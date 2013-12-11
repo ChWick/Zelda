@@ -3,9 +3,9 @@
 ################################################################################
 include(FindPackageHandleStandardArgs)
 
-find_path(LUA_H_PATH NAMES lua.hpp)
-find_library(LUA_LIB NAMES lua)
-find_library(LUA_LIB_DBG NAMES liblua5.2_d liblua_d)
+find_path(LUA_H_PATH NAMES lua.hpp PATH_SUFFIXES lua5.2)
+find_library(LUA_LIB NAMES lua lua5.2)
+find_library(LUA_LIB_DBG NAMES lua5.2_d lua_d)
 
 mark_as_advanced(LUA_H_PATH LUA_LIB LUA_LIB_DBG)
 

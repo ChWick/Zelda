@@ -4,7 +4,7 @@ SET(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 SET(CMAKE_DEPENDS_CHECK_CXX
-  "/home/christoph/Documents/Projects/ogre-paged/examples/Example10.cpp" "/home/christoph/Documents/Projects/ogre-paged/examples/CMakeFiles/Example10.dir/Example10.o"
+  "/home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged/examples/Example10.cpp" "/home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged/examples/CMakeFiles/Example10.dir/Example10.o"
   )
 SET(CMAKE_CXX_COMPILER_ID "GNU")
 
@@ -15,7 +15,7 @@ SET(CMAKE_TARGET_DEFINITIONS
 
 # Targets to which this target links.
 SET(CMAKE_TARGET_LINKED_INFO_FILES
-  "/home/christoph/Documents/Projects/ogre-paged/source/CMakeFiles/PagedGeometry.dir/DependInfo.cmake"
+  "/home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged/source/CMakeFiles/PagedGeometry.dir/DependInfo.cmake"
   )
 
 # The include file search paths:

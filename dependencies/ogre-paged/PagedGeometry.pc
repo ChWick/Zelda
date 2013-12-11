@@ -7,5 +7,5 @@ Name: PagedGeometry
 Description: Paged Geometry is a library that helps you to add grass and trees to your Ogre3D scene
 Requires: 
 Version: 1.1.4
-Libs: -L${libdir} -l 
+Libs: -L${libdir} -lPagedGeometry 
 Cflags: -I${includedir}

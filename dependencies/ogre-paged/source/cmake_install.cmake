@@ -1,4 +1,4 @@
-# Install script for directory: /home/christoph/Documents/Projects/ogre-paged/source
+# Install script for directory: /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged/source
 
 # Set the install prefix
 IF(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -33,14 +33,14 @@ IF(NOT DEFINED CMAKE_INSTALL_SO_NO_EXE)
 ENDIF(NOT DEFINED CMAKE_INSTALL_SO_NO_EXE)
 
 IF(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
-  FILE(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE STATIC_LIBRARY FILES "/home/christoph/Documents/Projects/ogre-paged/lib/libPagedGeometry.a")
+  FILE(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE STATIC_LIBRARY FILES "/home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged/lib/libPagedGeometry.a")
 ENDIF(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
 
 IF(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
-  FILE(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include/PagedGeometry" TYPE DIRECTORY FILES "/home/christoph/Documents/Projects/ogre-paged/include/" FILES_MATCHING REGEX "/[^/]*\\.h$" REGEX "/\\.svn$" EXCLUDE)
+  FILE(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include/PagedGeometry" TYPE DIRECTORY FILES "/home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged/include/" FILES_MATCHING REGEX "/[^/]*\\.h$" REGEX "/\\.svn$" EXCLUDE)
 ENDIF(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
 
 IF(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
-  FILE(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include/PagedGeometry" TYPE DIRECTORY FILES "/home/christoph/Documents/Projects/ogre-paged/include/" FILES_MATCHING REGEX "/[^/]*\\.h$" REGEX "/\\.svn$" EXCLUDE)
+  FILE(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include/PagedGeometry" TYPE DIRECTORY FILES "/home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged/include/" FILES_MATCHING REGEX "/[^/]*\\.h$" REGEX "/\\.svn$" EXCLUDE)
 ENDIF(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
 

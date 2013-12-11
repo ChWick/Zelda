@@ -1,1 +1,1 @@
-/usr/bin/c++       CMakeFiles/Example7.dir/Example7.o  -o ../bin/Example7 -rdynamic ../lib/libPagedGeometry.a -lX11 -lOgreMain -lpthread -lOgreTerrain -lOgrePaging -lOgreMain -lpthread -lOgrePaging -lOgreMain -lpthread -lOIS -lOgreTerrain -lOIS 
+/usr/bin/c++       CMakeFiles/Example7.dir/Example7.o  -o ../bin/Example7 -rdynamic ../lib/libPagedGeometry.a -lX11 -lOgreMain -lpthread -lOgreTerrain -lOgrePaging -lOgreMain -lpthread -lOgrePaging -lOgreMain -lpthread -lOIS -lboost_system -lOgreTerrain -lOIS 

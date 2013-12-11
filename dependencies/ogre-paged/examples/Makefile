@@ -39,10 +39,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/christoph/Documents/Projects/ogre-paged
+CMAKE_SOURCE_DIR = /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/christoph/Documents/Projects/ogre-paged
+CMAKE_BINARY_DIR = /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -101,7 +101,7 @@ list_install_components/fast: list_install_components
 # Special rule for the target package
 package: preinstall
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Run CPack packaging tool..."
-	cd /home/christoph/Documents/Projects/ogre-paged && /usr/bin/cpack --config ./CPackConfig.cmake
+	cd /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged && /usr/bin/cpack --config ./CPackConfig.cmake
 .PHONY : package
 
 # Special rule for the target package
@@ -111,7 +111,7 @@ package/fast: package
 # Special rule for the target package_source
 package_source:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Run CPack packaging tool for source..."
-	cd /home/christoph/Documents/Projects/ogre-paged && /usr/bin/cpack --config ./CPackSourceConfig.cmake /home/christoph/Documents/Projects/ogre-paged/CPackSourceConfig.cmake
+	cd /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged && /usr/bin/cpack --config ./CPackSourceConfig.cmake /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged/CPackSourceConfig.cmake
 .PHONY : package_source
 
 # Special rule for the target package_source
@@ -130,14 +130,14 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	cd /home/christoph/Documents/Projects/ogre-paged && $(CMAKE_COMMAND) -E cmake_progress_start /home/christoph/Documents/Projects/ogre-paged/CMakeFiles /home/christoph/Documents/Projects/ogre-paged/examples/CMakeFiles/progress.marks
-	cd /home/christoph/Documents/Projects/ogre-paged && $(MAKE) -f CMakeFiles/Makefile2 examples/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/christoph/Documents/Projects/ogre-paged/CMakeFiles 0
+	cd /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged && $(CMAKE_COMMAND) -E cmake_progress_start /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged/CMakeFiles /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged/examples/CMakeFiles/progress.marks
+	cd /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged && $(MAKE) -f CMakeFiles/Makefile2 examples/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /home/christoph/Documents/Projects/ogre-paged && $(MAKE) -f CMakeFiles/Makefile2 examples/clean
+	cd /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged && $(MAKE) -f CMakeFiles/Makefile2 examples/clean
 .PHONY : clean
 
 # The main clean target
@@ -146,22 +146,22 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /home/christoph/Documents/Projects/ogre-paged && $(MAKE) -f CMakeFiles/Makefile2 examples/preinstall
+	cd /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged && $(MAKE) -f CMakeFiles/Makefile2 examples/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /home/christoph/Documents/Projects/ogre-paged && $(MAKE) -f CMakeFiles/Makefile2 examples/preinstall
+	cd /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged && $(MAKE) -f CMakeFiles/Makefile2 examples/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /home/christoph/Documents/Projects/ogre-paged && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
 examples/CMakeFiles/Example1.dir/rule:
-	cd /home/christoph/Documents/Projects/ogre-paged && $(MAKE) -f CMakeFiles/Makefile2 examples/CMakeFiles/Example1.dir/rule
+	cd /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged && $(MAKE) -f CMakeFiles/Makefile2 examples/CMakeFiles/Example1.dir/rule
 .PHONY : examples/CMakeFiles/Example1.dir/rule
 
 # Convenience name for target.
@@ -170,12 +170,12 @@ Example1: examples/CMakeFiles/Example1.dir/rule
 
 # fast build rule for target.
 Example1/fast:
-	cd /home/christoph/Documents/Projects/ogre-paged && $(MAKE) -f examples/CMakeFiles/Example1.dir/build.make examples/CMakeFiles/Example1.dir/build
+	cd /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged && $(MAKE) -f examples/CMakeFiles/Example1.dir/build.make examples/CMakeFiles/Example1.dir/build
 .PHONY : Example1/fast
 
 # Convenience name for target.
 examples/CMakeFiles/Example10.dir/rule:
-	cd /home/christoph/Documents/Projects/ogre-paged && $(MAKE) -f CMakeFiles/Makefile2 examples/CMakeFiles/Example10.dir/rule
+	cd /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged && $(MAKE) -f CMakeFiles/Makefile2 examples/CMakeFiles/Example10.dir/rule
 .PHONY : examples/CMakeFiles/Example10.dir/rule
 
 # Convenience name for target.
@@ -184,12 +184,12 @@ Example10: examples/CMakeFiles/Example10.dir/rule
 
 # fast build rule for target.
 Example10/fast:
-	cd /home/christoph/Documents/Projects/ogre-paged && $(MAKE) -f examples/CMakeFiles/Example10.dir/build.make examples/CMakeFiles/Example10.dir/build
+	cd /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged && $(MAKE) -f examples/CMakeFiles/Example10.dir/build.make examples/CMakeFiles/Example10.dir/build
 .PHONY : Example10/fast
 
 # Convenience name for target.
 examples/CMakeFiles/Example11.dir/rule:
-	cd /home/christoph/Documents/Projects/ogre-paged && $(MAKE) -f CMakeFiles/Makefile2 examples/CMakeFiles/Example11.dir/rule
+	cd /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged && $(MAKE) -f CMakeFiles/Makefile2 examples/CMakeFiles/Example11.dir/rule
 .PHONY : examples/CMakeFiles/Example11.dir/rule
 
 # Convenience name for target.
@@ -198,12 +198,12 @@ Example11: examples/CMakeFiles/Example11.dir/rule
 
 # fast build rule for target.
 Example11/fast:
-	cd /home/christoph/Documents/Projects/ogre-paged && $(MAKE) -f examples/CMakeFiles/Example11.dir/build.make examples/CMakeFiles/Example11.dir/build
+	cd /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged && $(MAKE) -f examples/CMakeFiles/Example11.dir/build.make examples/CMakeFiles/Example11.dir/build
 .PHONY : Example11/fast
 
 # Convenience name for target.
 examples/CMakeFiles/Example2.dir/rule:
-	cd /home/christoph/Documents/Projects/ogre-paged && $(MAKE) -f CMakeFiles/Makefile2 examples/CMakeFiles/Example2.dir/rule
+	cd /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged && $(MAKE) -f CMakeFiles/Makefile2 examples/CMakeFiles/Example2.dir/rule
 .PHONY : examples/CMakeFiles/Example2.dir/rule
 
 # Convenience name for target.
@@ -212,12 +212,12 @@ Example2: examples/CMakeFiles/Example2.dir/rule
 
 # fast build rule for target.
 Example2/fast:
-	cd /home/christoph/Documents/Projects/ogre-paged && $(MAKE) -f examples/CMakeFiles/Example2.dir/build.make examples/CMakeFiles/Example2.dir/build
+	cd /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged && $(MAKE) -f examples/CMakeFiles/Example2.dir/build.make examples/CMakeFiles/Example2.dir/build
 .PHONY : Example2/fast
 
 # Convenience name for target.
 examples/CMakeFiles/Example3.dir/rule:
-	cd /home/christoph/Documents/Projects/ogre-paged && $(MAKE) -f CMakeFiles/Makefile2 examples/CMakeFiles/Example3.dir/rule
+	cd /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged && $(MAKE) -f CMakeFiles/Makefile2 examples/CMakeFiles/Example3.dir/rule
 .PHONY : examples/CMakeFiles/Example3.dir/rule
 
 # Convenience name for target.
@@ -226,12 +226,12 @@ Example3: examples/CMakeFiles/Example3.dir/rule
 
 # fast build rule for target.
 Example3/fast:
-	cd /home/christoph/Documents/Projects/ogre-paged && $(MAKE) -f examples/CMakeFiles/Example3.dir/build.make examples/CMakeFiles/Example3.dir/build
+	cd /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged && $(MAKE) -f examples/CMakeFiles/Example3.dir/build.make examples/CMakeFiles/Example3.dir/build
 .PHONY : Example3/fast
 
 # Convenience name for target.
 examples/CMakeFiles/Example4.dir/rule:
-	cd /home/christoph/Documents/Projects/ogre-paged && $(MAKE) -f CMakeFiles/Makefile2 examples/CMakeFiles/Example4.dir/rule
+	cd /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged && $(MAKE) -f CMakeFiles/Makefile2 examples/CMakeFiles/Example4.dir/rule
 .PHONY : examples/CMakeFiles/Example4.dir/rule
 
 # Convenience name for target.
@@ -240,12 +240,12 @@ Example4: examples/CMakeFiles/Example4.dir/rule
 
 # fast build rule for target.
 Example4/fast:
-	cd /home/christoph/Documents/Projects/ogre-paged && $(MAKE) -f examples/CMakeFiles/Example4.dir/build.make examples/CMakeFiles/Example4.dir/build
+	cd /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged && $(MAKE) -f examples/CMakeFiles/Example4.dir/build.make examples/CMakeFiles/Example4.dir/build
 .PHONY : Example4/fast
 
 # Convenience name for target.
 examples/CMakeFiles/Example5.dir/rule:
-	cd /home/christoph/Documents/Projects/ogre-paged && $(MAKE) -f CMakeFiles/Makefile2 examples/CMakeFiles/Example5.dir/rule
+	cd /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged && $(MAKE) -f CMakeFiles/Makefile2 examples/CMakeFiles/Example5.dir/rule
 .PHONY : examples/CMakeFiles/Example5.dir/rule
 
 # Convenience name for target.
@@ -254,12 +254,12 @@ Example5: examples/CMakeFiles/Example5.dir/rule
 
 # fast build rule for target.
 Example5/fast:
-	cd /home/christoph/Documents/Projects/ogre-paged && $(MAKE) -f examples/CMakeFiles/Example5.dir/build.make examples/CMakeFiles/Example5.dir/build
+	cd /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged && $(MAKE) -f examples/CMakeFiles/Example5.dir/build.make examples/CMakeFiles/Example5.dir/build
 .PHONY : Example5/fast
 
 # Convenience name for target.
 examples/CMakeFiles/Example6.dir/rule:
-	cd /home/christoph/Documents/Projects/ogre-paged && $(MAKE) -f CMakeFiles/Makefile2 examples/CMakeFiles/Example6.dir/rule
+	cd /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged && $(MAKE) -f CMakeFiles/Makefile2 examples/CMakeFiles/Example6.dir/rule
 .PHONY : examples/CMakeFiles/Example6.dir/rule
 
 # Convenience name for target.
@@ -268,12 +268,12 @@ Example6: examples/CMakeFiles/Example6.dir/rule
 
 # fast build rule for target.
 Example6/fast:
-	cd /home/christoph/Documents/Projects/ogre-paged && $(MAKE) -f examples/CMakeFiles/Example6.dir/build.make examples/CMakeFiles/Example6.dir/build
+	cd /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged && $(MAKE) -f examples/CMakeFiles/Example6.dir/build.make examples/CMakeFiles/Example6.dir/build
 .PHONY : Example6/fast
 
 # Convenience name for target.
 examples/CMakeFiles/Example7.dir/rule:
-	cd /home/christoph/Documents/Projects/ogre-paged && $(MAKE) -f CMakeFiles/Makefile2 examples/CMakeFiles/Example7.dir/rule
+	cd /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged && $(MAKE) -f CMakeFiles/Makefile2 examples/CMakeFiles/Example7.dir/rule
 .PHONY : examples/CMakeFiles/Example7.dir/rule
 
 # Convenience name for target.
@@ -282,12 +282,12 @@ Example7: examples/CMakeFiles/Example7.dir/rule
 
 # fast build rule for target.
 Example7/fast:
-	cd /home/christoph/Documents/Projects/ogre-paged && $(MAKE) -f examples/CMakeFiles/Example7.dir/build.make examples/CMakeFiles/Example7.dir/build
+	cd /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged && $(MAKE) -f examples/CMakeFiles/Example7.dir/build.make examples/CMakeFiles/Example7.dir/build
 .PHONY : Example7/fast
 
 # Convenience name for target.
 examples/CMakeFiles/Example8.dir/rule:
-	cd /home/christoph/Documents/Projects/ogre-paged && $(MAKE) -f CMakeFiles/Makefile2 examples/CMakeFiles/Example8.dir/rule
+	cd /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged && $(MAKE) -f CMakeFiles/Makefile2 examples/CMakeFiles/Example8.dir/rule
 .PHONY : examples/CMakeFiles/Example8.dir/rule
 
 # Convenience name for target.
@@ -296,12 +296,12 @@ Example8: examples/CMakeFiles/Example8.dir/rule
 
 # fast build rule for target.
 Example8/fast:
-	cd /home/christoph/Documents/Projects/ogre-paged && $(MAKE) -f examples/CMakeFiles/Example8.dir/build.make examples/CMakeFiles/Example8.dir/build
+	cd /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged && $(MAKE) -f examples/CMakeFiles/Example8.dir/build.make examples/CMakeFiles/Example8.dir/build
 .PHONY : Example8/fast
 
 # Convenience name for target.
 examples/CMakeFiles/Example9.dir/rule:
-	cd /home/christoph/Documents/Projects/ogre-paged && $(MAKE) -f CMakeFiles/Makefile2 examples/CMakeFiles/Example9.dir/rule
+	cd /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged && $(MAKE) -f CMakeFiles/Makefile2 examples/CMakeFiles/Example9.dir/rule
 .PHONY : examples/CMakeFiles/Example9.dir/rule
 
 # Convenience name for target.
@@ -310,172 +310,172 @@ Example9: examples/CMakeFiles/Example9.dir/rule
 
 # fast build rule for target.
 Example9/fast:
-	cd /home/christoph/Documents/Projects/ogre-paged && $(MAKE) -f examples/CMakeFiles/Example9.dir/build.make examples/CMakeFiles/Example9.dir/build
+	cd /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged && $(MAKE) -f examples/CMakeFiles/Example9.dir/build.make examples/CMakeFiles/Example9.dir/build
 .PHONY : Example9/fast
 
 # target to build an object file
 Example1.o:
-	cd /home/christoph/Documents/Projects/ogre-paged && $(MAKE) -f examples/CMakeFiles/Example1.dir/build.make examples/CMakeFiles/Example1.dir/Example1.o
+	cd /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged && $(MAKE) -f examples/CMakeFiles/Example1.dir/build.make examples/CMakeFiles/Example1.dir/Example1.o
 .PHONY : Example1.o
 
 # target to preprocess a source file
 Example1.i:
-	cd /home/christoph/Documents/Projects/ogre-paged && $(MAKE) -f examples/CMakeFiles/Example1.dir/build.make examples/CMakeFiles/Example1.dir/Example1.i
+	cd /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged && $(MAKE) -f examples/CMakeFiles/Example1.dir/build.make examples/CMakeFiles/Example1.dir/Example1.i
 .PHONY : Example1.i
 
 # target to generate assembly for a file
 Example1.s:
-	cd /home/christoph/Documents/Projects/ogre-paged && $(MAKE) -f examples/CMakeFiles/Example1.dir/build.make examples/CMakeFiles/Example1.dir/Example1.s
+	cd /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged && $(MAKE) -f examples/CMakeFiles/Example1.dir/build.make examples/CMakeFiles/Example1.dir/Example1.s
 .PHONY : Example1.s
 
 # target to build an object file
 Example10.o:
-	cd /home/christoph/Documents/Projects/ogre-paged && $(MAKE) -f examples/CMakeFiles/Example10.dir/build.make examples/CMakeFiles/Example10.dir/Example10.o
+	cd /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged && $(MAKE) -f examples/CMakeFiles/Example10.dir/build.make examples/CMakeFiles/Example10.dir/Example10.o
 .PHONY : Example10.o
 
 # target to preprocess a source file
 Example10.i:
-	cd /home/christoph/Documents/Projects/ogre-paged && $(MAKE) -f examples/CMakeFiles/Example10.dir/build.make examples/CMakeFiles/Example10.dir/Example10.i
+	cd /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged && $(MAKE) -f examples/CMakeFiles/Example10.dir/build.make examples/CMakeFiles/Example10.dir/Example10.i
 .PHONY : Example10.i
 
 # target to generate assembly for a file
 Example10.s:
-	cd /home/christoph/Documents/Projects/ogre-paged && $(MAKE) -f examples/CMakeFiles/Example10.dir/build.make examples/CMakeFiles/Example10.dir/Example10.s
+	cd /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged && $(MAKE) -f examples/CMakeFiles/Example10.dir/build.make examples/CMakeFiles/Example10.dir/Example10.s
 .PHONY : Example10.s
 
 # target to build an object file
 Example11.o:
-	cd /home/christoph/Documents/Projects/ogre-paged && $(MAKE) -f examples/CMakeFiles/Example11.dir/build.make examples/CMakeFiles/Example11.dir/Example11.o
+	cd /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged && $(MAKE) -f examples/CMakeFiles/Example11.dir/build.make examples/CMakeFiles/Example11.dir/Example11.o
 .PHONY : Example11.o
 
 # target to preprocess a source file
 Example11.i:
-	cd /home/christoph/Documents/Projects/ogre-paged && $(MAKE) -f examples/CMakeFiles/Example11.dir/build.make examples/CMakeFiles/Example11.dir/Example11.i
+	cd /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged && $(MAKE) -f examples/CMakeFiles/Example11.dir/build.make examples/CMakeFiles/Example11.dir/Example11.i
 .PHONY : Example11.i
 
 # target to generate assembly for a file
 Example11.s:
-	cd /home/christoph/Documents/Projects/ogre-paged && $(MAKE) -f examples/CMakeFiles/Example11.dir/build.make examples/CMakeFiles/Example11.dir/Example11.s
+	cd /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged && $(MAKE) -f examples/CMakeFiles/Example11.dir/build.make examples/CMakeFiles/Example11.dir/Example11.s
 .PHONY : Example11.s
 
 # target to build an object file
 Example2.o:
-	cd /home/christoph/Documents/Projects/ogre-paged && $(MAKE) -f examples/CMakeFiles/Example2.dir/build.make examples/CMakeFiles/Example2.dir/Example2.o
+	cd /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged && $(MAKE) -f examples/CMakeFiles/Example2.dir/build.make examples/CMakeFiles/Example2.dir/Example2.o
 .PHONY : Example2.o
 
 # target to preprocess a source file
 Example2.i:
-	cd /home/christoph/Documents/Projects/ogre-paged && $(MAKE) -f examples/CMakeFiles/Example2.dir/build.make examples/CMakeFiles/Example2.dir/Example2.i
+	cd /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged && $(MAKE) -f examples/CMakeFiles/Example2.dir/build.make examples/CMakeFiles/Example2.dir/Example2.i
 .PHONY : Example2.i
 
 # target to generate assembly for a file
 Example2.s:
-	cd /home/christoph/Documents/Projects/ogre-paged && $(MAKE) -f examples/CMakeFiles/Example2.dir/build.make examples/CMakeFiles/Example2.dir/Example2.s
+	cd /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged && $(MAKE) -f examples/CMakeFiles/Example2.dir/build.make examples/CMakeFiles/Example2.dir/Example2.s
 .PHONY : Example2.s
 
 # target to build an object file
 Example3.o:
-	cd /home/christoph/Documents/Projects/ogre-paged && $(MAKE) -f examples/CMakeFiles/Example3.dir/build.make examples/CMakeFiles/Example3.dir/Example3.o
+	cd /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged && $(MAKE) -f examples/CMakeFiles/Example3.dir/build.make examples/CMakeFiles/Example3.dir/Example3.o
 .PHONY : Example3.o
 
 # target to preprocess a source file
 Example3.i:
-	cd /home/christoph/Documents/Projects/ogre-paged && $(MAKE) -f examples/CMakeFiles/Example3.dir/build.make examples/CMakeFiles/Example3.dir/Example3.i
+	cd /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged && $(MAKE) -f examples/CMakeFiles/Example3.dir/build.make examples/CMakeFiles/Example3.dir/Example3.i
 .PHONY : Example3.i
 
 # target to generate assembly for a file
 Example3.s:
-	cd /home/christoph/Documents/Projects/ogre-paged && $(MAKE) -f examples/CMakeFiles/Example3.dir/build.make examples/CMakeFiles/Example3.dir/Example3.s
+	cd /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged && $(MAKE) -f examples/CMakeFiles/Example3.dir/build.make examples/CMakeFiles/Example3.dir/Example3.s
 .PHONY : Example3.s
 
 # target to build an object file
 Example4.o:
-	cd /home/christoph/Documents/Projects/ogre-paged && $(MAKE) -f examples/CMakeFiles/Example4.dir/build.make examples/CMakeFiles/Example4.dir/Example4.o
+	cd /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged && $(MAKE) -f examples/CMakeFiles/Example4.dir/build.make examples/CMakeFiles/Example4.dir/Example4.o
 .PHONY : Example4.o
 
 # target to preprocess a source file
 Example4.i:
-	cd /home/christoph/Documents/Projects/ogre-paged && $(MAKE) -f examples/CMakeFiles/Example4.dir/build.make examples/CMakeFiles/Example4.dir/Example4.i
+	cd /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged && $(MAKE) -f examples/CMakeFiles/Example4.dir/build.make examples/CMakeFiles/Example4.dir/Example4.i
 .PHONY : Example4.i
 
 # target to generate assembly for a file
 Example4.s:
-	cd /home/christoph/Documents/Projects/ogre-paged && $(MAKE) -f examples/CMakeFiles/Example4.dir/build.make examples/CMakeFiles/Example4.dir/Example4.s
+	cd /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged && $(MAKE) -f examples/CMakeFiles/Example4.dir/build.make examples/CMakeFiles/Example4.dir/Example4.s
 .PHONY : Example4.s
 
 # target to build an object file
 Example5.o:
-	cd /home/christoph/Documents/Projects/ogre-paged && $(MAKE) -f examples/CMakeFiles/Example5.dir/build.make examples/CMakeFiles/Example5.dir/Example5.o
+	cd /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged && $(MAKE) -f examples/CMakeFiles/Example5.dir/build.make examples/CMakeFiles/Example5.dir/Example5.o
 .PHONY : Example5.o
 
 # target to preprocess a source file
 Example5.i:
-	cd /home/christoph/Documents/Projects/ogre-paged && $(MAKE) -f examples/CMakeFiles/Example5.dir/build.make examples/CMakeFiles/Example5.dir/Example5.i
+	cd /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged && $(MAKE) -f examples/CMakeFiles/Example5.dir/build.make examples/CMakeFiles/Example5.dir/Example5.i
 .PHONY : Example5.i
 
 # target to generate assembly for a file
 Example5.s:
-	cd /home/christoph/Documents/Projects/ogre-paged && $(MAKE) -f examples/CMakeFiles/Example5.dir/build.make examples/CMakeFiles/Example5.dir/Example5.s
+	cd /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged && $(MAKE) -f examples/CMakeFiles/Example5.dir/build.make examples/CMakeFiles/Example5.dir/Example5.s
 .PHONY : Example5.s
 
 # target to build an object file
 Example6.o:
-	cd /home/christoph/Documents/Projects/ogre-paged && $(MAKE) -f examples/CMakeFiles/Example6.dir/build.make examples/CMakeFiles/Example6.dir/Example6.o
+	cd /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged && $(MAKE) -f examples/CMakeFiles/Example6.dir/build.make examples/CMakeFiles/Example6.dir/Example6.o
 .PHONY : Example6.o
 
 # target to preprocess a source file
 Example6.i:
-	cd /home/christoph/Documents/Projects/ogre-paged && $(MAKE) -f examples/CMakeFiles/Example6.dir/build.make examples/CMakeFiles/Example6.dir/Example6.i
+	cd /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged && $(MAKE) -f examples/CMakeFiles/Example6.dir/build.make examples/CMakeFiles/Example6.dir/Example6.i
 .PHONY : Example6.i
 
 # target to generate assembly for a file
 Example6.s:
-	cd /home/christoph/Documents/Projects/ogre-paged && $(MAKE) -f examples/CMakeFiles/Example6.dir/build.make examples/CMakeFiles/Example6.dir/Example6.s
+	cd /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged && $(MAKE) -f examples/CMakeFiles/Example6.dir/build.make examples/CMakeFiles/Example6.dir/Example6.s
 .PHONY : Example6.s
 
 # target to build an object file
 Example7.o:
-	cd /home/christoph/Documents/Projects/ogre-paged && $(MAKE) -f examples/CMakeFiles/Example7.dir/build.make examples/CMakeFiles/Example7.dir/Example7.o
+	cd /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged && $(MAKE) -f examples/CMakeFiles/Example7.dir/build.make examples/CMakeFiles/Example7.dir/Example7.o
 .PHONY : Example7.o
 
 # target to preprocess a source file
 Example7.i:
-	cd /home/christoph/Documents/Projects/ogre-paged && $(MAKE) -f examples/CMakeFiles/Example7.dir/build.make examples/CMakeFiles/Example7.dir/Example7.i
+	cd /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged && $(MAKE) -f examples/CMakeFiles/Example7.dir/build.make examples/CMakeFiles/Example7.dir/Example7.i
 .PHONY : Example7.i
 
 # target to generate assembly for a file
 Example7.s:
-	cd /home/christoph/Documents/Projects/ogre-paged && $(MAKE) -f examples/CMakeFiles/Example7.dir/build.make examples/CMakeFiles/Example7.dir/Example7.s
+	cd /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged && $(MAKE) -f examples/CMakeFiles/Example7.dir/build.make examples/CMakeFiles/Example7.dir/Example7.s
 .PHONY : Example7.s
 
 # target to build an object file
 Example8.o:
-	cd /home/christoph/Documents/Projects/ogre-paged && $(MAKE) -f examples/CMakeFiles/Example8.dir/build.make examples/CMakeFiles/Example8.dir/Example8.o
+	cd /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged && $(MAKE) -f examples/CMakeFiles/Example8.dir/build.make examples/CMakeFiles/Example8.dir/Example8.o
 .PHONY : Example8.o
 
 # target to preprocess a source file
 Example8.i:
-	cd /home/christoph/Documents/Projects/ogre-paged && $(MAKE) -f examples/CMakeFiles/Example8.dir/build.make examples/CMakeFiles/Example8.dir/Example8.i
+	cd /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged && $(MAKE) -f examples/CMakeFiles/Example8.dir/build.make examples/CMakeFiles/Example8.dir/Example8.i
 .PHONY : Example8.i
 
 # target to generate assembly for a file
 Example8.s:
-	cd /home/christoph/Documents/Projects/ogre-paged && $(MAKE) -f examples/CMakeFiles/Example8.dir/build.make examples/CMakeFiles/Example8.dir/Example8.s
+	cd /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged && $(MAKE) -f examples/CMakeFiles/Example8.dir/build.make examples/CMakeFiles/Example8.dir/Example8.s
 .PHONY : Example8.s
 
 # target to build an object file
 Example9.o:
-	cd /home/christoph/Documents/Projects/ogre-paged && $(MAKE) -f examples/CMakeFiles/Example9.dir/build.make examples/CMakeFiles/Example9.dir/Example9.o
+	cd /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged && $(MAKE) -f examples/CMakeFiles/Example9.dir/build.make examples/CMakeFiles/Example9.dir/Example9.o
 .PHONY : Example9.o
 
 # target to preprocess a source file
 Example9.i:
-	cd /home/christoph/Documents/Projects/ogre-paged && $(MAKE) -f examples/CMakeFiles/Example9.dir/build.make examples/CMakeFiles/Example9.dir/Example9.i
+	cd /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged && $(MAKE) -f examples/CMakeFiles/Example9.dir/build.make examples/CMakeFiles/Example9.dir/Example9.i
 .PHONY : Example9.i
 
 # target to generate assembly for a file
 Example9.s:
-	cd /home/christoph/Documents/Projects/ogre-paged && $(MAKE) -f examples/CMakeFiles/Example9.dir/build.make examples/CMakeFiles/Example9.dir/Example9.s
+	cd /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged && $(MAKE) -f examples/CMakeFiles/Example9.dir/build.make examples/CMakeFiles/Example9.dir/Example9.s
 .PHONY : Example9.s
 
 # Help Target
@@ -547,6 +547,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /home/christoph/Documents/Projects/ogre-paged && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

@@ -23,8 +23,8 @@
 #include <OIS/OIS.h>
 #endif
 
-#include "libraries/OgreSdkUtil/SdkCameraMan.h"
-#include "libraries/OgreSdkUtil/SdkTrays.h"
+#include "dependencies/OgreSdkUtil/SdkCameraMan.h"
+#include "dependencies/OgreSdkUtil/SdkTrays.h"
 
 #include <CEGUI/CEGUI.h>
 
