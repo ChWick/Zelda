@@ -1,0 +1,28 @@
+<innerObjects>
+	<innerObject name="GreenRuby" text="Du hast einen gruenen Rubin erhalten."/>
+	<innerObject name="RedRuby" text="Du hast einen roten Rubin erhalten. Ein roter Rubin entspricht 10 gruenen Rubinen."/>
+	<innerObject name="Heart" text="Du hast ein Herz gefunden. Es regeneriert dir Gesundheit." />
+	<innerObject name="Bow" text="Du hast den Bogen erhalten. Selektrieren und Pfeile abfeuern!" />
+	<innerObject name="Lamp" text="You got the Lamp!\nNow you can light torches and see your way in darkness." />
+</innerObjects>
+<defaultInformation>
+	<default id="low_mana" text="You are short on Magic Power! You can't use this item now. Watch your Magic Meter!"/>
+</defaultInformation>
+<chats>
+	<mapChats name="LinkHouse">
+		<chat id="zelda_init_begin" text="Help me...\\n\\nPlease help me...\\nI am a prisoner in the dungeon of the castle. My name is Zelda.\\nThe wizard, Agahnim, has done...something to the other missing girls. Now only I remain...\\nAgahnim has seized control of the castle and is now trying to open the seven wise men's seal. ... ...\\n I am in the dungeon of the castle.\\nPlease help me..."/>
+		<chat id="link_father_begin" text="${name}, I'm going out for a while, I'll be back by morning. Don't leave the house."/>
+	</mapChats>
+	<mapChats name="TestLinkHouse">
+		<chat id="block_text_1" text="What're you doing up this late, kid? You can stay up when you're grown up! Now go home!"/>
+		<chat id="block_text_2" text="I see you brought a map so you don't get lost. (Press the ${button_map} Button to see your map)."/>
+		<chat id="block_text_3" text="You look strong for a kid. How much can you lift? (Press the ${button_lift} Button while touching a thing to lift it.)" />
+		<chat id="block_text_4" text="I'll bet you can't wait until you are old enough to use a sword! (Press the ${button_attack} to use your sword when u get it.)" />
+		<chat id="block_text_5" text="That mark on your map must be your destination." />
+		<chat id="block_text_6" text="You can often find valuables in chests. (Press ${button_open} in front of a chest to open it.)" />
+		<chat id="block_text_7" text="Us soldiers have been around, kid. You can learn a lot from us. But you already know that!" />
+		<chat id="zelda_help_msg" text="Help me...\\nI am in the dungeon of the castle.\\nI know there is a hidden path from outside of the castle to the garden inside." />
+		<chat id="block_entrance" text="Hey hey! You're not allowed in the castle, son!\\nGo home and get some sleep!" />
+		<chat id="link_father_end" text="Unnh... ${name}, I didn't want you involved in this... I told you not to leave the house...\\nTake my sword and shield and listen. You can focus power in the blade (hold the ${button_attack}). Then release it using the secret technique handed down by our people...\\n${name}, you can do it!\\nSave the Princess...\\nZelda is your... ... ..." />
+	</mapChats>
+</chats>

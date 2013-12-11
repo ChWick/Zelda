@@ -1,0 +1,7 @@
+<mapUserData>
+	<chests>
+	</chests>
+	<signs>
+		<sign id="LinkHouseToCastle" front="Front" rear="rear"/>
+	</signs>
+</mapUserData>

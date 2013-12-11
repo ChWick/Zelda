@@ -1,0 +1,12 @@
+# ignroe meshes that are used from objects
+fence*.mesh
+flower*.mesh
+soil_green*.mesh
+GreenBush.mesh
+GreenBushTrunk.mesh
+light_stone.mesh
+green_tree.mesh
+
+# materials are in light_world pack
+*.material
+

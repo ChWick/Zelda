@@ -4,17 +4,17 @@ SET(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 SET(CMAKE_DEPENDS_CHECK_CXX
-  "/home/christoph/Documents/Projects/ogre-paged/source/BatchPage.cpp" "/home/christoph/Documents/Projects/ogre-paged/source/CMakeFiles/PagedGeometry.dir/BatchPage.o"
-  "/home/christoph/Documents/Projects/ogre-paged/source/BatchedGeometry.cpp" "/home/christoph/Documents/Projects/ogre-paged/source/CMakeFiles/PagedGeometry.dir/BatchedGeometry.o"
-  "/home/christoph/Documents/Projects/ogre-paged/source/GrassLoader.cpp" "/home/christoph/Documents/Projects/ogre-paged/source/CMakeFiles/PagedGeometry.dir/GrassLoader.o"
-  "/home/christoph/Documents/Projects/ogre-paged/source/ImpostorPage.cpp" "/home/christoph/Documents/Projects/ogre-paged/source/CMakeFiles/PagedGeometry.dir/ImpostorPage.o"
-  "/home/christoph/Documents/Projects/ogre-paged/source/PagedGeometry.cpp" "/home/christoph/Documents/Projects/ogre-paged/source/CMakeFiles/PagedGeometry.dir/PagedGeometry.o"
-  "/home/christoph/Documents/Projects/ogre-paged/source/PropertyMaps.cpp" "/home/christoph/Documents/Projects/ogre-paged/source/CMakeFiles/PagedGeometry.dir/PropertyMaps.o"
-  "/home/christoph/Documents/Projects/ogre-paged/source/StaticBillboardSet.cpp" "/home/christoph/Documents/Projects/ogre-paged/source/CMakeFiles/PagedGeometry.dir/StaticBillboardSet.o"
-  "/home/christoph/Documents/Projects/ogre-paged/source/TreeLoader2D.cpp" "/home/christoph/Documents/Projects/ogre-paged/source/CMakeFiles/PagedGeometry.dir/TreeLoader2D.o"
-  "/home/christoph/Documents/Projects/ogre-paged/source/TreeLoader3D.cpp" "/home/christoph/Documents/Projects/ogre-paged/source/CMakeFiles/PagedGeometry.dir/TreeLoader3D.o"
-  "/home/christoph/Documents/Projects/ogre-paged/source/WindBatchPage.cpp" "/home/christoph/Documents/Projects/ogre-paged/source/CMakeFiles/PagedGeometry.dir/WindBatchPage.o"
-  "/home/christoph/Documents/Projects/ogre-paged/source/WindBatchedGeometry.cpp" "/home/christoph/Documents/Projects/ogre-paged/source/CMakeFiles/PagedGeometry.dir/WindBatchedGeometry.o"
+  "/home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged/source/BatchPage.cpp" "/home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged/source/CMakeFiles/PagedGeometry.dir/BatchPage.o"
+  "/home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged/source/BatchedGeometry.cpp" "/home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged/source/CMakeFiles/PagedGeometry.dir/BatchedGeometry.o"
+  "/home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged/source/GrassLoader.cpp" "/home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged/source/CMakeFiles/PagedGeometry.dir/GrassLoader.o"
+  "/home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged/source/ImpostorPage.cpp" "/home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged/source/CMakeFiles/PagedGeometry.dir/ImpostorPage.o"
+  "/home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged/source/PagedGeometry.cpp" "/home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged/source/CMakeFiles/PagedGeometry.dir/PagedGeometry.o"
+  "/home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged/source/PropertyMaps.cpp" "/home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged/source/CMakeFiles/PagedGeometry.dir/PropertyMaps.o"
+  "/home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged/source/StaticBillboardSet.cpp" "/home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged/source/CMakeFiles/PagedGeometry.dir/StaticBillboardSet.o"
+  "/home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged/source/TreeLoader2D.cpp" "/home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged/source/CMakeFiles/PagedGeometry.dir/TreeLoader2D.o"
+  "/home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged/source/TreeLoader3D.cpp" "/home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged/source/CMakeFiles/PagedGeometry.dir/TreeLoader3D.o"
+  "/home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged/source/WindBatchPage.cpp" "/home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged/source/CMakeFiles/PagedGeometry.dir/WindBatchPage.o"
+  "/home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged/source/WindBatchedGeometry.cpp" "/home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged/source/CMakeFiles/PagedGeometry.dir/WindBatchedGeometry.o"
   )
 SET(CMAKE_CXX_COMPILER_ID "GNU")
 

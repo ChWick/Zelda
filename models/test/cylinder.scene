@@ -1,0 +1,24 @@
+<scene exported_by="christoph" formatVersion="1.0.1" export_time="1408354810.9972007" previous_export_time="1408354761.1831205" >
+  <nodes >
+    <node name="Cylinder" >
+      <position z="-0.000000" y="0.000000" x="0.000000" />
+      <rotation qy="0.000000" qw="1.000000" qx="0.000000" qz="-0.000000" />
+      <scale z="1.000000" y="1.000000" x="1.000000" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <entity lock_trans_x="False" actor="False" mass="1.0" friction_x="1.0" inertia_tensor="0.4000000059604645" lock_trans_y="False" physics_type="STATIC" friction_y="1.0" name="Cylinder" lock_rot_x="False" meshFile="Cylinder.mesh" lock_trans_z="False" velocity_max="0.0" anisotropic_friction="False" mass_radius="1.0" friction_z="1.0" velocity_min="0.0" lock_rot_z="False" damping_trans="0.03999999910593033" ghost="False" lock_rot_y="False" damping_rot="0.10000000149011612" />
+    </node>
+  </nodes>
+  <externals >
+    <item type="material" >
+      <file name="/home/christoph/Documents/Projects/Zelda/models/test/TestMaterial.material" />
+    </item>
+  </externals>
+  <environment >
+    <colourBackground g="0.05087608844041824" r="0.05087608844041824" b="0.05087608844041824" />
+    <colourDiffuse g="0.05087608844041824" r="0.05087608844041824" b="0.05087608844041824" />
+    <colourAmbient g="0.0" r="0.0" b="0.0" />
+  </environment>
+</scene>

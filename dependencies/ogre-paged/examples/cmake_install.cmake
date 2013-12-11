@@ -1,4 +1,4 @@
-# Install script for directory: /home/christoph/Documents/Projects/ogre-paged/examples
+# Install script for directory: /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged/examples
 
 # Set the install prefix
 IF(NOT DEFINED CMAKE_INSTALL_PREFIX)

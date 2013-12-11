@@ -1,0 +1,229 @@
+material Examples/Rockwall
+{
+	technique
+	{
+		pass
+		{
+			texture_unit
+			{
+				texture rockwall.tga
+			}
+		}
+	}
+}
+
+material Examples/Ninja
+{
+	technique
+	{
+		pass
+		{
+
+			texture_unit
+			{
+				texture nskingr.jpg
+			}
+		}
+	}
+}
+
+material OgreHome/Floor
+{
+    technique
+    {
+       pass
+       {
+          texture_unit
+          {
+            texture grassTile01.jpg
+			scale 0.0625 0.0625
+          }
+          texture_unit
+          {
+             texture ogre_home_floor_blend.png             
+             colour_op alpha_blend
+          }
+          texture_unit
+          {
+            texture Gravel0120_5_S.jpg
+            colour_op_ex blend_current_alpha src_texture src_current
+			scale 0.0625 0.0625
+          }
+       }
+    }
+}
+material OgreHomeLeft/Floor
+{
+    technique
+    {
+       pass
+       {
+          texture_unit
+          {
+            texture grassTile01.jpg
+			scale 0.0625 0.0625
+          }
+          texture_unit
+          {
+             texture ogre_home_left_floor_blend.png             
+             colour_op alpha_blend
+          }
+          texture_unit
+          {
+            texture Gravel0120_5_S.jpg
+            colour_op_ex blend_current_alpha src_texture src_current
+			scale 0.0625 0.0625
+          }
+       }
+    }
+}
+material ForestGladeRegion/Floor
+{
+    technique
+    {
+       pass
+       {
+          texture_unit
+          {
+            texture grassTile01.jpg
+			scale 0.0625 0.03125
+          }
+          texture_unit
+          {
+             texture forest_glade_region_blend.png             
+             colour_op alpha_blend
+          }
+          texture_unit
+          {
+            texture Gravel0120_5_S.jpg
+            colour_op_ex blend_current_alpha src_texture src_current
+			scale 0.0625 0.03125
+          }
+       }
+    }
+}
+material ForestGladeRegion/SandFloor
+{
+    technique
+    {
+       pass
+       {
+          texture_unit
+          {
+            texture SoilSand0068_1_S.jpg
+			scale 0.0625 0.03125
+          }
+          texture_unit
+          {
+             texture forest_glade_region_blend.png             
+             colour_op alpha_blend
+          }
+          texture_unit
+          {
+            texture Gravel0120_5_S.jpg
+            colour_op_ex blend_current_alpha src_texture src_current
+			scale 0.0625 0.03125
+          }
+       }
+    }
+}
+material BiblioRegion/Floor
+{
+    technique
+    {
+       pass
+       {
+          texture_unit
+          {
+            texture grassTile01.jpg
+			scale 0.0625 0.0625
+          }
+          texture_unit
+          {
+             texture biblio_region_blend.png             
+             colour_op alpha_blend
+          }
+          texture_unit
+          {
+            texture Gravel0120_5_S.jpg
+            colour_op_ex blend_current_alpha src_texture src_current
+			scale 0.0625 0.0625
+          }
+       }
+    }
+}
+material BiblioLeftRegion/Floor
+{
+    technique
+    {
+       pass
+       {
+          texture_unit
+          {
+            texture grassTile01.jpg
+			scale 0.0625 0.0625
+          }
+          texture_unit
+          {
+             texture biblio_left_region_blend.png             
+             colour_op alpha_blend
+          }
+          texture_unit
+          {
+            texture Gravel0120_5_S.jpg
+            colour_op_ex blend_current_alpha src_texture src_current
+			scale 0.0625 0.0625
+          }
+       }
+    }
+}
+material CastleRegion/Floor
+{
+    technique
+    {
+       pass
+       {
+          texture_unit
+          {
+            texture grassTile01.jpg
+			scale 0.03125 0.03125
+          }
+          texture_unit
+          {
+             texture castle_region_floor_blend.png             
+             colour_op alpha_blend
+          }
+          texture_unit
+          {
+            texture Gravel0120_5_S.jpg
+            colour_op_ex blend_current_alpha src_texture src_current
+			scale 0.03125 0.03125
+          }
+       }
+    }
+}
+material CastleRegion/WaterFloor
+{
+    technique
+    {
+       pass
+       {
+          texture_unit
+          {
+            texture feuchtersand_512.jpg
+			scale 0.03125 0.03125
+          }
+          texture_unit
+          {
+             texture castle_region_floor_blend.png             
+             colour_op alpha_blend
+          }
+          texture_unit
+          {
+            texture Gravel0120_5_S.jpg
+            colour_op_ex blend_current_alpha src_texture src_current
+			scale 0.03125 0.03125
+          }
+       }
+    }
+}

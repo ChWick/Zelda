@@ -35,10 +35,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/christoph/Documents/Projects/ogre-paged
+CMAKE_SOURCE_DIR = /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/christoph/Documents/Projects/ogre-paged
+CMAKE_BINARY_DIR = /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged
 
 # Include any dependencies generated for this target.
 include source/CMakeFiles/PagedGeometry.dir/depend.make
@@ -51,17 +51,17 @@ include source/CMakeFiles/PagedGeometry.dir/flags.make
 
 source/CMakeFiles/PagedGeometry.dir/WindBatchedGeometry.o: source/CMakeFiles/PagedGeometry.dir/flags.make
 source/CMakeFiles/PagedGeometry.dir/WindBatchedGeometry.o: source/WindBatchedGeometry.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/christoph/Documents/Projects/ogre-paged/CMakeFiles $(CMAKE_PROGRESS_1)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged/CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object source/CMakeFiles/PagedGeometry.dir/WindBatchedGeometry.o"
-	cd /home/christoph/Documents/Projects/ogre-paged/source && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/PagedGeometry.dir/WindBatchedGeometry.o -c /home/christoph/Documents/Projects/ogre-paged/source/WindBatchedGeometry.cpp
+	cd /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged/source && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/PagedGeometry.dir/WindBatchedGeometry.o -c /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged/source/WindBatchedGeometry.cpp
 
 source/CMakeFiles/PagedGeometry.dir/WindBatchedGeometry.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/PagedGeometry.dir/WindBatchedGeometry.i"
-	cd /home/christoph/Documents/Projects/ogre-paged/source && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/christoph/Documents/Projects/ogre-paged/source/WindBatchedGeometry.cpp > CMakeFiles/PagedGeometry.dir/WindBatchedGeometry.i
+	cd /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged/source && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged/source/WindBatchedGeometry.cpp > CMakeFiles/PagedGeometry.dir/WindBatchedGeometry.i
 
 source/CMakeFiles/PagedGeometry.dir/WindBatchedGeometry.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/PagedGeometry.dir/WindBatchedGeometry.s"
-	cd /home/christoph/Documents/Projects/ogre-paged/source && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/christoph/Documents/Projects/ogre-paged/source/WindBatchedGeometry.cpp -o CMakeFiles/PagedGeometry.dir/WindBatchedGeometry.s
+	cd /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged/source && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged/source/WindBatchedGeometry.cpp -o CMakeFiles/PagedGeometry.dir/WindBatchedGeometry.s
 
 source/CMakeFiles/PagedGeometry.dir/WindBatchedGeometry.o.requires:
 .PHONY : source/CMakeFiles/PagedGeometry.dir/WindBatchedGeometry.o.requires
@@ -74,17 +74,17 @@ source/CMakeFiles/PagedGeometry.dir/WindBatchedGeometry.o.provides.build: source
 
 source/CMakeFiles/PagedGeometry.dir/TreeLoader2D.o: source/CMakeFiles/PagedGeometry.dir/flags.make
 source/CMakeFiles/PagedGeometry.dir/TreeLoader2D.o: source/TreeLoader2D.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/christoph/Documents/Projects/ogre-paged/CMakeFiles $(CMAKE_PROGRESS_2)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged/CMakeFiles $(CMAKE_PROGRESS_2)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object source/CMakeFiles/PagedGeometry.dir/TreeLoader2D.o"
-	cd /home/christoph/Documents/Projects/ogre-paged/source && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/PagedGeometry.dir/TreeLoader2D.o -c /home/christoph/Documents/Projects/ogre-paged/source/TreeLoader2D.cpp
+	cd /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged/source && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/PagedGeometry.dir/TreeLoader2D.o -c /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged/source/TreeLoader2D.cpp
 
 source/CMakeFiles/PagedGeometry.dir/TreeLoader2D.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/PagedGeometry.dir/TreeLoader2D.i"
-	cd /home/christoph/Documents/Projects/ogre-paged/source && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/christoph/Documents/Projects/ogre-paged/source/TreeLoader2D.cpp > CMakeFiles/PagedGeometry.dir/TreeLoader2D.i
+	cd /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged/source && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged/source/TreeLoader2D.cpp > CMakeFiles/PagedGeometry.dir/TreeLoader2D.i
 
 source/CMakeFiles/PagedGeometry.dir/TreeLoader2D.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/PagedGeometry.dir/TreeLoader2D.s"
-	cd /home/christoph/Documents/Projects/ogre-paged/source && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/christoph/Documents/Projects/ogre-paged/source/TreeLoader2D.cpp -o CMakeFiles/PagedGeometry.dir/TreeLoader2D.s
+	cd /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged/source && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged/source/TreeLoader2D.cpp -o CMakeFiles/PagedGeometry.dir/TreeLoader2D.s
 
 source/CMakeFiles/PagedGeometry.dir/TreeLoader2D.o.requires:
 .PHONY : source/CMakeFiles/PagedGeometry.dir/TreeLoader2D.o.requires
@@ -97,17 +97,17 @@ source/CMakeFiles/PagedGeometry.dir/TreeLoader2D.o.provides.build: source/CMakeF
 
 source/CMakeFiles/PagedGeometry.dir/BatchedGeometry.o: source/CMakeFiles/PagedGeometry.dir/flags.make
 source/CMakeFiles/PagedGeometry.dir/BatchedGeometry.o: source/BatchedGeometry.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/christoph/Documents/Projects/ogre-paged/CMakeFiles $(CMAKE_PROGRESS_3)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged/CMakeFiles $(CMAKE_PROGRESS_3)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object source/CMakeFiles/PagedGeometry.dir/BatchedGeometry.o"
-	cd /home/christoph/Documents/Projects/ogre-paged/source && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/PagedGeometry.dir/BatchedGeometry.o -c /home/christoph/Documents/Projects/ogre-paged/source/BatchedGeometry.cpp
+	cd /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged/source && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/PagedGeometry.dir/BatchedGeometry.o -c /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged/source/BatchedGeometry.cpp
 
 source/CMakeFiles/PagedGeometry.dir/BatchedGeometry.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/PagedGeometry.dir/BatchedGeometry.i"
-	cd /home/christoph/Documents/Projects/ogre-paged/source && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/christoph/Documents/Projects/ogre-paged/source/BatchedGeometry.cpp > CMakeFiles/PagedGeometry.dir/BatchedGeometry.i
+	cd /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged/source && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged/source/BatchedGeometry.cpp > CMakeFiles/PagedGeometry.dir/BatchedGeometry.i
 
 source/CMakeFiles/PagedGeometry.dir/BatchedGeometry.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/PagedGeometry.dir/BatchedGeometry.s"
-	cd /home/christoph/Documents/Projects/ogre-paged/source && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/christoph/Documents/Projects/ogre-paged/source/BatchedGeometry.cpp -o CMakeFiles/PagedGeometry.dir/BatchedGeometry.s
+	cd /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged/source && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged/source/BatchedGeometry.cpp -o CMakeFiles/PagedGeometry.dir/BatchedGeometry.s
 
 source/CMakeFiles/PagedGeometry.dir/BatchedGeometry.o.requires:
 .PHONY : source/CMakeFiles/PagedGeometry.dir/BatchedGeometry.o.requires
@@ -120,17 +120,17 @@ source/CMakeFiles/PagedGeometry.dir/BatchedGeometry.o.provides.build: source/CMa
 
 source/CMakeFiles/PagedGeometry.dir/WindBatchPage.o: source/CMakeFiles/PagedGeometry.dir/flags.make
 source/CMakeFiles/PagedGeometry.dir/WindBatchPage.o: source/WindBatchPage.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/christoph/Documents/Projects/ogre-paged/CMakeFiles $(CMAKE_PROGRESS_4)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged/CMakeFiles $(CMAKE_PROGRESS_4)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object source/CMakeFiles/PagedGeometry.dir/WindBatchPage.o"
-	cd /home/christoph/Documents/Projects/ogre-paged/source && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/PagedGeometry.dir/WindBatchPage.o -c /home/christoph/Documents/Projects/ogre-paged/source/WindBatchPage.cpp
+	cd /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged/source && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/PagedGeometry.dir/WindBatchPage.o -c /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged/source/WindBatchPage.cpp
 
 source/CMakeFiles/PagedGeometry.dir/WindBatchPage.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/PagedGeometry.dir/WindBatchPage.i"
-	cd /home/christoph/Documents/Projects/ogre-paged/source && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/christoph/Documents/Projects/ogre-paged/source/WindBatchPage.cpp > CMakeFiles/PagedGeometry.dir/WindBatchPage.i
+	cd /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged/source && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged/source/WindBatchPage.cpp > CMakeFiles/PagedGeometry.dir/WindBatchPage.i
 
 source/CMakeFiles/PagedGeometry.dir/WindBatchPage.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/PagedGeometry.dir/WindBatchPage.s"
-	cd /home/christoph/Documents/Projects/ogre-paged/source && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/christoph/Documents/Projects/ogre-paged/source/WindBatchPage.cpp -o CMakeFiles/PagedGeometry.dir/WindBatchPage.s
+	cd /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged/source && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged/source/WindBatchPage.cpp -o CMakeFiles/PagedGeometry.dir/WindBatchPage.s
 
 source/CMakeFiles/PagedGeometry.dir/WindBatchPage.o.requires:
 .PHONY : source/CMakeFiles/PagedGeometry.dir/WindBatchPage.o.requires
@@ -143,17 +143,17 @@ source/CMakeFiles/PagedGeometry.dir/WindBatchPage.o.provides.build: source/CMake
 
 source/CMakeFiles/PagedGeometry.dir/StaticBillboardSet.o: source/CMakeFiles/PagedGeometry.dir/flags.make
 source/CMakeFiles/PagedGeometry.dir/StaticBillboardSet.o: source/StaticBillboardSet.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/christoph/Documents/Projects/ogre-paged/CMakeFiles $(CMAKE_PROGRESS_5)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged/CMakeFiles $(CMAKE_PROGRESS_5)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object source/CMakeFiles/PagedGeometry.dir/StaticBillboardSet.o"
-	cd /home/christoph/Documents/Projects/ogre-paged/source && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/PagedGeometry.dir/StaticBillboardSet.o -c /home/christoph/Documents/Projects/ogre-paged/source/StaticBillboardSet.cpp
+	cd /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged/source && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/PagedGeometry.dir/StaticBillboardSet.o -c /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged/source/StaticBillboardSet.cpp
 
 source/CMakeFiles/PagedGeometry.dir/StaticBillboardSet.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/PagedGeometry.dir/StaticBillboardSet.i"
-	cd /home/christoph/Documents/Projects/ogre-paged/source && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/christoph/Documents/Projects/ogre-paged/source/StaticBillboardSet.cpp > CMakeFiles/PagedGeometry.dir/StaticBillboardSet.i
+	cd /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged/source && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged/source/StaticBillboardSet.cpp > CMakeFiles/PagedGeometry.dir/StaticBillboardSet.i
 
 source/CMakeFiles/PagedGeometry.dir/StaticBillboardSet.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/PagedGeometry.dir/StaticBillboardSet.s"
-	cd /home/christoph/Documents/Projects/ogre-paged/source && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/christoph/Documents/Projects/ogre-paged/source/StaticBillboardSet.cpp -o CMakeFiles/PagedGeometry.dir/StaticBillboardSet.s
+	cd /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged/source && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged/source/StaticBillboardSet.cpp -o CMakeFiles/PagedGeometry.dir/StaticBillboardSet.s
 
 source/CMakeFiles/PagedGeometry.dir/StaticBillboardSet.o.requires:
 .PHONY : source/CMakeFiles/PagedGeometry.dir/StaticBillboardSet.o.requires
@@ -166,17 +166,17 @@ source/CMakeFiles/PagedGeometry.dir/StaticBillboardSet.o.provides.build: source/
 
 source/CMakeFiles/PagedGeometry.dir/ImpostorPage.o: source/CMakeFiles/PagedGeometry.dir/flags.make
 source/CMakeFiles/PagedGeometry.dir/ImpostorPage.o: source/ImpostorPage.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/christoph/Documents/Projects/ogre-paged/CMakeFiles $(CMAKE_PROGRESS_6)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged/CMakeFiles $(CMAKE_PROGRESS_6)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object source/CMakeFiles/PagedGeometry.dir/ImpostorPage.o"
-	cd /home/christoph/Documents/Projects/ogre-paged/source && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/PagedGeometry.dir/ImpostorPage.o -c /home/christoph/Documents/Projects/ogre-paged/source/ImpostorPage.cpp
+	cd /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged/source && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/PagedGeometry.dir/ImpostorPage.o -c /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged/source/ImpostorPage.cpp
 
 source/CMakeFiles/PagedGeometry.dir/ImpostorPage.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/PagedGeometry.dir/ImpostorPage.i"
-	cd /home/christoph/Documents/Projects/ogre-paged/source && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/christoph/Documents/Projects/ogre-paged/source/ImpostorPage.cpp > CMakeFiles/PagedGeometry.dir/ImpostorPage.i
+	cd /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged/source && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged/source/ImpostorPage.cpp > CMakeFiles/PagedGeometry.dir/ImpostorPage.i
 
 source/CMakeFiles/PagedGeometry.dir/ImpostorPage.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/PagedGeometry.dir/ImpostorPage.s"
-	cd /home/christoph/Documents/Projects/ogre-paged/source && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/christoph/Documents/Projects/ogre-paged/source/ImpostorPage.cpp -o CMakeFiles/PagedGeometry.dir/ImpostorPage.s
+	cd /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged/source && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged/source/ImpostorPage.cpp -o CMakeFiles/PagedGeometry.dir/ImpostorPage.s
 
 source/CMakeFiles/PagedGeometry.dir/ImpostorPage.o.requires:
 .PHONY : source/CMakeFiles/PagedGeometry.dir/ImpostorPage.o.requires
@@ -189,17 +189,17 @@ source/CMakeFiles/PagedGeometry.dir/ImpostorPage.o.provides.build: source/CMakeF
 
 source/CMakeFiles/PagedGeometry.dir/PropertyMaps.o: source/CMakeFiles/PagedGeometry.dir/flags.make
 source/CMakeFiles/PagedGeometry.dir/PropertyMaps.o: source/PropertyMaps.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/christoph/Documents/Projects/ogre-paged/CMakeFiles $(CMAKE_PROGRESS_7)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged/CMakeFiles $(CMAKE_PROGRESS_7)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object source/CMakeFiles/PagedGeometry.dir/PropertyMaps.o"
-	cd /home/christoph/Documents/Projects/ogre-paged/source && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/PagedGeometry.dir/PropertyMaps.o -c /home/christoph/Documents/Projects/ogre-paged/source/PropertyMaps.cpp
+	cd /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged/source && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/PagedGeometry.dir/PropertyMaps.o -c /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged/source/PropertyMaps.cpp
 
 source/CMakeFiles/PagedGeometry.dir/PropertyMaps.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/PagedGeometry.dir/PropertyMaps.i"
-	cd /home/christoph/Documents/Projects/ogre-paged/source && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/christoph/Documents/Projects/ogre-paged/source/PropertyMaps.cpp > CMakeFiles/PagedGeometry.dir/PropertyMaps.i
+	cd /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged/source && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged/source/PropertyMaps.cpp > CMakeFiles/PagedGeometry.dir/PropertyMaps.i
 
 source/CMakeFiles/PagedGeometry.dir/PropertyMaps.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/PagedGeometry.dir/PropertyMaps.s"
-	cd /home/christoph/Documents/Projects/ogre-paged/source && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/christoph/Documents/Projects/ogre-paged/source/PropertyMaps.cpp -o CMakeFiles/PagedGeometry.dir/PropertyMaps.s
+	cd /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged/source && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged/source/PropertyMaps.cpp -o CMakeFiles/PagedGeometry.dir/PropertyMaps.s
 
 source/CMakeFiles/PagedGeometry.dir/PropertyMaps.o.requires:
 .PHONY : source/CMakeFiles/PagedGeometry.dir/PropertyMaps.o.requires
@@ -212,17 +212,17 @@ source/CMakeFiles/PagedGeometry.dir/PropertyMaps.o.provides.build: source/CMakeF
 
 source/CMakeFiles/PagedGeometry.dir/BatchPage.o: source/CMakeFiles/PagedGeometry.dir/flags.make
 source/CMakeFiles/PagedGeometry.dir/BatchPage.o: source/BatchPage.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/christoph/Documents/Projects/ogre-paged/CMakeFiles $(CMAKE_PROGRESS_8)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged/CMakeFiles $(CMAKE_PROGRESS_8)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object source/CMakeFiles/PagedGeometry.dir/BatchPage.o"
-	cd /home/christoph/Documents/Projects/ogre-paged/source && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/PagedGeometry.dir/BatchPage.o -c /home/christoph/Documents/Projects/ogre-paged/source/BatchPage.cpp
+	cd /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged/source && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/PagedGeometry.dir/BatchPage.o -c /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged/source/BatchPage.cpp
 
 source/CMakeFiles/PagedGeometry.dir/BatchPage.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/PagedGeometry.dir/BatchPage.i"
-	cd /home/christoph/Documents/Projects/ogre-paged/source && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/christoph/Documents/Projects/ogre-paged/source/BatchPage.cpp > CMakeFiles/PagedGeometry.dir/BatchPage.i
+	cd /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged/source && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged/source/BatchPage.cpp > CMakeFiles/PagedGeometry.dir/BatchPage.i
 
 source/CMakeFiles/PagedGeometry.dir/BatchPage.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/PagedGeometry.dir/BatchPage.s"
-	cd /home/christoph/Documents/Projects/ogre-paged/source && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/christoph/Documents/Projects/ogre-paged/source/BatchPage.cpp -o CMakeFiles/PagedGeometry.dir/BatchPage.s
+	cd /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged/source && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged/source/BatchPage.cpp -o CMakeFiles/PagedGeometry.dir/BatchPage.s
 
 source/CMakeFiles/PagedGeometry.dir/BatchPage.o.requires:
 .PHONY : source/CMakeFiles/PagedGeometry.dir/BatchPage.o.requires
@@ -235,17 +235,17 @@ source/CMakeFiles/PagedGeometry.dir/BatchPage.o.provides.build: source/CMakeFile
 
 source/CMakeFiles/PagedGeometry.dir/PagedGeometry.o: source/CMakeFiles/PagedGeometry.dir/flags.make
 source/CMakeFiles/PagedGeometry.dir/PagedGeometry.o: source/PagedGeometry.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/christoph/Documents/Projects/ogre-paged/CMakeFiles $(CMAKE_PROGRESS_9)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged/CMakeFiles $(CMAKE_PROGRESS_9)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object source/CMakeFiles/PagedGeometry.dir/PagedGeometry.o"
-	cd /home/christoph/Documents/Projects/ogre-paged/source && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/PagedGeometry.dir/PagedGeometry.o -c /home/christoph/Documents/Projects/ogre-paged/source/PagedGeometry.cpp
+	cd /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged/source && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/PagedGeometry.dir/PagedGeometry.o -c /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged/source/PagedGeometry.cpp
 
 source/CMakeFiles/PagedGeometry.dir/PagedGeometry.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/PagedGeometry.dir/PagedGeometry.i"
-	cd /home/christoph/Documents/Projects/ogre-paged/source && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/christoph/Documents/Projects/ogre-paged/source/PagedGeometry.cpp > CMakeFiles/PagedGeometry.dir/PagedGeometry.i
+	cd /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged/source && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged/source/PagedGeometry.cpp > CMakeFiles/PagedGeometry.dir/PagedGeometry.i
 
 source/CMakeFiles/PagedGeometry.dir/PagedGeometry.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/PagedGeometry.dir/PagedGeometry.s"
-	cd /home/christoph/Documents/Projects/ogre-paged/source && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/christoph/Documents/Projects/ogre-paged/source/PagedGeometry.cpp -o CMakeFiles/PagedGeometry.dir/PagedGeometry.s
+	cd /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged/source && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged/source/PagedGeometry.cpp -o CMakeFiles/PagedGeometry.dir/PagedGeometry.s
 
 source/CMakeFiles/PagedGeometry.dir/PagedGeometry.o.requires:
 .PHONY : source/CMakeFiles/PagedGeometry.dir/PagedGeometry.o.requires
@@ -258,17 +258,17 @@ source/CMakeFiles/PagedGeometry.dir/PagedGeometry.o.provides.build: source/CMake
 
 source/CMakeFiles/PagedGeometry.dir/GrassLoader.o: source/CMakeFiles/PagedGeometry.dir/flags.make
 source/CMakeFiles/PagedGeometry.dir/GrassLoader.o: source/GrassLoader.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/christoph/Documents/Projects/ogre-paged/CMakeFiles $(CMAKE_PROGRESS_10)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged/CMakeFiles $(CMAKE_PROGRESS_10)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object source/CMakeFiles/PagedGeometry.dir/GrassLoader.o"
-	cd /home/christoph/Documents/Projects/ogre-paged/source && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/PagedGeometry.dir/GrassLoader.o -c /home/christoph/Documents/Projects/ogre-paged/source/GrassLoader.cpp
+	cd /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged/source && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/PagedGeometry.dir/GrassLoader.o -c /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged/source/GrassLoader.cpp
 
 source/CMakeFiles/PagedGeometry.dir/GrassLoader.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/PagedGeometry.dir/GrassLoader.i"
-	cd /home/christoph/Documents/Projects/ogre-paged/source && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/christoph/Documents/Projects/ogre-paged/source/GrassLoader.cpp > CMakeFiles/PagedGeometry.dir/GrassLoader.i
+	cd /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged/source && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged/source/GrassLoader.cpp > CMakeFiles/PagedGeometry.dir/GrassLoader.i
 
 source/CMakeFiles/PagedGeometry.dir/GrassLoader.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/PagedGeometry.dir/GrassLoader.s"
-	cd /home/christoph/Documents/Projects/ogre-paged/source && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/christoph/Documents/Projects/ogre-paged/source/GrassLoader.cpp -o CMakeFiles/PagedGeometry.dir/GrassLoader.s
+	cd /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged/source && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged/source/GrassLoader.cpp -o CMakeFiles/PagedGeometry.dir/GrassLoader.s
 
 source/CMakeFiles/PagedGeometry.dir/GrassLoader.o.requires:
 .PHONY : source/CMakeFiles/PagedGeometry.dir/GrassLoader.o.requires
@@ -281,17 +281,17 @@ source/CMakeFiles/PagedGeometry.dir/GrassLoader.o.provides.build: source/CMakeFi
 
 source/CMakeFiles/PagedGeometry.dir/TreeLoader3D.o: source/CMakeFiles/PagedGeometry.dir/flags.make
 source/CMakeFiles/PagedGeometry.dir/TreeLoader3D.o: source/TreeLoader3D.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/christoph/Documents/Projects/ogre-paged/CMakeFiles $(CMAKE_PROGRESS_11)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged/CMakeFiles $(CMAKE_PROGRESS_11)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object source/CMakeFiles/PagedGeometry.dir/TreeLoader3D.o"
-	cd /home/christoph/Documents/Projects/ogre-paged/source && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/PagedGeometry.dir/TreeLoader3D.o -c /home/christoph/Documents/Projects/ogre-paged/source/TreeLoader3D.cpp
+	cd /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged/source && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/PagedGeometry.dir/TreeLoader3D.o -c /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged/source/TreeLoader3D.cpp
 
 source/CMakeFiles/PagedGeometry.dir/TreeLoader3D.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/PagedGeometry.dir/TreeLoader3D.i"
-	cd /home/christoph/Documents/Projects/ogre-paged/source && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/christoph/Documents/Projects/ogre-paged/source/TreeLoader3D.cpp > CMakeFiles/PagedGeometry.dir/TreeLoader3D.i
+	cd /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged/source && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged/source/TreeLoader3D.cpp > CMakeFiles/PagedGeometry.dir/TreeLoader3D.i
 
 source/CMakeFiles/PagedGeometry.dir/TreeLoader3D.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/PagedGeometry.dir/TreeLoader3D.s"
-	cd /home/christoph/Documents/Projects/ogre-paged/source && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/christoph/Documents/Projects/ogre-paged/source/TreeLoader3D.cpp -o CMakeFiles/PagedGeometry.dir/TreeLoader3D.s
+	cd /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged/source && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged/source/TreeLoader3D.cpp -o CMakeFiles/PagedGeometry.dir/TreeLoader3D.s
 
 source/CMakeFiles/PagedGeometry.dir/TreeLoader3D.o.requires:
 .PHONY : source/CMakeFiles/PagedGeometry.dir/TreeLoader3D.o.requires
@@ -333,8 +333,8 @@ lib/libPagedGeometry.a: source/CMakeFiles/PagedGeometry.dir/TreeLoader3D.o
 lib/libPagedGeometry.a: source/CMakeFiles/PagedGeometry.dir/build.make
 lib/libPagedGeometry.a: source/CMakeFiles/PagedGeometry.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --red --bold "Linking CXX static library ../lib/libPagedGeometry.a"
-	cd /home/christoph/Documents/Projects/ogre-paged/source && $(CMAKE_COMMAND) -P CMakeFiles/PagedGeometry.dir/cmake_clean_target.cmake
-	cd /home/christoph/Documents/Projects/ogre-paged/source && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/PagedGeometry.dir/link.txt --verbose=$(VERBOSE)
+	cd /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged/source && $(CMAKE_COMMAND) -P CMakeFiles/PagedGeometry.dir/cmake_clean_target.cmake
+	cd /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged/source && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/PagedGeometry.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
 source/CMakeFiles/PagedGeometry.dir/build: lib/libPagedGeometry.a
@@ -354,10 +354,10 @@ source/CMakeFiles/PagedGeometry.dir/requires: source/CMakeFiles/PagedGeometry.di
 .PHONY : source/CMakeFiles/PagedGeometry.dir/requires
 
 source/CMakeFiles/PagedGeometry.dir/clean:
-	cd /home/christoph/Documents/Projects/ogre-paged/source && $(CMAKE_COMMAND) -P CMakeFiles/PagedGeometry.dir/cmake_clean.cmake
+	cd /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged/source && $(CMAKE_COMMAND) -P CMakeFiles/PagedGeometry.dir/cmake_clean.cmake
 .PHONY : source/CMakeFiles/PagedGeometry.dir/clean
 
 source/CMakeFiles/PagedGeometry.dir/depend:
-	cd /home/christoph/Documents/Projects/ogre-paged && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/christoph/Documents/Projects/ogre-paged /home/christoph/Documents/Projects/ogre-paged/source /home/christoph/Documents/Projects/ogre-paged /home/christoph/Documents/Projects/ogre-paged/source /home/christoph/Documents/Projects/ogre-paged/source/CMakeFiles/PagedGeometry.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged/source /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged/source /home/christoph/Documents/Projects/Zelda/dependencies/ogre-paged/source/CMakeFiles/PagedGeometry.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : source/CMakeFiles/PagedGeometry.dir/depend
 

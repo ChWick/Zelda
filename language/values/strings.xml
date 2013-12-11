@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="Name">Name</string>
+  <string name="Difficulty">Difficulty</string>
+  <string name="Description">Description</string>
+  <string name="easy">easy</string>
+  <string name="medium">medium</string>
+  <string name="hard">hard</string>
+  <string name="unknown">unknown</string>
+  <string name="start_game">Start game</string>
+  <string name="options">Options</string>
+  <string name="credits">Credits</string>
+  <string name="exit">Exit</string>
+  <string name="map_editor">Map editor</string>
+  <string name="new_game">New game</string>
+  <string name="load_game">Load game</string>
+  <string name="select_map">Select map</string>
+  <string name="back">Back</string>
+  <string name="new_map">New map</string>
+  <string name="load_map">Load map</string>
+  <string name="video">Video</string>
+  <string name="input">Input</string>
+  <string name="back_to_game">Back to game</string>
+  <string name="exit_game">Exit game</string>
+  <string name="select_level">Select level</string>
+  <string name="close">Close</string>
+  <string name="next">Next</string>
+  <string name="Tools">Tools</string>
+
+  <!-- GUIStatistics -->
+  <string name="Statistics">Statistics</string>
+  <string name="Mission accomplished">Mission accomplished</string>
+  <string name="Mission failed">Mission failed</string>
+  <string name="Retry">Retry</string>
+  <string name="To level selection">Statistics</string>
+  <string name="Time">Time</string>
+  <string name="Hitpoints">Hitpoints</string>
+  <string name="Manapoints">Manapoints</string>
+  <string name="Lost hitpoints">Lost hitpoints</string>
+  <string name="Used manapoints">Used manapoints</string>
+  <string name="Killed enemies">Killed enemies</string>
+</resources>

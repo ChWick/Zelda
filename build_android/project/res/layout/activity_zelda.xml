@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/mainLayout"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/shade">
+    
+	
+	<ImageView
+	    android:id="@+id/background_image"
+	    android:contentDescription=""
+	    android:layout_width="wrap_content"
+	    android:layout_height="match_parent"
+	    android:src="@drawable/ic_launcher"
+	    android:layout_centerInParent="true"/>
+    <TextView
+        android:visibility="invisible"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:textColor="#FFFFAA"
+        android:gravity="center"
+        android:background="#AA000066"
+		android:id="@+id/mencus_load_text"/>
+</RelativeLayout>
+
+

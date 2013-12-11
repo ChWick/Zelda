@@ -1,0 +1,4 @@
+*.mesh
+*.mesh.xml
+*.scene
+*.material

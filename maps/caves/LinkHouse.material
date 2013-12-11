@@ -1,0 +1,191 @@
+
+material _missing_material_
+{
+    receive_shadows off
+    technique
+    {
+        pass
+        {
+            ambient 0.1 0.1 0.1 1.0
+            diffuse 0.8 0.0 0.0 1.0
+            specular 0.5 0.5 0.5 1.0 12.5
+            emissive 0.3 0.3 0.3 1.0
+        }
+    }
+}
+
+// HausInnenMauerUnten genrated by blender2ogre 0.6.0
+
+material HausInnenMauerUnten 
+{
+    receive_shadows on 
+
+    technique
+    {
+        pass HausInnenMauerUnten
+        {
+            ambient 0.800000011920929 0.800000011920929 0.800000011920929 1.0
+            diffuse 0.800000011920929 0.800000011920929 0.800000011920929 1.0
+            specular 0.10000000149011612 0.10000000149011612 0.10000000149011612 1.0 12.5
+            emissive 0.4000000059604645 0.4000000059604645 0.4000000059604645 1.0
+
+            alpha_to_coverage off
+            colour_write on
+            cull_hardware clockwise
+            depth_check on
+            depth_func less_equal
+            depth_write on
+            illumination_stage 
+            light_clip_planes off
+            light_scissor off
+            lighting on
+            normalise_normals off
+            polygon_mode solid
+            scene_blend one zero
+            scene_blend_op add
+            shading gouraud
+            transparent_sorting on
+
+            texture_unit 
+            {
+                texture InnenMauerUnten.png
+                tex_address_mode wrap
+                scale 1.0 1.0
+                colour_op modulate
+            }
+        }
+    }
+}
+// CS/door genrated by blender2ogre 0.6.0
+
+material CS/door 
+{
+    receive_shadows on 
+
+    technique
+    {
+        pass CS/door
+        {
+            ambient 1.0 1.0 1.0 1.0
+            diffuse 1.0 1.0 1.0 1.0
+            specular 0.10000000149011612 0.10000000149011612 0.10000000149011612 1.0 1.25
+            emissive 0.0 0.0 0.0 1.0
+
+            alpha_to_coverage off
+            colour_write on
+            cull_hardware clockwise
+            depth_check on
+            depth_func less_equal
+            depth_write on
+            illumination_stage 
+            light_clip_planes off
+            light_scissor off
+            lighting on
+            normalise_normals off
+            polygon_mode solid
+            scene_blend one zero
+            scene_blend_op add
+            shading gouraud
+            transparent_sorting on
+
+            texture_unit 
+            {
+                texture maison-porte.jpg
+                tex_address_mode wrap
+                scale 1.0 1.0
+                colour_op modulate
+            }
+        }
+    }
+}
+// CS/Tuergriff genrated by blender2ogre 0.6.0
+
+material CS/Tuergriff 
+{
+    receive_shadows on 
+
+    technique
+    {
+        pass CS/Tuergriff
+        {
+            ambient 1.0 1.0 1.0 1.0
+            diffuse 1.0 1.0 1.0 1.0
+            specular 0.10000000149011612 0.10000000149011612 0.10000000149011612 1.0 4.0
+            emissive 0.0 0.0 0.0 1.0
+
+            alpha_to_coverage off
+            colour_write on
+            cull_hardware clockwise
+            depth_check on
+            depth_func less_equal
+            depth_write on
+            illumination_stage 
+            light_clip_planes off
+            light_scissor off
+            lighting on
+            normalise_normals off
+            polygon_mode solid
+            scene_blend one zero
+            scene_blend_op add
+            shading gouraud
+            transparent_sorting on
+
+            texture_unit 
+            {
+                texture maison-porte-poignee.jpg
+                tex_address_mode wrap
+                scale 1.0 1.0
+                colour_op modulate
+            }
+        }
+    }
+}
+// Chest.Small.Mat genrated by blender2ogre 0.6.0
+
+material Chest.Small.Mat__.._.._models_Objects_chest_chest.blend 
+{
+    receive_shadows on 
+
+    technique
+    {
+        pass Chest.Small.Mat
+        {
+            ambient 0.5882353186607361 0.5882353186607361 0.5882353186607361 1.0
+            diffuse 0.4705882619409003 0.4705882619409003 0.4705882619409003 1.0
+            specular 0.4490196108818054 0.4490196108818054 0.4490196108818054 1.0 12.5
+            emissive 0.0 0.0 0.0 1.0
+
+            alpha_to_coverage off
+            colour_write on
+            cull_hardware clockwise
+            depth_check on
+            depth_func less_equal
+            depth_write on
+            illumination_stage 
+            light_clip_planes off
+            light_scissor off
+            lighting on
+            normalise_normals off
+            polygon_mode solid
+            scene_blend one zero
+            scene_blend_op add
+            shading gouraud
+            transparent_sorting on
+
+            texture_unit 
+            {
+                texture SmalMM00.tga
+                tex_address_mode wrap
+                scale 1.0 1.0
+                colour_op modulate
+            }
+            texture_unit 
+            {
+                texture SmalMM00.tga
+                tex_address_mode wrap
+                scale 1.0 1.0
+                colour_op alpha_blend
+            }
+        }
+    }
+}

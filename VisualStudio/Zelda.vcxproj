@@ -1,0 +1,232 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\include\BlinkingMaterialManager.h" />
+    <ClInclude Include="..\include\Bomb.h" />
+    <ClInclude Include="..\include\BombListener.h" />
+    <ClInclude Include="..\include\Bow.h" />
+    <ClInclude Include="..\include\BtOgreExtras.h" />
+    <ClInclude Include="..\include\BtOgreGP.h" />
+    <ClInclude Include="..\include\BtOgrePG.h" />
+    <ClInclude Include="..\include\CameraController.h" />
+    <ClInclude Include="..\include\Character.h" />
+    <ClInclude Include="..\include\CharacterController.h" />
+    <ClInclude Include="..\include\CharacterControllerListener.h" />
+    <ClInclude Include="..\include\CharacterController_Physics.h" />
+    <ClInclude Include="..\include\ChatableInterface.h" />
+    <ClInclude Include="..\include\Chest.h" />
+    <ClInclude Include="..\include\ContactLink.h" />
+    <ClInclude Include="..\include\Damage.h" />
+    <ClInclude Include="..\include\DebugDisplay.h" />
+    <ClInclude Include="..\include\DebugDrawer.h" />
+    <ClInclude Include="..\include\Door.h" />
+    <ClInclude Include="..\include\DotsceneLoader.h" />
+    <ClInclude Include="..\include\DotSceneLoaderCallback.h" />
+    <ClInclude Include="..\include\Fader.h" />
+    <ClInclude Include="..\include\Game.h" />
+    <ClInclude Include="..\include\GameScriptParser.h" />
+    <ClInclude Include="..\include\GameState.h" />
+    <ClInclude Include="..\include\GUIManager.h" />
+    <ClInclude Include="..\include\HitableInterface.h" />
+    <ClInclude Include="..\include\Hitpoints.h" />
+    <ClInclude Include="..\include\HUD.h" />
+    <ClInclude Include="..\include\HUDListener.h" />
+    <ClInclude Include="..\include\InnerObjectContainerInterface.h" />
+    <ClInclude Include="..\include\InnerObjectGenerator.h" />
+    <ClInclude Include="..\include\InnerObjectInterface.h" />
+    <ClInclude Include="..\include\InputListener.h" />
+    <ClInclude Include="..\include\InteractionInterface.h" />
+    <ClInclude Include="..\include\Ladder.h" />
+    <ClInclude Include="..\include\Lamp.h" />
+    <ClInclude Include="..\include\LiftableObject.h" />
+    <ClInclude Include="..\include\LinkableObject.h" />
+    <ClInclude Include="..\include\MainMap.h" />
+    <ClInclude Include="..\include\Map.h" />
+    <ClInclude Include="..\include\MapEntry.h" />
+    <ClInclude Include="..\include\MapLinkInterface.h" />
+    <ClInclude Include="..\include\MapLocalisationData.h" />
+    <ClInclude Include="..\include\MapManager.h" />
+    <ClInclude Include="..\include\MapUserDataParser.h" />
+    <ClInclude Include="..\include\Object.h" />
+    <ClInclude Include="..\include\ObjectManager.h" />
+    <ClInclude Include="..\include\Person.h" />
+    <ClInclude Include="..\include\PersonController.h" />
+    <ClInclude Include="..\include\PhysicsManager.h" />
+    <ClInclude Include="..\include\PhysicsUserPointer.h" />
+    <ClInclude Include="..\include\PickableObject.h" />
+    <ClInclude Include="..\include\Player.h" />
+    <ClInclude Include="..\include\PlayerController.h" />
+    <ClInclude Include="..\include\PlayerData.h" />
+    <ClInclude Include="..\include\PlayerTool.h" />
+    <ClInclude Include="..\include\Projectile.h" />
+    <ClInclude Include="..\include\Shield.h" />
+    <ClInclude Include="..\include\Sign.h" />
+    <ClInclude Include="..\include\SimpleEnemy.h" />
+    <ClInclude Include="..\include\SimpleEnemyController.h" />
+    <ClInclude Include="..\include\SimpleFriend.h" />
+    <ClInclude Include="..\include\StdAfx.h" />
+    <ClInclude Include="..\include\TextLoader.h" />
+    <ClInclude Include="..\include\tinyxml2.h" />
+    <ClInclude Include="..\include\Tool.h" />
+    <ClInclude Include="..\include\UserData.h" />
+    <ClInclude Include="..\include\Util.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\src\BlinkingMaterialManager.cpp" />
+    <ClCompile Include="..\src\Bomb.cpp" />
+    <ClCompile Include="..\src\BtOgre.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\src\CameraController.cpp" />
+    <ClCompile Include="..\src\Character.cpp" />
+    <ClCompile Include="..\src\CharacterController_Physics.cpp" />
+    <ClCompile Include="..\src\ChatableInterface.cpp" />
+    <ClCompile Include="..\src\Chest.cpp" />
+    <ClCompile Include="..\src\ContactLink.cpp" />
+    <ClCompile Include="..\src\Damage.cpp" />
+    <ClCompile Include="..\src\DebugDisplay.cpp" />
+    <ClCompile Include="..\src\DebugDrawer.cpp" />
+    <ClCompile Include="..\src\Door.cpp" />
+    <ClCompile Include="..\src\DotsceneLoader.cpp" />
+    <ClCompile Include="..\src\Fader.cpp" />
+    <ClCompile Include="..\src\Game.cpp" />
+    <ClCompile Include="..\src\GameScriptParser.cpp" />
+    <ClCompile Include="..\src\GameState.cpp" />
+    <ClCompile Include="..\src\GUIManager.cpp" />
+    <ClCompile Include="..\src\HUD.cpp" />
+    <ClCompile Include="..\src\InnerObjectContainerInterface.cpp" />
+    <ClCompile Include="..\src\InnerObjectGenerator.cpp" />
+    <ClCompile Include="..\src\InnerObjectInterface.cpp" />
+    <ClCompile Include="..\src\InputListener.cpp" />
+    <ClCompile Include="..\src\InteractionInterface.cpp" />
+    <ClCompile Include="..\src\Ladder.cpp" />
+    <ClCompile Include="..\src\Lamp.cpp" />
+    <ClCompile Include="..\src\LiftableObject.cpp" />
+    <ClCompile Include="..\src\LinkableObject.cpp" />
+    <ClCompile Include="..\src\main.cpp" />
+    <ClCompile Include="..\src\MainMap.cpp" />
+    <ClCompile Include="..\src\Map.cpp" />
+    <ClCompile Include="..\src\MapManager.cpp" />
+    <ClCompile Include="..\src\MapUserDataParser.cpp" />
+    <ClCompile Include="..\src\Object.cpp" />
+    <ClCompile Include="..\src\ObjectManager.cpp" />
+    <ClCompile Include="..\src\Person.cpp" />
+    <ClCompile Include="..\src\PersonController.cpp" />
+    <ClCompile Include="..\src\PhysicsManager.cpp" />
+    <ClCompile Include="..\src\PickableObject.cpp" />
+    <ClCompile Include="..\src\Player.cpp" />
+    <ClCompile Include="..\src\PlayerController.cpp" />
+    <ClCompile Include="..\src\PlayerData.cpp" />
+    <ClCompile Include="..\src\PlayerTool.cpp" />
+    <ClCompile Include="..\src\Projectile.cpp" />
+    <ClCompile Include="..\src\Shield.cpp" />
+    <ClCompile Include="..\src\Sign.cpp" />
+    <ClCompile Include="..\src\SimpleEnemy.cpp" />
+    <ClCompile Include="..\src\SimpleEnemyController.cpp" />
+    <ClCompile Include="..\src\SimpleFriend.cpp" />
+    <ClCompile Include="..\src\StdAfx.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\src\TextLoader.cpp" />
+    <ClCompile Include="..\src\tinyxml2.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\src\UserData.cpp" />
+    <ClCompile Include="..\src\Util.cpp" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{2DF17783-4D22-4EDC-AC0B-3F4D09062DD9}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>Zelda</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <OutDir>../bin/</OutDir>
+    <IncludePath>C:\Users\Christoph\Documents\Visual Studio 2013\Projects\lua\include;C:\Users\Christoph\Documents\Visual Studio 2013\Projects\ogre-paged\include;C:\Users\Christoph\Documents\Visual Studio 2013\Projects\ogre_src_v1-8-1\dependencies\src\ois\includes;C:\Users\Christoph\Documents\Visual Studio 2013\Projects\ogre_src_v1-8-1\PlugIns\OctreeSceneManager\include;C:\Users\Christoph\Documents\Visual Studio 2013\Projects\Zelda;C:\Users\Christoph\Documents\Visual Studio 2013\Projects\Zelda\include;C:\Users\Christoph\Documents\Visual Studio 2013\Projects\ogre_src_v1-8-1\dependencies\src;C:\Users\Christoph\Documents\Visual Studio 2013\Projects\ogre_src_v1-8-1\OgreMain\include;C:\Users\Christoph\Documents\Visual Studio 2013\Projects\ogre_src_v1-8-1\include;C:\Users\Christoph\Documents\Visual Studio 2013\Projects\cegui-0.8.2\cegui\include;C:\Users\Christoph\Documents\Visual Studio 2013\Projects\bullet-2.81-rev2613\src;C:\Users\Christoph\Documents\Visual Studio 2013\Projects\boost;$(IncludePath)</IncludePath>
+    <TargetName>$(ProjectName)_d</TargetName>
+    <LibraryPath>C:\Users\Christoph\Documents\Visual Studio 2013\Projects\lua;C:\Users\Christoph\Documents\Visual Studio 2013\Projects\ogre_src_v1-8-1\dependencies\src\FreeImage\Debug;C:\Users\Christoph\Documents\Visual Studio 2013\Projects\ogre_src_v1-8-1\dependencies\src\Cg\lib;C:\Users\Christoph\Documents\Visual Studio 2013\Projects\bullet-2.81-rev2613\lib;C:\Users\Christoph\Documents\Visual Studio 2013\Projects\ogre_src_v1-8-1\dependencies\src\ois\Debug;C:\Users\Christoph\Documents\Visual Studio 2013\Projects\cegui-0.8.2\lib;C:\Users\Christoph\Documents\Visual Studio 2013\Projects\ogre_src_v1-8-1\dependencies\bin\Debug;C:\Users\Christoph\Documents\Visual Studio 2013\Projects\ogre_src_v1-8-1\lib\Debug;C:\Users\Christoph\Documents\Visual Studio 2013\Projects\boost\stage\lib;C:\Users\Christoph\Documents\Visual Studio 2013\Projects\ogre-paged\lib\Debug;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+    <IncludePath>C:\Users\Christoph\Documents\Visual Studio 2013\Projects\lua\include;C:\Users\Christoph\Documents\Visual Studio 2013\Projects\ogre-paged\include;C:\Users\Christoph\Documents\Visual Studio 2013\Projects\ogre_src_v1-8-1\dependencies\src\ois\includes;C:\Users\Christoph\Documents\Visual Studio 2013\Projects\ogre_src_v1-8-1\PlugIns\OctreeSceneManager\include;C:\Users\Christoph\Documents\Visual Studio 2013\Projects\Zelda;C:\Users\Christoph\Documents\Visual Studio 2013\Projects\Zelda\include;C:\Users\Christoph\Documents\Visual Studio 2013\Projects\ogre_src_v1-8-1\dependencies\src;C:\Users\Christoph\Documents\Visual Studio 2013\Projects\ogre_src_v1-8-1\OgreMain\include;C:\Users\Christoph\Documents\Visual Studio 2013\Projects\ogre_src_v1-8-1\include;C:\Users\Christoph\Documents\Visual Studio 2013\Projects\cegui-0.8.2\cegui\include;C:\Users\Christoph\Documents\Visual Studio 2013\Projects\bullet-2.81-rev2613\src;C:\Users\Christoph\Documents\Visual Studio 2013\Projects\boost;$(IncludePath)</IncludePath>
+    <OutDir>../bin/</OutDir>
+    <LibraryPath>C:\Users\Christoph\Documents\Visual Studio 2013\Projects\lua;C:\Users\Christoph\Documents\Visual Studio 2013\Projects\ogre_src_v1-8-1\dependencies\src\FreeImage\Debug;C:\Users\Christoph\Documents\Visual Studio 2013\Projects\ogre_src_v1-8-1\dependencies\src\Cg\lib;C:\Users\Christoph\Documents\Visual Studio 2013\Projects\bullet-2.81-rev2613\lib;C:\Users\Christoph\Documents\Visual Studio 2013\Projects\ogre_src_v1-8-1\dependencies\src\ois\Debug;C:\Users\Christoph\Documents\Visual Studio 2013\Projects\cegui-0.8.2\lib;C:\Users\Christoph\Documents\Visual Studio 2013\Projects\ogre_src_v1-8-1\dependencies\bin\Debug;C:\Users\Christoph\Documents\Visual Studio 2013\Projects\ogre_src_v1-8-1\lib\Debug;C:\Users\Christoph\Documents\Visual Studio 2013\Projects\boost\stage\lib;C:\Users\Christoph\Documents\Visual Studio 2013\Projects\ogre-paged\lib\Debug;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <DisableSpecificWarnings>4251;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <AdditionalOptions>/Zm300 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>lua.lib;PagedGeometry_d.lib;OgreMain_d.lib;ois_d.lib;bulletcollision_vs2010_debug.lib;bulletdynamics_vs2010_debug.lib;linearmath_vs2010_debug.lib;ConvexDecomposition_vs2010_debug.lib;cg.lib;FreeImage_d.lib;CEGUIBase-0_d.lib;CEGUIOgreRenderer-0_d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
+      <ProgramDatabaseFile>$(OutDir)$(TargetName).pdb</ProgramDatabaseFile>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <DisableSpecificWarnings>4251</DisableSpecificWarnings>
+      <AdditionalOptions>/Zm300 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>OgrePaging.lib;PagedGeometry.lib;plugin_octreescenemanager.lib;OgreMain.lib;ois.lib;OgreBulletCollisions.lib;OgreBulletDynamics.lib;bulletcollision.lib;bulletdynamics.lib;linearmath.lib;ConvexDecomposition.lib;cg.lib;FreeImage.lib;CEGUIBase-0.lib;CEGUIOgreRenderer-0.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

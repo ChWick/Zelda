@@ -1,3 +1,22 @@
+/*****************************************************************************
+ * Copyright 2014 Christoph Wick
+ *
+ * This file is part of Zelda.
+ *
+ * Zelda is free software: you can redistribute it and/or modify it under the
+ * terms of the GNU General Public License as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option) any later
+ * version.
+ *
+ * Zelda is distributed in the hope that it will be useful, but WITHOUT ANY
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+ * details.
+ *
+ * You should have received a copy of the GNU General Public License along with
+ * Zelda. If not, see http://www.gnu.org/licenses/.
+ *****************************************************************************/
+
 #include "StdAfx.h"
 #include "PlayerData.h"
 
@@ -27,8 +46,8 @@ void CMapSaveData::readFromFile(XMLElement *pElement) {
 // CPlayerSaveData
 // ============================================================================================================================
 CPlayerData::CPlayerData()
-    : m_uiHP(0),
-    m_uiMaxHP(0),
+    : m_uiHP(300),          // This is the default hp (since hp >= 25, or dead if 0)
+    m_uiMaxHP(300),
     m_fMP(0),
     m_iRubyCount(0),
     m_iKeyCount(0),
@@ -84,7 +103,7 @@ void CPlayerData::readFromFile() {
 	m_fMP = pRoot->FloatAttribute("mp");
     m_iBombCount = pRoot->IntAttribute("bombCount");
 
-	assert(m_uiMaxHP > 99); // this helps if one accendently sets the hp to be 3 instead of 300!
+	assert(m_uiMaxHP > 4); // this helps if one accendently sets the hp to be 3 instead of 300! (25 is possible ofc)
 
 	for (XMLElement *pElement = pRoot->FirstChildElement(); pElement; pElement = pElement->NextSiblingElement()) {
 		if (Ogre::String(pElement->Value()) == "map") {

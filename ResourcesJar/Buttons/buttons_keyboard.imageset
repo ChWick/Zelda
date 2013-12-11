@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Imageset version="2" name="input_buttons" imagefile="input_buttons.png" autoScaled="vertical" >
+    <Image name="jump" xPos="0" yPos="0" width="64" height="64" />
+    <Image name="enterLink" xPos="64" yPos="0" height="64" width="64" />
+    <Image name="interact" xPos="128" yPos="0" width="128" height="64" />
+    <Image name="left" xPos="0" yPos="64" height="64" width="64" />
+    <Image name="right" xPos="64" yPos="64" width="64" height="64" />
+    <Image name="escape" xPos="128" yPos="64" height="64" width="64" />
+    <Image name="attack" xPos="0" yPos="128" height="64" width="256" />
+    <Image name="menu" xPos="192" yPos="64" height="64" width="64" />
+</Imageset>

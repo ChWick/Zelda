@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map scene="map.scene" global_position="0 0 0" global_size="18 18">
+  <player>
+    <event>
+      <emitter type="collision" id="bottom_margin"/>
+      <action type="message" message_type="switch_map" map="Map1"/>
+    </event>
+  </player>
+  <region id="bottom_margin" position="0 0 -4" size="4 1 0.01" shape="box"/>
+</map>

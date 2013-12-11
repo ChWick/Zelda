@@ -20,3 +20,7 @@ INSTALL(TARGETS ${LIBNAME}
 # install the headers: both source and build headers
 INSTALL(DIRECTORY ${PagedGeometry_SOURCE_DIR}/include/ DESTINATION include/PagedGeometry FILES_MATCHING PATTERN "*.h" PATTERN ".svn" EXCLUDE)
 INSTALL(DIRECTORY ${PagedGeometry_BINARY_DIR}/include/ DESTINATION include/PagedGeometry FILES_MATCHING PATTERN "*.h" PATTERN ".svn" EXCLUDE)
+
+IF(NOT WIN32)
+	TARGET_LINK_LIBRARIES(${LIBNAME} boost_system)
+ENDIF()

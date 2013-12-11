@@ -1,0 +1,39 @@
+######################################################################
+# These are the systems resources, that are essential for running
+
+# these resources are loaded before the ogre loading bar (OgreTray)
+[Essential]
+@RESOURCES_USING_APK@Zip=@RESOURCES_PREFIX@packs/SdkTrays@RESOURCES_MINIMAL@.zip
+@RESOURCES_USING_APK@FileSystem=@RESOURCES_PREFIX@RTShaderLib
+@RESOURCES_USING_APK@FileSystem=@RESOURCES_PREFIX@RTShaderLib/GLSLES
+#@RESOURCES_USING_APK@FileSystem=@RESOURCES_PREFIX@RTShaderLib/materials
+
+# these resources are loaded during the loading bar, because the are needed before the actual game
+[PreloadGame]
+#@RESOURCES_USING_APK@FileSystem=@RESOURCES_PREFIX@packs
+#@RESOURCES_USING_APK@FileSystem=@RESOURCES_PREFIX@gfx
+#@RESOURCES_USING_APK@FileSystem=@RESOURCES_PREFIX@gfx/background
+#@RESOURCES_USING_APK@FileSystem=@RESOURCES_PREFIX@materials
+#@RESOURCES_USING_APK@FileSystem=@RESOURCES_PREFIX@overlays
+#@RESOURCES_USING_APK@FileSystem=@RESOURCES_PREFIX@credits
+#@RESOURCES_USING_APK@FileSystem=@RESOURCES_PREFIX@/fx/overlay
+
+# these resources are for cegui
+[Imagesets]
+@RESOURCES_USING_APK@FileSystem=@RESOURCES_PREFIX@cegui/imagesets
+[Fonts]
+@RESOURCES_USING_APK@FileSystem=@RESOURCES_PREFIX@cegui/fonts
+@RESOURCES_USING_APK@FileSystem=@RESOURCES_PREFIX@fonts
+[Schemes]
+@RESOURCES_USING_APK@FileSystem=@RESOURCES_PREFIX@cegui/schemes
+[LookNFeel]
+@RESOURCES_USING_APK@FileSystem=@RESOURCES_PREFIX@cegui/looknfeel
+[Layouts]
+@RESOURCES_USING_APK@FileSystem=@RESOURCES_PREFIX@cegui/layouts
+
+######################################################################
+# You can add here your own resources and its groups
+
+[World]
+@RESOURCES_USING_APK@Zip=@RESOURCES_PREFIX@packs/game.zip
+@RESOURCES_USING_APK@Zip=@RESOURCES_PREFIX@packs/light_world.zip

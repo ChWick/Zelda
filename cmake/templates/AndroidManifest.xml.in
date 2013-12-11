@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+	  package="org.@LOWERCASE_PROJECT_NAME@"
+	  android:versionCode="@PROJECT_VERSION_CODE@"
+	  android:versionName="@PROJECT_VERSION_NAME@" 
+	  android:installLocation="auto">
+
+  <uses-sdk android:minSdkVersion="@ANDROID_NATIVE_API_LEVEL@" />
+  <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />  
+  <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+  @PROJECT_ANDROID_PERMISSIONS@
+
+  <application android:label="@CMAKE_PROJECT_NAME@"
+	       android:icon="@drawable/ic_launcher"
+	       android:hasCode="true"
+	       android:allowBackup="true"
+	       android:largeHeap="true">
+    <meta-data
+        android:name="com.google.android.gms.version"
+        android:value="@integer/google_play_services_version" />
+    <activity android:name=".NativeActivity"
+              android:label="@CMAKE_PROJECT_NAME@"
+	      android:screenOrientation="landscape"
+              android:configChanges="orientation@SCREEN_SIZE@|keyboardHidden"
+	      android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen">
+      <!-- Tell NativeActivity the name of or .so -->
+      <meta-data android:name="android.app.lib_name" android:value="@CMAKE_PROJECT_NAME@" />
+      <intent-filter>
+        <action android:name="android.intent.action.MAIN" />
+        <category android:name="android.intent.category.LAUNCHER" />
+      </intent-filter>
+    </activity>
+    <!-- Activity required to show ad overlays. -->
+    <activity
+        android:name="com.google.android.gms.ads.AdActivity"
+        android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"/>
+
+   @PROJECT_AMAZON_GAME_CIRCLE_ACTIVITY@
+
+  </application>
+
+</manifest>

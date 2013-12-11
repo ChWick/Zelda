@@ -52,6 +52,72 @@
             </Layer>
         </StateImagery>
     </WidgetLook>
+    <WidgetLook name="OgreTray/ShadowedLabel">
+        <PropertyDefinition redrawOnWrite="true" initialValue="FFFFFFFF" type="Colour" name="NormalTextColour"/>
+        <PropertyDefinition redrawOnWrite="true" initialValue="FF000000" type="Colour" name="ShadowTextColour"/>
+        <PropertyDefinition redrawOnWrite="true" initialValue="FF444444" type="Colour" name="DisabledTextColour"/>
+        <PropertyDefinition redrawOnWrite="true" initialValue="CentreAligned" type="VerticalTextFormatting" name="VertFormatting"/>
+        <PropertyDefinition redrawOnWrite="true" initialValue="CentreAligned" type="HorizontalTextFormatting" name="HorzFormatting"/>
+        <Property name="Size" value="{{0, 128}, {0, 32}}" />
+	<ImagerySection name="Shadow">
+            <TextComponent>
+                <Area>
+                    <Dim type="LeftEdge">
+                        <AbsoluteDim value="2"/>
+                    </Dim>
+                    <Dim type="TopEdge">
+                        <AbsoluteDim value="2"/>
+                    </Dim>
+                    <Dim type="Width">
+                        <UnifiedDim scale="1" type="Width"/>
+                    </Dim>
+                    <Dim type="Height">
+                        <UnifiedDim scale="1" type="Height"/>
+                    </Dim>
+                </Area>
+                <VertFormatProperty name="VertFormatting"/>
+                <HorzFormatProperty name="HorzFormatting"/>
+                <ColourProperty name="ShadowTextColour"/>
+            </TextComponent>
+	</ImagerySection>
+        <ImagerySection name="Label">
+            <TextComponent>
+                <Area>
+                    <Dim type="LeftEdge">
+                        <AbsoluteDim value="0"/>
+                    </Dim>
+                    <Dim type="TopEdge">
+                        <AbsoluteDim value="0"/>
+                    </Dim>
+                    <Dim type="Width">
+                        <UnifiedDim scale="1" type="Width"/>
+                    </Dim>
+                    <Dim type="Height">
+                        <UnifiedDim scale="1" type="Height"/>
+                    </Dim>
+                </Area>
+                <VertFormatProperty name="VertFormatting"/>
+                <HorzFormatProperty name="HorzFormatting"/>
+            </TextComponent>
+        </ImagerySection>
+        <StateImagery name="Enabled">
+            <Layer>
+                <Section section="Shadow"/>
+                <Section section="Label">
+                    <ColourProperty name="NormalTextColour"/>
+                </Section>
+            </Layer>
+        </StateImagery>
+        <StateImagery name="Disabled">
+            <Layer>
+                <Section section="Shadow"/>
+                <Section section="Label">
+                    <ColourProperty name="DisabledTextColour"/>
+                </Section>
+            </Layer>
+        </StateImagery>
+    </WidgetLook>
+
     <WidgetLook name="OgreTray/BGTest">
         <Property name="Size" value="{{0, 128}, {0, 128}}" />
         <ImagerySection name="main">
@@ -1840,6 +1906,430 @@
         </StateImagery>
     </WidgetLook>
     <!--
+:::: ImagePushButton
+-->
+    <WidgetLook name="OgreTray/ImagePushButton">
+        <PropertyDefinition redrawOnWrite="true" initialValue="FF000000" type="ColourRect" name="NormalTextColour"/>
+        <PropertyDefinition redrawOnWrite="true" initialValue="FF000000" type="ColourRect" name="HoverTextColour"/>
+        <PropertyDefinition redrawOnWrite="true" initialValue="FF000000" type="ColourRect" name="PushedTextColour"/>
+        <PropertyDefinition redrawOnWrite="true" initialValue="FF888888" type="ColourRect" name="DisabledTextColour"/>
+	<PropertyDefinition redrawOnWrite="true" initialValue="tl:FFFFFFFF tr:FFFFFFFF bl:FFFFFFFF br:FFFFFFFF" type="ColourRect" name="ImageColours"/>
+        <PropertyDefinition redrawOnWrite="true" initialValue="Stretched" type="VerticalFormatting" name="VertFormatting"/>
+        <PropertyDefinition redrawOnWrite="true" initialValue="Stretched" type="HorizontalFormatting" name="HorzFormatting"/>
+	<PropertyDefinition redrawOnWrite="true" initialValue="" type="Image" name="Image"/>
+        <Property name="Size" value="{{0, 96}, {0, 32}}" />
+        <ImagerySection name="label">
+            <TextComponent>
+                <Area>
+                    <Dim type="LeftEdge">
+                        <AbsoluteDim value="0"/>
+                    </Dim>
+                    <Dim type="TopEdge">
+                        <AbsoluteDim value="0"/>
+                    </Dim>
+                    <Dim type="RightEdge">
+                        <UnifiedDim scale="1" type="RightEdge"/>
+                    </Dim>
+                    <Dim type="BottomEdge">
+                        <UnifiedDim scale="1" type="BottomEdge"/>
+                    </Dim>
+                </Area>
+                <VertFormat type="CentreAligned"/>
+                <HorzFormat type="WordWrapCentreAligned"/>
+            </TextComponent>
+        </ImagerySection>
+	<ImagerySection name="image">
+	    <ImageryComponent>
+                <Area>
+                    <Dim type="LeftEdge">
+                        <UnifiedDim scale="0.05" type="LeftEdge"/>
+                    </Dim>
+                    <Dim type="TopEdge">
+                        <UnifiedDim scale="0.05" type="TopEdge"/>
+                    </Dim>
+                    <Dim type="RightEdge">
+                        <UnifiedDim scale="0.95" type="RightEdge"/>
+                    </Dim>
+                    <Dim type="BottomEdge">
+                        <UnifiedDim scale="0.95" type="BottomEdge"/>
+                    </Dim>
+                </Area>
+                <ImageProperty name="Image"/>
+                <ColourRectProperty name="ImageColours"/>
+                <VertFormatProperty name="VertFormatting"/>
+                <HorzFormatProperty name="HorzFormatting"/>
+            </ImageryComponent>
+	</ImagerySection>
+        <ImagerySection name="normal">
+            <FrameComponent>
+                <Area>
+                    <Dim type="LeftEdge">
+                        <AbsoluteDim value="0"/>
+                    </Dim>
+                    <Dim type="TopEdge">
+                        <AbsoluteDim value="0"/>
+                    </Dim>
+                    <Dim type="RightEdge">
+                        <UnifiedDim scale="1" type="RightEdge"/>
+                    </Dim>
+                    <Dim type="BottomEdge">
+                        <UnifiedDim scale="1" type="BottomEdge"/>
+                    </Dim>
+                </Area>
+                <Image component="TopLeftCorner" name="OgreTrayImages/ButtonUpTL"/>
+                <Image component="TopRightCorner" name="OgreTrayImages/ButtonUpTR"/>
+                <Image component="BottomLeftCorner" name="OgreTrayImages/ButtonUpBL"/>
+                <Image component="BottomRightCorner" name="OgreTrayImages/ButtonUpBR"/>
+                <Image component="LeftEdge" name="OgreTrayImages/ButtonUpL"/>
+                <Image component="TopEdge" name="OgreTrayImages/ButtonUpT"/>
+                <Image component="RightEdge" name="OgreTrayImages/ButtonUpR"/>
+                <Image component="BottomEdge" name="OgreTrayImages/ButtonUpB"/>
+                <Image component="Background" name="OgreTrayImages/ButtonUpM"/>
+            </FrameComponent>
+        </ImagerySection>
+        <ImagerySection name="hover">
+            <FrameComponent>
+                <Area>
+                    <Dim type="LeftEdge">
+                        <AbsoluteDim value="0"/>
+                    </Dim>
+                    <Dim type="TopEdge">
+                        <AbsoluteDim value="0"/>
+                    </Dim>
+                    <Dim type="RightEdge">
+                        <UnifiedDim scale="1" type="RightEdge"/>
+                    </Dim>
+                    <Dim type="BottomEdge">
+                        <UnifiedDim scale="1" type="BottomEdge"/>
+                    </Dim>
+                </Area>
+                <Image component="TopLeftCorner" name="OgreTrayImages/ButtonOverTL"/>
+                <Image component="TopRightCorner" name="OgreTrayImages/ButtonOverTR"/>
+                <Image component="BottomLeftCorner" name="OgreTrayImages/ButtonOverBL"/>
+                <Image component="BottomRightCorner" name="OgreTrayImages/ButtonOverBR"/>
+                <Image component="LeftEdge" name="OgreTrayImages/ButtonOverL"/>
+                <Image component="TopEdge" name="OgreTrayImages/ButtonOverT"/>
+                <Image component="RightEdge" name="OgreTrayImages/ButtonOverR"/>
+                <Image component="BottomEdge" name="OgreTrayImages/ButtonOverB"/>
+                <Image component="Background" name="OgreTrayImages/ButtonOverM"/>
+            </FrameComponent>
+        </ImagerySection>
+        <ImagerySection name="pushed">
+            <FrameComponent>
+                <Area>
+                    <Dim type="LeftEdge">
+                        <AbsoluteDim value="0"/>
+                    </Dim>
+                    <Dim type="TopEdge">
+                        <AbsoluteDim value="0"/>
+                    </Dim>
+                    <Dim type="RightEdge">
+                        <UnifiedDim scale="1" type="RightEdge"/>
+                    </Dim>
+                    <Dim type="BottomEdge">
+                        <UnifiedDim scale="1" type="BottomEdge"/>
+                    </Dim>
+                </Area>
+                <Image component="TopLeftCorner" name="OgreTrayImages/ButtonDownTL"/>
+                <Image component="TopRightCorner" name="OgreTrayImages/ButtonDownTR"/>
+                <Image component="BottomLeftCorner" name="OgreTrayImages/ButtonDownBL"/>
+                <Image component="BottomRightCorner" name="OgreTrayImages/ButtonDownBR"/>
+                <Image component="LeftEdge" name="OgreTrayImages/ButtonDownL"/>
+                <Image component="TopEdge" name="OgreTrayImages/ButtonDownT"/>
+                <Image component="RightEdge" name="OgreTrayImages/ButtonDownR"/>
+                <Image component="BottomEdge" name="OgreTrayImages/ButtonDownB"/>
+                <Image component="Background" name="OgreTrayImages/ButtonDownM"/>
+            </FrameComponent>
+        </ImagerySection>
+        <StateImagery name="Normal">
+            <Layer>
+                <Section section="normal"/>
+                <Section section="label">
+                    <ColourProperty name="NormalTextColour"/>
+                </Section>
+		<Section section="image"/>
+            </Layer>
+        </StateImagery>
+        <StateImagery name="Hover">
+            <Layer>
+                <Section section="hover"/>
+                <Section section="label">
+                    <ColourProperty name="HoverTextColour"/>
+                </Section>
+		<Section section="image"/>
+            </Layer>
+        </StateImagery>
+        <StateImagery name="Pushed">
+            <Layer>
+                <Section section="pushed"/>
+                <Section section="label">
+                    <ColourProperty name="PushedTextColour"/>
+                </Section>
+		<Section section="image"/>
+            </Layer>
+        </StateImagery>
+        <StateImagery name="PushedOff">
+            <Layer>
+                <Section section="hover"/>
+                <Section section="label">
+                    <ColourProperty name="HoverTextColour"/>
+                    <ColourRectProperty name="ImageColours"/>
+                </Section>
+            </Layer>
+        </StateImagery>
+        <StateImagery name="Disabled">
+            <Layer>
+                <Section section="normal"/>
+                <Section section="label">
+                    <ColourProperty name="DisabledTextColour"/>
+                </Section>
+		<Section section="image"/>
+            </Layer>
+        </StateImagery>
+    </WidgetLook>
+    <!--
+:::: Progress Bar
+-->
+    <WidgetLook name="OgreTray/ProgressBar">
+        <Property name="Size" value="{{0, 256}, {0, 32}}" />
+        <NamedArea name="ProgressArea">
+            <Area>
+                <Dim type="LeftEdge">
+                    <AbsoluteDim value="0"/>
+                </Dim>
+                <Dim type="TopEdge">
+                    <AbsoluteDim value="0"/>
+                </Dim>
+                <Dim type="RightEdge">
+                    <UnifiedDim scale="1" type="RightEdge"/>
+                </Dim>
+                <Dim type="BottomEdge">
+                    <UnifiedDim scale="1" type="BottomEdge"/>
+                </Dim>
+            </Area>
+        </NamedArea>
+        <ImagerySection name="frame">
+            <FrameComponent>
+                <Area>
+                    <Dim type="LeftEdge">
+                        <AbsoluteDim value="0"/>
+                    </Dim>
+                    <Dim type="TopEdge">
+                        <AbsoluteDim value="0"/>
+                    </Dim>
+                    <Dim type="Width">
+                        <UnifiedDim scale="1" type="Width"/>
+                    </Dim>
+                    <Dim type="Height">
+                        <UnifiedDim scale="1" type="Height"/>
+                    </Dim>
+                </Area>
+                <Image component="TopLeftCorner" name="OgreTrayImages/MiniTextBoxTL"/>
+                <Image component="TopRightCorner" name="OgreTrayImages/MiniTextBoxTR"/>
+                <Image component="BottomLeftCorner" name="OgreTrayImages/MiniTextBoxBL"/>
+                <Image component="BottomRightCorner" name="OgreTrayImages/MiniTextBoxBR"/>
+                <Image component="LeftEdge" name="OgreTrayImages/MiniTextBoxL"/>
+                <Image component="TopEdge" name="OgreTrayImages/MiniTextBoxT"/>
+                <Image component="RightEdge" name="OgreTrayImages/MiniTextBoxR"/>
+                <Image component="BottomEdge" name="OgreTrayImages/MiniTextBoxB"/>
+                <Image component="Background" name="OgreTrayImages/MiniTextBoxM"/>
+            </FrameComponent>
+        </ImagerySection>
+        <ImagerySection name="progress">
+            <FrameComponent>
+                <Area>
+                    <Dim type="LeftEdge">
+                        <AbsoluteDim value="0"/>
+                    </Dim>
+                    <Dim type="TopEdge">
+                        <AbsoluteDim value="0"/>
+                    </Dim>
+                    <Dim type="Width">
+                        <OperatorDim op="Multiply">
+                            <UnifiedDim scale="1" type="Width"/>
+                            <PropertyDim name="CurrentProgress"/>
+                        </OperatorDim>
+                    </Dim>
+                    <Dim type="Height">
+                        <UnifiedDim scale="1" type="Height"/>
+                    </Dim>
+                </Area>
+                <Image component="TopLeftCorner" name="OgreTrayImages/MiniTextBoxOverTL"/>
+                <Image component="TopRightCorner" name="OgreTrayImages/MiniTextBoxOverTR"/>
+                <Image component="BottomLeftCorner" name="OgreTrayImages/MiniTextBoxOverBL"/>
+                <Image component="BottomRightCorner" name="OgreTrayImages/MiniTextBoxOverBR"/>
+                <Image component="LeftEdge" name="OgreTrayImages/MiniTextBoxOverL"/>
+                <Image component="TopEdge" name="OgreTrayImages/MiniTextBoxOverT"/>
+                <Image component="RightEdge" name="OgreTrayImages/MiniTextBoxOverR"/>
+                <Image component="BottomEdge" name="OgreTrayImages/MiniTextBoxOverB"/>
+                <Image component="Background" name="OgreTrayImages/MiniTextBoxOverM"/>
+            </FrameComponent>
+        </ImagerySection>
+        <StateImagery name="Enabled">
+            <Layer>
+                <Section section="frame"/>
+            </Layer>
+        </StateImagery>
+        <StateImagery name="Disabled">
+            <Layer>
+                <Section section="frame"/>
+            </Layer>
+        </StateImagery>
+        <StateImagery name="EnabledProgress">
+            <Layer>
+                <Section section="progress"/>
+            </Layer>
+        </StateImagery>
+        <StateImagery name="DisabledProgress">
+            <Layer>
+                <Section section="progress"/>
+            </Layer>
+        </StateImagery>
+    </WidgetLook>
+    <!--
+:::: Editbox
+-->
+    <WidgetLook name="OgreTray/Editbox">
+        <PropertyDefinition redrawOnWrite="true" initialValue="FF000000" type="ColourRect" name="NormalTextColour"/>
+        <PropertyDefinition redrawOnWrite="true" initialValue="FF000000" type="ColourRect" name="SelectedTextColour"/>
+        <Property name="Size" value="{{0, 256}, {0, 32}}" />
+        <NamedArea name="TextArea">
+            <Area>
+                <Dim type="LeftEdge">
+                    <OperatorDim op="Multiply">
+                        <ImageDim name="OgreTrayImages/TextBoxL" dimension="Width"/>
+                        <AbsoluteDim value="0.25"/>
+                    </OperatorDim>
+                </Dim>
+                <Dim type="TopEdge">
+                    <OperatorDim op="Multiply">
+                        <ImageDim name="OgreTrayImages/TextBoxT" dimension="Height"/>
+                        <AbsoluteDim value="0.25"/>
+                    </OperatorDim>
+                </Dim>
+                <Dim type="RightEdge">
+                    <OperatorDim op="Subtract">
+                        <UnifiedDim scale="1" type="Width"/>
+                        <OperatorDim op="Multiply">
+                            <ImageDim name="OgreTrayImages/TextBoxR" dimension="Width"/>
+                            <AbsoluteDim value="0.25"/>
+                        </OperatorDim>
+                    </OperatorDim>
+                </Dim>
+                <Dim type="BottomEdge">
+                    <OperatorDim op="Subtract">
+                        <UnifiedDim scale="1" type="Height"/>
+                        <OperatorDim op="Multiply">
+                            <ImageDim name="OgreTrayImages/TextBoxB" dimension="Height"/>
+                            <AbsoluteDim value="0.25"/>
+                        </OperatorDim>
+                    </OperatorDim>
+                </Dim>
+            </Area>
+        </NamedArea>
+        <ImagerySection name="frame">
+            <FrameComponent>
+                <Area>
+                    <Dim type="LeftEdge">
+                        <AbsoluteDim value="0"/>
+                    </Dim>
+                    <Dim type="TopEdge">
+                        <AbsoluteDim value="0"/>
+                    </Dim>
+                    <Dim type="Width">
+                        <UnifiedDim scale="1" type="Width"/>
+                    </Dim>
+                    <Dim type="Height">
+                        <UnifiedDim scale="1" type="Height"/>
+                    </Dim>
+                </Area>
+                <Image component="TopLeftCorner" name="OgreTrayImages/MiniTextBoxTL"/>
+                <Image component="TopRightCorner" name="OgreTrayImages/MiniTextBoxTR"/>
+                <Image component="BottomLeftCorner" name="OgreTrayImages/MiniTextBoxBL"/>
+                <Image component="BottomRightCorner" name="OgreTrayImages/MiniTextBoxBR"/>
+                <Image component="LeftEdge" name="OgreTrayImages/MiniTextBoxL"/>
+                <Image component="TopEdge" name="OgreTrayImages/MiniTextBoxT"/>
+                <Image component="RightEdge" name="OgreTrayImages/MiniTextBoxR"/>
+                <Image component="BottomEdge" name="OgreTrayImages/MiniTextBoxB"/>
+                <Image component="Background" name="OgreTrayImages/MiniTextBoxM"/>
+            </FrameComponent>
+        </ImagerySection>
+        <ImagerySection name="selection">
+            <FrameComponent>
+                <Area>
+                    <Dim type="LeftEdge">
+                        <AbsoluteDim value="0"/>
+                    </Dim>
+                    <Dim type="TopEdge">
+                        <AbsoluteDim value="0"/>
+                    </Dim>
+                    <Dim type="Width">
+                        <UnifiedDim scale="1" type="Width"/>
+                    </Dim>
+                    <Dim type="Height">
+                        <UnifiedDim scale="1" type="Height"/>
+                    </Dim>
+                </Area>
+                <Image component="TopLeftCorner" name="OgreTrayImages/MiniTextBoxOverTL"/>
+                <Image component="TopRightCorner" name="OgreTrayImages/MiniTextBoxOverTR"/>
+                <Image component="BottomLeftCorner" name="OgreTrayImages/MiniTextBoxOverBL"/>
+                <Image component="BottomRightCorner" name="OgreTrayImages/MiniTextBoxOverBR"/>
+                <Image component="LeftEdge" name="OgreTrayImages/MiniTextBoxOverL"/>
+                <Image component="TopEdge" name="OgreTrayImages/MiniTextBoxOverT"/>
+                <Image component="RightEdge" name="OgreTrayImages/MiniTextBoxOverR"/>
+                <Image component="BottomEdge" name="OgreTrayImages/MiniTextBoxOverB"/>
+                <Image component="Background" name="OgreTrayImages/MiniTextBoxOverM"/>
+            </FrameComponent>
+        </ImagerySection>
+        <ImagerySection name="Caret">
+            <ImageryComponent>
+                <Area>
+                    <Dim type="LeftEdge">
+                        <AbsoluteDim value="0"/>
+                    </Dim>
+                    <Dim type="TopEdge">
+                        <AbsoluteDim value="0"/>
+                    </Dim>
+                    <Dim type="Width">
+                        <AbsoluteDim value="2"/>
+                    </Dim>
+                    <Dim type="BottomEdge">
+                        <UnifiedDim scale="1.0" type="BottomEdge"/>
+                    </Dim>
+                </Area>
+                <Image name="OgreTrayImages/GenericBrush"/>
+                <Colours topLeft="FF22AA33" bottomLeft="FF22AA33" topRight="FF22AA33" bottomRight="FF22AA33"/>
+                <VertFormat type="Stretched"/>
+                <HorzFormat type="Stretched"/>
+            </ImageryComponent>
+        </ImagerySection>
+        <StateImagery name="Enabled">
+            <Layer>
+                <Section section="frame"/>
+            </Layer>
+        </StateImagery>
+        <StateImagery name="ReadOnly">
+            <Layer>
+                <Section section="frame"/>
+            </Layer>
+        </StateImagery>
+        <StateImagery name="Disabled">
+            <Layer>
+                <Section section="frame"/>
+            </Layer>
+        </StateImagery>
+        <StateImagery name="ActiveSelection">
+            <Layer>
+                <Section section="selection"/>
+            </Layer>
+        </StateImagery>
+        <StateImagery name="InactiveSelection">
+            <Layer>
+                <Section section="selection"/>
+            </Layer>
+        </StateImagery>
+    </WidgetLook>
+    <!--
 :::: Multiline Editbox
 -->
     <WidgetLook name="OgreTray/MultiLineEditbox">
@@ -2642,6 +3132,212 @@
             </Layer>
         </StateImagery>
     </WidgetLook>
+<!--
+:::: ToggleButton
+-->
+    <WidgetLook name="OgreTray/ToggleButton">
+        <PropertyDefinition redrawOnWrite="true" initialValue="FF000000" type="ColourRect" name="NormalTextColour"/>
+        <PropertyDefinition redrawOnWrite="true" initialValue="FF000000" type="ColourRect" name="HoverTextColour"/>
+        <PropertyDefinition redrawOnWrite="true" initialValue="FF000000" type="ColourRect" name="PushedTextColour"/>
+        <PropertyDefinition redrawOnWrite="true" initialValue="FF666666" type="ColourRect" name="DisabledTextColour"/>
+	<PropertyDefinition redrawOnWrite="true" initialValue="tl:FFFFFFFF tr:FFFFFFFF bl:FFFFFFFF br:FFFFFFFF" type="ColourRect" name="ImageColours"/>
+	<PropertyDefinition redrawOnWrite="true" initialValue="tl:FFFFFFFF tr:FFFFFFFF bl:FFFFFFFF br:FFFFFFFF" type="ColourRect" name="BackgroundColours"/>
+        <PropertyDefinition redrawOnWrite="true" initialValue="Stretched" type="VerticalFormatting" name="VertFormatting"/>
+        <PropertyDefinition redrawOnWrite="true" initialValue="Stretched" type="HorizontalFormatting" name="HorzFormatting"/>
+	<PropertyDefinition redrawOnWrite="true" initialValue="" type="Image" name="Image"/>
+        <Property name="Size" value="{{0, 128}, {0, 32}}" />
+        <ImagerySection name="label">
+            <TextComponent>
+                <Area>
+                    <Dim type="LeftEdge">
+                        <AbsoluteDim value="0"/>
+                    </Dim>
+                    <Dim type="TopEdge">
+                        <AbsoluteDim value="0"/>
+                    </Dim>
+                    <Dim type="RightEdge">
+                        <UnifiedDim scale="1" type="Width"/>
+                    </Dim>
+                    <Dim type="Height">
+                        <UnifiedDim scale="1" type="Height"/>
+                    </Dim>
+                </Area>
+                <VertFormat type="CentreAligned"/>
+                <HorzFormat type="CentreAligned"/>
+            </TextComponent>
+        </ImagerySection>
+	<ImagerySection name="image">
+            <ImageryComponent>
+                <Area>
+                    <Dim type="LeftEdge">
+                        <UnifiedDim scale="0.05" type="LeftEdge"/>
+                    </Dim>
+                    <Dim type="TopEdge">
+                        <UnifiedDim scale="0.05" type="TopEdge"/>
+                    </Dim>
+                    <Dim type="RightEdge">
+                        <UnifiedDim scale="0.95" type="RightEdge"/>
+                    </Dim>
+                    <Dim type="BottomEdge">
+                        <UnifiedDim scale="0.95" type="BottomEdge"/>
+                    </Dim>
+                </Area>
+                <ImageProperty name="Image"/>
+                <ColourRectProperty name="ImageColours"/>
+                <VertFormatProperty name="VertFormatting"/>
+                <HorzFormatProperty name="HorzFormatting"/>
+            </ImageryComponent>
+	</ImagerySection>
+        <ImagerySection name="normal">
+            <FrameComponent>
+                <Area>
+                    <Dim type="LeftEdge">
+                        <OperatorDim op="Subtract">
+                            <UnifiedDim scale="1" type="Width"/>
+                            <UnifiedDim scale="1" type="Height"/>
+                        </OperatorDim>
+                    </Dim>
+                    <Dim type="TopEdge">
+                        <AbsoluteDim value="0"/>
+                    </Dim>
+                    <Dim type="Width">
+                        <UnifiedDim scale="1" type="Height"/>
+                    </Dim>
+                    <Dim type="Height">
+                        <UnifiedDim scale="1" type="Height"/>
+                    </Dim>
+                </Area>
+                <ColourRectProperty name="BackgroundColours"/>
+                <Image component="TopLeftCorner" name="OgreTrayImages/MiniTextBoxTL"/>
+                <Image component="TopRightCorner" name="OgreTrayImages/MiniTextBoxTR"/>
+                <Image component="BottomLeftCorner" name="OgreTrayImages/MiniTextBoxBL"/>
+                <Image component="BottomRightCorner" name="OgreTrayImages/MiniTextBoxBR"/>
+                <Image component="LeftEdge" name="OgreTrayImages/MiniTextBoxL"/>
+                <Image component="TopEdge" name="OgreTrayImages/MiniTextBoxT"/>
+                <Image component="RightEdge" name="OgreTrayImages/MiniTextBoxR"/>
+                <Image component="BottomEdge" name="OgreTrayImages/MiniTextBoxB"/>
+                <Image component="Background" name="OgreTrayImages/MiniTextBoxM"/>
+            </FrameComponent>
+        </ImagerySection>
+        <ImagerySection name="hover">
+            <FrameComponent>
+                <Area>
+                    <Dim type="LeftEdge">
+                        <OperatorDim op="Subtract">
+                            <UnifiedDim scale="1" type="Width"/>
+                            <UnifiedDim scale="1" type="Height"/>
+                        </OperatorDim>
+                    </Dim>
+                    <Dim type="TopEdge">
+                        <AbsoluteDim value="0"/>
+                    </Dim>
+                    <Dim type="Width">
+                        <UnifiedDim scale="1" type="Height"/>
+                    </Dim>
+                    <Dim type="Height">
+                        <UnifiedDim scale="1" type="Height"/>
+                    </Dim>
+                </Area>
+                <ColourRectProperty name="BackgroundColours"/>
+                <Image component="TopLeftCorner" name="OgreTrayImages/MiniTextBoxOverTL"/>
+                <Image component="TopRightCorner" name="OgreTrayImages/MiniTextBoxOverTR"/>
+                <Image component="BottomLeftCorner" name="OgreTrayImages/MiniTextBoxOverBL"/>
+                <Image component="BottomRightCorner" name="OgreTrayImages/MiniTextBoxOverBR"/>
+                <Image component="LeftEdge" name="OgreTrayImages/MiniTextBoxOverL"/>
+                <Image component="TopEdge" name="OgreTrayImages/MiniTextBoxOverT"/>
+                <Image component="RightEdge" name="OgreTrayImages/MiniTextBoxOverR"/>
+                <Image component="BottomEdge" name="OgreTrayImages/MiniTextBoxOverB"/>
+                <Image component="Background" name="OgreTrayImages/MiniTextBoxOverM"/>
+            </FrameComponent>
+        </ImagerySection>
+        <ImagerySection name="select_mark">
+            <FrameComponent>
+                <Area>
+                    <Dim type="LeftEdge">
+                        <AbsoluteDim value="0"/>
+                    </Dim>
+                    <Dim type="TopEdge">
+                        <AbsoluteDim value="0"/>
+                    </Dim>
+                    <Dim type="RightEdge">
+                        <UnifiedDim scale="1" type="RightEdge"/>
+                    </Dim>
+                    <Dim type="BottomEdge">
+                        <UnifiedDim scale="1" type="BottomEdge"/>
+                    </Dim>
+                </Area>
+                <ColourRectProperty name="BackgroundColours"/>
+		<Image component="TopLeftCorner" name="OgreTrayImages/MiniTextBoxOverTL"/>
+                <Image component="TopRightCorner" name="OgreTrayImages/MiniTextBoxOverTR"/>
+                <Image component="BottomLeftCorner" name="OgreTrayImages/MiniTextBoxOverBL"/>
+                <Image component="BottomRightCorner" name="OgreTrayImages/MiniTextBoxOverBR"/>
+                <Image component="LeftEdge" name="OgreTrayImages/MiniTextBoxOverL"/>
+                <Image component="TopEdge" name="OgreTrayImages/MiniTextBoxOverT"/>
+                <Image component="RightEdge" name="OgreTrayImages/MiniTextBoxOverR"/>
+                <Image component="BottomEdge" name="OgreTrayImages/MiniTextBoxOverB"/>
+                <Image component="Background" name="OgreTrayImages/MiniTextBoxOverM"/>
+            </FrameComponent>
+        </ImagerySection>
+        <StateImagery name="Normal">
+            <Layer>
+                <Section section="normal"/>
+                <Section section="label">
+                    <ColourProperty name="NormalTextColour"/>
+                </Section>
+		<Section section="image">
+                    <ColourRectProperty name="ImageColours"/>
+		</Section>
+            </Layer>
+        </StateImagery>
+        <StateImagery name="Hover">
+            <Layer>
+                <Section section="hover"/>
+                <Section section="label">
+                    <ColourProperty name="HoverTextColour"/>
+                </Section>
+		<Section section="image">
+                    <ColourRectProperty name="ImageColours"/>
+		</Section>
+            </Layer>
+        </StateImagery>
+        <StateImagery name="SelectedNormal">
+            <Layer>
+                <Section section="normal"/>
+                <Section section="select_mark"/>
+                <Section section="label">
+                    <ColourProperty name="NormalTextColour"/>
+                </Section>
+		<Section section="image">
+                    <ColourRectProperty name="ImageColours"/>
+		</Section>
+            </Layer>
+        </StateImagery>
+        <StateImagery name="SelectedHover">
+            <Layer>
+                <Section section="hover"/>
+                <Section section="select_mark"/>
+                <Section section="label">
+                    <ColourProperty name="HoverTextColour"/>
+                </Section>
+		<Section section="image">
+                    <ColourRectProperty name="ImageColours"/>
+		</Section>
+            </Layer>
+        </StateImagery>
+	<StateImagery name="Disabled">
+            <Layer>
+                <Section section="normal"/>
+                <Section section="label">
+                    <ColourProperty name="DisabledTextColour"/>
+
+                    <ColourRectProperty name="ImageColours"/>
+                </Section>
+		<Section section="image">
+                    <ColourRectProperty name="ImageColours"/>
+		</Section>
+            </Layer>
+        </StateImagery>
+    </WidgetLook>
     <!--
 :::: Radio Button (Same as checkbox except for 'select mark' text.  We could have reused the
 :::: checkbox widgetlook if we really wanted to.
@@ -2986,12 +3682,12 @@
         </StateImagery>
         <StateImagery name="NoFrameEnabledBackground">
             <Layer>
-                <Section section="noframe_background" look="OgreTray/StaticShared"/>
+ <!--               <Section section="noframe_background" look="OgreTray/StaticShared"/>-->
             </Layer>
         </StateImagery>
         <StateImagery name="NoFrameDisabledBackground">
             <Layer>
-                <Section section="noframe_background" look="OgreTray/StaticShared"/>
+<!--                <Section section="noframe_background" look="OgreTray/StaticShared"/>-->
             </Layer>
         </StateImagery>
         <StateImagery name="WithFrameImage">
