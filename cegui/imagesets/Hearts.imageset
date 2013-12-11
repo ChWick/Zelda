@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<Imageset version="2" name="Hearts" imagefile="Hearts.png" nativeHorzRes="256" nativeVertRes="256" autoScaled="vertical">
+	<Image name="4/4" xPos="0" yPos="0" width="64" height="64" />
+	<Image name="3/4" xPos="64" yPos="0" width="64" height="64" />
+	<Image name="2/4" xPos="128" yPos="0" width="64" height="64" />
+	<Image name="1/4" xPos="192" yPos="0" width="64" height="64" />
+	<Image name="0/4" xPos="0" yPos="64" width="64" height="64" />
+	<Image name="Black" xPos="0" yPos="192" width="64" height="64" />
+	<Image name="Mana" xPos="192" yPos="64" width="64" height="192" />
+	<Image name="Key" xPos="128" yPos="192" width="64" height="64" />
+	<Image name="Ruby" xPos="64" yPos="192" width="64" height="64" />
+</Imageset>
