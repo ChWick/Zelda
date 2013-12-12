@@ -1,11 +1,4 @@
 /*-------------------------------------------------------------------------------------
-Modified 2013 Christoph Wick (ch.wick@web.de)
-Bugfixes in creating Impostors, compare:
-     http://www.ogre3d.org/forums/viewtopic.php?f=2&t=69835
--------------------------------------------------------------------------------------*/
-
-
-/*-------------------------------------------------------------------------------------
 Copyright (c) 2006 John Judnich
 Modified 2008 by Erik Hjortsberg (erik.hjortsberg@iteam.se)
 
