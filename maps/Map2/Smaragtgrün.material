@@ -1,0 +1,35 @@
+// Smaragtgrün genrated by blender2ogre 0.5.9
+
+material Smaragtgrün 
+{
+    receive_shadows on 
+
+    technique
+    {
+        pass Smaragtgrün
+        {
+            ambient 0.08028692752122879 0.538223147392273 0.29249659180641174 1.0
+            diffuse 0.08028692752122879 0.538223147392273 0.29249659180641174 1.0
+            specular 0.16728969723231657 0.205330379668343 0.26249998807907104 1.0 3.75
+            emissive 0.0 0.0 0.0 1.0
+
+            alpha_to_coverage off
+            colour_write on
+            cull_hardware clockwise
+            depth_check on
+            depth_func less_equal
+            depth_write on
+            illumination_stage 
+            light_clip_planes off
+            light_scissor off
+            lighting on
+            normalise_normals off
+            polygon_mode solid
+            scene_blend one zero
+            scene_blend_op add
+            shading gouraud
+            transparent_sorting on
+
+        }
+    }
+}

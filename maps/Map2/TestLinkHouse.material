@@ -1,0 +1,1549 @@
+
+material _missing_material_
+{
+    receive_shadows off
+    technique
+    {
+        pass
+        {
+            ambient 0.1 0.1 0.1 1.0
+            diffuse 0.8 0.0 0.0 1.0
+            specular 0.5 0.5 0.5 1.0 12.5
+            emissive 0.3 0.3 0.3 1.0
+        }
+    }
+}
+
+// CS/HausKaminklein genrated by blender2ogre 0.6.0
+
+material CS_HausKaminklein__map.blend 
+{
+    receive_shadows on 
+
+    technique
+    {
+        pass CS/HausKaminklein
+        {
+            ambient 1.0 1.0 1.0 1.0
+            diffuse 1.0 1.0 1.0 1.0
+            specular 0.10000000149011612 0.10000000149011612 0.10000000149011612 1.0 4.0
+            emissive 0.0 0.0 0.0 1.0
+
+            alpha_to_coverage off
+            colour_write on
+            cull_hardware clockwise
+            depth_check on
+            depth_func less_equal
+            depth_write on
+            illumination_stage 
+            light_clip_planes off
+            light_scissor off
+            lighting on
+            normalise_normals off
+            polygon_mode solid
+            scene_blend one zero
+            scene_blend_op add
+            shading gouraud
+            transparent_sorting on
+
+            texture_unit 
+            {
+                texture cheminee-petit.jpg
+                tex_address_mode wrap
+                scale 1.0 1.0
+                colour_op modulate
+            }
+        }
+    }
+}
+// CS/HausKaminGross genrated by blender2ogre 0.6.0
+
+material CS_HausKaminGross__map.blend 
+{
+    receive_shadows on 
+
+    technique
+    {
+        pass CS/HausKaminGross
+        {
+            ambient 1.0 1.0 1.0 1.0
+            diffuse 1.0 1.0 1.0 1.0
+            specular 0.10000000149011612 0.10000000149011612 0.10000000149011612 1.0 4.0
+            emissive 0.0 0.0 0.0 1.0
+
+            alpha_to_coverage off
+            colour_write on
+            cull_hardware clockwise
+            depth_check on
+            depth_func less_equal
+            depth_write on
+            illumination_stage 
+            light_clip_planes off
+            light_scissor off
+            lighting on
+            normalise_normals off
+            polygon_mode solid
+            scene_blend one zero
+            scene_blend_op add
+            shading gouraud
+            transparent_sorting on
+
+            texture_unit 
+            {
+                texture cheminee-gros.jpg
+                tex_address_mode wrap
+                scale 1.0 1.0
+                colour_op modulate
+            }
+        }
+    }
+}
+// CS/HausFasadeEckVorne genrated by blender2ogre 0.6.0
+
+material CS_HausFasadeEckVorne__map.blend 
+{
+    receive_shadows on 
+
+    technique
+    {
+        pass CS/HausFasadeEckVorne
+        {
+            ambient 1.0 1.0 1.0 1.0
+            diffuse 1.0 1.0 1.0 1.0
+            specular 0.10000000149011612 0.10000000149011612 0.10000000149011612 1.0 4.0
+            emissive 0.0 0.0 0.0 1.0
+
+            alpha_to_coverage off
+            colour_write on
+            cull_hardware clockwise
+            depth_check on
+            depth_func less_equal
+            depth_write on
+            illumination_stage 
+            light_clip_planes off
+            light_scissor off
+            lighting on
+            normalise_normals off
+            polygon_mode solid
+            scene_blend one zero
+            scene_blend_op add
+            shading gouraud
+            transparent_sorting on
+
+            texture_unit 
+            {
+                texture maison-facade-cornerfront.jpg
+                tex_address_mode wrap
+                scale 1.0 1.0
+                colour_op modulate
+            }
+        }
+    }
+}
+// CS/HausFasadeHinten genrated by blender2ogre 0.6.0
+
+material CS_HausFasadeHinten__map.blend 
+{
+    receive_shadows on 
+
+    technique
+    {
+        pass CS/HausFasadeHinten
+        {
+            ambient 1.0 1.0 1.0 1.0
+            diffuse 1.0 1.0 1.0 1.0
+            specular 0.10000000149011612 0.10000000149011612 0.10000000149011612 1.0 4.0
+            emissive 0.0 0.0 0.0 1.0
+
+            alpha_to_coverage off
+            colour_write on
+            cull_hardware clockwise
+            depth_check on
+            depth_func less_equal
+            depth_write on
+            illumination_stage 
+            light_clip_planes off
+            light_scissor off
+            lighting on
+            normalise_normals off
+            polygon_mode solid
+            scene_blend one zero
+            scene_blend_op add
+            shading gouraud
+            transparent_sorting on
+
+            texture_unit 
+            {
+                texture maison-facade-back.jpg
+                tex_address_mode wrap
+                scale 1.0 1.0
+                colour_op modulate
+            }
+        }
+    }
+}
+// CS/HausFasadeHintenKante genrated by blender2ogre 0.6.0
+
+material CS_HausFasadeHintenKante__map.blend 
+{
+    receive_shadows on 
+
+    technique
+    {
+        pass CS/HausFasadeHintenKante
+        {
+            ambient 1.0 1.0 1.0 1.0
+            diffuse 1.0 1.0 1.0 1.0
+            specular 0.10000000149011612 0.10000000149011612 0.10000000149011612 1.0 4.0
+            emissive 0.0 0.0 0.0 1.0
+
+            alpha_to_coverage off
+            colour_write on
+            cull_hardware clockwise
+            depth_check on
+            depth_func less_equal
+            depth_write on
+            illumination_stage 
+            light_clip_planes off
+            light_scissor off
+            lighting on
+            normalise_normals off
+            polygon_mode solid
+            scene_blend one zero
+            scene_blend_op add
+            shading gouraud
+            transparent_sorting on
+
+            texture_unit 
+            {
+                texture maison-facade-cornerback.jpg
+                tex_address_mode wrap
+                scale 1.0 1.0
+                colour_op modulate
+            }
+        }
+    }
+}
+// CS/HausFasadeSeite genrated by blender2ogre 0.6.0
+
+material CS_HausFasadeSeite__map.blend 
+{
+    receive_shadows on 
+
+    technique
+    {
+        pass CS/HausFasadeSeite
+        {
+            ambient 1.0 1.0 1.0 1.0
+            diffuse 1.0 1.0 1.0 1.0
+            specular 0.10000000149011612 0.10000000149011612 0.10000000149011612 1.0 4.0
+            emissive 0.0 0.0 0.0 1.0
+
+            alpha_to_coverage off
+            colour_write on
+            cull_hardware clockwise
+            depth_check on
+            depth_func less_equal
+            depth_write on
+            illumination_stage 
+            light_clip_planes off
+            light_scissor off
+            lighting on
+            normalise_normals off
+            polygon_mode solid
+            scene_blend one zero
+            scene_blend_op add
+            shading gouraud
+            transparent_sorting on
+
+            texture_unit 
+            {
+                texture maison-facade-side.jpg
+                tex_address_mode wrap
+                scale 1.0 1.0
+                colour_op modulate
+            }
+        }
+    }
+}
+// CS/door genrated by blender2ogre 0.6.0
+
+material CS_door__map.blend 
+{
+    receive_shadows on 
+
+    technique
+    {
+        pass CS/door
+        {
+            ambient 1.0 1.0 1.0 1.0
+            diffuse 1.0 1.0 1.0 1.0
+            specular 0.10000000149011612 0.10000000149011612 0.10000000149011612 1.0 1.25
+            emissive 0.0 0.0 0.0 1.0
+
+            alpha_to_coverage off
+            colour_write on
+            cull_hardware clockwise
+            depth_check on
+            depth_func less_equal
+            depth_write on
+            illumination_stage 
+            light_clip_planes off
+            light_scissor off
+            lighting on
+            normalise_normals off
+            polygon_mode solid
+            scene_blend one zero
+            scene_blend_op add
+            shading gouraud
+            transparent_sorting on
+
+            texture_unit 
+            {
+                texture maison-porte.jpg
+                tex_address_mode wrap
+                scale 1.0 1.0
+                colour_op modulate
+            }
+        }
+    }
+}
+// CS/HausFasadeVorne genrated by blender2ogre 0.6.0
+
+material CS_HausFasadeVorne__map.blend 
+{
+    receive_shadows on 
+
+    technique
+    {
+        pass CS/HausFasadeVorne
+        {
+            ambient 1.0 1.0 1.0 1.0
+            diffuse 1.0 1.0 1.0 1.0
+            specular 0.10000000149011612 0.10000000149011612 0.10000000149011612 1.0 4.0
+            emissive 0.0 0.0 0.0 1.0
+
+            alpha_to_coverage off
+            colour_write on
+            cull_hardware clockwise
+            depth_check on
+            depth_func less_equal
+            depth_write on
+            illumination_stage 
+            light_clip_planes off
+            light_scissor off
+            lighting on
+            normalise_normals off
+            polygon_mode solid
+            scene_blend one zero
+            scene_blend_op add
+            shading gouraud
+            transparent_sorting on
+
+            texture_unit 
+            {
+                texture maison-facade-front.jpg
+                tex_address_mode wrap
+                scale 1.0 1.0
+                colour_op modulate
+            }
+        }
+    }
+}
+// CS/HausDachrinne genrated by blender2ogre 0.6.0
+
+material CS_HausDachrinne__map.blend 
+{
+    receive_shadows on 
+
+    technique
+    {
+        pass CS/HausDachrinne
+        {
+            ambient 1.0 1.0 1.0 1.0
+            diffuse 1.0 1.0 1.0 1.0
+            specular 0.10000000149011612 0.10000000149011612 0.10000000149011612 1.0 4.0
+            emissive 0.0 0.0 0.0 1.0
+
+            alpha_to_coverage off
+            colour_write on
+            cull_hardware clockwise
+            depth_check on
+            depth_func less_equal
+            depth_write on
+            illumination_stage 
+            light_clip_planes off
+            light_scissor off
+            lighting on
+            normalise_normals off
+            polygon_mode solid
+            scene_blend one zero
+            scene_blend_op add
+            shading gouraud
+            transparent_sorting on
+
+            texture_unit 
+            {
+                texture maison-toit-border.jpg
+                tex_address_mode wrap
+                scale 1.0 1.0
+                colour_op modulate
+            }
+        }
+    }
+}
+// CS/RotesDachKante genrated by blender2ogre 0.6.0
+
+material CS_RotesDachKante__map.blend 
+{
+    receive_shadows on 
+
+    technique
+    {
+        pass CS/RotesDachKante
+        {
+            ambient 1.0 1.0 1.0 1.0
+            diffuse 1.0 1.0 1.0 1.0
+            specular 0.10000000149011612 0.10000000149011612 0.10000000149011612 1.0 1.25
+            emissive 0.0 0.0 0.0 1.0
+
+            alpha_to_coverage off
+            colour_write on
+            cull_hardware clockwise
+            depth_check on
+            depth_func less_equal
+            depth_write on
+            illumination_stage 
+            light_clip_planes off
+            light_scissor off
+            lighting on
+            normalise_normals off
+            polygon_mode solid
+            scene_blend one zero
+            scene_blend_op add
+            shading gouraud
+            transparent_sorting on
+
+            texture_unit 
+            {
+                texture maison-toitrouge-face.jpg
+                tex_address_mode wrap
+                scale 1.0 1.0
+                colour_op modulate
+            }
+        }
+    }
+}
+// CS/RotesDachOben genrated by blender2ogre 0.6.0
+
+material CS_RotesDachOben__map.blend 
+{
+    receive_shadows on 
+
+    technique
+    {
+        pass CS/RotesDachOben
+        {
+            ambient 1.0 1.0 1.0 1.0
+            diffuse 1.0 1.0 1.0 1.0
+            specular 0.10000000149011612 0.10000000149011612 0.10000000149011612 1.0 1.25
+            emissive 0.0 0.0 0.0 1.0
+
+            alpha_to_coverage off
+            colour_write on
+            cull_hardware clockwise
+            depth_check on
+            depth_func less_equal
+            depth_write on
+            illumination_stage 
+            light_clip_planes off
+            light_scissor off
+            lighting on
+            normalise_normals off
+            polygon_mode solid
+            scene_blend one zero
+            scene_blend_op add
+            shading gouraud
+            transparent_sorting on
+
+            texture_unit 
+            {
+                texture maison-toitrouge-top.jpg
+                tex_address_mode wrap
+                scale 1.0 1.0
+                colour_op modulate
+            }
+        }
+    }
+}
+// CS/RotesDachEcke genrated by blender2ogre 0.6.0
+
+material CS_RotesDachEcke__map.blend 
+{
+    receive_shadows on 
+
+    technique
+    {
+        pass CS/RotesDachEcke
+        {
+            ambient 1.0 1.0 1.0 1.0
+            diffuse 1.0 1.0 1.0 1.0
+            specular 0.10000000149011612 0.10000000149011612 0.10000000149011612 1.0 1.25
+            emissive 0.0 0.0 0.0 1.0
+
+            alpha_to_coverage off
+            colour_write on
+            cull_hardware clockwise
+            depth_check on
+            depth_func less_equal
+            depth_write on
+            illumination_stage 
+            light_clip_planes off
+            light_scissor off
+            lighting on
+            normalise_normals off
+            polygon_mode solid
+            scene_blend one zero
+            scene_blend_op add
+            shading gouraud
+            transparent_sorting on
+
+            texture_unit 
+            {
+                texture maison-toitrouge-corner.jpg
+                tex_address_mode wrap
+                scale 1.0 1.0
+                colour_op modulate
+            }
+        }
+    }
+}
+// CS/Tuergriff genrated by blender2ogre 0.6.0
+
+material CS_Tuergriff__map.blend 
+{
+    receive_shadows on 
+
+    technique
+    {
+        pass CS/Tuergriff
+        {
+            ambient 1.0 1.0 1.0 1.0
+            diffuse 1.0 1.0 1.0 1.0
+            specular 0.10000000149011612 0.10000000149011612 0.10000000149011612 1.0 4.0
+            emissive 0.0 0.0 0.0 1.0
+
+            alpha_to_coverage off
+            colour_write on
+            cull_hardware clockwise
+            depth_check on
+            depth_func less_equal
+            depth_write on
+            illumination_stage 
+            light_clip_planes off
+            light_scissor off
+            lighting on
+            normalise_normals off
+            polygon_mode solid
+            scene_blend one zero
+            scene_blend_op add
+            shading gouraud
+            transparent_sorting on
+
+            texture_unit 
+            {
+                texture maison-porte-poignee.jpg
+                tex_address_mode wrap
+                scale 1.0 1.0
+                colour_op modulate
+            }
+        }
+    }
+}
+// CS/HausEingang genrated by blender2ogre 0.6.0
+
+material CS_HausEingang__map.blend 
+{
+    receive_shadows on 
+
+    technique
+    {
+        pass CS/HausEingang
+        {
+            ambient 1.0 1.0 1.0 1.0
+            diffuse 1.0 1.0 1.0 1.0
+            specular 0.10000000149011612 0.10000000149011612 0.10000000149011612 1.0 4.0
+            emissive 0.0 0.0 0.0 1.0
+
+            alpha_to_coverage off
+            colour_write on
+            cull_hardware clockwise
+            depth_check on
+            depth_func less_equal
+            depth_write on
+            illumination_stage 
+            light_clip_planes off
+            light_scissor off
+            lighting on
+            normalise_normals off
+            polygon_mode solid
+            scene_blend one zero
+            scene_blend_op add
+            shading gouraud
+            transparent_sorting on
+
+            texture_unit 
+            {
+                texture maison-porte-arcade.jpg
+                tex_address_mode wrap
+                scale 1.0 1.0
+                colour_op modulate
+            }
+        }
+    }
+}
+// GrassPlain genrated by blender2ogre 0.6.0
+
+material GrassPlain__map.blend 
+{
+    receive_shadows on 
+
+    technique
+    {
+        pass GrassPlain
+        {
+            ambient 1.0 1.0 1.0 1.0
+            diffuse 1.0 1.0 1.0 1.0
+            specular 0.1340000033378601 0.1340000033378601 0.1340000033378601 1.0 48.0
+            emissive 0.0 0.0 0.0 1.0
+
+            alpha_to_coverage off
+            colour_write on
+            cull_hardware clockwise
+            depth_check on
+            depth_func less_equal
+            depth_write on
+            illumination_stage 
+            light_clip_planes off
+            light_scissor off
+            lighting on
+            normalise_normals off
+            polygon_mode solid
+            scene_blend one zero
+            scene_blend_op add
+            shading gouraud
+            transparent_sorting on
+
+            texture_unit 
+            {
+                texture sol-vert.jpg
+                tex_address_mode wrap
+                scale 1.0 1.0
+                colour_op modulate
+            }
+        }
+    }
+}
+// CS/GreenBush genrated by blender2ogre 0.6.0
+
+material CS_GreenBush__map.blend 
+{
+    receive_shadows on 
+
+    technique
+    {
+        pass CS/GreenBush
+        {
+            ambient 0.10000000149011612 0.10000000149011612 0.10000000149011612 1.0
+            diffuse 0.6000000238418579 0.6000000238418579 0.6000000238418579 1.0
+            specular 0.30000001192092896 0.30000001192092896 0.30000001192092896 1.0 25.0
+            emissive 0.0 0.0 0.0 1.0
+
+            alpha_to_coverage off
+            colour_write on
+            cull_hardware clockwise
+            depth_check on
+            depth_func less_equal
+            depth_write on
+            illumination_stage 
+            light_clip_planes off
+            light_scissor off
+            lighting on
+            normalise_normals off
+            polygon_mode solid
+            scene_blend one zero
+            scene_blend_op add
+            shading gouraud
+            transparent_sorting on
+
+            texture_unit 
+            {
+                texture couche-arbuste.jpg
+                tex_address_mode wrap
+                scale 1.0 1.0
+                colour_op modulate
+            }
+        }
+    }
+}
+// CS/LightStone genrated by blender2ogre 0.6.0
+
+material CS_LightStone__map.blend 
+{
+    receive_shadows on 
+
+    technique
+    {
+        pass CS/LightStone
+        {
+            ambient 0.10000000149011612 0.10000000149011612 0.10000000149011612 1.0
+            diffuse 0.800000011920929 0.800000011920929 0.800000011920929 1.0
+            specular 0.034999999925494185 0.034999999925494185 0.034999999925494185 1.0 4.0
+            emissive 0.0 0.0 0.0 1.0
+
+            alpha_to_coverage off
+            colour_write on
+            cull_hardware clockwise
+            depth_check on
+            depth_func less_equal
+            depth_write on
+            illumination_stage 
+            light_clip_planes off
+            light_scissor off
+            lighting on
+            normalise_normals off
+            polygon_mode solid
+            scene_blend one zero
+            scene_blend_op add
+            shading gouraud
+            transparent_sorting on
+
+            texture_unit 
+            {
+                texture couche-rocher.jpg
+                tex_address_mode wrap
+                scale 1.0 1.0
+                colour_op modulate
+            }
+        }
+    }
+}
+// CS/Sign_Bot genrated by blender2ogre 0.6.0
+
+material CS_Sign_Bot__map.blend 
+{
+    receive_shadows on 
+
+    technique
+    {
+        pass CS/Sign_Bot
+        {
+            ambient 0.800000011920929 0.800000011920929 0.800000011920929 1.0
+            diffuse 0.480000026226044 0.480000026226044 0.480000026226044 1.0
+            specular 0.10000000149011612 0.10000000149011612 0.10000000149011612 1.0 12.5
+            emissive 0.0 0.0 0.0 1.0
+
+            alpha_to_coverage off
+            colour_write on
+            cull_hardware clockwise
+            depth_check on
+            depth_func less_equal
+            depth_write on
+            illumination_stage 
+            light_clip_planes off
+            light_scissor off
+            lighting on
+            normalise_normals off
+            polygon_mode solid
+            scene_blend one zero
+            scene_blend_op add
+            shading gouraud
+            transparent_sorting on
+
+            texture_unit 
+            {
+                texture maison-toit-tute.jpg
+                tex_address_mode wrap
+                scale 1.0 1.0
+                colour_op modulate
+            }
+        }
+    }
+}
+// CS/Sign_top genrated by blender2ogre 0.6.0
+
+material CS_Sign_top__map.blend 
+{
+    receive_shadows on 
+
+    technique
+    {
+        pass CS/Sign_top
+        {
+            ambient 0.800000011920929 0.800000011920929 0.800000011920929 1.0
+            diffuse 0.480000026226044 0.480000026226044 0.480000026226044 1.0
+            specular 0.10000000149011612 0.10000000149011612 0.10000000149011612 1.0 12.5
+            emissive 0.0 0.0 0.0 1.0
+
+            alpha_to_coverage off
+            colour_write on
+            cull_hardware clockwise
+            depth_check on
+            depth_func less_equal
+            depth_write on
+            illumination_stage 
+            light_clip_planes off
+            light_scissor off
+            lighting on
+            normalise_normals off
+            polygon_mode solid
+            scene_blend one zero
+            scene_blend_op add
+            shading gouraud
+            transparent_sorting on
+
+            texture_unit 
+            {
+                texture maison-toit-tute.jpg
+                tex_address_mode wrap
+                scale 1.0 1.0
+                colour_op modulate
+            }
+        }
+    }
+}
+// CS/Sign_Mid genrated by blender2ogre 0.6.0
+
+material CS_Sign_Mid__map.blend 
+{
+    receive_shadows on 
+
+    technique
+    {
+        pass CS/Sign_Mid
+        {
+            ambient 0.800000011920929 0.800000011920929 0.800000011920929 1.0
+            diffuse 0.480000026226044 0.480000026226044 0.480000026226044 1.0
+            specular 0.10000000149011612 0.10000000149011612 0.10000000149011612 1.0 12.5
+            emissive 0.0 0.0 0.0 1.0
+
+            alpha_to_coverage off
+            colour_write on
+            cull_hardware clockwise
+            depth_check on
+            depth_func less_equal
+            depth_write on
+            illumination_stage 
+            light_clip_planes off
+            light_scissor off
+            lighting on
+            normalise_normals off
+            polygon_mode solid
+            scene_blend one zero
+            scene_blend_op add
+            shading gouraud
+            transparent_sorting on
+
+            texture_unit 
+            {
+                texture aa-pancarte-texte.jpg
+                tex_address_mode wrap
+                scale 1.0 1.0
+                colour_op modulate
+            }
+        }
+    }
+}
+// Wand4_Gras_auf_Erde genrated by blender2ogre 0.6.0
+
+material Wand4_Gras_auf_Erde__map.blend 
+{
+    receive_shadows on 
+
+    technique
+    {
+        pass Wand4_Gras_auf_Erde
+        {
+            ambient 1.0 1.0 1.0 1.0
+            diffuse 1.0 1.0 1.0 1.0
+            specular 0.13385321199893951 0.13385321199893951 0.13385321199893951 1.0 48.0
+            emissive 0.0 0.0 0.0 1.0
+
+            alpha_to_coverage off
+            colour_write on
+            cull_hardware clockwise
+            depth_check on
+            depth_func less_equal
+            depth_write on
+            illumination_stage 
+            light_clip_planes off
+            light_scissor off
+            lighting on
+            normalise_normals off
+            polygon_mode solid
+            scene_blend one zero
+            scene_blend_op add
+            shading gouraud
+            transparent_sorting on
+
+            texture_unit 
+            {
+                texture Wand4_Gras_auf_Erde.jpg
+                tex_address_mode wrap
+                scale 1.0 1.0
+                colour_op modulate
+            }
+        }
+    }
+}
+// Erdboden genrated by blender2ogre 0.6.0
+
+material Erdboden__map.blend 
+{
+    receive_shadows on 
+
+    technique
+    {
+        pass Erdboden
+        {
+            ambient 1.0 1.0 1.0 1.0
+            diffuse 1.0 1.0 1.0 1.0
+            specular 0.13385321199893951 0.13385321199893951 0.13385321199893951 1.0 48.0
+            emissive 0.0 0.0 0.0 1.0
+
+            alpha_to_coverage off
+            colour_write on
+            cull_hardware clockwise
+            depth_check on
+            depth_func less_equal
+            depth_write on
+            illumination_stage 
+            light_clip_planes off
+            light_scissor off
+            lighting on
+            normalise_normals off
+            polygon_mode solid
+            scene_blend one zero
+            scene_blend_op add
+            shading gouraud
+            transparent_sorting on
+
+            texture_unit 
+            {
+                texture sol-terre.jpg
+                tex_address_mode wrap
+                scale 1.0 1.0
+                colour_op modulate
+            }
+        }
+    }
+}
+// Wand8_Gras_Auf_Erde genrated by blender2ogre 0.6.0
+
+material Wand8_Gras_Auf_Erde__map.blend 
+{
+    receive_shadows on 
+
+    technique
+    {
+        pass Wand8_Gras_Auf_Erde
+        {
+            ambient 1.0 1.0 1.0 1.0
+            diffuse 1.0 1.0 1.0 1.0
+            specular 0.13385321199893951 0.13385321199893951 0.13385321199893951 1.0 48.0
+            emissive 0.0 0.0 0.0 1.0
+
+            alpha_to_coverage off
+            colour_write on
+            cull_hardware clockwise
+            depth_check on
+            depth_func less_equal
+            depth_write on
+            illumination_stage 
+            light_clip_planes off
+            light_scissor off
+            lighting on
+            normalise_normals off
+            polygon_mode solid
+            scene_blend one zero
+            scene_blend_op add
+            shading gouraud
+            transparent_sorting on
+
+            texture_unit 
+            {
+                texture Wand8_Gras_auf_Erde.jpg
+                tex_address_mode wrap
+                scale 1.0 1.0
+                colour_op modulate
+            }
+        }
+    }
+}
+// Wand6_Gras_Auf_Erde genrated by blender2ogre 0.6.0
+
+material Wand6_Gras_Auf_Erde__map.blend 
+{
+    receive_shadows on 
+
+    technique
+    {
+        pass Wand6_Gras_Auf_Erde
+        {
+            ambient 1.0 1.0 1.0 1.0
+            diffuse 1.0 1.0 1.0 1.0
+            specular 0.13385321199893951 0.13385321199893951 0.13385321199893951 1.0 48.0
+            emissive 0.0 0.0 0.0 1.0
+
+            alpha_to_coverage off
+            colour_write on
+            cull_hardware clockwise
+            depth_check on
+            depth_func less_equal
+            depth_write on
+            illumination_stage 
+            light_clip_planes off
+            light_scissor off
+            lighting on
+            normalise_normals off
+            polygon_mode solid
+            scene_blend one zero
+            scene_blend_op add
+            shading gouraud
+            transparent_sorting on
+
+            texture_unit 
+            {
+                texture Wand6_Gras_auf_Erde.jpg
+                tex_address_mode wrap
+                scale 1.0 1.0
+                colour_op modulate
+            }
+        }
+    }
+}
+// cote_bout genrated by blender2ogre 0.6.0
+
+material cote_bout__map.blend 
+{
+    receive_shadows on 
+
+    technique
+    {
+        pass cote_bout
+        {
+            ambient 0.5879999995231628 0.5879999995231628 0.5879999995231628 1.0
+            diffuse 0.4704000066280365 0.4704000066280365 0.4704000066280365 1.0
+            specular 0.0 0.0 0.0 1.0 1.25
+            emissive 0.0 0.0 0.0 1.0
+
+            alpha_to_coverage off
+            colour_write on
+            cull_hardware clockwise
+            depth_check on
+            depth_func less_equal
+            depth_write on
+            illumination_stage 
+            light_clip_planes off
+            light_scissor off
+            lighting on
+            normalise_normals off
+            polygon_mode solid
+            scene_blend one zero
+            scene_blend_op add
+            shading gouraud
+            transparent_sorting on
+
+            texture_unit 
+            {
+                texture cote-bout.jpg
+                tex_address_mode wrap
+                scale 1.0 1.0
+                colour_op modulate
+            }
+        }
+    }
+}
+// top_bout genrated by blender2ogre 0.6.0
+
+material top_bout__map.blend 
+{
+    receive_shadows on 
+
+    technique
+    {
+        pass top_bout
+        {
+            ambient 0.5879999995231628 0.5879999995231628 0.5879999995231628 1.0
+            diffuse 0.5879999995231628 0.5879999995231628 0.5879999995231628 1.0
+            specular 0.10000000149011612 0.10000000149011612 0.10000000149011612 1.0 1.25
+            emissive 0.0 0.0 0.0 1.0
+
+            alpha_to_coverage off
+            colour_write on
+            cull_hardware clockwise
+            depth_check on
+            depth_func less_equal
+            depth_write on
+            illumination_stage 
+            light_clip_planes off
+            light_scissor off
+            lighting on
+            normalise_normals off
+            polygon_mode solid
+            scene_blend one zero
+            scene_blend_op add
+            shading gouraud
+            transparent_sorting on
+
+            texture_unit 
+            {
+                texture top-bout.jpg
+                tex_address_mode wrap
+                scale 1.0 1.0
+                colour_op modulate
+            }
+        }
+    }
+}
+// cote_terre_oblique genrated by blender2ogre 0.6.0
+
+material cote_terre_oblique__map.blend 
+{
+    receive_shadows on 
+
+    technique
+    {
+        pass cote_terre_oblique
+        {
+            ambient 0.5879999995231628 0.5879999995231628 0.5879999995231628 1.0
+            diffuse 0.5879999995231628 0.5879999995231628 0.5879999995231628 1.0
+            specular 0.10000000149011612 0.10000000149011612 0.10000000149011612 1.0 1.25
+            emissive 0.0 0.0 0.0 1.0
+
+            alpha_to_coverage off
+            colour_write on
+            cull_hardware clockwise
+            depth_check on
+            depth_func less_equal
+            depth_write on
+            illumination_stage 
+            light_clip_planes off
+            light_scissor off
+            lighting on
+            normalise_normals off
+            polygon_mode solid
+            scene_blend one zero
+            scene_blend_op add
+            shading gouraud
+            transparent_sorting on
+
+            texture_unit 
+            {
+                texture cote-terre-oblique.jpg
+                tex_address_mode clamp
+                scale 1.0 1.0
+                colour_op modulate
+            }
+        }
+    }
+}
+// cote_eau_oblique genrated by blender2ogre 0.6.0
+
+material cote_eau_oblique__map.blend 
+{
+    receive_shadows on 
+
+    technique
+    {
+        pass cote_eau_oblique
+        {
+            ambient 0.5879999995231628 0.5879999995231628 0.5879999995231628 1.0
+            diffuse 0.5879999995231628 0.5879999995231628 0.5879999995231628 1.0
+            specular 0.10000000149011612 0.10000000149011612 0.10000000149011612 1.0 1.25
+            emissive 0.0 0.0 0.0 1.0
+
+            alpha_to_coverage off
+            colour_write on
+            cull_hardware clockwise
+            depth_check on
+            depth_func less_equal
+            depth_write on
+            illumination_stage 
+            light_clip_planes off
+            light_scissor off
+            lighting on
+            normalise_normals off
+            polygon_mode solid
+            scene_blend one zero
+            scene_blend_op add
+            shading gouraud
+            transparent_sorting on
+
+            texture_unit 
+            {
+                texture cot-eau-oblique.jpg
+                tex_address_mode clamp
+                scale 1.0 1.0
+                colour_op modulate
+            }
+        }
+    }
+}
+// top_oblique genrated by blender2ogre 0.6.0
+
+material top_oblique__map.blend 
+{
+    receive_shadows on 
+
+    technique
+    {
+        pass top_oblique
+        {
+            ambient 0.5879999995231628 0.5879999995231628 0.5879999995231628 1.0
+            diffuse 0.5879999995231628 0.5879999995231628 0.5879999995231628 1.0
+            specular 0.10000000149011612 0.10000000149011612 0.10000000149011612 1.0 1.25
+            emissive 0.0 0.0 0.0 1.0
+
+            alpha_to_coverage off
+            colour_write on
+            cull_hardware clockwise
+            depth_check on
+            depth_func less_equal
+            depth_write on
+            illumination_stage 
+            light_clip_planes off
+            light_scissor off
+            lighting on
+            normalise_normals off
+            polygon_mode solid
+            scene_blend one zero
+            scene_blend_op add
+            shading gouraud
+            transparent_sorting on
+
+            texture_unit 
+            {
+                texture top-oblique.jpg
+                tex_address_mode clamp
+                scale 1.0 1.0
+                colour_op modulate
+            }
+        }
+    }
+}
+// cote_terre_droite genrated by blender2ogre 0.6.0
+
+material cote_terre_droite__map.blend 
+{
+    receive_shadows on 
+
+    technique
+    {
+        pass cote_terre_droite
+        {
+            ambient 0.5879999995231628 0.5879999995231628 0.5879999995231628 1.0
+            diffuse 0.5879999995231628 0.5879999995231628 0.5879999995231628 1.0
+            specular 0.10000000149011612 0.10000000149011612 0.10000000149011612 1.0 1.25
+            emissive 0.0 0.0 0.0 1.0
+
+            alpha_to_coverage off
+            colour_write on
+            cull_hardware clockwise
+            depth_check on
+            depth_func less_equal
+            depth_write on
+            illumination_stage 
+            light_clip_planes off
+            light_scissor off
+            lighting on
+            normalise_normals off
+            polygon_mode solid
+            scene_blend one zero
+            scene_blend_op add
+            shading gouraud
+            transparent_sorting on
+
+            texture_unit 
+            {
+                texture cote-terre-droite.jpg
+                tex_address_mode wrap
+                scale 1.0 1.0
+                colour_op modulate
+            }
+        }
+    }
+}
+// cote_eau_droite genrated by blender2ogre 0.6.0
+
+material cote_eau_droite__map.blend 
+{
+    receive_shadows on 
+
+    technique
+    {
+        pass cote_eau_droite
+        {
+            ambient 0.5879999995231628 0.5879999995231628 0.5879999995231628 1.0
+            diffuse 0.5879999995231628 0.5879999995231628 0.5879999995231628 1.0
+            specular 0.10000000149011612 0.10000000149011612 0.10000000149011612 1.0 1.25
+            emissive 0.0 0.0 0.0 1.0
+
+            alpha_to_coverage off
+            colour_write on
+            cull_hardware clockwise
+            depth_check on
+            depth_func less_equal
+            depth_write on
+            illumination_stage 
+            light_clip_planes off
+            light_scissor off
+            lighting on
+            normalise_normals off
+            polygon_mode solid
+            scene_blend one zero
+            scene_blend_op add
+            shading gouraud
+            transparent_sorting on
+
+            texture_unit 
+            {
+                texture cote-eau-droite.jpg
+                tex_address_mode clamp
+                scale 1.0 1.0
+                colour_op modulate
+            }
+        }
+    }
+}
+// top_droite genrated by blender2ogre 0.6.0
+
+material top_droite__map.blend 
+{
+    receive_shadows on 
+
+    technique
+    {
+        pass top_droite
+        {
+            ambient 0.5879999995231628 0.5879999995231628 0.5879999995231628 1.0
+            diffuse 0.5879999995231628 0.5879999995231628 0.5879999995231628 1.0
+            specular 0.10000000149011612 0.10000000149011612 0.10000000149011612 1.0 1.25
+            emissive 0.0 0.0 0.0 1.0
+
+            alpha_to_coverage off
+            colour_write on
+            cull_hardware clockwise
+            depth_check on
+            depth_func less_equal
+            depth_write on
+            illumination_stage 
+            light_clip_planes off
+            light_scissor off
+            lighting on
+            normalise_normals off
+            polygon_mode solid
+            scene_blend one zero
+            scene_blend_op add
+            shading gouraud
+            transparent_sorting on
+
+            texture_unit 
+            {
+                texture top-droite.jpg
+                tex_address_mode wrap
+                scale 1.0 1.0
+                colour_op modulate
+            }
+        }
+    }
+}
+// Erdwand genrated by blender2ogre 0.6.0
+
+material Erdwand__map.blend 
+{
+    receive_shadows on 
+
+    technique
+    {
+        pass Erdwand
+        {
+            ambient 1.0 1.0 1.0 1.0
+            diffuse 1.0 1.0 1.0 1.0
+            specular 0.10000000149011612 0.10000000149011612 0.10000000149011612 1.0 48.0
+            emissive 0.0 0.0 0.0 1.0
+
+            alpha_to_coverage off
+            colour_write on
+            cull_hardware clockwise
+            depth_check on
+            depth_func less_equal
+            depth_write on
+            illumination_stage 
+            light_clip_planes off
+            light_scissor off
+            lighting on
+            normalise_normals off
+            polygon_mode solid
+            scene_blend one zero
+            scene_blend_op add
+            shading gouraud
+            transparent_sorting on
+
+            texture_unit 
+            {
+                texture Wand2_Gras_auf_Gras.jpg
+                tex_address_mode wrap
+                scale 1.0 1.0
+                colour_op modulate
+            }
+        }
+    }
+}
+// Stein genrated by blender2ogre 0.6.0
+
+material Stein__map.blend 
+{
+    receive_shadows on 
+
+    technique
+    {
+        pass Stein
+        {
+            ambient 0.800000011920929 0.800000011920929 0.800000011920929 1.0
+            diffuse 0.6400000190734865 0.6400000190734865 0.6400000190734865 1.0
+            specular 0.5 0.5 0.5 1.0 12.5
+            emissive 0.0 0.0 0.0 1.0
+
+            alpha_to_coverage off
+            colour_write on
+            cull_hardware clockwise
+            depth_check on
+            depth_func less_equal
+            depth_write on
+            illumination_stage 
+            light_clip_planes off
+            light_scissor off
+            lighting on
+            normalise_normals off
+            polygon_mode solid
+            scene_blend one zero
+            scene_blend_op add
+            shading gouraud
+            transparent_sorting on
+
+        }
+    }
+}
+// Wand2_Gras_Gras genrated by blender2ogre 0.6.0
+
+material Wand2_Gras_Gras__map.blend 
+{
+    receive_shadows on 
+
+    technique
+    {
+        pass Wand2_Gras_Gras
+        {
+            ambient 1.0 1.0 1.0 1.0
+            diffuse 1.0 1.0 1.0 1.0
+            specular 0.13385321199893951 0.13385321199893951 0.13385321199893951 1.0 48.0
+            emissive 0.0 0.0 0.0 1.0
+
+            alpha_to_coverage off
+            colour_write on
+            cull_hardware clockwise
+            depth_check on
+            depth_func less_equal
+            depth_write on
+            illumination_stage 
+            light_clip_planes off
+            light_scissor off
+            lighting on
+            normalise_normals off
+            polygon_mode solid
+            scene_blend one zero
+            scene_blend_op add
+            shading gouraud
+            transparent_sorting on
+
+            texture_unit 
+            {
+                texture Wand2_Gras_auf_Gras.jpg
+                tex_address_mode wrap
+                scale 1.0 1.0
+                colour_op modulate
+            }
+        }
+    }
+}
+// DunkelStein genrated by blender2ogre 0.6.0
+
+material DunkelStein__map.blend 
+{
+    receive_shadows on 
+
+    technique
+    {
+        pass DunkelStein
+        {
+            ambient 0.26675984263420105 0.26675984263420105 0.26675984263420105 1.0
+            diffuse 0.21340787728738597 0.21340787728738597 0.21340787728738597 1.0
+            specular 0.1666666567325592 0.1666666567325592 0.1666666567325592 1.0 12.5
+            emissive 0.0 0.0 0.0 1.0
+
+            alpha_to_coverage off
+            colour_write on
+            cull_hardware clockwise
+            depth_check on
+            depth_func less_equal
+            depth_write on
+            illumination_stage 
+            light_clip_planes off
+            light_scissor off
+            lighting on
+            normalise_normals off
+            polygon_mode solid
+            scene_blend one zero
+            scene_blend_op add
+            shading gouraud
+            transparent_sorting on
+
+        }
+    }
+}
+// Physics_Only genrated by blender2ogre 0.6.0
+
+material Physics_Only__map.blend 
+{
+    receive_shadows on 
+
+    technique
+    {
+        pass Physics_Only
+        {
+            ambient 0.800000011920929 0.0 0.6347007751464844 1.0
+            diffuse 0.6400000190734865 0.0 0.5077606276834103 1.0
+            specular 0.5 0.5 0.5 1.0 12.5
+            emissive 0.0 0.0 0.0 1.0
+
+            alpha_to_coverage off
+            colour_write on
+            cull_hardware clockwise
+            depth_check on
+            depth_func less_equal
+            depth_write on
+            illumination_stage 
+            light_clip_planes off
+            light_scissor off
+            lighting on
+            normalise_normals off
+            polygon_mode solid
+            scene_blend one zero
+            scene_blend_op add
+            shading gouraud
+            transparent_sorting on
+
+        }
+    }
+}

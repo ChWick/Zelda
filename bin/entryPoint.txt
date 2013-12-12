@@ -1,0 +1,26 @@
+# Use this file to set the entry point to the player
+# for test one can change the "main map" to smaller parts of the main map, like testlinkhouse
+# real main map is maps/Map2/map
+# to enter a specific region use map_name entry_point, as defined in the blender file
+
+# DEFINES
+###########################################
+
+# uncomment this and comment all other DEFINE_MAIN_MAP's if you want the complete main map
+# DEFINE_MAIN_MAP maps/Map2/ map
+# use one of these if you want the main map only a small part (useful for debugging!)
+DEFINE_MAIN_MAP maps/Map2/ TestLinkHouse
+
+
+# ENTRY POINTS
+###########################################
+# set the real entry point to the main map
+MAIN_MAP_PATH MAIN_MAP_NAME Link
+
+# set the entry point to the house of link
+#maps/caves/ LinkHouse Link
+
+# secret pass
+#maps/caves/CastleSecretPass/ CastleSecretPass well
+
+# others will follow
