@@ -5339,11 +5339,11 @@
 1372780905 source:/home/christoph/Documents/Projects/Zelda/StdAfx.cpp
 	"StdAfx.h"
 
-1385551966 source:/home/christoph/Documents/Projects/Zelda/src/BlinkingMaterialManager.cpp
+1386799237 source:/home/christoph/Documents/Projects/Zelda/src/BlinkingMaterialManager.cpp
 	"StdAfx.h"
 	"BlinkingMaterialManager.h"
 
-1385551923 /home/christoph/Documents/Projects/Zelda/include/StdAfx.h
+1386844550 /home/christoph/Documents/Projects/Zelda/include/StdAfx.h
 	<cmath>
 	<algorithm>
 	<boost/algorithm/string.hpp>
@@ -5358,8 +5358,8 @@
 	"OgreSingleton.h"
 	<OIS.h>
 	<OIS/OIS.h>
-	"libraries/OgreSdkUtil/SdkCameraMan.h"
-	"libraries/OgreSdkUtil/SdkTrays.h"
+	"dependencies/OgreSdkUtil/SdkCameraMan.h"
+	"dependencies/OgreSdkUtil/SdkTrays.h"
 	<CEGUI/CEGUI.h>
 	"tinyxml2.h"
 	<btBulletCollisionCommon.h>
@@ -5388,7 +5388,7 @@
 	<CEGUI/RendererModules/Ogre/ImageCodec.h>
 	<CEGUI/RendererModules/Ogre/ResourceProvider.h>
 
-1385551923 /home/christoph/Documents/Projects/Zelda/include/tinyxml2.h
+1386799237 /home/christoph/Documents/Projects/Zelda/include/tinyxml2.h
 	<cctype>
 	<climits>
 	<cstdio>
@@ -5397,12 +5397,12 @@
 	<android/log.h>
 	<assert.h>
 
-1385551923 /home/christoph/Documents/Projects/Zelda/include/BtOgrePG.h
+1386799237 /home/christoph/Documents/Projects/Zelda/include/BtOgrePG.h
 	<btBulletDynamicsCommon.h>
 	"OgreSceneNode.h"
 	"BtOgreExtras.h"
 
-1385551923 /home/christoph/Documents/Projects/Zelda/include/BtOgreExtras.h
+1386799237 /home/christoph/Documents/Projects/Zelda/include/BtOgreExtras.h
 	"btBulletDynamicsCommon.h"
 	"OgreSceneNode.h"
 	"OgreSimpleRenderable.h"
@@ -5413,20 +5413,20 @@
 	"OgrePass.h"
 	"OgreLogManager.h"
 
-1385551923 /home/christoph/Documents/Projects/Zelda/include/BtOgreGP.h
+1386799237 /home/christoph/Documents/Projects/Zelda/include/BtOgreGP.h
 	"btBulletDynamicsCommon.h"
 	"BtOgreExtras.h"
 	"Ogre.h"
 
-1385551923 /home/christoph/Documents/Projects/Zelda/include/BlinkingMaterialManager.h
+1386799237 /home/christoph/Documents/Projects/Zelda/include/BlinkingMaterialManager.h
 	"StdAfx.h"
 
-1385551966 source:/home/christoph/Documents/Projects/Zelda/src/BtOgre.cpp
+1386799237 source:/home/christoph/Documents/Projects/Zelda/src/BtOgre.cpp
 	"BtOgrePG.h"
 	"BtOgreGP.h"
 	"BtOgreExtras.h"
 
-1385551966 source:/home/christoph/Documents/Projects/Zelda/src/CameraController.cpp
+1386799237 source:/home/christoph/Documents/Projects/Zelda/src/CameraController.cpp
 	"StdAfx.h"
 	"CameraController.h"
 	"Character.h"
@@ -5435,43 +5435,43 @@
 	"PhysicsManager.h"
 	"GameState.h"
 
-1385551923 /home/christoph/Documents/Projects/Zelda/include/CameraController.h
+1386799237 /home/christoph/Documents/Projects/Zelda/include/CameraController.h
 	"StdAfx.h"
 	"InputListener.h"
 	"GameState.h"
 
-1385551923 /home/christoph/Documents/Projects/Zelda/include/InputListener.h
+1386799237 /home/christoph/Documents/Projects/Zelda/include/InputListener.h
 	"StdAfx.h"
 
-1385551923 /home/christoph/Documents/Projects/Zelda/include/GameState.h
+1386799237 /home/christoph/Documents/Projects/Zelda/include/GameState.h
 	"StdAfx.h"
 
-1385551923 /home/christoph/Documents/Projects/Zelda/include/Character.h
+1386799237 /home/christoph/Documents/Projects/Zelda/include/Character.h
 	"StdAfx.h"
 	"PhysicsManager.h"
 	"HitableInterface.h"
 	"Hitpoints.h"
 	"ChatableInterface.h"
 
-1385632253 /home/christoph/Documents/Projects/Zelda/include/CharacterController_Physics.h
+1386799237 /home/christoph/Documents/Projects/Zelda/include/CharacterController_Physics.h
 	"StdAfx.h"
 
-1385551923 /home/christoph/Documents/Projects/Zelda/include/PhysicsManager.h
+1386799237 /home/christoph/Documents/Projects/Zelda/include/PhysicsManager.h
 	"StdAfx.h"
 
-1385551923 /home/christoph/Documents/Projects/Zelda/include/HitableInterface.h
+1386799237 /home/christoph/Documents/Projects/Zelda/include/HitableInterface.h
 	"StdAfx.h"
 	"PhysicsUserPointer.h"
 
-1385551923 /home/christoph/Documents/Projects/Zelda/include/PhysicsUserPointer.h
+1386799237 /home/christoph/Documents/Projects/Zelda/include/PhysicsUserPointer.h
 	"StdAfx.h"
 
-1385551923 /home/christoph/Documents/Projects/Zelda/include/Hitpoints.h
+1386799237 /home/christoph/Documents/Projects/Zelda/include/Hitpoints.h
 
-1385551923 /home/christoph/Documents/Projects/Zelda/include/Util.h
+1386799237 /home/christoph/Documents/Projects/Zelda/include/Util.h
 	"OgrePrerequisites.h"
 
-1385551923 /home/christoph/Documents/Projects/Zelda/include/Map.h
+1386799237 /home/christoph/Documents/Projects/Zelda/include/Map.h
 	"StdAfx.h"
 	"DotSceneLoaderCallback.h"
 	"ObjectManager.h"
@@ -5479,32 +5479,32 @@
 	"MapUserDataParser.h"
 	"MapLocalisationData.h"
 
-1385551923 /home/christoph/Documents/Projects/Zelda/include/DotSceneLoaderCallback.h
+1386799237 /home/christoph/Documents/Projects/Zelda/include/DotSceneLoaderCallback.h
 	<OgrePrerequisites.h>
 
-1385551923 /home/christoph/Documents/Projects/Zelda/include/ObjectManager.h
+1386799237 /home/christoph/Documents/Projects/Zelda/include/ObjectManager.h
 	"StdAfx.h"
 
-1385551923 /home/christoph/Documents/Projects/Zelda/include/DotsceneLoader.h
+1386799237 /home/christoph/Documents/Projects/Zelda/include/DotsceneLoader.h
 	"StdAfx.h"
 	"DotSceneLoaderCallback.h"
 
-1385551923 /home/christoph/Documents/Projects/Zelda/include/MapUserDataParser.h
+1386799237 /home/christoph/Documents/Projects/Zelda/include/MapUserDataParser.h
 	"StdAfx.h"
 	"PickableObject.h"
 	"InnerObjectGenerator.h"
 
-1385551923 /home/christoph/Documents/Projects/Zelda/include/PickableObject.h
+1386799237 /home/christoph/Documents/Projects/Zelda/include/PickableObject.h
 	"Object.h"
 	"InnerObjectInterface.h"
 
-1385551923 /home/christoph/Documents/Projects/Zelda/include/Object.h
+1386799237 /home/christoph/Documents/Projects/Zelda/include/Object.h
 	"StdAfx.h"
 	"HitableInterface.h"
 	"InteractionInterface.h"
 	"UserData.h"
 
-1385551966 source:/home/christoph/Documents/Projects/Zelda/src/Character.cpp
+1386799237 source:/home/christoph/Documents/Projects/Zelda/src/Character.cpp
 	"StdAfx.h"
 	"Character.h"
 	"Util.h"
@@ -5515,28 +5515,28 @@
 	"Damage.h"
 	"CharacterController.h"
 
-1385551923 /home/christoph/Documents/Projects/Zelda/include/DebugDrawer.h
+1386799237 /home/christoph/Documents/Projects/Zelda/include/DebugDrawer.h
 	<OgreSingleton.h>
 	<map>
 	<inttypes.h>
 
-1385551923 /home/christoph/Documents/Projects/Zelda/include/LiftableObject.h
+1386799237 /home/christoph/Documents/Projects/Zelda/include/LiftableObject.h
 	"Object.h"
 	"InnerObjectContainerInterface.h"
 
-1385551923 /home/christoph/Documents/Projects/Zelda/include/Damage.h
+1386799237 /home/christoph/Documents/Projects/Zelda/include/Damage.h
 	"StdAfx.h"
 	"Hitpoints.h"
 
-1385551923 /home/christoph/Documents/Projects/Zelda/include/CharacterController.h
+1386799237 /home/christoph/Documents/Projects/Zelda/include/CharacterController.h
 
-1385634886 source:/home/christoph/Documents/Projects/Zelda/src/CharacterController_Physics.cpp
+1386799237 source:/home/christoph/Documents/Projects/Zelda/src/CharacterController_Physics.cpp
 	"StdAfx.h"
 	"CharacterController_Physics.h"
 	"PhysicsManager.h"
 	<stdio.h>
 
-1385551966 source:/home/christoph/Documents/Projects/Zelda/src/Chest.cpp
+1386799237 source:/home/christoph/Documents/Projects/Zelda/src/Chest.cpp
 	"StdAfx.h"
 	"Chest.h"
 	"ObjectManager.h"
@@ -5548,34 +5548,34 @@
 	"CameraController.h"
 	"PlayerData.h"
 
-1385551923 /home/christoph/Documents/Projects/Zelda/include/Chest.h
+1386799237 /home/christoph/Documents/Projects/Zelda/include/Chest.h
 	"Object.h"
 	"PickableObject.h"
 	"HUD.h"
 	"InnerObjectContainerInterface.h"
 
-1385551923 /home/christoph/Documents/Projects/Zelda/include/HUD.h
+1386799237 /home/christoph/Documents/Projects/Zelda/include/HUD.h
 	"StdAfx.h"
 	"Hitpoints.h"
 	"InputListener.h"
 	"GameState.h"
 	"HUDListener.h"
 
-1385551923 /home/christoph/Documents/Projects/Zelda/include/TextLoader.h
+1386799237 /home/christoph/Documents/Projects/Zelda/include/TextLoader.h
 	"StdAfx.h"
 
-1385551966 source:/home/christoph/Documents/Projects/Zelda/src/Damage.cpp
+1386799237 source:/home/christoph/Documents/Projects/Zelda/src/Damage.cpp
 	"StdAfx.h"
 	"Damage.h"
 
-1385551966 source:/home/christoph/Documents/Projects/Zelda/src/DebugDisplay.cpp
+1386799237 source:/home/christoph/Documents/Projects/Zelda/src/DebugDisplay.cpp
 	"StdAfx.h"
 	"DebugDisplay.h"
 
-1385551923 /home/christoph/Documents/Projects/Zelda/include/DebugDisplay.h
+1386799237 /home/christoph/Documents/Projects/Zelda/include/DebugDisplay.h
 	"StdAfx.h"
 
-1385551966 source:/home/christoph/Documents/Projects/Zelda/src/DebugDrawer.cpp
+1386799237 source:/home/christoph/Documents/Projects/Zelda/src/DebugDrawer.cpp
 	"StdAfx.h"
 	"DebugDrawer.h"
 	"OgreMath.h"
@@ -5585,29 +5585,29 @@
 	"OgreSceneManager.h"
 	"OgreManualObject.h"
 
-1385551966 source:/home/christoph/Documents/Projects/Zelda/src/Door.cpp
+1386799237 source:/home/christoph/Documents/Projects/Zelda/src/Door.cpp
 	"StdAfx.h"
 	"Door.h"
 	"MapManager.h"
 	"CameraController.h"
 
-1385551923 /home/christoph/Documents/Projects/Zelda/include/Door.h
+1386799237 /home/christoph/Documents/Projects/Zelda/include/Door.h
 	"Object.h"
 	"MapLinkInterface.h"
 
-1385717909 /home/christoph/Documents/Projects/Zelda/include/MapLinkInterface.h
+1386799237 /home/christoph/Documents/Projects/Zelda/include/MapLinkInterface.h
 	"MapManager.h"
 	"MapLocalisationData.h"
 
-1385551923 /home/christoph/Documents/Projects/Zelda/include/MapManager.h
+1386799237 /home/christoph/Documents/Projects/Zelda/include/MapManager.h
 	"Fader.h"
 	"OgreSingleton.h"
 	"MapLocalisationData.h"
 
-1385551923 /home/christoph/Documents/Projects/Zelda/include/Fader.h
+1386799237 /home/christoph/Documents/Projects/Zelda/include/Fader.h
 	"OgrePrerequisites.h"
 
-1385551966 source:/home/christoph/Documents/Projects/Zelda/src/DotsceneLoader.cpp
+1386799237 source:/home/christoph/Documents/Projects/Zelda/src/DotsceneLoader.cpp
 	"StdAfx.h"
 	"DotsceneLoader.h"
 	<Ogre.h>
@@ -5615,11 +5615,11 @@
 	"Util.h"
 	"UserData.h"
 
-1385551966 source:/home/christoph/Documents/Projects/Zelda/src/Fader.cpp
+1386799237 source:/home/christoph/Documents/Projects/Zelda/src/Fader.cpp
 	"StdAfx.h"
 	"Fader.h"
 
-1385551966 source:/home/christoph/Documents/Projects/Zelda/src/Game.cpp
+1386799237 source:/home/christoph/Documents/Projects/Zelda/src/Game.cpp
 	"StdAfx.h"
 	"Game.h"
 	"DebugDrawer.h"
@@ -5638,53 +5638,53 @@
 	"Dungeon.h"
 	"PCZSceneManager.h"
 
-1385551923 /home/christoph/Documents/Projects/Zelda/include/Game.h
+1386799237 /home/christoph/Documents/Projects/Zelda/include/Game.h
 	"StdAfx.h"
 	"InputListener.h"
 
-1385551923 /home/christoph/Documents/Projects/Zelda/include/GUIManager.h
+1386799237 /home/christoph/Documents/Projects/Zelda/include/GUIManager.h
 	"OgreSingleton.h"
 
-1385551923 /home/christoph/Documents/Projects/Zelda/include/PlayerData.h
+1386799237 /home/christoph/Documents/Projects/Zelda/include/PlayerData.h
 	"tinyxml2.h"
 	"OgrePrerequisites.h"
 	"OgreSingleton.h"
 	"HUD.h"
 	"PlayerTool.h"
 
-1385551923 /home/christoph/Documents/Projects/Zelda/include/Player.h
+1386799237 /home/christoph/Documents/Projects/Zelda/include/Player.h
 	"Person.h"
 
-1385551923 /home/christoph/Documents/Projects/Zelda/include/Person.h
+1386799237 /home/christoph/Documents/Projects/Zelda/include/Person.h
 	"Character.h"
 	"Shield.h"
 	"Object.h"
 	"BombListener.h"
 
-1385551923 /home/christoph/Documents/Projects/Zelda/include/Shield.h
+1386799237 /home/christoph/Documents/Projects/Zelda/include/Shield.h
 	"StdAfx.h"
 	"HitableInterface.h"
 
-1385551966 source:/home/christoph/Documents/Projects/Zelda/src/GameState.cpp
+1386799237 source:/home/christoph/Documents/Projects/Zelda/src/GameState.cpp
 	"StdAfx.h"
 	"GameState.h"
 
-1385551966 source:/home/christoph/Documents/Projects/Zelda/src/GUIManager.cpp
+1386799237 source:/home/christoph/Documents/Projects/Zelda/src/GUIManager.cpp
 	"StdAfx.h"
 	"GUIManager.h"
 	"HUD.h"
 
-1385551966 source:/home/christoph/Documents/Projects/Zelda/src/HUD.cpp
+1386799237 source:/home/christoph/Documents/Projects/Zelda/src/HUD.cpp
 	"StdAfx.h"
 	"HUD.h"
 	"PlayerData.h"
 	"PlayerTool.h"
 
-1385551966 source:/home/christoph/Documents/Projects/Zelda/src/InputListener.cpp
+1386799237 source:/home/christoph/Documents/Projects/Zelda/src/InputListener.cpp
 	"StdAfx.h"
 	"InputListener.h"
 
-1385551966 source:/home/christoph/Documents/Projects/Zelda/src/LiftableObject.cpp
+1386799237 source:/home/christoph/Documents/Projects/Zelda/src/LiftableObject.cpp
 	"StdAfx.h"
 	"LiftableObject.h"
 	"ObjectManager.h"
@@ -5695,21 +5695,21 @@
 	"PickableObject.h"
 	"UserData.h"
 
-1385551966 source:/home/christoph/Documents/Projects/Zelda/src/main.cpp
+1386799237 source:/home/christoph/Documents/Projects/Zelda/src/main.cpp
 	"StdAfx.h"
 	"Game.h"
 	"windows.h"
 
-1386184603 source:/home/christoph/Documents/Projects/Zelda/src/MainMap.cpp
+1386799237 source:/home/christoph/Documents/Projects/Zelda/src/MainMap.cpp
 	"StdAfx.h"
 	"Object.h"
 	"MainMap.h"
 
-1385551923 /home/christoph/Documents/Projects/Zelda/include/MainMap.h
+1386799237 /home/christoph/Documents/Projects/Zelda/include/MainMap.h
 	"StdAfx.h"
 	"Map.h"
 
-1385551966 source:/home/christoph/Documents/Projects/Zelda/src/Map.cpp
+1386799237 source:/home/christoph/Documents/Projects/Zelda/src/Map.cpp
 	"StdAfx.h"
 	"Map.h"
 	"PhysicsManager.h"
@@ -5727,14 +5727,14 @@
 	"Ladder.h"
 	"Glower.h"
 
-1385551923 /home/christoph/Documents/Projects/Zelda/include/Sign.h
+1386799237 /home/christoph/Documents/Projects/Zelda/include/Sign.h
 	"LiftableObject.h"
 	"ChatableInterface.h"
 
-1385551923 /home/christoph/Documents/Projects/Zelda/include/SimpleEnemy.h
+1386799237 /home/christoph/Documents/Projects/Zelda/include/SimpleEnemy.h
 	"Person.h"
 
-1385551966 source:/home/christoph/Documents/Projects/Zelda/src/MapManager.cpp
+1386799237 source:/home/christoph/Documents/Projects/Zelda/src/MapManager.cpp
 	"StdAfx.h"
 	"MapManager.h"
 	"PhysicsManager.h"
@@ -5747,23 +5747,23 @@
 	"HUD.h"
 	"GameScriptParser.h"
 
-1385551966 source:/home/christoph/Documents/Projects/Zelda/src/MapUserDataParser.cpp
+1386799237 source:/home/christoph/Documents/Projects/Zelda/src/MapUserDataParser.cpp
 	"StdAfx.h"
 	"MapUserDataParser.h"
 	"tinyxml2.h"
 
-1385551966 source:/home/christoph/Documents/Projects/Zelda/src/Object.cpp
+1386799237 source:/home/christoph/Documents/Projects/Zelda/src/Object.cpp
 	"StdAfx.h"
 	"Object.h"
 	"ObjectManager.h"
 
-1385551966 source:/home/christoph/Documents/Projects/Zelda/src/ObjectManager.cpp
+1386799237 source:/home/christoph/Documents/Projects/Zelda/src/ObjectManager.cpp
 	"StdAfx.h"
 	"ObjectManager.h"
 	"Object.h"
 	"Map.h"
 
-1385551966 source:/home/christoph/Documents/Projects/Zelda/src/Person.cpp
+1386799237 source:/home/christoph/Documents/Projects/Zelda/src/Person.cpp
 	"StdAfx.h"
 	"Person.h"
 	"Map.h"
@@ -5779,12 +5779,12 @@
 	"Lamp.h"
 	"CharacterController_Physics.h"
 
-1385551923 /home/christoph/Documents/Projects/Zelda/include/PersonController.h
+1386799237 /home/christoph/Documents/Projects/Zelda/include/PersonController.h
 	"StdAfx.h"
 	"CharacterController.h"
 	"PlayerTool.h"
 
-1385551966 source:/home/christoph/Documents/Projects/Zelda/src/PersonController.cpp
+1386799237 source:/home/christoph/Documents/Projects/Zelda/src/PersonController.cpp
 	"StdAfx.h"
 	"PersonController.h"
 	"Person.h"
@@ -5793,11 +5793,11 @@
 	"Ladder.h"
 	"DebugDrawer.h"
 
-1385551966 source:/home/christoph/Documents/Projects/Zelda/src/PhysicsManager.cpp
+1386799237 source:/home/christoph/Documents/Projects/Zelda/src/PhysicsManager.cpp
 	"StdAfx.h"
 	"PhysicsManager.h"
 
-1385551966 source:/home/christoph/Documents/Projects/Zelda/src/PickableObject.cpp
+1386799237 source:/home/christoph/Documents/Projects/Zelda/src/PickableObject.cpp
 	"StdAfx.h"
 	"PickableObject.h"
 	"ObjectManager.h"
@@ -5808,7 +5808,7 @@
 	"PlayerData.h"
 	"PlayerTool.h"
 
-1385551966 source:/home/christoph/Documents/Projects/Zelda/src/Player.cpp
+1386799237 source:/home/christoph/Documents/Projects/Zelda/src/Player.cpp
 	"StdAfx.h"
 	"Player.h"
 	"HUD.h"
@@ -5821,7 +5821,7 @@
 	"CameraController.h"
 	"InteractionInterface.h"
 
-1385551923 /home/christoph/Documents/Projects/Zelda/include/PlayerController.h
+1386799237 /home/christoph/Documents/Projects/Zelda/include/PlayerController.h
 	"PersonController.h"
 	"InputListener.h"
 	"OgreVector3.h"
@@ -5829,32 +5829,32 @@
 	"CharacterController_Physics.h"
 	"GameState.h"
 
-1385551966 source:/home/christoph/Documents/Projects/Zelda/src/PlayerController.cpp
+1386799237 source:/home/christoph/Documents/Projects/Zelda/src/PlayerController.cpp
 	"StdAfx.h"
 	"PlayerController.h"
 	"Player.h"
 	"InputListener.h"
 	"CameraController.h"
 
-1385551966 source:/home/christoph/Documents/Projects/Zelda/src/PlayerData.cpp
+1386856301 source:/home/christoph/Documents/Projects/Zelda/src/PlayerData.cpp
 	"StdAfx.h"
 	"PlayerData.h"
 
-1385551966 source:/home/christoph/Documents/Projects/Zelda/src/Shield.cpp
+1386799237 source:/home/christoph/Documents/Projects/Zelda/src/Shield.cpp
 	"StdAfx.h"
 	"Shield.h"
 	"Person.h"
 	"Map.h"
 	"PhysicsManager.h"
 
-1385551966 source:/home/christoph/Documents/Projects/Zelda/src/Sign.cpp
+1386799237 source:/home/christoph/Documents/Projects/Zelda/src/Sign.cpp
 	"StdAfx.h"
 	"Sign.h"
 	"HUD.h"
 	"MapManager.h"
 	"CameraController.h"
 
-1385551966 source:/home/christoph/Documents/Projects/Zelda/src/SimpleEnemy.cpp
+1386799237 source:/home/christoph/Documents/Projects/Zelda/src/SimpleEnemy.cpp
 	"StdAfx.h"
 	"SimpleEnemy.h"
 	"SimpleEnemyController.h"
@@ -5862,46 +5862,46 @@
 	"Damage.h"
 	"PickableObject.h"
 
-1385551923 /home/christoph/Documents/Projects/Zelda/include/SimpleEnemyController.h
+1386799237 /home/christoph/Documents/Projects/Zelda/include/SimpleEnemyController.h
 	"PersonController.h"
 
-1385551966 source:/home/christoph/Documents/Projects/Zelda/src/SimpleEnemyController.cpp
+1386799237 source:/home/christoph/Documents/Projects/Zelda/src/SimpleEnemyController.cpp
 	"StdAfx.h"
 	"SimpleEnemyController.h"
 	"Person.h"
 	"Player.h"
 
-1385551966 source:/home/christoph/Documents/Projects/Zelda/src/StdAfx.cpp
+1386799237 source:/home/christoph/Documents/Projects/Zelda/src/StdAfx.cpp
 	"StdAfx.h"
 
-1385551966 source:/home/christoph/Documents/Projects/Zelda/src/TextLoader.cpp
+1386799237 source:/home/christoph/Documents/Projects/Zelda/src/TextLoader.cpp
 	"StdAfx.h"
 	"TextLoader.h"
 	"PickableObject.h"
 	"MapManager.h"
 	"Map.h"
 
-1385551966 source:/home/christoph/Documents/Projects/Zelda/src/tinyxml2.cpp
+1386799237 source:/home/christoph/Documents/Projects/Zelda/src/tinyxml2.cpp
 	"tinyxml2.h"
 	<cstdio>
 	<cstdlib>
 	<new>
 	<cstddef>
 
-1385551966 source:/home/christoph/Documents/Projects/Zelda/src/Util.cpp
+1386799237 source:/home/christoph/Documents/Projects/Zelda/src/Util.cpp
 	"StdAfx.h"
 	"Util.h"
 
-1385551923 /home/christoph/Documents/Projects/Zelda/include/PlayerTool.h
+1386799237 /home/christoph/Documents/Projects/Zelda/include/PlayerTool.h
 	"StdAfx.h"
 	"Damage.h"
 
-1385551966 source:/home/christoph/Documents/Projects/Zelda/src/PlayerTool.cpp
+1386799237 source:/home/christoph/Documents/Projects/Zelda/src/PlayerTool.cpp
 	"StdAfx.h"
 	"PlayerTool.h"
 	"HUD.h"
 
-1385551966 source:/home/christoph/Documents/Projects/Zelda/src/Projectile.cpp
+1386799237 source:/home/christoph/Documents/Projects/Zelda/src/Projectile.cpp
 	"StdAfx.h"
 	"Projectile.h"
 	"ObjectManager.h"
@@ -5912,19 +5912,19 @@
 	"DebugDrawer.h"
 	"PhysicsUserPointer.h"
 
-1385551923 /home/christoph/Documents/Projects/Zelda/include/Projectile.h
+1386799237 /home/christoph/Documents/Projects/Zelda/include/Projectile.h
 	"Damage.h"
 	"Object.h"
 
-1385551923 /home/christoph/Documents/Projects/Zelda/include/Bow.h
+1386799237 /home/christoph/Documents/Projects/Zelda/include/Bow.h
 	"StdAfx.h"
 	"Tool.h"
 
-1385551923 /home/christoph/Documents/Projects/Zelda/include/Tool.h
+1386799237 /home/christoph/Documents/Projects/Zelda/include/Tool.h
 	"StdAfx.h"
 	"PlayerTool.h"
 
-1385551966 source:/home/christoph/Documents/Projects/Zelda/src/Bomb.cpp
+1386799237 source:/home/christoph/Documents/Projects/Zelda/src/Bomb.cpp
 	"StdAfx.h"
 	"Bomb.h"
 	"Util.h"
@@ -5935,12 +5935,12 @@
 	"BombListener.h"
 	"Damage.h"
 
-1385551923 /home/christoph/Documents/Projects/Zelda/include/Bomb.h
+1386799237 /home/christoph/Documents/Projects/Zelda/include/Bomb.h
 	"LiftableObject.h"
 
-1385551923 /home/christoph/Documents/Projects/Zelda/include/BombListener.h
+1386799237 /home/christoph/Documents/Projects/Zelda/include/BombListener.h
 
-1385551966 source:/home/christoph/Documents/Projects/Zelda/src/GameScriptParser.cpp
+1386799237 source:/home/christoph/Documents/Projects/Zelda/src/GameScriptParser.cpp
 	"StdAfx.h"
 	"GameScriptParser.h"
 	"Map.h"
@@ -5952,7 +5952,7 @@
 	"PhysicsManager.h"
 	"TextLoader.h"
 
-1385551923 /home/christoph/Documents/Projects/Zelda/include/GameScriptParser.h
+1386799237 /home/christoph/Documents/Projects/Zelda/include/GameScriptParser.h
 	"StdAfx.h"
 	"HUDListener.h"
 	"CharacterControllerListener.h"
@@ -5982,29 +5982,29 @@
 	<stdio.h>
 	"lua.h"
 
-1385551923 /home/christoph/Documents/Projects/Zelda/include/HUDListener.h
+1386799237 /home/christoph/Documents/Projects/Zelda/include/HUDListener.h
 
-1385551966 source:/home/christoph/Documents/Projects/Zelda/src/SimpleFriend.cpp
+1386799237 source:/home/christoph/Documents/Projects/Zelda/src/SimpleFriend.cpp
 	"StdAfx.h"
 	"SimpleFriend.h"
 	"PlayerTool.h"
 
-1385551923 /home/christoph/Documents/Projects/Zelda/include/SimpleFriend.h
+1386799237 /home/christoph/Documents/Projects/Zelda/include/SimpleFriend.h
 	"Person.h"
 
-1385551923 /home/christoph/Documents/Projects/Zelda/include/CharacterControllerListener.h
+1386799237 /home/christoph/Documents/Projects/Zelda/include/CharacterControllerListener.h
 
-1385551923 /home/christoph/Documents/Projects/Zelda/include/InteractionInterface.h
+1386799237 /home/christoph/Documents/Projects/Zelda/include/InteractionInterface.h
 	"StdAfx.h"
 
-1385551923 /home/christoph/Documents/Projects/Zelda/include/ChatableInterface.h
+1386799237 /home/christoph/Documents/Projects/Zelda/include/ChatableInterface.h
 	"InteractionInterface.h"
 
-1385551966 source:/home/christoph/Documents/Projects/Zelda/src/InteractionInterface.cpp
+1386799237 source:/home/christoph/Documents/Projects/Zelda/src/InteractionInterface.cpp
 	"StdAfx.h"
 	"InteractionInterface.h"
 
-1385551966 source:/home/christoph/Documents/Projects/Zelda/src/ChatableInterface.cpp
+1386799237 source:/home/christoph/Documents/Projects/Zelda/src/ChatableInterface.cpp
 	"StdAfx.h"
 	"ChatableInterface.h"
 	"HUD.h"
@@ -6012,42 +6012,42 @@
 	"CameraController.h"
 	"TextLoader.h"
 
-1385551923 /home/christoph/Documents/Projects/Zelda/include/InnerObjectGenerator.h
+1386799237 /home/christoph/Documents/Projects/Zelda/include/InnerObjectGenerator.h
 	"StdAfx.h"
 
-1385551923 /home/christoph/Documents/Projects/Zelda/include/InnerObjectInterface.h
+1386799237 /home/christoph/Documents/Projects/Zelda/include/InnerObjectInterface.h
 
-1385551966 source:/home/christoph/Documents/Projects/Zelda/src/InnerObjectGenerator.cpp
+1386799237 source:/home/christoph/Documents/Projects/Zelda/src/InnerObjectGenerator.cpp
 	"StdAfx.h"
 	"InnerObjectGenerator.h"
 	"PickableObject.h"
 	"Map.h"
 
-1385551966 source:/home/christoph/Documents/Projects/Zelda/src/InnerObjectInterface.cpp
+1386799237 source:/home/christoph/Documents/Projects/Zelda/src/InnerObjectInterface.cpp
 	"StdAfx.h"
 	"InnerObjectInterface.h"
 
-1385551966 source:/home/christoph/Documents/Projects/Zelda/src/Lamp.cpp
+1386799237 source:/home/christoph/Documents/Projects/Zelda/src/Lamp.cpp
 	"StdAfx.h"
 	"Lamp.h"
 	"Util.h"
 	"PhysicsManager.h"
 	"Person.h"
 
-1385551923 /home/christoph/Documents/Projects/Zelda/include/Lamp.h
+1386799237 /home/christoph/Documents/Projects/Zelda/include/Lamp.h
 	"Tool.h"
 
-1385551923 /home/christoph/Documents/Projects/Zelda/include/InnerObjectContainerInterface.h
+1386799237 /home/christoph/Documents/Projects/Zelda/include/InnerObjectContainerInterface.h
 	"InnerObjectGenerator.h"
 
-1385551966 source:/home/christoph/Documents/Projects/Zelda/src/InnerObjectContainerInterface.cpp
+1386799237 source:/home/christoph/Documents/Projects/Zelda/src/InnerObjectContainerInterface.cpp
 	"StdAfx.h"
 	"InnerObjectContainerInterface.h"
 
-1385551923 /home/christoph/Documents/Projects/Zelda/include/UserData.h
+1386799237 /home/christoph/Documents/Projects/Zelda/include/UserData.h
 	"StdAfx.h"
 
-1385551966 source:/home/christoph/Documents/Projects/Zelda/src/LinkableObject.cpp
+1386799237 source:/home/christoph/Documents/Projects/Zelda/src/LinkableObject.cpp
 	"StdAfx.h"
 	"LinkableObject.h"
 	"ObjectManager.h"
@@ -6055,24 +6055,24 @@
 	"Util.h"
 	"PhysicsManager.h"
 
-1385551923 /home/christoph/Documents/Projects/Zelda/include/LinkableObject.h
+1386799237 /home/christoph/Documents/Projects/Zelda/include/LinkableObject.h
 	"Object.h"
 
-1385551966 source:/home/christoph/Documents/Projects/Zelda/src/UserData.cpp
+1386799237 source:/home/christoph/Documents/Projects/Zelda/src/UserData.cpp
 	"StdAfx.h"
 	"UserData.h"
 
-1385551966 source:/home/christoph/Documents/Projects/Zelda/src/ContactLink.cpp
+1386799237 source:/home/christoph/Documents/Projects/Zelda/src/ContactLink.cpp
 	"StdAfx.h"
 	"ContactLink.h"
 	"ObjectManager.h"
 	"Player.h"
 
-1385551923 /home/christoph/Documents/Projects/Zelda/include/ContactLink.h
+1386799237 /home/christoph/Documents/Projects/Zelda/include/ContactLink.h
 	"Object.h"
 	"MapLinkInterface.h"
 
-1385551923 /home/christoph/Documents/Projects/Zelda/include/MapLocalisationData.h
+1386799237 /home/christoph/Documents/Projects/Zelda/include/MapLocalisationData.h
 
 1346563634 /usr/local/include/OGRE/RTShaderSystem/OgreShaderGenerator.h
 	"OgreShaderPrerequisites.h"
@@ -6210,16 +6210,16 @@
 	"OISInterface.h"
 	"OISEffect.h"
 
-1385551923 /home/christoph/Documents/Projects/Zelda/include/Ladder.h
+1386799237 /home/christoph/Documents/Projects/Zelda/include/Ladder.h
 	<Object.h>
 
-1385551966 source:/home/christoph/Documents/Projects/Zelda/src/Ladder.cpp
+1386799237 source:/home/christoph/Documents/Projects/Zelda/src/Ladder.cpp
 	"StdAfx.h"
 	"Ladder.h"
 	"Person.h"
 	"DebugDrawer.h"
 
-1385551966 source:/home/christoph/Documents/Projects/Zelda/src/Glower.cpp
+1386799237 source:/home/christoph/Documents/Projects/Zelda/src/Glower.cpp
 	"StdAfx.h"
 	"Glower.h"
 	"ObjectManager.h"
@@ -6227,7 +6227,7 @@
 	"Util.h"
 	"Damage.h"
 
-1385551923 /home/christoph/Documents/Projects/Zelda/include/Glower.h
+1386799237 /home/christoph/Documents/Projects/Zelda/include/Glower.h
 	<Object.h>
 
 1336317057 /usr/include/ois/OIS.h
@@ -6301,4 +6301,17 @@
 
 1380750650 /usr/local/include/bullet/BulletDynamics/ConstraintSolver/btFixedConstraint.h
 	"btTypedConstraint.h"
+
+1386844550 /home/christoph/Documents/Projects/Zelda/dependencies/OgreSdkUtil/SdkCameraMan.h
+	"Ogre.h"
+	<limits>
+
+1386844550 /home/christoph/Documents/Projects/Zelda/dependencies/OgreSdkUtil/SdkTrays.h
+	"Ogre.h"
+	"OgreFontManager.h"
+	"OgreBorderPanelOverlayElement.h"
+	"OgreTextAreaOverlayElement.h"
+	<math.h>
+	"OgreStringSerialiser.h"
+	"OgreTimer.h"
 
