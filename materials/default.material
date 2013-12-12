@@ -1,0 +1,142 @@
+// -------------------------------
+// Cel Shading Section
+// -------------------------------
+
+// Textured
+vertex_program Ogre/CelShadingTexturedVP cg
+{
+   source Example_CelShadingTextured.cg
+   entry_point main_vp
+   profiles vs_1_1 arbvp1
+
+   default_params
+   {
+      param_named_auto lightPosition light_position_object_space 0
+      param_named_auto eyePosition camera_position_object_space
+      param_named_auto worldViewProj worldviewproj_matrix
+      param_named shininess float 10 
+   }
+}
+
+fragment_program Ogre/CelShadingTexturedFP cg
+{
+   source Example_CelShadingTextured.cg
+   entry_point main_fp
+   profiles ps_2_0 arbfp1 fp20
+}
+// -------------------------------
+// Not Textured
+// -------------------------------
+vertex_program Ogre/CelShadingVP cg
+{
+	source Example_CelShading.cg
+	entry_point main_vp
+	profiles vs_4_0 vs_1_1 arbvp1
+
+	default_params
+	{
+		param_named_auto lightPosition light_position_object_space 0
+		param_named_auto eyePosition camera_position_object_space
+		param_named_auto worldViewProj worldviewproj_matrix
+		param_named shininess float 10 
+	}
+}
+
+fragment_program Ogre/CelShadingFP cg
+{
+	source Example_CelShading.cg
+	entry_point main_fp
+	profiles ps_4_0 ps_1_1 arbfp1 fp20
+
+}
+
+material Examples/CelShadingTextured
+{
+   technique
+   {
+      pass
+      {
+         iteration once_per_light
+         vertex_program_ref Ogre/CelShadingTexturedVP
+         {
+            param_named shininess float 1.0 // you can change this as well
+         }
+         fragment_program_ref Ogre/CelShadingTexturedFP
+         {
+         }
+         texture_unit
+         {
+            texture cel_shading_diffuse.png 1d
+            tex_address_mode clamp
+            filtering none
+         }
+         texture_unit
+         {
+            texture cel_shading_specular.png 1d
+            tex_address_mode clamp
+            filtering none
+            tex_coord_set 1
+         }
+         texture_unit
+         {
+            texture cel_shading_edge.png 1d
+            tex_address_mode clamp
+            filtering none
+            tex_coord_set 2
+         }
+         texture_unit
+         {
+            texture diffuse_map.png //add your diffuse map here
+         }
+         texture_unit
+         {
+            texture specular_map.png //add your specular map here
+         }
+      }
+   }
+   
+}
+// Sonstiges
+material Default/OverlayMaterial
+{
+     technique
+     {
+         pass
+         {
+             scene_blend alpha_blend
+ 
+             texture_unit
+             {
+                 texture black.jpg
+             }
+         }
+     }
+}
+material WaterStream
+{
+	technique
+	{
+		pass
+		{
+			ambient 0.1 0.1 0.1
+			scene_blend add
+			depth_write off
+			cull_software none
+			cull_hardware none
+
+			texture_unit
+			{
+				texture Water02.jpg
+				//scroll_anim 0.125 0
+				wave_xform scroll_x sine 0 0.25 0 0.125
+			}
+
+			texture_unit
+			{
+				rotate 90
+				texture Water02.jpg
+				wave_xform scroll_y sine 0.1 0.25 0.1 0.125
+			}
+		}
+	}
+}

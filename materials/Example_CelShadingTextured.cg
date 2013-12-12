@@ -1,0 +1,62 @@
+void main_vp(float4 position : POSITION,
+          float3 normal : NORMAL,
+          // outputs
+          out float4 oPosition : POSITION,
+          out float  diffuse : TEXCOORD0,
+          out float  specular : TEXCOORD1,
+          out float  edge : TEXCOORD2,
+          float2 texCoord3 : TEXCOORD0, 
+          out float2 uv3 : TEXCOORD3,
+          // parameters
+          uniform float3 lightPosition, // object space
+          uniform float3 eyePosition,   // object space
+          uniform float4  shininess,
+          uniform float4x4 worldViewProj)
+{
+   // calculate output position
+   oPosition = mul(worldViewProj, position);
+
+   // calculate light vector
+   float3 N = normalize(normal);
+   float3 L = normalize(lightPosition - position.xyz);
+   
+   // Calculate diffuse component
+   diffuse = max(dot(N, L) , 0);
+
+   // Calculate specular component
+   float3 E = normalize(eyePosition - position.xyz);
+   float3 H = normalize(L + E);
+   specular = pow(max(dot(N, H), 0), shininess);
+   // Mask off specular if diffuse is 0
+   if (diffuse == 0) specular = 0;
+
+   // Edge detection, dot eye and normal vectors
+   edge = max(dot(N, E), 0);
+   uv3 = texCoord3;
+}
+
+void main_fp(float diffuseIn : TEXCOORD0,
+          float specularIn : TEXCOORD1,
+          float edge   : TEXCOORD2,
+          
+          out float4 colour : COLOR,
+
+          float2 uv3   : TEXCOORD3,
+          
+          uniform sampler1D diffuseRamp,
+          uniform sampler1D specularRamp,
+          uniform sampler1D edgeRamp,
+          uniform sampler2D diffmap : register(s3),
+          uniform sampler2D specmap : register(s4)
+)
+{
+
+   // Step functions from textures
+   diffuseIn = tex1D(diffuseRamp, diffuseIn).x;
+   edge = tex1D(edgeRamp, edge).x;
+
+
+   float4 diffuse_map = tex2D( diffmap, uv3 );
+   colour = edge * ( ( diffuse_map * diffuseIn ) + ( tex2D( specmap, uv3 ) * specularIn) ); 
+   colour.a = diffuse_map.a; 
+}
