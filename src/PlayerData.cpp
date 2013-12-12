@@ -27,8 +27,8 @@ void CMapSaveData::readFromFile(XMLElement *pElement) {
 // CPlayerSaveData
 // ============================================================================================================================
 CPlayerData::CPlayerData()
-    : m_uiHP(0),
-    m_uiMaxHP(0),
+    : m_uiHP(300),          // This is the default hp (since hp >= 25, or dead if 0)
+    m_uiMaxHP(300),
     m_fMP(0),
     m_iRubyCount(0),
     m_iKeyCount(0),
@@ -84,7 +84,7 @@ void CPlayerData::readFromFile() {
 	m_fMP = pRoot->FloatAttribute("mp");
     m_iBombCount = pRoot->IntAttribute("bombCount");
 
-	assert(m_uiMaxHP > 99); // this helps if one accendently sets the hp to be 3 instead of 300!
+	assert(m_uiMaxHP > 4); // this helps if one accendently sets the hp to be 3 instead of 300! (25 is possible ofc)
 
 	for (XMLElement *pElement = pRoot->FirstChildElement(); pElement; pElement = pElement->NextSiblingElement()) {
 		if (Ogre::String(pElement->Value()) == "map") {
