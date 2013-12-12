@@ -1,9 +1,4 @@
 /*-------------------------------------------------------------------------------------
-Modified by Christoph Wick (ch.wick@web.de)
-Wrong indices in line 285-288
--------------------------------------------------------------------------------------*/
-
-/*-------------------------------------------------------------------------------------
 Copyright (c) 2006 John Judnich
 
 This software is provided 'as-is', without any express or implied warranty. In no event will the authors be held liable for any damages arising from the use of this software.
@@ -287,7 +282,7 @@ void WindBatchedGeometry::WindSubBatch::build()
                         // rotate vector by matrix. Ogre::Matrix3::operator* (const Vector3&) is not fast
                         destPtr[0] = float(mat[0] * sourcePtr[0] + mat[1] * sourcePtr[1] + mat[2] * sourcePtr[2]);   // x
                         destPtr[1] = float(mat[3] * sourcePtr[0] + mat[4] * sourcePtr[1] + mat[5] * sourcePtr[2]);   // y
-                        destPtr[2] = float(mat[6] * sourcePtr[0] + mat[7] * sourcePtr[1] + mat[8] * sourcePtr[2]);   // z
+                        destPtr[2] = float(mat[6] * sourcePtr[0] + mat[6] * sourcePtr[1] + mat[6] * sourcePtr[2]);   // z
                      }
                      break;
 
