@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="Zelda" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="../bin/Zelda" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="../bin" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-std=c++11" />
+					<Add option="-g" />
+					<Add option="-D_DEBUG" />
+					<Add directory="include" />
+				</Compiler>
+			</Target>
+			<Target title="Release">
+				<Option output="../bin/Zelda" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="../bin" />
+				<Option object_output="obj/Release/" />
+				<Option type="0" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+					<Add directory="include" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-std=c++11" />
+			<Add option="-fexceptions" />
+			<Add directory="/usr/local/include/OGRE/Plugins/OctreeSceneManager" />
+			<Add directory="/usr/local/include/PagedGeometry" />
+			<Add directory="/usr/local/include/cegui-0" />
+			<Add directory="/usr/local/include/bullet" />
+			<Add directory=".." />
+			<Add directory="../include" />
+		</Compiler>
+		<Linker>
+			<Add library="boost_system" />
+			<Add library="boost_regex" />
+			<Add directory="/bin/Debug" />
+			<Add directory="/bin/Release" />
+		</Linker>
+		<Unit filename="../include/BlinkingMaterialManager.h" />
+		<Unit filename="../include/Bomb.h" />
+		<Unit filename="../include/Bow.h" />
+		<Unit filename="../include/BtOgreExtras.h" />
+		<Unit filename="../include/BtOgreGP.h" />
+		<Unit filename="../include/BtOgrePG.h" />
+		<Unit filename="../include/CameraController.h" />
+		<Unit filename="../include/Character.h" />
+		<Unit filename="../include/CharacterController.h" />
+		<Unit filename="../include/CharacterControllerListener.h" />
+		<Unit filename="../include/CharacterController_Physics.h" />
+		<Unit filename="../include/ChatableInterface.h" />
+		<Unit filename="../include/Chest.h" />
+		<Unit filename="../include/ContactLink.h" />
+		<Unit filename="../include/Damage.h" />
+		<Unit filename="../include/DebugDisplay.h" />
+		<Unit filename="../include/DebugDrawer.h" />
+		<Unit filename="../include/Door.h" />
+		<Unit filename="../include/DotSceneLoaderCallback.h" />
+		<Unit filename="../include/DotsceneLoader.h" />
+		<Unit filename="../include/Fader.h" />
+		<Unit filename="../include/GUIManager.h" />
+		<Unit filename="../include/Game.h" />
+		<Unit filename="../include/GameScriptParser.h" />
+		<Unit filename="../include/GameState.h" />
+		<Unit filename="../include/Glower.h" />
+		<Unit filename="../include/HUD.h" />
+		<Unit filename="../include/HUDListener.h" />
+		<Unit filename="../include/HitableInterface.h" />
+		<Unit filename="../include/Hitpoints.h" />
+		<Unit filename="../include/InnerObjectContainerInterface.h" />
+		<Unit filename="../include/InnerObjectGenerator.h" />
+		<Unit filename="../include/InnerObjectInterface.h" />
+		<Unit filename="../include/InputListener.h" />
+		<Unit filename="../include/InteractionInterface.h" />
+		<Unit filename="../include/Ladder.h" />
+		<Unit filename="../include/Lamp.h" />
+		<Unit filename="../include/LiftableObject.h" />
+		<Unit filename="../include/LinkableObject.h" />
+		<Unit filename="../include/MainMap.h" />
+		<Unit filename="../include/Map.h" />
+		<Unit filename="../include/MapEntry.h" />
+		<Unit filename="../include/MapLinkInterface.h" />
+		<Unit filename="../include/MapLocalisationData.h" />
+		<Unit filename="../include/MapManager.h" />
+		<Unit filename="../include/MapUserDataParser.h" />
+		<Unit filename="../include/Object.h" />
+		<Unit filename="../include/ObjectManager.h" />
+		<Unit filename="../include/Person.h" />
+		<Unit filename="../include/PersonController.h" />
+		<Unit filename="../include/PhysicsManager.h" />
+		<Unit filename="../include/PhysicsUserPointer.h" />
+		<Unit filename="../include/PickableObject.h" />
+		<Unit filename="../include/Player.h" />
+		<Unit filename="../include/PlayerController.h" />
+		<Unit filename="../include/PlayerData.h" />
+		<Unit filename="../include/PlayerTool.h" />
+		<Unit filename="../include/Projectile.h" />
+		<Unit filename="../include/Shield.h" />
+		<Unit filename="../include/Sign.h" />
+		<Unit filename="../include/SimpleEnemy.h" />
+		<Unit filename="../include/SimpleEnemyController.h" />
+		<Unit filename="../include/SimpleFriend.h" />
+		<Unit filename="../include/StdAfx.h" />
+		<Unit filename="../include/TextLoader.h" />
+		<Unit filename="../include/Tool.h" />
+		<Unit filename="../include/UserData.h" />
+		<Unit filename="../include/Util.h" />
+		<Unit filename="../include/tinyxml2.h" />
+		<Unit filename="../maps/Map2/TestLinkHouse.lua" />
+		<Unit filename="../maps/caves/CastleSecretPass/CastleSecretPass.lua" />
+		<Unit filename="../maps/caves/LinkHouse.lua" />
+		<Unit filename="../src/BlinkingMaterialManager.cpp" />
+		<Unit filename="../src/Bomb.cpp" />
+		<Unit filename="../src/BtOgre.cpp" />
+		<Unit filename="../src/CameraController.cpp" />
+		<Unit filename="../src/Character.cpp" />
+		<Unit filename="../src/CharacterController_Physics.cpp" />
+		<Unit filename="../src/ChatableInterface.cpp" />
+		<Unit filename="../src/Chest.cpp" />
+		<Unit filename="../src/ContactLink.cpp" />
+		<Unit filename="../src/Damage.cpp" />
+		<Unit filename="../src/DebugDisplay.cpp" />
+		<Unit filename="../src/DebugDrawer.cpp" />
+		<Unit filename="../src/Door.cpp" />
+		<Unit filename="../src/DotsceneLoader.cpp" />
+		<Unit filename="../src/Fader.cpp" />
+		<Unit filename="../src/GUIManager.cpp" />
+		<Unit filename="../src/Game.cpp" />
+		<Unit filename="../src/GameScriptParser.cpp" />
+		<Unit filename="../src/GameState.cpp" />
+		<Unit filename="../src/Glower.cpp" />
+		<Unit filename="../src/HUD.cpp" />
+		<Unit filename="../src/InnerObjectContainerInterface.cpp" />
+		<Unit filename="../src/InnerObjectGenerator.cpp" />
+		<Unit filename="../src/InnerObjectInterface.cpp" />
+		<Unit filename="../src/InputListener.cpp" />
+		<Unit filename="../src/InteractionInterface.cpp" />
+		<Unit filename="../src/Ladder.cpp" />
+		<Unit filename="../src/Lamp.cpp" />
+		<Unit filename="../src/LiftableObject.cpp" />
+		<Unit filename="../src/LinkableObject.cpp" />
+		<Unit filename="../src/MainMap.cpp" />
+		<Unit filename="../src/Map.cpp" />
+		<Unit filename="../src/MapManager.cpp" />
+		<Unit filename="../src/MapUserDataParser.cpp" />
+		<Unit filename="../src/Object.cpp" />
+		<Unit filename="../src/ObjectManager.cpp" />
+		<Unit filename="../src/Person.cpp" />
+		<Unit filename="../src/PersonController.cpp" />
+		<Unit filename="../src/PhysicsManager.cpp" />
+		<Unit filename="../src/PickableObject.cpp" />
+		<Unit filename="../src/Player.cpp" />
+		<Unit filename="../src/PlayerController.cpp" />
+		<Unit filename="../src/PlayerData.cpp" />
+		<Unit filename="../src/PlayerTool.cpp" />
+		<Unit filename="../src/Projectile.cpp" />
+		<Unit filename="../src/Shield.cpp" />
+		<Unit filename="../src/Sign.cpp" />
+		<Unit filename="../src/SimpleEnemy.cpp" />
+		<Unit filename="../src/SimpleEnemyController.cpp" />
+		<Unit filename="../src/SimpleFriend.cpp" />
+		<Unit filename="../src/StdAfx.cpp" />
+		<Unit filename="../src/TextLoader.cpp" />
+		<Unit filename="../src/UserData.cpp" />
+		<Unit filename="../src/Util.cpp" />
+		<Unit filename="../src/main.cpp" />
+		<Unit filename="../src/tinyxml2.cpp" />
+		<Extensions>
+			<code_completion>
+				<search_path add="/usr/local/include/OGRE" />
+				<search_path add="/usr/local/include/cegui-0/CEGUI" />
+				<search_path add="/usr/include/OIS" />
+			</code_completion>
+			<debugger />
+			<envvars />
+			<lib_finder>
+				<lib name="OGRE" />
+				<lib name="pthread-stubs" />
+				<lib name="bullet" />
+				<lib name="lua" />
+				<lib name="CEGUI-0" />
+				<lib name="CEGUI-0-OGRE" />
+				<lib name="OIS" />
+				<lib name="PagedGeometry" />
+			</lib_finder>
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>
