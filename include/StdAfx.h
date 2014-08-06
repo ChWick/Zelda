@@ -47,12 +47,6 @@
 #include "BtOgreGP.h"
 #include "BtOgreExtras.h"
 
-#include "PagedGeometryConfig.h"
-#include "PagedGeometry.h"
-#include "BatchPage.h"
-#include "ImpostorPage.h"
-#include "TreeLoader3D.h"
-
 #include <lua.hpp>
 
 /*#include "Hydrax/Hydrax.h"

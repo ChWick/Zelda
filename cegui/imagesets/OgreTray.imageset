@@ -57,6 +57,7 @@
     <Image name="MiniTrayTL" xPos="166" yPos="83" width="12" height="12" />
     <Image name="MiniTrayTR" xPos="186" yPos="83" width="12" height="12" />
     <Image name="MouseArrow" xPos="1" yPos="100" width="20" height="23" />
+    <Image name="MouseInvisible" xPos="0" yPos="250" width="1" height="1" />
     <Image name="SeparatorL" xPos="173" yPos="71" width="20" height="4" />
     <Image name="SeparatorM" xPos="193" yPos="71" width="10" height="4" />
     <Image name="SeparatorR" xPos="203" yPos="71" width="20" height="4" />

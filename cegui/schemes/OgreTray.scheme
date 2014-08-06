@@ -7,6 +7,7 @@
 
     <FalagardMapping windowType="OgreTray/Label"                targetType="DefaultWindow"          renderer="Core/Default"             lookNFeel="OgreTray/Label" />
     <FalagardMapping windowType="OgreTray/Button"               targetType="CEGUI/PushButton"       renderer="Core/Button"              lookNFeel="OgreTray/PushButton" />
+    <FalagardMapping windowType="OgreTray/ImageButton"               targetType="CEGUI/PushButton"       renderer="Core/Button"              lookNFeel="OgreTray/ImagePushButton" />
     <FalagardMapping windowType="OgreTray/Titlebar"             targetType="CEGUI/Titlebar"         renderer="Core/Titlebar"            lookNFeel="OgreTray/Titlebar" />
     <FalagardMapping windowType="OgreTray/FrameWindow"          targetType="CEGUI/FrameWindow"      renderer="Core/FrameWindow"         lookNFeel="OgreTray/FrameWindow" />
     <FalagardMapping windowType="OgreTray/Thumb"                targetType="CEGUI/Thumb"            renderer="Core/Button"              lookNFeel="OgreTray/Thumb" />
@@ -24,6 +25,7 @@
     <FalagardMapping windowType="OgreTray/DropDownMenu"         targetType="CEGUI/Combobox"         renderer="Core/Default"             lookNFeel="OgreTray/DropDownMenu" />
     <FalagardMapping windowType="OgreTray/Group"                targetType="DefaultWindow"          renderer="Core/Default"             lookNFeel="OgreTray/Group" />
     <FalagardMapping windowType="OgreTray/Checkbox"             targetType="CEGUI/ToggleButton"         renderer="Core/ToggleButton"        lookNFeel="OgreTray/Checkbox" />
+	<FalagardMapping windowType="OgreTray/ToggleRadioButton"             targetType="CEGUI/RadioButton"         renderer="Core/ToggleButton"        lookNFeel="OgreTray/ToggleButton" />
     <FalagardMapping windowType="OgreTray/RadioButton"          targetType="CEGUI/RadioButton"      renderer="Core/ToggleButton"        lookNFeel="OgreTray/RadioButton" />
     <FalagardMapping windowType="OgreTray/Slider"               targetType="CEGUI/Slider"           renderer="Core/Slider"              lookNFeel="OgreTray/Slider" />
     <FalagardMapping windowType="OgreTray/StaticImage"          targetType="DefaultWindow"          renderer="Core/StaticImage"         lookNFeel="OgreTray/StaticImage" />
