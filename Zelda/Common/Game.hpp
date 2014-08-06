@@ -71,6 +71,7 @@ public:
   Ogre::FileSystemLayer* getFileSystemLayer() {return mFSLayer;}
   Ogre::Root *getRoot() {return mRoot;}
   Ogre::RenderWindow *getRenderWindow() {return mWindow;}
+  Ogre::SceneManager *getSceneManager() const {return mSceneMgr;}
   OgreBites::SdkTrayManager *getTrayMgr() {return mTrayMgr;}
 
   void go();

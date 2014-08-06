@@ -2,6 +2,7 @@
 #define _MAP_PACK_HPP_
 
 class CMapPack {
+public:
 
 };
 

@@ -181,6 +181,8 @@ private:
 
 class DebugDrawer : public btIDebugDraw
 {
+private:
+  static unsigned int INSTANCES;
 protected:
 	Ogre::SceneNode *mNode;
 	btDynamicsWorld *mWorld;
@@ -197,24 +199,27 @@ public:
 		mLineDrawer = new DynamicLines(Ogre::RenderOperation::OT_LINE_LIST);
 		mNode->attachObject(mLineDrawer);
 
-                if (!Ogre::ResourceGroupManager::getSingleton().resourceGroupExists("BtOgre"))
-                    Ogre::ResourceGroupManager::getSingleton().createResourceGroup("BtOgre");
-                if (!Ogre::MaterialManager::getSingleton().resourceExists("BtOgre/DebugLines"))
-                {
-                    Ogre::MaterialPtr mat = Ogre::MaterialManager::getSingleton().create("BtOgre/DebugLines", "BtOgre");
-                    mat->setReceiveShadows(false);
-                    mat->setSelfIllumination(1,1,1);
-                }
+    if (INSTANCES == 0) {
+      Ogre::ResourceGroupManager::getSingleton().createResourceGroup("BtOgre");
+      Ogre::MaterialPtr mat = Ogre::MaterialManager::getSingleton().create("BtOgre/DebugLines", "BtOgre");
+      mat->setReceiveShadows(false);
+      mat->setSelfIllumination(1,1,1);
+    }
 
 		mLineDrawer->setMaterial("BtOgre/DebugLines");
+
+		INSTANCES++;
 	}
 
 	~DebugDrawer()
 	{
-                Ogre::MaterialManager::getSingleton().remove("BtOgre/DebugLines");
-				if (Ogre::ResourceGroupManager::getSingleton().resourceGroupExists("BtOgre")) {
-					Ogre::ResourceGroupManager::getSingleton().destroyResourceGroup("BtOgre");
-				}
+	  INSTANCES--;
+
+	  if (INSTANCES == 0) {
+      Ogre::MaterialManager::getSingleton().remove("BtOgre/DebugLines");
+			Ogre::ResourceGroupManager::getSingleton().destroyResourceGroup("BtOgre");
+    }
+
 		delete mLineDrawer;
 	}
 
