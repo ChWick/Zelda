@@ -1,0 +1,296 @@
+
+material _missing_material_
+{
+    receive_shadows off
+    technique
+    {
+        pass
+        {
+            ambient 0.1 0.1 0.1 1.0
+            diffuse 0.8 0.0 0.0 1.0
+            specular 0.5 0.5 0.5 1.0 12.5
+            emissive 0.3 0.3 0.3 1.0
+        }
+    }
+}
+
+// Lamp genrated by blender2ogre 0.6.0
+
+material Lamp 
+{
+    receive_shadows on 
+
+    technique
+    {
+        pass Lamp
+        {
+            ambient 0.6738469004631042 0.024098964408040047 0.0 1.0
+            diffuse 0.6738469004631042 0.024098964408040047 0.0 1.0
+            specular 0.3245975670595236 0.2205798890366122 0.20422459257318337 1.0 12.5
+            emissive 0.0 0.0 0.0 1.0
+
+            alpha_to_coverage off
+            colour_write on
+            cull_hardware clockwise
+            depth_check on
+            depth_func less_equal
+            depth_write on
+            illumination_stage 
+            light_clip_planes off
+            light_scissor off
+            lighting on
+            normalise_normals off
+            polygon_mode solid
+            scene_blend one zero
+            scene_blend_op add
+            shading gouraud
+            transparent_sorting on
+
+        }
+    }
+}
+// Arrow_Wood genrated by blender2ogre 0.6.0
+
+material Arrow_Wood 
+{
+    receive_shadows on 
+
+    technique
+    {
+        pass Arrow_Wood
+        {
+            ambient 0.06680626422166824 0.01558971032500267 0.0 1.0
+            diffuse 0.053445012173727324 0.012471768445845965 0.0 1.0
+            specular 0.4490196108818054 0.4490196108818054 0.4490196108818054 1.0 12.5
+            emissive 0.0 0.0 0.0 1.0
+
+            alpha_to_coverage off
+            colour_write on
+            cull_hardware clockwise
+            depth_check on
+            depth_func less_equal
+            depth_write on
+            illumination_stage 
+            light_clip_planes off
+            light_scissor off
+            lighting on
+            normalise_normals off
+            polygon_mode solid
+            scene_blend one zero
+            scene_blend_op add
+            shading gouraud
+            transparent_sorting on
+
+        }
+    }
+}
+// Bomb genrated by blender2ogre 0.6.0
+
+material Bomb 
+{
+    receive_shadows on 
+
+    technique
+    {
+        pass Bomb
+        {
+            ambient 0.0 0.025897404178977013 0.08001147210597992 1.0
+            diffuse 0.0 0.020717923651902725 0.06400917863859501 1.0
+            specular 0.5 0.5 0.5 1.0 12.5
+            emissive 0.0 0.0 0.0 1.0
+
+            alpha_to_coverage off
+            colour_write on
+            cull_hardware clockwise
+            depth_check on
+            depth_func less_equal
+            depth_write on
+            illumination_stage 
+            light_clip_planes off
+            light_scissor off
+            lighting on
+            normalise_normals off
+            polygon_mode solid
+            scene_blend one zero
+            scene_blend_op add
+            shading gouraud
+            transparent_sorting on
+
+        }
+    }
+}
+// HammerMetal genrated by blender2ogre 0.6.0
+
+material HammerMetal 
+{
+    receive_shadows on 
+
+    technique
+    {
+        pass HammerMetal
+        {
+            ambient 0.6078431606292725 0.6313725709915161 0.615686297416687 1.0
+            diffuse 0.4862745357494731 0.5050980643197605 0.4925490452729022 1.0
+            specular 0.4490196108818054 0.4490196108818054 0.4490196108818054 1.0 12.5
+            emissive 0.0 0.0 0.0 1.0
+
+            alpha_to_coverage off
+            colour_write on
+            cull_hardware clockwise
+            depth_check on
+            depth_func less_equal
+            depth_write on
+            illumination_stage 
+            light_clip_planes off
+            light_scissor off
+            lighting on
+            normalise_normals off
+            polygon_mode solid
+            scene_blend one zero
+            scene_blend_op add
+            shading gouraud
+            transparent_sorting on
+
+        }
+    }
+}
+// Bow_String genrated by blender2ogre 0.6.0
+
+material Bow_String 
+{
+    receive_shadows on 
+
+    technique
+    {
+        pass Bow_String
+        {
+            ambient 1.0 0.8274973630905151 0.27397584915161133 1.0
+            diffuse 0.800000011920929 0.6619979003369494 0.2191806825873357 1.0
+            specular 0.4490196108818054 0.4490196108818054 0.4490196108818054 1.0 12.5
+            emissive 0.0 0.0 0.0 1.0
+
+            alpha_to_coverage off
+            colour_write on
+            cull_hardware clockwise
+            depth_check on
+            depth_func less_equal
+            depth_write on
+            illumination_stage 
+            light_clip_planes off
+            light_scissor off
+            lighting on
+            normalise_normals off
+            polygon_mode solid
+            scene_blend one zero
+            scene_blend_op add
+            shading gouraud
+            transparent_sorting on
+
+        }
+    }
+}
+// Bow_Grip genrated by blender2ogre 0.6.0
+
+material Bow_Grip 
+{
+    receive_shadows on 
+
+    technique
+    {
+        pass Bow_Grip
+        {
+            ambient 0.04887760430574417 0.049548882991075516 0.049548882991075516 1.0
+            diffuse 0.039102084027261785 0.03963910698352913 0.03963910698352913 1.0
+            specular 0.4490196108818054 0.4490196108818054 0.4490196108818054 1.0 12.5
+            emissive 0.0 0.0 0.0 1.0
+
+            alpha_to_coverage off
+            colour_write on
+            cull_hardware clockwise
+            depth_check on
+            depth_func less_equal
+            depth_write on
+            illumination_stage 
+            light_clip_planes off
+            light_scissor off
+            lighting on
+            normalise_normals off
+            polygon_mode solid
+            scene_blend one zero
+            scene_blend_op add
+            shading gouraud
+            transparent_sorting on
+
+        }
+    }
+}
+// Arrow_Metall genrated by blender2ogre 0.6.0
+
+material Arrow_Metall 
+{
+    receive_shadows on 
+
+    technique
+    {
+        pass Arrow_Metall
+        {
+            ambient 0.7093959450721741 0.7407599687576294 0.7742701768875122 1.0
+            diffuse 0.5675167645143979 0.5926079838366505 0.6194161507400295 1.0
+            specular 0.4490196108818054 0.4490196108818054 0.4490196108818054 1.0 12.5
+            emissive 0.0 0.0 0.0 1.0
+
+            alpha_to_coverage off
+            colour_write on
+            cull_hardware clockwise
+            depth_check on
+            depth_func less_equal
+            depth_write on
+            illumination_stage 
+            light_clip_planes off
+            light_scissor off
+            lighting on
+            normalise_normals off
+            polygon_mode solid
+            scene_blend one zero
+            scene_blend_op add
+            shading gouraud
+            transparent_sorting on
+
+        }
+    }
+}
+// Arrow_Plumes genrated by blender2ogre 0.6.0
+
+material Arrow_Plumes 
+{
+    receive_shadows on 
+
+    technique
+    {
+        pass Arrow_Plumes
+        {
+            ambient 0.14619337022304535 0.18640314042568207 0.800000011920929 1.0
+            diffuse 0.11695469792119706 0.14912251456264425 0.6400000190734865 1.0
+            specular 0.5 0.5 0.5 1.0 12.5
+            emissive 0.0 0.0 0.0 1.0
+
+            alpha_to_coverage off
+            colour_write on
+            cull_hardware clockwise
+            depth_check on
+            depth_func less_equal
+            depth_write on
+            illumination_stage 
+            light_clip_planes off
+            light_scissor off
+            lighting on
+            normalise_normals off
+            polygon_mode solid
+            scene_blend one zero
+            scene_blend_op add
+            shading gouraud
+            transparent_sorting on
+
+        }
+    }
+}

@@ -1,0 +1,278 @@
+
+material _missing_material_
+{
+    receive_shadows off
+    technique
+    {
+        pass
+        {
+            ambient 0.1 0.1 0.1 1.0
+            diffuse 0.8 0.0 0.0 1.0
+            specular 0.5 0.5 0.5 1.0 12.5
+            emissive 0.3 0.3 0.3 1.0
+        }
+    }
+}
+
+// ldraw_0 genrated by blender2ogre 0.6.0
+
+material ldraw_0 
+{
+    receive_shadows on 
+
+    technique
+    {
+        pass ldraw_0
+        {
+            ambient 0.019607843831181526 0.07450980693101883 0.11372549086809158 1.0
+            diffuse 0.015686275298688934 0.05960784643304118 0.09098039405018676 1.0
+            specular 0.4490196108818054 0.4490196108818054 0.4490196108818054 1.0 12.5
+            emissive 0.0 0.0 0.0 1.0
+
+            alpha_to_coverage off
+            colour_write on
+            cull_hardware clockwise
+            depth_check on
+            depth_func less_equal
+            depth_write on
+            illumination_stage 
+            light_clip_planes off
+            light_scissor off
+            lighting on
+            normalise_normals off
+            polygon_mode solid
+            scene_blend one zero
+            scene_blend_op add
+            shading gouraud
+            transparent_sorting on
+
+        }
+    }
+}
+// SimpleSword genrated by blender2ogre 0.6.0
+
+material SimpleSword 
+{
+    receive_shadows on 
+
+    technique
+    {
+        pass SimpleSword
+        {
+            ambient 0.3260822594165802 0.3260822594165802 0.3260822594165802 1.0
+            diffuse 0.2608658114204676 0.2608658114204676 0.2608658114204676 1.0
+            specular 0.732145245214781 0.732145245214781 0.732145245214781 1.0 1.0
+            emissive 0.0 0.0 0.0 1.0
+
+            alpha_to_coverage off
+            colour_write on
+            cull_hardware clockwise
+            depth_check on
+            depth_func less_equal
+            depth_write on
+            illumination_stage 
+            light_clip_planes off
+            light_scissor off
+            lighting on
+            normalise_normals off
+            polygon_mode solid
+            scene_blend one zero
+            scene_blend_op add
+            shading gouraud
+            transparent_sorting on
+
+        }
+    }
+}
+// Yellow genrated by blender2ogre 0.6.0
+
+material Yellow 
+{
+    receive_shadows on 
+
+    technique
+    {
+        pass Yellow
+        {
+            ambient 1.0 0.949999988079071 0.30000001192092896 1.0
+            diffuse 0.800000011920929 0.7600000017881392 0.240000013113022 1.0
+            specular 0.20000000298023224 0.20000000298023224 0.20000000298023224 1.0 20.0
+            emissive 0.0 0.0 0.0 1.0
+
+            alpha_to_coverage off
+            colour_write on
+            cull_hardware clockwise
+            depth_check on
+            depth_func less_equal
+            depth_write on
+            illumination_stage 
+            light_clip_planes off
+            light_scissor off
+            lighting on
+            normalise_normals off
+            polygon_mode solid
+            scene_blend one zero
+            scene_blend_op add
+            shading gouraud
+            transparent_sorting on
+
+        }
+    }
+}
+// Face genrated by blender2ogre 0.6.0
+
+material Face 
+{
+    receive_shadows on 
+
+    technique
+    {
+        pass Face
+        {
+            ambient 1.0 0.949999988079071 0.30000001192092896 1.0
+            diffuse 0.800000011920929 0.7600000017881392 0.240000013113022 1.0
+            specular 0.20000000298023224 0.20000000298023224 0.20000000298023224 1.0 20.0
+            emissive 0.0 0.0 0.0 1.0
+
+            alpha_to_coverage off
+            colour_write on
+            cull_hardware clockwise
+            depth_check on
+            depth_func less_equal
+            depth_write on
+            illumination_stage 
+            light_clip_planes off
+            light_scissor off
+            lighting on
+            normalise_normals off
+            polygon_mode solid
+            scene_blend one zero
+            scene_blend_op add
+            shading gouraud
+            transparent_sorting on
+
+            texture_unit 
+            {
+                texture Face.png
+                tex_address_mode border
+                tex_border_colour 1.0 0.0 1.0
+                scale 1.0 1.0
+                tex_coord_set 1
+                colour_op modulate
+            }
+        }
+    }
+}
+// Brown genrated by blender2ogre 0.6.0
+
+material Brown 
+{
+    receive_shadows on 
+
+    technique
+    {
+        pass Brown
+        {
+            ambient 0.6000000238418579 0.20000000298023224 0.0 1.0
+            diffuse 0.480000026226044 0.16000000476837162 0.0 1.0
+            specular 0.20000000298023224 0.20000000298023224 0.20000000298023224 1.0 20.0
+            emissive 0.0 0.0 0.0 1.0
+
+            alpha_to_coverage off
+            colour_write on
+            cull_hardware clockwise
+            depth_check on
+            depth_func less_equal
+            depth_write on
+            illumination_stage 
+            light_clip_planes off
+            light_scissor off
+            lighting on
+            normalise_normals off
+            polygon_mode solid
+            scene_blend one zero
+            scene_blend_op add
+            shading gouraud
+            transparent_sorting on
+
+        }
+    }
+}
+// Light Gray genrated by blender2ogre 0.6.0
+
+material Light Gray 
+{
+    receive_shadows on 
+
+    technique
+    {
+        pass Light Gray
+        {
+            ambient 0.5174920558929443 0.5174920558929443 0.5174920558929443 1.0
+            diffuse 0.4139936508833415 0.4139936508833415 0.4139936508833415 1.0
+            specular 0.20000000298023224 0.20000000298023224 0.20000000298023224 1.0 20.0
+            emissive 0.0 0.0 0.0 1.0
+
+            alpha_to_coverage off
+            colour_write on
+            cull_hardware clockwise
+            depth_check on
+            depth_func less_equal
+            depth_write on
+            illumination_stage 
+            light_clip_planes off
+            light_scissor off
+            lighting on
+            normalise_normals off
+            polygon_mode solid
+            scene_blend one zero
+            scene_blend_op add
+            shading gouraud
+            transparent_sorting on
+
+        }
+    }
+}
+// Torso genrated by blender2ogre 0.6.0
+
+material Torso 
+{
+    receive_shadows on 
+
+    technique
+    {
+        pass Torso
+        {
+            ambient 0.5174920558929443 0.5174920558929443 0.5174920558929443 1.0
+            diffuse 0.4139936508833415 0.4139936508833415 0.4139936508833415 1.0
+            specular 0.20000000298023224 0.20000000298023224 0.20000000298023224 1.0 20.0
+            emissive 0.0 0.0 0.0 1.0
+
+            alpha_to_coverage off
+            colour_write on
+            cull_hardware clockwise
+            depth_check on
+            depth_func less_equal
+            depth_write on
+            illumination_stage 
+            light_clip_planes off
+            light_scissor off
+            lighting on
+            normalise_normals off
+            polygon_mode solid
+            scene_blend one zero
+            scene_blend_op add
+            shading gouraud
+            transparent_sorting on
+
+            texture_unit 
+            {
+                texture Spools.png
+                tex_address_mode wrap
+                scale 1.0 1.0
+                tex_coord_set 1
+                colour_op modulate
+            }
+        }
+    }
+}

@@ -1,0 +1,35 @@
+// wire_148177027 genrated by blender2ogre 0.5.9
+
+material wire_148177027 
+{
+    receive_shadows on 
+
+    technique
+    {
+        pass wire_148177027
+        {
+            ambient 0.5803999900817871 0.694100022315979 0.10589999705553055 1.0
+            diffuse 0.46431999898433673 0.5552800261271003 0.08471999890685078 1.0
+            specular 0.3499999940395355 0.3499999940395355 0.3499999940395355 1.0 4.0
+            emissive 0.0 0.0 0.0 1.0
+
+            alpha_to_coverage off
+            colour_write on
+            cull_hardware clockwise
+            depth_check on
+            depth_func less_equal
+            depth_write on
+            illumination_stage 
+            light_clip_planes off
+            light_scissor off
+            lighting on
+            normalise_normals off
+            polygon_mode solid
+            scene_blend one zero
+            scene_blend_op add
+            shading gouraud
+            transparent_sorting on
+
+        }
+    }
+}
