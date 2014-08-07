@@ -41,10 +41,10 @@
 			<Add directory="/usr/local/include/PagedGeometry" />
 			<Add directory="/usr/local/include/cegui-0" />
 			<Add directory="/usr/local/include/bullet" />
-			<Add directory=".." />
-			<Add directory="../include" />
 			<Add directory="../Zelda" />
 			<Add directory="../Zelda/Common" />
+			<Add directory="." />
+			<Add directory=".." />
 		</Compiler>
 		<Linker>
 			<Add library="boost_system" />
@@ -96,6 +96,8 @@
 		<Unit filename="../Zelda/Common/Physics/PhysicsManager.h" />
 		<Unit filename="../Zelda/Common/Physics/PhysicsUserPointer.h" />
 		<Unit filename="../Zelda/Common/ShaderGenerator.hpp" />
+		<Unit filename="../Zelda/Common/Util/DebugDrawer.cpp" />
+		<Unit filename="../Zelda/Common/Util/DebugDrawer.hpp" />
 		<Unit filename="../Zelda/Common/Util/EnumIdMap.hpp" />
 		<Unit filename="../Zelda/Common/Util/Sleep.cpp" />
 		<Unit filename="../Zelda/Common/Util/Sleep.hpp" />
@@ -116,9 +118,41 @@
 		<Unit filename="../Zelda/World/Atlas/Map.cpp" />
 		<Unit filename="../Zelda/World/Atlas/Map.hpp" />
 		<Unit filename="../Zelda/World/Atlas/MapPack.hpp" />
+		<Unit filename="../Zelda/World/Character/Character.cpp" />
+		<Unit filename="../Zelda/World/Character/Character.h" />
+		<Unit filename="../Zelda/World/Character/CharacterController.h" />
+		<Unit filename="../Zelda/World/Character/CharacterControllerListener.h" />
+		<Unit filename="../Zelda/World/Character/CharacterController_Physics.cpp" />
+		<Unit filename="../Zelda/World/Character/CharacterController_Physics.h" />
+		<Unit filename="../Zelda/World/Character/Person.cpp" />
+		<Unit filename="../Zelda/World/Character/Person.h" />
+		<Unit filename="../Zelda/World/Character/PersonController.cpp" />
+		<Unit filename="../Zelda/World/Character/PersonController.h" />
+		<Unit filename="../Zelda/World/Character/Player.cpp" />
+		<Unit filename="../Zelda/World/Character/Player.h" />
+		<Unit filename="../Zelda/World/Character/PlayerController.cpp" />
+		<Unit filename="../Zelda/World/Character/PlayerController.h" />
+		<Unit filename="../Zelda/World/Character/PlayerData.cpp" />
+		<Unit filename="../Zelda/World/Character/PlayerData.h" />
+		<Unit filename="../Zelda/World/Character/PlayerTool.cpp" />
+		<Unit filename="../Zelda/World/Character/PlayerTool.h" />
+		<Unit filename="../Zelda/World/Character/SimpleEnemy.cpp" />
+		<Unit filename="../Zelda/World/Character/SimpleEnemy.h" />
+		<Unit filename="../Zelda/World/Character/SimpleEnemyController.cpp" />
+		<Unit filename="../Zelda/World/Character/SimpleEnemyController.h" />
+		<Unit filename="../Zelda/World/Character/SimpleFriend.cpp" />
+		<Unit filename="../Zelda/World/Character/SimpleFriend.h" />
+		<Unit filename="../Zelda/World/Damage.cpp" />
+		<Unit filename="../Zelda/World/Damage.hpp" />
+		<Unit filename="../Zelda/World/DamageTypes.hpp" />
+		<Unit filename="../Zelda/World/HitableInterface.cpp" />
+		<Unit filename="../Zelda/World/HitableInterface.hpp" />
+		<Unit filename="../Zelda/World/Hitpoints.hpp" />
 		<Unit filename="../Zelda/World/PhysicsMasks.hpp" />
 		<Unit filename="../Zelda/World/World.cpp" />
 		<Unit filename="../Zelda/World/World.hpp" />
+		<Unit filename="../Zelda/World/WorldEntity.cpp" />
+		<Unit filename="../Zelda/World/WorldEntity.hpp" />
 		<Unit filename="../Zelda/Zelda.cpp" />
 		<Unit filename="../Zelda/Zelda.hpp" />
 		<Extensions>

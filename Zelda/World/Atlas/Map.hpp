@@ -10,6 +10,9 @@ private:
 public:
   CMap(CEntity *pAtlas);
 
+  const CPhysicsManager *getPhysicsManager() const {return &m_PhysicsManager;}
+  CPhysicsManager *getPhysicsManager() {return &m_PhysicsManager;}
+
   void update(float tpf);
 };
 #endif // _MAP_HPP_

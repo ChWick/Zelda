@@ -6960,7 +6960,7 @@
 	<OgreStringConverter.h>
 	"Message/Message.hpp"
 
-1407349411 /home/christoph/Documents/Projects/Zelda/Zelda/Common/GameLogic/Entity.hpp
+1407416671 /home/christoph/Documents/Projects/Zelda/Zelda/Common/GameLogic/Entity.hpp
 	"Config/TypeDefines.hpp"
 	"Message/MessageInjector.hpp"
 	<string>
@@ -6968,7 +6968,7 @@
 	<tinyxml2.h>
 	"OutputStyle.hpp"
 
-1407346801 /home/christoph/Documents/Projects/Zelda/Zelda/Common/Config/TypeDefines.hpp
+1407415465 /home/christoph/Documents/Projects/Zelda/Zelda/Common/Config/TypeDefines.hpp
 
 1407331199 /home/christoph/Documents/Projects/Zelda/Zelda/Common/GameLogic/OutputStyle.hpp
 
@@ -7052,7 +7052,7 @@
 1407350779 /home/christoph/Documents/Projects/Zelda/Zelda/World/Atlas/Atlas.hpp
 	"../../Common/GameLogic/Entity.hpp"
 
-1407354012 /home/christoph/Documents/Projects/Zelda/Zelda/World/Atlas/Map.hpp
+1407422023 /home/christoph/Documents/Projects/Zelda/Zelda/World/Atlas/Map.hpp
 	"../../Common/GameLogic/Entity.hpp"
 	"../../Common/Physics/PhysicsManager.h"
 
@@ -7637,4 +7637,136 @@
 	"LinearMath/btVector3.h"
 	"btCharacterControllerInterface.h"
 	"BulletCollision/BroadphaseCollision/btCollisionAlgorithm.h"
+
+1407354703 source:/home/christoph/Documents/Projects/Zelda/Zelda/Common/Physics/BtOgreExtras.cpp
+	"BtOgreExtras.h"
+
+1407407565 source:/home/christoph/Documents/Projects/Zelda/Zelda/World/WorldEntity.cpp
+	"WorldEntity.hpp"
+	<OgreSceneNode.h>
+
+1407420803 /home/christoph/Documents/Projects/Zelda/Zelda/World/WorldEntity.hpp
+	"../Common/GameLogic/Entity.hpp"
+	"HitableInterface.hpp"
+
+1407416053 /home/christoph/Documents/Projects/Zelda/Zelda/World/HitableInterface.hpp
+	"Hitpoints.hpp"
+
+1407415568 /home/christoph/Documents/Projects/Zelda/Zelda/World/Hitpoints.hpp
+	<limits>
+
+1407416056 source:/home/christoph/Documents/Projects/Zelda/Zelda/World/HitableInterface.cpp
+	"HitableInterface.hpp"
+	"Damage.hpp"
+
+1407415481 /home/christoph/Documents/Projects/Zelda/Zelda/World/Damage.hpp
+	"Hitpoints.hpp"
+	"DamageTypes.hpp"
+	"../Common/Config/TypeDefines.hpp"
+
+1407414314 /home/christoph/Documents/Projects/Zelda/Zelda/World/DamageTypes.hpp
+
+1407420822 source:/home/christoph/Documents/Projects/Zelda/Zelda/World/Character/Character.cpp
+	"Character.h"
+	"CharacterController.h"
+	"../PhysicsMasks.hpp"
+	<OgreAnimationState.h>
+
+1407420706 /home/christoph/Documents/Projects/Zelda/Zelda/World/Character/Character.h
+	"../WorldEntity.hpp"
+	<LinearMath/btAlignedObjectArray.h>
+
+1395843312 /usr/local/include/tinyxml2.h
+	<ctype.h>
+	<limits.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<stdarg.h>
+	<cctype>
+	<climits>
+	<cstdio>
+	<cstdlib>
+	<cstring>
+	<cstdarg>
+	<android/log.h>
+	<assert.h>
+
+1407421367 /home/christoph/Documents/Projects/Zelda/Zelda/World/Character/CharacterController.h
+	<list>
+	<OgreVector3.h>
+
+1407353343 /home/christoph/Documents/Projects/Zelda/Zelda/World/PhysicsMasks.hpp
+
+1407421846 source:/home/christoph/Documents/Projects/Zelda/Zelda/Common/Util/DebugDrawer.cpp
+	"DebugDrawer.hpp"
+	"OgreMath.h"
+	"OgreVector3.h"
+	"OgreMatrix4.h"
+	"OgreColourValue.h"
+	"OgreSceneManager.h"
+	"OgreManualObject.h"
+
+1407421781 /home/christoph/Documents/Projects/Zelda/Zelda/Common/Util/DebugDrawer.hpp
+	<OgreSingleton.h>
+	<map>
+	<inttypes.h>
+
+1407421200 source:/home/christoph/Documents/Projects/Zelda/Zelda/World/Character/CharacterController_Physics.cpp
+	"CharacterController_Physics.h"
+	"../../Common/Physics/PhysicsManager.h"
+	<stdio.h>
+
+1407422057 /home/christoph/Documents/Projects/Zelda/Zelda/World/Character/CharacterController_Physics.h
+	<btBulletCollisionCommon.h>
+	<btBulletDynamicsCommon.h>
+	<BulletCollision/CollisionDispatch/btGhostObject.h>
+	<BulletCollision/CollisionShapes/btMultiSphereShape.h>
+	<BulletCollision/CollisionShapes/btCapsuleShape.h>
+	<BulletCollision/BroadphaseCollision/btOverlappingPairCache.h>
+	<BulletCollision/BroadphaseCollision/btCollisionAlgorithm.h>
+	<BulletCollision/CollisionDispatch/btCollisionWorld.h>
+	<LinearMath/btDefaultMotionState.h>
+	<BulletDynamics/Character/btCharacterControllerInterface.h>
+	<BulletDynamics/Character/btKinematicCharacterController.h>
+
+1407422602 source:/home/christoph/Documents/Projects/Zelda/Zelda/World/Character/Person.cpp
+	"Person.h"
+	"PersonController.h"
+	"../Atlas/Map.hpp"
+	"CharacterController_Physics.h"
+	<OgreStringVector.h>
+	<OgreEntity.h>
+	<OgreBone.h>
+	<OgreSkeletonInstance.h>
+	<OgreSceneNode.h>
+	<OgreSceneManager.h>
+	"../PhysicsMasks.hpp"
+
+1407421521 /home/christoph/Documents/Projects/Zelda/Zelda/World/Character/Person.h
+	"Character.h"
+
+1407421613 /home/christoph/Documents/Projects/Zelda/Zelda/World/Character/PersonController.h
+	"CharacterController.h"
+	"PlayerTool.h"
+
+1407421094 /home/christoph/Documents/Projects/Zelda/Zelda/World/Character/PlayerTool.h
+	"../Damage.hpp"
+	<CEGUI/String.h>
+
+1407421877 source:/home/christoph/Documents/Projects/Zelda/Zelda/World/Character/PersonController.cpp
+	"PersonController.h"
+	"Person.h"
+	"CharacterControllerListener.h"
+	<BulletDynamics/Character/btCharacterControllerInterface.h>
+	"../../Common/Physics/BtOgreExtras.h"
+	"../../Common/Util/DebugDrawer.hpp"
+
+1407405786 /home/christoph/Documents/Projects/Zelda/Zelda/World/Character/CharacterControllerListener.h
+
+1407421118 source:/home/christoph/Documents/Projects/Zelda/Zelda/World/Character/PlayerTool.cpp
+	"PlayerTool.h"
+
+1407415404 source:/home/christoph/Documents/Projects/Zelda/Zelda/World/Damage.cpp
+	"Damage.hpp"
 

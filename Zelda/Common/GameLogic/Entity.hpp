@@ -32,6 +32,12 @@ namespace events {
   class CEvent;
 };
 
+namespace Ogre {
+  class SceneNode;
+};
+
+class btCollisionObject;
+
 class CMessage;
 
 //! Class for an arbitrary entity
@@ -114,7 +120,7 @@ public:
   virtual void setPosition(const SPATIAL_VECTOR &vPos) {}
   virtual void translate(const SPATIAL_VECTOR &vOffset) {setPosition(getPosition() + vOffset);}
 
-  virtual const SPATIAL_VECTOR &getCenter() const {getPosition();}
+  virtual const SPATIAL_VECTOR &getCenter() const {return getPosition();}
   virtual void setCenter(const SPATIAL_VECTOR &vCenter) {setPosition(vCenter);}
 
   virtual const SPATIAL_VECTOR &getSize() const {return SPATIAL_VECTOR::ZERO;}
@@ -123,8 +129,15 @@ public:
   virtual const SPATIAL_VECTOR &getScale() const {return SPATIAL_VECTOR::UNIT_SCALE;}
   virtual void setScale(const SPATIAL_VECTOR &vScale) {}
 
+	virtual const Ogre::Quaternion &getOrientation() const {}
+	virtual void setOrientation(const Ogre::Quaternion &quat) {}
+
   unsigned int getType() const {return m_uiType;}
   void setType(unsigned int uiType) {m_uiType = uiType;}
+
+
+  virtual Ogre::SceneNode *getSceneNode() const {return nullptr;}
+  virtual btCollisionObject *getCollisionObject() const {return nullptr;}
 
 protected:
 
