@@ -6,7 +6,7 @@ CAtlas::CAtlas(CEntity *pParent)
     m_pCurrentMap(nullptr),
     m_pNextMap(nullptr) {
 
-  m_pCurrentMap = new CMap(this);
+  m_pCurrentMap = new CMap(this, CMapPackPtr(new CMapPack("../maps/Atlases/TestMap/Map/", "Map")));
 }
 CAtlas::~CAtlas() {
 }

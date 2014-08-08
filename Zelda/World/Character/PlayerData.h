@@ -3,8 +3,7 @@
 #include "tinyxml2.h"
 #include "OgrePrerequisites.h"
 #include "OgreSingleton.h"
-#include "HUD.h"
-#include "PlayerTool.h"
+#include "../Hitpoints.hpp"
 
 enum EItemSaveState {
 	ISS_STILL_IN_MAP,
@@ -46,7 +45,6 @@ private:
 	Ogre::Real m_fMP;           //!< Mana points in interval [0, 1]
 
 	Ogre::map<Ogre::String, CMapSaveData>::type m_mapSaveDataOfMap;
-	CPlayerTools m_PlayerTools;
 public:
 	CPlayerData();
 	~CPlayerData();
@@ -64,18 +62,16 @@ public:
 	int getArrowCount() const {return m_iArrowCount;}
 	int getBombCount() const {return m_iBombCount;}
 
-	CPlayerTools &getPlayerTools() {return m_PlayerTools;}
+  //void addArrow(int count) {m_iArrowCount += count; CHUD::getSingleton().setArrowCount(m_iArrowCount);}
+	//void removeArrow(int count) {addArrow(-count);}
 
-    void addArrow(int count) {m_iArrowCount += count; CHUD::getSingleton().setArrowCount(m_iArrowCount);}
-    void removeArrow(int count) {addArrow(-count);}
+  //void addBomb(int count) {m_iBombCount += count; CHUD::getSingleton().setBombCount(m_iBombCount);}
+	//void removeBomb(int count) {addBomb(-count);}
 
-    void addBomb(int count) {m_iBombCount += count; CHUD::getSingleton().setBombCount(m_iBombCount);}
-    void removeBomb(int count) {addBomb(-count);}
-
-	void addRuby(int count) {m_iRubyCount += count; CHUD::getSingleton().setRubyCount(m_iRubyCount);}
-	void addMP(Ogre::Real mp) {m_fMP += mp; if (m_fMP > 1) {m_fMP = 1;} CHUD::getSingleton().setMP(m_fMP);}
-	void addKey() {m_iKeyCount++; CHUD::getSingleton().setKeyCount(m_iKeyCount);}
-	void removeKey() {m_iKeyCount--; CHUD::getSingleton().setKeyCount(m_iKeyCount);}
+	//void addRuby(int count) {m_iRubyCount += count; CHUD::getSingleton().setRubyCount(m_iRubyCount);}
+	//void addMP(Ogre::Real mp) {m_fMP += mp; if (m_fMP > 1) {m_fMP = 1;} CHUD::getSingleton().setMP(m_fMP);}
+	//void addKey() {m_iKeyCount++; CHUD::getSingleton().setKeyCount(m_iKeyCount);}
+	//void removeKey() {m_iKeyCount--; CHUD::getSingleton().setKeyCount(m_iKeyCount);}
 	EItemSaveState getMapItemState(const Ogre::String &mapName, const Ogre::String &itemId, EItemSaveState defaultState) {
 		return m_mapSaveDataOfMap[mapName].getState(itemId, defaultState);
 	}

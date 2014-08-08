@@ -1,8 +1,6 @@
-#include "StdAfx.h"
 #include "PlayerController.h"
 #include "Player.h"
-#include "InputListener.h"
-#include "CameraController.h"
+#include "../../Common/Input/GameInputCommand.hpp"
 
 using namespace Ogre;
 
@@ -13,23 +11,18 @@ CPlayerController::CPlayerController(SceneManager * scnMgr, CCameraController *p
     mCCPerson = ccPlayer;
 	mSceneManager = scnMgr;
 	mKeyDirection = Vector3::ZERO;
-
-	CInputListenerManager::getSingleton().addInputListener(this);
-	CGameState::getSingleton().addCallback(this);
 }
 
 CPlayerController::~CPlayerController()
 {
-
-	CInputListenerManager::getSingleton().addInputListener(this);
-	CGameState::getSingleton().removeCallback(this);
 }
 btCharacterControllerInterface * CPlayerController::getCCPhysics()
 {
 	return mCCPhysics;
 }
-
-
+void CPlayerController::receiveInputCommand(const CGameInputCommand &cmd) {
+}
+/*
 bool CPlayerController::keyPressed(const OIS::KeyEvent & evt)
 {
 
@@ -131,6 +124,7 @@ bool CPlayerController::mouseReleased( const OIS::MouseEvent &arg, OIS::MouseBut
     }
 	return true;
 }
+*/
 void CPlayerController::updateCharacter(const Real deltaTime)
 {
 	CPersonController::updateCharacter(deltaTime);
@@ -138,14 +132,14 @@ void CPlayerController::updateCharacter(const Real deltaTime)
 void CPlayerController::updateGoalDirection() {
 	mGoalDirection = Ogre::Vector3::ZERO;
 
-	if (mKeyDirection != Vector3::ZERO)
+	/*if (mKeyDirection != Vector3::ZERO)
 	{
 		// calculate actuall goal direction in world based on player's key directions
 		mGoalDirection += mKeyDirection.z * m_pCameraController->getCameraNode()->getOrientation().zAxis();
 		mGoalDirection += mKeyDirection.x * m_pCameraController->getCameraNode()->getOrientation().xAxis();
 		mGoalDirection.y = 0;
 		mGoalDirection.normalise();
-	}
+	}*/
 }
 void CPlayerController::postUpdateCharacter() {
 	if (m_uiCurrentMoveState == MS_NOT_MOVING) {
@@ -154,9 +148,9 @@ void CPlayerController::postUpdateCharacter() {
 }
 void CPlayerController::interactionLockedChanged(bool bActivate) {
 	if (!bActivate) {
-		setInputListenerEnabled(true);
+		setGameInputListenerEnabled(true);
 	}
 	else {
-		setInputListenerEnabled(false);
+		setGameInputListenerEnabled(false);
 	}
 }

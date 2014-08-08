@@ -1,4 +1,3 @@
-#include "StdAfx.h"
 #include "SimpleEnemyController.h"
 #include "Person.h"
 #include "Player.h"

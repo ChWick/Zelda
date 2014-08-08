@@ -16,7 +16,7 @@ public:
 private:
     ESimpleFriendTypes m_eType;         //!< type of the friend
 public:
-    SimpleFriend(ESimpleFriendTypes eType, CMap *pMap);
+    SimpleFriend(const std::string &sID, CEntity *pParent, ESimpleFriendTypes eType, CMap *pMap);
     virtual ~SimpleFriend();
 
 protected:

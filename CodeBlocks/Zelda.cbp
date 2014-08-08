@@ -58,6 +58,11 @@
 		<Unit filename="../Zelda/Common/Android/Logger.hpp" />
 		<Unit filename="../Zelda/Common/Android/OgreStaticPluginLoader.h" />
 		<Unit filename="../Zelda/Common/Config/TypeDefines.hpp" />
+		<Unit filename="../Zelda/Common/DotSceneLoader/DotSceneLoader.cpp" />
+		<Unit filename="../Zelda/Common/DotSceneLoader/DotSceneLoader.hpp" />
+		<Unit filename="../Zelda/Common/DotSceneLoader/DotSceneLoaderCallback.hpp" />
+		<Unit filename="../Zelda/Common/DotSceneLoader/UserData.cpp" />
+		<Unit filename="../Zelda/Common/DotSceneLoader/UserData.hpp" />
 		<Unit filename="../Zelda/Common/FileManager/FileManager.cpp" />
 		<Unit filename="../Zelda/Common/FileManager/FileManager.hpp" />
 		<Unit filename="../Zelda/Common/GUI/GUIManager.cpp" />
@@ -94,6 +99,7 @@
 		<Unit filename="../Zelda/Common/Physics/BtOgrePG.h" />
 		<Unit filename="../Zelda/Common/Physics/PhysicsManager.cpp" />
 		<Unit filename="../Zelda/Common/Physics/PhysicsManager.h" />
+		<Unit filename="../Zelda/Common/Physics/PhysicsMasks.hpp" />
 		<Unit filename="../Zelda/Common/Physics/PhysicsUserPointer.h" />
 		<Unit filename="../Zelda/Common/ShaderGenerator.hpp" />
 		<Unit filename="../Zelda/Common/Util/DebugDrawer.cpp" />
@@ -117,6 +123,7 @@
 		<Unit filename="../Zelda/World/Atlas/Atlas.hpp" />
 		<Unit filename="../Zelda/World/Atlas/Map.cpp" />
 		<Unit filename="../Zelda/World/Atlas/Map.hpp" />
+		<Unit filename="../Zelda/World/Atlas/MapPack.cpp" />
 		<Unit filename="../Zelda/World/Atlas/MapPack.hpp" />
 		<Unit filename="../Zelda/World/Character/Character.cpp" />
 		<Unit filename="../Zelda/World/Character/Character.h" />
@@ -148,7 +155,6 @@
 		<Unit filename="../Zelda/World/HitableInterface.cpp" />
 		<Unit filename="../Zelda/World/HitableInterface.hpp" />
 		<Unit filename="../Zelda/World/Hitpoints.hpp" />
-		<Unit filename="../Zelda/World/PhysicsMasks.hpp" />
 		<Unit filename="../Zelda/World/World.cpp" />
 		<Unit filename="../Zelda/World/World.hpp" />
 		<Unit filename="../Zelda/World/WorldEntity.cpp" />

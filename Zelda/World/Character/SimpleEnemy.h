@@ -14,7 +14,7 @@ public:
 private:
 	const EEnemyTypes m_eEnemyType;
 public:
-	CSimpleEnemy(EEnemyTypes eEnemyType, CMap *pMap);
+	CSimpleEnemy(const std::string &sID, CEntity *pParent, EEnemyTypes eEnemyType, CMap *pMap);
 
 	void setPlayer(CPlayer *pPlayer);
 

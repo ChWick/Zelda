@@ -1,4 +1,3 @@
-#include "StdAfx.h"
 #include "PlayerData.h"
 
 using namespace tinyxml2;
@@ -100,16 +99,16 @@ void CPlayerData::readPlayerTools(XMLElement *pElem) {
         if (Ogre::String(pTool->Value()) == "tool") {
             int type = pTool->IntAttribute("type");
             bool exists = pTool->BoolAttribute("exists");
-            m_PlayerTools.getTool(type).setExists(exists);
+            //m_PlayerTools.getTool(type).setExists(exists);
         }
     }
 }
 void CPlayerData::writePlayerTools(XMLElement *pElem, tinyxml2::XMLDocument &doc) {
-    for (unsigned int i = 0; i < m_PlayerTools.getNumTools(); i++) {
+/*for (unsigned int i = 0; i < m_PlayerTools.getNumTools(); i++) {
         XMLElement *pToolElem = doc.NewElement("tool");
         pElem->InsertEndChild(pToolElem);
 
-        pToolElem->SetAttribute("type", m_PlayerTools.getTool(i).getToolType());
-        pToolElem->SetAttribute("exists", m_PlayerTools.getTool(i).doesExists());
-    }
+//pToolElem->SetAttribute("type", m_PlayerTools.getTool(i).getToolType());
+      //pToolElem->SetAttribute("exists", m_PlayerTools.getTool(i).doesExists());
+    }*/
 }

@@ -9,7 +9,7 @@
 #include <OgreSkeletonInstance.h>
 #include <OgreSceneNode.h>
 #include <OgreSceneManager.h>
-#include "../PhysicsMasks.hpp"
+#include "../../Common/Physics/PhysicsMasks.hpp"
 
 //const Ogre::Real PERSONS_MASS = 1.0f;
 const Ogre::String CPerson::PERSON_SHEATH("Sheath");

@@ -2,18 +2,17 @@
 #define PLAYERCONTROLLER_H
 
 #include "PersonController.h"
-#include "InputListener.h"
+#include "../../Common/Input/GameInputListener.hpp"
 #include "OgreVector3.h"
 #include "OgreSceneNode.h"
 #include "CharacterController_Physics.h"
-#include "GameState.h"
 
 class CPlayer;
 class CCameraController;
 
 using namespace Ogre;
 
-class CPlayerController : public CPersonController, public CInputListener, public CGameStateCallback {
+class CPlayerController : public CPersonController, public CGameInputListener {
 private:
 	SceneManager * mSceneManager;
 	CCameraController *m_pCameraController;
@@ -25,11 +24,7 @@ public:
     virtual ~CPlayerController();
 	btCharacterControllerInterface * getCCPhysics();
 
-    virtual bool keyPressed( const OIS::KeyEvent &arg );
-    virtual bool keyReleased( const OIS::KeyEvent &arg );
-    virtual bool mouseMoved( const OIS::MouseEvent &arg );
-    virtual bool mousePressed( const OIS::MouseEvent &arg, OIS::MouseButtonID id );
-    virtual bool mouseReleased( const OIS::MouseEvent &arg, OIS::MouseButtonID id );
+  virtual void receiveInputCommand(const CGameInputCommand &cmd);
 
 	void updateCharacter(const Real dt);
 

@@ -386,16 +386,15 @@ void CGame::createScene() {
   mCamera = mSceneMgr->createCamera("GameCam");
 
   // Position it at 500 in Z direction
-  //mCamera->setPosition(Ogre::Vector3(0,0,10));
+  mCamera->setPosition(Ogre::Vector3(0,1,1));
   // Look back along -Z
-  //mCamera->lookAt(Ogre::Vector3(0,0,0));
-  //mCamera->setNearClipDistance(0.01f);
-  //mCamera->setFarClipDistance(400.0f);
-
+  mCamera->lookAt(Ogre::Vector3(0,0,0));
+  mCamera->setNearClipDistance(0.001f);
+  mCamera->setFarClipDistance(10000.0f);
 
   Ogre::LogManager::getSingletonPtr()->logMessage("   create viewport");
-  //mCameraMan = new OgreBites::SdkCameraMan(mCamera);   // create a default camera controlle
-  //mCameraMan->setTopSpeed(10);
+  mCameraMan = new OgreBites::SdkCameraMan(mCamera);   // create a default camera controlle
+  mCameraMan->setTopSpeed(10);
   //------------------------------------------------------------------------------------
   // create viewports
   // Create one viewport, entire window
@@ -409,7 +408,24 @@ void CGame::createScene() {
 
     //-------------------------------------------------------------------------------------
     // Create the scene
-    //mSceneMgr->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_ADDITIVE);
+  mSceneMgr->setAmbientLight(Ogre::ColourValue(0.5, 0.5, 0.5));
+
+
+  Ogre::Light* directionalLight = mSceneMgr->createLight("directionalLight");
+  directionalLight->setType(Ogre::Light::LT_DIRECTIONAL);
+  directionalLight->setDiffuseColour(Ogre::ColourValue(1, 1, 1));
+  directionalLight->setSpecularColour(Ogre::ColourValue(.25, .25, 0));
+  directionalLight->setDirection(Ogre::Vector3( 0, -1, 1 ));
+
+  mSceneMgr->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_ADDITIVE);
+
+  /*Ogre::Plane plane(Ogre::Vector3::UNIT_Y, 0);
+  Ogre::MeshManager::getSingleton().createPlane("wall", Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME,
+    plane, 1500, 1500, 20, 20, true, 1, 5, 5, Ogre::Vector3::UNIT_Z);
+  Ogre::Entity* entGround = mSceneMgr->createEntity("GroundEntity", "wall");
+  mSceneMgr->getRootSceneNode()->createChildSceneNode()->attachObject(entGround);
+  entGround->setMaterialName("BaseWhite");
+  entGround->setCastShadows(false);*/
 
 
 
@@ -539,6 +555,10 @@ bool CGame::frameRenderingQueued(const Ogre::FrameEvent& evt) {
   }
 
   mTrayMgr->frameRenderingQueued(evt);
+
+  if (mCameraMan) {
+    mCameraMan->frameRenderingQueued(evt);
+  }
 
   return true;
 }
@@ -675,7 +695,7 @@ bool CGame::keyPressed( const OIS::KeyEvent &arg )
   }
 
   if (mCameraMan) {
-    mCameraMan->injectKeyUp(arg);
+    mCameraMan->injectKeyDown(arg);
   }
 
   return true;
@@ -684,7 +704,7 @@ bool CGame::keyPressed( const OIS::KeyEvent &arg )
 bool CGame::keyReleased( const OIS::KeyEvent &arg )
 {
   if (mCameraMan) {
-    mCameraMan->injectKeyDown(arg);
+    mCameraMan->injectKeyUp(arg);
   }
   return true;
 }
@@ -695,6 +715,10 @@ bool CGame::mouseMoved( const OIS::MouseEvent &arg ) {
   mTrayMgr->injectMouseMove(arg);
 #endif
 #endif
+
+  if (mCameraMan) {
+    mCameraMan->injectMouseMove(arg);
+  }
 
   return true;
 }
