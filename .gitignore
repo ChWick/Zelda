@@ -45,3 +45,6 @@ Makefile
 cotire*
 CMakeCache.txt
 *.mesh.xml
+*.blend1
+*.blend2
+*.blend3
