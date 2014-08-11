@@ -751,7 +751,7 @@ if (isPhysicsOnly) {
   if (isStatic) {
     // for static gemometry (paged geometry), we can use the same entity for each appearance
     if (m_lEntityBufferMap.find(meshFile) == m_lEntityBufferMap.end()) {
-      m_lEntityBufferMap[meshFile] = pEntity = mSceneMgr->createEntity("Ent:" + m_sPrependNode + meshFile, meshFile);
+      m_lEntityBufferMap[meshFile] = pEntity = mSceneMgr->createEntity("Ent:" + m_sPrependNode + meshFile, meshFile, m_sGroupName);
     }
     else {
       pEntity = m_lEntityBufferMap[meshFile];
@@ -759,7 +759,7 @@ if (isPhysicsOnly) {
   }
   else {
     // elsewise create its own entity
-    pEntity = mSceneMgr->createEntity(pParent->getName() + ":" + name, meshFile);
+    pEntity = mSceneMgr->createEntity(pParent->getName() + ":" + name, meshFile, m_sGroupName);
   }
 
   pEntity->setCastShadows(castShadows);
@@ -912,7 +912,7 @@ if (isPhysicsOnly) {
       }
 
       if(!materialFile.empty())
-          pEntity->setMaterialName(materialFile);
+          pEntity->setMaterialName(materialFile, m_sGroupName);
 
 
   }

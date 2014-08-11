@@ -13,7 +13,7 @@ using namespace XMLHelper;
 CMapPack::CMapPack(const std::string &path, const std::string &name)
   : m_sPath(path),
     m_sName(name),
-    m_sResourceGroup(name),
+    m_sResourceGroup(name + "_RG"),
     m_bInitialized(false),
     m_pListener(nullptr) {
 }

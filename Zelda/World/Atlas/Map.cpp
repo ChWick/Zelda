@@ -22,7 +22,7 @@ CMap::CMap(CEntity *pAtlas, CMapPackPtr mapPack, Ogre::SceneNode *pParentSceneNo
 
   m_SceneLoader.parseDotScene(m_MapPack->getSceneFile(),
                               m_MapPack->getResourceGroup(),
-                              pParentSceneNode->getCreator(),
+                              m_pSceneNode->getCreator(),
                               &m_PhysicsManager,
                               m_pSceneNode,
                               m_MapPack->getName());

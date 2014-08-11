@@ -21,6 +21,7 @@ CWorld::CWorld()
   // default position
   m_pWorldCamera->setPosition(Ogre::Vector3(0,1,1));
   m_pWorldCamera->lookAt(Ogre::Vector3(0,0,0));
+  //sm_pWorldCamera->setProjectionType(Ogre::PT_ORTHOGRAPHIC);
 
   Ogre::Viewport *vp = CGame::getSingleton().getMainViewPort();
   m_pWorldCamera->setAspectRatio(Ogre::Real(vp->getActualWidth()) / Ogre::Real(vp->getActualHeight()));
