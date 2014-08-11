@@ -10,6 +10,7 @@
 # Packages #
 ############
 # it's better to unpack these files and commit the raw source
+# zip files can belong to the game, thus thay may be added
 # git has its own built in compression methods
 *.7z
 *.dmg
@@ -18,7 +19,6 @@
 *.jar
 *.rar
 *.tar
-*.zip
 
 # Logs and databases #
 ######################
@@ -44,3 +44,4 @@ Makefile
 *.cmake
 cotire*
 CMakeCache.txt
+*.mesh.xml
