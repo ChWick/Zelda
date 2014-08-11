@@ -6759,12 +6759,12 @@
 	<OgreDataStream.h>
 	<android_native_app_glue.h>
 
-1407240222 /home/christoph/Documents/Projects/Zelda/Zelda/Common/Message/MessageHandler.hpp
+1407760276 /home/christoph/Documents/Projects/Zelda/Zelda/Common/Message/MessageHandler.hpp
 	<OgreSingleton.h>
 	<list>
 	"Message.hpp"
 
-1407759256 /home/christoph/Documents/Projects/Zelda/Zelda/Common/Message/Message.hpp
+1407761355 /home/christoph/Documents/Projects/Zelda/Zelda/Common/Message/Message.hpp
 	"MessageTypes.hpp"
 
 1407239337 /home/christoph/Documents/Projects/Zelda/Zelda/Common/Android/Android.hpp
@@ -6866,9 +6866,10 @@
 	<unistd.h>
 	<direct.h>
 
-1407240222 source:/home/christoph/Documents/Projects/Zelda/Zelda/Common/Message/MessageHandler.cpp
+1407760368 source:/home/christoph/Documents/Projects/Zelda/Zelda/Common/Message/MessageHandler.cpp
 	"MessageHandler.hpp"
 	"MessageInjector.hpp"
+	"Message.hpp"
 	"Log.hpp"
 
 1407240222 /home/christoph/Documents/Projects/Zelda/Zelda/Common/Message/MessageInjector.hpp
@@ -6944,13 +6945,14 @@
 	"GameState.hpp"
 	"GameStateManager.hpp"
 
-1407517812 source:/home/christoph/Documents/Projects/Zelda/Zelda/Common/GameLogic/GameStateManager.cpp
+1407761040 source:/home/christoph/Documents/Projects/Zelda/Zelda/Common/GameLogic/GameStateManager.cpp
 	"GameStateManager.hpp"
 	<OgreException.h>
 	<OgreLogManager.h>
 	"Util/Sleep.hpp"
+	"../Message/MessageHandler.hpp"
 
-1407752435 source:/home/christoph/Documents/Projects/Zelda/Zelda/Common/GameLogic/Entity.cpp
+1407760941 source:/home/christoph/Documents/Projects/Zelda/Zelda/Common/GameLogic/Entity.cpp
 	"Entity.hpp"
 	"Events/Event.hpp"
 	"Util/XMLHelper.hpp"
@@ -6958,7 +6960,7 @@
 	<OgreStringConverter.h>
 	"Message/Message.hpp"
 
-1407752932 /home/christoph/Documents/Projects/Zelda/Zelda/Common/GameLogic/Entity.hpp
+1407760938 /home/christoph/Documents/Projects/Zelda/Zelda/Common/GameLogic/Entity.hpp
 	"Config/TypeDefines.hpp"
 	"Message/MessageInjector.hpp"
 	<string>
@@ -6978,7 +6980,7 @@
 	"GameLogic/OutputStyle.hpp"
 	"Config/TypeDefines.hpp"
 
-1407332655 /home/christoph/Documents/Projects/Zelda/Zelda/Common/Util/XMLHelper.hpp
+1407760507 /home/christoph/Documents/Projects/Zelda/Zelda/Common/Util/XMLHelper.hpp
 	<tinyxml2.h>
 	<assert.h>
 	<string>
@@ -6987,17 +6989,17 @@
 	<OgreVector2.h>
 	<OgreException.h>
 
-1407758973 source:/home/christoph/Documents/Projects/Zelda/Zelda/Common/GameLogic/Events/Event.cpp
+1407759858 source:/home/christoph/Documents/Projects/Zelda/Zelda/Common/GameLogic/Events/Event.cpp
 	"Event.hpp"
 	"OgreException.h"
-	<OgreLogManager.h>
+	"../../Log.hpp"
 	"OgreStringConverter.h"
 	"EmitterCreator.hpp"
 	"Emitter.hpp"
 	"Actions/ActionCreator.hpp"
 	"Actions/Action.hpp"
 
-1407334009 source:/home/christoph/Documents/Projects/Zelda/Zelda/Common/Util/XMLHelper.cpp
+1407760582 source:/home/christoph/Documents/Projects/Zelda/Zelda/Common/Util/XMLHelper.cpp
 	"XMLHelper.hpp"
 
 1407349873 /home/christoph/Documents/Projects/Zelda/Zelda/Common/GameLogic/GameStateTypes.hpp
@@ -7042,7 +7044,7 @@
 	"../Common/GameLogic/GameState.hpp"
 	<OgrePrerequisites.h>
 
-1407751730 source:/home/christoph/Documents/Projects/Zelda/Zelda/World/World.cpp
+1407764074 source:/home/christoph/Documents/Projects/Zelda/Zelda/World/World.cpp
 	"World.hpp"
 	"Atlas/Atlas.hpp"
 	"Character/Player.h"
@@ -7053,7 +7055,7 @@
 	<OgreViewport.h>
 	"Camera/AerialCameraPerspective.hpp"
 
-1407754091 source:/home/christoph/Documents/Projects/Zelda/Zelda/World/Atlas/Map.cpp
+1407763696 source:/home/christoph/Documents/Projects/Zelda/Zelda/World/Atlas/Map.cpp
 	"Map.hpp"
 	"../../Common/Physics/BtOgrePG.h"
 	"../../Common/Util/DeleteSceneNode.hpp"
@@ -7063,15 +7065,17 @@
 	<OgreLogManager.h>
 	"Region.hpp"
 
-1407753450 source:/home/christoph/Documents/Projects/Zelda/Zelda/World/Atlas/Atlas.cpp
+1407765249 source:/home/christoph/Documents/Projects/Zelda/Zelda/World/Atlas/Atlas.cpp
 	"Atlas.hpp"
 	"Map.hpp"
 	<OgreSceneNode.h>
+	"../../Common/Log.hpp"
+	"../../Common/Message/MessageSwitchMap.hpp"
 
-1407753448 /home/christoph/Documents/Projects/Zelda/Zelda/World/Atlas/Atlas.hpp
+1407761501 /home/christoph/Documents/Projects/Zelda/Zelda/World/Atlas/Atlas.hpp
 	"../WorldEntity.hpp"
 
-1407753431 /home/christoph/Documents/Projects/Zelda/Zelda/World/Atlas/Map.hpp
+1407764787 /home/christoph/Documents/Projects/Zelda/Zelda/World/Atlas/Map.hpp
 	"../WorldEntity.hpp"
 	"../../Common/Physics/PhysicsManager.h"
 	"MapPack.hpp"
@@ -7624,7 +7628,7 @@
 	"BtOgreExtras.h"
 	"Ogre.h"
 
-1407608671 source:/home/christoph/Documents/Projects/Zelda/Zelda/Common/Physics/PhysicsManager.cpp
+1407763992 source:/home/christoph/Documents/Projects/Zelda/Zelda/Common/Physics/PhysicsManager.cpp
 	"PhysicsManager.h"
 	<btBulletCollisionCommon.h>
 	<btBulletDynamicsCommon.h>
@@ -7641,7 +7645,7 @@
 	<OgreSceneManager.h>
 	<OgreLogManager.h>
 
-1407601541 /home/christoph/Documents/Projects/Zelda/Zelda/Common/Physics/PhysicsManager.h
+1407763476 /home/christoph/Documents/Projects/Zelda/Zelda/Common/Physics/PhysicsManager.h
 	<OgreVector3.h>
 	<OgreException.h>
 	"../Input/InputListener.hpp"
@@ -7670,7 +7674,7 @@
 	<OgreSceneNode.h>
 	<BulletCollision/CollisionDispatch/btCollisionObject.h>
 
-1407753906 /home/christoph/Documents/Projects/Zelda/Zelda/World/WorldEntity.hpp
+1407764117 /home/christoph/Documents/Projects/Zelda/Zelda/World/WorldEntity.hpp
 	"../Common/GameLogic/Entity.hpp"
 	"HitableInterface.hpp"
 
@@ -7691,11 +7695,13 @@
 
 1407414314 /home/christoph/Documents/Projects/Zelda/Zelda/World/DamageTypes.hpp
 
-1407751383 source:/home/christoph/Documents/Projects/Zelda/Zelda/World/Character/Character.cpp
+1407764548 source:/home/christoph/Documents/Projects/Zelda/Zelda/World/Character/Character.cpp
 	"Character.h"
 	"CharacterController.h"
 	"../Atlas/Map.hpp"
 	"../../Common/Physics/PhysicsMasks.hpp"
+	"../../Common/Physics/BtOgreExtras.h"
+	<BulletDynamics/Character/btCharacterControllerInterface.h>
 	<OgreAnimationState.h>
 
 1407751273 /home/christoph/Documents/Projects/Zelda/Zelda/World/Character/Character.h
@@ -7758,7 +7764,7 @@
 	<BulletDynamics/Character/btCharacterControllerInterface.h>
 	<BulletDynamics/Character/btKinematicCharacterController.h>
 
-1407755017 source:/home/christoph/Documents/Projects/Zelda/Zelda/World/Character/Person.cpp
+1407762994 source:/home/christoph/Documents/Projects/Zelda/Zelda/World/Character/Person.cpp
 	"Person.h"
 	"PersonController.h"
 	"../Atlas/Map.hpp"
@@ -7858,11 +7864,13 @@
 1407751562 /home/christoph/Documents/Projects/Zelda/Zelda/World/Character/SimpleFriend.h
 	"Person.h"
 
-1407697613 /home/christoph/Documents/Projects/Zelda/Zelda/World/Atlas/MapPack.hpp
+1407765168 /home/christoph/Documents/Projects/Zelda/Zelda/World/Atlas/MapPack.hpp
 	<string>
 	<memory>
+	<OgreVector3.h>
+	<OgreVector2.h>
 
-1407750793 source:/home/christoph/Documents/Projects/Zelda/Zelda/World/Atlas/MapPack.cpp
+1407765129 source:/home/christoph/Documents/Projects/Zelda/Zelda/World/Atlas/MapPack.cpp
 	"MapPack.hpp"
 	<OgreResourceGroupManager.h>
 	<tinyxml2.h>
@@ -7870,6 +7878,7 @@
 	<OgreLogManager.h>
 	"MapPackParserListener.hpp"
 	"RegionInfo.hpp"
+	<OgreStringConverter.h>
 
 1407494139 source:/home/christoph/Documents/Projects/Zelda/Zelda/Common/DotSceneLoader/DotSceneLoader.cpp
 	"DotSceneLoader.hpp"
@@ -7902,7 +7911,7 @@
 	"UserData.hpp"
 	<OgreStringConverter.h>
 
-1407682042 source:/home/christoph/Documents/Projects/Zelda/Zelda/World/Camera/AerialCameraPerspective.cpp
+1407765366 source:/home/christoph/Documents/Projects/Zelda/Zelda/World/Camera/AerialCameraPerspective.cpp
 	"AerialCameraPerspective.hpp"
 	<OgreVector3.h>
 	<OgreSceneNode.h>
@@ -7972,17 +7981,19 @@
 	"Action.hpp"
 	"../../../Util/XMLHelper.hpp"
 
-1407758634 /home/christoph/Documents/Projects/Zelda/Zelda/Common/GameLogic/Events/Actions/Action.hpp
+1407760082 /home/christoph/Documents/Projects/Zelda/Zelda/Common/GameLogic/Events/Actions/Action.hpp
 	"ActionTypes.hpp"
 
 1407757747 /home/christoph/Documents/Projects/Zelda/Zelda/Common/GameLogic/Events/Actions/ActionTypes.hpp
 	"../../../Util/EnumIdMap.hpp"
 
-1407758931 source:/home/christoph/Documents/Projects/Zelda/Zelda/Common/GameLogic/Events/Actions/ActionMessage.cpp
+1407760399 source:/home/christoph/Documents/Projects/Zelda/Zelda/Common/GameLogic/Events/Actions/ActionMessage.cpp
 	"ActionMessage.hpp"
 	"../../../Util/XMLHelper.hpp"
+	"../../../Message/MessageCreator.hpp"
+	"../../../Message/MessageHandler.hpp"
 
-1407758718 /home/christoph/Documents/Projects/Zelda/Zelda/Common/GameLogic/Events/Actions/ActionMessage.hpp
+1407760095 /home/christoph/Documents/Projects/Zelda/Zelda/Common/GameLogic/Events/Actions/ActionMessage.hpp
 	"Action.hpp"
 
 1407758904 source:/home/christoph/Documents/Projects/Zelda/Zelda/Common/GameLogic/Events/Actions/ActionTypes.cpp
@@ -8003,7 +8014,7 @@
 1407759147 source:/home/christoph/Documents/Projects/Zelda/Zelda/Common/Message/MessageTypes.cpp
 	"MessageTypes.hpp"
 
-1407759344 source:/home/christoph/Documents/Projects/Zelda/Zelda/Common/Message/Message.cpp
+1407761442 source:/home/christoph/Documents/Projects/Zelda/Zelda/Common/Message/Message.cpp
 	"Message.hpp"
 	"../Util/XMLHelper.hpp"
 
