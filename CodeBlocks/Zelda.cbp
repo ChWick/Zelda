@@ -114,6 +114,8 @@
 		<Unit filename="../Zelda/Common/Message/MessageInjector.hpp" />
 		<Unit filename="../Zelda/Common/Message/MessageSwitchMap.cpp" />
 		<Unit filename="../Zelda/Common/Message/MessageSwitchMap.hpp" />
+		<Unit filename="../Zelda/Common/Message/MessageTargetReached.cpp" />
+		<Unit filename="../Zelda/Common/Message/MessageTargetReached.hpp" />
 		<Unit filename="../Zelda/Common/Message/MessageTypes.cpp" />
 		<Unit filename="../Zelda/Common/Message/MessageTypes.hpp" />
 		<Unit filename="../Zelda/Common/Physics/BtOgre.cpp" />
@@ -160,7 +162,6 @@
 		<Unit filename="../Zelda/World/Character/Character.cpp" />
 		<Unit filename="../Zelda/World/Character/Character.h" />
 		<Unit filename="../Zelda/World/Character/CharacterController.h" />
-		<Unit filename="../Zelda/World/Character/CharacterControllerListener.h" />
 		<Unit filename="../Zelda/World/Character/CharacterController_Physics.cpp" />
 		<Unit filename="../Zelda/World/Character/CharacterController_Physics.h" />
 		<Unit filename="../Zelda/World/Character/Person.cpp" />
