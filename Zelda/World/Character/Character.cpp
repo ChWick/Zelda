@@ -1,6 +1,6 @@
 #include "Character.h"
 #include "CharacterController.h"
-#include "../PhysicsMasks.hpp"
+#include "../../Common/Physics/PhysicsMasks.hpp"
 #include <OgreAnimationState.h>
 
 CCharacter::CCharacter(const std::string &sID, CEntity *pParent, CMap *pMap, const EFriendOrEnemyStates foe)
@@ -8,10 +8,9 @@ CCharacter::CCharacter(const std::string &sID, CEntity *pParent, CMap *pMap, con
 	  m_uiAnimationCount(ANIM_COUNT),
 		m_fTimer(0),
 		m_fAnimSpeed(1),
-		m_pCurrentMap(nullptr),
     m_eFriendOrEnemy(foe)
 {
-	m_pCharacterController = NULL;
+  m_pCharacterController = NULL;
   mCCPhysics = NULL;
   m_bMoving = false;
   m_fYaw = 0;
@@ -25,7 +24,7 @@ void CCharacter::init(Ogre::SceneNode *pParentSceneNode) {
 	initBody(pParentSceneNode);
 	createPhysics();
 	m_pCharacterController = createCharacterController();
-	setupAnimations();
+	//setupAnimations();
 	setupInternal();
 }
 void CCharacter::destroy() {
@@ -46,12 +45,12 @@ void CCharacter::setOrientation(const Ogre::Quaternion &vRotation) {
 }
 
 void CCharacter::update(Ogre::Real fTime) {
-	CWorldEntity::update(fTime);
+  CWorldEntity::update(fTime);
 
-	m_pCharacterController->updateCharacter(fTime);
-  preUpdateBoundsCallback(fTime);
-  preAnimationUpdateCallback(fTime);
-  updateAnimations(fTime);
+  m_pCharacterController->updateCharacter(fTime);
+  //preUpdateBoundsCallback(fTime);
+  //preAnimationUpdateCallback(fTime);
+  //updateAnimations(fTime);
 }
 
 void CCharacter::updateAnimations(Ogre::Real fTime) {
@@ -151,20 +150,20 @@ void CCharacter::animRunEnd()
 }
 void CCharacter::animJumpStart()
 {
-	setAnimation(ANIM_JUMP_START, true);
+	//setAnimation(ANIM_JUMP_START, true);
 	m_fTimer = 0;
 }
 void CCharacter::animJumpLoop()
 {
-	setAnimation(ANIM_JUMP_LOOP, true);
+	//setAnimation(ANIM_JUMP_LOOP, true);
 }
 void CCharacter::animJumpEnd()
 {
-	setAnimation(ANIM_JUMP_END, true);
+	//setAnimation(ANIM_JUMP_END, true);
 	m_fTimer = 0;
 }
 void CCharacter::animAttack() {
-  setAnimation(ANIM_SLICE_HORIZONTAL, true);
+  //setAnimation(ANIM_SLICE_HORIZONTAL, true);
   m_fTimer = 0;
 }
 void CCharacter::animAttackEnd() {

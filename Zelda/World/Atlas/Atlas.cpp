@@ -1,12 +1,16 @@
 #include "Atlas.hpp"
 #include "Map.hpp"
+#include <OgreSceneNode.h>
 
-CAtlas::CAtlas(CEntity *pParent)
-  : CEntity("atlas", pParent),
+CAtlas::CAtlas(CEntity *pParent, Ogre::SceneNode *pRootSceneNode)
+  : CWorldEntity("atlas", pParent, nullptr),
     m_pCurrentMap(nullptr),
     m_pNextMap(nullptr) {
 
-  m_pCurrentMap = new CMap(this, CMapPackPtr(new CMapPack("../maps/Atlases/TestMap/Map/", "Map")));
+  m_pSceneNode = pRootSceneNode->createChildSceneNode("Atlas");
+
+  m_pCurrentMap = new CMap(this, CMapPackPtr(new CMapPack("../maps/Atlases/TestMap/", "Map")), m_pSceneNode);
 }
 CAtlas::~CAtlas() {
+  delete m_pCurrentMap;
 }

@@ -127,4 +127,6 @@ void CGameStateManager::update(Ogre::Real tpf) {
   default:
     break;
   }
+
+  CEntity::update(tpf);
 }

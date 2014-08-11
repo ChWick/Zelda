@@ -1,5 +1,6 @@
 #include "WorldEntity.hpp"
 #include <OgreSceneNode.h>
+#include <BulletCollision/CollisionDispatch/btCollisionObject.h>
 
 CWorldEntity::CWorldEntity(const std::string &sID, CEntity *pParent, CMap *pMap)
   : CEntity(sID, pParent),
@@ -56,4 +57,14 @@ btCollisionObject *CWorldEntity::getCollisionObject() const {
 void CWorldEntity::update(Ogre::Real tpf) {
   CHitableInterface::update(tpf);
   CEntity::update(tpf);
+}
+
+void CWorldEntity::setThisAsCollisionObjectsUserPointer() {
+  assert(m_pCollisionObject);
+  m_pCollisionObject->setUserPointer(this);
+}
+
+CWorldEntity *CWorldEntity::getFromUserPointer(btCollisionObject *pCO) {
+  assert(pCO);
+  return static_cast<CWorldEntity*>(pCO->getUserPointer());
 }

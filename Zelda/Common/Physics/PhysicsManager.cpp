@@ -21,17 +21,26 @@ CPhysicsManager::CPhysicsManager(Ogre::SceneManager *pSceneManager)
   : m_pSceneManager(pSceneManager),
     m_pGhostPairCallback(NULL) {
 
+
+#if PHYSICS_MANAGER_DEBUG == 1
+  CInputListenerManager::getSingleton().addInputListener(this);
+#endif // PHYSICS_MANAGER_DEBUG
+
   Ogre::LogManager::getSingleton().logMessage("Creating new PhysicsManager");
     m_bDisplayDebugInfo = true;
 
-    mBroadphase = new btDbvtBroadphase();
+    //mBroadphase = new btDbvtBroadphase();
+btVector3 worldMin(-1000,-1000,-1000);
+btVector3 worldMax(1000,1000, 1000);
+    btAxisSweep3* sweepBP = new btAxisSweep3(worldMin,worldMax);
+  mBroadphaseInterface = sweepBP;
     mCollisionConfig = new btDefaultCollisionConfiguration();
     mDispatcher = new btCollisionDispatcher(mCollisionConfig);
     mSolver = new btSequentialImpulseConstraintSolver();
 
-    m_pPhyWorld = new btDiscreteDynamicsWorld(mDispatcher, mBroadphase, mSolver, mCollisionConfig);
+    m_pPhyWorld = new btDiscreteDynamicsWorld(mDispatcher, mBroadphaseInterface, mSolver, mCollisionConfig);
     m_pPhyWorld->setGravity(btVector3(0,-GRAVITY_FACTOR,0));
-    m_pPhyWorld->getDispatchInfo().m_allowedCcdPenetration = 0.000f;
+    m_pPhyWorld->getDispatchInfo().m_allowedCcdPenetration = 0.0000f;
 
 #ifdef PHYSICS_DEBUG
     m_pDbgDraw = new BtOgre::DebugDrawer(m_pSceneManager->getRootSceneNode(), m_pPhyWorld);
@@ -39,13 +48,17 @@ CPhysicsManager::CPhysicsManager(Ogre::SceneManager *pSceneManager)
 #endif
 
 	m_pGhostPairCallback = new btGhostPairCallback();
-    mBroadphase->getOverlappingPairCache()->setInternalGhostPairCallback(m_pGhostPairCallback);
-
+    //mBroadphase->getOverlappingPairCache()->setInternalGhostPairCallback(m_pGhostPairCallback);
+  sweepBP->getOverlappingPairCache()->setInternalGhostPairCallback(new btGhostPairCallback());
     toggleDisplayDebugInfo();
 
   Ogre::LogManager::getSingleton().logMessage("PhysicsManager created.");
 }
 CPhysicsManager::~CPhysicsManager() {
+#if PHYSICS_MANAGER_DEBUG == 1
+  CInputListenerManager::getSingleton().removeInputListener(this);
+#endif // PHYSICS_MANAGER_DEBUG
+
 #ifdef PHYSICS_DEBUG
     delete m_pDbgDraw;
 #endif
@@ -79,7 +92,7 @@ CPhysicsManager::~CPhysicsManager() {
     delete m_pPhyWorld;
 
     delete mSolver;
-    delete mBroadphase;
+    delete mBroadphaseInterface;
     delete mDispatcher;
     delete mCollisionConfig;
 
@@ -93,7 +106,7 @@ btCollisionWorld *CPhysicsManager::getCollisionWorld()
 
 btBroadphaseInterface *CPhysicsManager::getBroadphase()
 {
-    return mBroadphase;
+    return mBroadphaseInterface;
 }
 void CPhysicsManager::update(Ogre::Real tpf) {
 	// handle Messages
@@ -118,9 +131,13 @@ void CPhysicsManager::update(Ogre::Real tpf) {
 		m_Messages.pop_front();
 	}
 
+  float fixedsubstep = 1.f/1000.f;
+  int maxNumSubsteps = 1;
 
 	 //Update Bullet world. Don't forget the debugDrawWorld() part!
-    m_pPhyWorld->stepSimulation(tpf, 4);
+  m_pPhyWorld->stepSimulation(tpf, 1);
+
+
 #ifdef PHYSICS_DEBUG
     m_pPhyWorld->debugDrawWorld();
     m_pDbgDraw->step();

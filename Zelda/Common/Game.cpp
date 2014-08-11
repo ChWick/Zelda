@@ -383,7 +383,7 @@ void CGame::createScene() {
   // create camera
   // Create the camera
   Ogre::LogManager::getSingletonPtr()->logMessage("   create camera");
-  mCamera = mSceneMgr->createCamera("GameCam");
+  mCamera = mSceneMgr->createCamera("GameCamera");
 
   // Position it at 500 in Z direction
   mCamera->setPosition(Ogre::Vector3(0,1,1));
@@ -398,12 +398,12 @@ void CGame::createScene() {
   //------------------------------------------------------------------------------------
   // create viewports
   // Create one viewport, entire window
-  Ogre::Viewport* vp = mWindow->addViewport(mCamera);
-  vp->setBackgroundColour(Ogre::ColourValue(0,0,0));
+  m_pMainViewPort = mWindow->addViewport(mCamera);
+  m_pMainViewPort->setBackgroundColour(Ogre::ColourValue(0,0,0));
   //vp->setClearEveryFrame(true);
 
   // Alter the camera aspect ratio to match the viewport
-  mCamera->setAspectRatio(Ogre::Real(vp->getActualWidth()) / Ogre::Real(vp->getActualHeight()));
+  mCamera->setAspectRatio(Ogre::Real(m_pMainViewPort->getActualWidth()) / Ogre::Real(m_pMainViewPort->getActualHeight()));
   //-------------------------------------------------------------------------------------
 
     //-------------------------------------------------------------------------------------
@@ -560,6 +560,8 @@ bool CGame::frameRenderingQueued(const Ogre::FrameEvent& evt) {
     mCameraMan->frameRenderingQueued(evt);
   }
 
+  m_pGameStateManager->frameRenderingQueued(evt);
+
   return true;
 }
 void CGame::destroyScene() {
@@ -584,9 +586,13 @@ bool CGame::frameStarted(const Ogre::FrameEvent& evt) {
   CGUIManager::getSingleton().update(evt.timeSinceLastFrame);
   m_pGameStateManager->update(evt.timeSinceLastFrame);
 
+  m_pGameStateManager->frameStarted(evt);
+  m_pGameStateManager->renderDebug(evt.timeSinceLastFrame);
+
   return true;
 }
 bool CGame::frameEnded(const Ogre::FrameEvent& evt) {
+  m_pGameStateManager->frameEnded(evt);
   return true;
 }
 

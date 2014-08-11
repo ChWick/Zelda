@@ -36,8 +36,10 @@ public:
   virtual CMap *getMap() const {return m_pMap;}
 
   virtual void update(Ogre::Real tpf);
-};
 
+  void setThisAsCollisionObjectsUserPointer();
+  static CWorldEntity *getFromUserPointer(btCollisionObject *pCO);
+};
 
 #endif // _WORLD_ENTITY_HPP_
 

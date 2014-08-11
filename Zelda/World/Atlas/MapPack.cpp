@@ -3,6 +3,8 @@
 #include <tinyxml2.h>
 #include "../../Common/Util/XMLHelper.hpp"
 #include <OgreLogManager.h>
+#include "MapPackParserListener.hpp"
+#include "RegionInfo.hpp"
 
 using namespace tinyxml2;
 using namespace XMLHelper;
@@ -11,14 +13,16 @@ CMapPack::CMapPack(const std::string &path, const std::string &name)
   : m_sPath(path),
     m_sName(name),
     m_sResourceGroup(name),
-    m_bInitialized(false) {
+    m_bInitialized(false),
+    m_pListener(nullptr) {
 }
 
 CMapPack::~CMapPack() {
   exit();
 }
 
-void CMapPack::init() {
+void CMapPack::init(CMapPackParserListener *pListener) {
+  m_pListener = pListener;
   if (m_bInitialized) {return;}
   m_bInitialized = true;
 
@@ -51,6 +55,19 @@ void CMapPack::parseXMLFile() {
   XMLDocument doc;
   doc.Parse(dataStream->getAsString().c_str());
 
-  XMLElement *pElem = doc.FirstChildElement();
-  m_sSceneFile = Attribute(pElem, "scene");
+  XMLElement *pMapElem = doc.FirstChildElement();
+  m_sSceneFile = Attribute(pMapElem, "scene");
+
+  for (XMLElement *pElem = pMapElem->FirstChildElement(); pElem; pElem = pElem->NextSiblingElement()) {
+    if (strcmp(pElem->Value(), "region") == 0) {
+      SRegionInfo region;
+
+      region.position = Ogre::StringConverter::parseVector3(Attribute(pElem, "position"));
+      region.size = Ogre::StringConverter::parseVector3(Attribute(pElem, "size"));
+      region.ID = Attribute(pElem, "id");
+      region.shape = Attribute(pElem, "shape");
+
+      if (m_pListener) {m_pListener->parseRegion(region);}
+    }
+  }
 }

@@ -26,12 +26,6 @@ protected:
 
 	btPairCachingGhostObject* m_ghostObject;
 	btConvexShape*	m_convexShape;//is also in m_ghostObject, but it needs to be convex, so we store it here to avoid upcast
-	btConvexShape* m_convexShapeForBorderDetection;
-	btVector3 m_vBorderDetectionShapeOffset;
-	btScalar m_fCurrentBorderCcdPenetration;
-
-	short m_BorderDetectionShapeGroup;
-	short m_BorderDetectionShapeMask;
 
 	btScalar m_verticalVelocity;
 	btScalar m_verticalOffset;
@@ -82,16 +76,14 @@ protected:
 	bool recoverFromPenetration ( btCollisionWorld* collisionWorld);
 	void stepUp (btCollisionWorld* collisionWorld);
 	void updateTargetPositionBasedOnCollision (const btVector3& hit_normal, btScalar tangentMag = btScalar(0.0), btScalar normalMag = btScalar(1.0));
-	void stepForwardAndStrafe (btCollisionWorld* collisionWorld, const btVector3& walkMove, btScalar dt);
+	void stepForwardAndStrafe (btCollisionWorld* collisionWorld, const btVector3& walkMove);
 	void stepDown (btCollisionWorld* collisionWorld, btScalar dt);
 public:
 
 	BT_DECLARE_ALIGNED_ALLOCATOR();
 
-	CharacterControllerPhysics (btPairCachingGhostObject* ghostObject,btConvexShape* convexShape, btConvexShape *pCSForBorderDetection, btScalar stepHeight, int upAxis = 1);
+	CharacterControllerPhysics (btPairCachingGhostObject* ghostObject,btConvexShape* convexShape,btScalar stepHeight, int upAxis = 1);
 	~CharacterControllerPhysics ();
-
-	void start();
 
 
 	///btActionInterface interface
@@ -129,6 +121,7 @@ public:
 				btScalar timeInterval);
 
 	void reset ( btCollisionWorld* collisionWorld );
+	void reset () {}
 	void warp (const btVector3& origin);
 
 	void preStep (  btCollisionWorld* collisionWorld);
@@ -140,7 +133,6 @@ public:
 	bool canJump () const;
 
 	void jump ();
-	void reset() {}
 
 	void setGravity(btScalar gravity);
 	btScalar getGravity() const;
@@ -158,11 +150,6 @@ public:
 
 	bool onGround () const;
 	void setUpInterpolate (bool value);
-
-
-public:
-	void setBorderDetectionShapeGroupAndMask(short group, short mask) {m_BorderDetectionShapeGroup = group; m_BorderDetectionShapeMask = mask;}
-	void setBorderDetectionShapeOffset(const btVector3 &vOffset) {m_vBorderDetectionShapeOffset = vOffset;}
 };
 
 

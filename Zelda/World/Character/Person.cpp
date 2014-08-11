@@ -10,6 +10,7 @@
 #include <OgreSceneNode.h>
 #include <OgreSceneManager.h>
 #include "../../Common/Physics/PhysicsMasks.hpp"
+#include <BulletDynamics/Character/btKinematicCharacterController.h>
 
 //const Ogre::Real PERSONS_MASS = 1.0f;
 const Ogre::String CPerson::PERSON_SHEATH("Sheath");
@@ -18,7 +19,7 @@ const Ogre::String CPerson::PERSON_LEFT_HANDLE("Handle.L");
 const Ogre::String CPerson::PERSON_RIGHT_HANDLE("Handle.R");
 const Ogre::Real CPerson::PERSON_HEIGHT = 0.4f;
 const Ogre::Real CPerson::PERSON_RADIUS = 0.2f;
-const Ogre::Real CPerson::PERSON_SCALE  = 0.15f;
+const Ogre::Real CPerson::PERSON_SCALE  = 1.f;
 
 
 CPerson::CPerson(const std::string &sID, CEntity *pParent, CMap *pMap, const EFriendOrEnemyStates foe)
@@ -55,7 +56,8 @@ void CPerson::createPhysics() {
     btScalar characterHeight = PERSON_HEIGHT;
 	btScalar characterWidth = PERSON_RADIUS;
 
-    btConvexShape * capsule = new btCapsuleShape(characterWidth, characterHeight);
+    btConvexShape * capsule = new btCylinderShape(btVector3(characterWidth, characterHeight, characterWidth));
+    capsule->setMargin(0.0);
 
     mCollisionShapes.push_back(capsule);
     characterGhostObject->setCollisionShape(capsule);
@@ -77,39 +79,40 @@ void CPerson::createPhysics() {
 
 
     //mCharacter = new CharacterControllerManager(mSceneManager, mCamera, characterGhostObject, capsule, stepHeight, CPhysicsManager::getSingleton().getCollisionWorld(), origin);
-	CharacterControllerPhysics *pCC = new CharacterControllerPhysics(characterGhostObject, capsule, pCylShape, stepHeight, 1);
+  btCharacterControllerInterface *pCC = new CharacterControllerPhysics(characterGhostObject, capsule, stepHeight);
+	//btCharacterControllerInterface *pCC = new btKinematicCharacterController(characterGhostObject, capsule, stepHeight, 1);
 	mCCPhysics = pCC;
-	pCC->setMaxSlope(0.5);
-	pCC->setBorderDetectionShapeOffset(btVector3(0, -characterHeight - 0.02, 0));
+	//pCC->setMaxSlope(0.5);
+	//pCC->setBorderDetectionShapeOffset(btVector3(0, -characterHeight - 0.02, 0));
     //mCCPhysics->setDuckingConvexShape(duck);
 
     //m_pCurrentMap->getPhysicsManager()->getWorld()->addCollisionObject(characterGhostObject, btBroadphaseProxy::CharacterFilter, btBroadphaseProxy::StaticFilter | btBroadphaseProxy::DefaultFilter);
-	m_pCurrentMap->getPhysicsManager()->getWorld()->addCollisionObject(characterGhostObject, getCollisionGroup(), getCollisionMask());
-    m_pCurrentMap->getPhysicsManager()->getWorld()->addAction(mCCPhysics);
+	m_pMap->getPhysicsManager()->getWorld()->addCollisionObject(characterGhostObject, getCollisionGroup(), getCollisionMask());
+  m_pMap->getPhysicsManager()->getWorld()->addAction(mCCPhysics);
 
     /// --
 
   m_pCollisionObject = characterGhostObject;
     //m_pBodyPhysics->setCollisionShape(pComShape);
 
-	m_pCollisionObject->setWorldTransform(btTransform(btQuaternion::getIdentity(), btVector3(0, 4, 0)));
+	m_pCollisionObject->setWorldTransform(btTransform(btQuaternion::getIdentity(), btVector3(0, 20, 0)));
 	//mCCPlayer->setIsMoving(true);
 
-	pCC->start();
-	pCC->setBorderDetectionShapeGroupAndMask(getCollisionGroup(), COL_WALL);
+	//pCC->start();
+	//pCC->setBorderDetectionShapeGroupAndMask(getCollisionGroup(), COL_WALL);
 }
 void CPerson::destroyPhysics() {
 
 	if (mCCPhysics) {
-		m_pCurrentMap->getPhysicsManager()->getWorld()->removeAction(mCCPhysics);
+		m_pMap->getPhysicsManager()->getWorld()->removeAction(mCCPhysics);
 		delete mCCPhysics;
 		mCCPhysics = NULL;
 	}
 	if (m_pCollisionObject) {
-		m_pCurrentMap->getPhysicsManager()->getWorld()->removeCollisionObject(m_pCollisionObject);
+		m_pMap->getPhysicsManager()->getWorld()->removeCollisionObject(m_pCollisionObject);
 
-		m_pCurrentMap->getPhysicsManager()->getBroadphase()->resetPool(m_pCurrentMap->getPhysicsManager()->getWorld()->getDispatcher());
-		m_pCurrentMap->getPhysicsManager()->getBroadphase()->getOverlappingPairCache()->cleanProxyFromPairs(m_pCollisionObject->getBroadphaseHandle(), m_pCurrentMap->getPhysicsManager()->getWorld()->getDispatcher());
+		m_pMap->getPhysicsManager()->getBroadphase()->resetPool(m_pMap->getPhysicsManager()->getWorld()->getDispatcher());
+		m_pMap->getPhysicsManager()->getBroadphase()->getOverlappingPairCache()->cleanProxyFromPairs(m_pCollisionObject->getBroadphaseHandle(), m_pMap->getPhysicsManager()->getWorld()->getDispatcher());
 
 		delete m_pCollisionObject;
 		m_pCollisionObject = NULL;
@@ -187,7 +190,7 @@ void CPerson::setLeftHandleRotation(const Ogre::Degree &degree, Ogre::Real speed
 }
 
 void CPerson::initBody(Ogre::SceneNode *pParentSceneNode) {
-	Ogre::String meshName = "LegoFig";
+	Ogre::String meshName = "Cylinder";
     // create main model
     m_pSceneNode = pParentSceneNode->createChildSceneNode(m_sID + meshName);
     Ogre::SceneNode *pModelSN = m_pSceneNode->createChildSceneNode();

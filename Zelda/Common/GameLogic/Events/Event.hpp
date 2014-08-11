@@ -21,6 +21,7 @@
 #define _EVENT_HPP_
 
 #include <string>
+#include <vector>
 #include <tinyxml2.h>
 #include "Util/XMLHelper.hpp"
 #include "GameLogic/OutputStyle.hpp"
@@ -30,23 +31,20 @@ class ENTITY;
 
 namespace events {
 
+  class CEmitter;
+
 class CEvent {
-public:
-  enum ETypes {
-    EVENT_TO_DEFINE
-  };
-  static std::string toString(ETypes eEventType);
-  static ETypes parseEventType(const std::string &sString);
 private:
-  const ETypes m_eType;
   const std::string m_sID;
 protected:
   CEntity &m_Owner;
   bool m_bStarted;
 
+  std::vector<CEmitter *> m_lEmitter;
+
 protected:
-  CEvent(CEntity &owner, ETypes eType);
-  CEvent(CEntity &owner, ETypes eType, const tinyxml2::XMLElement *pElement);
+  CEvent(CEntity &owner);
+  CEvent(CEntity &owner, const tinyxml2::XMLElement *pElement);
 public:
   virtual ~CEvent();
 
@@ -57,7 +55,7 @@ public:
   void stop();
 
   const std::string &getID() const {return m_sID;}
-  ETypes getType() const {return m_eType;}
+  const std::vector<CEmitter *> &getEmitter() const {return m_lEmitter;}
 
   virtual void writeToXMLElement(tinyxml2::XMLElement *pElement, EOutputStyle eStyle) const;
 

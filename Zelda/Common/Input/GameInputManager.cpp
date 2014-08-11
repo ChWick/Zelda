@@ -48,25 +48,28 @@ bool CGameInputManager::keyPressed( const OIS::KeyEvent &arg ) {
     injectCommand(CGameInputCommand(GIC_RIGHT, 1));
   }
   else if (arg.key == OIS::KC_UP) {
-    injectCommand(CGameInputCommand(GIC_JUMP, 1));
+    injectCommand(CGameInputCommand(GIC_FRONT, 1));
   }
   else if (arg.key == OIS::KC_DOWN) {
-    injectCommand(CGameInputCommand(GIC_ENTER_LINK, 1));
+    injectCommand(CGameInputCommand(GIC_REAR, 1));
   }
-  else if (arg.key == OIS::KC_SPACE) {
-    injectCommand(CGameInputCommand(GIC_ATTACK, 1));
+  else if (arg.key == OIS::KC_B) {
+    injectCommand(CGameInputCommand(GIC_SWORD, 1));
   }
-  else if (arg.key == OIS::KC_RETURN) {
-    injectCommand(CGameInputCommand(GIC_ACTIVATE, 1));
+  else if (arg.key == OIS::KC_V) {
+    injectCommand(CGameInputCommand(GIC_TOOL, 1));
   }
-  else if (arg.key == OIS::KC_N) {
-    injectCommand(CGameInputCommand(GIC_USE_HEALTH_POTION, 1));
+  else if (arg.key == OIS::KC_C) {
+    injectCommand(CGameInputCommand(GIC_INTERACT, 1));
   }
-  else if (arg.key == OIS::KC_M) {
-    injectCommand(CGameInputCommand(GIC_USE_MANA_POTION, 1));
+  else if (arg.key == OIS::KC_X) {
+    injectCommand(CGameInputCommand(GIC_RUN, 1));
   }
   else if (arg.key == OIS::KC_APPS) {
     injectCommand(CGameInputCommand(GIC_SHOW_MENU, 1));
+  }
+  else if (arg.key == OIS::KC_ESCAPE) {
+    injectCommand(CGameInputCommand(GIC_ESCAPE, 1));
   }
 
   return true;
@@ -79,19 +82,28 @@ bool CGameInputManager::keyReleased( const OIS::KeyEvent &arg ) {
     injectCommand(CGameInputCommand(GIC_RIGHT, 0));
   }
   else if (arg.key == OIS::KC_UP) {
-    injectCommand(CGameInputCommand(GIC_JUMP, 0));
+    injectCommand(CGameInputCommand(GIC_FRONT, 0));
   }
   else if (arg.key == OIS::KC_DOWN) {
-    injectCommand(CGameInputCommand(GIC_ENTER_LINK, 0));
+    injectCommand(CGameInputCommand(GIC_REAR, 0));
   }
-  else if (arg.key == OIS::KC_SPACE || arg.key == OIS::KC_PLAYPAUSE) {
-    injectCommand(CGameInputCommand(GIC_ATTACK, 0));
+  else if (arg.key == OIS::KC_B) {
+    injectCommand(CGameInputCommand(GIC_SWORD, 0));
   }
-  else if (arg.key == OIS::KC_RETURN) {
-    injectCommand(CGameInputCommand(GIC_ACTIVATE, 0));
+  else if (arg.key == OIS::KC_V) {
+    injectCommand(CGameInputCommand(GIC_TOOL, 0));
+  }
+  else if (arg.key == OIS::KC_C) {
+    injectCommand(CGameInputCommand(GIC_INTERACT, 0));
+  }
+  else if (arg.key == OIS::KC_X) {
+    injectCommand(CGameInputCommand(GIC_RUN, 0));
   }
   else if (arg.key == OIS::KC_APPS) {
     injectCommand(CGameInputCommand(GIC_SHOW_MENU, 0));
+  }
+  else if (arg.key == OIS::KC_ESCAPE) {
+    injectCommand(CGameInputCommand(GIC_ESCAPE, 0));
   }
 
   return true;

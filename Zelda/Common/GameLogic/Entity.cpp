@@ -248,6 +248,36 @@ void CEntity::render(Ogre::Real tpf) {
   }
 }
 
+void CEntity::renderDebug(Ogre::Real tpf) {
+  for (auto &pEnt : m_lChildren) {
+    if (!pEnt->m_bPauseRender) {
+      pEnt->renderDebug(tpf);
+    }
+  }
+}
+
+bool CEntity::frameRenderingQueued(const Ogre::FrameEvent& evt) {
+  for (auto &pEnt : m_lChildren) {
+    pEnt->frameRenderingQueued(evt);
+  }
+  return true;
+}
+
+bool CEntity::frameStarted(const Ogre::FrameEvent& evt) {
+  for (auto &pEnt : m_lChildren) {
+    pEnt->frameStarted(evt);
+  }
+  return true;
+}
+
+bool CEntity::frameEnded(const Ogre::FrameEvent& evt) {
+  for (auto &pEnt : m_lChildren) {
+    pEnt->frameEnded(evt);
+  }
+  return true;
+}
+
+
 void CEntity::writeToXMLElement(tinyxml2::XMLElement *pElement, EOutputStyle eStyle) const {
   using namespace tinyxml2;
 

@@ -1,18 +1,20 @@
 #ifndef _ATLAS_HPP_
 #define _ATLAS_HPP_
 
-#include "../../Common/GameLogic/Entity.hpp"
+#include "../WorldEntity.hpp"
 
 class CMap;
 
-class CAtlas : public CEntity {
+class CAtlas : public CWorldEntity {
 private:
   CMap *m_pCurrentMap;
   CMap *m_pNextMap;
 
 public:
-  CAtlas(CEntity *pParent);
+  CAtlas(CEntity *pParent, Ogre::SceneNode *pRootSceneNode);
   ~CAtlas();
+
+  CMap *getCurrentMap() const {return m_pCurrentMap;}
 };
 
 #endif // _ATLAS_HPP_

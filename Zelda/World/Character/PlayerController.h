@@ -15,13 +15,13 @@ using namespace Ogre;
 class CPlayerController : public CPersonController, public CGameInputListener {
 private:
 	SceneManager * mSceneManager;
-	CCameraController *m_pCameraController;
+	const Ogre::Camera *m_pCamera;
 
 	Vector3 mKeyDirection;
 public:
-    CPlayerController(SceneManager * scnMgr, CCameraController *pCameraController, CPlayer * ccPlayer);
-    /** Default destructor */
-    virtual ~CPlayerController();
+  CPlayerController(SceneManager * scnMgr, const Ogre::Camera *pCamera, CPlayer * ccPlayer);
+  /** Default destructor */
+  virtual ~CPlayerController();
 	btCharacterControllerInterface * getCCPhysics();
 
   virtual void receiveInputCommand(const CGameInputCommand &cmd);

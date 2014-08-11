@@ -12,8 +12,9 @@
 Ogre::Real g_fCurrentSpeedScale = 1;
 const Ogre::Real PLAYER_ENEMY_NOTIFY_RADIUS_SQR = 100.f; // already squared!
 
-CPlayer::CPlayer(CEntity *pParent, CMap *pMap, CCameraController* camController, Ogre::SceneManager *pPlayerSceneManager)
+CPlayer::CPlayer(CEntity *pParent, CMap *pMap, const Ogre::Camera* pCamera, Ogre::SceneManager *pPlayerSceneManager)
 	: CPerson("player", pParent, pMap, FOE_FRIENDLY),
+		m_pCamera(pCamera),
     m_pPlayerSceneManager(pPlayerSceneManager) {
 }
 CPlayer::~CPlayer() {
@@ -22,7 +23,7 @@ void CPlayer::destroy() {
   CPerson::destroy();
 }
 CCharacterController *CPlayer::createCharacterController() {
-	return new CPlayerController(m_pPlayerSceneManager, m_pCameraController, this);
+	return new CPlayerController(m_pPlayerSceneManager, m_pCamera, this);
 }
 void CPlayer::setupInternal()  {
 	// create hair and hat

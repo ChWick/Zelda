@@ -3,6 +3,9 @@
 
 #include <OgreVector3.h>
 #include <OgreException.h>
+#include "../Input/InputListener.hpp"
+
+#define PHYSICS_MANAGER_DEBUG 1
 
 const float GRAVITY_FACTOR = 8.0f;
 
@@ -59,13 +62,17 @@ public:
 		return (m_pShape == colObj.m_pShape && m_vOffset == colObj.m_vOffset);
 	}
 };
-class CPhysicsManager {
+class CPhysicsManager
+#if PHYSICS_MANAGER_DEBUG == 1
+: public CInputListener
+#endif
+{
 public:
 private:
 	//NxOgre::World *mWorld;
 	btDiscreteDynamicsWorld *m_pPhyWorld;
   BtOgre::DebugDrawer *m_pDbgDraw;
-  btBroadphaseInterface *mBroadphase;
+  btBroadphaseInterface *mBroadphaseInterface;
 	btDefaultCollisionConfiguration *mCollisionConfig;
 	btCollisionDispatcher *mDispatcher;
 	btSequentialImpulseConstraintSolver *mSolver;
@@ -129,6 +136,16 @@ public:
 		}
 		throw Ogre::Exception(0, "Collision shape key not found", __FILE__);
 	}
+
+
+#if PHYSICS_MANAGER_DEBUG == 1
+  bool keyPressed( const OIS::KeyEvent &arg ) {
+  	if (arg.key == OIS::KC_P) {
+			toggleDisplayDebugInfo();
+  	}
+  	return true;
+	}
+#endif
 };
 
 #endif

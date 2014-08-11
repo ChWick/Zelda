@@ -1,16 +1,15 @@
 #include "CharacterController_Physics.h"
 #include "../../Common/Physics/PhysicsManager.h"
 
-const btScalar BORDER_CCD_PENETRATION_SPEED_ADD_FACTOR = 1.2;
-const btScalar BORDER_CCD_PENETRATION_SPEED = 5;
 
 // static helper method
 static btVector3
 getNormalizedVector(const btVector3& v)
 {
-	btVector3 n = v.normalized();
-	if (n.length() < SIMD_EPSILON) {
-		n.setValue(0, 0, 0);
+	btVector3 n(0, 0, 0);
+
+	if (v.length() > SIMD_EPSILON) {
+		n = v.normalized();
 	}
 	return n;
 }
@@ -55,6 +54,9 @@ public:
 	virtual btScalar addSingleResult(btCollisionWorld::LocalConvexResult& convexResult,bool normalInWorldSpace)
 	{
 		if (convexResult.m_hitCollisionObject == m_me)
+			return btScalar(1.0);
+
+		if (!convexResult.m_hitCollisionObject->hasContactResponse())
 			return btScalar(1.0);
 
 		btVector3 hitNormalWorld;
@@ -107,30 +109,28 @@ btVector3 CharacterControllerPhysics::perpindicularComponent (const btVector3& d
 	return direction - parallelComponent(direction, normal);
 }
 
-CharacterControllerPhysics::CharacterControllerPhysics (btPairCachingGhostObject* ghostObject,btConvexShape* convexShape,btConvexShape *pCSForBorderDetection, btScalar stepHeight, int upAxis)
+CharacterControllerPhysics::CharacterControllerPhysics (btPairCachingGhostObject* ghostObject,btConvexShape* convexShape,btScalar stepHeight, int upAxis)
 {
 	m_upAxis = upAxis;
-	m_addedMargin = 0.02;
+	m_addedMargin = 0.2;
 	m_walkDirection.setValue(0,0,0);
 	m_useGhostObjectSweepTest = true;
 	m_ghostObject = ghostObject;
 	m_stepHeight = stepHeight;
 	m_turnAngle = btScalar(0.0);
 	m_convexShape=convexShape;
-	m_convexShapeForBorderDetection=pCSForBorderDetection;
 	m_useWalkDirection = true;	// use walk direction by default, legacy behavior
 	m_velocityTimeInterval = 0.0;
 	m_verticalVelocity = 0.0;
 	m_verticalOffset = 0.0;
-	m_gravity = GRAVITY_FACTOR ;
+	m_gravity = 9.8 * 3 ; // 3G acceleration.
 	m_fallSpeed = 55.0; // Terminal velocity of a sky diver in m/s.
-	m_jumpSpeed = 0.5; // ?
+	m_jumpSpeed = 10.0; // ?
 	m_wasOnGround = false;
 	m_wasJumping = false;
+	m_interpolateUp = true;
 	setMaxSlope(btRadians(45.0));
-	m_vBorderDetectionShapeOffset = btVector3(0, 0, 0);
-	m_fCurrentBorderCcdPenetration = 0;
-
+	m_currentStepOffset = 0;
 	full_drop = false;
 	bounce_fix = false;
 }
@@ -138,11 +138,6 @@ CharacterControllerPhysics::CharacterControllerPhysics (btPairCachingGhostObject
 CharacterControllerPhysics::~CharacterControllerPhysics ()
 {
 }
-void CharacterControllerPhysics::start() {
-    m_BorderDetectionShapeGroup = getGhostObject()->getBroadphaseHandle()->m_collisionFilterGroup;
-    m_BorderDetectionShapeMask = getGhostObject()->getBroadphaseHandle()->m_collisionFilterMask;
-}
-
 
 btPairCachingGhostObject* CharacterControllerPhysics::getGhostObject()
 {
@@ -178,6 +173,12 @@ bool CharacterControllerPhysics::recoverFromPenetration ( btCollisionWorld* coll
 		m_manifoldArray.resize(0);
 
 		btBroadphasePair* collisionPair = &m_ghostObject->getOverlappingPairCache()->getOverlappingPairArray()[i];
+
+		btCollisionObject* obj0 = static_cast<btCollisionObject*>(collisionPair->m_pProxy0->m_clientObject);
+                btCollisionObject* obj1 = static_cast<btCollisionObject*>(collisionPair->m_pProxy1->m_clientObject);
+
+		if ((obj0 && !obj0->hasContactResponse()) || (obj1 && !obj1->hasContactResponse()))
+			continue;
 
 		if (collisionPair->m_algorithm)
 			collisionPair->m_algorithm->getAllContactManifolds(m_manifoldArray);
@@ -251,7 +252,10 @@ void CharacterControllerPhysics::stepUp ( btCollisionWorld* world)
 		{
 			// we moved up only a fraction of the step height
 			m_currentStepOffset = m_stepHeight * callback.m_closestHitFraction;
-			m_currentPosition.setInterpolate3 (m_currentPosition, m_targetPosition, callback.m_closestHitFraction);
+			if (m_interpolateUp == true)
+				m_currentPosition.setInterpolate3 (m_currentPosition, m_targetPosition, callback.m_closestHitFraction);
+			else
+				m_currentPosition = m_targetPosition;
 		}
 		m_verticalVelocity = 0.0;
 		m_verticalOffset = 0.0;
@@ -297,7 +301,7 @@ void CharacterControllerPhysics::updateTargetPositionBasedOnCollision (const btV
 	}
 }
 
-void CharacterControllerPhysics::stepForwardAndStrafe ( btCollisionWorld* collisionWorld, const btVector3& walkMove, btScalar dt)
+void CharacterControllerPhysics::stepForwardAndStrafe ( btCollisionWorld* collisionWorld, const btVector3& walkMove)
 {
 	// printf("m_normalizedDirection=%f,%f,%f\n",
 	// 	m_normalizedDirection[0],m_normalizedDirection[1],m_normalizedDirection[2]);
@@ -316,7 +320,7 @@ void CharacterControllerPhysics::stepForwardAndStrafe ( btCollisionWorld* collis
 	{
 		if (m_normalizedDirection.dot(m_touchingNormal) > btScalar(0.0))
 		{
-		    //interferes with step movement
+			//interferes with step movement
 			//updateTargetPositionBasedOnCollision (m_touchingNormal);
 		}
 	}
@@ -345,23 +349,7 @@ void CharacterControllerPhysics::stepForwardAndStrafe ( btCollisionWorld* collis
 		{
 			collisionWorld->convexSweepTest (m_convexShape, start, end, callback, collisionWorld->getDispatchInfo().m_allowedCcdPenetration);
 		}
-        if (callback.hasHit() == false && !m_wasJumping) {
-            callback.m_collisionFilterGroup = m_BorderDetectionShapeGroup;
-            callback.m_collisionFilterMask = m_BorderDetectionShapeMask;
-            start.setOrigin (m_currentPosition + m_vBorderDetectionShapeOffset);
-            end.setOrigin (m_targetPosition + m_vBorderDetectionShapeOffset);
-            /*if (m_useGhostObjectSweepTest)
-            {
-                m_ghostObject->convexSweepTest (m_convexShapeForBorderDetection, start, end, callback, collisionWorld->getDispatchInfo().m_allowedCcdPenetration);
-            } else*/
-            {
-                collisionWorld->convexSweepTest (m_convexShapeForBorderDetection, start, end, callback, collisionWorld->getDispatchInfo().m_allowedCcdPenetration + m_fCurrentBorderCcdPenetration);
-            }
-            if (callback.hasHit()) {
-                // hit with wall
-                m_fCurrentBorderCcdPenetration += BORDER_CCD_PENETRATION_SPEED_ADD_FACTOR * BORDER_CCD_PENETRATION_SPEED * dt;
-            }
-        }
+
 		m_convexShape->setMargin(margin);
 
 
@@ -538,6 +526,7 @@ void CharacterControllerPhysics::stepDown ( btCollisionWorld* collisionWorld, bt
 }
 
 
+
 void CharacterControllerPhysics::setWalkDirection
 (
 const btVector3& walkDirection
@@ -545,12 +534,7 @@ const btVector3& walkDirection
 {
 	m_useWalkDirection = true;
 	m_walkDirection = walkDirection;
-	if (m_walkDirection.isZero()) {
-        m_normalizedDirection = m_walkDirection;
-	}
-	else {
-        m_normalizedDirection = getNormalizedVector(m_walkDirection);
-	}
+	m_normalizedDirection = getNormalizedVector(m_walkDirection);
 }
 
 
@@ -569,10 +553,8 @@ btScalar timeInterval
 	m_useWalkDirection = false;
 	m_walkDirection = velocity;
 	m_normalizedDirection = getNormalizedVector(m_walkDirection);
-	m_velocityTimeInterval = timeInterval;
+	m_velocityTimeInterval += timeInterval;
 }
-
-
 
 void CharacterControllerPhysics::reset ( btCollisionWorld* collisionWorld )
 {
@@ -629,8 +611,7 @@ void CharacterControllerPhysics::playerStep (  btCollisionWorld* collisionWorld,
 {
 //	printf("playerStep(): ");
 //	printf("  dt = %f", dt);
-    m_fCurrentBorderCcdPenetration -= BORDER_CCD_PENETRATION_SPEED * dt;
-    if (m_fCurrentBorderCcdPenetration < 0) {m_fCurrentBorderCcdPenetration = 0;}
+
 	// quick check...
 	if (!m_useWalkDirection && m_velocityTimeInterval <= 0.0) {
 //		printf("\n");
@@ -660,7 +641,7 @@ void CharacterControllerPhysics::playerStep (  btCollisionWorld* collisionWorld,
 
 	stepUp (collisionWorld);
 	if (m_useWalkDirection) {
-		stepForwardAndStrafe (collisionWorld, m_walkDirection, dt);
+		stepForwardAndStrafe (collisionWorld, m_walkDirection);
 	} else {
 		//printf("  time: %f", m_velocityTimeInterval);
 		// still have some time left for moving!
@@ -674,7 +655,7 @@ void CharacterControllerPhysics::playerStep (  btCollisionWorld* collisionWorld,
 		//printf("  dtMoving: %f", dtMoving);
 
 		// okay, step
-		stepForwardAndStrafe(collisionWorld, move, dt);
+		stepForwardAndStrafe(collisionWorld, move);
 	}
 	stepDown (collisionWorld, dt);
 
@@ -759,14 +740,6 @@ btVector3* CharacterControllerPhysics::getUpAxisDirections()
 
 void CharacterControllerPhysics::debugDraw(btIDebugDraw* debugDrawer)
 {
-    btCylinderShape *pCylShape = dynamic_cast<btCylinderShape*>(m_convexShapeForBorderDetection);
-    if (pCylShape) {
-        btScalar radius = pCylShape->getHalfExtentsWithoutMargin()[0];
-        btScalar halfheight = pCylShape->getHalfExtentsWithoutMargin()[1];
-        btTransform t(m_ghostObject->getWorldTransform());
-        t.setOrigin(t.getOrigin() + m_vBorderDetectionShapeOffset);
-        debugDrawer->drawCylinder(radius, halfheight, pCylShape->getUpAxis(), t, btVector3(1, 0, 0));
-    }
 }
 
 void CharacterControllerPhysics::setUpInterpolate(bool value)

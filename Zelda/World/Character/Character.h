@@ -63,7 +63,6 @@ public:
 	};
 protected:
 	const EFriendOrEnemyStates m_eFriendOrEnemy;	//!< Is this character a friend or an enemy?
-	CMap *m_pCurrentMap;													//!< the map the Character belonds to
 
 	bool m_bMoving;
 	Ogre::Entity *m_pBodyEntity;									//!< The entity of the body

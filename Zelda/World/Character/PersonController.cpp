@@ -16,7 +16,7 @@ CPersonController::CPersonController(CPerson * ccPlayer) {
 	mBodyNode = mCCPerson->getSceneNode();
 
 	mJumped = false;
-	mIsFalling = mCCPhysics->onGround();
+	//mIsFalling = mCCPhysics->onGround();
 	mWalkDirection = Ogre::Vector3::ZERO;
 
 	m_fTimer = 0.0f;
@@ -46,7 +46,7 @@ void CPersonController::updateCharacter(const Ogre::Real deltaTime) {
 
 	if (position != playerPos)
 	{
-		mBodyNode->translate((position - playerPos) * RUN_SPEED * deltaTime);
+		mBodyNode->translate((position - playerPos) * 10 * deltaTime);
 		//mBodyNode->setPosition(position);
 
 		if (!mIsFalling && !mCCPhysics->onGround()) // last frame we were on ground and now we're in "air"

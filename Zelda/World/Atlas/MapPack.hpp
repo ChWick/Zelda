@@ -4,6 +4,8 @@
 #include <string>
 #include <memory>
 
+class CMapPackParserListener;
+
 class CMapPack {
 private:
   const std::string m_sPath;
@@ -14,11 +16,12 @@ private:
 
 
   std::string m_sSceneFile;
+  CMapPackParserListener *m_pListener;
 public:
   CMapPack(const std::string &path, const std::string &name);
   ~CMapPack();
 
-  void init();
+  void init(CMapPackParserListener *pListener);
   void exit();
 
   const std::string &getPath() const {return m_sPath;}

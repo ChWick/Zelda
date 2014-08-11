@@ -46,6 +46,7 @@ class CGame : public CInputListener,
               public Ogre::Singleton<CGame> {
 protected:
   CGameStateManager *m_pGameStateManager;
+  Ogre::Viewport *m_pMainViewPort;
 
 private:
   std::vector<std::string> m_vAdditionalLevelDirPaths;
@@ -73,6 +74,7 @@ public:
   Ogre::RenderWindow *getRenderWindow() {return mWindow;}
   Ogre::SceneManager *getSceneManager() const {return mSceneMgr;}
   OgreBites::SdkTrayManager *getTrayMgr() {return mTrayMgr;}
+  Ogre::Viewport *getMainViewPort() {return m_pMainViewPort;}
 
   void go();
   void initApp();

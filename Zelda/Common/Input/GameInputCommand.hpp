@@ -23,14 +23,16 @@
 enum EGameInputCommandTypes {
   GIC_RIGHT,
   GIC_LEFT,
-  GIC_JUMP,
-  GIC_ENTER_LINK,
-  GIC_ATTACK,
-  GIC_ACTIVATE,
-  GIC_USE_HEALTH_POTION,
-  GIC_USE_MANA_POTION,
-  GIC_CHANGE_WEAPON,
+  GIC_FRONT,
+  GIC_REAR,
+
+  GIC_SWORD,
+  GIC_TOOL,
+  GIC_RUN,
+  GIC_INTERACT,
+
   GIC_SHOW_MENU,
+  GIC_ESCAPE,
 
   GIC_COUNT,
 };
@@ -69,7 +71,7 @@ public:
   float getFloatValue() const {return m_fValue;}
   int getIntValue() const {return m_iValue;}
   EGameInputState getState() const {return m_eState;}
-  
+
 };
 
 #endif

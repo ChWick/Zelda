@@ -12,9 +12,9 @@ protected:
 public:
 
   T parseString(const std::string &str) const {
-    for (std::pair<T, std::string> &p : m_Map) {
+    for (const std::pair<T, std::string> &p : m_Map) {
       if (p.second == str) {
-        return p;
+        return p.first;
       }
     }
     throw Ogre::Exception(0, "'" + str + "' could not be parsed.", __FILE__);

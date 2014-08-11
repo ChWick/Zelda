@@ -1,13 +1,14 @@
 #include "PlayerController.h"
 #include "Player.h"
 #include "../../Common/Input/GameInputCommand.hpp"
+#include <OgreCamera.h>
 
 using namespace Ogre;
 
 
-CPlayerController::CPlayerController(SceneManager * scnMgr, CCameraController *pCameraController, CPlayer * ccPlayer)
-	: CPersonController(ccPlayer), m_pCameraController(pCameraController) {
-	assert(pCameraController);
+CPlayerController::CPlayerController(SceneManager * scnMgr, const Ogre::Camera *pCamera, CPlayer * ccPlayer)
+	: CPersonController(ccPlayer),
+		m_pCamera(pCamera) {
     mCCPerson = ccPlayer;
 	mSceneManager = scnMgr;
 	mKeyDirection = Vector3::ZERO;
@@ -21,6 +22,20 @@ btCharacterControllerInterface * CPlayerController::getCCPhysics()
 	return mCCPhysics;
 }
 void CPlayerController::receiveInputCommand(const CGameInputCommand &cmd) {
+  switch (cmd.getType()) {
+	case GIC_RIGHT:
+		mKeyDirection.x = cmd.getIntValue();
+		break;
+	case GIC_LEFT:
+		mKeyDirection.x = -cmd.getIntValue();
+		break;
+	case GIC_FRONT:
+		mKeyDirection.z = -cmd.getIntValue();
+		break;
+	case GIC_REAR:
+		mKeyDirection.z = cmd.getIntValue();
+		break;
+	}
 }
 /*
 bool CPlayerController::keyPressed(const OIS::KeyEvent & evt)
@@ -132,14 +147,14 @@ void CPlayerController::updateCharacter(const Real deltaTime)
 void CPlayerController::updateGoalDirection() {
 	mGoalDirection = Ogre::Vector3::ZERO;
 
-	/*if (mKeyDirection != Vector3::ZERO)
+	if (mKeyDirection != Vector3::ZERO)
 	{
 		// calculate actuall goal direction in world based on player's key directions
-		mGoalDirection += mKeyDirection.z * m_pCameraController->getCameraNode()->getOrientation().zAxis();
-		mGoalDirection += mKeyDirection.x * m_pCameraController->getCameraNode()->getOrientation().xAxis();
+		mGoalDirection += mKeyDirection.z * m_pCamera->getOrientation().zAxis();
+		mGoalDirection += mKeyDirection.x * m_pCamera->getOrientation().xAxis();
 		mGoalDirection.y = 0;
 		mGoalDirection.normalise();
-	}*/
+	}
 }
 void CPlayerController::postUpdateCharacter() {
 	if (m_uiCurrentMoveState == MS_NOT_MOVING) {

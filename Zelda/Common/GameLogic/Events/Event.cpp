@@ -20,40 +20,33 @@
 #include "Event.hpp"
 #include "OgreException.h"
 #include "OgreStringConverter.h"
+#include "EmitterCreator.hpp"
+#include "Emitter.hpp"
 
 using namespace XMLHelper;
 
 namespace events {
-
-std::string CEvent::toString(ETypes eEventType) {
-  switch (eEventType) {
-  case EVENT_TO_DEFINE:
-    return "event_to_define";
-  }
-
-  throw Ogre::Exception(0, "Event type " + Ogre::StringConverter::toString(eEventType) + " could not be converted to a string", __FILE__);
-}
-CEvent::ETypes CEvent::parseEventType(const std::string &sString) {
-  if (sString == "event_to_define") {return EVENT_TO_DEFINE;}
-
-  throw Ogre::Exception(0, "Event type " + sString + " could not be converted to a string", __FILE__);
-}
-
-
-
-CEvent::CEvent(CEntity &owner, ETypes eType)
-  : m_eType(eType),
-    m_sID("unset id"),
+CEvent::CEvent(CEntity &owner)
+  : m_sID("unset id"),
     m_Owner(owner),
     m_bStarted(false) {
 }
-CEvent::CEvent(CEntity &owner, ETypes eType, const tinyxml2::XMLElement *pElement)
-  : m_eType(eType),
-    m_sID(Attribute(pElement, "id", "unset id")),
+CEvent::CEvent(CEntity &owner, const tinyxml2::XMLElement *pElement)
+  : m_sID(Attribute(pElement, "id", "unset id")),
     m_Owner(owner),
     m_bStarted(BoolAttribute(pElement, "started", false)) {
+
+  for (const tinyxml2::XMLElement *pChildElem = pElement->FirstChildElement(); pChildElem; pChildElem = pChildElem->NextSiblingElement()) {
+    if (strcmp(pChildElem->Value(), "emitter") == 0) {
+      m_lEmitter.push_back(createEmitter(pChildElem));
+    }
+  }
 }
 CEvent::~CEvent() {
+  for (CEmitter *pEmitter : m_lEmitter) {
+    delete pEmitter;
+  }
+  m_lEmitter.clear();
 }
 void CEvent::init() {
 }
@@ -70,7 +63,6 @@ void CEvent::stop() {
   }
 }
 void CEvent::writeToXMLElement(tinyxml2::XMLElement *pElement, EOutputStyle eStyle) const {
-  SetAttribute(pElement, "type", toString(m_eType));
   SetAttribute(pElement, "id", m_sID);
   if (eStyle == OS_FULL) {
     SetAttribute(pElement, "started", m_bStarted);
