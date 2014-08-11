@@ -50,8 +50,9 @@ void DotSceneLoader::parseDotScene(const String &SceneName, const String &groupN
         Ogre::String basename, path;
         Ogre::StringUtil::splitFilename(SceneName, basename, path);
 
+        // Do not look in other groups but the given one
         DataStreamPtr pStream = ResourceGroupManager::getSingleton().
-            openResource( basename, groupName );
+            openResource( basename, groupName, false );
 
         //DataStreamPtr pStream = ResourceGroupManager::getSingleton().
         //    openResource( SceneName, groupName );

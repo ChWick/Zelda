@@ -45,7 +45,7 @@ void CMapPack::exit() {
 
 void CMapPack::parseXMLFile() {
   Ogre::DataStreamPtr dataStream
-    = Ogre::ResourceGroupManager::getSingleton().openResource(m_sName + ".xml", m_sResourceGroup);
+    = Ogre::ResourceGroupManager::getSingleton().openResource(m_sName + ".xml", m_sResourceGroup, false);
 
   if (dataStream.isNull()) {
     throw Ogre::Exception(0, "File " + m_sName + ".zip not found in resource group " + m_sResourceGroup + "!", __FILE__);
