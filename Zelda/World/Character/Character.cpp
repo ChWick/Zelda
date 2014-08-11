@@ -50,6 +50,7 @@ void CCharacter::destroy() {
 void CCharacter::setPosition(const Ogre::Vector3 &vPos) {
   if (mCCPhysics) {
     mCCPhysics->warp(BtOgre::Convert::toBullet(vPos));
+    m_pSceneNode->setPosition(BtOgre::Convert::toOgre(m_pCollisionObject->getWorldTransform().getOrigin()));
   }
   else {
     m_pCharacterController->setPosition(vPos);

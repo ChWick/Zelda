@@ -11,11 +11,15 @@ private:
   CMap *m_pNextMap;
   CWorldEntity *m_pPlayer;
 
+  bool m_bSwitchingMaps;          //!< Is the map currently switch from current to next map
+
 public:
   CAtlas(CEntity *pParent, Ogre::SceneNode *pRootSceneNode, CWorldEntity *pPlayer);
   ~CAtlas();
 
   CMap *getCurrentMap() const {return m_pCurrentMap;}
+
+  void update(Ogre::Real tpf);
 
 protected:
   void handleMessage(const CMessage &message);
