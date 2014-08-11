@@ -19,9 +19,12 @@
 
 #include "Event.hpp"
 #include "OgreException.h"
+#include "../../Log.hpp"
 #include "OgreStringConverter.h"
 #include "EmitterCreator.hpp"
 #include "Emitter.hpp"
+#include "Actions/ActionCreator.hpp"
+#include "Actions/Action.hpp"
 
 using namespace XMLHelper;
 
@@ -40,6 +43,12 @@ CEvent::CEvent(CEntity &owner, const tinyxml2::XMLElement *pElement)
     if (strcmp(pChildElem->Value(), "emitter") == 0) {
       m_lEmitter.push_back(createEmitter(pChildElem, *this));
     }
+    else if (strcmp(pChildElem->Value(), "action") == 0) {
+      m_lActions.push_back(createAction(pChildElem, *this));
+    }
+    else {
+      throw Ogre::Exception(0, "Unknown event child '" + std::string(pChildElem->Value()) + "'", __FILE__);
+    }
   }
 }
 CEvent::~CEvent() {
@@ -52,14 +61,22 @@ void CEvent::init() {
 }
 void CEvent::start() {
   if (!m_bStarted) {
+    LOGV("Starting event");
     m_bStarted = true;
-    start_impl();
+
+    for (CAction *pAction : m_lActions) {
+      pAction->start();
+    }
   }
 }
 void CEvent::stop() {
   if (m_bStarted) {
+    LOGV("Stopping event");
     m_bStarted = false;
-    stop_impl();
+
+    for (CAction *pAction : m_lActions) {
+      pAction->stop();
+    }
   }
 }
 

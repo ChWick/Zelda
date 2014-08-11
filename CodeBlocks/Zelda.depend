@@ -6764,10 +6764,8 @@
 	<list>
 	"Message.hpp"
 
-1407240222 /home/christoph/Documents/Projects/Zelda/Zelda/Common/Message/Message.hpp
-	<vector>
-	<string>
-	<OgreException.h>
+1407759256 /home/christoph/Documents/Projects/Zelda/Zelda/Common/Message/Message.hpp
+	"MessageTypes.hpp"
 
 1407239337 /home/christoph/Documents/Projects/Zelda/Zelda/Common/Android/Android.hpp
 	"SaveStateManager.hpp"
@@ -6972,7 +6970,7 @@
 
 1407331199 /home/christoph/Documents/Projects/Zelda/Zelda/Common/GameLogic/OutputStyle.hpp
 
-1407752742 /home/christoph/Documents/Projects/Zelda/Zelda/Common/GameLogic/Events/Event.hpp
+1407758305 /home/christoph/Documents/Projects/Zelda/Zelda/Common/GameLogic/Events/Event.hpp
 	<string>
 	<vector>
 	<tinyxml2.h>
@@ -6989,12 +6987,15 @@
 	<OgreVector2.h>
 	<OgreException.h>
 
-1407752893 source:/home/christoph/Documents/Projects/Zelda/Zelda/Common/GameLogic/Events/Event.cpp
+1407758973 source:/home/christoph/Documents/Projects/Zelda/Zelda/Common/GameLogic/Events/Event.cpp
 	"Event.hpp"
 	"OgreException.h"
+	<OgreLogManager.h>
 	"OgreStringConverter.h"
 	"EmitterCreator.hpp"
 	"Emitter.hpp"
+	"Actions/ActionCreator.hpp"
+	"Actions/Action.hpp"
 
 1407334009 source:/home/christoph/Documents/Projects/Zelda/Zelda/Common/Util/XMLHelper.cpp
 	"XMLHelper.hpp"
@@ -7002,7 +7003,7 @@
 1407349873 /home/christoph/Documents/Projects/Zelda/Zelda/Common/GameLogic/GameStateTypes.hpp
 	"Util/EnumIdMap.hpp"
 
-1407749316 /home/christoph/Documents/Projects/Zelda/Zelda/Common/Util/EnumIdMap.hpp
+1407758609 /home/christoph/Documents/Projects/Zelda/Zelda/Common/Util/EnumIdMap.hpp
 	<map>
 	<string>
 	<OgreException.h>
@@ -7966,4 +7967,60 @@
 	"../../Util/XMLHelper.hpp"
 	"Event.hpp"
 	"../Entity.hpp"
+
+1407758215 source:/home/christoph/Documents/Projects/Zelda/Zelda/Common/GameLogic/Events/Actions/Action.cpp
+	"Action.hpp"
+	"../../../Util/XMLHelper.hpp"
+
+1407758634 /home/christoph/Documents/Projects/Zelda/Zelda/Common/GameLogic/Events/Actions/Action.hpp
+	"ActionTypes.hpp"
+
+1407757747 /home/christoph/Documents/Projects/Zelda/Zelda/Common/GameLogic/Events/Actions/ActionTypes.hpp
+	"../../../Util/EnumIdMap.hpp"
+
+1407758931 source:/home/christoph/Documents/Projects/Zelda/Zelda/Common/GameLogic/Events/Actions/ActionMessage.cpp
+	"ActionMessage.hpp"
+	"../../../Util/XMLHelper.hpp"
+
+1407758718 /home/christoph/Documents/Projects/Zelda/Zelda/Common/GameLogic/Events/Actions/ActionMessage.hpp
+	"Action.hpp"
+
+1407758904 source:/home/christoph/Documents/Projects/Zelda/Zelda/Common/GameLogic/Events/Actions/ActionTypes.cpp
+	"ActionTypes.hpp"
+
+1407758438 /home/christoph/Documents/Projects/Zelda/Zelda/Common/GameLogic/Events/Actions/ActionCreator.hpp
+
+1407758839 source:/home/christoph/Documents/Projects/Zelda/Zelda/Common/GameLogic/Events/Actions/ActionCreator.cpp
+	"ActionCreator.hpp"
+	"ActionTypes.hpp"
+	"../../../Util/XMLHelper.hpp"
+	<OgreException.h>
+	"ActionMessage.hpp"
+
+1407759151 /home/christoph/Documents/Projects/Zelda/Zelda/Common/Message/MessageTypes.hpp
+	"../Util/EnumIdMap.hpp"
+
+1407759147 source:/home/christoph/Documents/Projects/Zelda/Zelda/Common/Message/MessageTypes.cpp
+	"MessageTypes.hpp"
+
+1407759344 source:/home/christoph/Documents/Projects/Zelda/Zelda/Common/Message/Message.cpp
+	"Message.hpp"
+	"../Util/XMLHelper.hpp"
+
+1407759510 source:/home/christoph/Documents/Projects/Zelda/Zelda/Common/Message/MessageCreator.cpp
+	"MessageCreator.hpp"
+	"MessageTypes.hpp"
+	"../Util/XMLHelper.hpp"
+	<OgreException.h>
+	"MessageSwitchMap.hpp"
+
+1407759409 /home/christoph/Documents/Projects/Zelda/Zelda/Common/Message/MessageCreator.hpp
+
+1407759674 /home/christoph/Documents/Projects/Zelda/Zelda/Common/Message/MessageSwitchMap.hpp
+	"Message.hpp"
+	<string>
+
+1407759711 source:/home/christoph/Documents/Projects/Zelda/Zelda/Common/Message/MessageSwitchMap.cpp
+	"MessageSwitchMap.hpp"
+	"../Util/XMLHelper.hpp"
 

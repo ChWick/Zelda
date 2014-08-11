@@ -32,6 +32,7 @@ class ENTITY;
 namespace events {
 
   class CEmitter;
+  class CAction;
 
 class CEvent {
 private:
@@ -41,6 +42,7 @@ protected:
   bool m_bStarted;
 
   std::vector<CEmitter *> m_lEmitter;
+  std::vector<CAction *> m_lActions;
 
 public:
   CEvent(CEntity &owner);
@@ -58,13 +60,12 @@ public:
 
   const std::string &getID() const {return m_sID;}
   const std::vector<CEmitter *> &getEmitter() const {return m_lEmitter;}
+  const std::vector<CAction *> &getActions() const {return m_lActions;}
   CEntity &getOwner() const {return m_Owner;}
 
   virtual void writeToXMLElement(tinyxml2::XMLElement *pElement, EOutputStyle eStyle) const;
 
 protected:
-  virtual void start_impl() {}
-  virtual void stop_impl() {}
 };
 
 };

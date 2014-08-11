@@ -1,4 +1,5 @@
 #ifndef _ENUM_ID_MAP_HPP_
+#define _ENUM_ID_MAP_HPP_
 
 #include <map>
 #include <string>
