@@ -1,0 +1,37 @@
+<scene formatVersion="1.0.1" exported_by="christoph" export_time="1407611096.515309" previous_export_time="1407602006.5808353" >
+  <nodes >
+    <node name="Cube" >
+      <position z="-0.000000" x="0.000000" y="-1.000000" />
+      <rotation qx="0.000000" qz="-0.000000" qw="1.000000" qy="0.000000" />
+      <scale z="400.000000" x="400.000000" y="1.000000" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <entity friction_z="1.0" name="Cube.001" physics_type="STATIC" lock_trans_y="False" anisotropic_friction="False" actor="False" lock_trans_z="False" lock_rot_z="False" damping_trans="0.03999999910593033" damping_rot="0.10000000149011612" velocity_max="0.0" mass="1.0" mass_radius="1.0" ghost="False" collisionPrim="triangle_mesh" meshFile="Cube.001.mesh" friction_x="1.0" lock_rot_y="False" velocity_min="0.0" lock_trans_x="False" inertia_tensor="0.4000000059604645" lock_rot_x="False" friction_y="1.0" />
+    </node>
+    <node name="Floor" >
+      <position z="-0.000000" x="0.000000" y="0.000000" />
+      <rotation qx="0.000000" qz="-0.000000" qw="1.000000" qy="0.000000" />
+      <scale z="1.000000" x="1.000000" y="1.000000" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <entity friction_z="1.0" name="Floor" physics_type="NO_COLLISION" lock_trans_y="False" anisotropic_friction="False" actor="False" damping_rot="0.10000000149011612" lock_rot_z="False" damping_trans="0.03999999910593033" lock_trans_z="False" velocity_max="0.0" mass="1.0" mass_radius="1.0" ghost="False" meshFile="Floor.mesh" friction_x="1.0" lock_rot_y="False" velocity_min="0.0" lock_trans_x="False" inertia_tensor="0.4000000059604645" lock_rot_x="False" friction_y="1.0" />
+    </node>
+  </nodes>
+  <externals >
+    <item type="material" >
+      <file name="/home/christoph/Documents/Projects/Zelda/maps/Atlases/TestMap/Map/PhysicsOnly.material" />
+    </item>
+    <item type="material" >
+      <file name="/home/christoph/Documents/Projects/Zelda/maps/Atlases/TestMap/Map/TexturedMaterial.material" />
+    </item>
+  </externals>
+  <environment >
+    <colourAmbient g="0.0" r="0.0" b="0.0" />
+    <colourDiffuse g="0.05087608844041824" r="0.05087608844041824" b="0.05087608844041824" />
+    <colourBackground g="0.05087608844041824" r="0.05087608844041824" b="0.05087608844041824" />
+  </environment>
+</scene>
