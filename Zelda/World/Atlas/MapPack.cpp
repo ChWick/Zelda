@@ -5,6 +5,7 @@
 #include <OgreLogManager.h>
 #include "MapPackParserListener.hpp"
 #include "RegionInfo.hpp"
+#include <OgreStringConverter.h>
 
 using namespace tinyxml2;
 using namespace XMLHelper;
@@ -57,6 +58,8 @@ void CMapPack::parseXMLFile() {
 
   XMLElement *pMapElem = doc.FirstChildElement();
   m_sSceneFile = Attribute(pMapElem, "scene");
+  m_vGlobalPosition = Ogre::StringConverter::parseVector3(Attribute(pMapElem, "global_position"));
+  m_vGlobalSize = Ogre::StringConverter::parseVector2(Attribute(pMapElem, "global_size"));
 
   for (XMLElement *pElem = pMapElem->FirstChildElement(); pElem; pElem = pElem->NextSiblingElement()) {
     if (strcmp(pElem->Value(), "region") == 0) {

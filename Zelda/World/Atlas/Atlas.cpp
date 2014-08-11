@@ -26,7 +26,8 @@ void CAtlas::handleMessage(const CMessage &message) {
 
     m_pNextMap = new CMap(this, CMapPackPtr(new CMapPack("../maps/Atlases/TestMap/", switch_map_message.getMap())), m_pSceneNode, m_pPlayer);
 
-    m_pCurrentMap->moveMapAndDeletePhysics(Ogre::Vector3(10, 0, 0));
+    Ogre::Vector3 vMapPositionOffset = m_pCurrentMap->getMapPack()->getGlobalPosition() - m_pNextMap->getMapPack()->getGlobalPosition();
+    m_pCurrentMap->moveMapAndDeletePhysics(vMapPositionOffset);
 
 
     m_pPlayer->enterMap(m_pNextMap);

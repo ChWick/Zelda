@@ -24,6 +24,7 @@ public:
 
   const CPhysicsManager *getPhysicsManager() const {return &m_PhysicsManager;}
   CPhysicsManager *getPhysicsManager() {return &m_PhysicsManager;}
+  const CMapPackPtr getMapPack() const {return m_MapPack;}
 
   void update(Ogre::Real tpf);
   bool frameStarted(const Ogre::FrameEvent& evt);
