@@ -104,6 +104,8 @@
 		<Unit filename="../Zelda/Common/ShaderGenerator.hpp" />
 		<Unit filename="../Zelda/Common/Util/DebugDrawer.cpp" />
 		<Unit filename="../Zelda/Common/Util/DebugDrawer.hpp" />
+		<Unit filename="../Zelda/Common/Util/DeleteSceneNode.cpp" />
+		<Unit filename="../Zelda/Common/Util/DeleteSceneNode.hpp" />
 		<Unit filename="../Zelda/Common/Util/EnumIdMap.hpp" />
 		<Unit filename="../Zelda/Common/Util/Sleep.cpp" />
 		<Unit filename="../Zelda/Common/Util/Sleep.hpp" />
@@ -125,6 +127,11 @@
 		<Unit filename="../Zelda/World/Atlas/Map.hpp" />
 		<Unit filename="../Zelda/World/Atlas/MapPack.cpp" />
 		<Unit filename="../Zelda/World/Atlas/MapPack.hpp" />
+		<Unit filename="../Zelda/World/Atlas/MapPackParserListener.hpp" />
+		<Unit filename="../Zelda/World/Atlas/Region.cpp" />
+		<Unit filename="../Zelda/World/Atlas/Region.hpp" />
+		<Unit filename="../Zelda/World/Camera/AerialCameraPerspective.cpp" />
+		<Unit filename="../Zelda/World/Camera/AerialCameraPerspective.hpp" />
 		<Unit filename="../Zelda/World/Character/Character.cpp" />
 		<Unit filename="../Zelda/World/Character/Character.h" />
 		<Unit filename="../Zelda/World/Character/CharacterController.h" />
@@ -161,6 +168,9 @@
 		<Unit filename="../Zelda/World/WorldEntity.hpp" />
 		<Unit filename="../Zelda/Zelda.cpp" />
 		<Unit filename="../Zelda/Zelda.hpp" />
+		<Unit filename="../dependencies/OgreSdkUtil/InputContext.h" />
+		<Unit filename="../dependencies/OgreSdkUtil/SdkCameraMan.h" />
+		<Unit filename="../dependencies/OgreSdkUtil/SdkTrays.h" />
 		<Extensions>
 			<code_completion>
 				<search_path add="/usr/local/include/OGRE" />

@@ -1,5 +1,6 @@
 #include "CharacterController_Physics.h"
 #include "../../Common/Physics/PhysicsManager.h"
+#include "../WorldEntity.hpp"
 
 
 // static helper method
@@ -175,7 +176,7 @@ bool CharacterControllerPhysics::recoverFromPenetration ( btCollisionWorld* coll
 		btBroadphasePair* collisionPair = &m_ghostObject->getOverlappingPairCache()->getOverlappingPairArray()[i];
 
 		btCollisionObject* obj0 = static_cast<btCollisionObject*>(collisionPair->m_pProxy0->m_clientObject);
-                btCollisionObject* obj1 = static_cast<btCollisionObject*>(collisionPair->m_pProxy1->m_clientObject);
+    btCollisionObject* obj1 = static_cast<btCollisionObject*>(collisionPair->m_pProxy1->m_clientObject);
 
 		if ((obj0 && !obj0->hasContactResponse()) || (obj1 && !obj1->hasContactResponse()))
 			continue;
@@ -187,7 +188,12 @@ bool CharacterControllerPhysics::recoverFromPenetration ( btCollisionWorld* coll
 		for (int j=0;j<m_manifoldArray.size();j++)
 		{
 			btPersistentManifold* manifold = m_manifoldArray[j];
+
+      if (manifold->getNumContacts() <= 0) {continue;}
+
 			btScalar directionSign = manifold->getBody0() == m_ghostObject ? btScalar(-1.0) : btScalar(1.0);
+
+
 			for (int p=0;p<manifold->getNumContacts();p++)
 			{
 				const btManifoldPoint&pt = manifold->getContactPoint(p);
@@ -303,6 +309,7 @@ void CharacterControllerPhysics::updateTargetPositionBasedOnCollision (const btV
 
 void CharacterControllerPhysics::stepForwardAndStrafe ( btCollisionWorld* collisionWorld, const btVector3& walkMove)
 {
+	m_lCollidingWorldEntities.clear();
 	// printf("m_normalizedDirection=%f,%f,%f\n",
 	// 	m_normalizedDirection[0],m_normalizedDirection[1],m_normalizedDirection[2]);
 	// phase 2: forward and strafe
@@ -357,6 +364,11 @@ void CharacterControllerPhysics::stepForwardAndStrafe ( btCollisionWorld* collis
 
 		if (callback.hasHit())
 		{
+			const btCollisionObject *pOther = callback.m_hitCollisionObject;
+
+      const CWorldEntity *pWE = CWorldEntity::getFromUserPointer(pOther);
+      if (pWE) {m_lCollidingWorldEntities.push_back(pWE);}
+
 			// we moved only a fraction
 			btScalar hitDistance;
 			hitDistance = (callback.m_hitPointWorld - m_currentPosition).length();

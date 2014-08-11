@@ -26,12 +26,14 @@ CWorld::CWorld()
   m_pWorldCamera->setAspectRatio(Ogre::Real(vp->getActualWidth()) / Ogre::Real(vp->getActualHeight()));
   vp->setCamera(m_pWorldCamera);
 
-  // create the atlas
-  m_pAtlas = new CAtlas(this, CGame::getSingleton().getSceneManager()->getRootSceneNode());
-
   // create the player
-  m_pPlayer = new CPlayer(this, m_pAtlas->getCurrentMap(), m_pWorldCamera, CGame::getSingleton().getSceneManager());
-  m_pPlayer->init(m_pAtlas->getSceneNode());
+  m_pPlayer = new CPlayer(this, m_pWorldCamera, CGame::getSingleton().getSceneManager());
+
+  // create the atlas
+  m_pAtlas = new CAtlas(this, CGame::getSingleton().getSceneManager()->getRootSceneNode(), m_pPlayer);
+
+  // initialize the player
+  m_pPlayer->enterMap(m_pAtlas->getCurrentMap());
 
   //m_pCameraPerspective = new CAerialCameraPerspective(m_pWorldCamera, (Ogre::SceneNode*)m_pAtlas->getChildren().front()->getSceneNode()->getChild(0));
   m_pCameraPerspective = new CAerialCameraPerspective(m_pWorldCamera, m_pPlayer->getSceneNode());
@@ -44,8 +46,8 @@ CWorld::~CWorld() {
 }
 
 void CWorld::update(Ogre::Real tpf) {
-  m_pCameraPerspective->updateCamera(tpf);
   CGameState::update(tpf);
+  m_pCameraPerspective->updateCamera(tpf);
 }
 
 bool CWorld::frameRenderingQueued(const Ogre::FrameEvent& evt) {

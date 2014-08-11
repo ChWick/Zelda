@@ -38,7 +38,7 @@ CEvent::CEvent(CEntity &owner, const tinyxml2::XMLElement *pElement)
 
   for (const tinyxml2::XMLElement *pChildElem = pElement->FirstChildElement(); pChildElem; pChildElem = pChildElem->NextSiblingElement()) {
     if (strcmp(pChildElem->Value(), "emitter") == 0) {
-      m_lEmitter.push_back(createEmitter(pChildElem));
+      m_lEmitter.push_back(createEmitter(pChildElem, *this));
     }
   }
 }
@@ -62,6 +62,17 @@ void CEvent::stop() {
     stop_impl();
   }
 }
+
+void CEvent::update(float tpf) {
+  if (m_bStarted) {return;}
+
+  for (CEmitter *pEmitter : m_lEmitter) {
+    if (pEmitter->isFiring(tpf)) {
+      start();
+    }
+  }
+}
+
 void CEvent::writeToXMLElement(tinyxml2::XMLElement *pElement, EOutputStyle eStyle) const {
   SetAttribute(pElement, "id", m_sID);
   if (eStyle == OS_FULL) {

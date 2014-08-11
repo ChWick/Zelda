@@ -1,7 +1,7 @@
 #ifndef CHARACTERCONTROLLER_PHYSICS_H
 #define CHARACTERCONTROLLER_PHYSICS_H
 
-
+#include <list>
 #include <btBulletCollisionCommon.h>
 #include <btBulletDynamicsCommon.h>
 #include <BulletCollision/CollisionDispatch/btGhostObject.h>
@@ -14,6 +14,7 @@
 #include <BulletDynamics/Character/btCharacterControllerInterface.h>
 #include <BulletDynamics/Character/btKinematicCharacterController.h>
 
+class CWorldEntity;
 
 ///btKinematicCharacterController is an object that supports a sliding motion in a world.
 ///It uses a ghost object and convex sweep test to test for upcoming collisions. This is combined with discrete collision detection to recover from penetrations.
@@ -68,6 +69,8 @@ protected:
 	bool  m_interpolateUp;
 	bool  full_drop;
 	bool  bounce_fix;
+
+	std::list<const CWorldEntity *> m_lCollidingWorldEntities;
 
 	btVector3 computeReflectionDirection (const btVector3& direction, const btVector3& normal);
 	btVector3 parallelComponent (const btVector3& direction, const btVector3& normal);
@@ -150,6 +153,9 @@ public:
 
 	bool onGround () const;
 	void setUpInterpolate (bool value);
+
+
+	const std::list<const CWorldEntity *> &getCollidingWorldEntities() const {return m_lCollidingWorldEntities;}
 };
 
 

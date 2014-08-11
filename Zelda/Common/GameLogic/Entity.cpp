@@ -67,16 +67,7 @@ CEntity::CEntity(
 
   attachTo(pParent);
 
-  // read events
-  using namespace tinyxml2;
-  const XMLElement *pEventsElement = pElem->FirstChildElement("events");
-  if (pEventsElement) {
-    for (const XMLElement *pEventElement = pEventsElement->FirstChildElement();
-          pEventElement;
-          pEventElement = pEventElement->NextSiblingElement()) {
-      //m_lEvents.push_back(CEventCreator::create(m_Map, *this, pEventElement));
-    }
-  }
+  readEventsFromXMLElement(pElem, false);
 }
 CEntity::~CEntity() {
   std::list<CEntity *> lClone(m_lChildren);
@@ -85,10 +76,9 @@ CEntity::~CEntity() {
     delete lClone.front();
     lClone.pop_front();
   }
-  while (m_lEvents.size() > 0) {
-    delete m_lEvents.front();
-    m_lEvents.pop_front();
-  }
+
+  clearEvents();
+
   attachTo(NULL);
 }
 void CEntity::init() {
@@ -239,6 +229,9 @@ void CEntity::update(Ogre::Real tpf) {
       pEnt->update(tpf);
     }
   }
+  for (auto &pEvt : m_lEvents) {
+    pEvt->update(tpf);
+  }
 }
 void CEntity::render(Ogre::Real tpf) {
   for (auto &pEnt : m_lChildren) {
@@ -305,11 +298,24 @@ void CEntity::handleMessage(const CMessage &message) {
 }
 
 
+void CEntity::clearEvents() {
+  while (m_lEvents.size() > 0) {
+    delete m_lEvents.front();
+    m_lEvents.pop_front();
+  }
+}
 
+void CEntity::readEventsFromXMLElement(const tinyxml2::XMLElement *pElement, bool bClearEvents) {
+  if (bClearEvents) {clearEvents();}
 
+  assert(pElement);
 
+  // read events
+  using namespace tinyxml2;
+  for (const XMLElement *pEventElement = pElement->FirstChildElement();
+        pEventElement;
+        pEventElement = pEventElement->NextSiblingElement()) {
 
-
-
-
-
+    m_lEvents.push_back(new CEvent(*this, pEventElement));
+  }
+}

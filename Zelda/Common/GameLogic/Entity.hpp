@@ -105,6 +105,8 @@ public:
 
   virtual void writeToXMLElement(tinyxml2::XMLElement *pElement, EOutputStyle eStyle) const;
 
+  void clearEvents();
+  void readEventsFromXMLElement(const tinyxml2::XMLElement *pElement, bool bClearEvents = true);
 
   // getter setter
   // =============
@@ -142,6 +144,7 @@ public:
 
   virtual Ogre::SceneNode *getSceneNode() const {return nullptr;}
   virtual btCollisionObject *getCollisionObject() const {return nullptr;}
+  virtual bool collidesWith(const std::string &sEntityID) const {return false;}
 
 protected:
 

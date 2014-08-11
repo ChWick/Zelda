@@ -11,7 +11,7 @@ private:
   CMap *m_pNextMap;
 
 public:
-  CAtlas(CEntity *pParent, Ogre::SceneNode *pRootSceneNode);
+  CAtlas(CEntity *pParent, Ogre::SceneNode *pRootSceneNode, CWorldEntity *pPlayer);
   ~CAtlas();
 
   CMap *getCurrentMap() const {return m_pCurrentMap;}

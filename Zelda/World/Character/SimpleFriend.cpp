@@ -1,8 +1,8 @@
 #include "SimpleFriend.h"
 #include "PlayerTool.h"
 
-SimpleFriend::SimpleFriend(const std::string &sID, CEntity *pParent, ESimpleFriendTypes eType, CMap *pMap)
-: CPerson(sID, pParent, pMap, FOE_FRIENDLY), m_eType(eType){
+SimpleFriend::SimpleFriend(const std::string &sID, CEntity *pParent, ESimpleFriendTypes eType)
+: CPerson(sID, pParent, FOE_FRIENDLY), m_eType(eType){
     //ctor
 }
 

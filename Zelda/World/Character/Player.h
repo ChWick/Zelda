@@ -16,7 +16,7 @@ private:
 	RibbonTrail* mSwordTrail;
 public:
 
-	CPlayer(CEntity *pParent, CMap *pMap, const Ogre::Camera *pCamera, Ogre::SceneManager *pPlayerSceneManager);
+	CPlayer(CEntity *pParent, const Ogre::Camera *pCamera, Ogre::SceneManager *pPlayerSceneManager);
 	virtual ~CPlayer();
 	void destroy();
 	void startup(const Ogre::Vector3 &playerPos, const Ogre::Vector3 &playerLookDirection, const Ogre::Real cameraYaw, const Ogre::Real cameraPitch);

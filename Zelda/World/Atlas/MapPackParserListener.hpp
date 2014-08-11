@@ -3,8 +3,13 @@
 
 struct SRegionInfo;
 
+namespace tinyxml2 {
+  class XMLElement;
+};
+
 class CMapPackParserListener {
 public:
+  virtual void parsePlayer(const tinyxml2::XMLElement *) {}
   virtual void parseRegion(const SRegionInfo &) {}
 };
 

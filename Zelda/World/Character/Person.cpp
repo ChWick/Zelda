@@ -22,8 +22,8 @@ const Ogre::Real CPerson::PERSON_RADIUS = 0.2f;
 const Ogre::Real CPerson::PERSON_SCALE  = 1.f;
 
 
-CPerson::CPerson(const std::string &sID, CEntity *pParent, CMap *pMap, const EFriendOrEnemyStates foe)
-  : CCharacter(sID, pParent, pMap, foe) {
+CPerson::CPerson(const std::string &sID, CEntity *pParent, const EFriendOrEnemyStates foe)
+  : CCharacter(sID, pParent, foe) {
 	m_degLeftHandleCurrentRotation = 0;
 	m_degLeftHandleRotationSpeed = 0;
 	m_degLeftHandleRotationToTarget = 0;
@@ -215,6 +215,15 @@ void CPerson::postUpdateAnimationsCallback(const Ogre::Real fTime) {
 }
 void CPerson::updateAnimationsCallback(const Ogre::Real fTime) {
     CCharacter::updateAnimationsCallback(fTime);
+}
+
+bool CPerson::collidesWith(const std::string &sEntityID) const {
+  for (const CWorldEntity *pWE : dynamic_cast<CharacterControllerPhysics*>(mCCPhysics)->getCollidingWorldEntities()) {
+    if (pWE->getID() == sEntityID) {
+      return true;
+    }
+  }
+  return false;
 }
 
 void CPerson::createBlinkingMaterials() {

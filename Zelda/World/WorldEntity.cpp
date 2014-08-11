@@ -68,3 +68,8 @@ CWorldEntity *CWorldEntity::getFromUserPointer(btCollisionObject *pCO) {
   assert(pCO);
   return static_cast<CWorldEntity*>(pCO->getUserPointer());
 }
+
+const CWorldEntity *CWorldEntity::getFromUserPointer(const btCollisionObject *pCO) {
+  assert(pCO);
+  return static_cast<CWorldEntity*>(pCO->getUserPointer());
+}

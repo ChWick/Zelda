@@ -7,10 +7,11 @@
 #include <OgreLogManager.h>
 #include "Region.hpp"
 
-CMap::CMap(CEntity *pAtlas, CMapPackPtr mapPack, Ogre::SceneNode *pParentSceneNode)
+CMap::CMap(CEntity *pAtlas, CMapPackPtr mapPack, Ogre::SceneNode *pParentSceneNode, CWorldEntity *pPlayer)
   : CWorldEntity("map", pAtlas, this),
     m_PhysicsManager(pParentSceneNode->getCreator()),
-    m_MapPack(mapPack) {
+    m_MapPack(mapPack),
+    m_pPlayer(pPlayer) {
 
   Ogre::LogManager::getSingleton().logMessage("Construction of map '" + m_MapPack->getName() + "'");
 
@@ -89,9 +90,6 @@ void CMap::CreateCube(const btVector3 &Position, btScalar Mass)
     // Create the rigid body object
     btRigidBody *RigidBody = new btRigidBody(Mass, MotionState, Shape, LocalInertia);
 
-    // Store a pointer to the Ogre Node so we can update it later
-    RigidBody->setUserPointer((void *) (node));
-
     // Add it to the physics world
     m_PhysicsManager.getWorld()->addRigidBody(RigidBody, 32, 1023);
 }
@@ -110,6 +108,12 @@ bool CMap::frameEnded(const Ogre::FrameEvent& evt) {
   return CWorldEntity::frameEnded(evt);
 }
 
+// ############################################################################3
+// MapPackParserListener
+
+void CMap::parsePlayer(const tinyxml2::XMLElement *pElem) {
+  m_pPlayer->readEventsFromXMLElement(pElem, true);
+}
 
 void CMap::parseRegion(const SRegionInfo &region) {
   new CRegion(this, region);

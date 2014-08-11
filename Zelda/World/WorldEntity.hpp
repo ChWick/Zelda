@@ -39,6 +39,7 @@ public:
 
   void setThisAsCollisionObjectsUserPointer();
   static CWorldEntity *getFromUserPointer(btCollisionObject *pCO);
+  static const CWorldEntity *getFromUserPointer(const btCollisionObject *pCO);
 };
 
 #endif // _WORLD_ENTITY_HPP_

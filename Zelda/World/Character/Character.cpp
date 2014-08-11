@@ -1,10 +1,11 @@
 #include "Character.h"
 #include "CharacterController.h"
+#include "../Atlas/Map.hpp"
 #include "../../Common/Physics/PhysicsMasks.hpp"
 #include <OgreAnimationState.h>
 
-CCharacter::CCharacter(const std::string &sID, CEntity *pParent, CMap *pMap, const EFriendOrEnemyStates foe)
-	: CWorldEntity(sID, pParent, pMap),
+CCharacter::CCharacter(const std::string &sID, CEntity *pParent, const EFriendOrEnemyStates foe)
+	: CWorldEntity(sID, pParent, nullptr),
 	  m_uiAnimationCount(ANIM_COUNT),
 		m_fTimer(0),
 		m_fAnimSpeed(1),
@@ -20,8 +21,10 @@ CCharacter::CCharacter(const std::string &sID, CEntity *pParent, CMap *pMap, con
 }
 CCharacter::~CCharacter() {
 }
-void CCharacter::init(Ogre::SceneNode *pParentSceneNode) {
-	initBody(pParentSceneNode);
+void CCharacter::enterMap(CMap *pMap) {
+  m_pMap = pMap;
+
+	initBody(m_pMap->getSceneNode());
 	createPhysics();
 	m_pCharacterController = createCharacterController();
 	//setupAnimations();

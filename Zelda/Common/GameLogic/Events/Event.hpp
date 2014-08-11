@@ -42,10 +42,10 @@ protected:
 
   std::vector<CEmitter *> m_lEmitter;
 
-protected:
+public:
   CEvent(CEntity &owner);
   CEvent(CEntity &owner, const tinyxml2::XMLElement *pElement);
-public:
+
   virtual ~CEvent();
 
   virtual void init();
@@ -54,8 +54,11 @@ public:
   void start();
   void stop();
 
+  void update(float tpf);
+
   const std::string &getID() const {return m_sID;}
   const std::vector<CEmitter *> &getEmitter() const {return m_lEmitter;}
+  CEntity &getOwner() const {return m_Owner;}
 
   virtual void writeToXMLElement(tinyxml2::XMLElement *pElement, EOutputStyle eStyle) const;
 

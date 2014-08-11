@@ -26,10 +26,13 @@ protected:
 	unsigned int m_uiTakeDamageFlags;               //!< from which dmg types the person can take damage (default all)
 	unsigned int m_uiBlockDamageFlags;              //!< which dmg type will be blocked (default all)
 public:
-	CPerson(const std::string &sID, CEntity *pParent, CMap *pMap, const EFriendOrEnemyStates foe);
+	CPerson(const std::string &sID, CEntity *pParent, const EFriendOrEnemyStates foe);
 	virtual ~CPerson();
 
 	virtual void destroy();
+
+
+  virtual bool collidesWith(const std::string &sEntityID) const;
 
 protected:
 	void createPhysics();

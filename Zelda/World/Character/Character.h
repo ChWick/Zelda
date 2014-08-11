@@ -96,10 +96,12 @@ public:
 
 protected:
 	// all values scaled in world units!
-	CCharacter(const std::string &sID, CEntity *pParent, CMap *pMap, const EFriendOrEnemyStates foe);
+	CCharacter(const std::string &sID, CEntity *pParent, const EFriendOrEnemyStates foe);
 
 public:
 	virtual ~CCharacter();
+
+	void enterMap(CMap *pMap);
 
 	void animRunStart();
 	void animRunEnd();
@@ -111,8 +113,6 @@ public:
 
 	void setIsMoving(bool isMoving);
 
-	// default init method
-	void init(Ogre::SceneNode *pParentSceneNode);
 	virtual void destroy();
 
 	void update(Ogre::Real fTime);

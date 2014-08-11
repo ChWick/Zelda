@@ -7,8 +7,9 @@ namespace tinyxml2 {
 
 namespace events {
   class CEmitter;
+  class CEvent;
 
-  CEmitter *createEmitter(const tinyxml2::XMLElement *pElem);
+  CEmitter *createEmitter(const tinyxml2::XMLElement *pElem, const CEvent &owner);
 };
 
 #endif // _EMITTER_CREATOR_HPP_

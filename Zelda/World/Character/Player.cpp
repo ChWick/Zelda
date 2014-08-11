@@ -12,8 +12,8 @@
 Ogre::Real g_fCurrentSpeedScale = 1;
 const Ogre::Real PLAYER_ENEMY_NOTIFY_RADIUS_SQR = 100.f; // already squared!
 
-CPlayer::CPlayer(CEntity *pParent, CMap *pMap, const Ogre::Camera* pCamera, Ogre::SceneManager *pPlayerSceneManager)
-	: CPerson("player", pParent, pMap, FOE_FRIENDLY),
+CPlayer::CPlayer(CEntity *pParent, const Ogre::Camera* pCamera, Ogre::SceneManager *pPlayerSceneManager)
+	: CPerson("player", pParent, FOE_FRIENDLY),
 		m_pCamera(pCamera),
     m_pPlayerSceneManager(pPlayerSceneManager) {
 }
