@@ -29,8 +29,13 @@ class CMessageInjector;
 class CMessageHandler
   : public Ogre::Singleton<CMessageHandler> {
 private:
+  struct SMessageEntry {
+    bool bAutoDelete;
+    const CMessage *pMessage;
+  };
+
   std::list<CMessageInjector*> m_lInjectors;
-  std::list<CMessage> m_lMessages;
+  std::list<SMessageEntry> m_lMessages;
 public:
   static CMessageHandler &getSingleton();
   static CMessageHandler *getSingletonPtr();
@@ -40,7 +45,7 @@ public:
   void addInjector(CMessageInjector *pInjector) {m_lInjectors.push_back(pInjector);}
   void removeInjector(CMessageInjector *pInjector) {m_lInjectors.remove(pInjector);}
 
-  void addMessage(const CMessage &m);
+  void addMessage(const CMessage *m, bool bAutoDelete = true);
 };
 
 #endif

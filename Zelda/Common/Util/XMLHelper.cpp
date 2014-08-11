@@ -75,17 +75,22 @@ namespace XMLHelper {
   }
 
   Ogre::String Attribute(const tinyxml2::XMLElement *pElem,
-			 const char *pLabel,
-			 const Ogre::String &sDefault,
-			 const  bool bRequired) {
+			 const char *pLabel) {
     assert(pElem);
     assert(pLabel);
     if (pElem->Attribute(pLabel)) {return Ogre::String(pElem->Attribute(pLabel));}
-    if (bRequired) {
-      throw Ogre::Exception(0,
-			    "Required attribute '" + Ogre::String(pLabel) + "' not found",
-			    __FILE__);
-    }
+
+    throw Ogre::Exception(0,
+        "Required attribute '" + Ogre::String(pLabel) + "' not found",
+        __FILE__);
+  }
+  Ogre::String Attribute(const tinyxml2::XMLElement *pElem,
+			 const char *pLabel,
+			 const Ogre::String &sDefault) {
+    assert(pElem);
+    assert(pLabel);
+    if (pElem->Attribute(pLabel)) {return Ogre::String(pElem->Attribute(pLabel));}
+
     return sDefault;
   }
   Ogre::Vector2 Vector2Attribute(const tinyxml2::XMLElement *pElem,

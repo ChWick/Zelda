@@ -16,6 +16,7 @@ namespace events {
     const CEvent &m_Owner;
 
     CAction(const tinyxml2::XMLElement *pElem, const CEvent &owner);
+    virtual ~CAction() {}
 
   public:
     virtual void start() {}

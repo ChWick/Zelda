@@ -56,9 +56,11 @@ namespace XMLHelper {
 		   const char *pLabel);
 
   Ogre::String Attribute(const tinyxml2::XMLElement *pElem,
+			 const char *pLabel);
+
+  Ogre::String Attribute(const tinyxml2::XMLElement *pElem,
 			 const char *pLabel,
-			 const Ogre::String &sDefault = Ogre::StringUtil::BLANK,
-			 bool bRequired = false);
+			 const Ogre::String &sDefault);
 
   Ogre::Vector2 Vector2Attribute(const tinyxml2::XMLElement *pElem,
 				 const Ogre::String &prefix = Ogre::StringUtil::BLANK,

@@ -19,6 +19,7 @@
 
 #include "MessageHandler.hpp"
 #include "MessageInjector.hpp"
+#include "Message.hpp"
 #include "Log.hpp"
 
 template<> CMessageHandler *Ogre::Singleton<CMessageHandler>::msSingleton = 0;
@@ -33,12 +34,20 @@ CMessageHandler &CMessageHandler::getSingleton() {
 void CMessageHandler::process() {
   while (m_lMessages.size() > 0) {
     for (auto pInjector : m_lInjectors) {
-      pInjector->sendMessageToAll(m_lMessages.front());
+      pInjector->sendMessageToAll(*m_lMessages.front().pMessage);
+    }
+
+    if (m_lMessages.front().bAutoDelete) {
+      delete m_lMessages.front().pMessage;
     }
     m_lMessages.pop_front();
   }
 }
-void CMessageHandler::addMessage(const CMessage &m) {
-  m_lMessages.push_back(m);
+void CMessageHandler::addMessage(const CMessage *m, bool bAutoDelete) {
+  SMessageEntry ent = {
+    bAutoDelete,
+    m
+  };
+  m_lMessages.push_back(ent);
 }
 
