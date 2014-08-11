@@ -23,7 +23,7 @@ CCharacter::CCharacter(const std::string &sID, CEntity *pParent, const EFriendOr
 }
 CCharacter::~CCharacter() {
 }
-void CCharacter::enterMap(CMap *pMap) {
+void CCharacter::enterMap(CMap *pMap, const Ogre::Vector3 &vInitPosition) {
   bool bSwitchMapOnly = m_pMap != nullptr;
 
   m_pMap = pMap;
@@ -37,6 +37,13 @@ void CCharacter::enterMap(CMap *pMap) {
   m_pCharacterController = createCharacterController();
 	//setupAnimations();
 	setupInternal();
+
+	if (bSwitchMapOnly) {
+    m_pCharacterController->moveToTarget(vInitPosition, 0.1f, Ogre::Degree(5), false, 5.f);
+	}
+	else {
+    setPosition(vInitPosition);
+	}
 }
 void CCharacter::destroy() {
 	destroyPhysics();

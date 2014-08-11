@@ -4,18 +4,12 @@
 #include <list>
 #include <OgreVector3.h>
 
-class CharacterControllerListener;
-
 class CCharacterController {
 protected:
-    std::list<CharacterControllerListener *> m_lListeners;
 public:
     CCharacterController() {
     }
 	virtual ~CCharacterController() {}
-
-	void addListener(CharacterControllerListener *pListener) {m_lListeners.push_back(pListener);}
-	void removeListener(CharacterControllerListener *pListener) {m_lListeners.remove(pListener);}
 
 	virtual void updateCharacter(Ogre::Real tpf) = 0;
 

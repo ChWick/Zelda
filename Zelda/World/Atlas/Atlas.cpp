@@ -3,6 +3,7 @@
 #include <OgreSceneNode.h>
 #include "../../Common/Log.hpp"
 #include "../../Common/Message/MessageSwitchMap.hpp"
+#include "../../Common/Message/MessageTargetReached.hpp"
 
 CAtlas::CAtlas(CEntity *pParent, Ogre::SceneNode *pRootSceneNode, CWorldEntity *pPlayer)
   : CWorldEntity("atlas", pParent, nullptr),
@@ -14,7 +15,8 @@ CAtlas::CAtlas(CEntity *pParent, Ogre::SceneNode *pRootSceneNode, CWorldEntity *
   m_pSceneNode = pRootSceneNode->createChildSceneNode("Atlas");
 
   m_pCurrentMap = new CMap(this, CMapPackPtr(new CMapPack("../maps/Atlases/TestMap/", "Map")), m_pSceneNode, pPlayer);
-  m_pPlayer->enterMap(m_pCurrentMap);
+  m_pPlayer->enterMap(m_pCurrentMap, Ogre::Vector3(0, 2, 0));
+  m_pCurrentMap->start();
 }
 CAtlas::~CAtlas() {
   delete m_pCurrentMap;
@@ -22,19 +24,28 @@ CAtlas::~CAtlas() {
 
 void CAtlas::update(Ogre::Real tpf) {
   if (m_bSwitchingMaps) {
-    delete m_pCurrentMap;
-    m_pCurrentMap = m_pNextMap;
-    m_pNextMap = nullptr;
-    m_bSwitchingMaps = false;
   }
-  else {
+  {
     // only update if map switching is done
     CWorldEntity::update(tpf);
   }
 }
+bool CAtlas::frameRenderingQueued(const Ogre::FrameEvent& evt) {
+  //if (m_bSwitchingMaps) {return true;}
+  return CWorldEntity::frameRenderingQueued(evt);
+}
+bool CAtlas::frameStarted(const Ogre::FrameEvent& evt) {
+  //if (m_bSwitchingMaps) {return true;}
+  return CWorldEntity::frameStarted(evt);
+}
+bool CAtlas::frameEnded(const Ogre::FrameEvent& evt) {
+  //if (m_bSwitchingMaps) {return true;}
+  return CWorldEntity::frameEnded(evt);
+}
 
 void CAtlas::handleMessage(const CMessage &message) {
   if (message.getType() == MSG_SWITCH_MAP) {
+    if (m_bSwitchingMaps) {return;}
     const CMessageSwitchMap &switch_map_message(dynamic_cast<const CMessageSwitchMap&>(message));
     LOGI("Atlas: changing map to '%s'", switch_map_message.getMap().c_str());
 
@@ -49,8 +60,7 @@ void CAtlas::handleMessage(const CMessage &message) {
     m_pCurrentMap->moveMapAndDeletePhysics(vMapPositionOffset);
 
 
-    m_pPlayer->enterMap(m_pNextMap);
-    m_pPlayer->setPosition(m_pPlayer->getPosition() + vMapPositionOffset);
+
 
     // determine direction
     Ogre::Vector3 vDirection(Ogre::Vector3::ZERO);
@@ -68,5 +78,21 @@ void CAtlas::handleMessage(const CMessage &message) {
     }
 
     m_bSwitchingMaps = true;
+
+    Ogre::Vector3 vPlayerPos = m_pPlayer->getPosition() + vMapPositionOffset;
+    m_pPlayer->enterMap(m_pNextMap, vPlayerPos + vDirection * 2);
+    m_pPlayer->setPosition(vPlayerPos);
+  }
+  else if (message.getType() == MSG_TARGET_REACHED) {
+    const CMessageTargetReached &message_target_reached(dynamic_cast<const CMessageTargetReached &>(message));
+    if (message_target_reached.getEntity() == m_pPlayer) {
+      if (m_bSwitchingMaps) {
+        delete m_pCurrentMap;
+        m_pCurrentMap = m_pNextMap;
+        m_pNextMap = nullptr;
+        m_bSwitchingMaps = false;
+        m_pCurrentMap->start();
+      }
+    }
   }
 }

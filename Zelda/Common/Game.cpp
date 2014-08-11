@@ -25,6 +25,7 @@
 #include "FileManager/FileManager.hpp"
 #include "Message/MessageHandler.hpp"
 #include "GameLogic/GameStateManager.hpp"
+#include "Util/DebugDrawer.hpp"
 
 #if OGRE_PLATFORM == OGRE_PLATFORM_ANDROID
 #include "Android/Android.hpp"
@@ -70,6 +71,7 @@ CGame::CGame(void)
 }
 //-------------------------------------------------------------------------------------
 CGame::~CGame(void) {
+  if (DebugDrawer::getSingletonPtr()) {delete DebugDrawer::getSingletonPtr();}
   if (mTrayMgr) delete mTrayMgr;
   if (mCameraMan) delete mCameraMan;
   if (CGameStateManager::getSingletonPtr()) { delete CGameStateManager::getSingletonPtr(); }
@@ -527,6 +529,8 @@ void CGame::createScene() {
   m_pGameStateManager = new CGameStateManager();
   Ogre::LogManager::getSingletonPtr()->logMessage("    GUIManager ");
   new CGUIManager(mSceneMgr, *mWindow);
+  Ogre::LogManager::getSingletonPtr()->logMessage("    DebugDrawer ");
+  new DebugDrawer(mSceneMgr, 0.7f);
 
 
   Ogre::LogManager::getSingletonPtr()->logMessage("    init GameState ");
@@ -589,9 +593,12 @@ bool CGame::frameStarted(const Ogre::FrameEvent& evt) {
   m_pGameStateManager->frameStarted(evt);
   m_pGameStateManager->renderDebug(evt.timeSinceLastFrame);
 
+  DebugDrawer::getSingleton().build();
+
   return true;
 }
 bool CGame::frameEnded(const Ogre::FrameEvent& evt) {
+  DebugDrawer::getSingleton().clear();
   m_pGameStateManager->frameEnded(evt);
   return true;
 }

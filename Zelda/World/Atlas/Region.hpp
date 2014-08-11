@@ -2,12 +2,14 @@
 #define _REGION_HPP_
 
 #include "../WorldEntity.hpp"
-
-struct SRegionInfo;
+#include "RegionInfo.hpp"
 
 class CRegion : public CWorldEntity {
+  const SRegionInfo m_Info;
 public:
   CRegion(CWorldEntity *pParent, const SRegionInfo &info);
+
+  void start();
 };
 
 #endif // _REGION_HPP_

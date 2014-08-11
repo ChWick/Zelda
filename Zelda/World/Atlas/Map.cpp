@@ -37,6 +37,10 @@ CMap::~CMap() {
   destroySceneNode(m_pSceneNode, true);
 }
 
+void CMap::start() {
+  sendCallToAll(&CEntity::start, false);
+}
+
 void CMap::CreateCube(const btVector3 &Position, btScalar Mass)
 {
     // empty ogre vectors for the cubes size and position

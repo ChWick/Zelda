@@ -1,9 +1,10 @@
 #include "PersonController.h"
 #include "Person.h"
-#include "CharacterControllerListener.h"
 #include <BulletDynamics/Character/btCharacterControllerInterface.h>
 #include "../../Common/Physics/BtOgreExtras.h"
 #include "../../Common/Util/DebugDrawer.hpp"
+#include "../../Common/Message/MessageHandler.hpp"
+#include "../../Common/Message/MessageTargetReached.hpp"
 
 const Ogre::Real DEFAULT_PUSHED_BACK_TIME = 0.1f;
 const Ogre::Real RUN_SPEED = 40;					//!< constat for the run speed
@@ -73,6 +74,8 @@ void CPersonController::updateCharacter(const Ogre::Real deltaTime) {
 		if (m_uiCurrentMoveState == MS_MOVE_TO_POINT) {
 			// the goal direction will be obviously the direction in witch the target is
 			mGoalDirection = getTargetPosition() - mBodyNode->_getDerivedPosition();
+
+			//Ogre::LogManager::getSingleton().logMessage(Ogre::StringConverter::toString(mGoalDirection));
 			if (mGoalDirection.squaredLength() <= getTargetRadius() * getTargetRadius()) {
 				// we reached the correct distance (check for view angle is the next step)
 				bMove = false;
@@ -182,7 +185,7 @@ void CPersonController::updateCharacter(const Ogre::Real deltaTime) {
 
 	if (m_uiCurrentMoveState == MS_MOVE_TO_POINT) {
     if (m_fTimer < 0) {
-      changeMoveState(MS_NORMAL);
+      targetReached();
     }
     DebugDrawer::getSingleton().drawSphere(getTargetPosition(), getTargetRadius(), Ogre::ColourValue::Blue, false);
 	}
@@ -221,7 +224,5 @@ void CPersonController::stun(const Ogre::Real fTime) {
 void CPersonController::targetReached() {
     changeMoveState(MS_NOT_MOVING); // reset our state
 
-    for (CharacterControllerListener *pCL : m_lListeners) {
-        pCL->targetReached(mCCPerson);
-    }
+  CMessageHandler::getSingleton().addMessage(new CMessageTargetReached(mCCPerson));
 }

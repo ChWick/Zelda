@@ -195,8 +195,9 @@ void CEntity::destroy() {
   }
 }
 
-void CEntity::sendCallToAll(void (CEntity::*pFunction)()) {
-  (this->*pFunction)();
+void CEntity::sendCallToAll(void (CEntity::*pFunction)(), bool bCallThis) {
+  if (bCallThis) {(this->*pFunction)();}
+
   for (auto pChild : m_lChildren) {
     pChild->sendCallToAll(pFunction);
   }

@@ -34,7 +34,7 @@ public:
   virtual Ogre::SceneNode *getSceneNode() const;
   virtual btCollisionObject *getCollisionObject() const;
   virtual CMap *getMap() const {return m_pMap;}
-  virtual void enterMap(CMap *pMap) {m_pMap = pMap;}
+  virtual void enterMap(CMap *pMap, const Ogre::Vector3 &vPosition) {m_pMap = pMap; setPosition(vPosition);}
 
   virtual void update(Ogre::Real tpf);
 

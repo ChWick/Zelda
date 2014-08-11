@@ -101,7 +101,7 @@ protected:
 public:
 	virtual ~CCharacter();
 
-	void enterMap(CMap *pMap);
+	void enterMap(CMap *pMap, const Ogre::Vector3 &vInitPosition);
 
 	void animRunStart();
 	void animRunEnd();

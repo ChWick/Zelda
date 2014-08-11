@@ -18,6 +18,8 @@ public:
   CMap(CEntity *pAtlas, CMapPackPtr mapPack, Ogre::SceneNode *pParentSceneNode, CWorldEntity *pPlayer);
   virtual ~CMap();
 
+  void start();
+
   void CreateCube(const btVector3 &Position, btScalar Mass);
 
   void moveMapAndDeletePhysics(const Ogre::Vector3 &offset);

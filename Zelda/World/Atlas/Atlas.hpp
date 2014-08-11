@@ -20,6 +20,9 @@ public:
   CMap *getCurrentMap() const {return m_pCurrentMap;}
 
   void update(Ogre::Real tpf);
+  bool frameRenderingQueued(const Ogre::FrameEvent& evt);
+  bool frameStarted(const Ogre::FrameEvent& evt);
+  bool frameEnded(const Ogre::FrameEvent& evt);
 
 protected:
   void handleMessage(const CMessage &message);
