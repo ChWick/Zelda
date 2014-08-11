@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="Name">Name</string>
+  <string name="Difficulty">Schwierigkeitsgrad</string>
+  <string name="Description">Beschreibung</string>
+  <string name="easy">leicht</string>
+  <string name="medium">mittel</string>
+  <string name="hard">schwer</string>
+  <string name="unknown">unbekannt</string>
+  <string name="start_game">Spiel starten</string>
+  <string name="options">Optionen</string>
+  <string name="credits">Credits</string>
+  <string name="exit">Ende</string>
+  <string name="map_editor">Karteneditor</string>
+  <string name="new_game">Neues Spiel</string>
+  <string name="load_game">Spiel laden</string>
+  <string name="select_map">Karte auswählen</string>
+  <string name="back">Zurück</string>
+  <string name="new_map">Neue Karte</string>
+  <string name="load_map">Karte laden</string>
+  <string name="video">Video</string>
+  <string name="input">Eingabe</string>
+  <string name="back_to_game">Zurück zum Spiel</string>
+  <string name="exit_game">Spiel verlassen</string>
+  <string name="select_level">Karte auswählen</string>
+  <string name="close">Schließen</string>
+  <string name="next">Weiter</string>
+  <string name="Tools">Werkzeuge</string>
+
+  <!-- GUIStatistics -->
+  <string name="Statistics">Statistik</string>
+  <string name="Mission accomplished">Mission vollbracht</string>
+  <string name="Mission failed">Mission fehlgeschlagen</string>
+  <string name="Retry">Erneut versuchen</string>
+  <string name="To level selection">Zur Levelauswahl</string>
+  <string name="Time">Zeit</string>
+  <string name="Hitpoints">Lebenspunkte</string>
+  <string name="Manapoints">Manapunkte</string>
+  <string name="Lost hitpoints">Verlorene Lebenspunkte</string>
+  <string name="Used manapoints">Verwendete Manapunkte</string>
+  <string name="Killed enemies">Getötete Gegner</string>
+</resources>
