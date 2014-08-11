@@ -20,6 +20,8 @@ public:
 
   void CreateCube(const btVector3 &Position, btScalar Mass);
 
+  void moveMapAndDeletePhysics(const Ogre::Vector3 &offset);
+
   const CPhysicsManager *getPhysicsManager() const {return &m_PhysicsManager;}
   CPhysicsManager *getPhysicsManager() {return &m_PhysicsManager;}
 

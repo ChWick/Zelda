@@ -8,4 +8,6 @@ CMessage::CMessage(const tinyxml2::XMLElement *pElement)
 }
 CMessage::CMessage(EMessageTypes type)
   : m_Type(type) {
-  }
+}
+CMessage::~CMessage() {
+}

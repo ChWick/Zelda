@@ -33,6 +33,9 @@ protected:
 public:
   CMessage(const tinyxml2::XMLElement *pElement);
   CMessage(EMessageTypes type);
+  virtual ~CMessage();
+
+  EMessageTypes getType() const {return m_Type;}
 };
 
 #endif

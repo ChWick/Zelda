@@ -89,6 +89,8 @@ public:
     CPhysicsManager(Ogre::SceneManager *pSceneManager);
     ~CPhysicsManager();
 
+	void exit();
+
     void update(Ogre::Real tpf);
 	void disableDebugInfo() {
 		m_bDisplayDebugInfo = true;

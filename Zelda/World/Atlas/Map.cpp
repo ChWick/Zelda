@@ -8,7 +8,7 @@
 #include "Region.hpp"
 
 CMap::CMap(CEntity *pAtlas, CMapPackPtr mapPack, Ogre::SceneNode *pParentSceneNode, CWorldEntity *pPlayer)
-  : CWorldEntity("map", pAtlas, this),
+  : CWorldEntity(mapPack->getName(), pAtlas, this),
     m_PhysicsManager(pParentSceneNode->getCreator()),
     m_MapPack(mapPack),
     m_pPlayer(pPlayer) {
@@ -24,7 +24,8 @@ CMap::CMap(CEntity *pAtlas, CMapPackPtr mapPack, Ogre::SceneNode *pParentSceneNo
                               m_MapPack->getResourceGroup(),
                               pParentSceneNode->getCreator(),
                               &m_PhysicsManager,
-                              m_pSceneNode);
+                              m_pSceneNode,
+                              m_MapPack->getName());
 
 
   CreateCube(btVector3(0, 10, 0.2), 1);
@@ -94,6 +95,12 @@ void CMap::CreateCube(const btVector3 &Position, btScalar Mass)
     m_PhysicsManager.getWorld()->addRigidBody(RigidBody, 32, 1023);
 }
 
+void CMap::moveMapAndDeletePhysics(const Ogre::Vector3 &offset) {
+  m_bPauseUpdate = true;
+  m_PhysicsManager.exit();
+  m_pSceneNode->translate(offset);
+}
+
 void CMap::update(Ogre::Real tpf) {
   CWorldEntity::update(tpf);
 }
@@ -104,6 +111,7 @@ bool CMap::frameStarted(const Ogre::FrameEvent& evt) {
 }
 
 bool CMap::frameEnded(const Ogre::FrameEvent& evt) {
+  if (m_bPauseUpdate) {return true;}
   m_PhysicsManager.update(evt.timeSinceLastFrame);
   return CWorldEntity::frameEnded(evt);
 }

@@ -55,26 +55,32 @@ btVector3 worldMax(1000,1000, 1000);
   Ogre::LogManager::getSingleton().logMessage("PhysicsManager created.");
 }
 CPhysicsManager::~CPhysicsManager() {
+  exit();
+}
+
+void CPhysicsManager::exit() {
+  if (!m_pPhyWorld) {return;} // already deleted
+
 #if PHYSICS_MANAGER_DEBUG == 1
   CInputListenerManager::getSingleton().removeInputListener(this);
 #endif // PHYSICS_MANAGER_DEBUG
 
 #ifdef PHYSICS_DEBUG
-    delete m_pDbgDraw;
+  if (m_pDbgDraw) {delete m_pDbgDraw; m_pDbgDraw = nullptr;}
 #endif
 
-    for (int i = m_pPhyWorld->getNumCollisionObjects() - 1; i >= 0; i--) {
-        btCollisionObject * obj = m_pPhyWorld->getCollisionObjectArray()[i];
+  for (int i = m_pPhyWorld->getNumCollisionObjects() - 1; i >= 0; i--) {
+    btCollisionObject * obj = m_pPhyWorld->getCollisionObjectArray()[i];
 
-        btRigidBody * body = btRigidBody::upcast(obj);
+    btRigidBody * body = btRigidBody::upcast(obj);
 
-        if (body && body->getMotionState())
-            delete body->getMotionState();
+    if (body && body->getMotionState())
+        delete body->getMotionState();
 
-        m_pPhyWorld->removeCollisionObject(obj);
+    m_pPhyWorld->removeCollisionObject(obj);
 
-        delete obj;
-    }
+    delete obj;
+  }
 
 	//destroy collision shapes
 	for (auto &sh : m_CollisionObjects) {
@@ -86,18 +92,17 @@ CPhysicsManager::~CPhysicsManager() {
 	}
 	m_CollisionObjects.clear();
 
-	if (m_pGhostPairCallback)
-		delete m_pGhostPairCallback;
+	if (m_pGhostPairCallback) {delete m_pGhostPairCallback; m_pGhostPairCallback = nullptr;}
 
+	if (m_pPhyWorld) {
     delete m_pPhyWorld;
+    m_pPhyWorld = nullptr;
 
     delete mSolver;
     delete mBroadphaseInterface;
     delete mDispatcher;
     delete mCollisionConfig;
-
-    //NxOgre::World::destroyWorld();
-    //NxOgre::World::destroySingletons();
+	}
 }
 btCollisionWorld *CPhysicsManager::getCollisionWorld()
 {

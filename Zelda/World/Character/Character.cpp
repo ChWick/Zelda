@@ -2,6 +2,8 @@
 #include "CharacterController.h"
 #include "../Atlas/Map.hpp"
 #include "../../Common/Physics/PhysicsMasks.hpp"
+#include "../../Common/Physics/BtOgreExtras.h"
+#include <BulletDynamics/Character/btCharacterControllerInterface.h>
 #include <OgreAnimationState.h>
 
 CCharacter::CCharacter(const std::string &sID, CEntity *pParent, const EFriendOrEnemyStates foe)
@@ -9,9 +11,9 @@ CCharacter::CCharacter(const std::string &sID, CEntity *pParent, const EFriendOr
 	  m_uiAnimationCount(ANIM_COUNT),
 		m_fTimer(0),
 		m_fAnimSpeed(1),
-    m_eFriendOrEnemy(foe)
+    m_eFriendOrEnemy(foe),
+    m_pCharacterController(nullptr)
 {
-  m_pCharacterController = NULL;
   mCCPhysics = NULL;
   m_bMoving = false;
   m_fYaw = 0;
@@ -22,11 +24,17 @@ CCharacter::CCharacter(const std::string &sID, CEntity *pParent, const EFriendOr
 CCharacter::~CCharacter() {
 }
 void CCharacter::enterMap(CMap *pMap) {
+  bool bSwitchMapOnly = m_pMap != nullptr;
+
   m_pMap = pMap;
 
-	initBody(m_pMap->getSceneNode());
+  if (!bSwitchMapOnly) {
+    // use atlas scene node
+    initBody(m_pMap->getParent()->getSceneNode());
+  }
 	createPhysics();
-	m_pCharacterController = createCharacterController();
+	if (m_pCharacterController) {delete m_pCharacterController;}
+  m_pCharacterController = createCharacterController();
 	//setupAnimations();
 	setupInternal();
 }
@@ -40,7 +48,12 @@ void CCharacter::destroy() {
 }
 
 void CCharacter::setPosition(const Ogre::Vector3 &vPos) {
+  if (mCCPhysics) {
+    mCCPhysics->warp(BtOgre::Convert::toBullet(vPos));
+  }
+  else {
     m_pCharacterController->setPosition(vPos);
+  }
 }
 
 void CCharacter::setOrientation(const Ogre::Quaternion &vRotation) {

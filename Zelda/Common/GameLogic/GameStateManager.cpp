@@ -21,6 +21,7 @@
 #include <OgreException.h>
 #include <OgreLogManager.h>
 #include "Util/Sleep.hpp"
+#include "../Message/MessageHandler.hpp"
 
 using namespace std;
 
@@ -40,93 +41,20 @@ CGameStateManager::CGameStateManager()
   m_eNextGameState(GS_COUNT),
   m_bForce(true),
   m_bAdShown(false) {
+
+  CMessageHandler::getSingleton().addInjector(this);
 }
 CGameStateManager::~CGameStateManager() {
+  CMessageHandler::getSingleton().removeInjector(this);
 }
 void CGameStateManager::init() {
   m_bAdShown = false;
 }
 void CGameStateManager::changeGameState(EGameStates eNewGameState, bool bNow, bool bForce) {
-  m_eNextGameState = eNewGameState;
-
-  if (bNow) {
-    changeGameStateImpl();
-  }
 }
 
 void CGameStateManager::changeGameStateImpl() {
-  if (!m_bForce && m_eCurrentGameState == m_eNextGameState) {
-    return;
-  }
-  auto ePreviousGameState = m_eCurrentGameState;
-
-  switch (m_eCurrentGameState) {
-  case GS_GAME:
-    if (!(m_eNextGameState == GS_STATISTICS || m_eNextGameState == GS_GAME_OVER)) {
-    }
-    m_bAdShown = false;
-    break;
-  case GS_AD:
-    m_bAdShown = false;
-    break;
-  case GS_MAIN_MENU:
-    break;
-  case GS_GAME_OVER:
-    if (!(m_eNextGameState == GS_STATISTICS || m_eNextGameState == GS_GAME || m_eNextGameState == GS_AD)) {
-    }
-    break;
-  case GS_STATISTICS:
-    if (!(m_eNextGameState == GS_GAME || m_eNextGameState == GS_GAME_OVER || m_eNextGameState == GS_AD)) {
-    }
-    break;
-  case GS_CREDITS:
-    break;
-  default:
-    break;
-  }
-  try {
-    m_eCurrentGameState = m_eNextGameState;
-    switch (m_eCurrentGameState) {
-    case GS_GAME:
-      break;
-    case GS_MAIN_MENU:
-      break;
-    case GS_GAME_OVER:
-      break;
-    case GS_STATISTICS:
-      break;
-    case GS_AD:
-      break;
-    case GS_CREDITS:
-      break;
-    default:
-      break;
-    }
-  }
-  catch (const Ogre::Exception &e) {
-    Ogre::LogManager::getSingleton().logMessage("Exception while changing the game state");
-    Ogre::LogManager::getSingleton().logMessage(e.getFullDescription());
-    m_eNextGameState = ePreviousGameState;
-    changeGameStateImpl();
-  }
 }
 void CGameStateManager::update(Ogre::Real tpf) {
-  if (m_eNextGameState != m_eCurrentGameState) {
-    changeGameStateImpl();
-  }
-
-  switch (m_eCurrentGameState) {
-  case GS_GAME:
-    break;
-  case GS_GAME_OVER:
-    break;
-  case GS_STATISTICS:
-    break;
-  case GS_AD:
-    break;
-  default:
-    break;
-  }
-
   CEntity::update(tpf);
 }
