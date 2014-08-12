@@ -4,17 +4,20 @@
 #include "../WorldEntity.hpp"
 
 class CMap;
+class CAerialCameraPerspective;
 
 class CAtlas : public CWorldEntity {
 private:
   CMap *m_pCurrentMap;
   CMap *m_pNextMap;
   CWorldEntity *m_pPlayer;
+  CAerialCameraPerspective* &m_pCameraPerspective;
 
   bool m_bSwitchingMaps;          //!< Is the map currently switch from current to next map
+  bool m_bPlayerTargetReached;
 
 public:
-  CAtlas(CEntity *pParent, Ogre::SceneNode *pRootSceneNode, CWorldEntity *pPlayer);
+  CAtlas(CEntity *pParent, Ogre::SceneNode *pRootSceneNode, CWorldEntity *pPlayer, CAerialCameraPerspective* &pCameraPerspective);
   ~CAtlas();
 
   CMap *getCurrentMap() const {return m_pCurrentMap;}

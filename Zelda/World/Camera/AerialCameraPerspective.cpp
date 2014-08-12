@@ -11,6 +11,7 @@
 #define WORLD_DEBUG_CAMERA_BOUNDS
 
 const Ogre::Vector3 AERIAL_CAMERA_OFFSET(0, 9e0, -4e0);
+const Ogre::Real AERIAL_CAMER_MOVE_SPEED(10);
 
 CAerialCameraPerspective::CAerialCameraPerspective(Ogre::Camera *pCamera,
                                                    Ogre::SceneNode *pTargetSceneNode)
@@ -18,7 +19,8 @@ CAerialCameraPerspective::CAerialCameraPerspective(Ogre::Camera *pCamera,
     m_pTargetSceneNode(pTargetSceneNode),
     m_vMinCamPoint(Ogre::Vector2::ZERO),
     m_vMaxCamPoint(Ogre::Vector2::ZERO),
-    m_bSwitchingMap(false) {
+    m_bSwitchingMap(false),
+    m_bCameraInBounds(false) {
 
   CMessageHandler::getSingleton().addInjector(this);
   //m_pSceneNode = pTargetSceneNode->createChildSceneNode(AERIAL_CAMERA_OFFSET);
@@ -50,9 +52,8 @@ void CAerialCameraPerspective::updateCamera(float tpf) {
   // use cameras backup position and move it
   Ogre::Vector3 vCamMoveDir(vTargetPosition - vCamPosBuffer);
   Ogre::Real fMaxStep = vCamMoveDir.normalise();
-  m_pCamera->setPosition(vCamPosBuffer + vCamMoveDir * std::min<Ogre::Real>(fMaxStep, 10 * tpf));
-
-
+  m_bCameraInBounds = fMaxStep < AERIAL_CAMER_MOVE_SPEED * tpf;
+  m_pCamera->setPosition(vCamPosBuffer + vCamMoveDir * std::min<Ogre::Real>(fMaxStep, AERIAL_CAMER_MOVE_SPEED * tpf));
 
 
 #ifdef WORLD_DEBUG_CAMERA_BOUNDS

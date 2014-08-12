@@ -33,7 +33,7 @@ CWorld::CWorld()
   m_pPlayer = new CPlayer(this, m_pWorldCamera, CGame::getSingleton().getSceneManager());
 
   // create the atlas
-  m_pAtlas = new CAtlas(this, CGame::getSingleton().getSceneManager()->getRootSceneNode(), m_pPlayer);
+  m_pAtlas = new CAtlas(this, CGame::getSingleton().getSceneManager()->getRootSceneNode(), m_pPlayer, m_pCameraPerspective);
 
   // initialize the player done in atlas, when new map is created
 

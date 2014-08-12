@@ -23,6 +23,7 @@ protected:
   Ogre::Vector2 m_vMaxCamPoint;
 
   bool m_bSwitchingMap;
+  bool m_bCameraInBounds;
 public:
   CAerialCameraPerspective(Ogre::Camera *pCamera,
                            Ogre::SceneNode *pTargetSceneNode);
@@ -30,6 +31,8 @@ public:
   ~CAerialCameraPerspective();
 
   void updateCamera(float tpf);
+
+  bool isCameraInBounds() const {return m_bCameraInBounds;}
 
 private:
   void sendMessageToAll(const CMessage &message);

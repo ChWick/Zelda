@@ -5,13 +5,16 @@
 #include "../../Common/Message/MessageSwitchMap.hpp"
 #include "../../Common/Message/MessageTargetReached.hpp"
 #include "../../Common/Message/MessageHandler.hpp"
+#include "../Camera/AerialCameraPerspective.hpp"
 
-CAtlas::CAtlas(CEntity *pParent, Ogre::SceneNode *pRootSceneNode, CWorldEntity *pPlayer)
+CAtlas::CAtlas(CEntity *pParent, Ogre::SceneNode *pRootSceneNode, CWorldEntity *pPlayer, CAerialCameraPerspective* &pCameraPerspective)
   : CWorldEntity("atlas", pParent, nullptr),
     m_pCurrentMap(nullptr),
     m_pNextMap(nullptr),
     m_pPlayer(pPlayer),
-    m_bSwitchingMaps(false) {
+    m_pCameraPerspective(pCameraPerspective),
+    m_bSwitchingMaps(false),
+    m_bPlayerTargetReached(false) {
 
   m_pSceneNode = pRootSceneNode->createChildSceneNode("Atlas");
 
@@ -27,6 +30,12 @@ CAtlas::~CAtlas() {
 
 void CAtlas::update(Ogre::Real tpf) {
   if (m_bSwitchingMaps) {
+    if (m_pCameraPerspective->isCameraInBounds() && m_bPlayerTargetReached) {
+      delete m_pCurrentMap;
+      m_pCurrentMap = m_pNextMap;
+      m_pNextMap = nullptr;
+      m_bSwitchingMaps = false;
+    }
   }
   {
     // only update if map switching is done
@@ -87,6 +96,8 @@ void CAtlas::handleMessage(const CMessage &message) {
         m_pPlayer->enterMap(m_pNextMap, vPlayerPos + vDirection * 2);
         m_pPlayer->setPosition(vPlayerPos);
 
+        m_bPlayerTargetReached = false;
+
         CMessageHandler::getSingleton().addMessage(new CMessageSwitchMap(m_pNextMap->getMapPack()->getName(), CMessageSwitchMap::SWITCHING, m_pCurrentMap, m_pNextMap));
     }
   }
@@ -94,11 +105,9 @@ void CAtlas::handleMessage(const CMessage &message) {
     const CMessageTargetReached &message_target_reached(dynamic_cast<const CMessageTargetReached &>(message));
     if (message_target_reached.getEntity() == m_pPlayer) {
       if (m_bSwitchingMaps) {
-        delete m_pCurrentMap;
-        m_pCurrentMap = m_pNextMap;
-        m_pNextMap = nullptr;
-        m_bSwitchingMaps = false;
-        m_pCurrentMap->start();
+        m_bPlayerTargetReached = true;
+
+        m_pNextMap->start();
 
         CMessageHandler::getSingleton().addMessage(new CMessageSwitchMap(m_pCurrentMap->getMapPack()->getName(), CMessageSwitchMap::FINISHED, m_pCurrentMap, nullptr));
       }
