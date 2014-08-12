@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map scene="map.scene" global_position="0 0 0" global_size="8 8">
+<map scene="map.scene" global_position="0 0 0" global_size="18 18">
   <player>
     <event>
       <emitter type="collision" id="bottom_margin"/>
