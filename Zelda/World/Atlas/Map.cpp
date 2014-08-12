@@ -5,6 +5,7 @@
 #include <OgreSceneNode.h>
 #include <OgreEntity.h>
 #include <OgreLogManager.h>
+#include <OgreMeshManager.h>
 #include "Region.hpp"
 
 CMap::CMap(CEntity *pAtlas, CMapPackPtr mapPack, Ogre::SceneNode *pParentSceneNode, CWorldEntity *pPlayer)
@@ -30,6 +31,16 @@ CMap::CMap(CEntity *pAtlas, CMapPackPtr mapPack, Ogre::SceneNode *pParentSceneNo
 
   CreateCube(btVector3(0, 10, 0.2), 1);
   CreateCube(btVector3(0, 200, 0.3), 100);
+
+  Ogre::Plane plane(Ogre::Vector3::UNIT_Y, -0.1);
+  Ogre::MeshManager::getSingleton().createPlane("ground", m_MapPack->getResourceGroup(),
+        plane, 1500, 1500, 20, 20, true, 1, 50, 50, Ogre::Vector3::UNIT_Z);
+
+    Ogre::Entity* entGround = m_pSceneNode->getCreator()->createEntity("GroundEntity", "ground");
+    m_pSceneNode->createChildSceneNode()->attachObject(entGround);
+
+    entGround->setMaterialName("Examples/Rockwall");
+    entGround->setCastShadows(false);
 }
 
 CMap::~CMap() {
@@ -58,7 +69,6 @@ void CMap::CreateCube(const btVector3 &Position, btScalar Mass)
 
   m_pSceneNode->getCreator()->createEntity(
         "Cylinder.mesh");
-    entity->setCastShadows(true);
 
     // This gets us the size of the bounding box but since the bounding box in Ogre
     // is a little bigger than the object itself we will cut that down slightly to make the physics
@@ -68,6 +78,7 @@ void CMap::CreateCube(const btVector3 &Position, btScalar Mass)
 
     // apply a material to the cube so it isn't gray like the ground
     entity->setMaterialName("BaseWhite");
+    entity->setCastShadows(true);
 
     // Create a sceneNode and attach the entity for rendering
     Ogre::SceneNode *node = m_pSceneNode->createChildSceneNode();

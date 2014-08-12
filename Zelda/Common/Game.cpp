@@ -381,6 +381,9 @@ void CGame::createScene() {
   Ogre::LogManager::getSingletonPtr()->logMessage("   create scene manager");
   mSceneMgr = mRoot->createSceneManager(ST_GENERIC, "MainSceneManager");
   mSceneMgr->addRenderQueueListener(mOverlaySystem);
+
+
+  mSceneMgr->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_ADDITIVE);
   //-------------------------------------------------------------------------------------
   // create camera
   // Create the camera
@@ -410,7 +413,7 @@ void CGame::createScene() {
 
     //-------------------------------------------------------------------------------------
     // Create the scene
-  mSceneMgr->setAmbientLight(Ogre::ColourValue(0.5, 0.5, 0.5));
+  mSceneMgr->setAmbientLight(Ogre::ColourValue(0, 0, 0));
 
 
   Ogre::Light* directionalLight = mSceneMgr->createLight("directionalLight");
@@ -418,8 +421,7 @@ void CGame::createScene() {
   directionalLight->setDiffuseColour(Ogre::ColourValue(1, 1, 1));
   directionalLight->setSpecularColour(Ogre::ColourValue(.25, .25, 0));
   directionalLight->setDirection(Ogre::Vector3( 0, -1, 1 ));
-
-  mSceneMgr->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_ADDITIVE);
+  directionalLight->setCastShadows(true);
 
   /*Ogre::Plane plane(Ogre::Vector3::UNIT_Y, 0);
   Ogre::MeshManager::getSingleton().createPlane("wall", Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME,
