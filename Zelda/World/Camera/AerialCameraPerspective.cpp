@@ -3,7 +3,7 @@
 #include <OgreSceneNode.h>
 #include <OgreCamera.h>
 
-const Ogre::Vector3 AERIAL_CAMERA_OFFSET(0, 1e1, -1e1);
+const Ogre::Vector3 AERIAL_CAMERA_OFFSET(0, 9e0, -4e0);
 
 CAerialCameraPerspective::CAerialCameraPerspective(Ogre::Camera *pCamera, Ogre::SceneNode *pTargetSceneNode)
   : m_pCamera(pCamera),

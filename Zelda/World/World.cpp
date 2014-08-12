@@ -26,11 +26,12 @@ CWorld::CWorld()
   // default position
   m_pWorldCamera->setPosition(Ogre::Vector3(0,1,1));
   m_pWorldCamera->lookAt(Ogre::Vector3(0,0,0));
-  //sm_pWorldCamera->setProjectionType(Ogre::PT_ORTHOGRAPHIC);
+  m_pWorldCamera->setProjectionType(Ogre::PT_ORTHOGRAPHIC);
 
   Ogre::Viewport *vp = CGame::getSingleton().getMainViewPort();
   m_pWorldCamera->setAspectRatio(Ogre::Real(vp->getActualWidth()) / Ogre::Real(vp->getActualHeight()));
   vp->setCamera(m_pWorldCamera);
+  m_pWorldCamera->setOrthoWindowWidth(16);
 
   // create the player
   m_pPlayer = new CPlayer(this, m_pWorldCamera, CGame::getSingleton().getSceneManager());
