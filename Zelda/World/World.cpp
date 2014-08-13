@@ -8,7 +8,7 @@
 #include <OgreViewport.h>
 #include "Camera/AerialCameraPerspective.hpp"
 #include "../Common/Log.hpp"
-#include "WorldGUI.hpp"
+#include "WorldGUI/WorldGUI.hpp"
 
 CWorld::CWorld()
   : CGameState(GST_WORLD),
