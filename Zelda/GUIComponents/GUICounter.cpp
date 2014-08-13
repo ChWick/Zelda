@@ -30,9 +30,6 @@ CGUICounter::CGUICounter(const std::string &id,
   m_pCounter->setPosition(UVector2(UDim(0, 0), UDim(0.5, 0)));
   m_pCounter->setSize(USize(UDim(1, 0), UDim(0.5, 0)));
   updateText();
-
-  // testing
-  setCurrentCount(500, true);
 }
 
 void CGUICounter::setCurrentCount(int iNewCount, bool bAnimate) {

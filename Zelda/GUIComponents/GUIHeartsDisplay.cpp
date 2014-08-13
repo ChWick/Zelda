@@ -23,10 +23,6 @@ CGUIHeartsDisplay::CGUIHeartsDisplay(CEntity *pParentEntity, CEGUI::Window *pPar
 		pWindow->setProperty("BackgroundEnabled","False");
 		pWindow->setVisible(false);
 	}
-
-	// testing
-	changeMaximalHitpoints(16 * HP_ONE_HEART);
-	changeCurrentHitpoints(13 * HP_ONE_HEART + 3 * HP_HALF_HEART);
 }
 
 void CGUIHeartsDisplay::changeCurrentHitpoints(Hitpoints hp) {

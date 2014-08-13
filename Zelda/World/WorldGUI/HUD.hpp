@@ -11,6 +11,8 @@ private:
   CEGUI::Window *m_pRoot;
   CGUIHeartsDisplay *m_pHeartsDisplay;
   CGUICounter *m_pRupeeCounter;
+  CGUICounter *m_pBombCounter;
+  CGUICounter *m_pArrowCounter;
 public:
   CHUD(CEntity *pParentEntity, CEGUI::Window *pParentWindow);
 };

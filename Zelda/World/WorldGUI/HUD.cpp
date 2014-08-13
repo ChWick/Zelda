@@ -18,4 +18,6 @@ CHUD::CHUD(CEntity *pParentEntity, CEGUI::Window *pParentWindow)
   m_pHeartsDisplay = new CGUIHeartsDisplay(this, m_pRoot, UVector2(UDim(0.5, 0), UDim(0.05, 0)));
 
   m_pRupeeCounter = new CGUICounter("counter_rupee", this, m_pRoot, 4, "hud/Rupee", UVector2(UDim(0.3, 0), UDim(0.05, 0)));
+  m_pBombCounter = new CGUICounter("counter_bomb", this, m_pRoot, 4, "hud/Bomb", UVector2(UDim(0.35, 0), UDim(0.05, 0)));
+  m_pArrowCounter = new CGUICounter("counter_arrow", this, m_pRoot, 4, "hud/Arrows", UVector2(UDim(0.4, 0), UDim(0.05, 0)));
 }
