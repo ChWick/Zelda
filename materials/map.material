@@ -12,6 +12,21 @@ material Examples/Rockwall
 	}
 }
 
+material Examples/Ninja
+{
+	technique
+	{
+		pass
+		{
+
+			texture_unit
+			{
+				texture nskingr.jpg
+			}
+		}
+	}
+}
+
 material OgreHome/Floor
 {
     technique

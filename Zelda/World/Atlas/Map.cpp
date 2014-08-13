@@ -31,16 +31,6 @@ CMap::CMap(CEntity *pAtlas, CMapPackPtr mapPack, Ogre::SceneNode *pParentSceneNo
 
   CreateCube(btVector3(0, 10, 0.2), 1);
   CreateCube(btVector3(0, 200, 0.3), 100);
-
-  Ogre::Plane plane(Ogre::Vector3::UNIT_Y, -0.1);
-  Ogre::MeshManager::getSingleton().createPlane("ground", m_MapPack->getResourceGroup(),
-        plane, 1500, 1500, 20, 20, true, 1, 50, 50, Ogre::Vector3::UNIT_Z);
-
-    Ogre::Entity* entGround = m_pSceneNode->getCreator()->createEntity("GroundEntity", "ground");
-    m_pSceneNode->createChildSceneNode()->attachObject(entGround);
-
-    entGround->setMaterialName("Examples/Rockwall");
-    entGround->setCastShadows(false);
 }
 
 CMap::~CMap() {
@@ -77,7 +67,7 @@ void CMap::CreateCube(const btVector3 &Position, btScalar Mass)
     size = boundingB.getSize()*0.95f;
 
     // apply a material to the cube so it isn't gray like the ground
-    entity->setMaterialName("BaseWhite");
+    entity->setMaterialName("Examples/Rockwall");
     entity->setCastShadows(true);
 
     // Create a sceneNode and attach the entity for rendering
