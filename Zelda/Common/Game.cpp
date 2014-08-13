@@ -523,6 +523,7 @@ void CGame::createScene() {
   m_pGameStateManager = new CGameStateManager();
   Ogre::LogManager::getSingletonPtr()->logMessage("    GUIManager ");
   new CGUIManager(mSceneMgr, *mWindow);
+  postGUIManagerInitialised();
   Ogre::LogManager::getSingletonPtr()->logMessage("    DebugDrawer ");
   new DebugDrawer(mSceneMgr, 0.7f);
 

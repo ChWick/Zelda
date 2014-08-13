@@ -192,6 +192,8 @@
 		<Unit filename="../Zelda/World/World.hpp" />
 		<Unit filename="../Zelda/World/WorldEntity.cpp" />
 		<Unit filename="../Zelda/World/WorldEntity.hpp" />
+		<Unit filename="../Zelda/World/WorldGUI/WorldGUI.cpp" />
+		<Unit filename="../Zelda/World/WorldGUI/WorldGUI.hpp" />
 		<Unit filename="../Zelda/Zelda.cpp" />
 		<Unit filename="../Zelda/Zelda.hpp" />
 		<Unit filename="../dependencies/OgreSdkUtil/InputContext.h" />

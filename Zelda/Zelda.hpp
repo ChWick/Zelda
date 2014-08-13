@@ -7,6 +7,8 @@ class CZelda : public CGame {
 protected:
   void chooseGameState();
 
+  void postGUIManagerInitialised();
+
   virtual bool keyPressed( const OIS::KeyEvent &arg );
 
 };

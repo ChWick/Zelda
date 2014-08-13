@@ -200,6 +200,7 @@ private:
 protected:
   // virtual function to setup user game
   virtual void chooseGameState() {}
+  virtual void postGUIManagerInitialised() {}
 };
 
 #endif // GAME_HPP

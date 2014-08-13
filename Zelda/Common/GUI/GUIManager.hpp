@@ -33,15 +33,7 @@ class CGUIManager :
   public CInputListener,
   public Ogre::Singleton<CGUIManager>,
   public Ogre::RenderQueueListener {
-
-private:
-  enum EMouseDirections {
-    MD_LEFT = 0,
-    MD_RIGHT,
-    MD_UP,
-    MD_DOWN,
-    MD_COUNT
-  };
+public:
   struct SImagesetResource {
     SImagesetResource(const CEGUI::String &sImagesetName, const CEGUI::String &sTextureName)
       : m_sImagesetName(sImagesetName),
@@ -51,6 +43,14 @@ private:
 
     CEGUI::String m_sImagesetName;
     CEGUI::String m_sTextureName;
+  };
+private:
+  enum EMouseDirections {
+    MD_LEFT = 0,
+    MD_RIGHT,
+    MD_UP,
+    MD_DOWN,
+    MD_COUNT
   };
 
   Ogre::SceneManager *m_pSceneManager;
