@@ -142,6 +142,10 @@
 		<Unit filename="../Zelda/Common/main.cpp" />
 		<Unit filename="../Zelda/Common/tinyxml2/tinyxml2.cpp" />
 		<Unit filename="../Zelda/Common/tinyxml2/tinyxml2.h" />
+		<Unit filename="../Zelda/GUIComponents/GUICounter.cpp" />
+		<Unit filename="../Zelda/GUIComponents/GUICounter.hpp" />
+		<Unit filename="../Zelda/GUIComponents/GUIHeartsDisplay.cpp" />
+		<Unit filename="../Zelda/GUIComponents/GUIHeartsDisplay.hpp" />
 		<Unit filename="../Zelda/GlobalBuildDefines.hpp" />
 		<Unit filename="../Zelda/MainMenu/MainMenu.cpp" />
 		<Unit filename="../Zelda/MainMenu/MainMenu.hpp" />
@@ -192,6 +196,8 @@
 		<Unit filename="../Zelda/World/World.hpp" />
 		<Unit filename="../Zelda/World/WorldEntity.cpp" />
 		<Unit filename="../Zelda/World/WorldEntity.hpp" />
+		<Unit filename="../Zelda/World/WorldGUI/HUD.cpp" />
+		<Unit filename="../Zelda/World/WorldGUI/HUD.hpp" />
 		<Unit filename="../Zelda/World/WorldGUI/WorldGUI.cpp" />
 		<Unit filename="../Zelda/World/WorldGUI/WorldGUI.hpp" />
 		<Unit filename="../Zelda/Zelda.cpp" />
