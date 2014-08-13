@@ -16,6 +16,7 @@ public:
               CEntity *pParentEntity,
               CEGUI::Window *pParentWindow,
               Ogre::Real fCountsPerSecond,
+              const CEGUI::String &sImage,
               const CEGUI::UVector2 &vPosition = CEGUI::UVector2(CEGUI::UDim(0, 0), CEGUI::UDim(0, 0)));
 
   void setCurrentCount(int iNewCount, bool bAnimate = true);

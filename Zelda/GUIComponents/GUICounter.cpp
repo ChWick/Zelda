@@ -6,6 +6,7 @@ CGUICounter::CGUICounter(const std::string &id,
                          CEntity *pParentEntity,
                          CEGUI::Window *pParentWindow,
                          Ogre::Real fCountsPerSecond,
+                         const CEGUI::String &sImage,
                          const CEGUI::UVector2 &vPosition)
   : CGUIOverlay(id, pParentEntity, pParentWindow),
     m_iCurrentCount(0),
@@ -16,6 +17,14 @@ CGUICounter::CGUICounter(const std::string &id,
   Window *pRoot = m_pParentWindow->createChild("DefaultWindow", id);
   pRoot->setSize(USize(UDim(0, 40), UDim(0, 60)));
   pRoot->setPosition(vPosition);
+
+
+  Window *pPicture = pRoot->createChild("OgreTray/StaticImage", "image");
+  pPicture->setPosition(UVector2(UDim(0, 5), UDim(0, 0)));
+  pPicture->setSize(USize(UDim(0, 30), UDim(0, 30)));
+  pPicture->setProperty("Image", sImage);
+  pPicture->setProperty("FrameEnabled", "false");
+  pPicture->setProperty("BackgroundEnabled", "false");
 
   m_pCounter = pRoot->createChild("OgreTray/ShadowedLabel", "counter");
   m_pCounter->setPosition(UVector2(UDim(0, 0), UDim(0.5, 0)));
