@@ -14,7 +14,7 @@ private:
   Hitpoints m_MaximalHitpoints;
   Hitpoints m_CurrentHitpoints;
 public:
-  CGUIHeartsDisplay(CEntity *pParentEntity, CEGUI::Window *pParentWindow);
+  CGUIHeartsDisplay(CEntity *pParentEntity, CEGUI::Window *pParentWindow, const CEGUI::UVector2 &vPosition = CEGUI::UVector2(CEGUI::UDim(0, 0), CEGUI::UDim(0, 0)));
 
 
   void changeCurrentHitpoints(Hitpoints hp);

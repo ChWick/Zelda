@@ -2,17 +2,22 @@
 
 using namespace CEGUI;
 
-CGUIHeartsDisplay::CGUIHeartsDisplay(CEntity *pParentEntity, CEGUI::Window *pParentWindow)
+const float GUI_HEART_IMG_SIZE = 32;
+const float GUI_HEART_IMG_WITH_BORDER_SIZE = 32;
+
+CGUIHeartsDisplay::CGUIHeartsDisplay(CEntity *pParentEntity, CEGUI::Window *pParentWindow, const CEGUI::UVector2 &vPosition)
   : CGUIOverlay("gui_hearts_display", pParentEntity, pParentWindow),
     m_MaximalHitpoints(0),
     m_CurrentHitpoints(0) {
 
   m_pRoot = m_pParentWindow->createChild("DefaultWindow");
+  m_pRoot->setPosition(vPosition);
+  m_pRoot->setSize(USize(UDim(0, 10 * GUI_HEART_IMG_WITH_BORDER_SIZE), UDim(0, 2 * GUI_HEART_IMG_WITH_BORDER_SIZE)));
 
   for (Ogre::uint16 i = 0; i < m_uiMaxHeartCount; i++) {
 		CEGUI::Window *pWindow = m_pRoot->createChild("OgreTray/StaticImage", "heart_" + CEGUI::PropertyHelper<int>::toString(i) );
-		pWindow->setPosition(CEGUI::UVector2(CEGUI::UDim(0.05f, (i % (m_uiMaxHeartCount / 2)) * 40.0f + 95.0f),CEGUI::UDim(0.05f, (i / (m_uiMaxHeartCount / 2))* 40.0f)));
-		pWindow->setSize(CEGUI::USize(CEGUI::UDim(0,32),CEGUI::UDim(0,32)));
+		pWindow->setPosition(CEGUI::UVector2(CEGUI::UDim(0, (i % (m_uiMaxHeartCount / 2)) * GUI_HEART_IMG_WITH_BORDER_SIZE),CEGUI::UDim(0, (i / (m_uiMaxHeartCount / 2))* GUI_HEART_IMG_WITH_BORDER_SIZE)));
+		pWindow->setSize(CEGUI::USize(CEGUI::UDim(0, GUI_HEART_IMG_SIZE),CEGUI::UDim(0, GUI_HEART_IMG_SIZE)));
 		pWindow->setProperty("Image","hud/0/4");
 		pWindow->setProperty("FrameEnabled","False");
 		pWindow->setProperty("BackgroundEnabled","False");
@@ -20,8 +25,8 @@ CGUIHeartsDisplay::CGUIHeartsDisplay(CEntity *pParentEntity, CEGUI::Window *pPar
 	}
 
 	// testing
-	changeMaximalHitpoints(6 * HP_ONE_HEART);
-	changeCurrentHitpoints(3 * HP_ONE_HEART + 3 * HP_HALF_HEART);
+	changeMaximalHitpoints(16 * HP_ONE_HEART);
+	changeCurrentHitpoints(13 * HP_ONE_HEART + 3 * HP_HALF_HEART);
 }
 
 void CGUIHeartsDisplay::changeCurrentHitpoints(Hitpoints hp) {
