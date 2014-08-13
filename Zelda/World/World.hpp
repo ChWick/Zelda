@@ -7,6 +7,7 @@
 class CPlayer;
 class CAtlas;
 class CAerialCameraPerspective;
+class CWorldGUI;
 
 class CWorld : public CGameState {
 private:
@@ -14,6 +15,7 @@ private:
   CAtlas *m_pAtlas;
   Ogre::Camera *m_pWorldCamera;
   CAerialCameraPerspective *m_pCameraPerspective;
+  CWorldGUI *m_pWorldGUI;
 public:
   CWorld();
   ~CWorld();

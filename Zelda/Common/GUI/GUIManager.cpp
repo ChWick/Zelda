@@ -106,10 +106,11 @@ CGUIManager::~CGUIManager() {
   CInputListenerManager::getSingleton().removeInputListener(this);
   m_pSceneManager->removeRenderQueueListener(this);
 
-  while (m_lGUIOverlays.size() > 0) {
+  /*while (m_lGUIOverlays.size() > 0) {
     delete m_lGUIOverlays.front();
     m_lGUIOverlays.pop_front();
-  }
+  }*/
+  m_lGUIOverlays.clear();
 
   if (CEGUI::System::getSingletonPtr()) {CEGUI::OgreRenderer::destroySystem();}
 }
@@ -125,9 +126,10 @@ void CGUIManager::update(Ogre::Real tpf) {
 
   if (m_bRenderPause) {return;}
 
-  for (CGUIOverlay *pOverlay : m_lGUIOverlays) {
+  // updating of gui overlays is done via the CEntity logic
+  /*for (CGUIOverlay *pOverlay : m_lGUIOverlays) {
     pOverlay->update(tpf);
-  }
+  }*/
 }
 void CGUIManager::renderQueueStarted(Ogre::uint8 id, const Ogre::String& invocation, bool& skipThisQueue) {
    // make sure you check the invocation string, or you can end up rendering the GUI multiple times

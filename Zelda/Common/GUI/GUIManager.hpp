@@ -93,7 +93,8 @@ public:
   void update(Ogre::Real tpf);
 
   void addGUIOverlay(CGUIOverlay *pOverlay) {m_lGUIOverlays.push_back(pOverlay);}
-  void destroyGUIOverlay(CGUIOverlay *pOverlay) {m_lGUIOverlays.remove(pOverlay); delete pOverlay;}
+  //void destroyGUIOverlay(CGUIOverlay *pOverlay) {m_lGUIOverlays.remove(pOverlay); delete pOverlay;}
+  void removeGUIOverlay(CGUIOverlay *pOverlay) {m_lGUIOverlays.remove(pOverlay);}
 
   CEGUI::OgreRenderer *getRenderer() const {return m_pCEGuiOgreRenderer;}
   CEGUI::Window *getRoot() const {return m_pRoot;}

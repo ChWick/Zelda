@@ -8,10 +8,12 @@
 #include <OgreViewport.h>
 #include "Camera/AerialCameraPerspective.hpp"
 #include "../Common/Log.hpp"
+#include "WorldGUI.hpp"
 
 CWorld::CWorld()
   : CGameState(GST_WORLD),
-    m_pPlayer(nullptr) {
+    m_pPlayer(nullptr),
+    m_pWorldGUI(nullptr) {
 
   Ogre::ResourceGroupManager::getSingleton().initialiseResourceGroup("World");
 
@@ -39,12 +41,15 @@ CWorld::CWorld()
 
   //m_pCameraPerspective = new CAerialCameraPerspective(m_pWorldCamera, (Ogre::SceneNode*)m_pAtlas->getChildren().front()->getSceneNode()->getChild(0));
   m_pCameraPerspective = new CAerialCameraPerspective(m_pWorldCamera, m_pPlayer->getSceneNode());
+
+  m_pWorldGUI = new CWorldGUI(this);
 }
 
 CWorld::~CWorld() {
   delete m_pCameraPerspective;
   delete m_pPlayer;
   delete m_pAtlas;
+  delete m_pWorldGUI;
 }
 
 void CWorld::preRender(Ogre::Real tpf) {
