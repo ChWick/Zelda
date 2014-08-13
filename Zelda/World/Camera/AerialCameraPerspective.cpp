@@ -59,7 +59,7 @@ void CAerialCameraPerspective::updateCamera(float tpf) {
   m_bCameraInBounds = fMaxStep < AERIAL_CAMERA_MOVE_SPEED * tpf;
   m_pCamera->setPosition(vCamPosBuffer + vCamMoveDir * std::min<Ogre::Real>(fMaxStep, AERIAL_CAMERA_MOVE_SPEED * tpf));
 
-  LOGI("targetPos: x=%f y=%f", vTargetPosition.x, vTargetPosition.z);
+  //LOGI("targetPos: x=%f y=%f", vTargetPosition.x, vTargetPosition.z);
 
 
 #ifdef WORLD_DEBUG_CAMERA_BOUNDS
