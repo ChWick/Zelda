@@ -111,13 +111,12 @@ void CMap::update(Ogre::Real tpf) {
 }
 
 bool CMap::frameStarted(const Ogre::FrameEvent& evt) {
-  //m_PhysicsManager.update(evt.timeSinceLastFrame);
+  if (m_bPauseUpdate) {return true;}
+  m_PhysicsManager.update(evt.timeSinceLastFrame);
   return CWorldEntity::frameStarted(evt);
 }
 
 bool CMap::frameEnded(const Ogre::FrameEvent& evt) {
-  if (m_bPauseUpdate) {return true;}
-  m_PhysicsManager.update(evt.timeSinceLastFrame);
   return CWorldEntity::frameEnded(evt);
 }
 

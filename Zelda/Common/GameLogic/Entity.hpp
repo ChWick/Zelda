@@ -96,12 +96,15 @@ public:
   virtual void start() {}
   virtual void stop() {}
 
+
+  virtual bool frameStarted(const Ogre::FrameEvent& evt);
   virtual void update(Ogre::Real tpf);
+  virtual void preRender(Ogre::Real tpf);
   virtual void render(Ogre::Real tpf);
   virtual void renderDebug(Ogre::Real tpf);
-  virtual bool frameRenderingQueued(const Ogre::FrameEvent& evt);
-  virtual bool frameStarted(const Ogre::FrameEvent& evt);
   virtual bool frameEnded(const Ogre::FrameEvent& evt);
+
+  virtual bool frameRenderingQueued(const Ogre::FrameEvent& evt);
 
   virtual void writeToXMLElement(tinyxml2::XMLElement *pElement, EOutputStyle eStyle) const;
 

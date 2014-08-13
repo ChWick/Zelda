@@ -234,6 +234,15 @@ void CEntity::update(Ogre::Real tpf) {
     pEvt->update(tpf);
   }
 }
+
+void CEntity::preRender(Ogre::Real tpf) {
+  for (auto &pEnt : m_lChildren) {
+    if (!pEnt->m_bPauseRender) {
+      pEnt->preRender(tpf);
+    }
+  }
+}
+
 void CEntity::render(Ogre::Real tpf) {
   for (auto &pEnt : m_lChildren) {
     if (!pEnt->m_bPauseRender) {

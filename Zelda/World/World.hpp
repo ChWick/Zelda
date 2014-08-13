@@ -19,6 +19,7 @@ public:
   ~CWorld();
 
   void update(Ogre::Real tpf);
+  void preRender(Ogre::Real tpf);
   bool frameRenderingQueued(const Ogre::FrameEvent& evt);
 
 private:

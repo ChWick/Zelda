@@ -581,12 +581,16 @@ bool CGame::frameStarted(const Ogre::FrameEvent& evt) {
   // process messages
   CMessageHandler::getSingleton().process();
 
+  m_pGameStateManager->frameStarted(evt);
+
   CGUIManager::getSingleton().update(evt.timeSinceLastFrame);
   m_pGameStateManager->update(evt.timeSinceLastFrame);
 
-  m_pGameStateManager->frameStarted(evt);
-  m_pGameStateManager->renderDebug(evt.timeSinceLastFrame);
+  m_pGameStateManager->preRender(evt.timeSinceLastFrame);
 
+  m_pGameStateManager->render(evt.timeSinceLastFrame);
+
+  m_pGameStateManager->renderDebug(evt.timeSinceLastFrame);
   DebugDrawer::getSingleton().build();
 
   return true;

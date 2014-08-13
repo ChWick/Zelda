@@ -6,12 +6,13 @@
 #include "../../Common/Message/MessageSwitchMap.hpp"
 #include "../../Common/Message/MessageHandler.hpp"
 #include "../Atlas/Map.hpp"
+#include "../../Common/Log.hpp"
 
 // drow camera bounds (lines and spheres)
 #define WORLD_DEBUG_CAMERA_BOUNDS
 
 const Ogre::Vector3 AERIAL_CAMERA_OFFSET(0, 9e0, -4e0);
-const Ogre::Real AERIAL_CAMER_MOVE_SPEED(10);
+const Ogre::Real AERIAL_CAMERA_MOVE_SPEED(10);
 
 CAerialCameraPerspective::CAerialCameraPerspective(Ogre::Camera *pCamera,
                                                    Ogre::SceneNode *pTargetSceneNode)
@@ -38,13 +39,16 @@ void CAerialCameraPerspective::updateCamera(float tpf) {
 
   // back up position and set it to desired to calculate the bounds
   const Ogre::Vector3 vCamPosBuffer(m_pCamera->getPosition());
-  m_pCamera->setPosition(vTargetPosition);
 
+  Ogre::Vector3 vRayPos;
+  Ogre::Vector3 vDelta;
   // update camera bounds
-  Ogre::Vector3 vRayPos = getRayPlaneHitPosition(RAY_BOTTOM_RIGHT);
-  Ogre::Vector3 vDelta(std::max<Ogre::Real>(m_vMinCamPoint.x - vRayPos.x, 0), 0, std::max<Ogre::Real>(m_vMinCamPoint.y - vRayPos.z, 0));
+  m_pCamera->setPosition(vTargetPosition);
+  vRayPos = getRayPlaneHitPosition(RAY_BOTTOM_RIGHT);
+  vDelta = Ogre::Vector3(std::max<Ogre::Real>(m_vMinCamPoint.x - vRayPos.x, 0), 0, std::max<Ogre::Real>(m_vMinCamPoint.y - vRayPos.z, 0));
   vTargetPosition += vDelta;
 
+  m_pCamera->setPosition(vTargetPosition);
   vRayPos = getRayPlaneHitPosition(RAY_TOP_LEFT);
   vDelta = Ogre::Vector3(std::min<Ogre::Real>(m_vMaxCamPoint.x - vRayPos.x, 0), 0, std::min<Ogre::Real>(m_vMaxCamPoint.y - vRayPos.z, 0));
   vTargetPosition += vDelta;
@@ -52,8 +56,10 @@ void CAerialCameraPerspective::updateCamera(float tpf) {
   // use cameras backup position and move it
   Ogre::Vector3 vCamMoveDir(vTargetPosition - vCamPosBuffer);
   Ogre::Real fMaxStep = vCamMoveDir.normalise();
-  m_bCameraInBounds = fMaxStep < AERIAL_CAMER_MOVE_SPEED * tpf;
-  m_pCamera->setPosition(vCamPosBuffer + vCamMoveDir * std::min<Ogre::Real>(fMaxStep, AERIAL_CAMER_MOVE_SPEED * tpf));
+  m_bCameraInBounds = fMaxStep < AERIAL_CAMERA_MOVE_SPEED * tpf;
+  m_pCamera->setPosition(vCamPosBuffer + vCamMoveDir * std::min<Ogre::Real>(fMaxStep, AERIAL_CAMERA_MOVE_SPEED * tpf));
+
+  LOGI("targetPos: x=%f y=%f", vTargetPosition.x, vTargetPosition.z);
 
 
 #ifdef WORLD_DEBUG_CAMERA_BOUNDS

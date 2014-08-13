@@ -47,9 +47,12 @@ CWorld::~CWorld() {
   delete m_pAtlas;
 }
 
+void CWorld::preRender(Ogre::Real tpf) {
+  m_pCameraPerspective->updateCamera(tpf);
+}
+
 void CWorld::update(Ogre::Real tpf) {
   CGameState::update(tpf);
-  m_pCameraPerspective->updateCamera(tpf);
 }
 
 bool CWorld::frameRenderingQueued(const Ogre::FrameEvent& evt) {
