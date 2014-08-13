@@ -6,8 +6,10 @@
     <WindowRendererSet filename="CEGUICoreWindowRendererSet" />
 
     <FalagardMapping windowType="OgreTray/Label"                targetType="DefaultWindow"          renderer="Core/Default"             lookNFeel="OgreTray/Label" />
+    <FalagardMapping windowType="OgreTray/ShadowedLabel"        targetType="DefaultWindow"          renderer="Core/Default"             lookNFeel="OgreTray/ShadowedLabel" />
+
     <FalagardMapping windowType="OgreTray/Button"               targetType="CEGUI/PushButton"       renderer="Core/Button"              lookNFeel="OgreTray/PushButton" />
-    <FalagardMapping windowType="OgreTray/ImageButton"               targetType="CEGUI/PushButton"       renderer="Core/Button"              lookNFeel="OgreTray/ImagePushButton" />
+    <FalagardMapping windowType="OgreTray/ImageButton"          targetType="CEGUI/PushButton"       renderer="Core/Button"              lookNFeel="OgreTray/ImagePushButton" />
     <FalagardMapping windowType="OgreTray/Titlebar"             targetType="CEGUI/Titlebar"         renderer="Core/Titlebar"            lookNFeel="OgreTray/Titlebar" />
     <FalagardMapping windowType="OgreTray/FrameWindow"          targetType="CEGUI/FrameWindow"      renderer="Core/FrameWindow"         lookNFeel="OgreTray/FrameWindow" />
     <FalagardMapping windowType="OgreTray/Thumb"                targetType="CEGUI/Thumb"            renderer="Core/Button"              lookNFeel="OgreTray/Thumb" />
