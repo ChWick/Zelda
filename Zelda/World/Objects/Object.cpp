@@ -76,7 +76,7 @@ CObject::CObject(const std::string &id, CWorldEntity *pParent, CMap *pMap, EObje
 }
 
 CObject::SInteractionResult CObject::interactOnCollision(const Ogre::Vector3 &vInteractDir, CWorldEntity *pSender) {
-  destroy();
+  deleteLater();
 
   return SInteractionResult();
 }

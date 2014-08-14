@@ -77,6 +77,7 @@ public:
   const CEntity *getChildRecursive(const std::string &sID) const;
   void destroyChildren();
   void destroy();
+  void deleteLater();
 
   void sendCallToAll(void (CEntity::*pFunction)(), bool bCallThis = true);
   void sendCallToAllChildrenFirst(void (CEntity::*pFunction)(), bool bCallThis = true);

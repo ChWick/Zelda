@@ -23,6 +23,7 @@
 #include "Events/Event.hpp"
 #include <OgreStringConverter.h>
 #include "Message/Message.hpp"
+#include "EntityManager.hpp"
 
 using namespace events;
 using namespace XMLHelper;
@@ -193,6 +194,12 @@ void CEntity::destroy() {
       it++;
     }
   }
+  exit();
+  delete this;
+}
+
+void CEntity::deleteLater() {
+  CEntityManager::getSingleton().deleteLater(this);
 }
 
 void CEntity::sendCallToAll(void (CEntity::*pFunction)(), bool bCallThis) {

@@ -25,6 +25,7 @@
 #include "FileManager/FileManager.hpp"
 #include "Message/MessageHandler.hpp"
 #include "GameLogic/GameStateManager.hpp"
+#include "GameLogic/EntityManager.hpp"
 #include "Util/DebugDrawer.hpp"
 
 #if OGRE_PLATFORM == OGRE_PLATFORM_ANDROID
@@ -74,12 +75,13 @@ CGame::~CGame(void) {
   if (DebugDrawer::getSingletonPtr()) {delete DebugDrawer::getSingletonPtr();}
   if (mTrayMgr) delete mTrayMgr;
   if (mCameraMan) delete mCameraMan;
-  if (CGameStateManager::getSingletonPtr()) { delete CGameStateManager::getSingletonPtr(); }
+  if (CGameStateManager::getSingletonPtr()) { CEntityManager::getSingleton().deleteNow(CGameStateManager::getSingletonPtr()); }
   if (CGUIManager::getSingletonPtr()) {delete CGUIManager::getSingletonPtr();}
   if (CGameInputManager::getSingletonPtr()) {delete CGameInputManager::getSingletonPtr();}
   if (CInputListenerManager::getSingletonPtr()) {delete CInputListenerManager::getSingletonPtr();}
 
   if (CMessageHandler::getSingletonPtr()) {delete CMessageHandler::getSingletonPtr();}
+  if (CEntityManager::getSingletonPtr()) {delete CEntityManager::getSingletonPtr();}
 
   OGRE_DELETE_T(mFSLayer, FileSystemLayer, Ogre::MEMCATEGORY_GENERAL);
   //Remove ourself as a Window listener
@@ -517,6 +519,8 @@ void CGame::createScene() {
 
   Ogre::LogManager::getSingletonPtr()->logMessage("*** Initializing singleton classes ***");
   //-------------------------------------------------------------------------------------
+  Ogre::LogManager::getSingletonPtr()->logMessage("    EntityManager ");
+  new CEntityManager();
   Ogre::LogManager::getSingletonPtr()->logMessage("    MessageManager ");
   new CMessageHandler();
   Ogre::LogManager::getSingletonPtr()->logMessage("    GameSate ");
@@ -598,6 +602,9 @@ bool CGame::frameStarted(const Ogre::FrameEvent& evt) {
 }
 bool CGame::frameEnded(const Ogre::FrameEvent& evt) {
   DebugDrawer::getSingleton().clear();
+
+  CEntityManager::getSingleton().process();
+
   m_pGameStateManager->frameEnded(evt);
   return true;
 }
