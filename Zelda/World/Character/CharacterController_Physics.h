@@ -70,7 +70,7 @@ protected:
 	bool  full_drop;
 	bool  bounce_fix;
 
-	std::list<const CWorldEntity *> m_lCollidingWorldEntities;
+	std::list<CWorldEntity *> m_lCollidingWorldEntities;
 
 	btVector3 computeReflectionDirection (const btVector3& direction, const btVector3& normal);
 	btVector3 parallelComponent (const btVector3& direction, const btVector3& normal);
@@ -155,7 +155,7 @@ public:
 	void setUpInterpolate (bool value);
 
 
-	const std::list<const CWorldEntity *> &getCollidingWorldEntities() const {return m_lCollidingWorldEntities;}
+	const std::list<CWorldEntity *> &getCollidingWorldEntities() const {return m_lCollidingWorldEntities;}
 };
 
 

@@ -189,9 +189,14 @@
 		<Unit filename="../Zelda/World/Damage.cpp" />
 		<Unit filename="../Zelda/World/Damage.hpp" />
 		<Unit filename="../Zelda/World/DamageTypes.hpp" />
+		<Unit filename="../Zelda/World/GlobalCollisionShapesTypes.cpp" />
+		<Unit filename="../Zelda/World/GlobalCollisionShapesTypes.hpp" />
 		<Unit filename="../Zelda/World/HitableInterface.cpp" />
 		<Unit filename="../Zelda/World/HitableInterface.hpp" />
 		<Unit filename="../Zelda/World/Hitpoints.hpp" />
+		<Unit filename="../Zelda/World/Objects/Object.cpp" />
+		<Unit filename="../Zelda/World/Objects/Object.hpp" />
+		<Unit filename="../Zelda/World/Objects/ObjectTypes.hpp" />
 		<Unit filename="../Zelda/World/World.cpp" />
 		<Unit filename="../Zelda/World/World.hpp" />
 		<Unit filename="../Zelda/World/WorldEntity.cpp" />

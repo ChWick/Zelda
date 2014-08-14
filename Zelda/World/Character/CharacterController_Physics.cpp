@@ -366,7 +366,7 @@ void CharacterControllerPhysics::stepForwardAndStrafe ( btCollisionWorld* collis
 		{
 			const btCollisionObject *pOther = callback.m_hitCollisionObject;
 
-      const CWorldEntity *pWE = CWorldEntity::getFromUserPointer(pOther);
+      CWorldEntity *pWE = CWorldEntity::getFromUserPointer(pOther);
       if (pWE) {m_lCollidingWorldEntities.push_back(pWE);}
 
 			// we moved only a fraction

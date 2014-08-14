@@ -93,6 +93,15 @@ void CPlayer::startup(const Ogre::Vector3 &playerPosition, const Ogre::Vector3 &
 		}
 	}
 }*/
+
+void CPlayer::update(Ogre::Real tpf) {
+	CPerson::update(tpf);
+
+  for (CWorldEntity *pWE : dynamic_cast<CharacterControllerPhysics*>(mCCPhysics)->getCollidingWorldEntities()) {
+  	// check for collisions, to pickup
+  	pWE->interactOnCollision(this->getPosition() - pWE->getPosition(), this);
+  }
+}
 void CPlayer::preUpdateBoundsCallback(const Ogre::Real deltaTime) {
     CPersonController *pPersonController = dynamic_cast<CPersonController*>(m_pCharacterController);
 	// check if player is in war mode (swords drawn), then im enemy is near change view

@@ -51,7 +51,7 @@ public:
 	CPhysicsCollisionObject(const CPhysicsCollisionObject &colObj)
 		: m_pShape(colObj.m_pShape), m_vOffset(colObj.m_vOffset) {
 	}
-	btCollisionShape *getShape() {return m_pShape;}
+	btCollisionShape *getShape() const {return m_pShape;}
 	const Ogre::Vector3 &getOffset() const {return m_vOffset;}
 
 	void operator=(const CPhysicsCollisionObject &colObj) {

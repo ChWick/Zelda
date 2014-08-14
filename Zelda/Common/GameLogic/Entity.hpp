@@ -79,6 +79,7 @@ public:
   void destroy();
 
   void sendCallToAll(void (CEntity::*pFunction)(), bool bCallThis = true);
+  void sendCallToAllChildrenFirst(void (CEntity::*pFunction)(), bool bCallThis = true);
 
   // events access
   std::list<events::CEvent*> &getEvents() {return m_lEvents;}

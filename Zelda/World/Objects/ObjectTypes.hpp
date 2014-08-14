@@ -1,0 +1,11 @@
+#ifndef _OBJECT_TYPES_HPP_
+#define _OBJECT_TYPES_HPP_
+
+enum EObjectTypes {
+  OBJECT_GREEN_BUSH,
+  OBJECT_GREEN_RUPEE,
+  OBJECT_BLUE_RUPEE,
+  OBJECT_RED_RUPEE,
+};
+
+#endif // _OBJECT_TYPES_HPP_

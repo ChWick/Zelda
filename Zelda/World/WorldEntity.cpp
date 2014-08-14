@@ -1,6 +1,9 @@
 #include "WorldEntity.hpp"
 #include <OgreSceneNode.h>
 #include <BulletCollision/CollisionDispatch/btCollisionObject.h>
+#include "../Common/Physics/BtOgreExtras.h"
+#include "../Common/Util/DeleteSceneNode.hpp"
+#include "Atlas/Map.hpp"
 
 CWorldEntity::CWorldEntity(const std::string &sID, CEntity *pParent, CMap *pMap)
   : CEntity(sID, pParent),
@@ -8,11 +11,35 @@ CWorldEntity::CWorldEntity(const std::string &sID, CEntity *pParent, CMap *pMap)
     m_pCollisionObject(nullptr),
     m_pMap(pMap) {
 }
+CWorldEntity::~CWorldEntity() {
+}
+
+void CWorldEntity::exit() {
+  if (m_pSceneNode) {
+    destroySceneNode(m_pSceneNode, true);
+    m_pSceneNode = nullptr;
+  }
+  if (m_pCollisionObject) {
+    assert(m_pMap);
+  	m_pMap->getPhysicsManager()->getWorld()->removeCollisionObject(m_pCollisionObject);
+    btRigidBody *pRB = btRigidBody::upcast(m_pCollisionObject);
+    if (pRB) {
+      delete pRB->getMotionState();
+    }
+    // dont delete collision shape, since it is normally a global shape
+    m_pCollisionObject = nullptr;
+  }
+
+  CEntity::exit();
+}
 
 const SPATIAL_VECTOR &CWorldEntity::getPosition() const {
   return m_pSceneNode->getPosition();
 }
 void CWorldEntity::setPosition(const SPATIAL_VECTOR &vPos) {
+  if (m_pCollisionObject) {
+    m_pCollisionObject->getWorldTransform().setOrigin(BtOgre::Convert::toBullet(vPos));
+  }
   m_pSceneNode->setPosition(vPos);
 }
 void CWorldEntity::translate(const SPATIAL_VECTOR &vOffset) {
@@ -69,7 +96,7 @@ CWorldEntity *CWorldEntity::getFromUserPointer(btCollisionObject *pCO) {
   return static_cast<CWorldEntity*>(pCO->getUserPointer());
 }
 
-const CWorldEntity *CWorldEntity::getFromUserPointer(const btCollisionObject *pCO) {
+CWorldEntity *CWorldEntity::getFromUserPointer(const btCollisionObject *pCO) {
   assert(pCO);
   return static_cast<CWorldEntity*>(pCO->getUserPointer());
 }

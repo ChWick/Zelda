@@ -46,6 +46,8 @@ CGameStateManager::CGameStateManager()
 }
 CGameStateManager::~CGameStateManager() {
   CMessageHandler::getSingleton().removeInjector(this);
+
+  sendCallToAllChildrenFirst(&CEntity::exit, true);
 }
 void CGameStateManager::init() {
   m_bAdShown = false;

@@ -7,6 +7,9 @@
 #include <OgreLogManager.h>
 #include <OgreMeshManager.h>
 #include "Region.hpp"
+#include "../GlobalCollisionShapesTypes.hpp"
+#include "../Objects/Object.hpp"
+#include "BulletCollision/CollisionShapes/btSphereShape.h"
 
 CMap::CMap(CEntity *pAtlas, CMapPackPtr mapPack, Ogre::SceneNode *pParentSceneNode, CWorldEntity *pPlayer)
   : CWorldEntity(mapPack->getName(), pAtlas, this),
@@ -15,6 +18,10 @@ CMap::CMap(CEntity *pAtlas, CMapPackPtr mapPack, Ogre::SceneNode *pParentSceneNo
     m_pPlayer(pPlayer) {
 
   Ogre::LogManager::getSingleton().logMessage("Construction of map '" + m_MapPack->getName() + "'");
+
+  // Create global collision shapes
+  m_PhysicsManager.addCollisionShape(GLOBAL_COLLISION_SHAPES_TYPES_ID_MAP.toString(GCST_PICKABLE_OBJECT_SPHERE),
+                                     CPhysicsCollisionObject(new btSphereShape(0.5)));
 
   m_pSceneNode = pParentSceneNode->createChildSceneNode(m_MapPack->getName() + "_RootNode");
 
@@ -31,11 +38,12 @@ CMap::CMap(CEntity *pAtlas, CMapPackPtr mapPack, Ogre::SceneNode *pParentSceneNo
 
   CreateCube(btVector3(0, 10, 0.2), 1);
   CreateCube(btVector3(0, 200, 0.3), 100);
+
+  new CObject(m_MapPack->getName() + "rupee", this, this, OBJECT_RED_RUPEE);
 }
 
 CMap::~CMap() {
   Ogre::LogManager::getSingleton().logMessage("Destruction of map '" + m_MapPack->getName() + "'");
-  destroySceneNode(m_pSceneNode, true);
 }
 
 void CMap::start() {

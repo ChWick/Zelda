@@ -1,12 +1,13 @@
 #ifndef _WORLD_ENTITY_HPP_
 #define _WORLD_ENTITY_HPP_
 
+#include "InteractionInterface.hpp"
 #include "../Common/GameLogic/Entity.hpp"
 #include "HitableInterface.hpp"
 
 class CMap;
 
-class CWorldEntity : public CEntity, public CHitableInterface {
+class CWorldEntity : public CEntity, public CHitableInterface, public CInteractionInterface {
 protected:
   Ogre::SceneNode *m_pSceneNode;
 	btCollisionObject *m_pCollisionObject;
@@ -14,6 +15,9 @@ protected:
 
 public:
   CWorldEntity(const std::string &sID, CEntity *pParent, CMap *pMap);
+  virtual ~CWorldEntity();
+
+  virtual void exit();
 
   virtual const SPATIAL_VECTOR &getPosition() const;
   virtual void setPosition(const SPATIAL_VECTOR &vPos);
@@ -41,7 +45,7 @@ public:
 
   void setThisAsCollisionObjectsUserPointer();
   static CWorldEntity *getFromUserPointer(btCollisionObject *pCO);
-  static const CWorldEntity *getFromUserPointer(const btCollisionObject *pCO);
+  static CWorldEntity *getFromUserPointer(const btCollisionObject *pCO);
 };
 
 #endif // _WORLD_ENTITY_HPP_

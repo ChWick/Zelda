@@ -13,6 +13,13 @@ CRegion::CRegion(CWorldEntity *pParent, const SRegionInfo &info)
 
 }
 
+CRegion::~CRegion() {
+}
+
+void CRegion::exit() {
+  delete m_pCollisionObject->getCollisionShape();
+}
+
 void CRegion::start() {
   btCollisionShape *pShape = nullptr;
   if (m_Info.shape == "box") {

@@ -8,6 +8,9 @@ class CRegion : public CWorldEntity {
   const SRegionInfo m_Info;
 public:
   CRegion(CWorldEntity *pParent, const SRegionInfo &info);
+  ~CRegion();
+
+  void exit();
 
   void start();
 };

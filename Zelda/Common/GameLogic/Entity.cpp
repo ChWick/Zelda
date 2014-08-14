@@ -203,6 +203,14 @@ void CEntity::sendCallToAll(void (CEntity::*pFunction)(), bool bCallThis) {
   }
 }
 
+void CEntity::sendCallToAllChildrenFirst(void (CEntity::*pFunction)(), bool bCallThis) {
+  for (auto pChild : m_lChildren) {
+    pChild->sendCallToAllChildrenFirst(pFunction);
+  }
+
+  if (bCallThis) {(this->*pFunction)();}
+}
+
 void CEntity::destroyChildren() {
   while (m_lChildren.size() > 0) {
     CEntity *toDel = m_lChildren.front();
