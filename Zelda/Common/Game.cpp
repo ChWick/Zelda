@@ -598,12 +598,17 @@ bool CGame::frameStarted(const Ogre::FrameEvent& evt) {
   m_pGameStateManager->renderDebug(evt.timeSinceLastFrame);
   DebugDrawer::getSingleton().build();
 
+
+
+  // process events again exactly before rendering
+  CMessageHandler::getSingleton().process();
+  CEntityManager::getSingleton().process();
+
   return true;
 }
 bool CGame::frameEnded(const Ogre::FrameEvent& evt) {
   DebugDrawer::getSingleton().clear();
 
-  CEntityManager::getSingleton().process();
 
   m_pGameStateManager->frameEnded(evt);
   return true;

@@ -34,7 +34,15 @@ void CWorldEntity::exit() {
 }
 
 const SPATIAL_VECTOR &CWorldEntity::getPosition() const {
-  return m_pSceneNode->getPosition();
+  if (m_pSceneNode) {
+    return m_pSceneNode->getPosition();
+  }
+
+  if (m_pCollisionObject) {
+    return BtOgre::Convert::toOgre(m_pCollisionObject->getWorldTransform().getOrigin());
+  }
+
+  return CEntity::getPosition();
 }
 void CWorldEntity::setPosition(const SPATIAL_VECTOR &vPos) {
   if (m_pCollisionObject) {

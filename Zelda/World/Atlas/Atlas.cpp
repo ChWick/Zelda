@@ -25,13 +25,12 @@ CAtlas::CAtlas(CEntity *pParent, Ogre::SceneNode *pRootSceneNode, CWorldEntity *
   CMessageHandler::getSingleton().addMessage(new CMessageSwitchMap(m_pCurrentMap->getMapPack()->getName(), CMessageSwitchMap::FINISHED, m_pCurrentMap, nullptr));
 }
 CAtlas::~CAtlas() {
-  delete m_pCurrentMap;
 }
 
 void CAtlas::update(Ogre::Real tpf) {
   if (m_bSwitchingMaps) {
     if (m_pCameraPerspective->isCameraInBounds() && m_bPlayerTargetReached) {
-      delete m_pCurrentMap;
+      m_pCurrentMap->deleteNow();
       m_pCurrentMap = m_pNextMap;
       m_pNextMap = nullptr;
       m_bSwitchingMaps = false;
@@ -70,7 +69,7 @@ void CAtlas::handleMessage(const CMessage &message) {
         CMapPackPtr currPack = m_pCurrentMap->getMapPack();
 
         Ogre::Vector3 vMapPositionOffset = currPack->getGlobalPosition() - nextPack->getGlobalPosition();
-        m_pCurrentMap->moveMapAndDeletePhysics(vMapPositionOffset);
+        m_pCurrentMap->moveMap(vMapPositionOffset);
 
 
 

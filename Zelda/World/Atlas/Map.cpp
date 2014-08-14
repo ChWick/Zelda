@@ -108,9 +108,8 @@ void CMap::CreateCube(const btVector3 &Position, btScalar Mass)
     m_PhysicsManager.getWorld()->addRigidBody(RigidBody, 32, 1023);
 }
 
-void CMap::moveMapAndDeletePhysics(const Ogre::Vector3 &offset) {
+void CMap::moveMap(const Ogre::Vector3 &offset) {
   m_bPauseUpdate = true;
-  m_PhysicsManager.exit();
   m_pSceneNode->translate(offset);
 }
 

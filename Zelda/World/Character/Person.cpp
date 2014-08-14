@@ -227,6 +227,11 @@ bool CPerson::collidesWith(const std::string &sEntityID) const {
   return false;
 }
 
+bool CPerson::frameEnded(const Ogre::FrameEvent& evt) {
+  dynamic_cast<CharacterControllerPhysics*>(mCCPhysics)->prepare();
+  return true;
+}
+
 void CPerson::createBlinkingMaterials() {
 /*	assert(m_pBodyEntity);
 

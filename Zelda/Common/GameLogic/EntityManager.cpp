@@ -1,5 +1,6 @@
 #include "EntityManager.hpp"
 #include "Entity.hpp"
+#include "../Log.hpp"
 
 
 template<> CEntityManager *Ogre::Singleton<CEntityManager>::msSingleton = 0;
@@ -13,6 +14,7 @@ CEntityManager *CEntityManager::getSingletonPtr() {
 }
 
 void CEntityManager::deleteNow(CEntity *pEntity) {
+  LOGV("Deleting entity '%s'", pEntity->getID().c_str());
   pEntity->sendCallToAllChildrenFirst(&CEntity::stop, true);
   pEntity->sendCallToAllChildrenFirst(&CEntity::exit, true);
   delete pEntity;

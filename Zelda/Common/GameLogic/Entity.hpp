@@ -78,6 +78,7 @@ public:
   void destroyChildren();
   void destroy();
   void deleteLater();
+  void deleteNow();
 
   void sendCallToAll(void (CEntity::*pFunction)(), bool bCallThis = true);
   void sendCallToAllChildrenFirst(void (CEntity::*pFunction)(), bool bCallThis = true);

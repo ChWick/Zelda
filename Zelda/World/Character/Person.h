@@ -31,6 +31,8 @@ public:
 
 	virtual void destroy();
 
+  virtual bool frameEnded(const Ogre::FrameEvent& evt);
+
 
   virtual bool collidesWith(const std::string &sEntityID) const;
 

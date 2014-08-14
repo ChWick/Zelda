@@ -92,8 +92,13 @@ public:
 	///btActionInterface interface
 	virtual void updateAction( btCollisionWorld* collisionWorld,btScalar deltaTime)
 	{
+		m_lCollidingWorldEntities.clear();
 		preStep ( collisionWorld);
 		playerStep (collisionWorld, deltaTime);
+	}
+
+	void prepare() {
+		m_lCollidingWorldEntities.clear();
 	}
 
 	///btActionInterface interface

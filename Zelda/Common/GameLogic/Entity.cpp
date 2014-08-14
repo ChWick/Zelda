@@ -202,6 +202,10 @@ void CEntity::deleteLater() {
   CEntityManager::getSingleton().deleteLater(this);
 }
 
+void CEntity::deleteNow() {
+  CEntityManager::getSingleton().deleteNow(this);
+}
+
 void CEntity::sendCallToAll(void (CEntity::*pFunction)(), bool bCallThis) {
   if (bCallThis) {(this->*pFunction)();}
 
