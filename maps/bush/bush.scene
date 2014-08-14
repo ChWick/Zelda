@@ -1,0 +1,24 @@
+<scene export_time="1408026451.0179367" exported_by="christoph" formatVersion="1.0.1" previous_export_time="1408026326.1850128" >
+  <nodes >
+    <node name="GreenBush" >
+      <position y="0.000000" z="-0.000000" x="0.000000" />
+      <rotation qy="0.000000" qw="1.000000" qx="0.000000" qz="-0.000000" />
+      <scale y="0.245255" z="0.245255" x="0.245255" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <entity actor="False" damping_rot="0.10000000149011612" lock_rot_z="False" mass_radius="1.0" mass="1.0" velocity_min="0.0" lock_rot_y="False" meshFile="GreenBush.mesh" friction_y="1.0" physics_type="STATIC" friction_x="1.0" velocity_max="0.0" anisotropic_friction="False" lock_trans_y="False" friction_z="1.0" ghost="False" name="GreenBush" lock_rot_x="False" lock_trans_x="False" inertia_tensor="0.4000000059604645" lock_trans_z="False" damping_trans="0.03999999910593033" />
+    </node>
+  </nodes>
+  <externals >
+    <item type="material" >
+      <file name="/home/christoph/Documents/Projects/Zelda/maps/bush/Game_Soil.material" />
+    </item>
+  </externals>
+  <environment >
+    <colourBackground g="0.05087608844041824" b="0.05087608844041824" r="0.05087608844041824" />
+    <colourDiffuse g="0.05087608844041824" b="0.05087608844041824" r="0.05087608844041824" />
+    <colourAmbient g="0.0" b="0.0" r="0.0" />
+  </environment>
+</scene>

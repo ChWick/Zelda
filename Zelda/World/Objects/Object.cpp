@@ -33,12 +33,17 @@ CObject::CObject(const std::string &id, CWorldEntity *pParent, CMap *pMap, EObje
   case OBJECT_BLUE_RUPEE:
     pEntity = pSceneManager->createEntity("rupee.mesh");
     pEntity->setMaterialName("Rupee/Blue");
-    pCollisionShape = m_pMap->getPhysicsManager()->getCollisionShape(GLOBAL_COLLISION_SHAPES_TYPES_ID_MAP.toString(GCST_PICKABLE_OBJECT_SPHERE)).getShape();
+    bUsePickableObjectSphere = true;
     break;
   case OBJECT_RED_RUPEE:
     pEntity = pSceneManager->createEntity("rupee.mesh");
     pEntity->setMaterialName("Rupee/Red");
-    pCollisionShape = m_pMap->getPhysicsManager()->getCollisionShape(GLOBAL_COLLISION_SHAPES_TYPES_ID_MAP.toString(GCST_PICKABLE_OBJECT_SPHERE)).getShape();
+    bUsePickableObjectSphere = true;
+    break;
+  case OBJECT_GREEN_BUSH:
+    pEntity = pSceneManager->createEntity("GreenBush.mesh");
+    pEntity->setMaterialName("Game/Soil");
+    bUsePickableObjectSphere = true;
     break;
   }
 
@@ -52,6 +57,7 @@ CObject::CObject(const std::string &id, CWorldEntity *pParent, CMap *pMap, EObje
   assert(pCollisionShape);
 
   m_pSceneNode->attachObject(pEntity);
+  pEntity->setCastShadows(false);
 
   btRigidBody *pRigidBody = new btRigidBody(1, new BtOgre::RigidBodyState(m_pSceneNode), pCollisionShape);
   m_pCollisionObject = pRigidBody;
@@ -76,7 +82,15 @@ CObject::CObject(const std::string &id, CWorldEntity *pParent, CMap *pMap, EObje
 }
 
 CObject::SInteractionResult CObject::interactOnCollision(const Ogre::Vector3 &vInteractDir, CWorldEntity *pSender) {
-  deleteLater();
+  switch (m_uiType) {
+  case OBJECT_GREEN_RUPEE:
+  case OBJECT_BLUE_RUPEE:
+  case OBJECT_RED_RUPEE:
+    deleteLater();
+    return SInteractionResult();
+    break;
+  }
 
+  // Do nothing
   return SInteractionResult();
 }

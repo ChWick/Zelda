@@ -39,7 +39,7 @@ CMap::CMap(CEntity *pAtlas, CMapPackPtr mapPack, Ogre::SceneNode *pParentSceneNo
   CreateCube(btVector3(0, 10, 0.2), 1);
   CreateCube(btVector3(0, 200, 0.3), 100);
 
-  new CObject(m_MapPack->getName() + "rupee", this, this, OBJECT_RED_RUPEE);
+  new CObject(m_MapPack->getName() + "rupee", this, this, OBJECT_GREEN_BUSH);
 }
 
 CMap::~CMap() {
