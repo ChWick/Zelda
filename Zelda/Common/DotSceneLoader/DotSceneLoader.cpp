@@ -690,13 +690,13 @@ void DotSceneLoader::processEntity(XMLElement *XMLNode, SceneNode *pParent, CUse
   String materialFile = getAttrib(XMLNode, "materialFile");
   String physicsType = getAttrib(XMLNode, "physics_type");
 
-  bool isStatic = getAttribBool(XMLNode, "static", false) || physicsType == "STATIC";
+  bool isStatic = getAttribBool(XMLNode, "static", false) || physicsType == "STATIC" || physicsType == "NO_COLLISION";
   if (!userData.getBoolUserData("static", true)) {
     isStatic = false;
   }
 
   bool castShadows = getAttribBool(XMLNode, "castShadows", true);
-  bool isGhost = false;
+  bool isGhost = getAttribBool(XMLNode, "ghost");
 
   // user data properties
   bool bIsWall = userData.getBoolUserData("wall", false);               // is this object a wall? this will set COL_WALL as collision group
@@ -714,7 +714,7 @@ void DotSceneLoader::processEntity(XMLElement *XMLNode, SceneNode *pParent, CUse
 // physics only meshes will only appear as physics and will not be drawn, have to be static!
 bool isPhysicsOnly = meshFile.find("Physics_Only_") == 0;
   if (isGhost) {
-      isPhysicsOnly = "true";
+      isPhysicsOnly = true;
   }
 // rotate grass randomly
 if (meshFile == "Grass.mesh") {
@@ -930,15 +930,15 @@ if (isPhysicsOnly) {
           mSceneMgr->destroyEntity(pEntity);
       }
       if (pParent) {
-          delete pParent;
+          mSceneMgr->destroySceneNode(pParent);
       }
-      if (pRB) {
+      /*if (pRB) {
           m_pPhysicsManager->getWorld()->removeRigidBody(pRB);
           m_pPhysicsManager->eraseCollisionShape(pRB->getCollisionShape());
           delete pRB->getMotionState();
           delete pRB->getCollisionShape();
           delete pRB;
-      }
+      }*/
   }
 }
 
@@ -1114,7 +1114,9 @@ bool DotSceneLoader::getAttribBool(XMLElement *XMLNode, const String &attrib, bo
     if(!XMLNode->Attribute(attrib.c_str()))
         return defaultValue;
 
-    if(String(XMLNode->Attribute(attrib.c_str())) == "true")
+  String v(XMLNode->Attribute(attrib.c_str()));
+  Ogre::StringUtil::toLowerCase(v);
+    if(v == "true")
         return true;
 
     return false;

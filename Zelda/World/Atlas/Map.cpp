@@ -25,9 +25,12 @@ CMap::CMap(CEntity *pAtlas, CMapPackPtr mapPack, Ogre::SceneNode *pParentSceneNo
 
   m_pSceneNode = pParentSceneNode->createChildSceneNode(m_MapPack->getName() + "_RootNode");
 
+  m_pStaticGeometry = pParentSceneNode->getCreator()->createStaticGeometry(m_MapPack->getName() + "_StaticGeometry");
+
   m_MapPack->init(this);
 
 
+  m_SceneLoader.addCallback(this);
   m_SceneLoader.parseDotScene(m_MapPack->getSceneFile(),
                               m_MapPack->getResourceGroup(),
                               m_pSceneNode->getCreator(),
@@ -40,6 +43,8 @@ CMap::CMap(CEntity *pAtlas, CMapPackPtr mapPack, Ogre::SceneNode *pParentSceneNo
   CreateCube(btVector3(0, 200, 0.3), 100);
 
   //new CObject(m_MapPack->getName() + "rupee", this, this, OBJECT_GREEN_BUSH);
+
+  m_pStaticGeometry->build();
 }
 
 CMap::~CMap() {
@@ -48,6 +53,11 @@ CMap::~CMap() {
 
 void CMap::start() {
   sendCallToAll(&CEntity::start, false);
+}
+
+void CMap::exit() {
+  m_pSceneNode->getCreator()->destroyStaticGeometry(m_pStaticGeometry);
+  m_pStaticGeometry = nullptr;
 }
 
 void CMap::CreateCube(const btVector3 &Position, btScalar Mass)
@@ -136,4 +146,9 @@ void CMap::parsePlayer(const tinyxml2::XMLElement *pElem) {
 
 void CMap::parseRegion(const SRegionInfo &region) {
   new CRegion(this, region);
+}
+
+void CMap::staticObjectAdded(Ogre::Entity *pEntity, Ogre::SceneNode *pParent) {
+  m_pStaticGeometry->addEntity(pEntity, pParent->getPosition(), pParent->getOrientation());
+  //destroySceneNode(pParent, true);
 }

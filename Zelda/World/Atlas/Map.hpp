@@ -5,20 +5,26 @@
 #include "../../Common/Physics/PhysicsManager.h"
 #include "MapPack.hpp"
 #include "../../Common/DotSceneLoader/DotSceneLoader.hpp"
+#include "../../Common/DotSceneLoader/DotSceneLoaderCallback.hpp"
 #include <btBulletDynamicsCommon.h>
 #include "MapPackParserListener.hpp"
+#include "OgreStaticGeometry.h"
 
-class CMap : public CWorldEntity, CMapPackParserListener {
+class CMap : public CWorldEntity,
+             private CMapPackParserListener,
+             private CDotSceneLoaderCallback {
 private:
   CPhysicsManager m_PhysicsManager;
   CMapPackPtr m_MapPack;
   Ogre::DotSceneLoader m_SceneLoader;
   CWorldEntity *m_pPlayer;
+  Ogre::StaticGeometry *m_pStaticGeometry;
 public:
   CMap(CEntity *pAtlas, CMapPackPtr mapPack, Ogre::SceneNode *pParentSceneNode, CWorldEntity *pPlayer);
   virtual ~CMap();
 
   void start();
+  void exit();
 
   void CreateCube(const btVector3 &Position, btScalar Mass);
 
@@ -35,5 +41,8 @@ public:
 private:
   void parsePlayer(const tinyxml2::XMLElement *);
   void parseRegion(const SRegionInfo &);
+
+
+	void staticObjectAdded(Ogre::Entity *pEntity, Ogre::SceneNode *pParent);
 };
 #endif // _MAP_HPP_

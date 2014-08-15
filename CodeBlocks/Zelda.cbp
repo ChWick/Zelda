@@ -72,6 +72,8 @@
 		<Unit filename="../Zelda/Common/Game.hpp" />
 		<Unit filename="../Zelda/Common/GameLogic/Entity.cpp" />
 		<Unit filename="../Zelda/Common/GameLogic/Entity.hpp" />
+		<Unit filename="../Zelda/Common/GameLogic/EntityManager.cpp" />
+		<Unit filename="../Zelda/Common/GameLogic/EntityManager.hpp" />
 		<Unit filename="../Zelda/Common/GameLogic/Events/Actions/Action.cpp" />
 		<Unit filename="../Zelda/Common/GameLogic/Events/Actions/Action.hpp" />
 		<Unit filename="../Zelda/Common/GameLogic/Events/Actions/ActionCreator.cpp" />
@@ -96,6 +98,7 @@
 		<Unit filename="../Zelda/Common/GameLogic/GameStateManager.hpp" />
 		<Unit filename="../Zelda/Common/GameLogic/GameStateTypes.cpp" />
 		<Unit filename="../Zelda/Common/GameLogic/GameStateTypes.hpp" />
+		<Unit filename="../Zelda/Common/GameLogic/OutputStyle.hpp" />
 		<Unit filename="../Zelda/Common/Input/GameInputCommand.hpp" />
 		<Unit filename="../Zelda/Common/Input/GameInputListener.cpp" />
 		<Unit filename="../Zelda/Common/Input/GameInputListener.hpp" />
@@ -194,6 +197,7 @@
 		<Unit filename="../Zelda/World/HitableInterface.cpp" />
 		<Unit filename="../Zelda/World/HitableInterface.hpp" />
 		<Unit filename="../Zelda/World/Hitpoints.hpp" />
+		<Unit filename="../Zelda/World/InteractionInterface.hpp" />
 		<Unit filename="../Zelda/World/Objects/Object.cpp" />
 		<Unit filename="../Zelda/World/Objects/Object.hpp" />
 		<Unit filename="../Zelda/World/Objects/ObjectTypes.hpp" />

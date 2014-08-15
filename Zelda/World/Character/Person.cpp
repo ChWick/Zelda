@@ -17,8 +17,8 @@ const Ogre::String CPerson::PERSON_SHEATH("Sheath");
 const Ogre::String CPerson::PERSON_SHIELD_PACKED("ShieldPacked");
 const Ogre::String CPerson::PERSON_LEFT_HANDLE("Handle.L");
 const Ogre::String CPerson::PERSON_RIGHT_HANDLE("Handle.R");
-const Ogre::Real CPerson::PERSON_HEIGHT = 0.2f;
-const Ogre::Real CPerson::PERSON_RADIUS = 0.05f;
+const Ogre::Real CPerson::PERSON_HEIGHT = 0.04f;
+const Ogre::Real CPerson::PERSON_RADIUS = 0.015f;
 const Ogre::Real CPerson::PERSON_SCALE  = 1.f;
 
 
@@ -56,7 +56,7 @@ void CPerson::createPhysics() {
     btScalar characterHeight = PERSON_HEIGHT;
 	btScalar characterWidth = PERSON_RADIUS;
 
-    btConvexShape * capsule = new btCapsuleShape(characterWidth, characterHeight);
+    btConvexShape * capsule = new btCapsuleShape(characterWidth / 2, characterHeight / 2);
     capsule->setMargin(0.0);
 
     mCollisionShapes.push_back(capsule);
@@ -67,7 +67,7 @@ void CPerson::createPhysics() {
     btConvexShape * duck = new btCapsuleShape(characterWidth, characterHeight / 3);
     mCollisionShapes.push_back(duck);
 
-    btScalar stepHeight = 0.05f;
+    btScalar stepHeight = 0.0005f;
 
     btCylinderShape *pCylShape = new btCylinderShape(btVector3(characterWidth, 0.2, characterWidth) * 0.5);
     mCollisionShapes.push_back(pCylShape);
