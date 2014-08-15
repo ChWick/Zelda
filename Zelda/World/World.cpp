@@ -29,7 +29,7 @@ CWorld::CWorld()
   Ogre::Viewport *vp = CGame::getSingleton().getMainViewPort();
   m_pWorldCamera->setAspectRatio(Ogre::Real(vp->getActualWidth()) / Ogre::Real(vp->getActualHeight()));
   vp->setCamera(m_pWorldCamera);
-  m_pWorldCamera->setOrthoWindowWidth(16);
+  m_pWorldCamera->setOrthoWindowWidth(1.6);
 
   // create the player
   m_pPlayer = new CPlayer(this, m_pWorldCamera, CGame::getSingleton().getSceneManager());

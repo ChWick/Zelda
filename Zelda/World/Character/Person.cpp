@@ -17,8 +17,8 @@ const Ogre::String CPerson::PERSON_SHEATH("Sheath");
 const Ogre::String CPerson::PERSON_SHIELD_PACKED("ShieldPacked");
 const Ogre::String CPerson::PERSON_LEFT_HANDLE("Handle.L");
 const Ogre::String CPerson::PERSON_RIGHT_HANDLE("Handle.R");
-const Ogre::Real CPerson::PERSON_HEIGHT = 0.4f;
-const Ogre::Real CPerson::PERSON_RADIUS = 0.2f;
+const Ogre::Real CPerson::PERSON_HEIGHT = 0.2f;
+const Ogre::Real CPerson::PERSON_RADIUS = 0.05f;
 const Ogre::Real CPerson::PERSON_SCALE  = 1.f;
 
 

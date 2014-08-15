@@ -7,7 +7,7 @@
 #include "../../Common/Message/MessageTargetReached.hpp"
 
 const Ogre::Real DEFAULT_PUSHED_BACK_TIME = 0.1f;
-const Ogre::Real RUN_SPEED = 40;					//!< constat for the run speed
+const Ogre::Real RUN_SPEED = 6; 					//!< constat for the run speed
 const Ogre::Real TURN_SPEED = 500;				//!< constant for the turn speed
 
 CPersonController::CPersonController(CPerson * ccPlayer) {
