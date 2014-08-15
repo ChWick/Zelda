@@ -56,7 +56,7 @@ void CPerson::createPhysics() {
     btScalar characterHeight = PERSON_HEIGHT;
 	btScalar characterWidth = PERSON_RADIUS;
 
-    btConvexShape * capsule = new btCylinderShape(btVector3(characterWidth, characterHeight, characterWidth));
+    btConvexShape * capsule = new btCapsuleShape(characterWidth, characterHeight);
     capsule->setMargin(0.0);
 
     mCollisionShapes.push_back(capsule);

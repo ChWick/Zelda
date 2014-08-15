@@ -1,0 +1,34 @@
+material Game/Soil
+{
+	technique
+	{
+		pass
+		{
+			texture_unit
+			{
+				texture tiles.png
+			}
+		}
+	}
+}
+
+material soil : Game/Soil {
+}
+
+material Game/house
+{
+	technique
+	{
+		pass
+		{
+			texture_unit
+			{
+				texture house.png
+			}
+		}
+	}
+}
+
+material house : Game/house {
+}
+

@@ -829,7 +829,7 @@ if (isPhysicsOnly) {
         else if (collisionPrim == "convex_hull") {
           shape = converter.createConvex();
           //Ogre::LogManager::getSingleton().logMessage("Creating Convex");
-          centerOffset = pParent->getOrientation() * converter.getCenter();
+          //centerOffset = pParent->getOrientation() * converter.getCenter();
         }
         else {
           throw Ogre::Exception(0, "Unknown Collision Prim: " + collisionPrim, __FILE__);
