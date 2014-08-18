@@ -20,12 +20,6 @@
 #ifndef _ANDROID_HPP_
 #define _ANDROID_HPP_
 
-#include "SaveStateManager.hpp"
-
-#ifdef INCLUDE_RTSHADER_SYSTEM
-#   include "OgreRTShaderSystem.h"
-#endif
-
 #ifdef OGRE_STATIC_LIB
 #  ifdef OGRE_BUILD_RENDERSYSTEM_GLES2
 #    undef OGRE_STATIC_GLES
@@ -34,6 +28,10 @@
 #  endif
 #else
 #error "Ogre has to be static!"
+#endif
+
+#ifdef INCLUDE_RTSHADER_SYSTEM
+#   include "OgreRTShaderSystem.h"
 #endif
 
 #  ifdef OGRE_BUILD_PLUGIN_CG
@@ -62,22 +60,21 @@
 #define LOGW(...) ((void)__android_log_print(ANDROID_LOG_WARN, "Ogre", __VA_ARGS__))
 
 #include "AndroidInput.hpp"
-#include "SnapshotManager.hpp"
-#include "FileManager.hpp"
+#include "../FileManager/FileManager.hpp"
 #include <CEGUI/Exceptions.h>
 #include <exception>
-#include "Assert.hpp"
+#include "../Util/Assert.hpp"
 
 class OgreAndroidBridge;
-    
-    
+
+
 /*=============================================================================
   | Ogre Android bridge
   =============================================================================*/
 class OgreAndroidBridge {
 private:
   static bool m_bRenderPaused;
-  static CSnapshot *m_pSnapshot;
+  //static CSnapshot *m_pSnapshot;
 public:
   static void init(struct android_app* state) {
     mActivity = state->activity;
@@ -85,16 +82,16 @@ public:
     state->onInputEvent = &OgreAndroidBridge::handleInput;
   }
   static void start() {
-    MENCUS_ASSERT(mActivity);
-            
+    ASSERT(mActivity);
+
     if(mInit)
       return;
-    
+
     LOGI("Initialising Root");
     mRoot = new Ogre::Root("plugins"OGRE_BUILD_SUFFIX".cfg",
 			   "ogre.cfg",
 			   CFileManager::getValidPath("ogre.log",
-						      CFileManager::SL_EXTERNAL));    
+						      CFileManager::SL_EXTERNAL));
 #ifdef OGRE_STATIC_LIB
     LOGI("Loading plugins");
     mStaticPluginLoader = new Ogre::StaticPluginLoader();
@@ -105,46 +102,46 @@ public:
     mRoot->initialise(false);
     mInit = true;
   }
-        
+
   static void shutdown()
   {
     if(!mInit)
       return;
-                
+
     mInit = false;
-            
+
     if(mGame)
       {
 	mGame->closeApp();
 	OGRE_DELETE mGame;
 	mGame = NULL;
       }
-      
+
     OGRE_DELETE mRoot;
     mRoot = NULL;
     mRenderWnd = NULL;
-            
+
     delete mTouch;
     mTouch = NULL;
-            
+
     delete mKeyboard;
     mKeyboard = NULL;
-            
+
     delete mInputInjector;
     mInputInjector = NULL;
-            
+
 #ifdef OGRE_STATIC_LIB
     mStaticPluginLoader->unload();
     delete mStaticPluginLoader;
     mStaticPluginLoader = NULL;
 #endif
   }
-        
-  static int32_t handleInput(struct android_app* app, AInputEvent* event) 
+
+  static int32_t handleInput(struct android_app* app, AInputEvent* event)
   {
     if (mInputInjector)
       {
-	if (AInputEvent_getType(event) == AINPUT_EVENT_TYPE_MOTION) 
+	if (AInputEvent_getType(event) == AINPUT_EVENT_TYPE_MOTION)
 	  {
 	    mTouch->setStatesToNone(AMotionEvent_getPointerCount(event));
 	    for (size_t n = 0; n < AMotionEvent_getPointerCount(event); n++) {
@@ -152,7 +149,7 @@ public:
 	      int nAction = AMOTION_EVENT_ACTION_MASK & AMotionEvent_getAction( event );
 	      int nRawAction = AMotionEvent_getAction( event );
 	      int nPointerIndex = n;
-	      
+
 	      if( nAction == AMOTION_EVENT_ACTION_POINTER_DOWN || nAction == AMOTION_EVENT_ACTION_POINTER_UP)
 		{
 		  nPointerIndex = (AMotionEvent_getAction( event ) & AMOTION_EVENT_ACTION_POINTER_INDEX_MASK) >> AMOTION_EVENT_ACTION_POINTER_INDEX_SHIFT;
@@ -166,7 +163,7 @@ public:
 		  injectTouchEvent(2,
 				   AMotionEvent_getRawX(event, nPointerIndex),
 				   AMotionEvent_getRawY(event, nPointerIndex), nPointerIndex );
-                    
+
 	      mInputInjector->
 		injectTouchEvent(action,
 				 AMotionEvent_getRawX(event, nPointerIndex),
@@ -179,7 +176,7 @@ public:
 	    }
 	    //LOGI("Pointer Count: %d  Number of states: %d", AMotionEvent_getPointerCount(event), mTouch->getMultiTouchStates().size());
 	  }
-	else 
+	else
 	  {
 	    mInputInjector->injectKeyEvent(AKeyEvent_getAction(event), AKeyEvent_getKeyCode(event));
 	  }
@@ -188,20 +185,20 @@ public:
       }
     return 0;
   }
-        
+
   static void handleCmd(struct android_app* app, int32_t cmd)
   {
     if (app->savedState) {
       LOGI("loading snapshot ...");
-      CSnapshotManager::getSingleton().setSnapshot(std::shared_ptr<CSnapshot>(new CSnapshot(app->savedState, app->savedStateSize)));
+      //CSnapshotManager::getSingleton().setSnapshot(std::shared_ptr<CSnapshot>(new CSnapshot(app->savedState, app->savedStateSize)));
     }
-    switch (cmd) 
+    switch (cmd)
       {
       case APP_CMD_SAVE_STATE:
 	LOGI("Saving state");
-	CSnapshotManager::getSingleton().makeBackupSnapshot();
-	CSnapshotManager::getSingleton().makeSnapshot().saveToMemory(app->savedState, app->savedStateSize);
-	if (CSaveStateManager::getSingletonPtr()) {CSaveStateManager::getSingleton().writeXMLFile();}
+	//CSnapshotManager::getSingleton().makeBackupSnapshot();
+	//CSnapshotManager::getSingleton().makeSnapshot().saveToMemory(app->savedState, app->savedStateSize);
+	//if (CSaveStateManager::getSingletonPtr()) {CSaveStateManager::getSingleton().writeXMLFile();}
 	break;
       case APP_CMD_INIT_WINDOW:
 	m_bRenderPaused = false;
@@ -210,27 +207,27 @@ public:
 	  LOGI("... creating config");
 	  AConfiguration* config = AConfiguration_new();
 	  AConfiguration_fromAssetManager(config, app->activity->assetManager);
-                        
+
 	  if (!mRenderWnd) {
 	    LOGI("... creating render window");
 	    Ogre::NameValuePairList opt;
 	    opt["externalWindowHandle"] = Ogre::StringConverter::toString((int)app->window);
 	    opt["androidConfig"] = Ogre::StringConverter::toString((int)config);
-                            
+
 	    mRenderWnd = Ogre::Root::getSingleton().createRenderWindow("OgreWindow", 0, 0, false, &opt);
-                            
+
 	    if(!mTouch)
 	      mTouch = new AndroidMultiTouch();
-                            
+
 	    if(!mKeyboard)
 	      mKeyboard = new AndroidKeyboard();
-                            
+
 	    if(!mGame) {
 	      LOGI("... creating game");
 	      mGame = OGRE_NEW CGame();
 	      mGame->initAppForAndroid(mRenderWnd, app, mTouch, mKeyboard);
 	      mGame->initApp();
-	      
+
 	      mInputInjector = new AndroidInputInjector(CInputListenerManager::getSingletonPtr(), mTouch, mKeyboard);
 	    }
 	  }
@@ -242,7 +239,7 @@ public:
 	      mGame->createResources();
 	    }
 	  }
-                        
+
 	  AConfiguration_delete(config);
 	}
 	break;
@@ -277,7 +274,7 @@ public:
 	try {
 	  if (source != NULL)
 	    source->process(state, source);
-                    
+
 	  if (state->destroyRequested != 0)
 	    return false;
 	}
@@ -295,7 +292,7 @@ public:
 	  LOGW("Unknown Exception in %s", __FILE__);
 	}
       }
-                
+
     if(mRenderWnd != NULL && mRenderWnd->isActive() && !m_bRenderPaused)
       {
 	try {
@@ -323,20 +320,20 @@ public:
       }
     return true;
   }
-        
+
   static void go(struct android_app* state)
   {
     if (state->savedState) {
       LOGI("loading snapshot ...");
-      CSnapshotManager::getSingleton().setSnapshot(std::shared_ptr<CSnapshot>(new CSnapshot(state->savedState, state->savedStateSize)));
+      //CSnapshotManager::getSingleton().setSnapshot(std::shared_ptr<CSnapshot>(new CSnapshot(state->savedState, state->savedStateSize)));
     }
     else {
       LOGI("no snapshot found, not loading");
     }
-    LOGI("starting rendering");            
+    LOGI("starting rendering");
     while (renderOneFrame(state)) {}
   }
-        
+
   static Ogre::RenderWindow* getRenderWindow()
   {
     return mRenderWnd;
@@ -358,7 +355,7 @@ public:
     if (res == JNI_ERR) {
       LOGI("Failed to retrieve JVM environment");
       // Failed to retrieve JVM environment
-      return true; 
+      return true;
     }
     jclass clazz = (env)->GetObjectClass(activity->clazz);
     jmethodID methodID = (env)->GetMethodID(clazz, "adPopupClosed", "()Z");
@@ -383,7 +380,7 @@ public:
     if (res == JNI_ERR) {
       LOGI("Failed to retrieve JVM environment");
       // Failed to retrieve JVM environment
-      return; 
+      return;
     }
     jclass clazz = (env)->GetObjectClass(activity->clazz);
     jmethodID methodID = (env)->GetMethodID(clazz, func, "()V");
@@ -401,7 +398,7 @@ public:
     if (res == JNI_ERR) {
       LOGI("Failed to retrieve JVM environment");
       // Failed to retrieve JVM environment
-      return; 
+      return;
     }
     jclass clazz = (env)->GetObjectClass(activity->clazz);
     jmethodID methodID = (env)->GetMethodID(clazz, func, "(Ljava/lang/String;)V");
@@ -424,7 +421,7 @@ public:
     if (res == JNI_ERR) {
       LOGI("Failed to retrieve JVM environment");
       // Failed to retrieve JVM environment
-      return ""; 
+      return "";
     }
     jclass clazz = (env)->GetObjectClass(activity->clazz);
     jmethodID methodID = (env)->GetMethodID(clazz, func, "()Ljava/lang/String;");
@@ -437,7 +434,7 @@ public:
     (jvm)->DetachCurrentThread();
     return s;
   }
-            
+
 private:
   static ANativeActivity *mActivity;
   static CGame* mGame;
@@ -447,7 +444,7 @@ private:
   static Ogre::RenderWindow* mRenderWnd;
   static Ogre::Root* mRoot;
   static bool mInit;
-        
+
 #ifdef OGRE_STATIC_LIB
   static Ogre::StaticPluginLoader* mStaticPluginLoader;
 #endif

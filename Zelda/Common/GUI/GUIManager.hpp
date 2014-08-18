@@ -25,7 +25,7 @@
 #include <OgreRenderQueueListener.h>
 #include <CEGUI/CEGUI.h>
 #include <CEGUI/RendererModules/Ogre/Renderer.h>
-#include "Input/InputListener.hpp"
+#include "../Input/InputListener.hpp"
 #include <vector>
 #include "GUIOverlay.hpp"
 

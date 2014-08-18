@@ -41,7 +41,7 @@ Ogre::RenderWindow* OgreAndroidBridge::mRenderWnd = NULL;
 Ogre::Root* OgreAndroidBridge::mRoot = NULL;
 bool OgreAndroidBridge::mInit = false;
 bool OgreAndroidBridge::m_bRenderPaused = true;
-CSnapshot *OgreAndroidBridge::m_pSnapshot = NULL;
+//CSnapshot *OgreAndroidBridge::m_pSnapshot = NULL;
 ANativeActivity *OgreAndroidBridge::mActivity = NULL;
 
 #   ifdef OGRE_STATIC_LIB
@@ -80,7 +80,7 @@ int main(int argc, char *argv[])
   }
 
   LOGI("Init Settings");
-  new CSettings();
+  //new CSettings();
 
   LOGI("Initialize");
   OgreAndroidBridge::start();

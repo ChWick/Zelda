@@ -1,0 +1,51 @@
+#ifndef _GLOBAL_BUILD_DEFINES_HPP_
+#define _GLOBAL_BUILD_DEFINES_HPP_
+
+// define version
+#define PROJECT_VERSION_CODE   @PROJECT_VERSION_CODE@
+#define PROJECT_VERSION_NAME   "@PROJECT_VERSION_NAME@"
+#define PROJECT_NAME           "@CMAKE_PROJECT_NAME@"
+
+// Flag to define whether to include the map editor
+#define ENABLE_MAP_EDITOR     @PROJECT_ENABLE_MAP_EDITOR@
+
+// Flag to define whether to enable the campaign
+#define ENABLE_CAMPAIGN       @PROJECT_ENABLE_CAMPAIGN@
+
+// Flag to define whether to enable cheats
+#define ENABLE_CHEATS         @PROJECT_ENABLE_CHEATS@
+
+// Flag to define wheter to enable touch-screen input
+#define ENABLE_INPUT_TOUCH    @PROJECT_ENABLE_INPUT_TOUCH@
+
+// Index of the input platform (0: keyboard, 1: touch, 2: amazon remote control)
+#define PROJECT_INPUT_PLATFORM @PROJECT_INPUT_PLATFORM@
+
+// define whether there are input buttons
+#if PROJECT_INPUT_PLATFORM == 0 || PROJECT_INPUT_PLATFORM == 2
+#define PROJECT_HAS_INPUT_BUTTONS_IMAGESET 1
+#else
+#define PROJECT_HAS_INPUT_BUTTONS_IMAGESET 0
+#endif
+
+// Flag to enable debug output
+#define ENABLE_DEBUG_DEFINES  @PROJECT_ENABLE_DEBUG_DEFINES@
+
+// Enable Shader manager (required for GLESES, optional for OpenGL/DirectX)
+#define PROJECT_ENABLE_SHADER  @PROJECT_ENABLE_SHADER@
+
+// Assert mode
+// 0: not asserting (release)
+// 1: asserts (debug)
+#define PROJECT_ASSERT_MODE    @PROJECT_ASSERT_MODE@
+
+// Ads enabled
+#define PROJECT_ENABLE_ADS     @PROJECT_ENABLE_ADS@
+
+// use amazon game circle
+#define PROJECT_USE_AMAZON_GAME_CIRCLE    @PROJECT_USE_AMAZON_GAME_CIRCLE@
+
+// default login to social gaming
+#define PROJECT_DEFAULT_LOGIN_TO_SOCIAL_GAMING @PROJECT_DEFAULT_LOGIN_TO_SOCIAL_GAMING@
+
+#endif

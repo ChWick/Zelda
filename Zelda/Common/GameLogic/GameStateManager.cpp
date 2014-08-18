@@ -20,7 +20,7 @@
 #include "GameStateManager.hpp"
 #include <OgreException.h>
 #include <OgreLogManager.h>
-#include "Util/Sleep.hpp"
+#include "../Util/Sleep.hpp"
 #include "../Message/MessageHandler.hpp"
 
 using namespace std;

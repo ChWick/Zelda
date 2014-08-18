@@ -20,9 +20,9 @@
 #ifndef _ENTITY_HPP_
 #define _ENTITY_HPP_
 
-#include "Config/TypeDefines.hpp"
+#include "../Config/TypeDefines.hpp"
 #include SPATIAL_VECTOR_HEADER
-#include "Message/MessageInjector.hpp"
+#include "../Message/MessageInjector.hpp"
 #include <string>
 #include <list>
 #include <tinyxml2.h>

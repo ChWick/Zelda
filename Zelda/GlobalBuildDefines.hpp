@@ -4,6 +4,7 @@
 // define version
 #define MENCUS_VERSION_CODE   12
 #define MENCUS_VERSION_NAME   "0.0.12"
+#define PROJECT_NAME "Zelda"
 
 // Flag to define whether to include the map editor
 #define ENABLE_MAP_EDITOR     0
@@ -36,7 +37,7 @@
 // Assert mode
 // 0: not asserting (release)
 // 1: asserts (debug)
-#define MENCUS_ASSERT_MODE    1
+#define PROJECT_ASSERT_MODE    1
 
 // Ads enabled
 #define MENCUS_ENABLE_ADS     0

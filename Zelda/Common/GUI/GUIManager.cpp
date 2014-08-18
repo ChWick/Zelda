@@ -19,7 +19,7 @@
 
 #include "GUIManager.hpp"
 #include <OgreSceneManager.h>
-#include "Game.hpp"
+#include "../Game.hpp"
 #include <dependencies/OgreSdkUtil/SdkTrays.h>
 
 using namespace CEGUI;

@@ -3,7 +3,7 @@
 
 #include <OgreSingleton.h>
 #include <map>
-#if OGRE_PLATFORM == OGRE_PLATFORM_LINUX
+#if OGRE_PLATFORM == OGRE_PLATFORM_LINUX || OGRE_PLATFORM == OGRE_PLATFORM_ANDROID
 #include <inttypes.h>
 typedef long long __int64;
 #endif

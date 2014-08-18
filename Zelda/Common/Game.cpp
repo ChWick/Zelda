@@ -734,15 +734,16 @@ bool CGame::keyReleased( const OIS::KeyEvent &arg )
 }
 
 bool CGame::mouseMoved( const OIS::MouseEvent &arg ) {
-#ifdef DEBUG_SHOW_OGRE_TRAY
 #if (OGRE_PLATFORM != OGRE_PLATFORM_APPLE_IOS) && (OGRE_PLATFORM != OGRE_PLATFORM_ANDROID)
+#ifdef DEBUG_SHOW_OGRE_TRAY
   mTrayMgr->injectMouseMove(arg);
-#endif
 #endif
 
   if (mCameraMan) {
     mCameraMan->injectMouseMove(arg);
   }
+
+#endif
 
   return true;
 }
@@ -765,10 +766,14 @@ bool CGame::mouseReleased( const OIS::MouseEvent &arg, OIS::MouseButtonID id ) {
   return true;
 }
 bool CGame::touchMoved(const OIS::MultiTouchEvent& evt) {
-#ifdef DEBUG_SHOW_OGRE_TRAY
 #if (OGRE_PLATFORM == OGRE_PLATFORM_APPLE_IOS) || (OGRE_PLATFORM == OGRE_PLATFORM_ANDROID)
+#ifdef DEBUG_SHOW_OGRE_TRAY
    mTrayMgr->injectMouseMove(evt);
 #endif
+
+  if (mCameraMan) {
+    mCameraMan->injectMouseMove(evt);
+  }
 #endif
   return true;
 }

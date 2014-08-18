@@ -17,37 +17,30 @@
  * Mencus. If not, see http://www.gnu.org/licenses/.
  *****************************************************************************/
 
-#include "MessageHandler.hpp"
-#include "MessageInjector.hpp"
-#include "Message.hpp"
-#include "../Log.hpp"
+#ifndef _ASSERT_HPP_
+#define _ASSERT_HPP_
 
-template<> CMessageHandler *Ogre::Singleton<CMessageHandler>::msSingleton = 0;
+#include <assert.h>
+#include "GlobalBuildDefines.hpp"
+#include <OgrePlatform.h>
 
-CMessageHandler *CMessageHandler::getSingletonPtr() {
-  return msSingleton;
-}
-CMessageHandler &CMessageHandler::getSingleton() {
-  assert(msSingleton);
-  return *msSingleton;
-}
-void CMessageHandler::process() {
-  while (m_lMessages.size() > 0) {
-    for (auto pInjector : m_lInjectors) {
-      pInjector->sendMessageToAll(*m_lMessages.front().pMessage);
-    }
+#ifndef PROJECT_ASSERT_MODE
+#error "Project assert mode is undefined. Try to rerun cmake build script."
 
-    if (m_lMessages.front().bAutoDelete) {
-      delete m_lMessages.front().pMessage;
-    }
-    m_lMessages.pop_front();
-  }
-}
-void CMessageHandler::addMessage(const CMessage *m, bool bAutoDelete) {
-  SMessageEntry ent = {
-    bAutoDelete,
-    m
-  };
-  m_lMessages.push_back(ent);
-}
+#elif PROJECT_ASSERT_MODE == 0
+#define ASSERT(cond)
+#elif PROJECT_ASSERT_MODE == 1
 
+#if OGRE_PLATFORM == OGRE_PLATFORM_ANDROID
+//#define ASSERT(e...) __android_log_assert(e, "TAG", #e)
+//#define ASSERT(e) assert(e)
+#define ASSERT(e) ((e) ? (void)0 : __android_log_assert(0,PROJECT_NAME,"%s(%s:%d) >> %s ",__func__ ,__FILE__, __LINE__, #e))
+#else
+
+#define ASSERT(cond) assert(cond)
+
+#endif
+
+#endif // _PROJECT_ASSERT_MODE
+
+#endif // _ASSERT_HPP_

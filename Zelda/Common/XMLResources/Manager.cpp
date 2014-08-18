@@ -18,7 +18,7 @@
  *****************************************************************************/
 
 #include "Manager.hpp"
-#include "FileManager/FileManager.hpp"
+#include "../FileManager/FileManager.hpp"
 
 namespace XMLResources {
   std::string CManager::LANGUAGE_CODE;

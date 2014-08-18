@@ -20,8 +20,8 @@
 #ifndef _ANDROID_INPUT_HPP_
 #define _ANDROID_INPUT_HPP_
 
-#include "OIS.h"
-#include "../InputListener.hpp"
+#include <OIS.h>
+#include "../Input/InputListener.hpp"
 
 /*=============================================================================
   | Android input handling
@@ -30,16 +30,16 @@ class AndroidMultiTouch : public OIS::MultiTouch
 {
 public:
   AndroidMultiTouch():OIS::MultiTouch("Ogre", false, 0, 0){}
-        
+
   /** @copydoc Object::setBuffered */
   virtual void setBuffered(bool buffered){}
-        
+
   /** @copydoc Object::capture */
   virtual void capture(){}
-        
+
   /** @copydoc Object::queryInterface */
   virtual OIS::Interface* queryInterface(OIS::Interface::IType type) {return 0;}
-        
+
   /** @copydoc Object::_initialize */
   virtual void _initialize(){}
 
@@ -48,7 +48,7 @@ public:
       mStates[i].touchType = OIS::MT_None;
     }
   }
-        
+
   OIS::MultiTouchState &getMultiTouchState(int i){
     while(i >= mStates.size()){
       Ogre::RenderWindow* pRenderWnd = static_cast<Ogre::RenderWindow*>(Ogre::Root::getSingleton().getRenderTarget("OgreWindow"));
@@ -63,38 +63,38 @@ public:
     return mStates[i];
   }
 };
-    
+
 class AndroidKeyboard : public OIS::Keyboard
 {
 public:
   AndroidKeyboard():OIS::Keyboard("Ogre", false, 1, 0){}
-        
+
   /** @copydoc Object::setBuffered */
   virtual void setBuffered(bool buffered){}
-        
+
   /** @copydoc Object::capture */
   virtual void capture(){}
-        
+
   /** @copydoc Object::queryInterface */
   virtual OIS::Interface* queryInterface(OIS::Interface::IType type) {return 0;}
-        
+
   /** @copydoc Object::_initialize */
   virtual void _initialize(){}
-        
+
   virtual bool isKeyDown( OIS::KeyCode key ) const{
     return false;
   }
-        
+
   virtual const std::string& getAsString( OIS::KeyCode kc ){
     static std::string defstr = "";
     return defstr;
   }
-        
+
   virtual void copyKeyStates( char keys[256] ) const{
-            
+
   }
 };
-    
+
 /*=============================================================================
   | Android input injection
   =============================================================================*/
@@ -104,12 +104,12 @@ private:
   CInputListenerManager* mInputListenerManager;
   AndroidMultiTouch* mTouch;
   AndroidKeyboard* mKeyboard;
-        
+
 public:
-        
-  AndroidInputInjector(CInputListenerManager* manager, AndroidMultiTouch* touch, AndroidKeyboard* keyboard) 
+
+  AndroidInputInjector(CInputListenerManager* manager, AndroidMultiTouch* touch, AndroidKeyboard* keyboard)
     : mInputListenerManager(manager), mTouch(touch), mKeyboard(keyboard) {}
-        
+
 
   void clearStates() {
     mTouch->clearStates();
@@ -142,12 +142,12 @@ public:
       key = OIS::KC_RETURN;
       break;
     case AKEYCODE_MEDIA_PLAY_PAUSE:
-      key = OIS::KC_PLAY_PAUSE;
+      key = OIS::KC_PLAYPAUSE;
       break;
-    case KEYCODE_MEDIA_REWIND:
+    case AKEYCODE_MEDIA_REWIND:
       key = OIS::KC_PREVTRACK;
       break;
-    case KEYCODE_MEDIA_FAST_FORWARD:
+    case AKEYCODE_MEDIA_FAST_FORWARD:
       key = OIS::KC_NEXTTRACK;
       break;
     }
@@ -160,13 +160,13 @@ public:
       mInputListenerManager->keyReleased(evt);
     }
   }
-        
+
   void injectTouchEvent(int action, float x, float y, int pointerId)
   {
     OIS::MultiTouchState &state = mTouch->getMultiTouchState(pointerId);
 
     //LOGI("%d x %f y %f id %d", action, x, y, pointerId);
-            
+
     switch(action)
       {
       case 5:
@@ -186,22 +186,22 @@ public:
       default:
 	state.touchType = OIS::MT_None;
       }
-            
+
 	int last = state.X.abs;
 	state.X.abs =  (int)x;
 	state.X.rel = state.X.abs - last;
-                
+
 	last = state.Y.abs;
 	state.Y.abs = (int)y;
 	state.Y.rel = state.Y.abs - last;
-                
+
 	state.Z.abs = 0;
 	state.Z.rel = 0;
     if(state.touchType != OIS::MT_None)
       {
-                
+
 	OIS::MultiTouchEvent evt(mTouch, state);
-                
+
 	switch(state.touchType)
 	  {
 	  case OIS::MT_Pressed:

@@ -21,7 +21,7 @@
 #define _XMLRESOURCES_MANAGER_HPP_
 
 #include <map>
-#include "tinyxml2/tinyxml2.h"
+#include "tinyxml2.h"
 #include <OgrePlatform.h>
 #include <OgreException.h>
 #include <OgreResourceGroupManager.h>

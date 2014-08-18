@@ -19,10 +19,10 @@
 
 #include "Entity.hpp"
 #include "Events/Event.hpp"
-#include "Util/XMLHelper.hpp"
+#include "../Util/XMLHelper.hpp"
 #include "Events/Event.hpp"
 #include <OgreStringConverter.h>
-#include "Message/Message.hpp"
+#include "../Message/Message.hpp"
 #include "EntityManager.hpp"
 
 using namespace events;

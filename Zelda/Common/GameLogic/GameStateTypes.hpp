@@ -1,7 +1,7 @@
 #ifndef GAME_STATE_TYPES_HPP
 #define GAME_STATE_TYPES_HPP
 
-#include "Util/EnumIdMap.hpp"
+#include "../Util/EnumIdMap.hpp"
 
 enum EGameStateTypes {
   GST_WORLD,

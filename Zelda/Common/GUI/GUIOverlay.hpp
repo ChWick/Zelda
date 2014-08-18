@@ -21,7 +21,7 @@
 #define _GUI_OVERLAY_HPP_
 
 #include <CEGUI/CEGUI.h>
-#include "GameLogic/Entity.hpp"
+#include "../GameLogic/Entity.hpp"
 
 class CGUIOverlay : public CEntity {
 protected:

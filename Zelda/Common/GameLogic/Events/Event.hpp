@@ -23,9 +23,9 @@
 #include <string>
 #include <vector>
 #include <tinyxml2.h>
-#include "Util/XMLHelper.hpp"
-#include "GameLogic/OutputStyle.hpp"
-#include "Config/TypeDefines.hpp"
+#include "../../Util/XMLHelper.hpp"
+#include "../../GameLogic/OutputStyle.hpp"
+#include "../../Config/TypeDefines.hpp"
 
 class ENTITY;
 

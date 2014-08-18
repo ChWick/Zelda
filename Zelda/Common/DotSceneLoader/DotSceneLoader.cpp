@@ -9,7 +9,7 @@
 #include "UserData.hpp"
 #include "../Physics/PhysicsManager.h"
 #include "../Physics/PhysicsMasks.hpp"
-#include <boost/regex.hpp>
+#include <regex>
 
 using namespace std;
 using namespace Ogre;
@@ -457,8 +457,8 @@ void DotSceneLoader::processNode(XMLElement *XMLNode, SceneNode *pParent)
 {
     // Construct the node's name
     String name = m_sPrependNode + getAttrib(XMLNode, "name");
-	boost::regex r("^ST_([A-Za-z]+)_([A-Za-z]+)\\.(\\d{3})$");
-	boost::cmatch matches;
+	//regex r("^ST_([A-Za-z]+)_([A-Za-z]+)\\.(\\d{3})$");
+	//cmatch matches;
 	/*Ogre::StaticGeometry *pSG(NULL);
 	if (boost::regex_match(name.c_str(), matches, r)) {
 		if (m_mStaticGeometryMap.find(matches[1].str()) == m_mStaticGeometryMap.end()) {
