@@ -26,6 +26,7 @@ CMap::CMap(CEntity *pAtlas, CMapPackPtr mapPack, Ogre::SceneNode *pParentSceneNo
   m_pSceneNode = pParentSceneNode->createChildSceneNode(m_MapPack->getName() + "_RootNode");
 
   m_pStaticGeometry = pParentSceneNode->getCreator()->createStaticGeometry(m_MapPack->getName() + "_StaticGeometry");
+  m_pStaticGeometry->setRegionDimensions(Ogre::Vector3(10, 10, 10));
 
   m_MapPack->init(this);
 

@@ -1,5 +1,15 @@
+material Physics_Only {
+	technique {
+		pass {
+			diffuse 1 1 0 1
+		}
+	}
+}
+
 material Game/Soil
 {
+	receive_shadows on
+
 	technique
 	{
 		pass
@@ -17,6 +27,8 @@ material soil : Game/Soil {
 
 material Game/house
 {
+	receive_shadows on
+
 	technique
 	{
 		pass

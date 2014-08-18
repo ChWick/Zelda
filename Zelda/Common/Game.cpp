@@ -385,7 +385,7 @@ void CGame::createScene() {
   mSceneMgr->addRenderQueueListener(mOverlaySystem);
 
 
-  mSceneMgr->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_ADDITIVE  );
+  mSceneMgr->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_MODULATIVE  );
   //-------------------------------------------------------------------------------------
   // create camera
   // Create the camera
@@ -424,7 +424,7 @@ void CGame::createScene() {
   //directionalLight->setDiffuseColour(0.65f, 0.65f, 0.65f);
   directionalLight->setDiffuseColour(Ogre::ColourValue(1, 1, 1));
   directionalLight->setSpecularColour(Ogre::ColourValue(.25, .25, 0));
-  directionalLight->setDirection(Ogre::Vector3( 0, 5, 1 ));
+  directionalLight->setDirection(Ogre::Vector3( 0, -5, -1 ));
   directionalLight->setCastShadows(true);
 
   Ogre::LogManager::getSingletonPtr()->logMessage("*** Initializing SdkTrays ***");
