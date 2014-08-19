@@ -40,8 +40,8 @@ Thumbs.db
 ###################
 *~
 *CMakeFiles*
+cmake_install.cmake
 Makefile
-*.cmake
 cotire*
 CMakeCache.txt
 *.mesh.xml
