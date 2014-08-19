@@ -6,6 +6,7 @@
 #include "MapPackParserListener.hpp"
 #include "RegionInfo.hpp"
 #include <OgreStringConverter.h>
+#include "../../Common/Log.hpp"
 
 using namespace tinyxml2;
 using namespace XMLHelper;
@@ -16,6 +17,8 @@ CMapPack::CMapPack(const std::string &path, const std::string &name)
     m_sResourceGroup(name + "_RG"),
     m_bInitialized(false),
     m_pListener(nullptr) {
+
+  LOGV("Created map pack for: '%s%s'");
 }
 
 CMapPack::~CMapPack() {
@@ -23,12 +26,17 @@ CMapPack::~CMapPack() {
 }
 
 void CMapPack::init(CMapPackParserListener *pListener) {
+  LOGV("Initializing map pack %s", m_sName.c_str());
   m_pListener = pListener;
   if (m_bInitialized) {return;}
   m_bInitialized = true;
 
   Ogre::ResourceGroupManager::getSingleton().createResourceGroup(m_sResourceGroup);
+#if OGRE_PLATFORM == OGRE_PLATFORM_ANDROID
+  Ogre::ResourceGroupManager::getSingleton().addResourceLocation(m_sPath + m_sName + ".zip", "APKZip", m_sResourceGroup);
+#else
   Ogre::ResourceGroupManager::getSingleton().addResourceLocation(m_sPath + m_sName + ".zip", "Zip", m_sResourceGroup);
+#endif // OGRE_PLATFORM
   Ogre::ResourceGroupManager::getSingleton().initialiseResourceGroup(m_sResourceGroup);
   Ogre::ResourceGroupManager::getSingleton().loadResourceGroup(m_sResourceGroup);
 

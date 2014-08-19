@@ -6,6 +6,7 @@
 #include "../../Common/Message/MessageTargetReached.hpp"
 #include "../../Common/Message/MessageHandler.hpp"
 #include "../Camera/AerialCameraPerspective.hpp"
+#include "../../Common/FileManager/FileManager.hpp"
 
 CAtlas::CAtlas(CEntity *pParent, Ogre::SceneNode *pRootSceneNode, CWorldEntity *pPlayer, CAerialCameraPerspective* &pCameraPerspective)
   : CWorldEntity("atlas", pParent, nullptr),
@@ -16,9 +17,11 @@ CAtlas::CAtlas(CEntity *pParent, Ogre::SceneNode *pRootSceneNode, CWorldEntity *
     m_bSwitchingMaps(false),
     m_bPlayerTargetReached(false) {
 
+  LOGV("Creating the atlas");
+
   m_pSceneNode = pRootSceneNode->createChildSceneNode("Atlas");
 
-  m_pCurrentMap = new CMap(this, CMapPackPtr(new CMapPack("../maps/Atlases/LightWorld/", "link_house")), m_pSceneNode, pPlayer);
+  m_pCurrentMap = new CMap(this, CMapPackPtr(new CMapPack(CFileManager::getResourcePath("maps/Atlases/LightWorld/"), "link_house")), m_pSceneNode, pPlayer);
   m_pPlayer->enterMap(m_pCurrentMap, Ogre::Vector3(0, 2, 0));
   m_pCurrentMap->start();
 

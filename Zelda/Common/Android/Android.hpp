@@ -49,7 +49,8 @@
 #include <EGL/egl.h>
 #include "OgrePlatform.h"
 #include "Android/OgreAndroidEGLWindow.h"
-#include "../Game.hpp"
+#include "../Config/TypeDefines.hpp"
+#include GAME_CLASS_HEADER
 #include <stdio.h>
 
 #ifdef OGRE_STATIC_LIB
@@ -224,7 +225,7 @@ public:
 
 	    if(!mGame) {
 	      LOGI("... creating game");
-	      mGame = OGRE_NEW CGame();
+	      mGame = OGRE_NEW GAME_CLASS();
 	      mGame->initAppForAndroid(mRenderWnd, app, mTouch, mKeyboard);
 	      mGame->initApp();
 

@@ -22,6 +22,7 @@
 #include <iostream>
 #include <string>
 #include <sys/stat.h>
+#include "../Util/Assert.hpp"
 
 
 #include <errno.h>
@@ -116,10 +117,18 @@ bool CFileManager::m_bInitialized(false);
 ANativeActivity *CFileManager::mNativeActivity(NULL);
 #endif
 
+std::string CFileManager::getResourcePath(const std::string &sFilename) {
+  ASSERT(m_bInitialized);
+#if OGRE_PLATFORM == OGRE_PLATFORM_ANDROID
+  return sFilename;
+#else
+  return "../" + sFilename;
+#endif // OGRE_PLATFORM
+}
 
 std::string CFileManager::getValidPath(const std::string &sFileName,
 					 EStorageLocation eLocation) {
-  assert(m_bInitialized);
+  ASSERT(m_bInitialized);
 #if OGRE_PLATFORM == OGRE_PLATFORM_ANDROID
   ANativeActivity* nativeActivity = mNativeActivity;
   std::string dataPath;
@@ -155,6 +164,7 @@ std::string CFileManager::getValidPath(const std::string &sFileName,
   return sFileName;
 #endif
 }
+
 bool CFileManager::openFile(std::fstream &stream,
 			    const std::string &sFileName,
 			    std::ios_base::openmode mode,

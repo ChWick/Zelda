@@ -15,6 +15,8 @@ CWorld::CWorld()
     m_pPlayer(nullptr),
     m_pWorldGUI(nullptr) {
 
+  LOGV("Creating World");
+
   Ogre::ResourceGroupManager::getSingleton().initialiseResourceGroup("World");
 
   // create the world camera
@@ -32,9 +34,11 @@ CWorld::CWorld()
   m_pWorldCamera->setOrthoWindowWidth(1.6);
 
   // create the player
+  LOGV("Creating Player");
   m_pPlayer = new CPlayer(this, m_pWorldCamera, CGame::getSingleton().getSceneManager());
 
   // create the atlas
+  LOGV("Creating the atlas");
   m_pAtlas = new CAtlas(this, CGame::getSingleton().getSceneManager()->getRootSceneNode(), m_pPlayer, m_pCameraPerspective);
 
   // initialize the player done in atlas, when new map is created
@@ -42,6 +46,7 @@ CWorld::CWorld()
   //m_pCameraPerspective = new CAerialCameraPerspective(m_pWorldCamera, (Ogre::SceneNode*)m_pAtlas->getChildren().front()->getSceneNode()->getChild(0));
   m_pCameraPerspective = new CAerialCameraPerspective(m_pWorldCamera, m_pPlayer->getSceneNode());
 
+  LOGV("Creating the world gui");
   m_pWorldGUI = new CWorldGUI(this);
 }
 

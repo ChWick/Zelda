@@ -54,6 +54,8 @@ public:
 #endif
     m_bInitialized = true;
   }
+
+  static std::string getResourcePath(const std::string &sFilename);
   static bool openFile(std::fstream &stream,
 		       const std::string &sFileName,
 		       std::ios_base::openmode mode,

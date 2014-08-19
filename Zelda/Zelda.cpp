@@ -3,8 +3,10 @@
 #include "MainMenu/MainMenu.hpp"
 #include "World/World.hpp"
 #include "Common/GUI/GUIManager.hpp"
+#include "Common/Log.hpp"
 
 void CZelda::chooseGameState() {
+  LOGV("choosing came state");
   //new CMainMenu();
   new CWorld();
   //m_pGameStateManager->changeGameState(CGameStateManager::GS_MAIN_MENU);

@@ -32,6 +32,7 @@
 #elif PROJECT_ASSERT_MODE == 1
 
 #if OGRE_PLATFORM == OGRE_PLATFORM_ANDROID
+#include <android/log.h>
 //#define ASSERT(e...) __android_log_assert(e, "TAG", #e)
 //#define ASSERT(e) assert(e)
 #define ASSERT(e) ((e) ? (void)0 : __android_log_assert(0,PROJECT_NAME,"%s(%s:%d) >> %s ",__func__ ,__FILE__, __LINE__, #e))
