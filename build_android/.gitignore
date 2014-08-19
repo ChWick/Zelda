@@ -1,0 +1,13 @@
+# eclipse workspace
+.classpath
+.project
+.cproject
+.settings
+include
+*.properties
+*.mk
+*.cpp
+assets
+bin
+obj
+AndroidManifest.xml
