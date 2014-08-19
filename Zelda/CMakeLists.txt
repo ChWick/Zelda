@@ -17,8 +17,8 @@ set (PROJECT_CONFIG_OUT "@CMAKE_BINARY_DIR@/include")
 include(toolchain/CreateGlobalDefines)
 
 # copy the level files (map packs)
-set(LEVEL_TARGET_PATH "@CMAKE_SOURCE_DIR@/level/")
-include(toolchain/CopyLevelFiles)
+#set(LEVEL_TARGET_PATH "@CMAKE_SOURCE_DIR@/level/")
+#include(toolchain/CopyLevelFiles)
 
 #copy the input buttons
 set(IMAGESET_TARGET_DIR "@CMAKE_SOURCE_DIR@/cegui/imagesets/")

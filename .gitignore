@@ -38,6 +38,8 @@ Thumbs.db
 
 # Temporary files #
 ###################
+build_linux
+build_window
 *~
 *CMakeFiles*
 cmake_install.cmake
@@ -48,3 +50,6 @@ CMakeCache.txt
 *.blend1
 *.blend2
 *.blend3
+CPackConfig.cmake
+CPackSourceConfig.cmake
+*cotire.cmake
