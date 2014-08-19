@@ -131,6 +131,7 @@
 		<Unit filename="../Zelda/Common/Physics/PhysicsMasks.hpp" />
 		<Unit filename="../Zelda/Common/Physics/PhysicsUserPointer.h" />
 		<Unit filename="../Zelda/Common/ShaderGenerator.hpp" />
+		<Unit filename="../Zelda/Common/Util/Assert.hpp" />
 		<Unit filename="../Zelda/Common/Util/DebugDrawer.cpp" />
 		<Unit filename="../Zelda/Common/Util/DebugDrawer.hpp" />
 		<Unit filename="../Zelda/Common/Util/DeleteSceneNode.cpp" />
