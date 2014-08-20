@@ -60,9 +60,10 @@ protected:
   virtual void onClosed() {}
 
 private:
+  void translateDragButton(float fDelta);
   void pressReleased();
   void updateDragButtonPosition(const CEGUI::EventArgs&);
-  void updateDragBar(float fPosY);
+  void updateDragBar(float fPosX, float fPosY);
 
   bool onDragPressed(const CEGUI::EventArgs&);
   bool onDragReleased(const CEGUI::EventArgs&);
