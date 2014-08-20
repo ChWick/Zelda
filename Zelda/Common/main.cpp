@@ -24,11 +24,19 @@
 #include "FileManager/FileManager.hpp"
 #include "XMLResources/Manager.hpp"
 
+#ifdef __APPLE__
+#include "CoreFoundation/CoreFoundation.h"
+#endif
+
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
 #define WIN32_DEFAULT_LIBS
 #define WIN32_LEAN_AND_MEAN
 #include "windows.h"
 #pragma comment(lib,"user32.lib")
+#elif OGRE_PLATFORM == OGRE_PLATFORM_APPLE
+#include "OSX/OSX.hpp"
+#elif OGRE_PLATFORM == OGRE_PLATFORM_APPLE_IOS
+#include "SampleBrowser_iOS.h"
 #elif OGRE_PLATFORM == OGRE_PLATFORM_ANDROID
 #include "Android/Android.hpp"
 #include <jni.h>
@@ -58,7 +66,39 @@ void android_main(struct android_app* state)
 int main(int argc, char *argv[])
 #endif
 {
-#if OGRE_PLATFORM == OGRE_PLATFORM_ANDROID
+    
+    // ----------------------------------------------------------------------------
+    // This makes relative paths work in C++ in Xcode by changing directory to the Resources folder inside the .app bundle
+#ifdef __APPLE__
+    CFBundleRef mainBundle = CFBundleGetMainBundle();
+    CFURLRef resourcesURL = CFBundleCopyResourcesDirectoryURL(mainBundle);
+    char path[PATH_MAX];
+    if (!CFURLGetFileSystemRepresentation(resourcesURL, TRUE, (UInt8 *)path, PATH_MAX))
+    {
+        // error!
+    }
+    CFRelease(resourcesURL);
+    
+    chdir(path);
+    std::cout << "Current Path: " << path << std::endl;
+#endif
+    
+#if OGRE_PLATFORM == OGRE_PLATFORM_APPLE_IOS
+	NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
+	int retVal = UIApplicationMain(argc, argv, @"UIApplication", @"AppDelegate");
+	[pool release];
+	return retVal;
+#elif (OGRE_PLATFORM == OGRE_PLATFORM_APPLE) && __LP64__
+	NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
+    
+    mAppDelegate = [[AppDelegate alloc] init];
+    [[NSApplication sharedApplication] setDelegate:mAppDelegate];
+	int retVal = NSApplicationMain(argc, (const char **) argv);
+    
+	[pool release];
+    
+	return retVal;
+#elif OGRE_PLATFORM == OGRE_PLATFORM_ANDROID
   OgreAndroidBridge::init(state);
 
 

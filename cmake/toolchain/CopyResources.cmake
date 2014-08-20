@@ -10,7 +10,7 @@ if (APPLE)
 		file(GLOB files "${RESOURCES_ROOT_DIR}/${directory}${file}")
 		foreach(single_file ${files})
 			add_custom_command(TARGET Game POST_BUILD
-				COMMAND ditto ${single_file} ${RESOURCES_OUTPUT_DIR}/${directory}${file}
+				COMMAND ditto ${single_file} ${RESOURCES_OUTPUT_DIR}/${directory}/
 				)
 		endforeach(single_file)
 	endfunction(copy_directory)

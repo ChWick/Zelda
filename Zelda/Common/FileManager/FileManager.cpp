@@ -119,7 +119,7 @@ ANativeActivity *CFileManager::mNativeActivity(NULL);
 
 std::string CFileManager::getResourcePath(const std::string &sFilename) {
   ASSERT(m_bInitialized);
-#if OGRE_PLATFORM == OGRE_PLATFORM_ANDROID
+#if OGRE_PLATFORM == OGRE_PLATFORM_ANDROID || OGRE_PLATFORM == OGRE_PLATFORM_APPLE
   return sFilename;
 #else
   return "../" + sFilename;
