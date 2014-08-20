@@ -28,7 +28,7 @@ public:
   CAerialCameraPerspective(Ogre::Camera *pCamera,
                            Ogre::SceneNode *pTargetSceneNode);
 
-  ~CAerialCameraPerspective();
+  virtual ~CAerialCameraPerspective();
 
   void updateCamera(float tpf);
 

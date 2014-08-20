@@ -1,5 +1,5 @@
 #ifndef _INTERACTION_INTERFACE_HPP_
-#define _INTERACTION_INTERGACE_HPP_
+#define _INTERACTION_INTERFACE_HPP_
 
 #include <OgrePrerequisites.h>
 

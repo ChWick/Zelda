@@ -141,7 +141,7 @@ public:
   virtual const SPATIAL_VECTOR &getScale() const {return SPATIAL_VECTOR::UNIT_SCALE;}
   virtual void setScale(const SPATIAL_VECTOR &vScale) {}
 
-	virtual const Ogre::Quaternion &getOrientation() const {}
+	virtual const Ogre::Quaternion &getOrientation() const {return Ogre::Quaternion::IDENTITY;}
 	virtual void setOrientation(const Ogre::Quaternion &quat) {}
 
   unsigned int getType() const {return m_uiType;}

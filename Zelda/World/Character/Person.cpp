@@ -43,7 +43,6 @@ void CPerson::createPhysics() {
     using namespace Ogre;
 
     assert(m_pSceneNode);
-    Ogre::SceneNode *pPhysicsSceneNode = m_pSceneNode;
 
     btTransform startTransform;
     startTransform.setIdentity();
