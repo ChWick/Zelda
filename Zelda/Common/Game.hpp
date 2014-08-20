@@ -85,7 +85,7 @@ public:
   void initApp();
   void closeApp();
 
-  void shutDown() { mShutDown = true; }
+  void requestShutDown() { mShutDown = true; }
 
   void createResources();
   void destroyResources();

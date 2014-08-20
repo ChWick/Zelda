@@ -32,6 +32,6 @@ bool CSlotSelector::onStartClicked(const CEGUI::EventArgs &args) {
 }
 
 bool CSlotSelector::onExitClicked(const CEGUI::EventArgs &args) {
-  CGame::getSingleton().shutDown();
+  CGame::getSingleton().requestShutDown();
   return true;
 }

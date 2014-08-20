@@ -676,28 +676,27 @@ bool CGame::keyPressed( const OIS::KeyEvent &arg )
       Ogre::String newVal;
       Ogre::PolygonMode pm;
 
-      switch (mCamera->getPolygonMode())
-        {
-        case Ogre::PM_SOLID:
-	  newVal = "Wireframe";
-	  pm = Ogre::PM_WIREFRAME;
-	  break;
-        case Ogre::PM_WIREFRAME:
-	  newVal = "Points";
-	  pm = Ogre::PM_POINTS;
-	  break;
-        default:
-	  newVal = "Solid";
-	  pm = Ogre::PM_SOLID;
-        }
+      switch (mCamera->getPolygonMode()) {
+      case Ogre::PM_SOLID:
+        newVal = "Wireframe";
+        pm = Ogre::PM_WIREFRAME;
+        break;
+      case Ogre::PM_WIREFRAME:
+        newVal = "Points";
+        pm = Ogre::PM_POINTS;
+        break;
+      default:
+        newVal = "Solid";
+        pm = Ogre::PM_SOLID;
+      }
 
       Ogre::SceneManagerEnumerator::SceneManagerIterator iterator = Ogre::Root::getSingleton().getSceneManagerIterator();
       while (iterator.hasMoreElements()) {
-	Ogre::SceneManager *pSM = iterator.getNext();
-	Ogre::SceneManager::CameraIterator camIt = pSM->getCameraIterator();
-	while (camIt.hasMoreElements()) {
-	  camIt.getNext()->setPolygonMode(pm);
-	}
+        Ogre::SceneManager *pSM = iterator.getNext();
+        Ogre::SceneManager::CameraIterator camIt = pSM->getCameraIterator();
+        while (camIt.hasMoreElements()) {
+          camIt.getNext()->setPolygonMode(pm);
+        }
       }
       mDetailsPanel->setParamValue(10, newVal);
     }
@@ -717,6 +716,9 @@ bool CGame::keyPressed( const OIS::KeyEvent &arg )
   }
   else if (arg.key == OIS::KC_E) {
     destroyResources();
+  }
+  else if (arg.key == OIS::KC_Q && mInputContext.isKeyDown(OIS::KC_LWIN)){
+    requestShutDown();
   }
 
   if (mCameraMan) {
