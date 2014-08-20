@@ -8,7 +8,6 @@ class CGUICounter;
 
 class CHUD : public CGUIOverlay {
 private:
-  CEGUI::Window *m_pRoot;
   CGUIHeartsDisplay *m_pHeartsDisplay;
   CGUICounter *m_pRupeeCounter;
   CGUICounter *m_pBombCounter;

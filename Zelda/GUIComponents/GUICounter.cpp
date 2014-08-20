@@ -8,13 +8,13 @@ CGUICounter::CGUICounter(const std::string &id,
                          Ogre::Real fCountsPerSecond,
                          const CEGUI::String &sImage,
                          const CEGUI::UVector2 &vPosition)
-  : CGUIOverlay(id, pParentEntity, pParentWindow),
+  : CGUIOverlay(id, pParentEntity, pParentWindow, pParentWindow->createChild("DefaultWindow", id)),
     m_iCurrentCount(0),
     m_iDesiredCount(0),
     m_fTimeSinceLastAdded(0),
     m_fCountsPerSecond(fCountsPerSecond) {
 
-  Window *pRoot = m_pParentWindow->createChild("DefaultWindow", id);
+  Window *pRoot = m_pRoot;
   pRoot->setSize(USize(UDim(0, 40), UDim(0, 60)));
   pRoot->setPosition(vPosition);
 

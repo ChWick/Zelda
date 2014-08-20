@@ -7,8 +7,6 @@
 
 class CGUIHeartsDisplay : public CGUIOverlay {
 private:
-  CEGUI::Window *m_pRoot;
-
   static const Ogre::uint16 m_uiMaxHeartCount = 20;
 
   Hitpoints m_MaximalHitpoints;

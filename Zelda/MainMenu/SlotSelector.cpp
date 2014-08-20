@@ -6,14 +6,14 @@
 using namespace CEGUI;
 
 CSlotSelector::CSlotSelector(CEntity *pParent, CEGUI::Window *pParentWindow)
-: CGUIOverlay("slot_selector", pParent, pParentWindow) {
-  Window *pStartButton = m_pParentWindow->createChild("OgreTray/Button", "Start");
+: CGUIOverlay("slot_selector", pParent, pParentWindow, pParentWindow->createChild("DefaultWindow", "SlotSelector_Root")) {
+  Window *pStartButton = m_pRoot->createChild("OgreTray/Button", "Start");
   pStartButton->setText("Start");
   pStartButton->setPosition(UVector2(UDim(0, 10), UDim(0, 10)));
   pStartButton->subscribeEvent(PushButton::EventClicked,
                                Event::Subscriber(&CSlotSelector::onStartClicked, this));
 
-  Window *pExitButton = m_pParentWindow->createChild("OgreTray/Button", "Exit");
+  Window *pExitButton = m_pRoot->createChild("OgreTray/Button", "Exit");
   pExitButton->setText("Exit");
   pExitButton->setPosition(UVector2(UDim(0, 10), UDim(0, 110)));
   pExitButton->subscribeEvent(PushButton::EventClicked,

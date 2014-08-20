@@ -26,12 +26,14 @@
 class CGUIOverlay : public CEntity {
 protected:
   CEGUI::Window *m_pParentWindow;
+  CEGUI::Window *m_pRoot;
 public:
-  CGUIOverlay(const std::string &id, CEntity *pParentEntity, CEGUI::Window *pParentWindow)
+  CGUIOverlay(const std::string &id, CEntity *pParentEntity, CEGUI::Window *pParentWindow, CEGUI::Window *pRoot)
   : CEntity(id, pParentEntity),
-    m_pParentWindow(pParentWindow) {
+    m_pParentWindow(pParentWindow),
+    m_pRoot(pRoot) {
   }
-  virtual ~CGUIOverlay() {}
+  virtual ~CGUIOverlay() {m_pRoot->destroy();}
 
   virtual void changeTouchButtonSize(float fSize) {}
   virtual void onGUIScalingChanged(float fScaling) {}

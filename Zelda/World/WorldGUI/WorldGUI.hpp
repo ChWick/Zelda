@@ -7,7 +7,6 @@ class CHUD;
 
 class CWorldGUI : public CGUIOverlay {
 private:
-  CEGUI::Window *m_pRoot;
   CHUD *m_pHUD;
 public:
   CWorldGUI(CEntity *pParentEntity);

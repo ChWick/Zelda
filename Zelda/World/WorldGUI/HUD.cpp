@@ -5,9 +5,7 @@
 using namespace CEGUI;
 
 CHUD::CHUD(CEntity *pParentEntity, CEGUI::Window *pParentWindow)
-  : CGUIOverlay("hud", pParentEntity, pParentWindow) {
-
-  m_pRoot = m_pParentWindow->createChild("DefaultWindow", "hud_root");
+  : CGUIOverlay("hud", pParentEntity, pParentWindow, pParentWindow->createChild("DefaultWindow", "hud_root")) {
 
   Window *m_pLivesText = m_pRoot->createChild("OgreTray/ShadowedLabel", "lives_text");
   m_pLivesText->setText("-- LIFE --");

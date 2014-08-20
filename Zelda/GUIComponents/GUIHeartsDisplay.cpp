@@ -6,11 +6,10 @@ const float GUI_HEART_IMG_SIZE = 32;
 const float GUI_HEART_IMG_WITH_BORDER_SIZE = 32;
 
 CGUIHeartsDisplay::CGUIHeartsDisplay(CEntity *pParentEntity, CEGUI::Window *pParentWindow, const CEGUI::UVector2 &vPosition)
-  : CGUIOverlay("gui_hearts_display", pParentEntity, pParentWindow),
+  : CGUIOverlay("gui_hearts_display", pParentEntity, pParentWindow, pParentWindow->createChild("DefaultWindow")),
     m_MaximalHitpoints(0),
     m_CurrentHitpoints(0) {
 
-  m_pRoot = m_pParentWindow->createChild("DefaultWindow");
   m_pRoot->setPosition(vPosition);
   m_pRoot->setSize(USize(UDim(0, 10 * GUI_HEART_IMG_WITH_BORDER_SIZE), UDim(0, 2 * GUI_HEART_IMG_WITH_BORDER_SIZE)));
 
