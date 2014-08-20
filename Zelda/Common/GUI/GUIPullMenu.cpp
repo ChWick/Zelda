@@ -21,10 +21,13 @@ CGUIPullMenu::CGUIPullMenu(const std::string &id,
      {
   CInputListenerManager::getSingleton().addInputListener(this);
 
+  m_pRoot->setAlwaysOnTop(true);
+
   m_pDragButton = m_pRoot->createChild("OgreTray/StaticImage", "DragButton");
   m_pDragButton->setAlpha(0.5);
   m_pDragButton->setProperty("HorzFormatting", "Tiled");
   m_pDragButton->setProperty("VertFormatting", "CentreAligned");
+  m_pDragButton->setAlwaysOnTop(true);
 
   m_pDragWindow = m_pRoot->createChild("OgreTray/Group", "DragWindow");
   m_pDragWindow->setText("Drag Window");

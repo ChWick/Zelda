@@ -6,6 +6,7 @@
 enum EMessageTypes {
   MSG_SWITCH_MAP,
   MSG_TARGET_REACHED,
+  MSG_DEBUG,
 };
 
 class CMessageTypesMap : public CEnumIdMap<EMessageTypes> {

@@ -20,6 +20,7 @@
 #include "GUIManager.hpp"
 #include <OgreSceneManager.h>
 #include "../Game.hpp"
+#include "GUIDebugPullMenu.hpp"
 #include <dependencies/OgreSdkUtil/SdkTrays.h>
 
 using namespace CEGUI;
@@ -36,7 +37,8 @@ CGUIManager& CGUIManager::getSingleton(void)
 }
 
 CGUIManager::CGUIManager(Ogre::SceneManager *pSceneManager, Ogre::RenderTarget &target)
-: m_pSceneManager(pSceneManager),
+: CEntity("GUIManager", nullptr),
+  m_pSceneManager(pSceneManager),
   m_nRenderQueue(Ogre::RENDER_QUEUE_OVERLAY),
   m_bPostQueue(false),
   m_bRenderPause(false),
@@ -94,6 +96,7 @@ CGUIManager::CGUIManager(Ogre::SceneManager *pSceneManager, Ogre::RenderTarget &
 
 
   pTrayMgr->userUpdateLoadBar("Creating gui components", 0.2);
+  new CGUIDebugPullMenu(this, guiRoot, CGUIPullMenu::PMD_RIGHT);
 
   pTrayMgr->userUpdateLoadBar("done...", 0.2);
 
@@ -126,10 +129,7 @@ void CGUIManager::update(Ogre::Real tpf) {
 
   if (m_bRenderPause) {return;}
 
-  // updating of gui overlays is done via the CEntity logic
-  /*for (CGUIOverlay *pOverlay : m_lGUIOverlays) {
-    pOverlay->update(tpf);
-  }*/
+  CEntity::update(tpf);
 }
 void CGUIManager::renderQueueStarted(Ogre::uint8 id, const Ogre::String& invocation, bool& skipThisQueue) {
    // make sure you check the invocation string, or you can end up rendering the GUI multiple times

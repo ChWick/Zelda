@@ -460,6 +460,7 @@ void CGame::createScene() {
 #else
   mTrayMgr->hideCursor();
 #endif // DEBUG_SHOW_OGRE_TRAY
+  mTrayMgr->hideCursor();
 
 #ifdef INPUT_MOUSE
 #else

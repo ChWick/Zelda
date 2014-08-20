@@ -29,11 +29,13 @@
 #include <vector>
 #include "GUIOverlay.hpp"
 #include <CEGUI/RendererModules/Ogre/Renderer.h>
+#include "../GameLogic/Entity.hpp"
 
 class CGUIManager :
   public CInputListener,
   public Ogre::Singleton<CGUIManager>,
-  public Ogre::RenderQueueListener {
+  public Ogre::RenderQueueListener,
+  public CEntity {
 public:
   struct SImagesetResource {
     SImagesetResource(const CEGUI::String &sImagesetName, const CEGUI::String &sTextureName)

@@ -4,6 +4,7 @@
 #include <OgreVector3.h>
 #include <OgreException.h>
 #include "../Input/InputListener.hpp"
+#include "../Message/MessageInjector.hpp"
 
 #define PHYSICS_MANAGER_DEBUG 1
 
@@ -64,7 +65,8 @@ public:
 };
 class CPhysicsManager
 #if PHYSICS_MANAGER_DEBUG == 1
-: public CInputListener
+: public CInputListener,
+  public CMessageInjector
 #endif
 {
 public:
@@ -141,6 +143,7 @@ public:
 
 
 #if PHYSICS_MANAGER_DEBUG == 1
+  void sendMessageToAll(const CMessage &message);
   bool keyPressed( const OIS::KeyEvent &arg ) {
   	if (arg.key == OIS::KC_P) {
 			toggleDisplayDebugInfo();

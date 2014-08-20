@@ -33,7 +33,14 @@ public:
     m_pParentWindow(pParentWindow),
     m_pRoot(pRoot) {
   }
-  virtual ~CGUIOverlay() {m_pRoot->destroy();}
+  virtual ~CGUIOverlay() {}
+
+  virtual void exit() {
+    if (m_pRoot) {
+      m_pRoot->destroy();
+      m_pRoot = nullptr;
+    }
+  }
 
   virtual void changeTouchButtonSize(float fSize) {}
   virtual void onGUIScalingChanged(float fScaling) {}

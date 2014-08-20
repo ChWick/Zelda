@@ -14,6 +14,8 @@
 #include "BtOgreExtras.h"
 #include <OgreSceneManager.h>
 #include <OgreLogManager.h>
+#include "../Message/MessageHandler.hpp"
+#include "../Message/MessageDebug.hpp"
 
 #define PHYSICS_DEBUG 1
 
@@ -24,6 +26,7 @@ CPhysicsManager::CPhysicsManager(Ogre::SceneManager *pSceneManager)
 
 #if PHYSICS_MANAGER_DEBUG == 1
   CInputListenerManager::getSingleton().addInputListener(this);
+  CMessageHandler::getSingleton().addInjector(this);
 #endif // PHYSICS_MANAGER_DEBUG
 
   Ogre::LogManager::getSingleton().logMessage("Creating new PhysicsManager");
@@ -63,6 +66,7 @@ void CPhysicsManager::exit() {
 
 #if PHYSICS_MANAGER_DEBUG == 1
   CInputListenerManager::getSingleton().removeInputListener(this);
+  CMessageHandler::getSingleton().removeInjector(this);
 #endif // PHYSICS_MANAGER_DEBUG
 
 #ifdef PHYSICS_DEBUG
@@ -165,3 +169,14 @@ void CPhysicsManager::deleteLater(const btCollisionObject *pCO) {
 	}
 	m_Messages.push_back(new CPhysicsMessage(CPhysicsMessage::PMT_DELETE, pCO));
 }
+
+#if PHYSICS_MANAGER_DEBUG == 1
+void CPhysicsManager::sendMessageToAll(const CMessage &message) {
+  if (message.getType() == MSG_DEBUG) {
+    const CMessageDebug &msg_dbg(dynamic_cast<const CMessageDebug &>(message));
+    if (msg_dbg.getDebugType() == CMessageDebug::DM_TOGGLE_PHYSICS) {
+      toggleDisplayDebugInfo();
+    }
+  }
+}
+#endif
