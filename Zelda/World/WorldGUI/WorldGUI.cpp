@@ -1,5 +1,5 @@
-#include "WorldGUI.hpp"
 #include "../../Common/GUI/GUIManager.hpp"
+#include "WorldGUI.hpp"
 #include "../../Common/GUI/GUIPullMenu.hpp"
 #include "HUD.hpp"
 

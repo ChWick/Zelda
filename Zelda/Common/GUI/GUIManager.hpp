@@ -20,14 +20,15 @@
 #ifndef GUIMANAGER_HPP
 #define GUIMANAGER_HPP
 
+#include <CEGUI/CEGUI.h>
+
 #include <OgreSingleton.h>
 #include <OgrePrerequisites.h>
 #include <OgreRenderQueueListener.h>
-#include <CEGUI/CEGUI.h>
-#include <CEGUI/RendererModules/Ogre/Renderer.h>
 #include "../Input/InputListener.hpp"
 #include <vector>
 #include "GUIOverlay.hpp"
+#include <CEGUI/RendererModules/Ogre/Renderer.h>
 
 class CGUIManager :
   public CInputListener,

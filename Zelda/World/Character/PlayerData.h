@@ -1,6 +1,6 @@
 #pragma once
 
-#include "tinyxml2.h"
+#include "../../Common/tinyxml2/tinyxml2.h"
 #include "OgrePrerequisites.h"
 #include "OgreSingleton.h"
 #include "../Hitpoints.hpp"

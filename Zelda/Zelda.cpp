@@ -1,8 +1,8 @@
+#include "Common/GUI/GUIManager.hpp"
 #include "Zelda.hpp"
 #include "Common/GameLogic/GameStateManager.hpp"
 #include "MainMenu/MainMenu.hpp"
 #include "World/World.hpp"
-#include "Common/GUI/GUIManager.hpp"
 #include "Common/Log.hpp"
 
 void CZelda::chooseGameState() {

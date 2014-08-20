@@ -3,9 +3,9 @@
 ################################################################################
 include(FindPackageHandleStandardArgs)
 
-find_path(OIS_H_PATH NAMES OIS.h PATH_SUFFIXES OIS)
-find_library(OIS_LIB NAMES OIS libOIS)
-find_library(OIS_LIB_DBG NAMES OIS_d libOIS_d)
+find_path(OIS_H_PATH NAMES OIS.h PATH_SUFFIXES OIS PATHS ${OGRE_DEPS_ROOT}/include)
+find_library(OIS_LIB NAMES OIS libOIS PATHS ${OGRE_DEPS_ROOT}/lib)
+find_library(OIS_LIB_DBG NAMES OIS_d libOIS_d PATHS ${OGRE_DEPS_ROOT}/lib)
 
 mark_as_advanced(OIS_H_PATH OIS_LIB OIS_LIB_DBG)
 

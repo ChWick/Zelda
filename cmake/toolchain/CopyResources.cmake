@@ -2,13 +2,30 @@ if (NOT RESOURCES_OUTPUT_DIR)
   message(fatal_error "RESOURCES_OUTPUT_DIR was not set")
 endif()
 
+if (APPLE)
+	function(copy_directory directory file)
+		add_custom_command(TARGET Game POST_BUILD
+	    	COMMAND mkdir ARGS -p "${RESOURCES_OUTPUT_DIR}/${directory}")
+
+		file(GLOB files "${RESOURCES_ROOT_DIR}/${directory}${file}")
+		foreach(single_file ${files})
+			add_custom_command(TARGET Game POST_BUILD
+				COMMAND ditto ${single_file} ${RESOURCES_OUTPUT_DIR}/${directory}${file}
+				)
+		endforeach(single_file)
+	endfunction(copy_directory)
+
+else()
+	function(copy_directory directory file)
+		file(GLOB files "${RESOURCES_ROOT_DIR}/${directory}${file}")
+		file(COPY ${files} DESTINATION ${RESOURCES_OUTPUT_DIR}/${directory})
+	endfunction(copy_directory)
+endif()
+
+
 set (RESOURCES_ROOT_DIR ${CMAKE_SOURCE_DIR})
 
-file(COPY "${RESOURCES_ROOT_DIR}/cegui" DESTINATION ${RESOURCES_OUTPUT_DIR})
-
-file(GLOB Packs "${RESOURCES_ROOT_DIR}/packs/*.zip")
-file(COPY ${Packs} DESTINATION  "${RESOURCES_OUTPUT_DIR}/packs")
-file(COPY "${RESOURCES_ROOT_DIR}/RTShaderLib" DESTINATION "${RESOURCES_OUTPUT_DIR}")
-
-file(GLOB LightWorldMaps "${RESOURCES_ROOT_DIR}/maps/Atlases/LightWorld/*.zip")
-file(COPY ${LightWorldMaps} DESTINATION "${RESOURCES_OUTPUT_DIR}/maps/Atlases/LightWorld")
+copy_directory("" "cegui")
+copy_directory("" "RTShaderLib")
+copy_directory("packs/" "*.zip")
+copy_directory("maps/Atlases/LightWorld/" "*.zip")

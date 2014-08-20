@@ -1,5 +1,5 @@
 #include "Emitter.hpp"
-#include <tinyxml2.h>
+#include "../../tinyxml2/tinyxml2.h"
 
 namespace events {
   CEmitter::CEmitter(EEmitterTypes eType, const CEvent &owner)

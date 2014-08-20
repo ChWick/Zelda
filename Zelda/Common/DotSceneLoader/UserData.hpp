@@ -3,7 +3,7 @@
 
 #include <OgreString.h>
 #include <vector>
-#include <tinyxml2.h>
+#include "../tinyxml2/tinyxml2.h"
 
 class CUserData {
 public:

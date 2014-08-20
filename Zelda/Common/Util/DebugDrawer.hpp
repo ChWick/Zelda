@@ -2,8 +2,9 @@
 #define DEBUGDRAWER_H_INCLUDED
 
 #include <OgreSingleton.h>
+#include <OgrePlatform.h>
 #include <map>
-#if OGRE_PLATFORM == OGRE_PLATFORM_LINUX || OGRE_PLATFORM == OGRE_PLATFORM_ANDROID
+#if OGRE_PLATFORM == OGRE_PLATFORM_LINUX || OGRE_PLATFORM == OGRE_PLATFORM_ANDROID || OGRE_PLATFORM == OGRE_PLATFORM_APPLE
 #include <inttypes.h>
 typedef long long __int64;
 #endif

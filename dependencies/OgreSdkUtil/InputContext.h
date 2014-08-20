@@ -28,8 +28,8 @@
 #ifndef __InputContext_H__
 #define __InputContext_H__
 
-#include "Ogre.h"
-#include "OIS.h"
+#include <OgrePrerequisites.h>
+#include <OIS.h>
 
 #if OIS_VERSION >= 0x010300		//  OIS_VERSION >= 1.3.0
 #define OIS_WITH_MULTITOUCH		1

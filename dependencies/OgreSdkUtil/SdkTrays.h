@@ -28,8 +28,9 @@
 #ifndef __SdkTrays_H__
 #define __SdkTrays_H__
 
-#include "Ogre.h"
-#include "OgreOverlaySystem.h"
+#include <OgreSceneNode.h>
+#include <OgreRoot.h>
+#include <OgreOverlaySystem.h>
 #include <math.h>
 
 #include "OgreTimer.h"

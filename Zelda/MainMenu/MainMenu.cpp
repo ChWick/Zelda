@@ -1,5 +1,5 @@
-#include "MainMenu.hpp"
 #include "../Common/GUI/GUIManager.hpp"
+#include "MainMenu.hpp"
 #include "SlotSelector.hpp"
 
 CMainMenu::CMainMenu()

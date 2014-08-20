@@ -3,8 +3,8 @@
 ################################################################################
 include(FindPackageHandleStandardArgs)
 
-find_path(OGRE_H_PATH NAMES Ogre.h PATH_SUFFIXES OGRE)
-find_path(OGRE_OVERLAY_PATH NAMES OgreOverlaySystem.h PATH_SUFFIXES OGRE OGRE/Overlay)
+find_path(OGRE_H_PATH NAMES Ogre.h PATH_SUFFIXES OGRE PATHS ${OGRE_SDK_ROOT}/include)
+find_path(OGRE_OVERLAY_PATH NAMES OgreOverlaySystem.h PATH_SUFFIXES OGRE OGRE/Overlay PATHS ${OGRE_SDK_ROOT}/include)
 
 if (${PROJECT_STATIC_DEPENDENCIES})
   find_library(OGRE_LIB NAMES OgreMainStatic)
@@ -58,9 +58,9 @@ if (${PROJECT_STATIC_DEPENDENCIES})
     OGRE_DEPS_FREETYPE_BUILD_PATH OGRE_DEPS_FREETYPE_FT_PATH OGRE_DEPS_FREETYPE_LIB
     )
 else()
-  find_library(OGRE_LIB NAMES OgreMain)
-  find_library(OGRE_LIB_DBG NAMES OgreMain_d)
-  find_library(OGRE_OVERLAY_LIB NAMES OgreOverlay)
+  find_library(OGRE_LIB NAMES OgreMain PATHS ${OGRE_SDK_ROOT}/lib)
+  find_library(OGRE_LIB_DBG NAMES OgreMain_d PATHS ${OGRE_SDK_ROOT}/lib)
+  find_library(OGRE_OVERLAY_LIB NAMES OgreOverlay PATHS ${OGRE_SDK_ROOT}/lib)
 
   mark_as_advanced(OGRE_H_PATH OGRE_LIB OGRE_LIB_DBG)
 

@@ -1,8 +1,8 @@
 #ifndef _MAIN_MENU_HPP_
 #define _MAIN_MENU_HPP_
 
-#include "../Common/GameLogic/GameState.hpp"
 #include <CEGUI/CEGUI.h>
+#include "../Common/GameLogic/GameState.hpp"
 
 class CMainMenu : public CGameState {
 private:

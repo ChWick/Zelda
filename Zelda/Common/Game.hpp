@@ -22,7 +22,11 @@
 
 #define DEBUG_SHOW_OGRE_TRAY
 
-#include <Ogre.h>
+#include <OgrePlatform.h>
+#if OGRE_PLATFORM == OGRE_PLATFORM_APPLE && !defined(__LP64__)
+#  include <Carbon/Carbon.h>
+#endif
+#include <OgrePrerequisites.h>
 #include <OgreSingleton.h>
 #include "Input/InputListener.hpp"
 #include "dependencies/OgreSdkUtil/SdkCameraMan.h"
@@ -36,6 +40,7 @@
 #endif
 
 #include "ShaderGenerator.hpp"
+#include <OgreWindowEventUtilities.h>
 
 class CGameStateManager;
 

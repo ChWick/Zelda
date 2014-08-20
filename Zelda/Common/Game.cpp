@@ -17,9 +17,11 @@
  * Mencus. If not, see http://www.gnu.org/licenses/.
  *****************************************************************************/
 
-#include "Game.hpp"
+
 #include "GUI/GUIManager.hpp"
+#include "Game.hpp"
 #include <OgreCodec.h>
+#include <OgreConfigFile.h>
 #include "Input/GameInputManager.hpp"
 #include "InputDefines.hpp"
 #include "FileManager/FileManager.hpp"
@@ -31,7 +33,6 @@
 #if OGRE_PLATFORM == OGRE_PLATFORM_ANDROID
 #include "Android/Android.hpp"
 #endif
-using namespace Ogre;
 
 template<> CGame *Ogre::Singleton<CGame>::msSingleton = 0;
 
@@ -381,7 +382,7 @@ void CGame::createScene() {
   // Get the SceneManager, in this case a generic one
   //	mSceneMgr = mRoot->createSceneManager(ST_EXTERIOR_CLOSE, "MainSceneManager");
   Ogre::LogManager::getSingletonPtr()->logMessage("   create scene manager");
-  mSceneMgr = mRoot->createSceneManager(ST_GENERIC, "MainSceneManager");
+  mSceneMgr = mRoot->createSceneManager(Ogre::ST_GENERIC, "MainSceneManager");
   mSceneMgr->addRenderQueueListener(mOverlaySystem);
 
 

@@ -1,6 +1,6 @@
 #include "MapPack.hpp"
 #include <OgreResourceGroupManager.h>
-#include <tinyxml2.h>
+#include "../../Common/tinyxml2/tinyxml2.h"
 #include "../../Common/Util/XMLHelper.hpp"
 #include <OgreLogManager.h>
 #include "MapPackParserListener.hpp"
@@ -18,7 +18,7 @@ CMapPack::CMapPack(const std::string &path, const std::string &name)
     m_bInitialized(false),
     m_pListener(nullptr) {
 
-  LOGV("Created map pack for: '%s%s'");
+  LOGV("Created map pack for: '%s%s'", path.c_str(), name.c_str());
 }
 
 CMapPack::~CMapPack() {

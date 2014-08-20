@@ -17,9 +17,9 @@
  * Mencus. If not, see http://www.gnu.org/licenses/.
  *****************************************************************************/
 
+#include <CEGUI/CEGUI.h>
 #include "Config/TypeDefines.hpp"
 #include GAME_CLASS_HEADER
-#include <CEGUI/CEGUI.h>
 #include <OIS.h>
 #include "FileManager/FileManager.hpp"
 #include "XMLResources/Manager.hpp"

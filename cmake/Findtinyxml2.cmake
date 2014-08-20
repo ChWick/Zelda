@@ -3,9 +3,9 @@
 ################################################################################
 include(FindPackageHandleStandardArgs)
 
-find_path(TINYXML2_H_PATH NAMES tinyxml2.h PATH_SUFFIXES tinyxml)
-find_library(TINYXML2_LIB NAMES tinyxml2 libtinyxml2)
-find_library(TINYXML2_LIB_DBG NAMES tinyxml2_d libtinyxml2_d)
+find_path(TINYXML2_H_PATH NAMES tinyxml2.h PATH_SUFFIXES tinyxml PATHS ${TINYXML2_SDK_ROOT}/include)
+find_library(TINYXML2_LIB NAMES tinyxml2 libtinyxml2 PATHS ${TINYXML2_SDK_ROOT}/lib)
+find_library(TINYXML2_LIB_DBG NAMES tinyxml2_d libtinyxml2_d PATHS ${TINYXML2_SDK_ROOT}/lib)
 
 mark_as_advanced(TINYXML2_H_PATH TINYXML2_LIB TINYXML2_LIB_DBG)
 

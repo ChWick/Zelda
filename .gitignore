@@ -39,7 +39,10 @@ Thumbs.db
 # Temporary files #
 ###################
 build_linux
-build_window
+build_windows
+build_mac
+build_xcode
+build_ios
 *~
 *CMakeFiles*
 cmake_install.cmake
