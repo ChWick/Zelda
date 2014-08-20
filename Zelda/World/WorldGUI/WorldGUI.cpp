@@ -1,5 +1,6 @@
 #include "WorldGUI.hpp"
 #include "../../Common/GUI/GUIManager.hpp"
+#include "../../Common/GUI/GUIPullMenu.hpp"
 #include "HUD.hpp"
 
 CWorldGUI::CWorldGUI(CEntity *pParentEntity)
@@ -9,11 +10,8 @@ CWorldGUI::CWorldGUI(CEntity *pParentEntity)
   CGUIManager::getSingleton().addGUIOverlay(this);
 
   m_pHUD = new CHUD(this, m_pRoot);
+  new CGUIPullMenu("test", this, m_pRoot, CGUIPullMenu::PMD_TOP, 400);
 }
 CWorldGUI::~CWorldGUI() {
   CGUIManager::getSingleton().removeGUIOverlay(this);
-
-  delete m_pHUD;
-
-  m_pRoot->destroy();
 }

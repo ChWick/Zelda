@@ -16,7 +16,7 @@
 #define ENABLE_CHEATS         0
 
 // Flag to define wheter to enable touch-screen input
-#define ENABLE_INPUT_TOUCH    0
+#define ENABLE_INPUT_TOUCH    1
 
 // Index of the input platform (0: keyboard, 1: touch, 2: amazon remote control)
 #define MENCUS_INPUT_PLATFORM 0

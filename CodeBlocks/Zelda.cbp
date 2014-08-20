@@ -68,6 +68,8 @@
 		<Unit filename="../Zelda/Common/GUI/GUIManager.cpp" />
 		<Unit filename="../Zelda/Common/GUI/GUIManager.hpp" />
 		<Unit filename="../Zelda/Common/GUI/GUIOverlay.hpp" />
+		<Unit filename="../Zelda/Common/GUI/GUIPullMenu.cpp" />
+		<Unit filename="../Zelda/Common/GUI/GUIPullMenu.hpp" />
 		<Unit filename="../Zelda/Common/Game.cpp" />
 		<Unit filename="../Zelda/Common/Game.hpp" />
 		<Unit filename="../Zelda/Common/GameLogic/Entity.cpp" />
@@ -104,6 +106,7 @@
 		<Unit filename="../Zelda/Common/Input/GameInputListener.hpp" />
 		<Unit filename="../Zelda/Common/Input/GameInputManager.cpp" />
 		<Unit filename="../Zelda/Common/Input/GameInputManager.hpp" />
+		<Unit filename="../Zelda/Common/Input/InputDefines.hpp" />
 		<Unit filename="../Zelda/Common/Input/InputListener.cpp" />
 		<Unit filename="../Zelda/Common/Input/InputListener.hpp" />
 		<Unit filename="../Zelda/Common/InputDefines.hpp" />
