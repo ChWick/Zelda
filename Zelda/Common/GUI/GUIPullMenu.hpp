@@ -2,8 +2,12 @@
 #define _GUI_PULL_MENU_HPP_
 
 #include "GUIOverlay.hpp"
+#include "../Input/InputListener.hpp"
 
-class CGUIPullMenu : public CGUIOverlay {
+class CGUIPullMenu :
+  public CGUIOverlay,
+  public CInputListener {
+
 public:
   enum EPullMenuPositions {
     PMD_LEFT = 1,
@@ -44,6 +48,8 @@ public:
                const float &fPixSize
                );
 
+  virtual ~CGUIPullMenu();
+
   void update(Ogre::Real tpf);
 
   CEGUI::Window *getDragWindow() const {return m_pDragWindow;}
@@ -62,6 +68,12 @@ private:
   bool onDragReleased(const CEGUI::EventArgs&);
   bool onDragMoved(const CEGUI::EventArgs&);
   bool onDragEnter(const CEGUI::EventArgs&);
+  bool onDragLeft(const CEGUI::EventArgs&);
+
+  bool touchReleased(const OIS::MultiTouchEvent& evt) {pressReleased(); return true;}
+  bool touchCancelled(const OIS::MultiTouchEvent& evt) {pressReleased();return true;}
+  bool mousePressed( const OIS::MouseEvent &arg, OIS::MouseButtonID id ) {m_bPressed = true; return true;}
+  bool mouseReleased( const OIS::MouseEvent &arg, OIS::MouseButtonID id ) {pressReleased(); return true;}
 };
 
 #endif // _GUI_PULL_MENU_HPP_

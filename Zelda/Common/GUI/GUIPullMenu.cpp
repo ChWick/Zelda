@@ -1,5 +1,6 @@
 #include "GUIPullMenu.hpp"
 #include "../Input/InputDefines.hpp"
+#include "../Log.hpp"
 
 using namespace CEGUI;
 
@@ -18,6 +19,8 @@ CGUIPullMenu::CGUIPullMenu(const std::string &id,
     m_fLastDragPos(0),
     m_fTimeSinceLastTouchMoveEvent(0)
      {
+  CInputListenerManager::getSingleton().addInputListener(this);
+
   m_pDragButton = m_pRoot->createChild("OgreTray/StaticImage", "DragButton");
   m_pDragButton->setAlpha(0.5);
   m_pDragButton->setProperty("HorzFormatting", "Tiled");
@@ -55,10 +58,13 @@ CGUIPullMenu::CGUIPullMenu(const std::string &id,
   m_pDragButton->
     subscribeEvent(
 		   Window::EventMouseLeavesArea,
-		   Event::Subscriber(&CGUIPullMenu::onDragMoved, this));
+		   Event::Subscriber(&CGUIPullMenu::onDragLeft, this));
 #endif
 }
 
+CGUIPullMenu::~CGUIPullMenu() {
+  CInputListenerManager::getSingleton().removeInputListener(this);
+}
 
 void CGUIPullMenu::update(Ogre::Real tpf) {
   if (m_eDragState == DS_DRAGGING || m_eDragState == DS_OPEN || m_eDragState == DS_OPENING) {
@@ -122,13 +128,24 @@ bool CGUIPullMenu::onDragMoved(const CEGUI::EventArgs& args) {
 }
 
 bool CGUIPullMenu::onDragEnter(const CEGUI::EventArgs& args) {
-  if (m_bPressed) {
+  if (m_bPressed) { //  mouse/touch has to be pressed
     onDragPressed(args);
   }
   return true;
 }
 
+bool CGUIPullMenu::onDragLeft(const CEGUI::EventArgs& args) {
+  if (m_eDragState == DS_DRAGGING) {
+    // follow mouse position
+    onDragMoved(args);
+  }
+
+  return true;
+}
+
 void CGUIPullMenu::pressReleased() {
+  m_bPressed = false;
+
   if (m_eDragState != DS_DRAGGING) {
     return;
   }
