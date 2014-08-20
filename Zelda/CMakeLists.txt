@@ -55,6 +55,26 @@ include_directories(${Game_include_directories})
 add_executable(Game ${Game_source_files} ${Game_source_event_files} ${Game_source_xmlresources_files} ${Game_include_files})
 target_link_libraries(Game ${Game_link_libraries})
 
+# create source groups
+# ==================================================================
+
+function(setup_source_group type)
+  foreach(src_file ${ARGN})
+    string(REPLACE ${SOURCE_DIR}/ "" src_file ${src_file})
+    string(FIND ${src_file} / sep_pos REVERSE)
+    if (${sep_pos} EQUAL -1)
+      set(group "")
+    else()
+      string(SUBSTRING ${src_file} 0 ${sep_pos} group)
+      string(REPLACE "/" "\\" group ${group})
+    endif()
+    source_group("${type}\\${group}" FILES ${src_file})
+  endforeach()
+endfunction(setup_source_group)
+
+setup_source_group(src ${Game_source_files})
+setup_source_group(include ${Game_include_files})
+
 # create plugins and resourced file
 # ==================================================================
 
