@@ -167,13 +167,19 @@ void CPlayer::lift(CWorldEntity *pObjectToLift) {
 
   m_pMap->getPhysicsManager()->getWorld()->removeCollisionObject(pRB);
   m_pMap->getPhysicsManager()->getWorld()->addRigidBody(pRB, COL_DAMAGE_P, MASK_DAMAGE_P_COLLIDES_WITH);
+
+  // Entities now cast shadows
+  Ogre::SceneNode::ObjectIterator itObject = m_pLiftedEntity->getSceneNode()->getAttachedObjectIterator();
+  while (itObject.hasMoreElements()) {
+    Ogre::MovableObject* pObject = static_cast<Ogre::MovableObject*>(itObject.getNext());
+    pObject->setCastShadows(true);
+  }
 }
 
 void CPlayer::throwLifted() {
   ASSERT(m_pLiftedEntity);
 
   btRigidBody *pRB = btRigidBody::upcast(m_pLiftedEntity->getCollisionObject());
-
   ASSERT(pRB);
 
   pRB->setLinearFactor(btVector3(1, 1, 1));

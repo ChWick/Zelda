@@ -38,6 +38,8 @@
 
 #define PHYSICS_DEBUG 1
 
+const float CPhysicsManager::GRAVITY_FACTOR = 4.f;
+
 CPhysicsManager::CPhysicsManager(Ogre::SceneManager *pSceneManager)
   : m_pSceneManager(pSceneManager),
     m_pGhostPairCallback(NULL) {

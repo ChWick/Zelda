@@ -27,8 +27,6 @@
 
 #define PHYSICS_MANAGER_DEBUG 1
 
-const float GRAVITY_FACTOR = 8.0f;
-
 namespace BtOgre {class DebugDrawer;}
 class btDiscreteDynamicsWorld;
 class btBroadphaseInterface;
@@ -89,6 +87,7 @@ class CPhysicsManager
 #endif
 {
 public:
+  static const float GRAVITY_FACTOR;
 private:
 	//NxOgre::World *mWorld;
 	btDiscreteDynamicsWorld *m_pPhyWorld;
