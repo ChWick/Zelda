@@ -25,6 +25,7 @@
 #include "PlayerController.hpp"
 #include <OgreLogManager.h>
 #include "../../Common/Physics/BtOgreExtras.hpp"
+#include "../../Common/Util/Assert.hpp"
 
 #define TURN_SCALE 4
 #define MAX_SPEED_SCALE 5
@@ -89,19 +90,19 @@ void CPlayer::startup(const Ogre::Vector3 &playerPosition, const Ogre::Vector3 &
 }
 void CPlayer::interact() {
 	if (m_pLiftedEntity) {return;}
-	Ogre::Vector3 startPos(getPosition() - Ogre::Vector3::UNIT_Y * PERSON_HEIGHT * 0.5);
+	Ogre::Vector3 startPos(getPosition() - Ogre::Vector3::UNIT_Y * (PERSON_FLOOR_OFFSET - PERSON_HEIGHT * 0.2));
 	Ogre::Vector3 endPos(startPos + getOrientation().zAxis() * PERSON_RADIUS * 2.0f);
 	// try to interact with the world. So detect an object to interact with
 	btCollisionWorld::ClosestRayResultCallback rayCallback(BtOgre::Convert::toBullet(startPos), BtOgre::Convert::toBullet(endPos));
 	rayCallback.m_collisionFilterGroup = COL_CHARACTER_P;
 	rayCallback.m_collisionFilterMask = COL_INTERACTIVE | COL_CHARACTER_N | COL_CHARACTER_P;
 	m_pMap->getPhysicsManager()->getWorld()->rayTest(BtOgre::Convert::toBullet(startPos), BtOgre::Convert::toBullet(endPos), rayCallback);
-	DebugDrawer::getSingleton().drawLine(startPos, endPos, Ogre::ColourValue::Red);
 	if (rayCallback.hasHit()) {
     CWorldEntity *pWE = CWorldEntity::getFromUserPointer(rayCallback.m_collisionObject);
     if (pWE) {
       SInteractionResult res(pWE->interactOnActivate(getOrientation().zAxis(), this));
 			if (res.eResult == IR_LIFT) {
+        lift(pWE);
 			}
 		}
 	}
@@ -114,7 +115,26 @@ void CPlayer::update(Ogre::Real tpf) {
   	// check for collisions, to pickup
   	pWE->interactOnCollision(this->getPosition() - pWE->getPosition(), this);
   }
+
+  updateLiftedObject(tpf);
 }
+
+void CPlayer::updateLiftedObject(const Ogre::Real fTime) {
+  if (!m_pLiftedEntity) {return;}
+
+  m_pLiftedEntity->setPosition(getPosition() + Ogre::Vector3::UNIT_Y * (PERSON_HEIGHT - PERSON_FLOOR_OFFSET));
+  
+}
+
+void CPlayer::renderDebug(Ogre::Real tpf) {
+  CPerson::renderDebug(tpf);
+
+  // draw interaction
+	Ogre::Vector3 startPos(getPosition() - Ogre::Vector3::UNIT_Y * (PERSON_FLOOR_OFFSET - PERSON_HEIGHT * 0.2));
+	Ogre::Vector3 endPos(startPos + getOrientation().zAxis() * PERSON_RADIUS * 2.0f);
+	DebugDrawer::getSingleton().drawLine(startPos, endPos, Ogre::ColourValue::Red);
+}
+
 void CPlayer::preUpdateBoundsCallback(const Ogre::Real deltaTime) {
     CPersonController *pPersonController = dynamic_cast<CPersonController*>(m_pCharacterController);
 	// check if player is in war mode (swords drawn), then im enemy is near change view
@@ -133,3 +153,10 @@ void CPlayer::maxHitpointsChangedCallback() {
 		m_pInteractingArea = dynamic_cast<CPlayerInteractiveArea*>(pAfter);
 	}
 }*/
+
+void CPlayer::lift(CWorldEntity *pObjectToLift) {
+  ASSERT(!m_pLiftedEntity);
+  m_pLiftedEntity = pObjectToLift;
+  m_pMap->getPhysicsManager()->getWorld()->removeCollisionObject(m_pLiftedEntity->getCollisionObject());
+  m_pMap->getPhysicsManager()->getWorld()->addCollisionObject(m_pLiftedEntity->getCollisionObject(), COL_DAMAGE_P, MASK_DAMAGE_P_COLLIDES_WITH);
+}

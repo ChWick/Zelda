@@ -17,8 +17,8 @@
  * Zelda. If not, see http://www.gnu.org/licenses/.
  *****************************************************************************/
 
-#ifndef _PLAYER_H_
-#define _PLAYER_H_
+#ifndef _PLAYER_HPP_
+#define _PLAYER_HPP_
 
 #include "Person.hpp"
 #include <OgrePrerequisites.h>
@@ -40,6 +40,7 @@ public:
 	virtual ~CPlayer();
 	void destroy();
 	void update(Ogre::Real tpf);
+  void renderDebug(Ogre::Real tpf);
 	void startup(const Ogre::Vector3 &playerPos, const Ogre::Vector3 &playerLookDirection, const Ogre::Real cameraYaw, const Ogre::Real cameraPitch);
 protected:
 	void setupInternal();
@@ -51,8 +52,9 @@ protected:
 	void updateWalkAnimation();
 	void updateLiftedObject(const Ogre::Real fTime);
   void interact();
+  void lift(CWorldEntity *pObjectToLift);
 
 	virtual CCharacterController *createCharacterController();
 };
 
-#endif // _PLAYER_H_
+#endif // _PLAYER_HPP_

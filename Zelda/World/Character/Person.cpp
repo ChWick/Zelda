@@ -30,15 +30,18 @@
 #include <OgreSceneManager.h>
 #include "../../Common/Physics/PhysicsMasks.hpp"
 #include <BulletDynamics/Character/btKinematicCharacterController.h>
+#include "../GlobalCollisionShapesTypes.hpp"
 
 //const Ogre::Real PERSONS_MASS = 1.0f;
 const Ogre::String CPerson::PERSON_SHEATH("Sheath");
 const Ogre::String CPerson::PERSON_SHIELD_PACKED("ShieldPacked");
 const Ogre::String CPerson::PERSON_LEFT_HANDLE("Handle.L");
 const Ogre::String CPerson::PERSON_RIGHT_HANDLE("Handle.R");
-const Ogre::Real CPerson::PERSON_HEIGHT = 0.04f;
-const Ogre::Real CPerson::PERSON_RADIUS = 0.015f;
+const Ogre::Real CPerson::PERSON_HEIGHT = 0.15f;
+const Ogre::Real CPerson::PERSON_RADIUS = 0.05f;
 const Ogre::Real CPerson::PERSON_SCALE  = 1.f;
+const Ogre::Real CPerson::PERSON_PHYSICS_OFFSET = 0;
+const Ogre::Real CPerson::PERSON_FLOOR_OFFSET = 0.075;
 
 
 CPerson::CPerson(const std::string &sID, CEntity *pParent, const EFriendOrEnemyStates foe)
@@ -71,21 +74,16 @@ void CPerson::createPhysics() {
     btPairCachingGhostObject * characterGhostObject = new btPairCachingGhostObject();
     characterGhostObject->setWorldTransform(startTransform);
 
-    btScalar characterHeight = PERSON_HEIGHT;
-	btScalar characterWidth = PERSON_RADIUS;
+    btScalar stepHeight = 0.0005f;
 
-    btConvexShape * capsule = new btCapsuleShape(characterWidth / 2, characterHeight / 2);
-    capsule->setMargin(0.0);
-
-    mCollisionShapes.push_back(capsule);
+    const CPhysicsCollisionObject &pco = m_pMap->getPhysicsManager()->getCollisionShape(GLOBAL_COLLISION_SHAPES_TYPES_ID_MAP.toString(GCST_PERSON_CAPSULE));
+    btConvexShape * capsule = dynamic_cast<btConvexShape*>(pco.getShape());
     characterGhostObject->setCollisionShape(capsule);
     characterGhostObject->setCollisionFlags(getCollisionGroup());
 
-    // duck setup
+    /*// duck setup
     btConvexShape * duck = new btCapsuleShape(characterWidth, characterHeight / 3);
     mCollisionShapes.push_back(duck);
-
-    btScalar stepHeight = 0.0005f;
 
     btCylinderShape *pCylShape = new btCylinderShape(btVector3(characterWidth, 0.2, characterWidth) * 0.5);
     mCollisionShapes.push_back(pCylShape);
@@ -93,31 +91,31 @@ void CPerson::createPhysics() {
     btCompoundShape *pComShape = new btCompoundShape();
     mCollisionShapes.push_back(pComShape);
     pComShape->addChildShape(btTransform(btQuaternion::getIdentity(), btVector3(0, - characterHeight - 0.005, 0)), pCylShape);
-    pComShape->addChildShape(btTransform::getIdentity(), capsule);
+    pComShape->addChildShape(btTransform::getIdentity(), capsule);*/
 
 
     //mCharacter = new CharacterControllerManager(mSceneManager, mCamera, characterGhostObject, capsule, stepHeight, CPhysicsManager::getSingleton().getCollisionWorld(), origin);
-  btCharacterControllerInterface *pCC = new CharacterControllerPhysics(characterGhostObject, capsule, stepHeight);
-	//btCharacterControllerInterface *pCC = new btKinematicCharacterController(characterGhostObject, capsule, stepHeight, 1);
-	mCCPhysics = pCC;
-	//pCC->setMaxSlope(0.5);
-	//pCC->setBorderDetectionShapeOffset(btVector3(0, -characterHeight - 0.02, 0));
+    btCharacterControllerInterface *pCC = new CharacterControllerPhysics(characterGhostObject, capsule, stepHeight);
+    //btCharacterControllerInterface *pCC = new btKinematicCharacterController(characterGhostObject, capsule, stepHeight, 1);
+    mCCPhysics = pCC;
+    //pCC->setMaxSlope(0.5);
+    //pCC->setBorderDetectionShapeOffset(btVector3(0, -characterHeight - 0.02, 0));
     //mCCPhysics->setDuckingConvexShape(duck);
 
     //m_pCurrentMap->getPhysicsManager()->getWorld()->addCollisionObject(characterGhostObject, btBroadphaseProxy::CharacterFilter, btBroadphaseProxy::StaticFilter | btBroadphaseProxy::DefaultFilter);
-	m_pMap->getPhysicsManager()->getWorld()->addCollisionObject(characterGhostObject, getCollisionGroup(), getCollisionMask());
-  m_pMap->getPhysicsManager()->getWorld()->addAction(mCCPhysics);
+    m_pMap->getPhysicsManager()->getWorld()->addCollisionObject(characterGhostObject, getCollisionGroup(), getCollisionMask());
+    m_pMap->getPhysicsManager()->getWorld()->addAction(mCCPhysics);
 
     /// --
 
-  m_pCollisionObject = characterGhostObject;
+    m_pCollisionObject = characterGhostObject;
     //m_pBodyPhysics->setCollisionShape(pComShape);
 
-	m_pCollisionObject->setWorldTransform(btTransform(btQuaternion::getIdentity(), btVector3(0, 20, 0)));
-	//mCCPlayer->setIsMoving(true);
+    m_pCollisionObject->setWorldTransform(btTransform(btQuaternion::getIdentity(), btVector3(0, 20, 0)));
+    //mCCPlayer->setIsMoving(true);
 
-	//pCC->start();
-	//pCC->setBorderDetectionShapeGroupAndMask(getCollisionGroup(), COL_WALL);
+    //pCC->start();
+    //pCC->setBorderDetectionShapeGroupAndMask(getCollisionGroup(), COL_WALL);
 }
 void CPerson::destroyPhysics() {
 
@@ -222,7 +220,7 @@ void CPerson::initBody(Ogre::SceneNode *pParentSceneNode) {
 
 	createBlinkingMaterials();
 
-	pModelSN->setPosition(0, -PERSON_HEIGHT, 0);
+	pModelSN->setPosition(0, 0, 0);
 }
 
 void CPerson::createHandObject(const Ogre::String &parentBone, EHands handPos, const Ogre::String &meshName) {

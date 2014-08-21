@@ -135,59 +135,60 @@ int main(int argc, char *argv[])
     XMLResources::GLOBAL.loadLanguage();
   }
   catch (const Ogre::Exception& e) {
-#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
+#  if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
     MessageBox( NULL, e.getFullDescription().c_str(), "An exception has occured!", MB_OK | MB_ICONERROR | MB_TASKMODAL);
-#else
+#  else
     std::cerr << "An exception has occured: " <<
       e.getFullDescription().c_str() << std::endl;
     std::cout << "An exception hat occured: " <<
       e.getFullDescription().c_str() << std::endl;
-#endif
+#  endif
   }
 
   // Create application object
   GAME_CLASS *app = new GAME_CLASS();
 
-#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
-#else
+#    if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
+#    else
   if (argc == 2) {
     // add additional level dir path
     app->getAdditionalLevelDirPaths().push_back(argv[1]);
   }
-#endif
+#    endif
 
   try {
     app->go();
   } catch( Ogre::Exception& e ) {
-#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
+#    if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
     MessageBox( NULL, e.getFullDescription().c_str(), "An exception has occured!", MB_OK | MB_ICONERROR | MB_TASKMODAL);
-#else
+#    else
     std::cerr << "An exception has occured: " <<
       e.getFullDescription().c_str() << std::endl;
     std::cout << "An exception hat occured: " <<
       e.getFullDescription().c_str() << std::endl;
-#endif
+#    endif
   }
   catch (CEGUI::Exception &e) {
-#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
+#    if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
     MessageBox( NULL, e.getMessage().c_str(), "An exception has occured!", MB_OK | MB_ICONERROR | MB_TASKMODAL);
-#else
+#    else
     std::cerr << "An exception has occured: " <<
       e.getMessage().c_str() << std::endl;
-#endif
+#    endif
   }
   catch (...) {
-#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
+#    if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
     MessageBox( NULL, "Unknown Error", "An exception has occured!", MB_OK | MB_ICONERROR | MB_TASKMODAL);
-#else
+#    else
     std::cerr << "An exception has occured: " <<
       "Unknown Error" << std::endl << "at file: " << __FILE__ << std::endl;
-#endif
+#    endif
   }
-#endif
+  
+  delete app;
+#  endif
 
 #if OGRE_PLATFORM != OGRE_PLATFORM_ANDROID
-  delete app;
   return 0;
 #endif
 }

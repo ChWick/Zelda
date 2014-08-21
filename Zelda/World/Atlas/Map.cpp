@@ -29,6 +29,8 @@
 #include "../GlobalCollisionShapesTypes.hpp"
 #include "../Objects/Object.hpp"
 #include "BulletCollision/CollisionShapes/btSphereShape.h"
+#include <BulletCollision/CollisionShapes/btCapsuleShape.h>
+#include "../Character/Person.hpp"
 
 CMap::CMap(CEntity *pAtlas, CMapPackPtr mapPack, Ogre::SceneNode *pParentSceneNode, CWorldEntity *pPlayer)
   : CWorldEntity(mapPack->getName(), pAtlas, this),
@@ -40,7 +42,9 @@ CMap::CMap(CEntity *pAtlas, CMapPackPtr mapPack, Ogre::SceneNode *pParentSceneNo
 
   // Create global collision shapes
   m_PhysicsManager.addCollisionShape(GLOBAL_COLLISION_SHAPES_TYPES_ID_MAP.toString(GCST_PICKABLE_OBJECT_SPHERE),
-                                     CPhysicsCollisionObject(new btSphereShape(0.05)));
+                                     CPhysicsCollisionObject(new btSphereShape(0.04), Ogre::Vector3::NEGATIVE_UNIT_Y * 0.03));
+  m_PhysicsManager.addCollisionShape(GLOBAL_COLLISION_SHAPES_TYPES_ID_MAP.toString(GCST_PERSON_CAPSULE),
+                                     CPhysicsCollisionObject(new btCapsuleShape(CPerson::PERSON_RADIUS, CPerson::PERSON_HEIGHT - 2 * CPerson::PERSON_RADIUS)));
 
   m_pSceneNode = pParentSceneNode->createChildSceneNode(m_MapPack->getName() + "_RootNode");
 

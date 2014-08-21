@@ -22,6 +22,7 @@
 
 CGlobalCollisionShapesTypesIdMap::CGlobalCollisionShapesTypesIdMap() {
   m_Map[GCST_PICKABLE_OBJECT_SPHERE] = "pickable_object_sphere";
+  m_Map[GCST_PERSON_CAPSULE] = "person_capsule";
 }
 
 CGlobalCollisionShapesTypesIdMap GLOBAL_COLLISION_SHAPES_TYPES_ID_MAP;

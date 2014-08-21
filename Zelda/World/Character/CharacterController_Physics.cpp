@@ -132,7 +132,7 @@ btVector3 CharacterControllerPhysics::perpindicularComponent (const btVector3& d
 CharacterControllerPhysics::CharacterControllerPhysics (btPairCachingGhostObject* ghostObject,btConvexShape* convexShape,btScalar stepHeight, int upAxis)
 {
 	m_upAxis = upAxis;
-	m_addedMargin = 0.2;
+	m_addedMargin = 0.02;
 	m_walkDirection.setValue(0,0,0);
 	m_useGhostObjectSweepTest = true;
 	m_ghostObject = ghostObject;
@@ -143,9 +143,9 @@ CharacterControllerPhysics::CharacterControllerPhysics (btPairCachingGhostObject
 	m_velocityTimeInterval = 0.0;
 	m_verticalVelocity = 0.0;
 	m_verticalOffset = 0.0;
-	m_gravity = 9.8 * 3 ; // 3G acceleration.
-	m_fallSpeed = 55.0; // Terminal velocity of a sky diver in m/s.
-	m_jumpSpeed = 10.0; // ?
+	m_gravity = 0.9 ; // 3G acceleration.
+	m_fallSpeed = 5.5; // Terminal velocity of a sky diver in m/s.
+	m_jumpSpeed = 1.0; // ?
 	m_wasOnGround = false;
 	m_wasJumping = false;
 	m_interpolateUp = true;

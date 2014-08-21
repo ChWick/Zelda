@@ -61,7 +61,7 @@ void CPersonController::updateCharacter(const Ogre::Real deltaTime) {
 	//btVector3 pos = mCCPhysics->getPosition();
 
 	//Vector3 position(pos.x(), pos.y(), pos.z());
-	Vector3 position(BtOgre::Convert::toOgre(mCCPerson->getCollisionObject()->getWorldTransform().getOrigin()));
+	Vector3 position(BtOgre::Convert::toOgre(mCCPerson->getCollisionObject()->getWorldTransform().getOrigin()) + Ogre::Vector3::UNIT_Y * CPerson::PERSON_PHYSICS_OFFSET);
 
 
 	if (position != playerPos)

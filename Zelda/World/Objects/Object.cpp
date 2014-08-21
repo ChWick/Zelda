@@ -84,7 +84,7 @@ CObject::CObject(const std::string &id, CWorldEntity *pParent, CMap *pMap, EObje
   m_pSceneNode->attachObject(pEntity);
   pEntity->setCastShadows(false);
 
-  btRigidBody *pRigidBody = new btRigidBody(1, new BtOgre::RigidBodyState(m_pSceneNode), pCollisionShape);
+  btRigidBody *pRigidBody = new btRigidBody(1, new BtOgre::RigidBodyState(m_pSceneNode, btTransform(btQuaternion::getIdentity(), btVector3(0, 0, 0)), btTransform(btQuaternion::getIdentity(), vCollisionShapeOffset)), pCollisionShape);
   m_pCollisionObject = pRigidBody;
 
   setThisAsCollisionObjectsUserPointer();
@@ -107,6 +107,8 @@ CObject::CObject(const std::string &id, CWorldEntity *pParent, CMap *pMap, EObje
     pRigidBody->setAngularVelocity(btVector3(0, 0, 0));
     break;
   }
+
+  m_pCollisionObject->getWorldTransform().getOrigin() -= vCollisionShapeOffset;
 }
 
 CObject::SInteractionResult CObject::interactOnCollision(const Ogre::Vector3 &vInteractDir, CWorldEntity *pSender) {
@@ -115,7 +117,20 @@ CObject::SInteractionResult CObject::interactOnCollision(const Ogre::Vector3 &vI
   case OBJECT_BLUE_RUPEE:
   case OBJECT_RED_RUPEE:
     deleteLater();
-    return SInteractionResult();
+    break;
+  default:
+    break;
+  }
+
+  // Do nothing
+  return SInteractionResult();
+}
+
+CObject::SInteractionResult CObject::interactOnActivate(const Ogre::Vector3 &vInteractDir, CWorldEntity *pSender) {
+  switch (m_uiType) {
+  case OBJECT_GREEN_BUSH:
+    return SInteractionResult(IR_LIFT);
+  default:
     break;
   }
 

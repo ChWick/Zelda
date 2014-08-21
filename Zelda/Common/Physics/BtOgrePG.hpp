@@ -70,6 +70,9 @@ class RigidBodyState : public btMotionState
         void setOffset(const btTransform &offset) {
             mCenterOfMassOffset = offset;
         }
+        const btTransform &getOffset() const {
+          return mCenterOfMassOffset;
+        }
 
         void setNode(Ogre::SceneNode *node)
         {

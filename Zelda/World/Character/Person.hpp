@@ -30,6 +30,8 @@ public:
 	static const Ogre::Real PERSON_HEIGHT;
 	static const Ogre::Real PERSON_RADIUS;
 	static const Ogre::Real PERSON_SCALE;
+  static const Ogre::Real PERSON_PHYSICS_OFFSET;
+  static const Ogre::Real PERSON_FLOOR_OFFSET;
 protected:
 	static const Ogre::String PERSON_LEFT_HANDLE;
 	static const Ogre::String PERSON_RIGHT_HANDLE;

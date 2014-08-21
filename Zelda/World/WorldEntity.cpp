@@ -21,6 +21,7 @@
 #include <OgreSceneNode.h>
 #include <BulletCollision/CollisionDispatch/btCollisionObject.h>
 #include "../Common/Physics/BtOgreExtras.hpp"
+#include "../Common/Physics/BtOgrePG.hpp"
 #include "../Common/Util/DeleteSceneNode.hpp"
 #include "Atlas/Map.hpp"
 
@@ -65,7 +66,13 @@ const SPATIAL_VECTOR &CWorldEntity::getPosition() const {
 }
 void CWorldEntity::setPosition(const SPATIAL_VECTOR &vPos) {
   if (m_pCollisionObject) {
-    m_pCollisionObject->getWorldTransform().setOrigin(BtOgre::Convert::toBullet(vPos));
+    if (btRigidBody::upcast(m_pCollisionObject) && dynamic_cast<BtOgre::RigidBodyState*>(btRigidBody::upcast(m_pCollisionObject)->getMotionState())) {
+      BtOgre::RigidBodyState *pRBS = dynamic_cast<BtOgre::RigidBodyState*>(btRigidBody::upcast(m_pCollisionObject)->getMotionState());
+      m_pCollisionObject->getWorldTransform().setOrigin(pRBS->getOffset().inverse() * BtOgre::Convert::toBullet(vPos));
+    }
+    else {
+      m_pCollisionObject->getWorldTransform().setOrigin(BtOgre::Convert::toBullet(vPos));
+    }
   }
   m_pSceneNode->setPosition(vPos);
 }

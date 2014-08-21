@@ -30,6 +30,7 @@ public:
 
 protected:
   virtual SInteractionResult interactOnCollision(const Ogre::Vector3 &vInteractDir, CWorldEntity *pSender);
+  virtual SInteractionResult interactOnActivate(const Ogre::Vector3 &vInteractDir, CWorldEntity *pSender);
 };
 
 #endif // _OBJECT_HPP_
