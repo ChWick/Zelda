@@ -30,6 +30,22 @@ def makeGameZip() :
 
 	zipf.close()
 
+def makeLWLinkHouseZip() :
+	print('Creating link_house.zip')
+
+	zipf = zipfile.ZipFile('../maps/Atlases/LightWorld/link_house.zip', 'w')
+	zipf.write('../maps/Atlases/LightWorld/link_house/physics_floor.mesh', 'physics_floor.mesh', zipfile.ZIP_DEFLATED)
+	zipf.write('../maps/Atlases/LightWorld/link_house/physics_floor_top.mesh', 'physics_floor_top.mesh', zipfile.ZIP_DEFLATED)
+	zipf.write('../maps/Atlases/LightWorld/link_house/wall_bot_right.mesh', 'wall_bot_right.mesh', zipfile.ZIP_DEFLATED)
+	zipf.write('../maps/Atlases/LightWorld/link_house/wall_bot.mesh', 'wall_bot.mesh', zipfile.ZIP_DEFLATED)
+	zipf.write('../maps/Atlases/LightWorld/link_house/wall_to_water.mesh', 'wall_to_water.mesh', zipfile.ZIP_DEFLATED)
+	zipf.write('../maps/Atlases/LightWorld/link_house/link_house.mesh', 'link_house.mesh', zipfile.ZIP_DEFLATED)
+	zipf.write('../maps/Atlases/LightWorld/link_house/link_house.scene', 'link_house.scene', zipfile.ZIP_DEFLATED)
+	zipf.write('../maps/Atlases/LightWorld/link_house/link_house.xml', 'link_house.xml', zipfile.ZIP_DEFLATED)
+
+	zipf.close()
+
 if __name__ == '__main__':
     makeLightWorldZip()
     makeGameZip()
+    makeLWLinkHouseZip()
