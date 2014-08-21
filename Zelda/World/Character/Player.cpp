@@ -89,7 +89,11 @@ void CPlayer::startup(const Ogre::Vector3 &playerPosition, const Ogre::Vector3 &
 	//m_pCameraController->setCameraPosition(cameraYaw, cameraPitch);
 }
 void CPlayer::interact() {
-	if (m_pLiftedEntity) {return;}
+	if (m_pLiftedEntity) {
+    throwLifted();
+    return;
+  }
+
 	Ogre::Vector3 startPos(getPosition() - Ogre::Vector3::UNIT_Y * (PERSON_FLOOR_OFFSET - PERSON_HEIGHT * 0.2));
 	Ogre::Vector3 endPos(startPos + getOrientation().zAxis() * PERSON_RADIUS * 2.0f);
 	// try to interact with the world. So detect an object to interact with
@@ -157,6 +161,28 @@ void CPlayer::maxHitpointsChangedCallback() {
 void CPlayer::lift(CWorldEntity *pObjectToLift) {
   ASSERT(!m_pLiftedEntity);
   m_pLiftedEntity = pObjectToLift;
-  m_pMap->getPhysicsManager()->getWorld()->removeCollisionObject(m_pLiftedEntity->getCollisionObject());
-  m_pMap->getPhysicsManager()->getWorld()->addCollisionObject(m_pLiftedEntity->getCollisionObject(), COL_DAMAGE_P, MASK_DAMAGE_P_COLLIDES_WITH);
+
+  btRigidBody *pRB = btRigidBody::upcast(m_pLiftedEntity->getCollisionObject());
+  ASSERT(pRB);
+
+  m_pMap->getPhysicsManager()->getWorld()->removeCollisionObject(pRB);
+  m_pMap->getPhysicsManager()->getWorld()->addRigidBody(pRB, COL_DAMAGE_P, MASK_DAMAGE_P_COLLIDES_WITH);
+}
+
+void CPlayer::throwLifted() {
+  ASSERT(m_pLiftedEntity);
+
+  btRigidBody *pRB = btRigidBody::upcast(m_pLiftedEntity->getCollisionObject());
+
+  ASSERT(pRB);
+
+  pRB->setLinearFactor(btVector3(1, 1, 1));
+  pRB->setLinearVelocity(BtOgre::Convert::toBullet(getOrientation() * Ogre::Vector3(0, 0.5, 1)));
+  pRB->setAngularFactor(0);
+  pRB->activate();
+
+  
+
+
+  m_pLiftedEntity = nullptr;
 }

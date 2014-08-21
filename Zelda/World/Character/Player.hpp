@@ -53,6 +53,7 @@ protected:
 	void updateLiftedObject(const Ogre::Real fTime);
   void interact();
   void lift(CWorldEntity *pObjectToLift);
+  void throwLifted();
 
 	virtual CCharacterController *createCharacterController();
 };

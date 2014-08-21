@@ -46,6 +46,8 @@ CObject::CObject(const std::string &id, CWorldEntity *pParent, CMap *pMap, EObje
   Ogre::Entity *pEntity(nullptr);
   btCollisionShape *pCollisionShape(nullptr);
   btVector3 vCollisionShapeOffset;
+  btVector3 vInertia;
+  float fMass = 1;
 
   bool bUsePickableObjectSphere = false;
 
@@ -84,7 +86,8 @@ CObject::CObject(const std::string &id, CWorldEntity *pParent, CMap *pMap, EObje
   m_pSceneNode->attachObject(pEntity);
   pEntity->setCastShadows(false);
 
-  btRigidBody *pRigidBody = new btRigidBody(1, new BtOgre::RigidBodyState(m_pSceneNode, btTransform(btQuaternion::getIdentity(), btVector3(0, 0, 0)), btTransform(btQuaternion::getIdentity(), vCollisionShapeOffset)), pCollisionShape);
+  pCollisionShape->calculateLocalInertia(fMass, vInertia);
+  btRigidBody *pRigidBody = new btRigidBody(fMass, new BtOgre::RigidBodyState(m_pSceneNode, btTransform(btQuaternion::getIdentity(), btVector3(0, 0, 0)), btTransform(btQuaternion::getIdentity(), vCollisionShapeOffset)), pCollisionShape, vInertia);
   m_pCollisionObject = pRigidBody;
 
   setThisAsCollisionObjectsUserPointer();
