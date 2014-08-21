@@ -18,8 +18,8 @@
 #define _BtOgreGP_H_
 
 #include <btBulletDynamicsCommon.h>
-#include "OgreSceneNode.h"
-#include "BtOgreExtras.h"
+#include <OgreSceneNode.h>
+#include "BtOgreExtras.hpp"
 
 namespace BtOgre {
 

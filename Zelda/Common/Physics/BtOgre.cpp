@@ -13,9 +13,9 @@
  * =============================================================================================
  */
 	
-#include "BtOgrePG.h"
-#include "BtOgreGP.h"
-#include "BtOgreExtras.h"
+#include "BtOgrePG.hpp"
+#include "BtOgreGP.hpp"
+#include "BtOgreExtras.hpp"
 
 using namespace Ogre;
 

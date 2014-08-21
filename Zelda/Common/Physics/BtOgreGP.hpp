@@ -18,7 +18,7 @@
 #define _BtOgrePG_H_
 
 #include "btBulletDynamicsCommon.h"
-#include "BtOgreExtras.h"
+#include "BtOgreExtras.hpp"
 #include "Ogre.h"
 
 namespace BtOgre {

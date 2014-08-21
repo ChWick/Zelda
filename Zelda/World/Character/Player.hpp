@@ -17,30 +17,40 @@
  * Zelda. If not, see http://www.gnu.org/licenses/.
  *****************************************************************************/
 
-#ifndef _SIMPLE_ENEMY_H_
-#define _SIMPLE_ENEMY_H_
+#ifndef _PLAYER_H_
+#define _PLAYER_H_
 
 #include "Person.hpp"
+#include <OgrePrerequisites.h>
 
-class CPlayer;
+class CMap;
 
-class CSimpleEnemy : public CPerson {
-public:
-	enum EEnemyTypes {
-		ET_GREEN_SWORD,
-		ET_BLOCKER,         // soldier that stands still and only blocks the player (start of game e.g.)
-	};
+using namespace Ogre;
+
+class CPlayer : public CPerson {
 private:
-	const EEnemyTypes m_eEnemyType;
+	const Ogre::Camera *m_pCamera;
+	Ogre::SceneManager *m_pPlayerSceneManager;
+
+	RibbonTrail* mSwordTrail;
 public:
-	CSimpleEnemy(const std::string &sID, CEntity *pParent, EEnemyTypes eEnemyType);
 
-	void setPlayer(CPlayer *pPlayer);
-
+	CPlayer(CEntity *pParent, const Ogre::Camera *pCamera, Ogre::SceneManager *pPlayerSceneManager);
+	virtual ~CPlayer();
+	void destroy();
+	void update(Ogre::Real tpf);
+	void startup(const Ogre::Vector3 &playerPos, const Ogre::Vector3 &playerLookDirection, const Ogre::Real cameraYaw, const Ogre::Real cameraPitch);
 protected:
 	void setupInternal();
+	void hitpointsChangedCallback();
+	void maxHitpointsChangedCallback();
+	void setupBody(SceneManager* sceneMgr);
+	void setupCamera(Camera* cam);
+	void preUpdateBoundsCallback(const Ogre::Real fTime);
+	void updateWalkAnimation();
+	void updateLiftedObject(const Ogre::Real fTime);
+
 	virtual CCharacterController *createCharacterController();
-	void killedCallback();
 };
 
-#endif
+#endif // _PLAYER_H_
