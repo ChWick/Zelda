@@ -251,7 +251,12 @@ DebugDrawer& DebugDrawer::getSingleton(void)
 
 
 DebugDrawer::DebugDrawer(Ogre::SceneManager *_sceneManager, float _fillAlpha)
-   : sceneManager(_sceneManager), fillAlpha(_fillAlpha), manualObject(0), linesIndex(0), trianglesIndex(0)
+  : sceneManager(_sceneManager),
+    manualObject(0),
+    fillAlpha(_fillAlpha),
+    isEnabled(true),
+    linesIndex(0),
+    trianglesIndex(0)
 {
 	initialise();
 }
