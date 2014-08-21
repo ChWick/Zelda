@@ -19,6 +19,7 @@
 
 #include "Player.hpp"
 #include "../../Common/Physics/PhysicsManager.hpp"
+#include "../../Common/Physics/PhysicsMasks.hpp"
 #include "../Atlas/Map.hpp"
 #include "../../Common/Util/DebugDrawer.hpp"
 #include "PlayerController.hpp"
@@ -33,6 +34,7 @@ const Ogre::Real PLAYER_ENEMY_NOTIFY_RADIUS_SQR = 100.f; // already squared!
 
 CPlayer::CPlayer(CEntity *pParent, const Ogre::Camera* pCamera, Ogre::SceneManager *pPlayerSceneManager)
 	: CPerson("player", pParent, FOE_FRIENDLY),
+    m_pLiftedEntity(nullptr),
 		m_pCamera(pCamera),
     m_pPlayerSceneManager(pPlayerSceneManager) {
 }
@@ -85,33 +87,25 @@ void CPlayer::startup(const Ogre::Vector3 &playerPosition, const Ogre::Vector3 &
 
 	//m_pCameraController->setCameraPosition(cameraYaw, cameraPitch);
 }
-/*void CPlayer::interact(CObject::EInteractType eInteractType) {
-	if (m_pLiftedObject) {return;}
-	Ogre::Vector3 startPos(m_pBodyNode->getPosition() - Ogre::Vector3::UNIT_Y * PERSON_HEIGHT * 0.5);
-	Ogre::Vector3 endPos(startPos + m_pBodyNode->getOrientation().zAxis() * PERSON_RADIUS * 2.0f);
+void CPlayer::interact() {
+	if (m_pLiftedEntity) {return;}
+	Ogre::Vector3 startPos(getPosition() - Ogre::Vector3::UNIT_Y * PERSON_HEIGHT * 0.5);
+	Ogre::Vector3 endPos(startPos + getOrientation().zAxis() * PERSON_RADIUS * 2.0f);
 	// try to interact with the world. So detect an object to interact with
 	btCollisionWorld::ClosestRayResultCallback rayCallback(BtOgre::Convert::toBullet(startPos), BtOgre::Convert::toBullet(endPos));
 	rayCallback.m_collisionFilterGroup = COL_CHARACTER_P;
 	rayCallback.m_collisionFilterMask = COL_INTERACTIVE | COL_CHARACTER_N | COL_CHARACTER_P;
-	m_pCurrentMap->getPhysicsManager()->getWorld()->rayTest(BtOgre::Convert::toBullet(startPos), BtOgre::Convert::toBullet(endPos), rayCallback);
+	m_pMap->getPhysicsManager()->getWorld()->rayTest(BtOgre::Convert::toBullet(startPos), BtOgre::Convert::toBullet(endPos), rayCallback);
 	DebugDrawer::getSingleton().drawLine(startPos, endPos, Ogre::ColourValue::Red);
 	if (rayCallback.hasHit()) {
-		if (rayCallback.m_collisionObject->getUserPointer()) {
-			InteractionInterface *pII = dynamic_cast<InteractionInterface*>(static_cast<CPhysicsUserPointer*>(rayCallback.m_collisionObject->getUserPointer()));
-			if (pII->interactOnKeypress(eInteractType, m_pBodyNode->getOrientation().zAxis())) {
-				if (eInteractType == CObject::IT_ATTACK) {
-                    CObject *pObject = dynamic_cast<CObject*>(pII);
-                    if (pObject) {
-                        if (pObject->getObjectType() == CObject::LIFTABLE_OBJECT) {
-                            m_pLiftedObject = btRigidBody::upcast(pObject->getCollisionObject());
-                            animStartPickObject();
-                        }
-                    }
-				}
+    CWorldEntity *pWE = CWorldEntity::getFromUserPointer(rayCallback.m_collisionObject);
+    if (pWE) {
+      SInteractionResult res(pWE->interactOnActivate(getOrientation().zAxis(), this));
+			if (res.eResult == IR_LIFT) {
 			}
 		}
 	}
-}*/
+}
 
 void CPlayer::update(Ogre::Real tpf) {
 	CPerson::update(tpf);

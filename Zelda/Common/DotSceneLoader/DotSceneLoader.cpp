@@ -700,7 +700,11 @@ void DotSceneLoader::processEntity(XMLElement *XMLNode, SceneNode *pParent, CUse
   // parse user data
   userData.parseNode(XMLNode);
 
-  for (auto &cb : m_lCallbacks) {cb->preEntityAdded(userData);}
+  for (auto &cb : m_lCallbacks) {
+    if (cb->preEntityAdded(XMLNode, pParent, userData) == CDotSceneLoaderCallback::R_CANCEL) {
+      return;
+    }
+  }
 
   // Process attributes
   String name = getAttrib(XMLNode, "name");
@@ -730,24 +734,24 @@ void DotSceneLoader::processEntity(XMLElement *XMLNode, SceneNode *pParent, CUse
 
 
 
-// physics only meshes will only appear as physics and will not be drawn, have to be static!
-bool isPhysicsOnly = meshFile.find("Physics_Only_") == 0;
+  // physics only meshes will only appear as physics and will not be drawn, have to be static!
+  bool isPhysicsOnly = meshFile.find("Physics_Only_") == 0;
   if (isGhost) {
       isPhysicsOnly = true;
   }
-// rotate grass randomly
-if (meshFile == "Grass.mesh") {
-  pParent->yaw(Ogre::Radian(Ogre::Math::UnitRandom() * Ogre::Math::TWO_PI));
-}
+  // rotate grass randomly
+  if (meshFile == "Grass.mesh") {
+    pParent->yaw(Ogre::Radian(Ogre::Math::UnitRandom() * Ogre::Math::TWO_PI));
+  }
 
   // TEMP: Maintain a list of static and dynamic objects
-if (isPhysicsOnly) {
-}
+  if (isPhysicsOnly) {
+  }
   else if(isStatic) {
-      staticObjects.push_back(name);
-}
+    staticObjects.push_back(name);
+  }
   else
-      dynamicObjects.push_back(name);
+    dynamicObjects.push_back(name);
 
   XMLElement *pElement;
 

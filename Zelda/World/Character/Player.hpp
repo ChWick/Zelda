@@ -31,6 +31,7 @@ class CPlayer : public CPerson {
 private:
 	const Ogre::Camera *m_pCamera;
 	Ogre::SceneManager *m_pPlayerSceneManager;
+  CWorldEntity *m_pLiftedEntity;
 
 	RibbonTrail* mSwordTrail;
 public:
@@ -49,6 +50,7 @@ protected:
 	void preUpdateBoundsCallback(const Ogre::Real fTime);
 	void updateWalkAnimation();
 	void updateLiftedObject(const Ogre::Real fTime);
+  void interact();
 
 	virtual CCharacterController *createCharacterController();
 };

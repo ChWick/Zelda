@@ -26,7 +26,7 @@
 class CObject : public CWorldEntity {
 protected:
 public:
-  CObject(const std::string &id, CWorldEntity *pParent, CMap *pMap, EObjectTypes eObjectType);
+  CObject(const std::string &id, CWorldEntity *pParent, CMap *pMap, EObjectTypes eObjectType, Ogre::SceneNode *pSceneNode = nullptr);
 
 protected:
   virtual SInteractionResult interactOnCollision(const Ogre::Vector3 &vInteractDir, CWorldEntity *pSender);

@@ -25,9 +25,18 @@
 class btRigidBody;
 class CUserData;
 
+namespace tinyxml2 {
+  class XMLElement;
+};
+
 class CDotSceneLoaderCallback {
 public:
-  virtual void preEntityAdded(CUserData &userData) {}
+  enum EResults {
+    R_CONTINUE,
+    R_CANCEL,
+  };
+
+  virtual EResults preEntityAdded(tinyxml2::XMLElement *XMLNode, Ogre::SceneNode *pParent, CUserData &userData) {return R_CONTINUE;}
 	virtual void postEntityAdded(Ogre::Entity *pEntity, Ogre::SceneNode *pParent, btRigidBody *pRigidBody, const CUserData &userData) {}
 	virtual void staticObjectAdded(Ogre::Entity *pEntity, Ogre::SceneNode *pParent) {}
 

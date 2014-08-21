@@ -40,7 +40,7 @@ CMap::CMap(CEntity *pAtlas, CMapPackPtr mapPack, Ogre::SceneNode *pParentSceneNo
 
   // Create global collision shapes
   m_PhysicsManager.addCollisionShape(GLOBAL_COLLISION_SHAPES_TYPES_ID_MAP.toString(GCST_PICKABLE_OBJECT_SPHERE),
-                                     CPhysicsCollisionObject(new btSphereShape(0.5)));
+                                     CPhysicsCollisionObject(new btSphereShape(0.05)));
 
   m_pSceneNode = pParentSceneNode->createChildSceneNode(m_MapPack->getName() + "_RootNode");
 
@@ -168,7 +168,21 @@ void CMap::parseRegion(const SRegionInfo &region) {
   new CRegion(this, region);
 }
 
+// ############################################################################3
+// CDotSceneLoaderCallback
+
 void CMap::staticObjectAdded(Ogre::Entity *pEntity, Ogre::SceneNode *pParent) {
   m_pStaticGeometry->addEntity(pEntity, pParent->getPosition(), pParent->getOrientation());
   //destroySceneNode(pParent, true);
+}
+
+CDotSceneLoaderCallback::EResults CMap::preEntityAdded(tinyxml2::XMLElement *XMLNode, Ogre::SceneNode *pParent, CUserData &userData) {
+  CWorldEntity *pEntity(nullptr);
+  if (strcmp(XMLNode->Attribute("meshFile"), "GreenBush.mesh") == 0) {
+    pEntity = new CObject(pParent->getName(), this, this, OBJECT_GREEN_BUSH, pParent);
+
+    pEntity->setPosition(pParent->getPosition());
+    return R_CANCEL;
+  }
+  return R_CONTINUE;
 }

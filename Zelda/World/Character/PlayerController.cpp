@@ -54,8 +54,10 @@ void CPlayerController::receiveInputCommand(const CGameInputCommand &cmd) {
 	case GIC_REAR:
 		mKeyDirection.z = cmd.getIntValue();
 		break;
-    default:
-        break;
+  case GIC_INTERACT:
+    mCCPerson->interact();
+  default:
+    break;
 	}
 }
 /*

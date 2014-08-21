@@ -54,6 +54,7 @@ public:
 
 
   virtual bool collidesWith(const std::string &sEntityID) const;
+  virtual void interact() {}
 
 protected:
 	void createPhysics();

@@ -29,12 +29,18 @@
 #include "../GlobalCollisionShapesTypes.hpp"
 #include "../Atlas/Map.hpp"
 
-CObject::CObject(const std::string &id, CWorldEntity *pParent, CMap *pMap, EObjectTypes eObjectType)
+CObject::CObject(const std::string &id, CWorldEntity *pParent, CMap *pMap, EObjectTypes eObjectType, Ogre::SceneNode *pSceneNode)
   : CWorldEntity(id, pParent, pMap) {
 
   setType(eObjectType);
 
-  m_pSceneNode = pParent->getSceneNode()->createChildSceneNode(id);
+  if (pSceneNode) {
+    m_pSceneNode = pSceneNode;
+  }
+  else {
+    m_pSceneNode = pParent->getSceneNode()->createChildSceneNode(id);
+  }
+  
   Ogre::SceneManager *pSceneManager = m_pSceneNode->getCreator();
 
   Ogre::Entity *pEntity(nullptr);
@@ -96,8 +102,11 @@ CObject::CObject(const std::string &id, CWorldEntity *pParent, CMap *pMap, EObje
     pRigidBody->setLinearFactor(btVector3(1.0f, 1.0f, 1.0f) * 0.25f);
     pRigidBody->setLinearVelocity(btVector3(0, 1.0f, 0));
     break;
+  case OBJECT_GREEN_BUSH:
+    pRigidBody->setLinearFactor(btVector3(0, 0, 0));
+    pRigidBody->setAngularVelocity(btVector3(0, 0, 0));
+    break;
   }
-  setPosition(Ogre::Vector3(0, 5, 0));
 }
 
 CObject::SInteractionResult CObject::interactOnCollision(const Ogre::Vector3 &vInteractDir, CWorldEntity *pSender) {
