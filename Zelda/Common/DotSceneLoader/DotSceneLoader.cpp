@@ -722,7 +722,7 @@ void DotSceneLoader::processEntity(XMLElement *XMLNode, SceneNode *pParent, CUse
   bool isGhost = getAttribBool(XMLNode, "ghost");
 
   // user data properties
-  bool bIsWall = userData.getBoolUserData("wall", false);               // is this object a wall? this will set COL_WALL as collision group
+  bool bIsBorder = userData.getBoolUserData("border", false);               // is this object a wall? this will set COL_WALL as collision group
   String type = userData.getStringUserData("type");
   Ogre::StringUtil::toLowerCase(type);
   if (type == "linkable") {
@@ -893,8 +893,8 @@ void DotSceneLoader::processEntity(XMLElement *XMLNode, SceneNode *pParent, CUse
               short colGroup = COL_STATIC;
               Ogre::String lcName = pParent->getName();
               Ogre::StringUtil::toLowerCase(lcName);
-              if (bIsWall) {
-                  colGroup = COL_WALL;
+              if (bIsBorder) {
+                  colGroup = COL_BORDER;
               }
               if (physicsType == "STATIC") {
                   pRB->setLinearFactor(btVector3(0, 0, 0));

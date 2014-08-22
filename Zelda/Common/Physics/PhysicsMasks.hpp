@@ -24,7 +24,7 @@
 enum ECollisionTypes {
   COL_NOTHING     = 0,    //!< Collide with nothing
   COL_STATIC      = 1,    //!< Collide with static objects
-  COL_WALL        = 2,    //!< Collides with walls (for detection of borders)
+  COL_BORDER      = 2,    //!< Collides with borders (of plateaus)
 	COL_CAMERA      = 4,   //!< Camera collision object
 	COL_INTERACTIVE = 8,   //!< Collide with interactive
 
@@ -39,10 +39,10 @@ enum ECollisionTypes {
 
 const unsigned int MASK_NONE = COL_NOTHING;
 
-const unsigned int MASK_PLAYER_P_COLLIDES_WITH = COL_STATIC | COL_WALL | COL_INTERACTIVE | COL_CHARACTER_P | COL_CHARACTER_N | COL_DAMAGE_N;
-const unsigned int MASK_PLAYER_N_COLLIDES_WITH = COL_STATIC | COL_WALL | COL_INTERACTIVE | COL_CHARACTER_P | COL_CHARACTER_N | COL_DAMAGE_P;
+const unsigned int MASK_PLAYER_P_COLLIDES_WITH = COL_STATIC | COL_BORDER | COL_INTERACTIVE | COL_CHARACTER_P | COL_CHARACTER_N | COL_DAMAGE_N;
+const unsigned int MASK_PLAYER_N_COLLIDES_WITH = COL_STATIC | COL_BORDER | COL_INTERACTIVE | COL_CHARACTER_P | COL_CHARACTER_N | COL_DAMAGE_P;
 
-const unsigned int MASK_PICKABLE_OBJECT_COLLIDES_WITH = COL_STATIC | COL_WALL;
+const unsigned int MASK_PICKABLE_OBJECT_COLLIDES_WITH = COL_STATIC;
 
 const unsigned int MASK_BLOCKADE_COLLIDES_WITH = COL_CHARACTER_P;
 
@@ -52,9 +52,9 @@ const unsigned int MASK_INTERACIVE_OBJECT_COLLIDES_WITH = COL_CHARACTER_N | COL_
 const unsigned int MASK_SHIELD_P_COLLIDES_WITH = COL_DAMAGE_N;
 const unsigned int MASK_SHIELD_N_COLLIDES_WITH = COL_DAMAGE_P;
 
-const unsigned int MASK_CAMERA_COLLIDES_WITH = COL_STATIC | COL_WALL;
-const unsigned int MASK_DAMAGE_P_COLLIDES_WITH = COL_CHARACTER_N | COL_SHIELD_N | COL_STATIC | COL_WALL | COL_INTERACTIVE;
-const unsigned int MASK_DAMAGE_N_COLLIDES_WITH = COL_CHARACTER_P | COL_SHIELD_P | COL_STATIC | COL_WALL | COL_INTERACTIVE;
+const unsigned int MASK_CAMERA_COLLIDES_WITH = COL_STATIC;
+const unsigned int MASK_DAMAGE_P_COLLIDES_WITH = COL_CHARACTER_N | COL_SHIELD_N | COL_STATIC | COL_INTERACTIVE;
+const unsigned int MASK_DAMAGE_N_COLLIDES_WITH = COL_CHARACTER_P | COL_SHIELD_P | COL_STATIC | COL_INTERACTIVE;
 //int powerupCollidesWith = COL_SHIP | COL_WALL;
 
 #endif // _PHYSICS_MASKS_HPP_

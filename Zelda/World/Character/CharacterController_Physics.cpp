@@ -19,7 +19,9 @@
 
 #include "CharacterController_Physics.hpp"
 #include "../../Common/Physics/PhysicsManager.hpp"
+#include "../../Common/Physics/PhysicsMasks.hpp"
 #include "../WorldEntity.hpp"
+#include "../../Common/Util/Assert.hpp"
 
 
 // static helper method
@@ -132,7 +134,7 @@ btVector3 CharacterControllerPhysics::perpindicularComponent (const btVector3& d
 CharacterControllerPhysics::CharacterControllerPhysics (btPairCachingGhostObject* ghostObject,btConvexShape* convexShape,btScalar stepHeight, int upAxis)
 {
 	m_upAxis = upAxis;
-	m_addedMargin = 0.02;
+	m_addedMargin = 0;
 	m_walkDirection.setValue(0,0,0);
 	m_useGhostObjectSweepTest = true;
 	m_ghostObject = ghostObject;
@@ -143,9 +145,11 @@ CharacterControllerPhysics::CharacterControllerPhysics (btPairCachingGhostObject
 	m_velocityTimeInterval = 0.0;
 	m_verticalVelocity = 0.0;
 	m_verticalOffset = 0.0;
-	m_gravity = 0.9 ; // 3G acceleration.
+	m_gravity = CPhysicsManager::GRAVITY_FACTOR ; // gravity.
 	m_fallSpeed = 5.5; // Terminal velocity of a sky diver in m/s.
-	m_jumpSpeed = 1.0; // ?
+	m_jumpSpeed = 2.0; // ?
+  m_bRequestingJump = false;
+  m_requestingJumpTime = 0;
 	m_wasOnGround = false;
 	m_wasJumping = false;
 	m_interpolateUp = true;
@@ -326,7 +330,7 @@ void CharacterControllerPhysics::updateTargetPositionBasedOnCollision (const btV
 	}
 }
 
-void CharacterControllerPhysics::stepForwardAndStrafe ( btCollisionWorld* collisionWorld, const btVector3& walkMove)
+void CharacterControllerPhysics::stepForwardAndStrafe ( btCollisionWorld* collisionWorld, const btVector3& walkMove, btScalar dt)
 {
 	m_lCollidingWorldEntities.clear();
 	// printf("m_normalizedDirection=%f,%f,%f\n",
@@ -391,6 +395,24 @@ void CharacterControllerPhysics::stepForwardAndStrafe ( btCollisionWorld* collis
 			// we moved only a fraction
 			btScalar hitDistance;
 			hitDistance = (callback.m_hitPointWorld - m_currentPosition).length();
+
+      if (pOther->getBroadphaseHandle()->m_collisionFilterGroup == COL_BORDER) {
+        // border, check for jump
+        btScalar cosangle = callback.m_hitNormalWorld.dot(m_normalizedDirection);
+        if (cosangle > -0.95f) {
+          // not perpeticular moving to side, no effect
+          m_bRequestingJump = false;
+        }
+        else {
+          if (m_bRequestingJump) {
+            m_requestingJumpTime -= dt;
+          }
+          else {
+            m_bRequestingJump = true;
+            m_requestingJumpTime = 0.2;
+          }
+        }
+      }
 
 //			m_currentPosition.setInterpolate3 (m_currentPosition, m_targetPosition, callback.m_closestHitFraction);
 
@@ -672,7 +694,7 @@ void CharacterControllerPhysics::playerStep (  btCollisionWorld* collisionWorld,
 
 	stepUp (collisionWorld);
 	if (m_useWalkDirection) {
-		stepForwardAndStrafe (collisionWorld, m_walkDirection);
+		stepForwardAndStrafe (collisionWorld, m_walkDirection, dt);
 	} else {
 		//printf("  time: %f", m_velocityTimeInterval);
 		// still have some time left for moving!
@@ -686,7 +708,7 @@ void CharacterControllerPhysics::playerStep (  btCollisionWorld* collisionWorld,
 		//printf("  dtMoving: %f", dtMoving);
 
 		// okay, step
-		stepForwardAndStrafe(collisionWorld, move);
+		stepForwardAndStrafe(collisionWorld, move, dtMoving);
 	}
 	stepDown (collisionWorld, dt);
 
@@ -694,6 +716,15 @@ void CharacterControllerPhysics::playerStep (  btCollisionWorld* collisionWorld,
 
 	xform.setOrigin (m_currentPosition);
 	m_ghostObject->setWorldTransform (xform);
+
+  // jumping on border
+  if (m_wasOnGround == false && onGround()) {
+    jumpThroughBorderEnd(collisionWorld);
+    m_bRequestingJump = false;
+  }
+  if (m_bRequestingJump && m_requestingJumpTime <= 0) {
+    jumpThroughBorderStart(collisionWorld);
+  }
 }
 
 void CharacterControllerPhysics::setFallSpeed (btScalar fallSpeed)
@@ -714,6 +745,21 @@ void CharacterControllerPhysics::setMaxJumpHeight (btScalar maxJumpHeight)
 bool CharacterControllerPhysics::canJump () const
 {
 	return onGround();
+}
+
+void CharacterControllerPhysics::jumpThroughBorderStart(btCollisionWorld* collisionWorld) {
+  short int group = m_ghostObject->getBroadphaseHandle()->m_collisionFilterGroup;
+  short int mask = m_ghostObject->getBroadphaseHandle()->m_collisionFilterMask - (m_ghostObject->getBroadphaseHandle()->m_collisionFilterMask & COL_BORDER);
+  collisionWorld->removeCollisionObject(m_ghostObject);
+  collisionWorld->addCollisionObject(m_ghostObject, group, mask);
+  jump();
+}
+
+void CharacterControllerPhysics::jumpThroughBorderEnd(btCollisionWorld* collisionWorld) {
+  short int group = m_ghostObject->getBroadphaseHandle()->m_collisionFilterGroup;
+  short int mask = m_ghostObject->getBroadphaseHandle()->m_collisionFilterMask | COL_BORDER;
+  collisionWorld->removeCollisionObject(m_ghostObject);
+  collisionWorld->addCollisionObject(m_ghostObject, group, mask);
 }
 
 void CharacterControllerPhysics::jump ()

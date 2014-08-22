@@ -51,6 +51,8 @@ protected:
 	btScalar m_verticalOffset;
 	btScalar m_fallSpeed;
 	btScalar m_jumpSpeed;
+  bool m_bRequestingJump; // is jump requested
+  btScalar m_requestingJumpTime; // time to wait until jump sets in
 	btScalar m_maxJumpHeight;
 	btScalar m_maxSlopeRadians; // Slope angle that is set (used for returning the exact value)
 	btScalar m_maxSlopeCosine;  // Cosine equivalent of m_maxSlopeRadians (calculated once when set, for optimization)
@@ -98,7 +100,7 @@ protected:
 	bool recoverFromPenetration ( btCollisionWorld* collisionWorld);
 	void stepUp (btCollisionWorld* collisionWorld);
 	void updateTargetPositionBasedOnCollision (const btVector3& hit_normal, btScalar tangentMag = btScalar(0.0), btScalar normalMag = btScalar(1.0));
-	void stepForwardAndStrafe (btCollisionWorld* collisionWorld, const btVector3& walkMove);
+	void stepForwardAndStrafe (btCollisionWorld* collisionWorld, const btVector3& walkMove, btScalar dt);
 	void stepDown (btCollisionWorld* collisionWorld, btScalar dt);
 public:
 
@@ -159,6 +161,8 @@ public:
 	void setMaxJumpHeight (btScalar maxJumpHeight);
 	bool canJump () const;
 
+  void jumpThroughBorderStart(btCollisionWorld* collisionWorld);
+  void jumpThroughBorderEnd(btCollisionWorld* collisionWorld);
 	void jump ();
 
 	void setGravity(btScalar gravity);

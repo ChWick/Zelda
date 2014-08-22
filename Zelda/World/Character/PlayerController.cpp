@@ -175,8 +175,9 @@ void CPlayerController::updateGoalDirection() {
 	if (mKeyDirection != Vector3::ZERO)
 	{
 		// calculate actuall goal direction in world based on player's key directions
-		mGoalDirection += mKeyDirection.z * m_pCamera->getOrientation().zAxis();
-		mGoalDirection += mKeyDirection.x * m_pCamera->getOrientation().xAxis();
+		//mGoalDirection += mKeyDirection.z * m_pCamera->getOrientation().zAxis();
+		//mGoalDirection += mKeyDirection.x * m_pCamera->getOrientation().xAxis();
+    mGoalDirection = mKeyDirection;
 		mGoalDirection.y = 0;
 		mGoalDirection.normalise();
 	}

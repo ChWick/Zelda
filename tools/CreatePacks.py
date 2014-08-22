@@ -34,6 +34,7 @@ def makeLWLinkHouseZip() :
 	print('Creating link_house.zip')
 
 	zipf = zipfile.ZipFile('../maps/Atlases/LightWorld/link_house.zip', 'w')
+	zipf.write('../maps/Atlases/LightWorld/link_house/physics_border_top.mesh', 'physics_border_top.mesh', zipfile.ZIP_DEFLATED)
 	zipf.write('../maps/Atlases/LightWorld/link_house/physics_floor.mesh', 'physics_floor.mesh', zipfile.ZIP_DEFLATED)
 	zipf.write('../maps/Atlases/LightWorld/link_house/physics_floor_top.mesh', 'physics_floor_top.mesh', zipfile.ZIP_DEFLATED)
 	zipf.write('../maps/Atlases/LightWorld/link_house/wall_bot_right.mesh', 'wall_bot_right.mesh', zipfile.ZIP_DEFLATED)
