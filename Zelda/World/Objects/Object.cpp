@@ -28,6 +28,7 @@
 #include "../../Common/Physics/PhysicsMasks.hpp"
 #include "../GlobalCollisionShapesTypes.hpp"
 #include "../Atlas/Map.hpp"
+#include "../../Common/Util/Assert.hpp"
 
 CObject::CObject(const std::string &id, CWorldEntity *pParent, CMap *pMap, EObjectTypes eObjectType, Ogre::SceneNode *pSceneNode)
   : CWorldEntity(id, pParent, pMap) {
@@ -116,6 +117,32 @@ CObject::CObject(const std::string &id, CWorldEntity *pParent, CMap *pMap, EObje
 }
 
 void CObject::changeState(EEntityStateTypes eState) {
+  switch (m_uiType) {
+  case OBJECT_GREEN_BUSH:
+    if (eState == EST_LIFTED) {
+      btRigidBody *pRB = btRigidBody::upcast(this->getCollisionObject());
+      ASSERT(pRB);
+
+      m_pMap->getPhysicsManager()->getWorld()->removeCollisionObject(pRB);
+      m_pMap->getPhysicsManager()->getWorld()->addRigidBody(pRB, COL_DAMAGE_P, MASK_DAMAGE_P_COLLIDES_WITH);
+
+      // Entities now cast shadows
+      Ogre::SceneNode::ObjectIterator itObject = this->getSceneNode()->getAttachedObjectIterator();
+      while (itObject.hasMoreElements()) {
+        Ogre::MovableObject* pObject = static_cast<Ogre::MovableObject*>(itObject.getNext());
+        pObject->setCastShadows(true);
+      }
+    }
+    else if (eState == EST_THROWN) {
+      btRigidBody *pRB = btRigidBody::upcast(this->getCollisionObject());
+      ASSERT(pRB);
+
+      pRB->setLinearFactor(btVector3(1, 1, 1));
+      pRB->setAngularFactor(0);
+      pRB->activate();
+    }
+  break;
+  }
   CWorldEntity::changeState(eState);
 }
 
