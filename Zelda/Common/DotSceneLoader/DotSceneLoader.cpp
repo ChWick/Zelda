@@ -946,6 +946,11 @@ void DotSceneLoader::processEntity(XMLElement *XMLNode, SceneNode *pParent, CUse
   if(pElement)
       processUserDataReference(pElement, pEntity);
 
+
+  if (isStatic && pRB) {
+    for (auto &cb : m_lCallbacks) {cb->worldPhysicsAdded(pRB);}
+  }
+
   if (isGhost) {
       // delete everything
       if (pEntity->getParentSceneNode()) {

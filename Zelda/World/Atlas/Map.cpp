@@ -31,6 +31,7 @@
 #include "BulletCollision/CollisionShapes/btSphereShape.h"
 #include <BulletCollision/CollisionShapes/btCapsuleShape.h>
 #include "../Character/Person.hpp"
+#include "../../Common/Util/Assert.hpp"
 
 CMap::CMap(CEntity *pAtlas, CMapPackPtr mapPack, Ogre::SceneNode *pParentSceneNode, CWorldEntity *pPlayer)
   : CWorldEntity(mapPack->getName(), pAtlas, this),
@@ -154,11 +155,41 @@ void CMap::update(Ogre::Real tpf) {
 bool CMap::frameStarted(const Ogre::FrameEvent& evt) {
   if (m_bPauseUpdate) {return true;}
   m_PhysicsManager.update(evt.timeSinceLastFrame);
+  processCollisionCheck();
   return CWorldEntity::frameStarted(evt);
 }
 
 bool CMap::frameEnded(const Ogre::FrameEvent& evt) {
   return CWorldEntity::frameEnded(evt);
+}
+
+void CMap::processCollisionCheck() {
+	int numManifolds = m_PhysicsManager.getWorld()->getDispatcher()->getNumManifolds();
+	for (int i=0;i<numManifolds;i++)
+	{
+		btPersistentManifold* contactManifold =  m_PhysicsManager.getWorld()->getDispatcher()->getManifoldByIndexInternal(i);
+		const btCollisionObject* obA = static_cast<const btCollisionObject*>(contactManifold->getBody0());
+		const btCollisionObject* obB = static_cast<const btCollisionObject*>(contactManifold->getBody1());
+
+		int numContacts = contactManifold->getNumContacts();
+		for (int j=0;j<numContacts;j++)
+		{
+			btManifoldPoint& pt = contactManifold->getContactPoint(j);
+			if (pt.getDistance()<0.f)
+			{
+				// Contact of 2 objects
+        CWorldEntity *pWE_A(CWorldEntity::getFromUserPointer(obA));
+        CWorldEntity *pWE_B(CWorldEntity::getFromUserPointer(obB));
+        btVector3 vDistance(pt.m_positionWorldOnA - pt.m_positionWorldOnB);
+        vDistance.normalize();
+        if (pWE_A && pWE_B) {
+          pWE_A->interactOnCollision(BtOgre::Convert::toOgre(vDistance), pWE_B);
+          pWE_B->interactOnCollision(-BtOgre::Convert::toOgre(vDistance), pWE_A);
+        }
+			}
+		}
+
+	}
 }
 
 // ############################################################################3
@@ -174,7 +205,11 @@ void CMap::parseRegion(const SRegionInfo &region) {
 
 // ############################################################################3
 // CDotSceneLoaderCallback
+void CMap::worldPhysicsAdded(btRigidBody *pRigidBody) {
+  ASSERT(pRigidBody);
 
+  pRigidBody->setUserPointer(dynamic_cast<CWorldEntity*>(this));
+}
 void CMap::staticObjectAdded(Ogre::Entity *pEntity, Ogre::SceneNode *pParent) {
   m_pStaticGeometry->addEntity(pEntity, pParent->getPosition(), pParent->getOrientation());
   //destroySceneNode(pParent, true);

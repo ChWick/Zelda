@@ -58,10 +58,14 @@ public:
   bool frameEnded(const Ogre::FrameEvent& evt);
 
 private:
+  void processCollisionCheck();
+
+  // CMapPackParserListener
   void parsePlayer(const tinyxml2::XMLElement *);
   void parseRegion(const SRegionInfo &);
 
   // CDotSceneLoaderCallback
+  void worldPhysicsAdded(btRigidBody *pRigidBody);
 	void staticObjectAdded(Ogre::Entity *pEntity, Ogre::SceneNode *pParent);
   EResults preEntityAdded(tinyxml2::XMLElement *XMLNode, Ogre::SceneNode *pParent, CUserData &userData);
 
