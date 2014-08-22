@@ -147,7 +147,7 @@ CharacterControllerPhysics::CharacterControllerPhysics (btPairCachingGhostObject
 	m_verticalOffset = 0.0;
 	m_gravity = CPhysicsManager::GRAVITY_FACTOR ; // gravity.
 	m_fallSpeed = 5.5; // Terminal velocity of a sky diver in m/s.
-	m_jumpSpeed = 2.0; // ?
+	m_jumpSpeed = 1.1; // ?
   m_bRequestingJump = false;
   m_requestingJumpTime = 0;
 	m_wasOnGround = false;
@@ -585,6 +585,7 @@ void CharacterControllerPhysics::setWalkDirection
 const btVector3& walkDirection
 )
 {
+  if (onGround() == false) {return;}
 	m_useWalkDirection = true;
 	m_walkDirection = walkDirection;
 	m_normalizedDirection = getNormalizedVector(m_walkDirection);
