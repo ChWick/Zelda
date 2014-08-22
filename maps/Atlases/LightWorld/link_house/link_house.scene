@@ -1,5 +1,115 @@
-<scene previous_export_time="1408465333.2122288" export_time="1408711645.55502" exported_by="christoph" formatVersion="1.0.1" >
+<scene previous_export_time="1408732978.744886" export_time="1408733032.12788" exported_by="christoph" formatVersion="1.0.1" >
   <nodes >
+    <node name="fence_plank.001" >
+      <position x="-0.875000" y="0.200000" z="-0.625000" />
+      <rotation qy="0.707107" qw="0.707106" qx="0.000000" qz="-0.000000" />
+      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <entity friction_y="1.0" lock_rot_y="False" mass_radius="1.0" friction_x="1.0" lock_trans_x="False" meshFile="fence_plank.mesh" anisotropic_friction="False" velocity_max="0.0" name="fence_plank" inertia_tensor="0.4000000059604645" ghost="False" mass="1.0" lock_trans_z="False" lock_rot_x="False" friction_z="1.0" actor="False" velocity_min="0.0" damping_trans="0.03999999910593033" physics_type="STATIC" damping_rot="0.10000000149011612" lock_rot_z="False" lock_trans_y="False" collisionPrim="box" />
+    </node>
+    <node name="fence_stake.010" >
+      <position x="-0.875000" y="0.200000" z="-0.725000" />
+      <rotation qy="0.000000" qw="1.000000" qx="0.000000" qz="-0.000000" />
+      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <entity friction_y="1.0" lock_rot_y="False" mass_radius="1.0" friction_x="1.0" lock_trans_x="False" meshFile="fence_stake.mesh" anisotropic_friction="False" velocity_max="0.0" name="fence_stake" inertia_tensor="0.4000000059604645" ghost="False" mass="1.0" lock_trans_z="False" lock_rot_x="False" friction_z="1.0" actor="False" velocity_min="0.0" damping_trans="0.03999999910593033" physics_type="STATIC" damping_rot="0.10000000149011612" lock_rot_z="False" lock_trans_y="False" collisionPrim="cylinder" />
+    </node>
+    <node name="fence_stake.009" >
+      <position x="-0.875000" y="0.200000" z="-0.625000" />
+      <rotation qy="0.000000" qw="1.000000" qx="0.000000" qz="-0.000000" />
+      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <entity friction_y="1.0" lock_rot_y="False" mass_radius="1.0" friction_x="1.0" lock_trans_x="False" meshFile="fence_stake.mesh" anisotropic_friction="False" velocity_max="0.0" name="fence_stake" inertia_tensor="0.4000000059604645" ghost="False" mass="1.0" lock_trans_z="False" lock_rot_x="False" friction_z="1.0" actor="False" velocity_min="0.0" damping_trans="0.03999999910593033" physics_type="STATIC" damping_rot="0.10000000149011612" lock_rot_z="False" lock_trans_y="False" collisionPrim="cylinder" />
+    </node>
+    <node name="fence_stake.008" >
+      <position x="-0.975000" y="0.200000" z="-0.525000" />
+      <rotation qy="0.000000" qw="1.000000" qx="0.000000" qz="-0.000000" />
+      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <entity friction_y="1.0" lock_rot_y="False" mass_radius="1.0" friction_x="1.0" lock_trans_x="False" meshFile="fence_stake.mesh" anisotropic_friction="False" velocity_max="0.0" name="fence_stake" inertia_tensor="0.4000000059604645" ghost="False" mass="1.0" lock_trans_z="False" lock_rot_x="False" friction_z="1.0" actor="False" velocity_min="0.0" damping_trans="0.03999999910593033" physics_type="STATIC" damping_rot="0.10000000149011612" lock_rot_z="False" lock_trans_y="False" collisionPrim="cylinder" />
+    </node>
+    <node name="fence_stake.007" >
+      <position x="-0.925000" y="0.200000" z="-0.575000" />
+      <rotation qy="0.000000" qw="1.000000" qx="0.000000" qz="-0.000000" />
+      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <entity friction_y="1.0" lock_rot_y="False" mass_radius="1.0" friction_x="1.0" lock_trans_x="False" meshFile="fence_stake.mesh" anisotropic_friction="False" velocity_max="0.0" name="fence_stake" inertia_tensor="0.4000000059604645" ghost="False" mass="1.0" lock_trans_z="False" lock_rot_x="False" friction_z="1.0" actor="False" velocity_min="0.0" damping_trans="0.03999999910593033" physics_type="STATIC" damping_rot="0.10000000149011612" lock_rot_z="False" lock_trans_y="False" collisionPrim="cylinder" />
+    </node>
+    <node name="fence_stake.006" >
+      <position x="-1.025000" y="0.200000" z="-0.475000" />
+      <rotation qy="0.000000" qw="1.000000" qx="0.000000" qz="-0.000000" />
+      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <entity friction_y="1.0" lock_rot_y="False" mass_radius="1.0" friction_x="1.0" lock_trans_x="False" meshFile="fence_stake.mesh" anisotropic_friction="False" velocity_max="0.0" name="fence_stake" inertia_tensor="0.4000000059604645" ghost="False" mass="1.0" lock_trans_z="False" lock_rot_x="False" friction_z="1.0" actor="False" velocity_min="0.0" damping_trans="0.03999999910593033" physics_type="STATIC" damping_rot="0.10000000149011612" lock_rot_z="False" lock_trans_y="False" collisionPrim="cylinder" />
+    </node>
+    <node name="fence_stake.005" >
+      <position x="-1.075000" y="0.200000" z="-0.425000" />
+      <rotation qy="0.000000" qw="1.000000" qx="0.000000" qz="-0.000000" />
+      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <entity friction_y="1.0" lock_rot_y="False" mass_radius="1.0" friction_x="1.0" lock_trans_x="False" meshFile="fence_stake.mesh" anisotropic_friction="False" velocity_max="0.0" name="fence_stake" inertia_tensor="0.4000000059604645" ghost="False" mass="1.0" lock_trans_z="False" lock_rot_x="False" friction_z="1.0" actor="False" velocity_min="0.0" damping_trans="0.03999999910593033" physics_type="STATIC" damping_rot="0.10000000149011612" lock_rot_z="False" lock_trans_y="False" collisionPrim="cylinder" />
+    </node>
+    <node name="fence_stake.004" >
+      <position x="-1.175000" y="0.200000" z="-0.325000" />
+      <rotation qy="0.000000" qw="1.000000" qx="0.000000" qz="-0.000000" />
+      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <entity friction_y="1.0" lock_rot_y="False" mass_radius="1.0" friction_x="1.0" lock_trans_x="False" meshFile="fence_stake.mesh" anisotropic_friction="False" velocity_max="0.0" name="fence_stake" inertia_tensor="0.4000000059604645" ghost="False" mass="1.0" lock_trans_z="False" lock_rot_x="False" friction_z="1.0" actor="False" velocity_min="0.0" damping_trans="0.03999999910593033" physics_type="STATIC" damping_rot="0.10000000149011612" lock_rot_z="False" lock_trans_y="False" collisionPrim="cylinder" />
+    </node>
+    <node name="fence_stake.003" >
+      <position x="-1.125000" y="0.200000" z="-0.375000" />
+      <rotation qy="0.000000" qw="1.000000" qx="0.000000" qz="-0.000000" />
+      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <entity friction_y="1.0" lock_rot_y="False" mass_radius="1.0" friction_x="1.0" lock_trans_x="False" meshFile="fence_stake.mesh" anisotropic_friction="False" velocity_max="0.0" name="fence_stake" inertia_tensor="0.4000000059604645" ghost="False" mass="1.0" lock_trans_z="False" lock_rot_x="False" friction_z="1.0" actor="False" velocity_min="0.0" damping_trans="0.03999999910593033" physics_type="STATIC" damping_rot="0.10000000149011612" lock_rot_z="False" lock_trans_y="False" collisionPrim="cylinder" />
+    </node>
+    <node name="fence_stake.002" >
+      <position x="-1.225000" y="0.200000" z="-0.275000" />
+      <rotation qy="0.000000" qw="1.000000" qx="0.000000" qz="-0.000000" />
+      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <entity friction_y="1.0" lock_rot_y="False" mass_radius="1.0" friction_x="1.0" lock_trans_x="False" meshFile="fence_stake.mesh" anisotropic_friction="False" velocity_max="0.0" name="fence_stake" inertia_tensor="0.4000000059604645" ghost="False" mass="1.0" lock_trans_z="False" lock_rot_x="False" friction_z="1.0" actor="False" velocity_min="0.0" damping_trans="0.03999999910593033" physics_type="STATIC" damping_rot="0.10000000149011612" lock_rot_z="False" lock_trans_y="False" collisionPrim="cylinder" />
+    </node>
+    <node name="fence_stake.001" >
+      <position x="-1.275000" y="0.200000" z="-0.225000" />
+      <rotation qy="0.000000" qw="1.000000" qx="0.000000" qz="-0.000000" />
+      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <entity friction_y="1.0" lock_rot_y="False" mass_radius="1.0" friction_x="1.0" lock_trans_x="False" meshFile="fence_stake.mesh" anisotropic_friction="False" velocity_max="0.0" name="fence_stake" inertia_tensor="0.4000000059604645" ghost="False" mass="1.0" lock_trans_z="False" lock_rot_x="False" friction_z="1.0" actor="False" velocity_min="0.0" damping_trans="0.03999999910593033" physics_type="STATIC" damping_rot="0.10000000149011612" lock_rot_z="False" lock_trans_y="False" collisionPrim="cylinder" />
+    </node>
     <node name="physics_border_top" >
       <position x="-1.300000" y="0.200000" z="-0.100000" />
       <rotation qy="0.000000" qw="1.000000" qx="0.000000" qz="-0.000000" />
@@ -230,6 +340,26 @@
         <actuators />
       </game>
       <entity friction_y="1.0" lock_rot_y="False" mass_radius="1.0" friction_x="1.0" lock_trans_x="False" meshFile="GreenBush.mesh" anisotropic_friction="False" velocity_max="0.0" name="GreenBush" inertia_tensor="0.4000000059604645" ghost="False" mass="1.0" lock_trans_z="False" lock_rot_x="False" friction_z="1.0" actor="False" lock_trans_y="False" damping_trans="0.03999999910593033" physics_type="STATIC" lock_rot_z="False" velocity_min="0.0" damping_rot="0.10000000149011612" />
+    </node>
+    <node name="fence_plank" >
+      <position x="-1.375000" y="0.200000" z="-0.225000" />
+      <rotation qy="0.000000" qw="1.000000" qx="0.000000" qz="-0.000000" />
+      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <entity friction_y="1.0" lock_rot_y="False" mass_radius="1.0" friction_x="1.0" lock_trans_x="False" meshFile="fence_plank.mesh" anisotropic_friction="False" velocity_max="0.0" name="fence_plank" inertia_tensor="0.4000000059604645" ghost="False" mass="1.0" lock_trans_z="False" lock_rot_x="False" friction_z="1.0" actor="False" velocity_min="0.0" damping_trans="0.03999999910593033" physics_type="STATIC" damping_rot="0.10000000149011612" lock_rot_z="False" lock_trans_y="False" collisionPrim="box" />
+    </node>
+    <node name="fence_stake" >
+      <position x="-1.375000" y="0.200000" z="-0.225000" />
+      <rotation qy="0.000000" qw="1.000000" qx="0.000000" qz="-0.000000" />
+      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <entity friction_y="1.0" lock_rot_y="False" mass_radius="1.0" friction_x="1.0" lock_trans_x="False" meshFile="fence_stake.mesh" anisotropic_friction="False" velocity_max="0.0" name="fence_stake" inertia_tensor="0.4000000059604645" ghost="False" mass="1.0" lock_trans_z="False" lock_rot_x="False" friction_z="1.0" actor="False" velocity_min="0.0" damping_trans="0.03999999910593033" physics_type="STATIC" damping_rot="0.10000000149011612" lock_rot_z="False" lock_trans_y="False" collisionPrim="cylinder" />
     </node>
   </nodes>
   <externals />

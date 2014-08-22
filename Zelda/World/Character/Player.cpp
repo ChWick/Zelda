@@ -96,7 +96,7 @@ void CPlayer::interact() {
   }
 
 	Ogre::Vector3 startPos(getPosition() - Ogre::Vector3::UNIT_Y * (PERSON_FLOOR_OFFSET - PERSON_HEIGHT * 0.2));
-	Ogre::Vector3 endPos(startPos + getOrientation().zAxis() * PERSON_RADIUS * 2.0f);
+	Ogre::Vector3 endPos(startPos + getOrientation().zAxis() * PERSON_RADIUS * 1.2f);
 	// try to interact with the world. So detect an object to interact with
 	btCollisionWorld::ClosestRayResultCallback rayCallback(BtOgre::Convert::toBullet(startPos), BtOgre::Convert::toBullet(endPos));
 	rayCallback.m_collisionFilterGroup = COL_CHARACTER_P;
@@ -119,6 +119,7 @@ void CPlayer::update(Ogre::Real tpf) {
   for (CWorldEntity *pWE : dynamic_cast<CharacterControllerPhysics*>(mCCPhysics)->getCollidingWorldEntities()) {
   	// check for collisions, to pickup
   	pWE->interactOnCollision(this->getPosition() - pWE->getPosition(), this);
+    this->interactOnCollision(pWE->getPosition() - this->getPosition(), pWE);
   }
 
   updateLiftedObject(tpf);
@@ -136,7 +137,7 @@ void CPlayer::renderDebug(Ogre::Real tpf) {
 
   // draw interaction
 	Ogre::Vector3 startPos(getPosition() - Ogre::Vector3::UNIT_Y * (PERSON_FLOOR_OFFSET - PERSON_HEIGHT * 0.2));
-	Ogre::Vector3 endPos(startPos + getOrientation().zAxis() * PERSON_RADIUS * 2.0f);
+	Ogre::Vector3 endPos(startPos + getOrientation().zAxis() * PERSON_RADIUS * 1.2f);
 	DebugDrawer::getSingleton().drawLine(startPos, endPos, Ogre::ColourValue::Red);
 }
 

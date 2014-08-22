@@ -84,7 +84,7 @@ void CAtlas::handleMessage(const CMessage &message) {
         LOGI("Atlas: changing map to '%s'", switch_map_message.getMap().c_str());
 
 
-        m_pNextMap = new CMap(this, CMapPackPtr(new CMapPack("../maps/Atlases/TestMap/", switch_map_message.getMap())), m_pSceneNode, m_pPlayer);
+        m_pNextMap = new CMap(this, CMapPackPtr(new CMapPack(CFileManager::getResourcePath("maps/Atlases/TestMap/"), switch_map_message.getMap())), m_pSceneNode, m_pPlayer);
 
 
         CMapPackPtr nextPack = m_pNextMap->getMapPack();

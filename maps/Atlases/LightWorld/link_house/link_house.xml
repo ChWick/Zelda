@@ -6,5 +6,8 @@
       <action type="message" message_type="switch_map" map="Map1"/>
     </event>
   </player>
-  <region id="bottom_margin" position="0 0 -4" size="4 1 0.01" shape="box"/>
+  <region id="bottom_margin" position="0 0 1.2" size="1.6 1 0.01" shape="box"/>
+  <region id="top_margin" position="0 0 -1.2" size="1.6 1 0.01" shape="box"/>
+  <region id="left_margin" position="-1.6 0 0" size="0.01 1 1.2" shape="box"/>
+  <region id="right_margin" position="1.6 0 0" size="0.01 1 1.2" shape="box"/>
 </map>
