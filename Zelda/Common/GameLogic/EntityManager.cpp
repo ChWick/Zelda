@@ -40,7 +40,11 @@ void CEntityManager::deleteNow(CEntity *pEntity) {
 }
 
 void CEntityManager::deleteLater(CEntity *pEntity) {
-  m_lEntitiesToDestroy.push_back(pEntity);
+  if (pEntity->getState() != EST_DELETE) {
+    // delete if not deleted
+    m_lEntitiesToDestroy.push_back(pEntity);
+    pEntity->changeState(EST_DELETE);
+  }
 }
 
 void CEntityManager::process() {

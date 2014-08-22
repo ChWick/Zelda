@@ -30,7 +30,7 @@
 // drow camera bounds (lines and spheres)
 #define WORLD_DEBUG_CAMERA_BOUNDS
 
-const Ogre::Vector3 AERIAL_CAMERA_OFFSET(0, 9e0, 4e0);
+const Ogre::Vector3 AERIAL_CAMERA_OFFSET(0, 9e-1, 2e-1);
 const Ogre::Real AERIAL_CAMERA_MOVE_SPEED(10);
 
 CAerialCameraPerspective::CAerialCameraPerspective(Ogre::Camera *pCamera,

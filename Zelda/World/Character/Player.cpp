@@ -100,7 +100,7 @@ void CPlayer::interact() {
 	// try to interact with the world. So detect an object to interact with
 	btCollisionWorld::ClosestRayResultCallback rayCallback(BtOgre::Convert::toBullet(startPos), BtOgre::Convert::toBullet(endPos));
 	rayCallback.m_collisionFilterGroup = COL_CHARACTER_P;
-	rayCallback.m_collisionFilterMask = COL_INTERACTIVE | COL_CHARACTER_N | COL_CHARACTER_P;
+	rayCallback.m_collisionFilterMask = COL_INTERACTIVE | COL_CHARACTER_N;
 	m_pMap->getPhysicsManager()->getWorld()->rayTest(BtOgre::Convert::toBullet(startPos), BtOgre::Convert::toBullet(endPos), rayCallback);
 	if (rayCallback.hasHit()) {
     CWorldEntity *pWE = CWorldEntity::getFromUserPointer(rayCallback.m_collisionObject);

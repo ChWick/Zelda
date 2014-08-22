@@ -26,6 +26,7 @@ enum EEntityStateTypes {
   EST_NORMAL,
   EST_LIFTED,
   EST_THROWN,
+  EST_DELETE,
 };
 
 class CEntityStateIdMap : public CEnumIdMap<EEntityStateTypes> {
