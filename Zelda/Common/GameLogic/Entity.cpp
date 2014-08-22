@@ -23,6 +23,8 @@
 #include "Events/Event.hpp"
 #include <OgreStringConverter.h>
 #include "../Message/Message.hpp"
+#include "../Message/MessageEntityStateChanged.hpp"
+#include "../Message/MessageHandler.hpp"
 #include "EntityManager.hpp"
 
 using namespace events;
@@ -32,6 +34,7 @@ using namespace XMLHelper;
 CEntity::CEntity(const std::string &sID, unsigned int uiType, CEntity *pParent)
   : m_sID(sID),
     m_uiType(uiType),
+    m_eState(EST_NORMAL),
     m_bPauseRender(false),
     m_bPauseUpdate(false),
     m_pParent(pParent) {
@@ -41,6 +44,7 @@ CEntity::CEntity(const std::string &sID, unsigned int uiType, CEntity *pParent)
 CEntity::CEntity(const std::string &sID, CEntity *pParent)
   : m_sID(sID),
     m_uiType(0),
+    m_eState(EST_NORMAL),
     m_bPauseRender(false),
     m_bPauseUpdate(false),
     m_pParent(pParent) {
@@ -49,6 +53,7 @@ CEntity::CEntity(const std::string &sID, CEntity *pParent)
 CEntity::CEntity(const CEntity &src)
   : m_sID(src.m_sID),
     m_uiType(src.m_uiType),
+    m_eState(EST_NORMAL),
     m_bPauseRender(src.m_bPauseRender),
     m_bPauseUpdate(src.m_bPauseUpdate),
     m_pParent(src.m_pParent) {
@@ -62,6 +67,7 @@ CEntity::CEntity(
 		 const tinyxml2::XMLElement *pElem)
   : m_sID(Attribute(pElem, "id", m_sID)),
     m_uiType(IntAttribute(pElem, "type", 0)),
+    m_eState(ENTITY_STATE_ID_MAP.parseString(Attribute(pElem, "state", ENTITY_STATE_ID_MAP.toString(EST_NORMAL)))),
     m_bPauseRender(BoolAttribute(pElem, "pause_render", false)),
     m_bPauseUpdate(BoolAttribute(pElem, "pause_update", false)),
     m_pParent(NULL) {
@@ -249,9 +255,9 @@ void CEntity::update(Ogre::Real tpf) {
       pEnt->update(tpf);
     }
   }
-  for (auto &pEvt : m_lEvents) {
+  /*for (auto &pEvt : m_lEvents) {
     pEvt->update(tpf);
-  }
+  }*/
 }
 
 void CEntity::preRender(Ogre::Real tpf) {
@@ -332,6 +338,12 @@ void CEntity::clearEvents() {
     delete m_lEvents.front();
     m_lEvents.pop_front();
   }
+}
+
+void CEntity::changeState(EEntityStateTypes eState) {
+  CMessageHandler::getSingleton().addMessage(new CMessageEntityStateChanged(m_eState, eState, *this));
+
+  m_eState = eState;
 }
 
 void CEntity::readEventsFromXMLElement(const tinyxml2::XMLElement *pElement, bool bClearEvents) {

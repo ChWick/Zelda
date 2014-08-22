@@ -26,6 +26,7 @@
 #include <OgreLogManager.h>
 #include "../../Common/Physics/BtOgreExtras.hpp"
 #include "../../Common/Util/Assert.hpp"
+#include "../../Common/GameLogic/Events/Event.hpp"
 
 #define TURN_SCALE 4
 #define MAX_SPEED_SCALE 5
@@ -162,6 +163,8 @@ void CPlayer::lift(CWorldEntity *pObjectToLift) {
   ASSERT(!m_pLiftedEntity);
   m_pLiftedEntity = pObjectToLift;
 
+  m_pLiftedEntity->changeState(EST_LIFTED);
+
   btRigidBody *pRB = btRigidBody::upcast(m_pLiftedEntity->getCollisionObject());
   ASSERT(pRB);
 
@@ -178,6 +181,8 @@ void CPlayer::lift(CWorldEntity *pObjectToLift) {
 
 void CPlayer::throwLifted() {
   ASSERT(m_pLiftedEntity);
+  
+  m_pLiftedEntity->changeState(EST_THROWN);
 
   btRigidBody *pRB = btRigidBody::upcast(m_pLiftedEntity->getCollisionObject());
   ASSERT(pRB);
@@ -185,9 +190,7 @@ void CPlayer::throwLifted() {
   pRB->setLinearFactor(btVector3(1, 1, 1));
   pRB->setLinearVelocity(BtOgre::Convert::toBullet(getOrientation() * Ogre::Vector3(0, 0.5, 1)));
   pRB->setAngularFactor(0);
-  pRB->activate();
-
-  
+  pRB->activate();  
 
 
   m_pLiftedEntity = nullptr;

@@ -30,7 +30,8 @@ CEmitOnCollision::CEmitOnCollision(const tinyxml2::XMLElement *pElem, const CEve
 }
 
 bool CEmitOnCollision::isFiring(float tpf) {
-  return m_Owner.getOwner().collidesWith(m_ID);
+  //return m_Owner.getOwner().collidesWith(m_ID);
+  return false;
 }
 
 };

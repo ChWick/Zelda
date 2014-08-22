@@ -23,6 +23,8 @@
 #include "../Common/Physics/BtOgreExtras.hpp"
 #include "../Common/Physics/BtOgrePG.hpp"
 #include "../Common/Util/DeleteSceneNode.hpp"
+#include "../Common/GameLogic/Events/Event.hpp"
+#include "../Common/GameLogic/Events/EmitOnCollision.hpp"
 #include "Atlas/Map.hpp"
 
 CWorldEntity::CWorldEntity(const std::string &sID, CEntity *pParent, CMap *pMap)
@@ -133,4 +135,20 @@ CWorldEntity *CWorldEntity::getFromUserPointer(btCollisionObject *pCO) {
 CWorldEntity *CWorldEntity::getFromUserPointer(const btCollisionObject *pCO) {
   assert(pCO);
   return static_cast<CWorldEntity*>(pCO->getUserPointer());
+}
+
+CWorldEntity::SInteractionResult CWorldEntity::interactOnCollision(const Ogre::Vector3 &vInteractDir, CWorldEntity *pSender) {
+  using namespace events;
+  for (auto &pEvt : m_lEvents) {
+    for (auto &pEmit : pEvt->getEmitter()) {
+      if (pEmit->getType() == EMIT_ON_COLLISION) {
+        CEmitOnCollision *pEON(dynamic_cast<CEmitOnCollision *>(pEmit));
+        if (pEON->getID() == pSender->getID()) {
+          pEvt->start();
+        }
+      }
+    }
+  }
+
+  return SInteractionResult();
 }

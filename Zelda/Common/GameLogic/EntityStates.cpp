@@ -17,21 +17,13 @@
  * Zelda. If not, see http://www.gnu.org/licenses/.
  *****************************************************************************/
 
-#ifndef _OBJECT_HPP_
-#define _OBJECT_HPP_
+#include "EntityStates.hpp"
 
-#include "ObjectTypes.hpp"
-#include "../WorldEntity.hpp"
 
-class CObject : public CWorldEntity {
-protected:
-public:
-  CObject(const std::string &id, CWorldEntity *pParent, CMap *pMap, EObjectTypes eObjectType, Ogre::SceneNode *pSceneNode = nullptr);
+CEntityStateIdMap::CEntityStateIdMap() {
+  m_Map[EST_NORMAL] = "normal";
+  m_Map[EST_LIFTED] = "lifted";
+  m_Map[EST_THROWN] = "thrown";
+}
 
-protected:
-  virtual SInteractionResult interactOnCollision(const Ogre::Vector3 &vInteractDir, CWorldEntity *pSender);
-  virtual SInteractionResult interactOnActivate(const Ogre::Vector3 &vInteractDir, CWorldEntity *pSender);
-  virtual void changeState(EEntityStateTypes eState);
-};
-
-#endif // _OBJECT_HPP_
+CEntityStateIdMap ENTITY_STATE_ID_MAP;

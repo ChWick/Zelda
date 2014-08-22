@@ -65,6 +65,9 @@ public:
   void setThisAsCollisionObjectsUserPointer();
   static CWorldEntity *getFromUserPointer(btCollisionObject *pCO);
   static CWorldEntity *getFromUserPointer(const btCollisionObject *pCO);
+
+  
+  virtual SInteractionResult interactOnCollision(const Ogre::Vector3 &vInteractDir, CWorldEntity *pSender);
 };
 
 #endif // _WORLD_ENTITY_HPP_

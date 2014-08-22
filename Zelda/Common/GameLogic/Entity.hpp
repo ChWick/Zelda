@@ -27,6 +27,7 @@
 #include <list>
 #include "../tinyxml2/tinyxml2.h"
 #include "OutputStyle.hpp"
+#include "EntityStates.hpp"
 
 namespace events {
   class CEvent;
@@ -45,6 +46,7 @@ class CEntity : public CMessageInjector {
 protected:
   std::string m_sID;                          //!< id of the entity
   unsigned int m_uiType;                      //!< one can set a type
+  EEntityStateTypes m_eState;                 //!< state of the entity
 
   bool m_bPauseRender;		                    //!< if true the entity and its children will not be rendered anymore
   bool m_bPauseUpdate;                        //!< if true the entity and its children will not be updated anymore
@@ -121,6 +123,9 @@ public:
   const std::string &getID() const {return m_sID;}
   std::string &getID() {return m_sID;}
   void setID(const std::string &sID) {m_sID = sID;}
+
+  virtual void changeState(EEntityStateTypes eState);
+  EEntityStateTypes getState() const {return m_eState;}
 
   void setPauseRender(bool bPause) {m_bPauseRender = bPause;}
   bool isRenderPaused() const {return m_bPauseRender;}

@@ -93,7 +93,7 @@ CObject::CObject(const std::string &id, CWorldEntity *pParent, CMap *pMap, EObje
   setThisAsCollisionObjectsUserPointer();
   //m_pSceneNode->setScale(Ogre::Vector3::UNIT_SCALE * 10);
 
-  m_pMap->getPhysicsManager()->getWorld()->addRigidBody(pRigidBody, COL_INTERACTIVE, MASK_PICKABLE_OBJECT_COLLIDES_WITH | COL_CHARACTER_P);
+  m_pMap->getPhysicsManager()->getWorld()->addRigidBody(pRigidBody, COL_INTERACTIVE, MASK_INTERACIVE_OBJECT_COLLIDES_WITH);
 
 
   // post creation
@@ -102,16 +102,21 @@ CObject::CObject(const std::string &id, CWorldEntity *pParent, CMap *pMap, EObje
   case OBJECT_BLUE_RUPEE:
   case OBJECT_RED_RUPEE:
     pRigidBody->setAngularVelocity(btVector3(0, 2, 0));
+    pRigidBody->setAngularFactor(btVector3(0, 1, 0));
     pRigidBody->setLinearFactor(btVector3(1.0f, 1.0f, 1.0f) * 0.25f);
     pRigidBody->setLinearVelocity(btVector3(0, 1.0f, 0));
     break;
   case OBJECT_GREEN_BUSH:
     pRigidBody->setLinearFactor(btVector3(0, 0, 0));
-    pRigidBody->setAngularVelocity(btVector3(0, 0, 0));
+    pRigidBody->setAngularFactor(0);
     break;
   }
 
   m_pCollisionObject->getWorldTransform().getOrigin() -= vCollisionShapeOffset;
+}
+
+void CObject::changeState(EEntityStateTypes eState) {
+  CWorldEntity::changeState(eState);
 }
 
 CObject::SInteractionResult CObject::interactOnCollision(const Ogre::Vector3 &vInteractDir, CWorldEntity *pSender) {
@@ -121,12 +126,16 @@ CObject::SInteractionResult CObject::interactOnCollision(const Ogre::Vector3 &vI
   case OBJECT_RED_RUPEE:
     deleteLater();
     break;
+  case OBJECT_GREEN_BUSH:
+    if (m_eState == EST_THROWN) {
+      deleteLater();
+    }
+    break;
   default:
     break;
   }
 
-  // Do nothing
-  return SInteractionResult();
+  return CWorldEntity::interactOnCollision(vInteractDir, pSender);
 }
 
 CObject::SInteractionResult CObject::interactOnActivate(const Ogre::Vector3 &vInteractDir, CWorldEntity *pSender) {
@@ -137,6 +146,5 @@ CObject::SInteractionResult CObject::interactOnActivate(const Ogre::Vector3 &vIn
     break;
   }
 
-  // Do nothing
-  return SInteractionResult();
+  return CWorldEntity::interactOnActivate(vInteractDir, pSender);
 }
