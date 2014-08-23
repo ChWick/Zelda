@@ -2,6 +2,13 @@ if (NOT RESOURCES_OUTPUT_DIR)
   message(fatal_error "RESOURCES_OUTPUT_DIR was not set")
 endif()
 
+# create packs
+
+add_custom_command(TARGET Game POST_BUILD
+	COMMAND python ARGS "${CMAKE_SOURCE_DIR}/tools/CreatePacks.py")
+
+# define copy functions
+
 if (APPLE)
 	function(copy_directory directory file)
 		add_custom_command(TARGET Game POST_BUILD

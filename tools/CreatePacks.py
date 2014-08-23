@@ -68,6 +68,9 @@ def makeLWLinkHouseZip() :
 
 	zipf.close()
 
+# set this as working dir
+os.chdir(os.path.dirname(os.path.realpath(__file__)))
+
 if __name__ == '__main__':
     makeLightWorldZip()
     makeGameZip()
