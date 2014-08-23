@@ -408,7 +408,7 @@ void CGame::createScene() {
   // Create one viewport, entire window
   m_pMainViewPort = mWindow->addViewport(mCamera);
   m_pMainViewPort->setBackgroundColour(Ogre::ColourValue(0,0,0));
-  //vp->setClearEveryFrame(true);
+  m_pMainViewPort->setClearEveryFrame(true, Ogre::FBT_DEPTH);
 
   // Alter the camera aspect ratio to match the viewport
   mCamera->setAspectRatio(Ogre::Real(m_pMainViewPort->getActualWidth()) / Ogre::Real(m_pMainViewPort->getActualHeight()));
@@ -681,14 +681,20 @@ bool CGame::keyPressed( const OIS::KeyEvent &arg )
       case Ogre::PM_SOLID:
         newVal = "Wireframe";
         pm = Ogre::PM_WIREFRAME;
+        
+        m_pMainViewPort->setClearEveryFrame(true);
         break;
       case Ogre::PM_WIREFRAME:
         newVal = "Points";
         pm = Ogre::PM_POINTS;
+        
+        m_pMainViewPort->setClearEveryFrame(true);
         break;
       default:
         newVal = "Solid";
         pm = Ogre::PM_SOLID;
+        
+        m_pMainViewPort->setClearEveryFrame(true, Ogre::FBT_DEPTH);
       }
 
       Ogre::SceneManagerEnumerator::SceneManagerIterator iterator = Ogre::Root::getSingleton().getSceneManagerIterator();
