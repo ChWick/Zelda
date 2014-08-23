@@ -20,11 +20,30 @@
 #ifndef _OBJECT_TYPES_HPP_
 #define _OBJECT_TYPES_HPP_
 
+#include "../../Common/Util/EnumIdMap.hpp"
+
 enum EObjectTypes {
   OBJECT_GREEN_BUSH,
+  OBJECT_LIGHT_STONE,
   OBJECT_GREEN_RUPEE,
   OBJECT_BLUE_RUPEE,
   OBJECT_RED_RUPEE,
+
+  OBJECT_COUNT,
 };
+
+struct SObjectTypeData {
+  std::string sMeshName;
+  std::string sMaterialName;
+};
+
+class CObjectTypeIdMap : public CEnumIdMap<EObjectTypes, SObjectTypeData> {
+public:
+  CObjectTypeIdMap();
+
+  EObjectTypes getFromMesh(const std::string &mesh) const;
+};
+
+extern CObjectTypeIdMap OBJECT_TYPE_ID_MAP;
 
 #endif // _OBJECT_TYPES_HPP_

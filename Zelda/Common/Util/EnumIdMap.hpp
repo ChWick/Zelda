@@ -40,6 +40,7 @@ public:
     throw Ogre::Exception(0, "Data could not be parsed.", __FILE__);
   }
   const DATA &toData(T t) const {return m_Map.at(t);}
+  const std::map<const T, const DATA> &getData() const {return m_Map;}
 
   // default for using strings
   T parseString(const DATA &str) const {

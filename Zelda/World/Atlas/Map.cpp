@@ -194,7 +194,8 @@ void CMap::handleMessage(const CMessage &message) {
         rebuildStaticGeometryChangedTiles();
         
         m_pStaticGeometryFixedTiles->destroy();
-        m_pStaticGeometryFixedTiles->addEntity(m_apTileEntities[TT_GREEN_SOIL_STONE_SHADOW], pObject->getSceneNode()->getInitialPosition());
+        m_pStaticGeometryFixedTiles->addEntity(m_apTileEntities[TT_GREEN_SOIL + std::rand() % (TT_GREEN_SOIL_GRASS_BR_TL_TR - TT_GREEN_SOIL + 1)], pObject->getSceneNode()->getInitialPosition());
+        m_pStaticGeometryFixedTiles->addEntity(m_apTileEntities[TT_GREEN_BUSH_TRUNK], pObject->getSceneNode()->getInitialPosition());
         m_pStaticGeometryFixedTiles->build();
       }
     }
@@ -207,9 +208,13 @@ void CMap::rebuildStaticGeometryChangedTiles() {
   for (CEntity *pChild : m_lChildren) {
     CObject *pObject(dynamic_cast<CObject*>(pChild));
     if (!pObject) {continue;}
-    if (pObject->getType() == OBJECT_GREEN_BUSH) {
-      if (pObject->getState() == EST_NORMAL) {
+    
+    if (pObject->getState() == EST_NORMAL) {
+      if (pObject->getType() == OBJECT_GREEN_BUSH) {
         m_pStaticGeometryChangedTiles->addEntity(m_apTileEntities[TT_GREEN_SOIL_BUSH_SHADOW], pObject->getSceneNode()->getInitialPosition());
+      }
+      else if (pObject->getType() == OBJECT_LIGHT_STONE) {
+        m_pStaticGeometryChangedTiles->addEntity(m_apTileEntities[TT_GREEN_SOIL_STONE_SHADOW], pObject->getSceneNode()->getInitialPosition());
       }
     }
   }
@@ -271,12 +276,15 @@ void CMap::staticObjectAdded(Ogre::Entity *pEntity, Ogre::SceneNode *pParent) {
 
 CDotSceneLoaderCallback::EResults CMap::preEntityAdded(tinyxml2::XMLElement *XMLNode, Ogre::SceneNode *pParent, CUserData &userData) {
   CWorldEntity *pEntity(nullptr);
-  if (strcmp(XMLNode->Attribute("meshFile"), "GreenBush.mesh") == 0) {
-    pEntity = new CObject(pParent->getName(), this, this, OBJECT_GREEN_BUSH, pParent);
+  
+  EObjectTypes objectType(OBJECT_TYPE_ID_MAP.getFromMesh(XMLNode->Attribute("meshFile")));
+  if (objectType != OBJECT_COUNT) {
+    pEntity = new CObject(pParent->getName(), this, this, objectType, pParent);
 
     pEntity->setPosition(pParent->getPosition());
     pEntity->getSceneNode()->setInitialState();
     return R_CANCEL;
   }
+
   return R_CONTINUE;
 }

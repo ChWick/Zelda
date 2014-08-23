@@ -1,30 +1,100 @@
-<scene previous_export_time="1408785253.556306" formatVersion="1.0.1" export_time="1408785262.335779" exported_by="christoph" >
+<scene exported_by="christoph" export_time="1408804418.308706" formatVersion="1.0.1" previous_export_time="0" >
   <nodes >
-    <node name="soil_green_bush" >
-      <position x="1.000000" z="-0.000000" y="0.000000" />
-      <rotation qw="1.000000" qx="0.000000" qz="-0.000000" qy="0.000000" />
-      <scale x="1.000000" z="1.000000" y="1.000000" />
+    <node name="green_bush_trunk" >
+      <position z="-0.100000" x="1.000000" y="0.000000" />
+      <rotation qz="-0.000000" qy="0.000000" qw="1.000000" qx="0.000000" />
+      <scale z="1.000000" x="1.000000" y="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity lock_rot_y="False" name="soil_green_bush" lock_trans_z="False" meshFile="soil_green_bush.mesh" inertia_tensor="0.4000000059604645" velocity_min="0.0" friction_z="1.0" lock_rot_x="False" anisotropic_friction="False" lock_trans_y="False" mass_radius="1.0" physics_type="STATIC" damping_rot="0.10000000149011612" lock_rot_z="False" ghost="False" lock_trans_x="False" friction_x="1.0" damping_trans="0.03999999910593033" velocity_max="0.0" actor="False" friction_y="1.0" mass="1.0" />
+      <entity meshFile="green_bush_trunk.mesh" physics_type="STATIC" damping_trans="0.03999999910593033" mass_radius="1.0" lock_rot_y="False" ghost="False" velocity_min="0.0" lock_rot_z="False" velocity_max="0.0" lock_rot_x="False" lock_trans_z="False" lock_trans_x="False" anisotropic_friction="False" lock_trans_y="False" damping_rot="0.10000000149011612" friction_x="1.0" friction_z="1.0" friction_y="1.0" mass="1.0" actor="False" name="green_bush_trunk" inertia_tensor="0.4000000059604645" />
+    </node>
+    <node name="soil_green_bush" >
+      <position z="-0.000000" x="1.000000" y="0.000000" />
+      <rotation qz="-0.000000" qy="0.000000" qw="1.000000" qx="0.000000" />
+      <scale z="1.000000" x="1.000000" y="1.000000" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <entity meshFile="soil_green_bush.mesh" physics_type="STATIC" damping_trans="0.03999999910593033" mass_radius="1.0" lock_rot_y="False" ghost="False" velocity_min="0.0" lock_rot_z="False" velocity_max="0.0" lock_rot_x="False" lock_trans_z="False" lock_trans_x="False" anisotropic_friction="False" lock_trans_y="False" damping_rot="0.10000000149011612" friction_x="1.0" friction_z="1.0" friction_y="1.0" mass="1.0" actor="False" name="soil_green_bush" inertia_tensor="0.4000000059604645" />
     </node>
     <node name="soil_green_stone" >
-      <position x="0.000000" z="-1.000000" y="0.000000" />
-      <rotation qw="1.000000" qx="0.000000" qz="-0.000000" qy="0.000000" />
-      <scale x="1.000000" z="1.000000" y="1.000000" />
+      <position z="-1.000000" x="0.000000" y="0.000000" />
+      <rotation qz="-0.000000" qy="0.000000" qw="1.000000" qx="0.000000" />
+      <scale z="1.000000" x="1.000000" y="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity lock_rot_y="False" name="soil_green_stone" lock_trans_z="False" meshFile="soil_green_stone.mesh" inertia_tensor="0.4000000059604645" velocity_min="0.0" friction_z="1.0" lock_rot_x="False" anisotropic_friction="False" lock_trans_y="False" mass_radius="1.0" physics_type="STATIC" damping_rot="0.10000000149011612" lock_rot_z="False" ghost="False" lock_trans_x="False" friction_x="1.0" damping_trans="0.03999999910593033" velocity_max="0.0" actor="False" friction_y="1.0" mass="1.0" />
+      <entity meshFile="soil_green_stone.mesh" physics_type="STATIC" damping_trans="0.03999999910593033" mass_radius="1.0" lock_rot_y="False" ghost="False" velocity_min="0.0" lock_rot_z="False" velocity_max="0.0" lock_rot_x="False" lock_trans_z="False" lock_trans_x="False" anisotropic_friction="False" lock_trans_y="False" damping_rot="0.10000000149011612" friction_x="1.0" friction_z="1.0" friction_y="1.0" mass="1.0" actor="False" name="soil_green_stone" inertia_tensor="0.4000000059604645" />
+    </node>
+    <node name="soil_green.000" >
+      <position z="-0.200000" x="1.000000" y="0.000000" />
+      <rotation qz="-0.000000" qy="0.000000" qw="1.000000" qx="0.000000" />
+      <scale z="1.000000" x="1.000000" y="1.000000" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <entity meshFile="soil_green.mesh" physics_type="STATIC" damping_trans="0.03999999910593033" mass_radius="1.0" lock_rot_y="False" ghost="False" velocity_min="0.0" lock_rot_z="False" velocity_max="0.0" lock_rot_x="False" lock_trans_z="False" lock_trans_x="False" anisotropic_friction="False" lock_trans_y="False" damping_rot="0.10000000149011612" friction_x="1.0" friction_z="1.0" friction_y="1.0" mass="1.0" actor="False" name="soil_green" inertia_tensor="0.4000000059604645" />
+    </node>
+    <node name="soil_green_bush_bl_br" >
+      <position z="-0.300000" x="1.000000" y="0.000000" />
+      <rotation qz="-0.000000" qy="0.000000" qw="1.000000" qx="0.000000" />
+      <scale z="1.000000" x="1.000000" y="1.000000" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <entity meshFile="soil_green_bush_bl_br.mesh" physics_type="STATIC" damping_trans="0.03999999910593033" mass_radius="1.0" lock_rot_y="False" ghost="False" velocity_min="0.0" lock_rot_z="False" velocity_max="0.0" lock_rot_x="False" lock_trans_z="False" lock_trans_x="False" anisotropic_friction="False" lock_trans_y="False" damping_rot="0.10000000149011612" friction_x="1.0" friction_z="1.0" friction_y="1.0" mass="1.0" actor="False" name="soil_green_bush_bl_br" inertia_tensor="0.4000000059604645" />
+    </node>
+    <node name="soil_green_bush_bl_br_tl_tr" >
+      <position z="-0.500000" x="1.000000" y="0.000000" />
+      <rotation qz="-0.000000" qy="0.000000" qw="1.000000" qx="0.000000" />
+      <scale z="1.000000" x="1.000000" y="1.000000" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <entity meshFile="soil_green_bush_bl_br_tl_tr.mesh" physics_type="STATIC" damping_trans="0.03999999910593033" mass_radius="1.0" lock_rot_y="False" ghost="False" velocity_min="0.0" lock_rot_z="False" velocity_max="0.0" lock_rot_x="False" lock_trans_z="False" lock_trans_x="False" anisotropic_friction="False" lock_trans_y="False" damping_rot="0.10000000149011612" friction_x="1.0" friction_z="1.0" friction_y="1.0" mass="1.0" actor="False" name="soil_green_bush_bl_br_tl_tr" inertia_tensor="0.4000000059604645" />
+    </node>
+    <node name="soil_green_bush_br_bl_tr" >
+      <position z="-0.400000" x="1.000000" y="0.000000" />
+      <rotation qz="-0.000000" qy="0.000000" qw="1.000000" qx="0.000000" />
+      <scale z="1.000000" x="1.000000" y="1.000000" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <entity meshFile="soil_green_bush_br_bl_tr.mesh" physics_type="STATIC" damping_trans="0.03999999910593033" mass_radius="1.0" lock_rot_y="False" ghost="False" velocity_min="0.0" lock_rot_z="False" velocity_max="0.0" lock_rot_x="False" lock_trans_z="False" lock_trans_x="False" anisotropic_friction="False" lock_trans_y="False" damping_rot="0.10000000149011612" friction_x="1.0" friction_z="1.0" friction_y="1.0" mass="1.0" actor="False" name="soil_green_bush_br_bl_tr" inertia_tensor="0.4000000059604645" />
+    </node>
+    <node name="soil_green_bush_br_tl_tr" >
+      <position z="-0.600000" x="1.000000" y="0.000000" />
+      <rotation qz="-0.000000" qy="0.000000" qw="1.000000" qx="0.000000" />
+      <scale z="1.000000" x="1.000000" y="1.000000" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <entity meshFile="soil_green_bush_br_tl_tr.mesh" physics_type="STATIC" damping_trans="0.03999999910593033" mass_radius="1.0" lock_rot_y="False" ghost="False" velocity_min="0.0" lock_rot_z="False" velocity_max="0.0" lock_rot_x="False" lock_trans_z="False" lock_trans_x="False" anisotropic_friction="False" lock_trans_y="False" damping_rot="0.10000000149011612" friction_x="1.0" friction_z="1.0" friction_y="1.0" mass="1.0" actor="False" name="soil_green_bush_br_tl_tr" inertia_tensor="0.4000000059604645" />
+    </node>
+    <node name="soil_green_bush_tl_tr" >
+      <position z="-0.700000" x="1.000000" y="0.000000" />
+      <rotation qz="-0.000000" qy="0.000000" qw="1.000000" qx="0.000000" />
+      <scale z="1.000000" x="1.000000" y="1.000000" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <entity meshFile="soil_green_bush_tl_tr.mesh" physics_type="STATIC" damping_trans="0.03999999910593033" mass_radius="1.0" lock_rot_y="False" ghost="False" velocity_min="0.0" lock_rot_z="False" velocity_max="0.0" lock_rot_x="False" lock_trans_z="False" lock_trans_x="False" anisotropic_friction="False" lock_trans_y="False" damping_rot="0.10000000149011612" friction_x="1.0" friction_z="1.0" friction_y="1.0" mass="1.0" actor="False" name="soil_green_bush_tl_tr" inertia_tensor="0.4000000059604645" />
     </node>
   </nodes>
   <externals />
   <environment >
-    <colourDiffuse b="0.05087608844041824" g="0.05087608844041824" r="0.05087608844041824" />
-    <colourAmbient b="0.0" g="0.0" r="0.0" />
-    <colourBackground b="0.05087608844041824" g="0.05087608844041824" r="0.05087608844041824" />
+    <colourDiffuse r="0.05087608844041824" g="0.05087608844041824" b="0.05087608844041824" />
+    <colourBackground r="0.05087608844041824" g="0.05087608844041824" b="0.05087608844041824" />
+    <colourAmbient r="0.0" g="0.0" b="0.0" />
   </environment>
 </scene>

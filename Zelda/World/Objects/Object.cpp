@@ -52,26 +52,28 @@ CObject::CObject(const std::string &id, CWorldEntity *pParent, CMap *pMap, EObje
 
   bool bUsePickableObjectSphere = false;
 
+  const SObjectTypeData &objectTypeData(OBJECT_TYPE_ID_MAP.toData(eObjectType));
+
+  pEntity = pSceneManager->createEntity(objectTypeData.sMeshName);
+  pEntity->setMaterialName(objectTypeData.sMaterialName);
+
   switch (eObjectType) {
   case OBJECT_GREEN_RUPEE:
-    pEntity = pSceneManager->createEntity("rupee.mesh");
-    pEntity->setMaterialName("Rupee/Green");
     bUsePickableObjectSphere = true;
     break;
   case OBJECT_BLUE_RUPEE:
-    pEntity = pSceneManager->createEntity("rupee.mesh");
-    pEntity->setMaterialName("Rupee/Blue");
     bUsePickableObjectSphere = true;
     break;
   case OBJECT_RED_RUPEE:
-    pEntity = pSceneManager->createEntity("rupee.mesh");
-    pEntity->setMaterialName("Rupee/Red");
     bUsePickableObjectSphere = true;
     break;
   case OBJECT_GREEN_BUSH:
-    pEntity = pSceneManager->createEntity("GreenBush.mesh");
-    pEntity->setMaterialName("Game/Soil");
     bUsePickableObjectSphere = true;
+    break;
+  case OBJECT_LIGHT_STONE:
+    bUsePickableObjectSphere = true;
+    break;
+  default:
     break;
   }
 
@@ -108,8 +110,11 @@ CObject::CObject(const std::string &id, CWorldEntity *pParent, CMap *pMap, EObje
     pRigidBody->setLinearVelocity(btVector3(0, 1.0f, 0));
     break;
   case OBJECT_GREEN_BUSH:
+  case OBJECT_LIGHT_STONE:
     pRigidBody->setLinearFactor(btVector3(0, 0, 0));
     pRigidBody->setAngularFactor(0);
+    break;
+  default:
     break;
   }
 
@@ -119,6 +124,7 @@ CObject::CObject(const std::string &id, CWorldEntity *pParent, CMap *pMap, EObje
 void CObject::changeState(EEntityStateTypes eState) {
   switch (m_uiType) {
   case OBJECT_GREEN_BUSH:
+  case OBJECT_LIGHT_STONE:
     if (eState == EST_LIFTED) {
       btRigidBody *pRB = btRigidBody::upcast(this->getCollisionObject());
       ASSERT(pRB);
@@ -154,6 +160,7 @@ CObject::SInteractionResult CObject::interactOnCollision(const Ogre::Vector3 &vI
     deleteLater();
     break;
   case OBJECT_GREEN_BUSH:
+  case OBJECT_LIGHT_STONE:
     if (m_eState == EST_THROWN) {
       deleteLater();
     }
@@ -168,6 +175,7 @@ CObject::SInteractionResult CObject::interactOnCollision(const Ogre::Vector3 &vI
 CObject::SInteractionResult CObject::interactOnActivate(const Ogre::Vector3 &vInteractDir, CWorldEntity *pSender) {
   switch (m_uiType) {
   case OBJECT_GREEN_BUSH:
+  case OBJECT_LIGHT_STONE:
     return SInteractionResult(IR_LIFT);
   default:
     break;

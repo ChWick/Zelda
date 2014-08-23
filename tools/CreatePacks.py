@@ -1,10 +1,16 @@
 import os
 import zipfile
+import glob
+import ntpath
 
 def zipdir(path, zip):
     for root, dirs, files in os.walk(path):
         for file in files:
             zip.write(os.path.join(root, file))
+
+def copyAllOfType(zipf, pattern, outputdir) :
+	for f in glob.glob(pattern) :
+		zipf.write(f, os.path.join(outputdir, ntpath.basename(f)), zipfile.ZIP_DEFLATED)
 
 def makeLightWorldZip() :
 	print('Creating light_world.zip')
@@ -17,12 +23,12 @@ def makeLightWorldZip() :
 
 
 	zipf.write('../maps/bush/GreenBush.mesh', 'meshes/GreenBush.mesh', zipfile.ZIP_DEFLATED)
+	zipf.write('../maps/stone/light_stone.mesh', 'meshes/light_stone.mesh', zipfile.ZIP_DEFLATED)
 	zipf.write('../maps/fence/fence_stake.mesh', 'meshes/fence_stake.mesh', zipfile.ZIP_DEFLATED)
 	zipf.write('../maps/fence/fence_plank.mesh', 'meshes/fence_plank.mesh', zipfile.ZIP_DEFLATED)
 
 	# tiles
-	zipf.write('../maps/tiles/soil_green_bush.mesh', 'meshes/soil_green_bush.mesh', zipfile.ZIP_DEFLATED)
-	zipf.write('../maps/tiles/soil_green_stone.mesh', 'meshes/soil_green_stone.mesh', zipfile.ZIP_DEFLATED)
+	copyAllOfType(zipf, '../maps/tiles/*.mesh', 'meshes')
 
 	zipf.close()
 
