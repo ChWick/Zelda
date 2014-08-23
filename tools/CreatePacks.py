@@ -43,6 +43,15 @@ def makeGameZip() :
 
 	zipf.close()
 
+def makeSdkTrays() :
+	print ("Creating SdkTrays.zip")
+
+	zipf = zipfile.ZipFile('../packs/SdkTrays.zip', 'w')
+
+	copyAllOfType(zipf, '../packs/SdkTrays/*', '.')
+
+	zipf.close()
+
 def makeLWLinkHouseZip() :
 	print('Creating link_house.zip')
 
@@ -62,4 +71,5 @@ def makeLWLinkHouseZip() :
 if __name__ == '__main__':
     makeLightWorldZip()
     makeGameZip()
+    makeSdkTrays()
     makeLWLinkHouseZip()
