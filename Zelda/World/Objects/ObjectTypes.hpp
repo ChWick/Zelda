@@ -21,6 +21,7 @@
 #define _OBJECT_TYPES_HPP_
 
 #include "../../Common/Util/EnumIdMap.hpp"
+#include "../Atlas/TileTypes.hpp"
 
 enum EObjectTypes {
   OBJECT_GREEN_BUSH,
@@ -35,6 +36,17 @@ enum EObjectTypes {
 struct SObjectTypeData {
   std::string sMeshName;
   std::string sMaterialName;
+
+  ETileTypes eNormalTile;
+  ETileTypes eRemovedTile;
+
+  SObjectTypeData() {}
+  SObjectTypeData(SObjectTypeData &&) = default;
+  SObjectTypeData(const std::string &meshName, const std::string &materialName);
+
+  SObjectTypeData(const std::string &meshName, const std::string &materialName, ETileTypes normalTile, ETileTypes removedTile);
+
+  SObjectTypeData &operator=(const SObjectTypeData&) = default;
 };
 
 class CObjectTypeIdMap : public CEnumIdMap<EObjectTypes, SObjectTypeData> {

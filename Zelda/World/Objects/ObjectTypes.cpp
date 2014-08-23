@@ -19,14 +19,27 @@
 
 #include "ObjectTypes.hpp"
 
+SObjectTypeData::SObjectTypeData(const std::string &meshName, const std::string &materialName)
+  : sMeshName(meshName),
+    sMaterialName(materialName),
+    eNormalTile(TT_COUNT),
+    eRemovedTile(TT_COUNT) {
+}
+
+SObjectTypeData::SObjectTypeData(const std::string &meshName, const std::string &materialName, ETileTypes normalTile, ETileTypes removedTile)
+  : sMeshName(meshName),
+    sMaterialName(materialName),
+    eNormalTile(normalTile),
+    eRemovedTile(removedTile) {
+}
 
 CObjectTypeIdMap::CObjectTypeIdMap() {
-  m_Map[OBJECT_GREEN_BUSH] = {"GreenBush.mesh", "soil"};
-  m_Map[OBJECT_LIGHT_STONE] = {"light_stone.mesh", "soil"};
+  m_Map[OBJECT_GREEN_BUSH] = SObjectTypeData("GreenBush.mesh", "soil", TT_GREEN_SOIL_BUSH_SHADOW, TT_GREEN_SOIL_GRASS_BL_BR_TL_TR);
+  m_Map[OBJECT_LIGHT_STONE] = SObjectTypeData("light_stone.mesh", "soil", TT_GREEN_SOIL_STONE_SHADOW, TT_GREEN_SOIL);
   
-  m_Map[OBJECT_GREEN_RUPEE] = {"rupee.mesh", "Rupee/Green"};
-  m_Map[OBJECT_BLUE_RUPEE] = {"rupee.mesh", "Rupee/Blue"};
-  m_Map[OBJECT_RED_RUPEE] = {"rupee.mesh", "Rupee/Red"};
+  m_Map[OBJECT_GREEN_RUPEE] = SObjectTypeData("rupee.mesh", "Rupee/Green");
+  m_Map[OBJECT_BLUE_RUPEE] = SObjectTypeData("rupee.mesh", "Rupee/Blue");
+  m_Map[OBJECT_RED_RUPEE] = SObjectTypeData("rupee.mesh", "Rupee/Red");
 }
 
 EObjectTypes CObjectTypeIdMap::getFromMesh(const std::string &mesh) const {

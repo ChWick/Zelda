@@ -190,14 +190,24 @@ void CMap::handleMessage(const CMessage &message) {
     if (!pObject) {return;}
     if (mesc.getOldState() == EST_NORMAL) {
       // only change request if object was in normal state before
+
+      const SObjectTypeData &data(OBJECT_TYPE_ID_MAP.toData(static_cast<EObjectTypes>(pObject->getType())));
+      if (data.eRemovedTile == TT_COUNT) {
+        return;
+      }
+
+      m_pStaticGeometryFixedTiles->destroy();
+      rebuildStaticGeometryChangedTiles();
+      
       if (pObject->getType() == OBJECT_GREEN_BUSH) {
-        rebuildStaticGeometryChangedTiles();
-        
-        m_pStaticGeometryFixedTiles->destroy();
         m_pStaticGeometryFixedTiles->addEntity(m_apTileEntities[TT_GREEN_SOIL + std::rand() % (TT_GREEN_SOIL_GRASS_BR_TL_TR - TT_GREEN_SOIL + 1)], pObject->getSceneNode()->getInitialPosition());
         m_pStaticGeometryFixedTiles->addEntity(m_apTileEntities[TT_GREEN_BUSH_TRUNK], pObject->getSceneNode()->getInitialPosition());
-        m_pStaticGeometryFixedTiles->build();
       }
+      else {
+        m_pStaticGeometryFixedTiles->addEntity(m_apTileEntities[data.eRemovedTile], pObject->getSceneNode()->getInitialPosition());
+      }
+
+      m_pStaticGeometryFixedTiles->build();
     }
   }
 }
@@ -210,11 +220,9 @@ void CMap::rebuildStaticGeometryChangedTiles() {
     if (!pObject) {continue;}
     
     if (pObject->getState() == EST_NORMAL) {
-      if (pObject->getType() == OBJECT_GREEN_BUSH) {
-        m_pStaticGeometryChangedTiles->addEntity(m_apTileEntities[TT_GREEN_SOIL_BUSH_SHADOW], pObject->getSceneNode()->getInitialPosition());
-      }
-      else if (pObject->getType() == OBJECT_LIGHT_STONE) {
-        m_pStaticGeometryChangedTiles->addEntity(m_apTileEntities[TT_GREEN_SOIL_STONE_SHADOW], pObject->getSceneNode()->getInitialPosition());
+      const SObjectTypeData &data(OBJECT_TYPE_ID_MAP.toData(static_cast<EObjectTypes>(pObject->getType())));
+      if (data.eNormalTile != TT_COUNT) {
+        m_pStaticGeometryChangedTiles->addEntity(m_apTileEntities[data.eNormalTile], pObject->getSceneNode()->getInitialPosition());
       }
     }
   }

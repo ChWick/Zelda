@@ -29,6 +29,7 @@ def makeLightWorldZip() :
 
 	# tiles
 	copyAllOfType(zipf, '../maps/tiles/*.mesh', 'meshes')
+	copyAllOfType(zipf, '../maps/tree/*.mesh', 'meshes')
 
 	zipf.close()
 
