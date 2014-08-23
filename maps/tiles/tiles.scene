@@ -1,0 +1,30 @@
+<scene previous_export_time="1408785253.556306" formatVersion="1.0.1" export_time="1408785262.335779" exported_by="christoph" >
+  <nodes >
+    <node name="soil_green_bush" >
+      <position x="1.000000" z="-0.000000" y="0.000000" />
+      <rotation qw="1.000000" qx="0.000000" qz="-0.000000" qy="0.000000" />
+      <scale x="1.000000" z="1.000000" y="1.000000" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <entity lock_rot_y="False" name="soil_green_bush" lock_trans_z="False" meshFile="soil_green_bush.mesh" inertia_tensor="0.4000000059604645" velocity_min="0.0" friction_z="1.0" lock_rot_x="False" anisotropic_friction="False" lock_trans_y="False" mass_radius="1.0" physics_type="STATIC" damping_rot="0.10000000149011612" lock_rot_z="False" ghost="False" lock_trans_x="False" friction_x="1.0" damping_trans="0.03999999910593033" velocity_max="0.0" actor="False" friction_y="1.0" mass="1.0" />
+    </node>
+    <node name="soil_green_stone" >
+      <position x="0.000000" z="-1.000000" y="0.000000" />
+      <rotation qw="1.000000" qx="0.000000" qz="-0.000000" qy="0.000000" />
+      <scale x="1.000000" z="1.000000" y="1.000000" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <entity lock_rot_y="False" name="soil_green_stone" lock_trans_z="False" meshFile="soil_green_stone.mesh" inertia_tensor="0.4000000059604645" velocity_min="0.0" friction_z="1.0" lock_rot_x="False" anisotropic_friction="False" lock_trans_y="False" mass_radius="1.0" physics_type="STATIC" damping_rot="0.10000000149011612" lock_rot_z="False" ghost="False" lock_trans_x="False" friction_x="1.0" damping_trans="0.03999999910593033" velocity_max="0.0" actor="False" friction_y="1.0" mass="1.0" />
+    </node>
+  </nodes>
+  <externals />
+  <environment >
+    <colourDiffuse b="0.05087608844041824" g="0.05087608844041824" r="0.05087608844041824" />
+    <colourAmbient b="0.0" g="0.0" r="0.0" />
+    <colourBackground b="0.05087608844041824" g="0.05087608844041824" r="0.05087608844041824" />
+  </environment>
+</scene>

@@ -28,6 +28,7 @@
 #include <btBulletDynamicsCommon.h>
 #include "MapPackParserListener.hpp"
 #include <OgreStaticGeometry.h>
+#include "TileTypes.hpp"
 
 class CMap : public CWorldEntity,
              private CMapPackParserListener,
@@ -38,6 +39,10 @@ private:
   Ogre::DotSceneLoader m_SceneLoader;
   CWorldEntity *m_pPlayer;
   Ogre::StaticGeometry *m_pStaticGeometry;
+  Ogre::StaticGeometry *m_pStaticGeometryChangedTiles;          //!< Here are the tiles added that can be remved (bush in place)
+  Ogre::StaticGeometry *m_pStaticGeometryFixedTiles;            //!< Here are new static tiles added, initially blank. Afterwards it is all static
+
+  Ogre::Entity *m_apTileEntities[TT_COUNT];
 public:
   CMap(CEntity *pAtlas, CMapPackPtr mapPack, Ogre::SceneNode *pParentSceneNode, CWorldEntity *pPlayer);
   virtual ~CMap();
@@ -58,6 +63,8 @@ public:
   bool frameEnded(const Ogre::FrameEvent& evt);
 
 private:
+  void handleMessage(const CMessage &message);
+  void rebuildStaticGeometryChangedTiles();
   void processCollisionCheck();
 
   // CMapPackParserListener

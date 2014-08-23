@@ -24,14 +24,25 @@
 #include <string>
 #include <OgreException.h>
 
-template <typename T>
+template <typename T, typename DATA = std::string>
 class CEnumIdMap {
 protected:
-  std::map<T, std::string> m_Map;
+  std::map<T, DATA> m_Map;
 
 public:
+  // for using custom data
+  T parseData(const DATA &str) const {
+    for (const std::pair<T, std::string> &p : m_Map) {
+      if (p.second == str) {
+        return p.first;
+      }
+    }
+    throw Ogre::Exception(0, "Data could not be parsed.", __FILE__);
+  }
+  const DATA &toData(T t) const {return m_Map.at(t);}
 
-  T parseString(const std::string &str) const {
+  // default for using strings
+  T parseString(const DATA &str) const {
     for (const std::pair<T, std::string> &p : m_Map) {
       if (p.second == str) {
         return p.first;
@@ -39,6 +50,6 @@ public:
     }
     throw Ogre::Exception(0, "'" + str + "' could not be parsed.", __FILE__);
   }
-  std::string toString(T t) const {return m_Map.at(t);}
+  const DATA &toString(T t) const {return m_Map.at(t);}
 };
 #endif // _ENUM_ID_MAP_HPP_

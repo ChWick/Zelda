@@ -32,6 +32,7 @@
 #include <BulletCollision/CollisionShapes/btCapsuleShape.h>
 #include "../Character/Person.hpp"
 #include "../../Common/Util/Assert.hpp"
+#include "../../Common/Message/MessageEntityStateChanged.hpp"
 
 CMap::CMap(CEntity *pAtlas, CMapPackPtr mapPack, Ogre::SceneNode *pParentSceneNode, CWorldEntity *pPlayer)
   : CWorldEntity(mapPack->getName(), pAtlas, this),
@@ -47,10 +48,24 @@ CMap::CMap(CEntity *pAtlas, CMapPackPtr mapPack, Ogre::SceneNode *pParentSceneNo
   m_PhysicsManager.addCollisionShape(GLOBAL_COLLISION_SHAPES_TYPES_ID_MAP.toString(GCST_PERSON_CAPSULE),
                                      CPhysicsCollisionObject(new btCapsuleShape(CPerson::PERSON_RADIUS, CPerson::PERSON_HEIGHT - 2 * CPerson::PERSON_RADIUS)));
 
+  // Create global entites
+  for (int i = 0; i < TT_COUNT; i++) {
+    m_apTileEntities[i] = pParentSceneNode->getCreator()->createEntity(TILE_TYPE_ID_MAP.toData(static_cast<ETileTypes>(i)).sMeshName);
+  }
+
   m_pSceneNode = pParentSceneNode->createChildSceneNode(m_MapPack->getName() + "_RootNode");
 
   m_pStaticGeometry = pParentSceneNode->getCreator()->createStaticGeometry(m_MapPack->getName() + "_StaticGeometry");
   m_pStaticGeometry->setRegionDimensions(Ogre::Vector3(10, 10, 10));
+  m_pStaticGeometry->setCastShadows(false);
+
+  m_pStaticGeometryChangedTiles = pParentSceneNode->getCreator()->createStaticGeometry(m_MapPack->getName() + "_StaticGeometryChangedTiles");
+  m_pStaticGeometryChangedTiles->setRegionDimensions(Ogre::Vector3(10, 10, 10));
+  m_pStaticGeometryChangedTiles->setCastShadows(false);
+
+  m_pStaticGeometryFixedTiles = pParentSceneNode->getCreator()->createStaticGeometry(m_MapPack->getName() + "_StaticGeometryFixedTiles");
+  m_pStaticGeometryFixedTiles->setRegionDimensions(Ogre::Vector3(10, 10, 10));
+  m_pStaticGeometryFixedTiles->setCastShadows(false);
 
   m_MapPack->init(this);
 
@@ -70,6 +85,7 @@ CMap::CMap(CEntity *pAtlas, CMapPackPtr mapPack, Ogre::SceneNode *pParentSceneNo
   //new CObject(m_MapPack->getName() + "rupee", this, this, OBJECT_GREEN_BUSH);
 
   m_pStaticGeometry->build();
+  rebuildStaticGeometryChangedTiles();
 }
 
 CMap::~CMap() {
@@ -81,6 +97,9 @@ void CMap::start() {
 }
 
 void CMap::exit() {
+  for (int i = 0; i < TT_COUNT; i++) {
+    m_pSceneNode->getCreator()->destroyEntity(m_apTileEntities[i]);
+  }
   m_pSceneNode->getCreator()->destroyStaticGeometry(m_pStaticGeometry);
   m_pStaticGeometry = nullptr;
 }
@@ -163,6 +182,41 @@ bool CMap::frameEnded(const Ogre::FrameEvent& evt) {
   return CWorldEntity::frameEnded(evt);
 }
 
+
+void CMap::handleMessage(const CMessage &message) {
+  if (message.getType() == MSG_ENTITY_STATE_CHANGED) {
+    const CMessageEntityStateChanged &mesc(dynamic_cast<const CMessageEntityStateChanged&>(message));
+    CObject *pObject(dynamic_cast<CObject*>(&mesc.getEntity()));
+    if (!pObject) {return;}
+    if (mesc.getOldState() == EST_NORMAL) {
+      // only change request if object was in normal state before
+      if (pObject->getType() == OBJECT_GREEN_BUSH) {
+        rebuildStaticGeometryChangedTiles();
+        
+        m_pStaticGeometryFixedTiles->destroy();
+        m_pStaticGeometryFixedTiles->addEntity(m_apTileEntities[TT_GREEN_SOIL_STONE_SHADOW], pObject->getSceneNode()->getInitialPosition());
+        m_pStaticGeometryFixedTiles->build();
+      }
+    }
+  }
+}
+
+void CMap::rebuildStaticGeometryChangedTiles() {
+  m_pStaticGeometryChangedTiles->reset();
+
+  for (CEntity *pChild : m_lChildren) {
+    CObject *pObject(dynamic_cast<CObject*>(pChild));
+    if (!pObject) {continue;}
+    if (pObject->getType() == OBJECT_GREEN_BUSH) {
+      if (pObject->getState() == EST_NORMAL) {
+        m_pStaticGeometryChangedTiles->addEntity(m_apTileEntities[TT_GREEN_SOIL_BUSH_SHADOW], pObject->getSceneNode()->getInitialPosition());
+      }
+    }
+  }
+
+  m_pStaticGeometryChangedTiles->build();
+}
+
 void CMap::processCollisionCheck() {
 	int numManifolds = m_PhysicsManager.getWorld()->getDispatcher()->getNumManifolds();
 	for (int i=0;i<numManifolds;i++)
@@ -221,6 +275,7 @@ CDotSceneLoaderCallback::EResults CMap::preEntityAdded(tinyxml2::XMLElement *XML
     pEntity = new CObject(pParent->getName(), this, this, OBJECT_GREEN_BUSH, pParent);
 
     pEntity->setPosition(pParent->getPosition());
+    pEntity->getSceneNode()->setInitialState();
     return R_CANCEL;
   }
   return R_CONTINUE;

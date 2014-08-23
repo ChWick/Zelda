@@ -20,6 +20,10 @@ def makeLightWorldZip() :
 	zipf.write('../maps/fence/fence_stake.mesh', 'meshes/fence_stake.mesh', zipfile.ZIP_DEFLATED)
 	zipf.write('../maps/fence/fence_plank.mesh', 'meshes/fence_plank.mesh', zipfile.ZIP_DEFLATED)
 
+	# tiles
+	zipf.write('../maps/tiles/soil_green_bush.mesh', 'meshes/soil_green_bush.mesh', zipfile.ZIP_DEFLATED)
+	zipf.write('../maps/tiles/soil_green_stone.mesh', 'meshes/soil_green_stone.mesh', zipfile.ZIP_DEFLATED)
+
 	zipf.close()
 
 def makeGameZip() :
