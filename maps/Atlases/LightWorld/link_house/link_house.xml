@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map scene="link_house.scene" global_position="0 0 0" global_size="1.8 1.8">
+<map scene="link_house.scene" global_position="0 0 0" global_size="1.6 1.6">
   <player>
     <event>
       <emitter type="collision" id="bottom_margin"/>
       <action type="message" message_type="switch_map" map="Map1"/>
     </event>
   </player>
-  <region id="bottom_margin" position="0 0 1.2" size="1.6 1 0.01" shape="box"/>
-  <region id="top_margin" position="0 0 -1.2" size="1.6 1 0.01" shape="box"/>
-  <region id="left_margin" position="-1.6 0 0" size="0.01 1 1.2" shape="box"/>
-  <region id="right_margin" position="1.6 0 0" size="0.01 1 1.2" shape="box"/>
+  <region id="bottom_margin" position="0 0 1.6" size="1.6 1 0.01" shape="box"/>
+  <region id="top_margin" position="0 0 -1.6" size="1.6 1 0.01" shape="box"/>
+  <region id="left_margin" position="-1.6 0 0" size="0.01 1 1.6" shape="box"/>
+  <region id="right_margin" position="1.6 0 0" size="0.01 1 1.6" shape="box"/>
 </map>
