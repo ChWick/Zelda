@@ -24,10 +24,12 @@
 #include "../../Common/Message/MessageInjector.hpp"
 #include <OgreVector2.h>
 
+class CWorldEntity;
+
 class CAerialCameraPerspective : public CMessageInjector {
 protected:
   Ogre::Camera *m_pCamera;
-  const Ogre::SceneNode *m_pTargetSceneNode;
+  const CWorldEntity *m_pTarget;
   Ogre::SceneNode *m_pSceneNode;
 
   enum ECameraEdgeRays {
@@ -45,7 +47,7 @@ protected:
   bool m_bCameraInBounds;
 public:
   CAerialCameraPerspective(Ogre::Camera *pCamera,
-                           Ogre::SceneNode *pTargetSceneNode);
+                           CWorldEntity *pTarget);
 
   virtual ~CAerialCameraPerspective();
 

@@ -26,17 +26,21 @@
 #include "../../Common/Message/MessageHandler.hpp"
 #include "../Atlas/Map.hpp"
 #include "../../Common/Log.hpp"
+#include "../WorldEntity.hpp"
 
 // drow camera bounds (lines and spheres)
 #define WORLD_DEBUG_CAMERA_BOUNDS
 
-const Ogre::Vector3 AERIAL_CAMERA_OFFSET(0, 9e-1, 2e-1);
+const Ogre::Vector3 AERIAL_CAMERA_OFFSET(0, 9e-1, 3e-1);
+const Ogre::Vector3 AERIAL_CAMERA_OFFSET_AT_PLATEAU(0, 9e-1, 0.1);
+const Ogre::Real AERIAL_CAMERA_PLATEAU_VALUE_AT(0.2);
+
 const Ogre::Real AERIAL_CAMERA_MOVE_SPEED(10);
 
 CAerialCameraPerspective::CAerialCameraPerspective(Ogre::Camera *pCamera,
-                                                   Ogre::SceneNode *pTargetSceneNode)
+                                                   CWorldEntity *pTarget)
   : m_pCamera(pCamera),
-    m_pTargetSceneNode(pTargetSceneNode),
+    m_pTarget(pTarget),
     m_vMinCamPoint(Ogre::Vector2::ZERO),
     m_vMaxCamPoint(Ogre::Vector2::ZERO),
     m_bSwitchingMap(false),
@@ -54,7 +58,8 @@ CAerialCameraPerspective::~CAerialCameraPerspective() {
 }
 
 void CAerialCameraPerspective::updateCamera(float tpf) {
-  Ogre::Vector3 vTargetPosition = m_pTargetSceneNode->getPosition() + AERIAL_CAMERA_OFFSET;
+  const Ogre::Vector3 vCurrentOffset(AERIAL_CAMERA_OFFSET + (AERIAL_CAMERA_OFFSET_AT_PLATEAU - AERIAL_CAMERA_OFFSET) * std::min<Ogre::Real>(1.f, std::max<Ogre::Real>(0.f, m_pTarget->getFloorPosition().y / AERIAL_CAMERA_PLATEAU_VALUE_AT)));
+  Ogre::Vector3 vTargetPosition = m_pTarget->getPosition() + vCurrentOffset;
 
   // back up position and set it to desired to calculate the bounds
   const Ogre::Vector3 vCamPosBuffer(m_pCamera->getPosition());
@@ -84,6 +89,8 @@ void CAerialCameraPerspective::updateCamera(float tpf) {
   Ogre::Real fMaxStep = vCamMoveDir.normalise();
   m_bCameraInBounds = fMaxStep < AERIAL_CAMERA_MOVE_SPEED * tpf;
   m_pCamera->setPosition(vCamPosBuffer + vCamMoveDir * std::min<Ogre::Real>(fMaxStep, AERIAL_CAMERA_MOVE_SPEED * tpf));
+  
+  m_pCamera->setDirection(-vCurrentOffset);
 
   //LOGI("targetPos: x=%f y=%f", vTargetPosition.x, vTargetPosition.z);
 

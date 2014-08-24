@@ -57,6 +57,12 @@ CPerson::~CPerson() {
 CCharacterController *CPerson::createCharacterController() {
 	return new CPersonController(this);
 }
+
+
+const Ogre::Vector3 CPerson::getFloorPosition() const {
+  return m_pSceneNode->getPosition() - Ogre::Vector3(0, PERSON_FLOOR_OFFSET, 0);
+}
+
 void CPerson::destroy() {
 	removeBlinkingMaterials();
 	CCharacter::destroy();

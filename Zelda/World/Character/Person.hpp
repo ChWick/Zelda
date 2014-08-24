@@ -58,6 +58,8 @@ public:
   virtual bool collidesWith(const std::string &sEntityID) const;
   virtual void interact() {}
 
+  virtual const Ogre::Vector3 getFloorPosition() const;
+
 protected:
 	void createPhysics();
 	void destroyPhysics();

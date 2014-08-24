@@ -42,6 +42,8 @@ public:
   virtual void setPosition(const SPATIAL_VECTOR &vPos);
   virtual void translate(const SPATIAL_VECTOR &vOffset);
 
+  virtual const SPATIAL_VECTOR getFloorPosition() const {return getPosition();}
+
   virtual const SPATIAL_VECTOR &getCenter() const;
   virtual void setCenter(const SPATIAL_VECTOR &vCenter);
 

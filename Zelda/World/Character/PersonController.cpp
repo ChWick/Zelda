@@ -56,12 +56,12 @@ void CPersonController::updateCharacter(const Ogre::Real deltaTime) {
 
 	Real posIncrementPerSecond = RUN_SPEED * 0.001f;
 
-	Vector3 playerPos = mCCPerson->getPosition();
+	Vector3 playerPos = mCCPerson->getFloorPosition();
 
 	//btVector3 pos = mCCPhysics->getPosition();
 
 	//Vector3 position(pos.x(), pos.y(), pos.z());
-	Vector3 position(BtOgre::Convert::toOgre(mCCPerson->getCollisionObject()->getWorldTransform().getOrigin()) + Ogre::Vector3::UNIT_Y * CPerson::PERSON_PHYSICS_OFFSET);
+	Vector3 position(BtOgre::Convert::toOgre(mCCPerson->getCollisionObject()->getWorldTransform().getOrigin()));
 
 
 	if (position != playerPos)
