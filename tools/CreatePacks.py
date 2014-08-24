@@ -78,5 +78,5 @@ if __name__ == '__main__':
     makeSdkTrays()
 
     makeMapPack('link_house', 'LightWorld', ['physics_border_top.mesh', 'physics_floor.mesh', 'physics_floor_top.mesh', 'wall_bot_right.mesh', 'wall_bot.mesh', 'wall_to_water.mesh'])
-    makeMapPack('link_house_left', 'LightWorld', ['physics_floor.mesh'])
+    makeMapPack('link_house_left', 'LightWorld', ['physics_floor.mesh', 'physics_floor.mesh', 'physics_floor_top.mesh', 'physics_floor_top_wall.mesh', 'physics_wall_bot.mesh'])
 
