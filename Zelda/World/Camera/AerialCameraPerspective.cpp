@@ -35,7 +35,7 @@ const Ogre::Vector3 AERIAL_CAMERA_OFFSET(0, 9e-1, 3e-1);
 const Ogre::Vector3 AERIAL_CAMERA_OFFSET_AT_PLATEAU(0, 9e-1, 0.1);
 const Ogre::Real AERIAL_CAMERA_PLATEAU_VALUE_AT(0.2);
 
-const Ogre::Real AERIAL_CAMERA_MOVE_SPEED(10);
+const Ogre::Real AERIAL_CAMERA_MOVE_SPEED(1);
 
 CAerialCameraPerspective::CAerialCameraPerspective(Ogre::Camera *pCamera,
                                                    CWorldEntity *pTarget)

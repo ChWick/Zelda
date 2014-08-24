@@ -2,8 +2,8 @@
 <map scene="link_house.scene" global_position="0 0 0" global_size="3.2 3.2">
   <player>
     <event>
-      <emitter type="collision" id="bottom_margin"/>
-      <action type="message" message_type="switch_map" map="Map1"/>
+      <emitter type="collision" id="left_margin"/>
+      <action type="message" message_type="switch_map" map="link_house_left"/>
     </event>
   </player>
   <region id="bottom_margin" position="0 0 1.6" size="1.6 1 0.01" shape="box"/>

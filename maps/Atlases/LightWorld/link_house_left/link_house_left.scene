@@ -1,0 +1,30 @@
+<scene formatVersion="1.0.1" previous_export_time="1408890683.536445" export_time="1408892236.657251" exported_by="christoph" >
+  <nodes >
+    <node name="link_house_left" >
+      <position y="0.000000" z="0.750000" x="0.550000" />
+      <rotation qz="-0.000000" qw="1.000000" qx="0.000000" qy="0.000000" />
+      <scale y="1.000000" z="1.000000" x="1.000000" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <entity damping_rot="0.10000000149011612" lock_trans_y="False" actor="False" name="link_house_left" friction_z="1.0" meshFile="link_house_left.mesh" physics_type="NO_COLLISION" mass="1.0" lock_rot_z="False" inertia_tensor="0.4000000059604645" ghost="False" anisotropic_friction="False" lock_trans_x="False" lock_rot_y="False" mass_radius="1.0" velocity_max="0.0" friction_x="1.0" velocity_min="0.0" friction_y="1.0" damping_trans="0.03999999910593033" lock_trans_z="False" lock_rot_x="False" />
+    </node>
+    <node name="physics_floor" >
+      <position y="0.000000" z="-0.000000" x="0.000000" />
+      <rotation qz="-0.000000" qw="1.000000" qx="0.000000" qy="0.000000" />
+      <scale y="1.000000" z="1.000000" x="1.000000" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <entity damping_rot="0.10000000149011612" lock_trans_y="False" actor="False" name="physics_floor" friction_z="1.0" meshFile="physics_floor.mesh" physics_type="STATIC" mass="1.0" lock_rot_z="False" inertia_tensor="0.4000000059604645" ghost="True" anisotropic_friction="False" lock_trans_x="False" lock_rot_y="False" collisionPrim="triangle_mesh" mass_radius="1.0" velocity_max="0.0" friction_x="1.0" velocity_min="0.0" friction_y="1.0" damping_trans="0.03999999910593033" lock_trans_z="False" lock_rot_x="False" />
+    </node>
+  </nodes>
+  <externals />
+  <environment >
+    <colourAmbient b="0.0" g="0.0" r="0.0" />
+    <colourBackground b="0.05087608844041824" g="0.05087608844041824" r="0.05087608844041824" />
+    <colourDiffuse b="0.05087608844041824" g="0.05087608844041824" r="0.05087608844041824" />
+  </environment>
+</scene>

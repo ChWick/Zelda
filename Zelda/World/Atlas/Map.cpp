@@ -89,7 +89,6 @@ CMap::CMap(CEntity *pAtlas, CMapPackPtr mapPack, Ogre::SceneNode *pParentSceneNo
 }
 
 CMap::~CMap() {
-  Ogre::LogManager::getSingleton().logMessage("Destruction of map '" + m_MapPack->getName() + "'");
 }
 
 void CMap::start() {
@@ -97,11 +96,17 @@ void CMap::start() {
 }
 
 void CMap::exit() {
+  Ogre::LogManager::getSingleton().logMessage("Destruction of map '" + m_MapPack->getName() + "'");
+  
   for (int i = 0; i < TT_COUNT; i++) {
     m_pSceneNode->getCreator()->destroyEntity(m_apTileEntities[i]);
   }
   m_pSceneNode->getCreator()->destroyStaticGeometry(m_pStaticGeometry);
+  m_pSceneNode->getCreator()->destroyStaticGeometry(m_pStaticGeometryChangedTiles);
+  m_pSceneNode->getCreator()->destroyStaticGeometry(m_pStaticGeometryFixedTiles);
   m_pStaticGeometry = nullptr;
+
+  CWorldEntity::exit();
 }
 
 void CMap::CreateCube(const btVector3 &Position, btScalar Mass)
@@ -165,6 +170,22 @@ void CMap::CreateCube(const btVector3 &Position, btScalar Mass)
 void CMap::moveMap(const Ogre::Vector3 &offset) {
   m_bPauseUpdate = true;
   m_pSceneNode->translate(offset);
+  // move static geometries
+  translateStaticGeometry(m_pStaticGeometry, offset);
+  translateStaticGeometry(m_pStaticGeometryChangedTiles, offset);
+  translateStaticGeometry(m_pStaticGeometryFixedTiles, offset);
+}
+
+void CMap::translateStaticGeometry(Ogre::StaticGeometry *pSG, const Ogre::Vector3 &vVec) {
+  Ogre::StaticGeometry::RegionIterator regionIt = pSG->getRegionIterator();
+  while (regionIt.hasMoreElements() ) {
+    Ogre::StaticGeometry::Region * reg=regionIt.getNext();
+    Ogre::SceneNode* thisSceneNode = reg->getParentSceneNode();
+    thisSceneNode->translate(vVec);
+    thisSceneNode->_updateBounds();
+    reg->_notifyMoved();
+  }
+  pSG->setOrigin(vVec);
 }
 
 void CMap::update(Ogre::Real tpf) {

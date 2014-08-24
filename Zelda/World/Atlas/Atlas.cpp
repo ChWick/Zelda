@@ -40,7 +40,7 @@ CAtlas::CAtlas(CEntity *pParent, Ogre::SceneNode *pRootSceneNode, CWorldEntity *
 
   m_pSceneNode = pRootSceneNode->createChildSceneNode("Atlas");
 
-  m_pCurrentMap = new CMap(this, CMapPackPtr(new CMapPack(CFileManager::getResourcePath("maps/Atlases/LightWorld/"), "link_house")), m_pSceneNode, pPlayer);
+  m_pCurrentMap = new CMap(this, CMapPackPtr(new CMapPack(CFileManager::getResourcePath("maps/Atlases/LightWorld/"), "link_house_left")), m_pSceneNode, pPlayer);
   m_pPlayer->enterMap(m_pCurrentMap, Ogre::Vector3(0, 2, 0));
   m_pCurrentMap->start();
 
@@ -84,7 +84,7 @@ void CAtlas::handleMessage(const CMessage &message) {
         LOGI("Atlas: changing map to '%s'", switch_map_message.getMap().c_str());
 
 
-        m_pNextMap = new CMap(this, CMapPackPtr(new CMapPack(CFileManager::getResourcePath("maps/Atlases/TestMap/"), switch_map_message.getMap())), m_pSceneNode, m_pPlayer);
+        m_pNextMap = new CMap(this, CMapPackPtr(new CMapPack(CFileManager::getResourcePath("maps/Atlases/LightWorld/"), switch_map_message.getMap())), m_pSceneNode, m_pPlayer);
 
 
         CMapPackPtr nextPack = m_pNextMap->getMapPack();
@@ -114,7 +114,7 @@ void CAtlas::handleMessage(const CMessage &message) {
         m_bSwitchingMaps = true;
 
         Ogre::Vector3 vPlayerPos = m_pPlayer->getPosition() + vMapPositionOffset;
-        m_pPlayer->enterMap(m_pNextMap, vPlayerPos + vDirection * 2);
+        m_pPlayer->enterMap(m_pNextMap, vPlayerPos + vDirection * 0.3);
         m_pPlayer->setPosition(vPlayerPos);
 
         m_bPlayerTargetReached = false;

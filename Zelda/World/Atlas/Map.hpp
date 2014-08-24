@@ -66,6 +66,7 @@ private:
   void handleMessage(const CMessage &message);
   void rebuildStaticGeometryChangedTiles();
   void processCollisionCheck();
+  void translateStaticGeometry(Ogre::StaticGeometry *pSG, const Ogre::Vector3 &vVec);
 
   // CMapPackParserListener
   void parsePlayer(const tinyxml2::XMLElement *);

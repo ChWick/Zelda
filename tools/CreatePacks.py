@@ -52,21 +52,22 @@ def makeSdkTrays() :
 
 	zipf.close()
 
-def makeLWLinkHouseZip() :
-	print('Creating link_house.zip')
+def makeMapPack(name, world, files) :
+	print 'Creating map pack for', name, ' in ', world
 
-	zipf = zipfile.ZipFile('../maps/Atlases/LightWorld/link_house.zip', 'w')
-	zipf.write('../maps/Atlases/LightWorld/link_house/physics_border_top.mesh', 'physics_border_top.mesh', zipfile.ZIP_DEFLATED)
-	zipf.write('../maps/Atlases/LightWorld/link_house/physics_floor.mesh', 'physics_floor.mesh', zipfile.ZIP_DEFLATED)
-	zipf.write('../maps/Atlases/LightWorld/link_house/physics_floor_top.mesh', 'physics_floor_top.mesh', zipfile.ZIP_DEFLATED)
-	zipf.write('../maps/Atlases/LightWorld/link_house/wall_bot_right.mesh', 'wall_bot_right.mesh', zipfile.ZIP_DEFLATED)
-	zipf.write('../maps/Atlases/LightWorld/link_house/wall_bot.mesh', 'wall_bot.mesh', zipfile.ZIP_DEFLATED)
-	zipf.write('../maps/Atlases/LightWorld/link_house/wall_to_water.mesh', 'wall_to_water.mesh', zipfile.ZIP_DEFLATED)
-	zipf.write('../maps/Atlases/LightWorld/link_house/link_house.mesh', 'link_house.mesh', zipfile.ZIP_DEFLATED)
-	zipf.write('../maps/Atlases/LightWorld/link_house/link_house.scene', 'link_house.scene', zipfile.ZIP_DEFLATED)
-	zipf.write('../maps/Atlases/LightWorld/link_house/link_house.xml', 'link_house.xml', zipfile.ZIP_DEFLATED)
+	worldPath = os.path.join('../maps/Atlases', world)
+	dataPath = os.path.join(worldPath, name)
+
+	zipf = zipfile.ZipFile(os.path.join(worldPath, name + '.zip'), 'w')
+	files.append(name + '.mesh')
+	files.append(name + '.scene')
+	files.append(name + '.xml')
+
+	for file in files :
+		zipf.write(os.path.join(dataPath, file), file, zipfile.ZIP_DEFLATED)
 
 	zipf.close()
+	
 
 # set this as working dir
 os.chdir(os.path.dirname(os.path.realpath(__file__)))
@@ -75,4 +76,7 @@ if __name__ == '__main__':
     makeLightWorldZip()
     makeGameZip()
     makeSdkTrays()
-    makeLWLinkHouseZip()
+
+    makeMapPack('link_house', 'LightWorld', ['physics_border_top.mesh', 'physics_floor.mesh', 'physics_floor_top.mesh', 'wall_bot_right.mesh', 'wall_bot.mesh', 'wall_to_water.mesh'])
+    makeMapPack('link_house_left', 'LightWorld', ['physics_floor.mesh'])
+
