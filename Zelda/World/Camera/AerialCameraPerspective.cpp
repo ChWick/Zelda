@@ -63,14 +63,21 @@ void CAerialCameraPerspective::updateCamera(float tpf) {
   Ogre::Vector3 vDelta;
   // update camera bounds
   m_pCamera->setPosition(vTargetPosition);
-  vRayPos = getRayPlaneHitPosition(RAY_BOTTOM_RIGHT);
+  vRayPos = getRayPlaneHitPosition(RAY_TOP_LEFT);
   vDelta = Ogre::Vector3(std::max<Ogre::Real>(m_vMinCamPoint.x - vRayPos.x, 0), 0, std::max<Ogre::Real>(m_vMinCamPoint.y - vRayPos.z, 0));
+  vTargetPosition += vDelta;
+  
+  m_pCamera->setPosition(vTargetPosition);
+  vRayPos = getRayPlaneHitPosition(RAY_TOP_RIGHT);
+  vDelta = Ogre::Vector3(std::min<Ogre::Real>(m_vMaxCamPoint.x - vRayPos.x, 0), 0, std::max<Ogre::Real>(m_vMinCamPoint.y - vRayPos.z, 0));
   vTargetPosition += vDelta;
 
   m_pCamera->setPosition(vTargetPosition);
-  vRayPos = getRayPlaneHitPosition(RAY_TOP_LEFT);
+  vRayPos = getRayPlaneHitPosition(RAY_BOTTOM_RIGHT);
   vDelta = Ogre::Vector3(std::min<Ogre::Real>(m_vMaxCamPoint.x - vRayPos.x, 0), 0, std::min<Ogre::Real>(m_vMaxCamPoint.y - vRayPos.z, 0));
   vTargetPosition += vDelta;
+
+  // only one bottom required, since smaller edge is bottom
 
   // use cameras backup position and move it
   Ogre::Vector3 vCamMoveDir(vTargetPosition - vCamPosBuffer);

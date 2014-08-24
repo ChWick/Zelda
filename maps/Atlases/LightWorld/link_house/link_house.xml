@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map scene="link_house.scene" global_position="0 0 0" global_size="1.6 1.6">
+<map scene="link_house.scene" global_position="0 0 0" global_size="3.2 3.2">
   <player>
     <event>
       <emitter type="collision" id="bottom_margin"/>
