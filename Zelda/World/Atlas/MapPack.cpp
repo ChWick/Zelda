@@ -50,7 +50,7 @@ void CMapPack::init(CMapPackParserListener *pListener) {
   if (m_bInitialized) {return;}
   m_bInitialized = true;
 
-  Ogre::ResourceGroupManager::getSingleton().createResourceGroup(m_sResourceGroup);
+  Ogre::ResourceGroupManager::getSingleton().createResourceGroup(m_sResourceGroup, false);
 #if OGRE_PLATFORM == OGRE_PLATFORM_ANDROID
   Ogre::ResourceGroupManager::getSingleton().addResourceLocation(m_sPath + m_sName + ".zip", "APKZip", m_sResourceGroup);
 #else

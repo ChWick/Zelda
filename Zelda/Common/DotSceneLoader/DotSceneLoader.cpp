@@ -770,7 +770,7 @@ void DotSceneLoader::processEntity(XMLElement *XMLNode, SceneNode *pParent, CUse
   btRigidBody *pRB(NULL);
   try
   {
-      MeshPtr mesh = MeshManager::getSingleton().load(meshFile, m_sGroupName);
+      //MeshPtr mesh = MeshManager::getSingleton().load(meshFile, m_sGroupName);
 
   if (isStatic) {
     // for static gemometry (paged geometry), we can use the same entity for each appearance
