@@ -56,7 +56,7 @@ void CPersonController::updateCharacter(const Ogre::Real deltaTime) {
 
 	Real posIncrementPerSecond = RUN_SPEED * 0.001f;
 
-	Vector3 playerPos = mCCPerson->getFloorPosition();
+	Vector3 playerPos = mCCPerson->getPosition();
 
 	//btVector3 pos = mCCPhysics->getPosition();
 

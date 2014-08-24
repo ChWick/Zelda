@@ -19,27 +19,42 @@
 
 #include "ObjectTypes.hpp"
 
-SObjectTypeData::SObjectTypeData(const std::string &meshName, const std::string &materialName)
-  : sMeshName(meshName),
+SObjectTypeData::SObjectTypeData(bool userHandle, const std::string &meshName, const std::string &materialName)
+  : bUserHandle(userHandle),
+    sMeshName(meshName),
     sMaterialName(materialName),
     eNormalTile(TT_COUNT),
-    eRemovedTile(TT_COUNT) {
+    eRemovedTile(TT_COUNT),
+    vPhysicsShapeScale(1, 1, 1) {
 }
 
-SObjectTypeData::SObjectTypeData(const std::string &meshName, const std::string &materialName, ETileTypes normalTile, ETileTypes removedTile)
-  : sMeshName(meshName),
+SObjectTypeData::SObjectTypeData(bool userHandle, const std::string &meshName, const std::string &materialName, const btVector3 &physicsShapeScale)
+  : bUserHandle(userHandle),
+    sMeshName(meshName),
+    sMaterialName(materialName),
+    eNormalTile(TT_COUNT),
+    eRemovedTile(TT_COUNT),
+    vPhysicsShapeScale(physicsShapeScale) {
+}
+
+SObjectTypeData::SObjectTypeData(bool userHandle, const std::string &meshName, const std::string &materialName, ETileTypes normalTile, ETileTypes removedTile)
+  : bUserHandle(userHandle),
+    sMeshName(meshName),
     sMaterialName(materialName),
     eNormalTile(normalTile),
-    eRemovedTile(removedTile) {
+    eRemovedTile(removedTile),
+    vPhysicsShapeScale(1, 1, 1) {
 }
 
 CObjectTypeIdMap::CObjectTypeIdMap() {
-  m_Map[OBJECT_GREEN_BUSH] = SObjectTypeData("GreenBush.mesh", "soil", TT_GREEN_SOIL_BUSH_SHADOW, TT_GREEN_SOIL_GRASS_BL_BR_TL_TR);
-  m_Map[OBJECT_LIGHT_STONE] = SObjectTypeData("light_stone.mesh", "soil", TT_GREEN_SOIL_STONE_SHADOW, TT_GREEN_SOIL);
+  m_Map[OBJECT_GREEN_BUSH] = SObjectTypeData(true, "GreenBush.mesh", "soil", TT_GREEN_SOIL_BUSH_SHADOW, TT_GREEN_SOIL_GRASS_BL_BR_TL_TR);
+  m_Map[OBJECT_LIGHT_STONE] = SObjectTypeData(true, "light_stone.mesh", "soil", TT_GREEN_SOIL_STONE_SHADOW, TT_GREEN_SOIL);
+
+  m_Map[OBJECT_GREEN_TREE] = SObjectTypeData(false, "green_tree.mesh", "soil", btVector3(0.75, 1, 0.75));
   
-  m_Map[OBJECT_GREEN_RUPEE] = SObjectTypeData("rupee.mesh", "Rupee/Green");
-  m_Map[OBJECT_BLUE_RUPEE] = SObjectTypeData("rupee.mesh", "Rupee/Blue");
-  m_Map[OBJECT_RED_RUPEE] = SObjectTypeData("rupee.mesh", "Rupee/Red");
+  m_Map[OBJECT_GREEN_RUPEE] = SObjectTypeData(true, "rupee.mesh", "Rupee/Green");
+  m_Map[OBJECT_BLUE_RUPEE] = SObjectTypeData(true, "rupee.mesh", "Rupee/Blue");
+  m_Map[OBJECT_RED_RUPEE] = SObjectTypeData(true, "rupee.mesh", "Rupee/Red");
 }
 
 EObjectTypes CObjectTypeIdMap::getFromMesh(const std::string &mesh) const {

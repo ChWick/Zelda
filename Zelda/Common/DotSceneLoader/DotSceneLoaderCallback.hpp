@@ -24,6 +24,7 @@
 
 class btRigidBody;
 class CUserData;
+class btCollisionShape;
 
 namespace tinyxml2 {
   class XMLElement;
@@ -36,6 +37,7 @@ public:
     R_CANCEL,
   };
 
+  virtual void physicsShapeCreated(btCollisionShape *pShape, const std::string &sMeshName) {}
   virtual void worldPhysicsAdded(btRigidBody *pRigidBody) {}
   virtual EResults preEntityAdded(tinyxml2::XMLElement *XMLNode, Ogre::SceneNode *pParent, CUserData &userData) {return R_CONTINUE;}
 	virtual void postEntityAdded(Ogre::Entity *pEntity, Ogre::SceneNode *pParent, btRigidBody *pRigidBody, const CUserData &userData) {}

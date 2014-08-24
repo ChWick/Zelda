@@ -272,6 +272,13 @@ void CMap::parseRegion(const SRegionInfo &region) {
 
 // ############################################################################3
 // CDotSceneLoaderCallback
+void CMap::physicsShapeCreated(btCollisionShape *pShape, const std::string &sMeshName) {
+  EObjectTypes objectType(OBJECT_TYPE_ID_MAP.getFromMesh(sMeshName));
+  if (objectType != OBJECT_COUNT) {
+    pShape->setLocalScaling(pShape->getLocalScaling() * OBJECT_TYPE_ID_MAP.toData(objectType).vPhysicsShapeScale);
+  }
+}
+
 void CMap::worldPhysicsAdded(btRigidBody *pRigidBody) {
   ASSERT(pRigidBody);
 
@@ -286,7 +293,7 @@ CDotSceneLoaderCallback::EResults CMap::preEntityAdded(tinyxml2::XMLElement *XML
   CWorldEntity *pEntity(nullptr);
   
   EObjectTypes objectType(OBJECT_TYPE_ID_MAP.getFromMesh(XMLNode->Attribute("meshFile")));
-  if (objectType != OBJECT_COUNT) {
+  if (objectType != OBJECT_COUNT && OBJECT_TYPE_ID_MAP.toData(objectType).bUserHandle) {
     pEntity = new CObject(pParent->getName(), this, this, objectType, pParent);
 
     pEntity->setPosition(pParent->getPosition());

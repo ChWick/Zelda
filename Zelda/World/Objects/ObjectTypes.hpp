@@ -22,10 +22,12 @@
 
 #include "../../Common/Util/EnumIdMap.hpp"
 #include "../Atlas/TileTypes.hpp"
+#include <LinearMath/btVector3.h>
 
 enum EObjectTypes {
   OBJECT_GREEN_BUSH,
   OBJECT_LIGHT_STONE,
+  OBJECT_GREEN_TREE,
   OBJECT_GREEN_RUPEE,
   OBJECT_BLUE_RUPEE,
   OBJECT_RED_RUPEE,
@@ -34,17 +36,21 @@ enum EObjectTypes {
 };
 
 struct SObjectTypeData {
+  bool bUserHandle;
   std::string sMeshName;
   std::string sMaterialName;
 
   ETileTypes eNormalTile;
   ETileTypes eRemovedTile;
 
+  btVector3 vPhysicsShapeScale;
+
   SObjectTypeData() {}
   SObjectTypeData(SObjectTypeData &&) = default;
-  SObjectTypeData(const std::string &meshName, const std::string &materialName);
+  SObjectTypeData(bool userHandle, const std::string &meshName, const std::string &materialName);
+  SObjectTypeData(bool userHandle, const std::string &meshName, const std::string &materialName, const btVector3 &physicsShapeScale);
 
-  SObjectTypeData(const std::string &meshName, const std::string &materialName, ETileTypes normalTile, ETileTypes removedTile);
+  SObjectTypeData(bool userHandle, const std::string &meshName, const std::string &materialName, ETileTypes normalTile, ETileTypes removedTile);
 
   SObjectTypeData &operator=(const SObjectTypeData&) = default;
 };

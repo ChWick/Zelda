@@ -858,6 +858,7 @@ void DotSceneLoader::processEntity(XMLElement *XMLNode, SceneNode *pParent, CUse
           throw Ogre::Exception(0, "Unknown Collision Prim: " + collisionPrim, __FILE__);
         }
 
+        for (auto &cb : m_lCallbacks) {cb->physicsShapeCreated(shape, meshFile);}
         m_pPhysicsManager->addCollisionShape(meshFile, CPhysicsCollisionObject(shape, centerOffset));
       }
           }

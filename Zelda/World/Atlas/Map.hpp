@@ -72,6 +72,7 @@ private:
   void parseRegion(const SRegionInfo &);
 
   // CDotSceneLoaderCallback
+  void physicsShapeCreated(btCollisionShape *pShape, const std::string &sMeshName) ;
   void worldPhysicsAdded(btRigidBody *pRigidBody);
 	void staticObjectAdded(Ogre::Entity *pEntity, Ogre::SceneNode *pParent);
   EResults preEntityAdded(tinyxml2::XMLElement *XMLNode, Ogre::SceneNode *pParent, CUserData &userData);
