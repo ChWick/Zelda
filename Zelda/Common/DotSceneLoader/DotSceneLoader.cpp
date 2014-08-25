@@ -851,6 +851,7 @@ void DotSceneLoader::processEntity(XMLElement *XMLNode, SceneNode *pParent, CUse
         }
         else if (collisionPrim == "convex_hull") {
           shape = converter.createConvex();
+          shape->setMargin(0.0);
           //Ogre::LogManager::getSingleton().logMessage("Creating Convex");
           //centerOffset = pParent->getOrientation() * converter.getCenter();
         }

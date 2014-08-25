@@ -6,6 +6,26 @@ material Physics_Only {
 	}
 }
 
+material light_world_soil_alpha {
+	receive_shadows on
+
+	technique
+	{
+		pass
+		{
+			lighting on
+
+      		scene_blend alpha_blend
+      		depth_write off
+			texture_unit
+			{
+				texture tiles.png
+				colour_op alpha_blend
+			}
+		}
+	}
+}
+
 material Game/Soil
 {
 	receive_shadows on

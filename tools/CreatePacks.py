@@ -30,6 +30,8 @@ def makeLightWorldZip() :
 	# tiles
 	copyAllOfType(zipf, '../maps/tiles/*.mesh', 'meshes')
 	copyAllOfType(zipf, '../maps/tree/*.mesh', 'meshes')
+	copyAllOfType(zipf, '../maps/flower/*.mesh', 'meshes')
+	copyAllOfType(zipf, '../maps/flower/*.skeleton', 'skeletons')
 
 	zipf.close()
 
@@ -52,7 +54,7 @@ def makeSdkTrays() :
 
 	zipf.close()
 
-def makeMapPack(name, world, files) :
+def makeMapPack(name, world, files, includeHouse=False) :
 	print 'Creating map pack for', name, ' in ', world
 
 	worldPath = os.path.join('../maps/Atlases', world)
@@ -62,6 +64,12 @@ def makeMapPack(name, world, files) :
 	files.append(name + '.mesh')
 	files.append(name + '.scene')
 	files.append(name + '.xml')
+
+	if (includeHouse) :
+		files.append('house_window.mesh')
+		files.append('house_roof_knob.mesh')
+		files.append('house_entrance.mesh')
+		files.append('house_knob.mesh')
 
 	for file in files :
 		zipf.write(os.path.join(dataPath, file), file, zipfile.ZIP_DEFLATED)
@@ -77,6 +85,6 @@ if __name__ == '__main__':
     makeGameZip()
     makeSdkTrays()
 
-    makeMapPack('link_house', 'LightWorld', ['physics_border_top.mesh', 'physics_floor.mesh', 'physics_floor_top.mesh', 'wall_bot_right.mesh', 'wall_bot.mesh', 'wall_to_water.mesh'])
+    makeMapPack('link_house', 'LightWorld', ['physics_border_top.mesh', 'physics_floor.mesh', 'physics_floor_top.mesh', 'wall_bot_right.mesh', 'wall_bot.mesh', 'wall_to_water.mesh', 'house_red_roof.mesh', 'house_roof_border.mesh', 'house_wall.mesh'], includeHouse=True)
     makeMapPack('link_house_left', 'LightWorld', ['physics_floor.mesh', 'physics_floor.mesh', 'physics_floor_top.mesh', 'physics_floor_top_wall.mesh', 'physics_wall_bot.mesh'])
 

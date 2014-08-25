@@ -24,6 +24,7 @@
 #include <OgreSceneNode.h>
 #include <OgreEntity.h>
 #include <OgreLogManager.h>
+#include <OgreAnimationState.h>
 #include <OgreMeshManager.h>
 #include "Region.hpp"
 #include "../GlobalCollisionShapesTypes.hpp"
@@ -33,6 +34,7 @@
 #include "../Character/Person.hpp"
 #include "../../Common/Util/Assert.hpp"
 #include "../../Common/Message/MessageEntityStateChanged.hpp"
+#include "../../Common/DotSceneLoader/UserData.hpp"
 
 int MAP_COUNTER = 0; // Counter to make names unique if objects are switched between maps since renaming a scene node is not possible
 
@@ -40,7 +42,8 @@ CMap::CMap(CEntity *pAtlas, CMapPackPtr mapPack, Ogre::SceneNode *pParentSceneNo
   : CWorldEntity(mapPack->getName(), pAtlas, this),
     m_PhysicsManager(pParentSceneNode->getCreator()),
     m_MapPack(mapPack),
-    m_pPlayer(pPlayer) {
+    m_pPlayer(pPlayer),
+    m_pFirstFlowerEntity(nullptr) {
 
   Ogre::LogManager::getSingleton().logMessage("Construction of map '" + m_MapPack->getName() + "'");
 
@@ -192,6 +195,10 @@ void CMap::translateStaticGeometry(Ogre::StaticGeometry *pSG, const Ogre::Vector
 
 void CMap::update(Ogre::Real tpf) {
   CWorldEntity::update(tpf);
+
+  if (m_pFlowerAnimationState) {
+    m_pFlowerAnimationState->addTime(tpf * 5);
+  }
 }
 
 bool CMap::frameStarted(const Ogre::FrameEvent& evt) {
@@ -307,9 +314,24 @@ void CMap::worldPhysicsAdded(btRigidBody *pRigidBody) {
 
   pRigidBody->setUserPointer(dynamic_cast<CWorldEntity*>(this));
 }
+
+void CMap::postEntityAdded(Ogre::Entity *pEntity, Ogre::SceneNode *pParent, btRigidBody *pRigidBody, const CUserData &userData) {
+  if (pEntity->getName().find("flower") != Ogre::String::npos) {
+    if (!m_pFirstFlowerEntity) {
+      m_pFirstFlowerEntity = pEntity;
+      m_pFlowerAnimationState = pEntity->getAnimationState("Action");
+      m_pFlowerAnimationState->setLoop(true);
+      m_pFlowerAnimationState->setEnabled(true);
+    }
+    else {
+      pEntity->shareSkeletonInstanceWith(m_pFirstFlowerEntity);
+    }
+  }
+}
+
 void CMap::staticObjectAdded(Ogre::Entity *pEntity, Ogre::SceneNode *pParent) {
   m_pStaticGeometry->addEntity(pEntity, pParent->getPosition(), pParent->getOrientation());
-  //destroySceneNode(pParent, true);
+  destroySceneNode(pParent, true);
 }
 
 CDotSceneLoaderCallback::EResults CMap::preEntityAdded(tinyxml2::XMLElement *XMLNode, Ogre::SceneNode *pParent, CUserData &userData) {
@@ -322,6 +344,10 @@ CDotSceneLoaderCallback::EResults CMap::preEntityAdded(tinyxml2::XMLElement *XML
     pEntity->setPosition(pParent->getPosition());
     pEntity->getSceneNode()->setInitialState();
     return R_CANCEL;
+  }
+
+  if (strcmp(XMLNode->Attribute("meshFile"), "flower.mesh") == 0) {
+    userData.setUserData("static", false);
   }
 
   return R_CONTINUE;
