@@ -1,5 +1,6 @@
 # ignroe meshes that are used from objects
 fence*.mesh
+flower*.mesh
 soil_green*.mesh
 GreenBush.mesh
 GreenBushTrunk.mesh
