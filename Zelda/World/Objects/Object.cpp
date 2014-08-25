@@ -49,7 +49,7 @@ CObject::CObject(const std::string &id, CWorldEntity *pParent, CMap *pMap, EObje
   const SObjectTypeData &objectTypeData(OBJECT_TYPE_ID_MAP.toData(eObjectType));
 
   // create entity
-  pEntity = pSceneManager->createEntity(objectTypeData.sMeshName);
+  pEntity = pSceneManager->createEntity(id + "ent", objectTypeData.sMeshName, "World");
   pEntity->setMaterialName(objectTypeData.sMaterialName);
   m_pSceneNode->attachObject(pEntity);
   pEntity->setCastShadows(false);
