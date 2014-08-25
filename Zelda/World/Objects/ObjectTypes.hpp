@@ -22,6 +22,7 @@
 
 #include "../../Common/Util/EnumIdMap.hpp"
 #include "../Atlas/TileTypes.hpp"
+#include "../GlobalCollisionShapesTypes.hpp"
 #include <LinearMath/btVector3.h>
 
 enum EObjectTypes {
@@ -43,14 +44,16 @@ struct SObjectTypeData {
   ETileTypes eNormalTile;
   ETileTypes eRemovedTile;
 
+  EGlobalCollisionShapesTypes eCollisionShape;
   btVector3 vPhysicsShapeScale;
+
 
   SObjectTypeData() {}
   SObjectTypeData(SObjectTypeData &&) = default;
   SObjectTypeData(bool userHandle, const std::string &meshName, const std::string &materialName);
   SObjectTypeData(bool userHandle, const std::string &meshName, const std::string &materialName, const btVector3 &physicsShapeScale);
 
-  SObjectTypeData(bool userHandle, const std::string &meshName, const std::string &materialName, ETileTypes normalTile, ETileTypes removedTile);
+  SObjectTypeData(bool userHandle, const std::string &meshName, const std::string &materialName, ETileTypes normalTile, ETileTypes removedTile, EGlobalCollisionShapesTypes collisionShape);
 
   SObjectTypeData &operator=(const SObjectTypeData&) = default;
 };

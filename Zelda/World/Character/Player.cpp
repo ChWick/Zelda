@@ -160,6 +160,14 @@ void CPlayer::maxHitpointsChangedCallback() {
 	}
 }*/
 
+void CPlayer::enterMap(CMap *pMap, const Ogre::Vector3 &vInitPosition) {
+  CPerson::enterMap(pMap, vInitPosition);
+
+  if (m_pLiftedEntity) {
+      m_pLiftedEntity->enterMap(pMap, vInitPosition);
+  }
+}
+
 void CPlayer::lift(CWorldEntity *pObjectToLift) {
   ASSERT(!m_pLiftedEntity);
   m_pLiftedEntity = pObjectToLift;

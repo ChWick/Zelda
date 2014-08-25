@@ -45,49 +45,51 @@ CObject::CObject(const std::string &id, CWorldEntity *pParent, CMap *pMap, EObje
   Ogre::SceneManager *pSceneManager = m_pSceneNode->getCreator();
 
   Ogre::Entity *pEntity(nullptr);
-  btCollisionShape *pCollisionShape(nullptr);
-  btVector3 vCollisionShapeOffset;
-  btVector3 vInertia;
-  float fMass = 1;
-
-  bool bUsePickableObjectSphere = false;
 
   const SObjectTypeData &objectTypeData(OBJECT_TYPE_ID_MAP.toData(eObjectType));
 
+  // create entity
   pEntity = pSceneManager->createEntity(objectTypeData.sMeshName);
   pEntity->setMaterialName(objectTypeData.sMaterialName);
+  m_pSceneNode->attachObject(pEntity);
+  pEntity->setCastShadows(false);
 
-  switch (eObjectType) {
-  case OBJECT_GREEN_RUPEE:
-    bUsePickableObjectSphere = true;
-    break;
-  case OBJECT_BLUE_RUPEE:
-    bUsePickableObjectSphere = true;
-    break;
-  case OBJECT_RED_RUPEE:
-    bUsePickableObjectSphere = true;
-    break;
-  case OBJECT_GREEN_BUSH:
-    bUsePickableObjectSphere = true;
-    break;
-  case OBJECT_LIGHT_STONE:
-    bUsePickableObjectSphere = true;
-    break;
-  default:
-    break;
+  createPhysics();
+}
+
+void CObject::destroyPhysics() {
+  const SObjectTypeData &objectTypeData(OBJECT_TYPE_ID_MAP.toData(static_cast<EObjectTypes>(m_uiType)));
+
+  if (m_pCollisionObject) {
+    btRigidBody *pRigidBody(btRigidBody::upcast(m_pCollisionObject));
+    m_pMap->getPhysicsManager()->getWorld()->removeRigidBody(pRigidBody);
+    if (objectTypeData.eCollisionShape == GCST_COUNT) {
+      delete m_pCollisionObject->getCollisionShape();
+    }
+    delete pRigidBody->getMotionState();
+    delete pRigidBody;
+    m_pCollisionObject = nullptr;
   }
+}
 
-  if (bUsePickableObjectSphere) {
-    const CPhysicsCollisionObject &pco = m_pMap->getPhysicsManager()->getCollisionShape(GLOBAL_COLLISION_SHAPES_TYPES_ID_MAP.toString(GCST_PICKABLE_OBJECT_SPHERE));
+void CObject::createPhysics() {
+  ASSERT(!m_pCollisionObject);
+  const SObjectTypeData &objectTypeData(OBJECT_TYPE_ID_MAP.toData(static_cast<EObjectTypes>(m_uiType)));
+
+  btCollisionShape *pCollisionShape(nullptr);
+  btVector3 vCollisionShapeOffset;
+  btVector3 vInertia;
+  float fMass = 0.1;
+  if (objectTypeData.eCollisionShape != GCST_COUNT) {
+    const CPhysicsCollisionObject &pco = m_pMap->getPhysicsManager()->getCollisionShape(GLOBAL_COLLISION_SHAPES_TYPES_ID_MAP.toString(objectTypeData.eCollisionShape));
     pCollisionShape = pco.getShape();
     vCollisionShapeOffset = BtOgre::Convert::toBullet(pco.getOffset());
   }
+  else {
+    // Handle shape by user
+  }
 
-  assert(pEntity);
-  assert(pCollisionShape);
-
-  m_pSceneNode->attachObject(pEntity);
-  pEntity->setCastShadows(false);
+  ASSERT(pCollisionShape);
 
   pCollisionShape->calculateLocalInertia(fMass, vInertia);
   btRigidBody *pRigidBody = new btRigidBody(fMass, new BtOgre::RigidBodyState(m_pSceneNode, btTransform(btQuaternion::getIdentity(), btVector3(0, 0, 0)), btTransform(btQuaternion::getIdentity(), vCollisionShapeOffset)), pCollisionShape, vInertia);
@@ -96,11 +98,12 @@ CObject::CObject(const std::string &id, CWorldEntity *pParent, CMap *pMap, EObje
   setThisAsCollisionObjectsUserPointer();
   //m_pSceneNode->setScale(Ogre::Vector3::UNIT_SCALE * 10);
 
-  m_pMap->getPhysicsManager()->getWorld()->addRigidBody(pRigidBody, COL_INTERACTIVE, MASK_INTERACIVE_OBJECT_COLLIDES_WITH);
 
+  unsigned short group = COL_INTERACTIVE;
+  unsigned short mask = MASK_INTERACIVE_OBJECT_COLLIDES_WITH;
 
   // post creation
-  switch (eObjectType) {
+  switch (m_uiType) {
   case OBJECT_GREEN_RUPEE:
   case OBJECT_BLUE_RUPEE:
   case OBJECT_RED_RUPEE:
@@ -111,6 +114,10 @@ CObject::CObject(const std::string &id, CWorldEntity *pParent, CMap *pMap, EObje
     break;
   case OBJECT_GREEN_BUSH:
   case OBJECT_LIGHT_STONE:
+    if (m_eState == EST_LIFTED) {
+      group = COL_DAMAGE_P;
+      mask = MASK_DAMAGE_P_COLLIDES_WITH;
+    }
     pRigidBody->setLinearFactor(btVector3(0, 0, 0));
     pRigidBody->setAngularFactor(0);
     break;
@@ -119,6 +126,25 @@ CObject::CObject(const std::string &id, CWorldEntity *pParent, CMap *pMap, EObje
   }
 
   m_pCollisionObject->getWorldTransform().getOrigin() -= vCollisionShapeOffset;
+
+
+  m_pMap->getPhysicsManager()->getWorld()->addRigidBody(pRigidBody, group, mask);
+}
+
+void CObject::enterMap(CMap *pMap, const Ogre::Vector3 &vPosition) {
+  // attach to new CEntity
+  attachTo(pMap);
+
+  // change scene node owner
+  m_pSceneNode->getParent()->removeChild(m_pSceneNode);
+  pMap->getSceneNode()->addChild(m_pSceneNode);
+
+  // recreate physics
+  destroyPhysics();
+  m_pMap = pMap;
+  createPhysics();
+
+  setPosition(vPosition);
 }
 
 void CObject::changeState(EEntityStateTypes eState) {

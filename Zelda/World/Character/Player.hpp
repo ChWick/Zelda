@@ -43,6 +43,7 @@ public:
   void renderDebug(Ogre::Real tpf);
 	void startup(const Ogre::Vector3 &playerPos, const Ogre::Vector3 &playerLookDirection, const Ogre::Real cameraYaw, const Ogre::Real cameraPitch);
 protected:
+  void enterMap(CMap *pMap, const Ogre::Vector3 &vInitPosition);
 	void setupInternal();
 	void hitpointsChangedCallback();
 	void maxHitpointsChangedCallback();

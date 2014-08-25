@@ -28,7 +28,13 @@ protected:
 public:
   CObject(const std::string &id, CWorldEntity *pParent, CMap *pMap, EObjectTypes eObjectType, Ogre::SceneNode *pSceneNode = nullptr);
 
+  
+  virtual void enterMap(CMap *pMap, const Ogre::Vector3 &vPosition);
+
 protected:
+  void destroyPhysics();
+  void createPhysics();
+
   virtual SInteractionResult interactOnCollision(const Ogre::Vector3 &vInteractDir, CWorldEntity *pSender);
   virtual SInteractionResult interactOnActivate(const Ogre::Vector3 &vInteractDir, CWorldEntity *pSender);
   virtual void changeState(EEntityStateTypes eState);

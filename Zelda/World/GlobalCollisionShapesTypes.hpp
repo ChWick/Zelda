@@ -25,6 +25,8 @@
 enum EGlobalCollisionShapesTypes {
   GCST_PICKABLE_OBJECT_SPHERE,
   GCST_PERSON_CAPSULE,
+
+  GCST_COUNT,
 };
 
 class CGlobalCollisionShapesTypesIdMap : public CEnumIdMap<EGlobalCollisionShapesTypes> {

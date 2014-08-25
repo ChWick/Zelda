@@ -34,6 +34,8 @@
 #include "../../Common/Util/Assert.hpp"
 #include "../../Common/Message/MessageEntityStateChanged.hpp"
 
+int MAP_COUNTER = 0; // Counter to make names unique if objects are switched between maps since renaming a scene node is not possible
+
 CMap::CMap(CEntity *pAtlas, CMapPackPtr mapPack, Ogre::SceneNode *pParentSceneNode, CWorldEntity *pPlayer)
   : CWorldEntity(mapPack->getName(), pAtlas, this),
     m_PhysicsManager(pParentSceneNode->getCreator()),
@@ -76,7 +78,7 @@ CMap::CMap(CEntity *pAtlas, CMapPackPtr mapPack, Ogre::SceneNode *pParentSceneNo
                               m_pSceneNode->getCreator(),
                               &m_PhysicsManager,
                               m_pSceneNode,
-                              m_MapPack->getName());
+                              m_MapPack->getName() + Ogre::StringConverter::toString(MAP_COUNTER++));
 
 
   CreateCube(btVector3(0, 10, 0.2), 1);
