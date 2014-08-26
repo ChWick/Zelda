@@ -1,0 +1,31 @@
+dependencies: \
+  /Users/christoph/Documents/Projects/Zelda/Zelda/Common/DotSceneLoader/UserData.cpp \
+  /Users/christoph/Documents/Projects/Zelda/Zelda/Common/DotSceneLoader/UserData.hpp \
+  /Users/christoph/Documents/Projects/ogre/build_xcode/sdk/include/OGRE/OgreString.h \
+  /Users/christoph/Documents/Projects/ogre/build_xcode/sdk/include/OGRE/OgrePrerequisites.h \
+  /Users/christoph/Documents/Projects/ogre/build_xcode/sdk/include/OGRE/OgrePlatform.h \
+  /Users/christoph/Documents/Projects/ogre/build_xcode/sdk/include/OGRE/OgreConfig.h \
+  /Users/christoph/Documents/Projects/ogre/build_xcode/sdk/include/OGRE/OgreBuildSettings.h \
+  /Users/christoph/Documents/Projects/ogre/build_xcode/sdk/include/OGRE/OgreStdHeaders.h \
+  /Users/christoph/Documents/Projects/ogre/build_xcode/sdk/include/OGRE/OgreMemoryAllocatorConfig.h \
+  /Users/christoph/Documents/Projects/ogre/build_xcode/sdk/include/OGRE/OgreMemoryAllocatedObject.h \
+  /Users/christoph/Documents/Projects/ogre/build_xcode/sdk/include/OGRE/OgreHeaderPrefix.h \
+  /Users/christoph/Documents/Projects/ogre/build_xcode/sdk/include/OGRE/OgreHeaderSuffix.h \
+  /Users/christoph/Documents/Projects/ogre/build_xcode/sdk/include/OGRE/OgreMemorySTLAllocator.h \
+  /Users/christoph/Documents/Projects/ogre/build_xcode/sdk/include/OGRE/OgreMemoryNedPooling.h \
+  /Users/christoph/Documents/Projects/Zelda/Zelda/../../tinyxml2/tinyxml2.h \
+  /Users/christoph/Documents/Projects/ogre/build_xcode/sdk/include/OGRE/OgreStringConverter.h \
+  /Users/christoph/Documents/Projects/ogre/build_xcode/sdk/include/OGRE/OgreStringVector.h \
+  /Users/christoph/Documents/Projects/ogre/build_xcode/sdk/include/OGRE/OgreSharedPtr.h \
+  /Users/christoph/Documents/Projects/ogre/build_xcode/sdk/include/OGRE/OgreAtomicScalar.h \
+  /Users/christoph/Documents/Projects/ogre/build_xcode/sdk/include/OGRE/OgreException.h \
+  /Users/christoph/Documents/Projects/ogre/build_xcode/sdk/include/OGRE/OgrePlatformInformation.h \
+  /Users/christoph/Documents/Projects/ogre/build_xcode/sdk/include/OGRE/OgreColourValue.h \
+  /Users/christoph/Documents/Projects/ogre/build_xcode/sdk/include/OGRE/OgreMath.h \
+  /Users/christoph/Documents/Projects/ogre/build_xcode/sdk/include/OGRE/OgreMatrix3.h \
+  /Users/christoph/Documents/Projects/ogre/build_xcode/sdk/include/OGRE/OgreVector3.h \
+  /Users/christoph/Documents/Projects/ogre/build_xcode/sdk/include/OGRE/OgreQuaternion.h \
+  /Users/christoph/Documents/Projects/ogre/build_xcode/sdk/include/OGRE/OgreMatrix4.h \
+  /Users/christoph/Documents/Projects/ogre/build_xcode/sdk/include/OGRE/OgreVector4.h \
+  /Users/christoph/Documents/Projects/ogre/build_xcode/sdk/include/OGRE/OgrePlane.h \
+  /Users/christoph/Documents/Projects/ogre/build_xcode/sdk/include/OGRE/OgreVector2.h

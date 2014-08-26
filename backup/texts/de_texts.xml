@@ -1,0 +1,12 @@
+<innerObjects>
+	<innerObject name="GreenRuby" text="Du hast einen gruenen Rubin erhalten."/>
+	<innerObject name="RedRuby" text="Du hast einen roten Rubin erhalten. Ein roter Rubin entspricht 10 gruenen Rubinen."/>
+	<innerObject name="Heart" text="Du hast ein Herz gefunden. Es regeneriert dir Gesundheit." />
+	<innerObject name="Bow" text="Du hast den Bogen erhalten. Selektrieren und Pfeile abfeuern!" />
+	<innerObject name="Lamp" text="Du hast die Lampe erhalten. Mit ihr kannst du Feuer entfachen. Achte auf deine Magieanzeige!" />
+</innerObjects>
+<chats>
+	<mapChats name="maps/Map2/TestLinkHouse">
+		<chat id="block1" text="Block1 Text"/>
+	</mapChats>
+</chats>

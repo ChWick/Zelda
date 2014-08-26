@@ -1,0 +1,420 @@
+<scene previous_export_time="1377774303.7914264" export_time="1385717596.0376272" exported_by="christoph" formatVersion="1.0.1" >
+  <nodes >
+    <node name="Sun" >
+      <position y="8.382701" x="40.035576" z="7.460728" />
+      <rotation qw="0.932253" qy="0.163727" qx="0.294012" qz="-0.132876" />
+      <scale y="1.000000" x="1.000000" z="1.000000" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <light type="directional" name="Sun" powerScale="1.0" >
+        <position y="8.382701" x="40.035576" z="7.460728" />
+        <lightAttenuation constant="1.0" linear="0.04" range="5000" quadratic="0.0" />
+        <direction y="-0.792" x="0.151" z="0.592" />
+        <colourDiffuse g="1.0" b="1.0" r="1.0" />
+        <colourSpecular g="1.0" b="1.0" r="1.0" />
+      </light>
+    </node>
+    <node name="LinkHouse" >
+      <position y="0.927585" x="9.417850" z="37.014652" />
+      <rotation qw="1.000000" qy="0.000000" qx="0.000000" qz="-0.000000" />
+      <scale y="1.036113" x="1.036113" z="1.036113" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <entity actor="False" ghost="False" anisotropic_friction="False" lock_rot_x="False" lock_rot_y="False" lock_rot_z="False" velocity_max="0.0" collisionPrim="box" friction_y="1.0" friction_x="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_trans_z="False" lock_trans_y="False" lock_trans_x="False" mass="1.0" inertia_tensor="0.4000000059604645" mass_radius="1.0" damping_rot="0.10000000149011612" meshFile="RedHouse1.mesh" velocity_min="0.0" name="RedHouse1" physics_type="STATIC" />
+    </node>
+    <node name="LinkHouseEntrance" >
+      <position y="0.927585" x="9.417850" z="37.014652" />
+      <rotation qw="1.000000" qy="0.000000" qx="0.000000" qz="-0.000000" />
+      <scale y="1.036113" x="1.036113" z="1.036113" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <entity actor="False" ghost="False" anisotropic_friction="False" lock_rot_x="False" lock_rot_y="False" lock_rot_z="False" velocity_max="0.0" collisionPrim="triangle_mesh" friction_y="1.0" friction_x="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_trans_z="False" lock_trans_y="False" lock_trans_x="False" mass="1.0" inertia_tensor="0.4000000059604645" mass_radius="1.0" damping_rot="0.10000000149011612" meshFile="BlueHouse1entrance.mesh" velocity_min="0.0" name="BlueHouse1entrance" physics_type="STATIC" />
+    </node>
+    <node name="LinkHousePlateau" >
+      <position y="0.000000" x="5.806143" z="41.001518" />
+      <rotation qw="1.000000" qy="0.000000" qx="0.000000" qz="-0.000000" />
+      <scale y="1.000000" x="1.000000" z="1.000000" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <entity actor="False" ghost="False" anisotropic_friction="False" lock_rot_x="False" lock_rot_y="False" lock_rot_z="False" velocity_max="0.0" collisionPrim="triangle_mesh" friction_y="1.0" friction_x="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_trans_z="False" lock_trans_y="False" lock_trans_x="False" mass="1.0" inertia_tensor="0.4000000059604645" mass_radius="1.0" damping_rot="0.10000000149011612" meshFile="Plane.014.mesh" velocity_min="0.0" name="Plane.014" physics_type="STATIC" />
+    </node>
+    <node name="GreenBush.446" >
+      <position y="0.940655" x="5.847538" z="39.366409" />
+      <rotation qw="1.000000" qy="0.000000" qx="0.000000" qz="-0.000000" />
+      <scale y="1.000000" x="1.000000" z="1.000000" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <entity actor="False" ghost="False" anisotropic_friction="False" lock_rot_x="False" lock_rot_y="False" lock_rot_z="False" velocity_max="0.0" collisionPrim="sphere" friction_y="1.0" friction_x="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_trans_z="False" lock_trans_y="False" lock_trans_x="False" mass="1.0" inertia_tensor="0.4000000059604645" mass_radius="1.0" damping_rot="0.10000000149011612" meshFile="GreenBush.mesh" velocity_min="0.0" name="GreenBush" physics_type="STATIC" />
+    </node>
+    <node name="GreenBush.447" >
+      <position y="0.940655" x="5.847538" z="38.593342" />
+      <rotation qw="1.000000" qy="0.000000" qx="0.000000" qz="-0.000000" />
+      <scale y="1.000000" x="1.000000" z="1.000000" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <entity actor="False" ghost="False" anisotropic_friction="False" lock_rot_x="False" lock_rot_y="False" lock_rot_z="False" velocity_max="0.0" collisionPrim="sphere" friction_y="1.0" friction_x="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_trans_z="False" lock_trans_y="False" lock_trans_x="False" mass="1.0" inertia_tensor="0.4000000059604645" mass_radius="1.0" damping_rot="0.10000000149011612" meshFile="GreenBush.mesh" velocity_min="0.0" name="GreenBush" physics_type="STATIC" />
+    </node>
+    <node name="GreenBush.448" >
+      <position y="0.940655" x="1.977591" z="38.636810" />
+      <rotation qw="1.000000" qy="0.000000" qx="0.000000" qz="-0.000000" />
+      <scale y="1.000000" x="1.000000" z="1.000000" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <entity actor="False" ghost="False" anisotropic_friction="False" lock_rot_x="False" lock_rot_y="False" lock_rot_z="False" velocity_max="0.0" collisionPrim="sphere" friction_y="1.0" friction_x="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_trans_z="False" lock_trans_y="False" lock_trans_x="False" mass="1.0" inertia_tensor="0.4000000059604645" mass_radius="1.0" damping_rot="0.10000000149011612" meshFile="GreenBush.mesh" velocity_min="0.0" name="GreenBush" physics_type="STATIC" />
+    </node>
+    <node name="GreenBush.449" >
+      <position y="0.940655" x="1.977591" z="39.409878" />
+      <rotation qw="1.000000" qy="0.000000" qx="0.000000" qz="-0.000000" />
+      <scale y="1.000000" x="1.000000" z="1.000000" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <entity actor="False" ghost="False" anisotropic_friction="False" lock_rot_x="False" lock_rot_y="False" lock_rot_z="False" velocity_max="0.0" collisionPrim="sphere" friction_y="1.0" friction_x="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_trans_z="False" lock_trans_y="False" lock_trans_x="False" mass="1.0" inertia_tensor="0.4000000059604645" mass_radius="1.0" damping_rot="0.10000000149011612" meshFile="GreenBush.mesh" velocity_min="0.0" name="GreenBush" physics_type="STATIC" />
+    </node>
+    <node name="GreenBush.450" >
+      <position y="0.940655" x="2.774505" z="39.409878" />
+      <rotation qw="1.000000" qy="0.000000" qx="0.000000" qz="-0.000000" />
+      <scale y="1.000000" x="1.000000" z="1.000000" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <entity actor="False" ghost="False" anisotropic_friction="False" lock_rot_x="False" lock_rot_y="False" lock_rot_z="False" velocity_max="0.0" collisionPrim="sphere" friction_y="1.0" friction_x="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_trans_z="False" lock_trans_y="False" lock_trans_x="False" mass="1.0" inertia_tensor="0.4000000059604645" mass_radius="1.0" damping_rot="0.10000000149011612" meshFile="GreenBush.mesh" velocity_min="0.0" name="GreenBush" physics_type="STATIC" />
+    </node>
+    <node name="GreenBush.451" >
+      <position y="0.940655" x="2.774505" z="38.636810" />
+      <rotation qw="1.000000" qy="0.000000" qx="0.000000" qz="-0.000000" />
+      <scale y="1.000000" x="1.000000" z="1.000000" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <entity actor="False" ghost="False" anisotropic_friction="False" lock_rot_x="False" lock_rot_y="False" lock_rot_z="False" velocity_max="0.0" collisionPrim="sphere" friction_y="1.0" friction_x="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_trans_z="False" lock_trans_y="False" lock_trans_x="False" mass="1.0" inertia_tensor="0.4000000059604645" mass_radius="1.0" damping_rot="0.10000000149011612" meshFile="GreenBush.mesh" velocity_min="0.0" name="GreenBush" physics_type="STATIC" />
+    </node>
+    <node name="GreenBush.452" >
+      <position y="0.940655" x="2.774505" z="40.234695" />
+      <rotation qw="1.000000" qy="0.000000" qx="0.000000" qz="-0.000000" />
+      <scale y="1.000000" x="1.000000" z="1.000000" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <entity actor="False" ghost="False" anisotropic_friction="False" lock_rot_x="False" lock_rot_y="False" lock_rot_z="False" velocity_max="0.0" collisionPrim="sphere" friction_y="1.0" friction_x="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_trans_z="False" lock_trans_y="False" lock_trans_x="False" mass="1.0" inertia_tensor="0.4000000059604645" mass_radius="1.0" damping_rot="0.10000000149011612" meshFile="GreenBush.mesh" velocity_min="0.0" name="GreenBush" physics_type="STATIC" />
+    </node>
+    <node name="GreenBush.453" >
+      <position y="0.940655" x="1.977591" z="40.234695" />
+      <rotation qw="1.000000" qy="0.000000" qx="0.000000" qz="-0.000000" />
+      <scale y="1.000000" x="1.000000" z="1.000000" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <entity actor="False" ghost="False" anisotropic_friction="False" lock_rot_x="False" lock_rot_y="False" lock_rot_z="False" velocity_max="0.0" collisionPrim="sphere" friction_y="1.0" friction_x="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_trans_z="False" lock_trans_y="False" lock_trans_x="False" mass="1.0" inertia_tensor="0.4000000059604645" mass_radius="1.0" damping_rot="0.10000000149011612" meshFile="GreenBush.mesh" velocity_min="0.0" name="GreenBush" physics_type="STATIC" />
+    </node>
+    <node name="GreenBush.454" >
+      <position y="0.940655" x="11.336986" z="39.366409" />
+      <rotation qw="1.000000" qy="0.000000" qx="0.000000" qz="-0.000000" />
+      <scale y="1.000000" x="1.000000" z="1.000000" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <entity actor="False" ghost="False" anisotropic_friction="False" lock_rot_x="False" lock_rot_y="False" lock_rot_z="False" velocity_max="0.0" collisionPrim="sphere" friction_y="1.0" friction_x="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_trans_z="False" lock_trans_y="False" lock_trans_x="False" mass="1.0" inertia_tensor="0.4000000059604645" mass_radius="1.0" damping_rot="0.10000000149011612" meshFile="GreenBush.mesh" velocity_min="0.0" name="GreenBush" physics_type="STATIC" />
+    </node>
+    <node name="GreenBush.455" >
+      <position y="0.940655" x="12.094308" z="39.366409" />
+      <rotation qw="1.000000" qy="0.000000" qx="0.000000" qz="-0.000000" />
+      <scale y="1.000000" x="1.000000" z="1.000000" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <entity actor="False" ghost="False" anisotropic_friction="False" lock_rot_x="False" lock_rot_y="False" lock_rot_z="False" velocity_max="0.0" collisionPrim="sphere" friction_y="1.0" friction_x="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_trans_z="False" lock_trans_y="False" lock_trans_x="False" mass="1.0" inertia_tensor="0.4000000059604645" mass_radius="1.0" damping_rot="0.10000000149011612" meshFile="GreenBush.mesh" velocity_min="0.0" name="GreenBush" physics_type="STATIC" />
+    </node>
+    <node name="GreenBush.456" >
+      <position y="0.940655" x="12.094308" z="38.593342" />
+      <rotation qw="1.000000" qy="0.000000" qx="0.000000" qz="-0.000000" />
+      <scale y="1.000000" x="1.000000" z="1.000000" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <entity actor="False" ghost="False" anisotropic_friction="False" lock_rot_x="False" lock_rot_y="False" lock_rot_z="False" velocity_max="0.0" collisionPrim="sphere" friction_y="1.0" friction_x="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_trans_z="False" lock_trans_y="False" lock_trans_x="False" mass="1.0" inertia_tensor="0.4000000059604645" mass_radius="1.0" damping_rot="0.10000000149011612" meshFile="GreenBush.mesh" velocity_min="0.0" name="GreenBush" physics_type="STATIC" />
+    </node>
+    <node name="GreenBush.457" >
+      <position y="0.940655" x="11.336986" z="38.593342" />
+      <rotation qw="1.000000" qy="0.000000" qx="0.000000" qz="-0.000000" />
+      <scale y="1.000000" x="1.000000" z="1.000000" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <entity actor="False" ghost="False" anisotropic_friction="False" lock_rot_x="False" lock_rot_y="False" lock_rot_z="False" velocity_max="0.0" collisionPrim="sphere" friction_y="1.0" friction_x="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_trans_z="False" lock_trans_y="False" lock_trans_x="False" mass="1.0" inertia_tensor="0.4000000059604645" mass_radius="1.0" damping_rot="0.10000000149011612" meshFile="GreenBush.mesh" velocity_min="0.0" name="GreenBush" physics_type="STATIC" />
+    </node>
+    <node name="LightStone.000" >
+      <position y="0.937652" x="11.341080" z="41.026436" />
+      <rotation qw="1.000000" qy="0.000000" qx="0.000000" qz="-0.000000" />
+      <scale y="1.000000" x="1.000000" z="1.000000" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <entity actor="False" ghost="False" anisotropic_friction="False" lock_rot_x="False" lock_rot_y="False" lock_rot_z="False" velocity_max="0.0" collisionPrim="cylinder" friction_y="1.0" friction_x="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_trans_z="False" lock_trans_y="False" lock_trans_x="False" mass="1.0" inertia_tensor="0.4000000059604645" mass_radius="1.0" damping_rot="0.10000000149011612" meshFile="LightStone.mesh" velocity_min="0.0" name="LightStone" physics_type="STATIC" />
+    </node>
+    <node name="LightStone.001" >
+      <position y="0.937652" x="12.139367" z="41.026436" />
+      <rotation qw="1.000000" qy="0.000000" qx="0.000000" qz="-0.000000" />
+      <scale y="1.000000" x="1.000000" z="1.000000" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <entity actor="False" ghost="False" anisotropic_friction="False" lock_rot_x="False" lock_rot_y="False" lock_rot_z="False" velocity_max="0.0" collisionPrim="cylinder" friction_y="1.0" friction_x="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_trans_z="False" lock_trans_y="False" lock_trans_x="False" mass="1.0" inertia_tensor="0.4000000059604645" mass_radius="1.0" damping_rot="0.10000000149011612" meshFile="LightStone.mesh" velocity_min="0.0" name="LightStone" physics_type="STATIC" />
+    </node>
+    <node name="LightStone.002" >
+      <position y="0.937652" x="10.536817" z="41.026436" />
+      <rotation qw="1.000000" qy="0.000000" qx="0.000000" qz="-0.000000" />
+      <scale y="1.000000" x="1.000000" z="1.000000" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <entity actor="False" ghost="False" anisotropic_friction="False" lock_rot_x="False" lock_rot_y="False" lock_rot_z="False" velocity_max="0.0" collisionPrim="cylinder" friction_y="1.0" friction_x="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_trans_z="False" lock_trans_y="False" lock_trans_x="False" mass="1.0" inertia_tensor="0.4000000059604645" mass_radius="1.0" damping_rot="0.10000000149011612" meshFile="LightStone.mesh" velocity_min="0.0" name="LightStone" physics_type="STATIC" />
+    </node>
+    <node name="LightStone.003" >
+      <position y="0.937652" x="6.597586" z="41.026436" />
+      <rotation qw="1.000000" qy="0.000000" qx="0.000000" qz="-0.000000" />
+      <scale y="1.000000" x="1.000000" z="1.000000" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <entity actor="False" ghost="False" anisotropic_friction="False" lock_rot_x="False" lock_rot_y="False" lock_rot_z="False" velocity_max="0.0" collisionPrim="cylinder" friction_y="1.0" friction_x="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_trans_z="False" lock_trans_y="False" lock_trans_x="False" mass="1.0" inertia_tensor="0.4000000059604645" mass_radius="1.0" damping_rot="0.10000000149011612" meshFile="LightStone.mesh" velocity_min="0.0" name="LightStone" physics_type="STATIC" />
+    </node>
+    <node name="LightStone.004" >
+      <position y="0.937652" x="7.401849" z="41.026436" />
+      <rotation qw="1.000000" qy="0.000000" qx="0.000000" qz="-0.000000" />
+      <scale y="1.000000" x="1.000000" z="1.000000" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <entity actor="False" ghost="False" anisotropic_friction="False" lock_rot_x="False" lock_rot_y="False" lock_rot_z="False" velocity_max="0.0" collisionPrim="cylinder" friction_y="1.0" friction_x="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_trans_z="False" lock_trans_y="False" lock_trans_x="False" mass="1.0" inertia_tensor="0.4000000059604645" mass_radius="1.0" damping_rot="0.10000000149011612" meshFile="LightStone.mesh" velocity_min="0.0" name="LightStone" physics_type="STATIC" />
+    </node>
+    <node name="Sign.001" >
+      <position y="-0.000000" x="8.214492" z="22.537386" />
+      <rotation qw="1.000000" qy="0.000000" qx="0.000000" qz="-0.000000" />
+      <scale y="1.000000" x="1.000000" z="1.000000" />
+      <user_data type="str" name="id" value="LinkHouseToCastle" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <entity actor="False" ghost="False" anisotropic_friction="False" lock_rot_x="False" lock_rot_y="False" lock_rot_z="False" velocity_max="0.0" collisionPrim="box" friction_y="1.0" friction_x="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_trans_z="False" lock_trans_y="False" lock_trans_x="False" mass="1.0" inertia_tensor="0.4000000059604645" mass_radius="1.0" damping_rot="0.10000000149011612" meshFile="Sign.001.mesh" velocity_min="0.0" name="Sign.001" physics_type="STATIC" />
+    </node>
+    <node name="WallLinkToWaterL" >
+      <position y="-0.000000" x="7.438604" z="47.549652" />
+      <rotation qw="1.000000" qy="0.000000" qx="0.000000" qz="-0.000000" />
+      <scale y="1.000000" x="1.000000" z="1.000000" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <entity actor="False" ghost="False" anisotropic_friction="False" lock_rot_x="False" lock_rot_y="False" lock_rot_z="False" velocity_max="0.0" friction_y="1.0" friction_x="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_trans_z="False" lock_trans_y="False" lock_trans_x="False" mass="1.0" inertia_tensor="0.4000000059604645" mass_radius="1.0" damping_rot="0.10000000149011612" meshFile="WallLinkToWaterL.mesh" velocity_min="0.0" name="WallLinkToWaterL" physics_type="STATIC" />
+    </node>
+    <node name="WallLinkToWaterR" >
+      <position y="0.000000" x="15.858757" z="47.877342" />
+      <rotation qw="1.000000" qy="0.000000" qx="0.000000" qz="-0.000000" />
+      <scale y="1.000000" x="1.000000" z="1.000000" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <entity actor="False" ghost="False" anisotropic_friction="False" lock_rot_x="False" lock_rot_y="False" lock_rot_z="False" velocity_max="0.0" collisionPrim="triangle_mesh" friction_y="1.0" friction_x="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_trans_z="False" lock_trans_y="False" lock_trans_x="False" mass="1.0" inertia_tensor="0.4000000059604645" mass_radius="1.0" damping_rot="0.10000000149011612" meshFile="WallLinkToWaterR.mesh" velocity_min="0.0" name="WallLinkToWaterR" physics_type="STATIC" />
+    </node>
+    <node name="LinkHouseBorderRight" >
+      <position y="0.000000" x="22.264172" z="21.403597" />
+      <rotation qw="1.000000" qy="0.000000" qx="0.000000" qz="-0.000000" />
+      <scale y="1.000000" x="1.000000" z="1.000000" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <entity actor="False" ghost="False" anisotropic_friction="False" lock_rot_x="False" lock_rot_y="False" lock_rot_z="False" velocity_max="0.0" collisionPrim="triangle_mesh" friction_y="1.0" friction_x="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_trans_z="False" lock_trans_y="False" lock_trans_x="False" mass="1.0" inertia_tensor="0.4000000059604645" mass_radius="1.0" damping_rot="0.10000000149011612" meshFile="LinkHouseBorderRight.mesh" velocity_min="0.0" name="LinkHouseBorderRight" physics_type="NO_COLLISION" />
+    </node>
+    <node name="LinkHouseGrass" >
+      <position y="-0.000000" x="-24.745411" z="19.618141" />
+      <rotation qw="1.000000" qy="0.000000" qx="0.000000" qz="-0.000000" />
+      <scale y="1.000000" x="1.000000" z="1.000000" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <entity actor="False" ghost="False" anisotropic_friction="False" lock_rot_x="False" lock_rot_y="False" lock_rot_z="False" velocity_max="0.0" collisionPrim="triangle_mesh" friction_y="1.0" friction_x="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_trans_z="False" lock_trans_y="False" lock_trans_x="False" mass="1.0" inertia_tensor="0.4000000059604645" mass_radius="1.0" damping_rot="0.10000000149011612" meshFile="Physics_Link_House.mesh" velocity_min="0.0" name="Physics_Link_House" physics_type="STATIC" />
+    </node>
+    <node name="CastleWallRiverBot" >
+      <position y="0.000000" x="-17.657715" z="6.290088" />
+      <rotation qw="1.000000" qy="0.000000" qx="0.000000" qz="-0.000000" />
+      <scale y="1.000000" x="1.000000" z="1.000000" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <entity actor="False" ghost="False" anisotropic_friction="False" lock_rot_x="False" lock_rot_y="False" lock_rot_z="False" velocity_max="0.0" collisionPrim="triangle_mesh" friction_y="1.0" friction_x="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_trans_z="False" lock_trans_y="False" lock_trans_x="False" mass="1.0" inertia_tensor="0.4000000059604645" mass_radius="1.0" damping_rot="0.10000000149011612" meshFile="CastleWallRiverBot.mesh" velocity_min="0.0" name="CastleWallRiverBot" physics_type="STATIC" />
+    </node>
+    <node name="LinkHouseForestWallRiver" >
+      <position y="0.000000" x="-23.973301" z="17.618139" />
+      <rotation qw="1.000000" qy="0.000000" qx="0.000000" qz="-0.000000" />
+      <scale y="1.000000" x="1.000000" z="1.000000" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <entity actor="False" ghost="False" anisotropic_friction="False" lock_rot_x="False" lock_rot_y="False" lock_rot_z="False" velocity_max="0.0" collisionPrim="triangle_mesh" friction_y="1.0" friction_x="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_trans_z="False" lock_trans_y="False" lock_trans_x="False" mass="1.0" inertia_tensor="0.4000000059604645" mass_radius="1.0" damping_rot="0.10000000149011612" meshFile="LinkHouseForestWallRiver.mesh" velocity_min="0.0" name="LinkHouseForestWallRiver" physics_type="STATIC" />
+    </node>
+    <node name="LinkHouseWallRiver" >
+      <position y="0.000000" x="-23.973301" z="17.618139" />
+      <rotation qw="1.000000" qy="0.000000" qx="0.000000" qz="-0.000000" />
+      <scale y="1.000000" x="1.000000" z="1.000000" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <entity actor="False" ghost="False" anisotropic_friction="False" lock_rot_x="False" lock_rot_y="False" lock_rot_z="False" velocity_max="0.0" collisionPrim="triangle_mesh" friction_y="1.0" friction_x="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_trans_z="False" lock_trans_y="False" lock_trans_x="False" mass="1.0" inertia_tensor="0.4000000059604645" mass_radius="1.0" damping_rot="0.10000000149011612" meshFile="LinkHouseWallRiver.mesh" velocity_min="0.0" name="LinkHouseWallRiver" physics_type="STATIC" />
+    </node>
+    <node name="CastleWall" >
+      <position y="0.000000" x="0.000000" z="-0.000000" />
+      <rotation qw="1.000000" qy="0.000000" qx="0.000000" qz="-0.000000" />
+      <scale y="1.000000" x="1.000000" z="1.000000" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <entity actor="False" ghost="False" anisotropic_friction="False" lock_rot_x="False" lock_rot_y="False" lock_rot_z="False" velocity_max="0.0" collisionPrim="triangle_mesh" friction_y="1.0" friction_x="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_trans_z="False" lock_trans_y="False" lock_trans_x="False" mass="1.0" inertia_tensor="0.4000000059604645" mass_radius="1.0" damping_rot="0.10000000149011612" meshFile="CastleWall.mesh" velocity_min="0.0" name="CastleWall" physics_type="STATIC" />
+    </node>
+    <node name="LinkHousePlateauBorder" >
+      <position y="0.000000" x="5.806143" z="41.001518" />
+      <rotation qw="1.000000" qy="0.000000" qx="0.000000" qz="-0.000000" />
+      <scale y="1.000000" x="1.000000" z="1.000000" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <entity actor="False" ghost="False" anisotropic_friction="False" lock_rot_x="False" lock_rot_y="False" lock_rot_z="False" velocity_max="0.0" collisionPrim="triangle_mesh" friction_y="1.0" friction_x="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_trans_z="False" lock_trans_y="False" lock_trans_x="False" mass="1.0" inertia_tensor="0.4000000059604645" mass_radius="1.0" damping_rot="0.10000000149011612" meshFile="LinkHousePlateauBorder.mesh" velocity_min="0.0" name="LinkHousePlateauBorder" physics_type="STATIC" >
+        <user_data type="str" name="wall" value="true" />
+      </entity>
+    </node>
+    <node name="BridgeCastle" >
+      <position y="-0.105831" x="0.000000" z="0.589094" />
+      <rotation qw="1.000000" qy="0.000000" qx="0.000000" qz="-0.000000" />
+      <scale y="1.000000" x="1.000000" z="1.000000" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <entity actor="False" ghost="False" anisotropic_friction="False" lock_rot_x="False" lock_rot_y="False" lock_rot_z="False" velocity_max="0.0" collisionPrim="box" friction_y="1.0" friction_x="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_trans_z="False" lock_trans_y="False" lock_trans_x="False" mass="1.0" inertia_tensor="0.4000000059604645" mass_radius="1.0" damping_rot="0.10000000149011612" meshFile="BridgeCastle.mesh" velocity_min="0.0" name="BridgeCastle" physics_type="STATIC" />
+    </node>
+    <node name="CastlePhysics" >
+      <position y="0.000000" x="-17.657715" z="6.290088" />
+      <rotation qw="1.000000" qy="0.000000" qx="0.000000" qz="-0.000000" />
+      <scale y="1.000000" x="1.000000" z="1.000000" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <entity actor="False" ghost="False" anisotropic_friction="False" lock_rot_x="False" lock_rot_y="False" lock_rot_z="False" velocity_max="0.0" collisionPrim="triangle_mesh" friction_y="1.0" friction_x="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_trans_z="False" lock_trans_y="False" lock_trans_x="False" mass="1.0" inertia_tensor="0.4000000059604645" mass_radius="1.0" damping_rot="0.10000000149011612" meshFile="CastlePhysics.mesh" velocity_min="0.0" name="CastlePhysics" physics_type="STATIC" />
+    </node>
+    <node name="CastleSecretEntranceGreenBush" >
+      <position y="0.000000" x="19.148062" z="-16.810034" />
+      <rotation qw="1.000000" qy="0.000000" qx="0.000000" qz="-0.000000" />
+      <scale y="1.000000" x="1.000000" z="1.000000" />
+      <user_data type="str" name="removeObjectOnLift" value="CastleSecretEntrancePlate" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <entity actor="False" ghost="False" anisotropic_friction="False" lock_rot_x="False" lock_rot_y="False" lock_rot_z="False" velocity_max="0.0" collisionPrim="sphere" friction_y="1.0" friction_x="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_trans_z="False" lock_trans_y="False" lock_trans_x="False" mass="1.0" inertia_tensor="0.4000000059604645" mass_radius="1.0" damping_rot="0.10000000149011612" meshFile="GreenBush.mesh" velocity_min="0.0" name="GreenBush" physics_type="STATIC" />
+    </node>
+    <node name="CastleSecretEntrance" >
+      <position y="0.000000" x="-17.657715" z="6.290088" />
+      <rotation qw="1.000000" qy="0.000000" qx="0.000000" qz="-0.000000" />
+      <scale y="1.000000" x="1.000000" z="1.000000" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <entity actor="False" ghost="False" anisotropic_friction="False" lock_rot_x="False" lock_rot_y="False" lock_rot_z="False" velocity_max="0.0" collisionPrim="triangle_mesh" friction_y="1.0" friction_x="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_trans_z="False" lock_trans_y="False" lock_trans_x="False" mass="1.0" inertia_tensor="0.4000000059604645" mass_radius="1.0" damping_rot="0.10000000149011612" meshFile="CastleSecretEntrance.001.mesh" velocity_min="0.0" name="CastleSecretEntrance.001" physics_type="STATIC" >
+        <user_data type="str" name="wall" value="true" />
+      </entity>
+    </node>
+    <node name="CastleSecretEntrancePlate" >
+      <position y="0.000000" x="-17.657715" z="6.290088" />
+      <rotation qw="1.000000" qy="0.000000" qx="0.000000" qz="-0.000000" />
+      <scale y="1.000000" x="1.000000" z="1.000000" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <entity actor="False" ghost="False" anisotropic_friction="False" lock_rot_x="False" lock_rot_y="False" lock_rot_z="False" velocity_max="0.0" collisionPrim="triangle_mesh" friction_y="1.0" friction_x="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_trans_z="False" lock_trans_y="False" lock_trans_x="False" mass="1.0" inertia_tensor="0.4000000059604645" mass_radius="1.0" damping_rot="0.10000000149011612" meshFile="CastleSecretEntrancePlate.mesh" velocity_min="0.0" name="CastleSecretEntrancePlate" physics_type="STATIC" >
+        <user_data type="str" name="type" value="linkable" />
+        <user_data type="str" name="id" value="CastleSecretEntrancePlate" />
+      </entity>
+    </node>
+    <node name="LinkHouse_Door" >
+      <position y="0.927590" x="9.385819" z="38.068661" />
+      <rotation qw="1.000000" qy="0.000000" qx="0.000000" qz="-0.000000" />
+      <scale y="1.036113" x="1.036113" z="1.036113" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <entity actor="False" ghost="False" anisotropic_friction="False" lock_rot_x="False" lock_rot_y="False" lock_rot_z="False" velocity_max="0.0" collisionPrim="box" friction_y="1.0" friction_x="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_trans_z="False" lock_trans_y="False" lock_trans_x="False" mass="1.0" inertia_tensor="0.4000000059604645" mass_radius="1.0" damping_rot="0.10000000149011612" meshFile="HouseWoodDoor.mesh" velocity_min="0.0" name="HouseWoodDoor" physics_type="STATIC" >
+        <user_data type="str" name="id" value="Link" />
+        <user_data type="str" name="link_id" value="Link" />
+        <user_data type="str" name="link_name" value="LinkHouse" />
+        <user_data type="str" name="link_path" value="maps/caves" />
+        <user_data type="str" name="type" value="Door" />
+      </entity>
+    </node>
+    <node name="CastleSecretEntranceLink" >
+      <position y="-3.557553" x="19.166958" z="-16.781584" />
+      <rotation qw="1.000000" qy="0.000000" qx="0.000000" qz="-0.000000" />
+      <scale y="1.000000" x="1.000000" z="1.000000" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <entity actor="False" ghost="False" anisotropic_friction="False" lock_rot_x="False" lock_rot_y="False" lock_rot_z="False" velocity_max="0.0" friction_y="1.0" friction_x="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_trans_z="False" lock_trans_y="False" lock_trans_x="False" mass="1.0" inertia_tensor="0.4000000059604645" mass_radius="1.0" damping_rot="0.10000000149011612" meshFile="CastleSecretEntranceLink.mesh" velocity_min="0.0" name="CastleSecretEntranceLink" physics_type="NO_COLLISION" >
+        <user_data type="str" name="type" value="ContactLink" />
+        <user_data type="str" name="link_id" value="well" />
+        <user_data type="str" name="link_path" value="maps/caves/CastleSecretPass" />
+        <user_data type="str" name="link_name" value="CastleSecretPass" />
+      </entity>
+    </node>
+  </nodes>
+  <externals >
+    <item type="material" >
+      <file name="/home/christoph/Documents/Projects/Zelda/maps/Map2/TestLinkHouse.material" />
+    </item>
+  </externals>
+  <environment >
+    <colourBackground g="0.05087608844041824" b="0.05087608844041824" r="0.05087608844041824" />
+    <colourAmbient g="0.0" b="0.0" r="0.0" />
+    <colourDiffuse g="0.05087608844041824" b="0.05087608844041824" r="0.05087608844041824" />
+  </environment>
+</scene>

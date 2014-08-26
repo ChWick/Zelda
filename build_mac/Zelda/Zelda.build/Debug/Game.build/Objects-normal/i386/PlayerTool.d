@@ -1,0 +1,29 @@
+dependencies: \
+  /Users/christoph/Documents/Projects/Zelda/Zelda/World/Character/PlayerTool.cpp \
+  /Users/christoph/Documents/Projects/Zelda/Zelda/World/Character/PlayerTool.hpp \
+  /Users/christoph/Documents/Projects/Zelda/Zelda/World/Character/../Damage.hpp \
+  /Users/christoph/Documents/Projects/Zelda/Zelda/World/Character/../Hitpoints.hpp \
+  /Users/christoph/Documents/Projects/Zelda/Zelda/World/Character/../DamageTypes.hpp \
+  /Users/christoph/Documents/Projects/Zelda/Zelda/World/Character/../../Common/Config/TypeDefines.hpp \
+  /Users/christoph/Documents/Projects/ogre/build_xcode/sdk/include/OGRE/OgreVector3.h \
+  /Users/christoph/Documents/Projects/ogre/build_xcode/sdk/include/OGRE/OgrePrerequisites.h \
+  /Users/christoph/Documents/Projects/ogre/build_xcode/sdk/include/OGRE/OgrePlatform.h \
+  /Users/christoph/Documents/Projects/ogre/build_xcode/sdk/include/OGRE/OgreConfig.h \
+  /Users/christoph/Documents/Projects/ogre/build_xcode/sdk/include/OGRE/OgreBuildSettings.h \
+  /Users/christoph/Documents/Projects/ogre/build_xcode/sdk/include/OGRE/OgreStdHeaders.h \
+  /Users/christoph/Documents/Projects/ogre/build_xcode/sdk/include/OGRE/OgreMemoryAllocatorConfig.h \
+  /Users/christoph/Documents/Projects/ogre/build_xcode/sdk/include/OGRE/OgreMemoryAllocatedObject.h \
+  /Users/christoph/Documents/Projects/ogre/build_xcode/sdk/include/OGRE/OgreHeaderPrefix.h \
+  /Users/christoph/Documents/Projects/ogre/build_xcode/sdk/include/OGRE/OgreHeaderSuffix.h \
+  /Users/christoph/Documents/Projects/ogre/build_xcode/sdk/include/OGRE/OgreMemorySTLAllocator.h \
+  /Users/christoph/Documents/Projects/ogre/build_xcode/sdk/include/OGRE/OgreMemoryNedPooling.h \
+  /Users/christoph/Documents/Projects/ogre/build_xcode/sdk/include/OGRE/OgreMath.h \
+  /Users/christoph/Documents/Projects/ogre/build_xcode/sdk/include/OGRE/OgreQuaternion.h \
+  /Users/christoph/Documents/Projects/cegui/build_xcode/sdk/include/cegui-0/CEGUI/String.h \
+  /Users/christoph/Documents/Projects/cegui/build_xcode/sdk/include/cegui-0/CEGUI/Base.h \
+  /Users/christoph/Documents/Projects/cegui/build_xcode/sdk/include/cegui-0/CEGUI/Config.h \
+  /Users/christoph/Documents/Projects/cegui/build_xcode/sdk/include/cegui-0/CEGUI/Version.h \
+  /Users/christoph/Documents/Projects/cegui/build_xcode/sdk/include/cegui-0/CEGUI/ForwardRefs.h \
+  /Users/christoph/Documents/Projects/cegui/build_xcode/sdk/include/cegui-0/CEGUI/MemoryAllocation.h \
+  /Users/christoph/Documents/Projects/cegui/build_xcode/sdk/include/cegui-0/CEGUI/MemoryAllocatedObject.h \
+  /Users/christoph/Documents/Projects/cegui/build_xcode/sdk/include/cegui-0/CEGUI/MemorySTLWrapper.h

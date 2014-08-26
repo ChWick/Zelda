@@ -1,0 +1,29 @@
+TALL_BUILD
+v6
+r1
+cCheck dependencies
+cPhaseScriptExecution CMake\ Rules /Users/christoph/Documents/Projects/Zelda/build_mac/Zelda.build/Debug/ALL_BUILD.build/Script-9F288D0FF413435C8F5BF43B.sh
+
+N/Users/christoph/Documents/Projects/Zelda/build_mac/Zelda.build/Debug/ALL_BUILD.build/Script-9F288D0FF413435C8F5BF43B.sh
+c0000000053F4EA0200000000000000C0
+t1408559618
+s192
+
+CCheck dependencies
+r0
+lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection18"Check dependencies18"Check dependenciesdb87b48221a5b941^2d24c88221a5b941^---0#1#1#--18"Check dependencies36"289992B1-FAB6-4461-97A4-E64469CC10C7-
+
+CPhaseScriptExecution CMake\ Rules /Users/christoph/Documents/Projects/Zelda/build_mac/Zelda.build/Debug/ALL_BUILD.build/Script-9F288D0FF413435C8F5BF43B.sh
+s430252418.778777
+e430252418.831557
+r1
+xPhaseScriptExecution
+xCMake Rules
+x/Users/christoph/Documents/Projects/Zelda/build_mac/Zelda.build/Debug/ALL_BUILD.build/Script-9F288D0FF413435C8F5BF43B.sh
+oecho ""
+o
+oecho Build\ all\ projects
+oBuild all projects
+lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection37"Run custom shell script 'CMake Rules'112"PhaseScriptExecution CMake\ Rules build_mac/Zelda.build/Debug/ALL_BUILD.build/Script-9F288D0FF413435C8F5BF43B.shf3ccc78221a5b941^a4e1d48221a5b941^-54"echo ""echo Build\ all\ projectsBuild all projects3(21%IDEActivityLogMessage2@8"echo ""-430252418#0#8#-0#-----2@26"echo Build\ all\ projects-430252418#9#26#-0#-----2@19"Build all projects-430252418#35#19#-0#-----0#0#1#--298"PhaseScriptExecution CMake\ Rules build_mac/Zelda.build/Debug/ALL_BUILD.build/Script-9F288D0FF413435C8F5BF43B.sh    cd /Users/christoph/Documents/Projects/Zelda    /bin/sh -c /Users/christoph/Documents/Projects/Zelda/build_mac/Zelda.build/Debug/ALL_BUILD.build/Script-9F288D0FF413435C8F5BF43B.sh36"0CC6E983-D98F-4D88-9C42-398EE22C4724-
+b4472E28E-FF44-4277-9511-117649057CFD
+

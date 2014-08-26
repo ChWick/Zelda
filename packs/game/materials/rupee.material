@@ -1,0 +1,51 @@
+material Rupee
+{
+    receive_shadows off
+
+    technique
+    {
+        pass
+        {
+            specular 0.5 0.5 0.5 1.0 12.5
+
+            scene_blend alpha_blend
+
+        }
+    }
+}
+
+material Rupee/Green : Rupee
+{
+    technique
+    {
+        pass
+        {
+            ambient 0.0 0.1 0.0 0.5
+            diffuse 0.0 0.800000011920929 0.0 0.5
+        }
+    }
+}
+
+material Rupee/Blue : Rupee
+{
+    technique
+    {
+        pass
+        {
+            ambient 0.0 0.0 0.1 0.5
+            diffuse 0.0 0.0 0.800000011920929 0.5
+        }
+    }
+}
+
+material Rupee/Red : Rupee
+{
+    technique
+    {
+        pass
+        {
+            ambient 0.1 0.0 0.0 0.5
+            diffuse 0.800000011920929 0.0 0.0 0.5
+        }
+    }
+}

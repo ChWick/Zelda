@@ -1,0 +1,105 @@
+TZERO_CHECK
+v6
+r1
+cCheck dependencies
+cPhaseScriptExecution CMake\ Rules /Users/christoph/Documents/Projects/Zelda/build_mac/Zelda.build/Debug/ZERO_CHECK.build/Script-FED66772E31F4F50BB80AAEA.sh
+
+N/Users/christoph/Documents/Projects/Zelda/build_mac/Zelda.build/Debug/ZERO_CHECK.build/Script-0A4CF4D9F1EB43FF922303FF.sh
+c0000000053F4E97000000000000000C1
+t1408559472
+s193
+
+N/Users/christoph/Documents/Projects/Zelda/build_mac/Zelda.build/Debug/ZERO_CHECK.build/Script-2B301DFF770F468DA87327DB.sh
+c0000000053F4E9C300000000000000C1
+t1408559555
+s193
+
+N/Users/christoph/Documents/Projects/Zelda/build_mac/Zelda.build/Debug/ZERO_CHECK.build/Script-66028DA84486423A8195645F.sh
+c0000000053F4E87F00000000000000C1
+t1408559231
+s193
+
+N/Users/christoph/Documents/Projects/Zelda/build_mac/Zelda.build/Debug/ZERO_CHECK.build/Script-D8099BF2F1AC4451983267BC.sh
+c0000000053F4D88000000000000000C1
+t1408555136
+s193
+
+N/Users/christoph/Documents/Projects/Zelda/build_mac/Zelda.build/Debug/ZERO_CHECK.build/Script-FED66772E31F4F50BB80AAEA.sh
+c0000000053F4EA0100000000000000C1
+t1408559617
+s193
+
+CCheck dependencies
+r0
+lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection18"Check dependencies18"Check dependencies3d2ce88121a5b941^9acce88121a5b941^---0#1#1#--18"Check dependencies36"94C30B19-6BBA-4150-B71B-F30349F82FC3-
+
+CPhaseScriptExecution CMake\ Rules /Users/christoph/Documents/Projects/Zelda/build_mac/Zelda.build/Debug/ZERO_CHECK.build/Script-0A4CF4D9F1EB43FF922303FF.sh
+s430252272.359409
+e430252272.482259
+r1
+xPhaseScriptExecution
+xCMake Rules
+x/Users/christoph/Documents/Projects/Zelda/build_mac/Zelda.build/Debug/ZERO_CHECK.build/Script-0A4CF4D9F1EB43FF922303FF.sh
+oecho ""
+o
+omake -f /Users/christoph/Documents/Projects/Zelda/build_mac/CMakeScripts/ReRunCMake.make
+omake[1]: `/Users/christoph/Documents/Projects/Zelda/build_mac/CMakeFiles/cmake.check_cache' is up to date.
+lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection37"Run custom shell script 'CMake Rules'113"PhaseScriptExecution CMake\ Rules build_mac/Zelda.build/Debug/ZERO_CHECK.build/Script-0A4CF4D9F1EB43FF922303FF.shcdad5cf020a5b941^fb757bf020a5b941^-205"echo ""make -f /Users/christoph/Documents/Projects/Zelda/build_mac/CMakeScripts/ReRunCMake.makemake[1]: `/Users/christoph/Documents/Projects/Zelda/build_mac/CMakeFiles/cmake.check_cache' is up to date.3(21%IDEActivityLogMessage2@8"echo ""-430252272#0#8#-0#-----2@89"make -f /Users/christoph/Documents/Projects/Zelda/build_mac/CMakeScripts/ReRunCMake.make-430252272#9#89#-0#-----2@107"make[1]: `/Users/christoph/Documents/Projects/Zelda/build_mac/CMakeFiles/cmake.check_cache' is up to date.-430252272#98#107#-0#-----0#0#1#--300"PhaseScriptExecution CMake\ Rules build_mac/Zelda.build/Debug/ZERO_CHECK.build/Script-0A4CF4D9F1EB43FF922303FF.sh    cd /Users/christoph/Documents/Projects/Zelda    /bin/sh -c /Users/christoph/Documents/Projects/Zelda/build_mac/Zelda.build/Debug/ZERO_CHECK.build/Script-0A4CF4D9F1EB43FF922303FF.sh36"967313C0-3DA8-4325-8EFA-5C55EA604C7A-
+bECA254A8-5E60-4DE7-B086-F0AD3C4ED699
+
+CPhaseScriptExecution CMake\ Rules /Users/christoph/Documents/Projects/Zelda/build_mac/Zelda.build/Debug/ZERO_CHECK.build/Script-2B301DFF770F468DA87327DB.sh
+s430252355.186373
+e430252355.291224
+r1
+xPhaseScriptExecution
+xCMake Rules
+x/Users/christoph/Documents/Projects/Zelda/build_mac/Zelda.build/Debug/ZERO_CHECK.build/Script-2B301DFF770F468DA87327DB.sh
+oecho ""
+o
+omake -f /Users/christoph/Documents/Projects/Zelda/build_mac/CMakeScripts/ReRunCMake.make
+omake[1]: `/Users/christoph/Documents/Projects/Zelda/build_mac/CMakeFiles/cmake.check_cache' is up to date.
+lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection37"Run custom shell script 'CMake Rules'113"PhaseScriptExecution CMake\ Rules build_mac/Zelda.build/Debug/ZERO_CHECK.build/Script-2B301DFF770F468DA87327DB.sh3c4b304321a5b941^fc8d4a4321a5b941^-205"echo ""make -f /Users/christoph/Documents/Projects/Zelda/build_mac/CMakeScripts/ReRunCMake.makemake[1]: `/Users/christoph/Documents/Projects/Zelda/build_mac/CMakeFiles/cmake.check_cache' is up to date.3(21%IDEActivityLogMessage2@8"echo ""-430252355#0#8#-0#-----2@89"make -f /Users/christoph/Documents/Projects/Zelda/build_mac/CMakeScripts/ReRunCMake.make-430252355#9#89#-0#-----2@107"make[1]: `/Users/christoph/Documents/Projects/Zelda/build_mac/CMakeFiles/cmake.check_cache' is up to date.-430252355#98#107#-0#-----0#0#1#--300"PhaseScriptExecution CMake\ Rules build_mac/Zelda.build/Debug/ZERO_CHECK.build/Script-2B301DFF770F468DA87327DB.sh    cd /Users/christoph/Documents/Projects/Zelda    /bin/sh -c /Users/christoph/Documents/Projects/Zelda/build_mac/Zelda.build/Debug/ZERO_CHECK.build/Script-2B301DFF770F468DA87327DB.sh36"946F68A9-379B-461A-8C17-B2DFE71694FD-
+b7C245E42-6C7B-494A-A949-DCBDE5350AD6
+
+CPhaseScriptExecution CMake\ Rules /Users/christoph/Documents/Projects/Zelda/build_mac/Zelda.build/Debug/ZERO_CHECK.build/Script-66028DA84486423A8195645F.sh
+s430252031.934646
+e430252032.166595
+r1
+xPhaseScriptExecution
+xCMake Rules
+x/Users/christoph/Documents/Projects/Zelda/build_mac/Zelda.build/Debug/ZERO_CHECK.build/Script-66028DA84486423A8195645F.sh
+oecho ""
+o
+omake -f /Users/christoph/Documents/Projects/Zelda/build_mac/CMakeScripts/ReRunCMake.make
+omake[1]: `/Users/christoph/Documents/Projects/Zelda/build_mac/CMakeFiles/cmake.check_cache' is up to date.
+lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection37"Run custom shell script 'CMake Rules'113"PhaseScriptExecution CMake\ Rules build_mac/Zelda.build/Debug/ZERO_CHECK.build/Script-66028DA84486423A8195645F.shd1b1efff1fa5b941^705b2f0020a5b941^-205"echo ""make -f /Users/christoph/Documents/Projects/Zelda/build_mac/CMakeScripts/ReRunCMake.makemake[1]: `/Users/christoph/Documents/Projects/Zelda/build_mac/CMakeFiles/cmake.check_cache' is up to date.3(21%IDEActivityLogMessage2@8"echo ""-430252032#0#8#-0#-----2@89"make -f /Users/christoph/Documents/Projects/Zelda/build_mac/CMakeScripts/ReRunCMake.make-430252032#9#89#-0#-----2@107"make[1]: `/Users/christoph/Documents/Projects/Zelda/build_mac/CMakeFiles/cmake.check_cache' is up to date.-430252032#98#107#-0#-----0#0#1#--300"PhaseScriptExecution CMake\ Rules build_mac/Zelda.build/Debug/ZERO_CHECK.build/Script-66028DA84486423A8195645F.sh    cd /Users/christoph/Documents/Projects/Zelda    /bin/sh -c /Users/christoph/Documents/Projects/Zelda/build_mac/Zelda.build/Debug/ZERO_CHECK.build/Script-66028DA84486423A8195645F.sh36"45EFF88F-244B-4803-AB38-E298030337BF-
+b6414DDA9-09CB-439B-997D-21F21E05BFB9
+
+CPhaseScriptExecution CMake\ Rules /Users/christoph/Documents/Projects/Zelda/build_mac/Zelda.build/Debug/ZERO_CHECK.build/Script-D8099BF2F1AC4451983267BC.sh
+s430251802.784930
+e430251803.175303
+r1
+xPhaseScriptExecution
+xCMake Rules
+x/Users/christoph/Documents/Projects/Zelda/build_mac/Zelda.build/Debug/ZERO_CHECK.build/Script-D8099BF2F1AC4451983267BC.sh
+oecho ""
+o
+omake -f /Users/christoph/Documents/Projects/Zelda/build_mac/CMakeScripts/ReRunCMake.make
+omake[1]: `/Users/christoph/Documents/Projects/Zelda/build_mac/CMakeFiles/cmake.check_cache' is up to date.
+lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection37"Run custom shell script 'CMake Rules'113"PhaseScriptExecution CMake\ Rules build_mac/Zelda.build/Debug/ZERO_CHECK.build/Script-D8099BF2F1AC4451983267BC.shbf7dc91a1fa5b941^35ef2c1b1fa5b941^-205"echo ""make -f /Users/christoph/Documents/Projects/Zelda/build_mac/CMakeScripts/ReRunCMake.makemake[1]: `/Users/christoph/Documents/Projects/Zelda/build_mac/CMakeFiles/cmake.check_cache' is up to date.3(21%IDEActivityLogMessage2@8"echo ""-430251803#0#8#-0#-----2@89"make -f /Users/christoph/Documents/Projects/Zelda/build_mac/CMakeScripts/ReRunCMake.make-430251803#9#89#-0#-----2@107"make[1]: `/Users/christoph/Documents/Projects/Zelda/build_mac/CMakeFiles/cmake.check_cache' is up to date.-430251803#98#107#-0#-----0#0#1#--300"PhaseScriptExecution CMake\ Rules build_mac/Zelda.build/Debug/ZERO_CHECK.build/Script-D8099BF2F1AC4451983267BC.sh    cd /Users/christoph/Documents/Projects/Zelda    /bin/sh -c /Users/christoph/Documents/Projects/Zelda/build_mac/Zelda.build/Debug/ZERO_CHECK.build/Script-D8099BF2F1AC4451983267BC.sh36"6186DFE9-21D5-4CEE-B1CC-03C2DF4E6CFD-
+b8F3BAB97-0EC5-4FE5-9440-CA29158F17B6
+
+CPhaseScriptExecution CMake\ Rules /Users/christoph/Documents/Projects/Zelda/build_mac/Zelda.build/Debug/ZERO_CHECK.build/Script-FED66772E31F4F50BB80AAEA.sh
+s430252417.909747
+e430252417.978998
+r1
+xPhaseScriptExecution
+xCMake Rules
+x/Users/christoph/Documents/Projects/Zelda/build_mac/Zelda.build/Debug/ZERO_CHECK.build/Script-FED66772E31F4F50BB80AAEA.sh
+oecho ""
+o
+omake -f /Users/christoph/Documents/Projects/Zelda/build_mac/CMakeScripts/ReRunCMake.make
+omake[1]: `/Users/christoph/Documents/Projects/Zelda/build_mac/CMakeFiles/cmake.check_cache' is up to date.
+lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection37"Run custom shell script 'CMake Rules'113"PhaseScriptExecution CMake\ Rules build_mac/Zelda.build/Debug/ZERO_CHECK.build/Script-FED66772E31F4F50BB80AAEA.she883e98121a5b941^02a0fa8121a5b941^-205"echo ""make -f /Users/christoph/Documents/Projects/Zelda/build_mac/CMakeScripts/ReRunCMake.makemake[1]: `/Users/christoph/Documents/Projects/Zelda/build_mac/CMakeFiles/cmake.check_cache' is up to date.3(21%IDEActivityLogMessage2@8"echo ""-430252417#0#8#-0#-----2@89"make -f /Users/christoph/Documents/Projects/Zelda/build_mac/CMakeScripts/ReRunCMake.make-430252417#9#89#-0#-----2@107"make[1]: `/Users/christoph/Documents/Projects/Zelda/build_mac/CMakeFiles/cmake.check_cache' is up to date.-430252417#98#107#-0#-----0#0#1#--300"PhaseScriptExecution CMake\ Rules build_mac/Zelda.build/Debug/ZERO_CHECK.build/Script-FED66772E31F4F50BB80AAEA.sh    cd /Users/christoph/Documents/Projects/Zelda    /bin/sh -c /Users/christoph/Documents/Projects/Zelda/build_mac/Zelda.build/Debug/ZERO_CHECK.build/Script-FED66772E31F4F50BB80AAEA.sh36"1D162B23-AF1A-4EC6-962B-5B19587DB2BB-
+bED63CC93-B37D-4D61-9F8C-E6A2CD1E8EB6
+

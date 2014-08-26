@@ -1,0 +1,29 @@
+TZERO_CHECK
+v6
+r1
+cCheck dependencies
+cPhaseScriptExecution CMake\ Rules /Users/christoph/Documents/Projects/Zelda/build_mac/Zelda.build/Debug/ZERO_CHECK.build/Script-D8099BF2F1AC4451983267BC.sh
+
+N/Users/christoph/Documents/Projects/Zelda/build_mac/Zelda.build/Debug/ZERO_CHECK.build/Script-D8099BF2F1AC4451983267BC.sh
+c0000000053F4D88000000000000000C1
+t1408555136
+s193
+
+CCheck dependencies
+r0
+lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection18"Check dependencies18"Check dependencies5ef3820010a5b941^b8e9870010a5b941^---0#1#1#--18"Check dependencies36"5A9BD6F3-5231-4823-B349-436C22ECF7E2-
+
+CPhaseScriptExecution CMake\ Rules /Users/christoph/Documents/Projects/Zelda/build_mac/Zelda.build/Debug/ZERO_CHECK.build/Script-D8099BF2F1AC4451983267BC.sh
+s430247936.592911
+e430247936.801170
+r1
+xPhaseScriptExecution
+xCMake Rules
+x/Users/christoph/Documents/Projects/Zelda/build_mac/Zelda.build/Debug/ZERO_CHECK.build/Script-D8099BF2F1AC4451983267BC.sh
+oecho ""
+o
+omake -f /Users/christoph/Documents/Projects/Zelda/build_mac/CMakeScripts/ReRunCMake.make
+omake[1]: `/Users/christoph/Documents/Projects/Zelda/build_mac/CMakeFiles/cmake.check_cache' is up to date.
+lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection37"Run custom shell script 'CMake Rules'113"PhaseScriptExecution CMake\ Rules build_mac/Zelda.build/Debug/ZERO_CHECK.build/Script-D8099BF2F1AC4451983267BC.sh703e990010a5b941^8f18cd0010a5b941^-205"echo ""make -f /Users/christoph/Documents/Projects/Zelda/build_mac/CMakeScripts/ReRunCMake.makemake[1]: `/Users/christoph/Documents/Projects/Zelda/build_mac/CMakeFiles/cmake.check_cache' is up to date.3(21%IDEActivityLogMessage2@8"echo ""-430247936#0#8#-0#-----2@89"make -f /Users/christoph/Documents/Projects/Zelda/build_mac/CMakeScripts/ReRunCMake.make-430247936#9#89#-0#-----2@107"make[1]: `/Users/christoph/Documents/Projects/Zelda/build_mac/CMakeFiles/cmake.check_cache' is up to date.-430247936#98#107#-0#-----0#0#1#--300"PhaseScriptExecution CMake\ Rules build_mac/Zelda.build/Debug/ZERO_CHECK.build/Script-D8099BF2F1AC4451983267BC.sh    cd /Users/christoph/Documents/Projects/Zelda    /bin/sh -c /Users/christoph/Documents/Projects/Zelda/build_mac/Zelda.build/Debug/ZERO_CHECK.build/Script-D8099BF2F1AC4451983267BC.sh36"40BEABFC-417F-43D7-8979-DCDB6765121A-
+bEF7C33FF-3C09-4155-95CB-43B57258AEA7
+

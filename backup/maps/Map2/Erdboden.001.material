@@ -1,0 +1,35 @@
+// Erdboden.001 genrated by blender2ogre 0.5.9
+
+material Erdboden.001 
+{
+    receive_shadows on 
+
+    technique
+    {
+        pass Erdboden.001
+        {
+            ambient 0.11068804562091827 0.07275455445051193 0.015404806472361088 1.0
+            diffuse 0.08855043781623895 0.05820364442771142 0.012323845361528474 1.0
+            specular 0.03669724613428116 0.03669724613428116 0.03669724613428116 1.0 18.0
+            emissive 0.0 0.0 0.0 1.0
+
+            alpha_to_coverage off
+            colour_write on
+            cull_hardware clockwise
+            depth_check on
+            depth_func less_equal
+            depth_write on
+            illumination_stage 
+            light_clip_planes off
+            light_scissor off
+            lighting on
+            normalise_normals off
+            polygon_mode solid
+            scene_blend one zero
+            scene_blend_op add
+            shading gouraud
+            transparent_sorting on
+
+        }
+    }
+}

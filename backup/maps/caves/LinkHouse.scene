@@ -1,0 +1,77 @@
+<scene previous_export_time="1378836260.314013" exported_by="christoph" export_time="1378837476.7658892" formatVersion="1.0.1" >
+  <nodes >
+    <node name="Sun" >
+      <position y="6.415987" x="1.927145" z="1.227465" />
+      <rotation qy="0.060978" qx="0.247350" qz="-0.089862" qw="0.962821" />
+      <scale y="1.000000" x="1.000000" z="1.000000" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <light type="directional" powerScale="1.0" name="Sun" >
+        <position y="6.415987" x="1.927145" z="1.227465" />
+        <lightAttenuation range="5000" constant="1.0" linear="0.04" quadratic="0.0" />
+        <direction y="-0.861" x="0.143" z="0.487" />
+        <colourDiffuse r="1.0" b="1.0" g="1.0" />
+        <colourSpecular r="1.0" b="1.0" g="1.0" />
+      </light>
+    </node>
+    <node name="LinkHausWand" >
+      <position y="0.940153" x="0.000000" z="0.928937" />
+      <rotation qy="0.000000" qx="0.000000" qz="-0.000000" qw="1.000000" />
+      <scale y="0.930367" x="3.383662" z="2.432136" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <entity lock_rot_x="False" lock_rot_y="False" lock_rot_z="False" velocity_min="0.0" friction_x="1.0" friction_z="1.0" lock_trans_z="False" lock_trans_y="False" lock_trans_x="False" name="LinkHausWand" actor="False" damping_trans="0.03999999910593033" friction_y="1.0" collisionPrim="triangle_mesh" damping_rot="0.10000000149011612" anisotropic_friction="False" physics_type="STATIC" meshFile="LinkHausWand.mesh" mass="1.0" inertia_tensor="0.4000000059604645" velocity_max="0.0" mass_radius="1.0" ghost="False" />
+    </node>
+    <node name="LinkHausBoden" >
+      <position y="-0.000000" x="0.021404" z="1.113012" />
+      <rotation qy="0.000000" qx="0.000000" qz="-0.000000" qw="1.000000" />
+      <scale y="4.447739" x="4.447739" z="4.447739" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <entity lock_rot_x="False" lock_rot_y="False" lock_rot_z="False" velocity_min="0.0" friction_x="1.0" friction_z="1.0" lock_trans_z="False" lock_trans_y="False" lock_trans_x="False" name="LinkHausBoden" actor="False" damping_trans="0.03999999910593033" friction_y="1.0" collisionPrim="triangle_mesh" damping_rot="0.10000000149011612" anisotropic_friction="False" physics_type="STATIC" meshFile="LinkHausBoden.mesh" mass="1.0" inertia_tensor="0.4000000059604645" velocity_max="0.0" mass_radius="1.0" ghost="False" />
+    </node>
+    <node name="Door_Link_MAINMAP" >
+      <position y="-0.000000" x="0.003860" z="3.257556" />
+      <rotation qy="1.000000" qx="0.000000" qz="-0.000000" qw="0.000000" />
+      <scale y="1.036113" x="1.036113" z="1.036113" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <entity lock_rot_x="False" lock_rot_y="False" lock_rot_z="False" velocity_min="0.0" friction_x="1.0" friction_z="1.0" lock_trans_z="False" lock_trans_y="False" lock_trans_x="False" name="HouseWoodDoor" actor="False" damping_trans="0.03999999910593033" friction_y="1.0" collisionPrim="box" damping_rot="0.10000000149011612" anisotropic_friction="False" physics_type="STATIC" meshFile="HouseWoodDoor.mesh" mass="1.0" inertia_tensor="0.4000000059604645" velocity_max="0.0" mass_radius="1.0" ghost="False" >
+        <user_data type="str" name="id" value="Link" />
+        <user_data type="str" name="type" value="Door" />
+        <user_data type="str" name="link_path" value="MAIN_MAP_PATH" />
+        <user_data type="str" name="link_name" value="MAIN_MAP_NAME" />
+        <user_data type="str" name="link_id" value="Link" />
+      </entity>
+    </node>
+    <node name="Chest/Small/Lower" >
+      <position y="-0.000000" x="2.812474" z="2.238646" />
+      <rotation qy="0.000000" qx="0.000000" qz="-0.000000" qw="1.000000" />
+      <scale y="1.000000" x="1.000000" z="1.000000" />
+      <user_data type="str" name="id" value="Lamp" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <entity lock_rot_x="False" lock_rot_y="False" lock_rot_z="False" velocity_min="0.0" friction_x="1.0" friction_z="1.0" lock_trans_z="False" lock_trans_y="False" lock_trans_x="False" name="Chest.Small.Lower" actor="False" damping_trans="0.03999999910593033" friction_y="1.0" collisionPrim="box" damping_rot="0.10000000149011612" anisotropic_friction="False" physics_type="STATIC" meshFile="Chest.Small.Lower.mesh" mass="1.0" inertia_tensor="0.4000000059604645" velocity_max="0.0" mass_radius="1.0" ghost="False" />
+    </node>
+  </nodes>
+  <externals >
+    <item type="material" >
+      <file name="/home/christoph/Documents/Projects/Zelda/maps/caves/LinkHouse.material" />
+    </item>
+  </externals>
+  <environment >
+    <colourBackground r="0.05087608844041824" b="0.05087608844041824" g="0.05087608844041824" />
+    <colourAmbient r="0.7230419516563416" b="0.7230419516563416" g="0.7230419516563416" />
+    <colourDiffuse r="0.05087608844041824" b="0.05087608844041824" g="0.05087608844041824" />
+  </environment>
+</scene>

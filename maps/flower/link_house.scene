@@ -1,0 +1,29 @@
+<scene previous_export_time="0" exported_by="christoph" export_time="1408979885.516414" formatVersion="1.0.1" >
+  <nodes >
+    <node name="flower_armature" >
+      <position z="-0.000000" y="0.010157" x="0.000000" />
+      <rotation qy="0.000000" qx="0.000000" qw="1.000000" qz="-0.000000" />
+      <scale z="0.006956" y="0.006956" x="0.006956" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+    </node>
+    <node name="flower" >
+      <position z="-0.000000" y="0.000000" x="0.000000" />
+      <rotation qy="0.000000" qx="0.000000" qw="1.000000" qz="-0.000000" />
+      <scale z="1.000000" y="1.000000" x="1.000000" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <entity lock_rot_z="False" lock_trans_x="False" velocity_min="0.0" mass_radius="1.0" damping_trans="0.03999999910593033" name="flower" inertia_tensor="0.4000000059604645" lock_rot_y="False" lock_rot_x="False" friction_x="1.0" damping_rot="0.10000000149011612" friction_z="1.0" mass="1.0" meshFile="flower.mesh" actor="False" anisotropic_friction="False" friction_y="1.0" ghost="False" lock_trans_y="False" physics_type="STATIC" velocity_max="0.0" lock_trans_z="False" />
+    </node>
+  </nodes>
+  <externals />
+  <environment >
+    <colourBackground b="0.05087608844041824" g="0.05087608844041824" r="0.05087608844041824" />
+    <colourAmbient b="0.0" g="0.0" r="0.0" />
+    <colourDiffuse b="0.05087608844041824" g="0.05087608844041824" r="0.05087608844041824" />
+  </environment>
+</scene>

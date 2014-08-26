@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<Imageset version="2" name="hud" imagefile="hud.png" nativeHorzRes="512" nativeVertRes="512" autoScaled="vertical">
+	<Image name="4/4" xPos="0" yPos="0" width="64" height="64" />
+	<Image name="3/4" xPos="64" yPos="0" width="64" height="64" />
+	<Image name="2/4" xPos="128" yPos="0" width="64" height="64" />
+	<Image name="1/4" xPos="192" yPos="0" width="64" height="64" />
+	<Image name="0/4" xPos="0" yPos="64" width="64" height="64" />
+	<Image name="Black" xPos="0" yPos="192" width="64" height="64" />
+	<Image name="Mana" xPos="192" yPos="64" width="64" height="192" />
+	<Image name="Key" xPos="128" yPos="192" width="64" height="64" />
+	<Image name="Rupee" xPos="64" yPos="192" width="64" height="64" />
+	<Image name="Arrows" xPos="0" yPos="128" width="64" height="64" />
+
+	<Image name="Blank" xPos="64" yPos="128" width="64" height="64" />
+	<Image name="Sword" xPos="64" yPos="64" width="64" height="64" />
+	<Image name="Bow" xPos="128" yPos="64" width="64" height="64" />
+	<Image name="Hammer" xPos="128" yPos="128" width="64" height="64" />
+	<Image name="Bomb" xPos="256" yPos="0" width="64" height="64" />
+	<Image name="Lamp" xPos="256" yPos="64" width="64" height="64" />
+</Imageset>

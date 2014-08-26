@@ -1,0 +1,21 @@
+dependencies: \
+  /Users/christoph/Documents/Projects/Zelda/Zelda/World/HitableInterface.cpp \
+  /Users/christoph/Documents/Projects/Zelda/Zelda/World/HitableInterface.hpp \
+  /Users/christoph/Documents/Projects/Zelda/Zelda/World/Hitpoints.hpp \
+  /Users/christoph/Documents/Projects/Zelda/Zelda/World/Damage.hpp \
+  /Users/christoph/Documents/Projects/Zelda/Zelda/World/DamageTypes.hpp \
+  /Users/christoph/Documents/Projects/Zelda/Zelda/World/../Common/Config/TypeDefines.hpp \
+  /Users/christoph/Documents/Projects/ogre/build_xcode/sdk/include/OGRE/OgreVector3.h \
+  /Users/christoph/Documents/Projects/ogre/build_xcode/sdk/include/OGRE/OgrePrerequisites.h \
+  /Users/christoph/Documents/Projects/ogre/build_xcode/sdk/include/OGRE/OgrePlatform.h \
+  /Users/christoph/Documents/Projects/ogre/build_xcode/sdk/include/OGRE/OgreConfig.h \
+  /Users/christoph/Documents/Projects/ogre/build_xcode/sdk/include/OGRE/OgreBuildSettings.h \
+  /Users/christoph/Documents/Projects/ogre/build_xcode/sdk/include/OGRE/OgreStdHeaders.h \
+  /Users/christoph/Documents/Projects/ogre/build_xcode/sdk/include/OGRE/OgreMemoryAllocatorConfig.h \
+  /Users/christoph/Documents/Projects/ogre/build_xcode/sdk/include/OGRE/OgreMemoryAllocatedObject.h \
+  /Users/christoph/Documents/Projects/ogre/build_xcode/sdk/include/OGRE/OgreHeaderPrefix.h \
+  /Users/christoph/Documents/Projects/ogre/build_xcode/sdk/include/OGRE/OgreHeaderSuffix.h \
+  /Users/christoph/Documents/Projects/ogre/build_xcode/sdk/include/OGRE/OgreMemorySTLAllocator.h \
+  /Users/christoph/Documents/Projects/ogre/build_xcode/sdk/include/OGRE/OgreMemoryNedPooling.h \
+  /Users/christoph/Documents/Projects/ogre/build_xcode/sdk/include/OGRE/OgreMath.h \
+  /Users/christoph/Documents/Projects/ogre/build_xcode/sdk/include/OGRE/OgreQuaternion.h

@@ -1,0 +1,1780 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXAggregateTarget section */
+		1CBEE5158BEF4CC5894E97DE /* ALL_BUILD */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = FBB99ADF9BEE4B5DA5401000 /* Build configuration list for PBXAggregateTarget "ALL_BUILD" */;
+			buildPhases = (
+				F4234F5B7C2F49E0BC42ED85 /* CMake Rules */,
+			);
+			dependencies = (
+				53FFE47B2D2646D79067D499 /* PBXTargetDependency */,
+				243574BF2255487C9F0A4B66 /* PBXTargetDependency */,
+			);
+			name = ALL_BUILD;
+			productName = ALL_BUILD;
+		};
+		70276259F478432882577EDB /* ZERO_CHECK */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 6B2D99FE990947A0ABC1D78D /* Build configuration list for PBXAggregateTarget "ZERO_CHECK" */;
+			buildPhases = (
+				CF39FBC6A5C94D6B9E66C2E0 /* CMake Rules */,
+			);
+			dependencies = (
+			);
+			name = ZERO_CHECK;
+			productName = ZERO_CHECK;
+		};
+/* End PBXAggregateTarget section */
+
+/* Begin PBXBuildFile section */
+		0475007BCC8645DCBAF191E6 /* GUIHeartsDisplay.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DF08A7FAC07643DAA724BBAB /* GUIHeartsDisplay.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		08F1CABB18424FDCBF8C8B79 /* Person.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A896039B0AE434693ECDEB9 /* Person.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		093FD06D4CEB4A9DB9117305 /* PlayerController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6E0ED6E12FB348E89DB6FC24 /* PlayerController.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		09C5320F849F43D195803919 /* MessageCreator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FB7615D0E2614A97BF1B9347 /* MessageCreator.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		0A9E0FF6A78942E0B4926564 /* Region.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5BD4A6751B34310884D7D56 /* Region.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		0BC0A660B4D04A17894636D8 /* SimpleEnemyController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05275884FE0B43548C72E2AB /* SimpleEnemyController.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		0D7594BBE2D54425BE86FCEE /* EmitOnCollision.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1D54DAA51AF2456F8C9C6EEB /* EmitOnCollision.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		0F767CBEB8014B6787563ADB /* GameStateTypes.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A0F46DC3A76A44699CE6DEFC /* GameStateTypes.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		11CBCEB67E094C9080219574 /* Object.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6778F48FDB3844C7ACAA6A6A /* Object.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		16DAB87334874CAA96A2F90B /* SlotSelector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D919E4A4CCA7448980B1CB1A /* SlotSelector.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		183814EEFA734E68ABA83892 /* MainMenu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41FD3EBCC45F4F5685B66C6D /* MainMenu.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		19E22EAF00154406AEF61B6B /* World.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1839859089504E0192468835 /* World.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		1FFAAE8CDFAB490FA7AC30D4 /* MessageHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4954E2F9643149D3A8CEB001 /* MessageHandler.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		30B4641CE07042F589EA3056 /* Game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 716E22D56B864D3ABDB615BC /* Game.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		32D7B35787BF4ADBB27C2EA9 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F1326A7FEEBE4B20AE887CAF /* main.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		3342DA733F314D2685A42F9E /* MessageTypes.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D0655A34D36A4499AC60A780 /* MessageTypes.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		3390653606F7486A8AE087B7 /* CharacterController_Physics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 24BC2E459D0A47EEB7E5B587 /* CharacterController_Physics.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		39782813C60248CCA1FB9004 /* MessageDebug.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FAF02EAB354549E588260F8C /* MessageDebug.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		3B84C9E46BA64E99B0D4A186 /* InputListener.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C3D41F14895C4AE9817F02B0 /* InputListener.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		45CE6FC371274A72879C4FCD /* Event.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F9671AF5EE94D72A89987A2 /* Event.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		46CFD302292D487D8423F078 /* ObjectTypes.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A76FD7E4DF47432681A843F7 /* ObjectTypes.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		4B8484B971174405B865E678 /* EntityManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 42E2B4B7DD254738BA7E2077 /* EntityManager.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		4FB36061EC474A98BF1A9576 /* DeleteSceneNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EE7AE894E5F44CA68DDAF4C2 /* DeleteSceneNode.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		50684C9EE41C445C982BD25B /* Atlas.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CFDA7234534F4D67B34FA8B1 /* Atlas.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		569AF7115C16467C837D94F9 /* TileTypes.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AD9E7302A1EB41B38ACBBE69 /* TileTypes.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		596D3A3DB661475FBB2ACFF7 /* WorldGUI.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4296F6D2FAF54DC2B4C4469C /* WorldGUI.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		5D659E66C24C43658A3E89A6 /* Map.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 70335BCACCCE46EDA1CD6F0B /* Map.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		5D6A0DAC010944C7B9F5528B /* DotSceneLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C088A9C1AF343C1AB42243C /* DotSceneLoader.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		5DC48BF99FD34E29AD25D578 /* HitableInterface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F86424695A024E6EBB3080FD /* HitableInterface.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		5DD3825B58BF49F3B1CA07EB /* ActionCreator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 23679FF893CE404ABE844E7A /* ActionCreator.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		662A1250A0AB45AB83B4836C /* GameStateManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F7C6ACAEDBB44B39ABA36E7A /* GameStateManager.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		6D4763056CDB400EAA722D90 /* GUIManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0704A81329934DCD886BB780 /* GUIManager.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		7B28BFC0398D40F4A886FC84 /* MessageSwitchMap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 910DDA9431154C7D8195E2CB /* MessageSwitchMap.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		7B85356223A94779B32621FA /* AerialCameraPerspective.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A30A7A7010474B089A6F6EA4 /* AerialCameraPerspective.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		8104F6D18BD9415EA7BE2382 /* GameState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 798998685D664A9CAC8F6B4F /* GameState.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		8187433942B64A9BB099F8C2 /* Damage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6923434D96BD4064862A22D0 /* Damage.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		8460C1DBF8A24494BBDCE1BA /* FileManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BCFD186A83E24A609AA85DDE /* FileManager.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		8A592E6887D54A7F85062FEF /* GUIPullMenu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FB15B9809A2C4BB3AC4C85F2 /* GUIPullMenu.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		9287C0EB0F094729B706B585 /* GameInputListener.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 77177C7A3CB04192977A1C05 /* GameInputListener.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		96B88211CD1E4C1F87C46E5B /* EntityStates.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43C45F20EA42474C9328406C /* EntityStates.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		A3F6FD501772460987E1D5F8 /* PhysicsManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 14DF68D0D0874667B59E146F /* PhysicsManager.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		A4115AB0FE9E4545A98E3E42 /* Entity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DEEC08643FD94D77973D6566 /* Entity.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		A449569DEC14416596D98B0B /* GameInputManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6B5BB2DBBED246C097ECA15E /* GameInputManager.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		A57EA35D265A49A79B7D8F27 /* PlayerTool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4F6C5890EC5443068D93FFBE /* PlayerTool.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		A6982F1815E74FA6BB55B787 /* EmitterCreator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7AB2AD611E56487395234945 /* EmitterCreator.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		AA227114A47C4C0FB6484D98 /* BtOgre.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2C2F76305D5408A89931313 /* BtOgre.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		AC8C0F91741F49DBB304299E /* BtOgreExtras.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4175257029934CC5A5E5A2E7 /* BtOgreExtras.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		AF15FA088D3D4A398096627A /* tinyxml2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 24FFCF9F85A14BA788217F17 /* tinyxml2.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		B35DA506537348CB9457009A /* EmitterTypes.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 47A1D03DDFC64B689FA3CB4A /* EmitterTypes.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		B37563CA1A95446DB2B772A7 /* Player.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD8CB8DEC0564D81AE33C850 /* Player.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		BE26258D1A1C4ED4B8963C64 /* GUIDebugPullMenu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F4A6B4488F0B4B6CA5866BAB /* GUIDebugPullMenu.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		C0755B3873E847259AE90201 /* ActionMessage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DFE680EC9A9C42C992491068 /* ActionMessage.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		C2A35B01D3344E70ABFBE0BC /* MapPack.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C7C259EEEE714E718B7A2C74 /* MapPack.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		CA9E1539E84A48F5923FDEF3 /* DebugDrawer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 12AFB327A50A4C0ABC82C7E4 /* DebugDrawer.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		CC47BD9B65CD42FF99E4ECD8 /* PersonController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 63BB430AB21B420F8D3C682A /* PersonController.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		CC53330C3E1B4778A47D24C4 /* GUICounter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CCCCFC530FB346079713F40A /* GUICounter.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		D2077157BB8F4891A8870EA9 /* SimpleEnemy.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1027B7C85BF148D0BC80D338 /* SimpleEnemy.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		D8DE0016A8144AEB80192B2B /* Emitter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45D4A3AC3C1B4F4E88FE1C8A /* Emitter.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		D94EB531EFF2450D87404501 /* MessageTargetReached.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A313A32FC924B24AAE83A4A /* MessageTargetReached.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		D97DB3A1C4F444798BBB7830 /* SimpleFriend.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41047A7694B148ADAEE3812A /* SimpleFriend.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		D9B2C9D5B47C4A9A92DA15DB /* GlobalCollisionShapesTypes.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50AEE34331364226AE4BEE5C /* GlobalCollisionShapesTypes.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		DD25B3495135405AB714721D /* WorldEntity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 09F8D251C5574B39B658F980 /* WorldEntity.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		DE3531D6E69B463B81EBDDA6 /* Manager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD9C3BDBAB3B4DE08F657862 /* Manager.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		DEB74A90A15044AF8D3B3268 /* XMLHelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1D86540E603B4A02BCA69674 /* XMLHelper.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		E5D264B149AF4D9997C9C9F5 /* Action.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F16F1026ECF04A9FAA40CD00 /* Action.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		EC40164768084F30AAF7C56C /* Sleep.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2FB5EA52FB2B494B966350E4 /* Sleep.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		ED0F9BE71D5243F7AD0A41AC /* Character.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2EEE5A344DF14958A2EB9229 /* Character.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		F1D6CB6C92674F9CAE1DDAF6 /* HUD.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 530455E62EEE4FF58B65D914 /* HUD.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		F4505CBC6BA8478DB469269C /* Zelda.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 54A11111DFEA4A0995D423D4 /* Zelda.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		F61EF74C740C46B38756817C /* MessageEntityStateChanged.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF06A0E6F6D44339AE506D63 /* MessageEntityStateChanged.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		F7EC8D011F964EA19328241A /* Message.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0D8B3F0996914A24866CB773 /* Message.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		FC2D11C799624709867771F0 /* UserData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 34AAF91ED9E740F3AE552ED5 /* UserData.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		FDE56286DC9F4E99A652B8F5 /* ActionTypes.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FEC5F3048EBB480DBE5182F3 /* ActionTypes.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		FFD8BC925DE34A478481A67F /* PlayerData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7DE880761ED84DBBB6093548 /* PlayerData.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		3DCD86CD65764761AFF77001 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 23CA5FFD953B4C06924FBF5F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 91ED692F429E449E95E90F24;
+			remoteInfo = Game;
+		};
+		D05F17A6406B460CA0185F00 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 23CA5FFD953B4C06924FBF5F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 70276259F478432882577EDB;
+			remoteInfo = ZERO_CHECK;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		01687673B0A24F5E88E7E63D /* MessageSwitchMap.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = MessageSwitchMap.hpp; path = Zelda/Common/Message/MessageSwitchMap.hpp; sourceTree = SOURCE_ROOT; };
+		025325C2F0CA4992918A2086 /* MessageInjector.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = MessageInjector.hpp; path = Zelda/Common/Message/MessageInjector.hpp; sourceTree = SOURCE_ROOT; };
+		05275884FE0B43548C72E2AB /* SimpleEnemyController.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = SimpleEnemyController.cpp; path = Zelda/World/Character/SimpleEnemyController.cpp; sourceTree = SOURCE_ROOT; };
+		0704A81329934DCD886BB780 /* GUIManager.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = GUIManager.cpp; path = Zelda/Common/GUI/GUIManager.cpp; sourceTree = SOURCE_ROOT; };
+		072F41AE95AB41BCA97226B2 /* Logger.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = Logger.hpp; path = Zelda/Common/Android/Logger.hpp; sourceTree = SOURCE_ROOT; };
+		08779A6B84724B76B716ADE7 /* SimpleFriend.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = SimpleFriend.hpp; path = Zelda/World/Character/SimpleFriend.hpp; sourceTree = SOURCE_ROOT; };
+		093B3E3C9D744816BA8D9057 /* MessageDebug.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = MessageDebug.hpp; path = Zelda/Common/Message/MessageDebug.hpp; sourceTree = SOURCE_ROOT; };
+		09F8D251C5574B39B658F980 /* WorldEntity.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = WorldEntity.cpp; path = Zelda/World/WorldEntity.cpp; sourceTree = SOURCE_ROOT; };
+		0A24CC515482404581551D7E /* CharacterController.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = CharacterController.hpp; path = Zelda/World/Character/CharacterController.hpp; sourceTree = SOURCE_ROOT; };
+		0A5842E48E3F45A2A764579B /* PhysicsManager.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = PhysicsManager.hpp; path = Zelda/Common/Physics/PhysicsManager.hpp; sourceTree = SOURCE_ROOT; };
+		0C088A9C1AF343C1AB42243C /* DotSceneLoader.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = DotSceneLoader.cpp; path = Zelda/Common/DotSceneLoader/DotSceneLoader.cpp; sourceTree = SOURCE_ROOT; };
+		0D8B3F0996914A24866CB773 /* Message.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = Message.cpp; path = Zelda/Common/Message/Message.cpp; sourceTree = SOURCE_ROOT; };
+		0F2F083C8E4C4CBB9D90FA4D /* CharacterController_Physics.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = CharacterController_Physics.hpp; path = Zelda/World/Character/CharacterController_Physics.hpp; sourceTree = SOURCE_ROOT; };
+		1027B7C85BF148D0BC80D338 /* SimpleEnemy.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = SimpleEnemy.cpp; path = Zelda/World/Character/SimpleEnemy.cpp; sourceTree = SOURCE_ROOT; };
+		12AFB327A50A4C0ABC82C7E4 /* DebugDrawer.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = DebugDrawer.cpp; path = Zelda/Common/Util/DebugDrawer.cpp; sourceTree = SOURCE_ROOT; };
+		14DF68D0D0874667B59E146F /* PhysicsManager.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = PhysicsManager.cpp; path = Zelda/Common/Physics/PhysicsManager.cpp; sourceTree = SOURCE_ROOT; };
+		1701B5B3767B49FFB031DF31 /* PhysicsMasks.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = PhysicsMasks.hpp; path = Zelda/Common/Physics/PhysicsMasks.hpp; sourceTree = SOURCE_ROOT; };
+		1839859089504E0192468835 /* World.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = World.cpp; path = Zelda/World/World.cpp; sourceTree = SOURCE_ROOT; };
+		1867AE7430E148A0B32ADAE2 /* MapPack.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = MapPack.hpp; path = Zelda/World/Atlas/MapPack.hpp; sourceTree = SOURCE_ROOT; };
+		18ED7890387149428DF016B1 /* MessageTypes.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = MessageTypes.hpp; path = Zelda/Common/Message/MessageTypes.hpp; sourceTree = SOURCE_ROOT; };
+		1A1AB322014F447FADBAB796 /* SlotSelector.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = SlotSelector.hpp; path = Zelda/MainMenu/SlotSelector.hpp; sourceTree = SOURCE_ROOT; };
+		1CCA88310303428F927D5CAE /* Entity.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = Entity.hpp; path = Zelda/Common/GameLogic/Entity.hpp; sourceTree = SOURCE_ROOT; };
+		1D54DAA51AF2456F8C9C6EEB /* EmitOnCollision.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = EmitOnCollision.cpp; path = Zelda/Common/GameLogic/Events/EmitOnCollision.cpp; sourceTree = SOURCE_ROOT; };
+		1D84B8B28E01482BA124551A /* Player.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = Player.hpp; path = Zelda/World/Character/Player.hpp; sourceTree = SOURCE_ROOT; };
+		1D86540E603B4A02BCA69674 /* XMLHelper.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = XMLHelper.cpp; path = Zelda/Common/Util/XMLHelper.cpp; sourceTree = SOURCE_ROOT; };
+		1E07E032655E4B90AD16A258 /* DamageTypes.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = DamageTypes.hpp; path = Zelda/World/DamageTypes.hpp; sourceTree = SOURCE_ROOT; };
+		1E2C0C145CE64B708E3D2C03 /* XMLHelper.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = XMLHelper.hpp; path = Zelda/Common/Util/XMLHelper.hpp; sourceTree = SOURCE_ROOT; };
+		216D9AB30C41443DA64DC7D5 /* EmitterTypes.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = EmitterTypes.hpp; path = Zelda/Common/GameLogic/Events/EmitterTypes.hpp; sourceTree = SOURCE_ROOT; };
+		228F71A56AD84263B966819C /* CMakeLists.txt */ = {isa = PBXFileReference; explicitFileType = sourcecode.text; fileEncoding = 4; lastKnownFileType = text; name = CMakeLists.txt; path = Zelda/CMakeLists.txt; sourceTree = SOURCE_ROOT; };
+		22DE295C6C384C57A6601A37 /* AndroidInput.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = AndroidInput.hpp; path = Zelda/Common/Android/AndroidInput.hpp; sourceTree = SOURCE_ROOT; };
+		23679FF893CE404ABE844E7A /* ActionCreator.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = ActionCreator.cpp; path = Zelda/Common/GameLogic/Events/Actions/ActionCreator.cpp; sourceTree = SOURCE_ROOT; };
+		23A8FA5F852A436B85FA5E18 /* MessageEntityStateChanged.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = MessageEntityStateChanged.hpp; path = Zelda/Common/Message/MessageEntityStateChanged.hpp; sourceTree = SOURCE_ROOT; };
+		23E4B03BD94B4334904DF1DD /* Emitter.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = Emitter.hpp; path = Zelda/Common/GameLogic/Events/Emitter.hpp; sourceTree = SOURCE_ROOT; };
+		24BC2E459D0A47EEB7E5B587 /* CharacterController_Physics.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = CharacterController_Physics.cpp; path = Zelda/World/Character/CharacterController_Physics.cpp; sourceTree = SOURCE_ROOT; };
+		24FFCF9F85A14BA788217F17 /* tinyxml2.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = tinyxml2.cpp; path = Zelda/Common/tinyxml2/tinyxml2.cpp; sourceTree = SOURCE_ROOT; };
+		26281FF5D3574F99AC4F9AEA /* MessageHandler.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = MessageHandler.hpp; path = Zelda/Common/Message/MessageHandler.hpp; sourceTree = SOURCE_ROOT; };
+		26F1D4A2B2B14DE7A34F9BFA /* Character.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = Character.hpp; path = Zelda/World/Character/Character.hpp; sourceTree = SOURCE_ROOT; };
+		2A27D9D520A047CCB94396AE /* BtOgrePG.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = BtOgrePG.hpp; path = Zelda/Common/Physics/BtOgrePG.hpp; sourceTree = SOURCE_ROOT; };
+		2A6FD0BD81344E1A85EE1663 /* GUIOverlay.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = GUIOverlay.hpp; path = Zelda/Common/GUI/GUIOverlay.hpp; sourceTree = SOURCE_ROOT; };
+		2B3FBE06E80F40ACA61EB0B0 /* Manager.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = Manager.hpp; path = Zelda/Common/XMLResources/Manager.hpp; sourceTree = SOURCE_ROOT; };
+		2EEE5A344DF14958A2EB9229 /* Character.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = Character.cpp; path = Zelda/World/Character/Character.cpp; sourceTree = SOURCE_ROOT; };
+		2FB5EA52FB2B494B966350E4 /* Sleep.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = Sleep.cpp; path = Zelda/Common/Util/Sleep.cpp; sourceTree = SOURCE_ROOT; };
+		30B4A742E2104C8AAADE4A8F /* DotSceneLoader.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = DotSceneLoader.hpp; path = Zelda/Common/DotSceneLoader/DotSceneLoader.hpp; sourceTree = SOURCE_ROOT; };
+		32AADF86AA174A289D18D097 /* AerialCameraPerspective.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = AerialCameraPerspective.hpp; path = Zelda/World/Camera/AerialCameraPerspective.hpp; sourceTree = SOURCE_ROOT; };
+		34AAF91ED9E740F3AE552ED5 /* UserData.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = UserData.cpp; path = Zelda/Common/DotSceneLoader/UserData.cpp; sourceTree = SOURCE_ROOT; };
+		350ED6EF8A4A477D9A96EC16 /* GUICounter.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = GUICounter.hpp; path = Zelda/GUIComponents/GUICounter.hpp; sourceTree = SOURCE_ROOT; };
+		37FD058BCEC74CFF96F6B707 /* GUIManager.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = GUIManager.hpp; path = Zelda/Common/GUI/GUIManager.hpp; sourceTree = SOURCE_ROOT; };
+		3A0CF6BCB98943FC911CE048 /* HUD.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = HUD.hpp; path = Zelda/World/WorldGUI/HUD.hpp; sourceTree = SOURCE_ROOT; };
+		3A896039B0AE434693ECDEB9 /* Person.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = Person.cpp; path = Zelda/World/Character/Person.cpp; sourceTree = SOURCE_ROOT; };
+		3BF19580791E41F1AB6FAC32 /* DebugDrawer.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = DebugDrawer.hpp; path = Zelda/Common/Util/DebugDrawer.hpp; sourceTree = SOURCE_ROOT; };
+		3D0E6FD566D2449C9E17A929 /* PlayerController.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = PlayerController.hpp; path = Zelda/World/Character/PlayerController.hpp; sourceTree = SOURCE_ROOT; };
+		3D6DF657E3D24ED19127F5CA /* EntityManager.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = EntityManager.hpp; path = Zelda/Common/GameLogic/EntityManager.hpp; sourceTree = SOURCE_ROOT; };
+		3D9E52DC91E942B9A8C11829 /* SimpleEnemy.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = SimpleEnemy.hpp; path = Zelda/World/Character/SimpleEnemy.hpp; sourceTree = SOURCE_ROOT; };
+		41047A7694B148ADAEE3812A /* SimpleFriend.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = SimpleFriend.cpp; path = Zelda/World/Character/SimpleFriend.cpp; sourceTree = SOURCE_ROOT; };
+		4175257029934CC5A5E5A2E7 /* BtOgreExtras.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = BtOgreExtras.cpp; path = Zelda/Common/Physics/BtOgreExtras.cpp; sourceTree = SOURCE_ROOT; };
+		41E7F7AD36C840239FB49E05 /* BtOgreExtras.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = BtOgreExtras.hpp; path = Zelda/Common/Physics/BtOgreExtras.hpp; sourceTree = SOURCE_ROOT; };
+		41EE291B245447A0A602298B /* ShaderGenerator.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = ShaderGenerator.hpp; path = Zelda/Common/ShaderGenerator.hpp; sourceTree = SOURCE_ROOT; };
+		41FD3EBCC45F4F5685B66C6D /* MainMenu.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = MainMenu.cpp; path = Zelda/MainMenu/MainMenu.cpp; sourceTree = SOURCE_ROOT; };
+		4296F6D2FAF54DC2B4C4469C /* WorldGUI.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = WorldGUI.cpp; path = Zelda/World/WorldGUI/WorldGUI.cpp; sourceTree = SOURCE_ROOT; };
+		42E2B4B7DD254738BA7E2077 /* EntityManager.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = EntityManager.cpp; path = Zelda/Common/GameLogic/EntityManager.cpp; sourceTree = SOURCE_ROOT; };
+		43ABAD1085444A798550FF41 /* WorldGUI.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = WorldGUI.hpp; path = Zelda/World/WorldGUI/WorldGUI.hpp; sourceTree = SOURCE_ROOT; };
+		43B830991E004F5FA15357E2 /* HitableInterface.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = HitableInterface.hpp; path = Zelda/World/HitableInterface.hpp; sourceTree = SOURCE_ROOT; };
+		43C45F20EA42474C9328406C /* EntityStates.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = EntityStates.cpp; path = Zelda/Common/GameLogic/EntityStates.cpp; sourceTree = SOURCE_ROOT; };
+		45D4A3AC3C1B4F4E88FE1C8A /* Emitter.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = Emitter.cpp; path = Zelda/Common/GameLogic/Events/Emitter.cpp; sourceTree = SOURCE_ROOT; };
+		47956C1801934D83B696C93B /* EnumIdMap.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = EnumIdMap.hpp; path = Zelda/Common/Util/EnumIdMap.hpp; sourceTree = SOURCE_ROOT; };
+		47A1D03DDFC64B689FA3CB4A /* EmitterTypes.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = EmitterTypes.cpp; path = Zelda/Common/GameLogic/Events/EmitterTypes.cpp; sourceTree = SOURCE_ROOT; };
+		47A7DBFD0260414DB8AD9B9A /* PlayerData.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = PlayerData.hpp; path = Zelda/World/Character/PlayerData.hpp; sourceTree = SOURCE_ROOT; };
+		4954E2F9643149D3A8CEB001 /* MessageHandler.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = MessageHandler.cpp; path = Zelda/Common/Message/MessageHandler.cpp; sourceTree = SOURCE_ROOT; };
+		4A81027BFA644BC29318E553 /* Atlas.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = Atlas.hpp; path = Zelda/World/Atlas/Atlas.hpp; sourceTree = SOURCE_ROOT; };
+		4C364F6C74ED479EAD955079 /* DeleteSceneNode.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = DeleteSceneNode.hpp; path = Zelda/Common/Util/DeleteSceneNode.hpp; sourceTree = SOURCE_ROOT; };
+		4E67DD40CE4E4F5E8D97AC2F /* GameState.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = GameState.hpp; path = Zelda/Common/GameLogic/GameState.hpp; sourceTree = SOURCE_ROOT; };
+		4F6C5890EC5443068D93FFBE /* PlayerTool.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = PlayerTool.cpp; path = Zelda/World/Character/PlayerTool.cpp; sourceTree = SOURCE_ROOT; };
+		50AEE34331364226AE4BEE5C /* GlobalCollisionShapesTypes.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = GlobalCollisionShapesTypes.cpp; path = Zelda/World/GlobalCollisionShapesTypes.cpp; sourceTree = SOURCE_ROOT; };
+		51F2D9E8FE8741B9A3EC62E2 /* EntityStates.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = EntityStates.hpp; path = Zelda/Common/GameLogic/EntityStates.hpp; sourceTree = SOURCE_ROOT; };
+		530455E62EEE4FF58B65D914 /* HUD.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = HUD.cpp; path = Zelda/World/WorldGUI/HUD.cpp; sourceTree = SOURCE_ROOT; };
+		54A11111DFEA4A0995D423D4 /* Zelda.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = Zelda.cpp; path = Zelda/Zelda.cpp; sourceTree = SOURCE_ROOT; };
+		56E1D833FE6C4CCF8030625D /* CMakeLists.txt */ = {isa = PBXFileReference; explicitFileType = sourcecode.text; fileEncoding = 4; lastKnownFileType = text; path = CMakeLists.txt; sourceTree = SOURCE_ROOT; };
+		5B30F44A32B247CD83BA721E /* Info.plist */ = {isa = PBXFileReference; explicitFileType = sourcecode.text.plist; fileEncoding = 4; lastKnownFileType = text.plist; name = Info.plist; path = build_mac/Zelda/CMakeFiles/Game.dir/Info.plist; sourceTree = SOURCE_ROOT; };
+		5C888851180B4D5CB6305FEC /* MainMenu.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = MainMenu.hpp; path = Zelda/MainMenu/MainMenu.hpp; sourceTree = SOURCE_ROOT; };
+		5E36E42BA1D544A8A8CD9E94 /* MessageCreator.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = MessageCreator.hpp; path = Zelda/Common/Message/MessageCreator.hpp; sourceTree = SOURCE_ROOT; };
+		5F9671AF5EE94D72A89987A2 /* Event.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = Event.cpp; path = Zelda/Common/GameLogic/Events/Event.cpp; sourceTree = SOURCE_ROOT; };
+		5FACA7598A254B2FB599A537 /* Message.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = Message.hpp; path = Zelda/Common/Message/Message.hpp; sourceTree = SOURCE_ROOT; };
+		60739B270FE046109E5FE72D /* Hitpoints.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = Hitpoints.hpp; path = Zelda/World/Hitpoints.hpp; sourceTree = SOURCE_ROOT; };
+		61672CB5EC0047C7B2D21DE9 /* ActionMessage.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = ActionMessage.hpp; path = Zelda/Common/GameLogic/Events/Actions/ActionMessage.hpp; sourceTree = SOURCE_ROOT; };
+		62D8FEC3ED4B45B39CB0F830 /* UserData.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = UserData.hpp; path = Zelda/Common/DotSceneLoader/UserData.hpp; sourceTree = SOURCE_ROOT; };
+		63BB430AB21B420F8D3C682A /* PersonController.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = PersonController.cpp; path = Zelda/World/Character/PersonController.cpp; sourceTree = SOURCE_ROOT; };
+		65466D45D5DC4FFC956EA9A9 /* TypeDefines.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = TypeDefines.hpp; path = Zelda/Common/Config/TypeDefines.hpp; sourceTree = SOURCE_ROOT; };
+		6778F48FDB3844C7ACAA6A6A /* Object.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = Object.cpp; path = Zelda/World/Objects/Object.cpp; sourceTree = SOURCE_ROOT; };
+		688D770DD3B648D99AE6F208 /* GameInputCommand.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = GameInputCommand.hpp; path = Zelda/Common/Input/GameInputCommand.hpp; sourceTree = SOURCE_ROOT; };
+		68FCE52DC7554D2A9CE66F1C /* MapPackParserListener.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = MapPackParserListener.hpp; path = Zelda/World/Atlas/MapPackParserListener.hpp; sourceTree = SOURCE_ROOT; };
+		6923434D96BD4064862A22D0 /* Damage.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = Damage.cpp; path = Zelda/World/Damage.cpp; sourceTree = SOURCE_ROOT; };
+		6B1059104DBA49A09BBBB6AF /* TileTypes.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = TileTypes.hpp; path = Zelda/World/Atlas/TileTypes.hpp; sourceTree = SOURCE_ROOT; };
+		6B312E71525E4D42A4186F25 /* Damage.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = Damage.hpp; path = Zelda/World/Damage.hpp; sourceTree = SOURCE_ROOT; };
+		6B5BB2DBBED246C097ECA15E /* GameInputManager.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = GameInputManager.cpp; path = Zelda/Common/Input/GameInputManager.cpp; sourceTree = SOURCE_ROOT; };
+		6CC278D9292941F3BA87B9EF /* Object.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = Object.hpp; path = Zelda/World/Objects/Object.hpp; sourceTree = SOURCE_ROOT; };
+		6E0ED6E12FB348E89DB6FC24 /* PlayerController.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = PlayerController.cpp; path = Zelda/World/Character/PlayerController.cpp; sourceTree = SOURCE_ROOT; };
+		6E9FCC805ABB46BDB9BE71E8 /* GUIHeartsDisplay.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = GUIHeartsDisplay.hpp; path = Zelda/GUIComponents/GUIHeartsDisplay.hpp; sourceTree = SOURCE_ROOT; };
+		70335BCACCCE46EDA1CD6F0B /* Map.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = Map.cpp; path = Zelda/World/Atlas/Map.cpp; sourceTree = SOURCE_ROOT; };
+		70457B95E6554FEA8DDAAC7C /* Event.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = Event.hpp; path = Zelda/Common/GameLogic/Events/Event.hpp; sourceTree = SOURCE_ROOT; };
+		716E22D56B864D3ABDB615BC /* Game.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = Game.cpp; path = Zelda/Common/Game.cpp; sourceTree = SOURCE_ROOT; };
+		731B77379ABE4AA4BD48647F /* SimpleEnemyController.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = SimpleEnemyController.hpp; path = Zelda/World/Character/SimpleEnemyController.hpp; sourceTree = SOURCE_ROOT; };
+		743D78391603413E9FA5037E /* InputDefines.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = InputDefines.hpp; path = Zelda/Common/InputDefines.hpp; sourceTree = SOURCE_ROOT; };
+		765729FE81604079961B664A /* OgreStaticPluginLoader.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = OgreStaticPluginLoader.hpp; path = Zelda/Common/Android/OgreStaticPluginLoader.hpp; sourceTree = SOURCE_ROOT; };
+		77177C7A3CB04192977A1C05 /* GameInputListener.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = GameInputListener.cpp; path = Zelda/Common/Input/GameInputListener.cpp; sourceTree = SOURCE_ROOT; };
+		7797A8BCB5254F81AA312433 /* EmitOnCollision.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = EmitOnCollision.hpp; path = Zelda/Common/GameLogic/Events/EmitOnCollision.hpp; sourceTree = SOURCE_ROOT; };
+		78FFE1BBEA3C456BBAE3D551 /* Game.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; path = Game.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		798998685D664A9CAC8F6B4F /* GameState.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = GameState.cpp; path = Zelda/Common/GameLogic/GameState.cpp; sourceTree = SOURCE_ROOT; };
+		7AB2AD611E56487395234945 /* EmitterCreator.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = EmitterCreator.cpp; path = Zelda/Common/GameLogic/Events/EmitterCreator.cpp; sourceTree = SOURCE_ROOT; };
+		7D62ECFAE8324ED99B86AA00 /* BtOgreGP.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = BtOgreGP.hpp; path = Zelda/Common/Physics/BtOgreGP.hpp; sourceTree = SOURCE_ROOT; };
+		7DE880761ED84DBBB6093548 /* PlayerData.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = PlayerData.cpp; path = Zelda/World/Character/PlayerData.cpp; sourceTree = SOURCE_ROOT; };
+		83871E067A9C4AF8842763F1 /* InteractionInterface.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = InteractionInterface.hpp; path = Zelda/World/InteractionInterface.hpp; sourceTree = SOURCE_ROOT; };
+		88A89DC122FF40D88117A69C /* Sleep.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = Sleep.hpp; path = Zelda/Common/Util/Sleep.hpp; sourceTree = SOURCE_ROOT; };
+		88CFD4B38D7846A89DE6A3B6 /* Log.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = Log.hpp; path = Zelda/Common/Log.hpp; sourceTree = SOURCE_ROOT; };
+		8987EA7860A84081A85D2E7C /* GlobalCollisionShapesTypes.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = GlobalCollisionShapesTypes.hpp; path = Zelda/World/GlobalCollisionShapesTypes.hpp; sourceTree = SOURCE_ROOT; };
+		89DFA19ACAF74617AACB3158 /* Game.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = Game.hpp; path = Zelda/Common/Game.hpp; sourceTree = SOURCE_ROOT; };
+		910DDA9431154C7D8195E2CB /* MessageSwitchMap.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = MessageSwitchMap.cpp; path = Zelda/Common/Message/MessageSwitchMap.cpp; sourceTree = SOURCE_ROOT; };
+		92D24B4AC8504EC7A619D05A /* MessageTargetReached.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = MessageTargetReached.hpp; path = Zelda/Common/Message/MessageTargetReached.hpp; sourceTree = SOURCE_ROOT; };
+		94083DBC76C44BA0B59AEACE /* WorldEntity.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = WorldEntity.hpp; path = Zelda/World/WorldEntity.hpp; sourceTree = SOURCE_ROOT; };
+		9A313A32FC924B24AAE83A4A /* MessageTargetReached.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = MessageTargetReached.cpp; path = Zelda/Common/Message/MessageTargetReached.cpp; sourceTree = SOURCE_ROOT; };
+		A0F46DC3A76A44699CE6DEFC /* GameStateTypes.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = GameStateTypes.cpp; path = Zelda/Common/GameLogic/GameStateTypes.cpp; sourceTree = SOURCE_ROOT; };
+		A1D742A8E8AA4275B133270D /* ActionCreator.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = ActionCreator.hpp; path = Zelda/Common/GameLogic/Events/Actions/ActionCreator.hpp; sourceTree = SOURCE_ROOT; };
+		A30A7A7010474B089A6F6EA4 /* AerialCameraPerspective.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = AerialCameraPerspective.cpp; path = Zelda/World/Camera/AerialCameraPerspective.cpp; sourceTree = SOURCE_ROOT; };
+		A3CF67F199844B1F82D04840 /* PersonController.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = PersonController.hpp; path = Zelda/World/Character/PersonController.hpp; sourceTree = SOURCE_ROOT; };
+		A76FD7E4DF47432681A843F7 /* ObjectTypes.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = ObjectTypes.cpp; path = Zelda/World/Objects/ObjectTypes.cpp; sourceTree = SOURCE_ROOT; };
+		A791BAC8588B4B5A83566C4A /* OutputStyle.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = OutputStyle.hpp; path = Zelda/Common/GameLogic/OutputStyle.hpp; sourceTree = SOURCE_ROOT; };
+		AC18C934C5A14B9B82B38B59 /* tinyxml2.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = tinyxml2.hpp; path = Zelda/Common/tinyxml2/tinyxml2.hpp; sourceTree = SOURCE_ROOT; };
+		AD9E7302A1EB41B38ACBBE69 /* TileTypes.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = TileTypes.cpp; path = Zelda/World/Atlas/TileTypes.cpp; sourceTree = SOURCE_ROOT; };
+		AE6CE3F9BBE64E67BBAEB462 /* DotSceneLoaderCallback.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = DotSceneLoaderCallback.hpp; path = Zelda/Common/DotSceneLoader/DotSceneLoaderCallback.hpp; sourceTree = SOURCE_ROOT; };
+		B274B4B33D7A447CA7B6F665 /* PlayerTool.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = PlayerTool.hpp; path = Zelda/World/Character/PlayerTool.hpp; sourceTree = SOURCE_ROOT; };
+		B2C2F76305D5408A89931313 /* BtOgre.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = BtOgre.cpp; path = Zelda/Common/Physics/BtOgre.cpp; sourceTree = SOURCE_ROOT; };
+		B33EDFB55BF24699905E79AA /* GameStateTypes.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = GameStateTypes.hpp; path = Zelda/Common/GameLogic/GameStateTypes.hpp; sourceTree = SOURCE_ROOT; };
+		B343D21D69A34CF2A94E2E73 /* Android.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = Android.hpp; path = Zelda/Common/Android/Android.hpp; sourceTree = SOURCE_ROOT; };
+		B6F41368991644F290C65BE4 /* EmitterCreator.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = EmitterCreator.hpp; path = Zelda/Common/GameLogic/Events/EmitterCreator.hpp; sourceTree = SOURCE_ROOT; };
+		B73CFC6F17A44B13BC035CD7 /* OSX.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = OSX.hpp; path = Zelda/Common/OSX/OSX.hpp; sourceTree = SOURCE_ROOT; };
+		B88B051FF36448F88F0F6D99 /* Map.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = Map.hpp; path = Zelda/World/Atlas/Map.hpp; sourceTree = SOURCE_ROOT; };
+		BCFD186A83E24A609AA85DDE /* FileManager.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = FileManager.cpp; path = Zelda/Common/FileManager/FileManager.cpp; sourceTree = SOURCE_ROOT; };
+		C0E0F84CF2FC41BE8311C373 /* GameStateManager.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = GameStateManager.hpp; path = Zelda/Common/GameLogic/GameStateManager.hpp; sourceTree = SOURCE_ROOT; };
+		C39A9EF756DD44F59A73E5DA /* FileManager.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = FileManager.hpp; path = Zelda/Common/FileManager/FileManager.hpp; sourceTree = SOURCE_ROOT; };
+		C3D41F14895C4AE9817F02B0 /* InputListener.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = InputListener.cpp; path = Zelda/Common/Input/InputListener.cpp; sourceTree = SOURCE_ROOT; };
+		C7C259EEEE714E718B7A2C74 /* MapPack.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = MapPack.cpp; path = Zelda/World/Atlas/MapPack.cpp; sourceTree = SOURCE_ROOT; };
+		CCCCFC530FB346079713F40A /* GUICounter.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = GUICounter.cpp; path = Zelda/GUIComponents/GUICounter.cpp; sourceTree = SOURCE_ROOT; };
+		CD562D60720942C78F48A801 /* InputDefines.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = InputDefines.hpp; path = Zelda/Common/Input/InputDefines.hpp; sourceTree = SOURCE_ROOT; };
+		CD9C3BDBAB3B4DE08F657862 /* Manager.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = Manager.cpp; path = Zelda/Common/XMLResources/Manager.cpp; sourceTree = SOURCE_ROOT; };
+		CE4C1C5749AA4DAC8C975EC7 /* GlobalBuildDefines.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = GlobalBuildDefines.hpp; path = Zelda/GlobalBuildDefines.hpp; sourceTree = SOURCE_ROOT; };
+		CF84543BD0F54D8F91F65CF8 /* Person.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = Person.hpp; path = Zelda/World/Character/Person.hpp; sourceTree = SOURCE_ROOT; };
+		CFDA7234534F4D67B34FA8B1 /* Atlas.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = Atlas.cpp; path = Zelda/World/Atlas/Atlas.cpp; sourceTree = SOURCE_ROOT; };
+		D0655A34D36A4499AC60A780 /* MessageTypes.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = MessageTypes.cpp; path = Zelda/Common/Message/MessageTypes.cpp; sourceTree = SOURCE_ROOT; };
+		D919E4A4CCA7448980B1CB1A /* SlotSelector.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = SlotSelector.cpp; path = Zelda/MainMenu/SlotSelector.cpp; sourceTree = SOURCE_ROOT; };
+		DEEC08643FD94D77973D6566 /* Entity.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = Entity.cpp; path = Zelda/Common/GameLogic/Entity.cpp; sourceTree = SOURCE_ROOT; };
+		DF08A7FAC07643DAA724BBAB /* GUIHeartsDisplay.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = GUIHeartsDisplay.cpp; path = Zelda/GUIComponents/GUIHeartsDisplay.cpp; sourceTree = SOURCE_ROOT; };
+		DFE680EC9A9C42C992491068 /* ActionMessage.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = ActionMessage.cpp; path = Zelda/Common/GameLogic/Events/Actions/ActionMessage.cpp; sourceTree = SOURCE_ROOT; };
+		E304F65BF72A43F8ADB45D60 /* ActionTypes.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = ActionTypes.hpp; path = Zelda/Common/GameLogic/Events/Actions/ActionTypes.hpp; sourceTree = SOURCE_ROOT; };
+		E551C69525184B51A9234395 /* Assert.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = Assert.hpp; path = Zelda/Common/Util/Assert.hpp; sourceTree = SOURCE_ROOT; };
+		E5BD4A6751B34310884D7D56 /* Region.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = Region.cpp; path = Zelda/World/Atlas/Region.cpp; sourceTree = SOURCE_ROOT; };
+		E6974FEF37AD445A9BE9251B /* GUIPullMenu.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = GUIPullMenu.hpp; path = Zelda/Common/GUI/GUIPullMenu.hpp; sourceTree = SOURCE_ROOT; };
+		E6F91F7D050140F9B306C6A2 /* Zelda.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = Zelda.hpp; path = Zelda/Zelda.hpp; sourceTree = SOURCE_ROOT; };
+		EAA742BEB2CA46E99AA769E5 /* GUIDebugPullMenu.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = GUIDebugPullMenu.hpp; path = Zelda/Common/GUI/GUIDebugPullMenu.hpp; sourceTree = SOURCE_ROOT; };
+		EAFDEBB749194E5AB5F9BA27 /* World.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = World.hpp; path = Zelda/World/World.hpp; sourceTree = SOURCE_ROOT; };
+		EE7AE894E5F44CA68DDAF4C2 /* DeleteSceneNode.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = DeleteSceneNode.cpp; path = Zelda/Common/Util/DeleteSceneNode.cpp; sourceTree = SOURCE_ROOT; };
+		EF06A0E6F6D44339AE506D63 /* MessageEntityStateChanged.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = MessageEntityStateChanged.cpp; path = Zelda/Common/Message/MessageEntityStateChanged.cpp; sourceTree = SOURCE_ROOT; };
+		F09817A1B9DB4EABBBF917D2 /* Region.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = Region.hpp; path = Zelda/World/Atlas/Region.hpp; sourceTree = SOURCE_ROOT; };
+		F1326A7FEEBE4B20AE887CAF /* main.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = main.cpp; path = Zelda/Common/main.cpp; sourceTree = SOURCE_ROOT; };
+		F16F1026ECF04A9FAA40CD00 /* Action.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = Action.cpp; path = Zelda/Common/GameLogic/Events/Actions/Action.cpp; sourceTree = SOURCE_ROOT; };
+		F2E77BED275F4F37B0879E83 /* Action.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = Action.hpp; path = Zelda/Common/GameLogic/Events/Actions/Action.hpp; sourceTree = SOURCE_ROOT; };
+		F30199CF0BE943B6A55CD1F0 /* PhysicsUserPointer.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = PhysicsUserPointer.hpp; path = Zelda/Common/Physics/PhysicsUserPointer.hpp; sourceTree = SOURCE_ROOT; };
+		F4A6B4488F0B4B6CA5866BAB /* GUIDebugPullMenu.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = GUIDebugPullMenu.cpp; path = Zelda/Common/GUI/GUIDebugPullMenu.cpp; sourceTree = SOURCE_ROOT; };
+		F69556D2EA6A499791AD6835 /* ObjectTypes.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = ObjectTypes.hpp; path = Zelda/World/Objects/ObjectTypes.hpp; sourceTree = SOURCE_ROOT; };
+		F7C6ACAEDBB44B39ABA36E7A /* GameStateManager.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = GameStateManager.cpp; path = Zelda/Common/GameLogic/GameStateManager.cpp; sourceTree = SOURCE_ROOT; };
+		F86424695A024E6EBB3080FD /* HitableInterface.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = HitableInterface.cpp; path = Zelda/World/HitableInterface.cpp; sourceTree = SOURCE_ROOT; };
+		F8DBDEFCA937456492BB631B /* GameInputManager.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = GameInputManager.hpp; path = Zelda/Common/Input/GameInputManager.hpp; sourceTree = SOURCE_ROOT; };
+		F9FDE159CC8840A1BEBB918F /* InputListener.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = InputListener.hpp; path = Zelda/Common/Input/InputListener.hpp; sourceTree = SOURCE_ROOT; };
+		FAF02EAB354549E588260F8C /* MessageDebug.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = MessageDebug.cpp; path = Zelda/Common/Message/MessageDebug.cpp; sourceTree = SOURCE_ROOT; };
+		FB15B9809A2C4BB3AC4C85F2 /* GUIPullMenu.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = GUIPullMenu.cpp; path = Zelda/Common/GUI/GUIPullMenu.cpp; sourceTree = SOURCE_ROOT; };
+		FB7615D0E2614A97BF1B9347 /* MessageCreator.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = MessageCreator.cpp; path = Zelda/Common/Message/MessageCreator.cpp; sourceTree = SOURCE_ROOT; };
+		FD8CB8DEC0564D81AE33C850 /* Player.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = Player.cpp; path = Zelda/World/Character/Player.cpp; sourceTree = SOURCE_ROOT; };
+		FEC5F3048EBB480DBE5182F3 /* ActionTypes.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = ActionTypes.cpp; path = Zelda/Common/GameLogic/Events/Actions/ActionTypes.cpp; sourceTree = SOURCE_ROOT; };
+		FF859951F74C4B7E9C56DE78 /* GameInputListener.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = GameInputListener.hpp; path = Zelda/Common/Input/GameInputListener.hpp; sourceTree = SOURCE_ROOT; };
+		FFE501E1EB4445ADA206CFA9 /* RegionInfo.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = RegionInfo.hpp; path = Zelda/World/Atlas/RegionInfo.hpp; sourceTree = SOURCE_ROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		026A7D96643B4E279CC2D7F8 /* Atlas */ = {
+			isa = PBXGroup;
+			children = (
+				4A81027BFA644BC29318E553 /* Atlas.hpp */,
+				B88B051FF36448F88F0F6D99 /* Map.hpp */,
+				1867AE7430E148A0B32ADAE2 /* MapPack.hpp */,
+				68FCE52DC7554D2A9CE66F1C /* MapPackParserListener.hpp */,
+				F09817A1B9DB4EABBBF917D2 /* Region.hpp */,
+				FFE501E1EB4445ADA206CFA9 /* RegionInfo.hpp */,
+				6B1059104DBA49A09BBBB6AF /* TileTypes.hpp */,
+			);
+			name = Atlas;
+			sourceTree = "<group>";
+		};
+		09A877A105CC4BF8A407B603 /* GUIComponents */ = {
+			isa = PBXGroup;
+			children = (
+				CCCCFC530FB346079713F40A /* GUICounter.cpp */,
+				DF08A7FAC07643DAA724BBAB /* GUIHeartsDisplay.cpp */,
+			);
+			name = GUIComponents;
+			sourceTree = "<group>";
+		};
+		0A44AE579ED74EFF9F122E8C /* Physics */ = {
+			isa = PBXGroup;
+			children = (
+				B2C2F76305D5408A89931313 /* BtOgre.cpp */,
+				4175257029934CC5A5E5A2E7 /* BtOgreExtras.cpp */,
+				14DF68D0D0874667B59E146F /* PhysicsManager.cpp */,
+			);
+			name = Physics;
+			sourceTree = "<group>";
+		};
+		1BC6DA797B3F4B05B8D0F1D8 /* FileManager */ = {
+			isa = PBXGroup;
+			children = (
+				BCFD186A83E24A609AA85DDE /* FileManager.cpp */,
+			);
+			name = FileManager;
+			sourceTree = "<group>";
+		};
+		1C60C6982F3A4C6094E1C2F1 /* Android */ = {
+			isa = PBXGroup;
+			children = (
+				B343D21D69A34CF2A94E2E73 /* Android.hpp */,
+				22DE295C6C384C57A6601A37 /* AndroidInput.hpp */,
+				072F41AE95AB41BCA97226B2 /* Logger.hpp */,
+				765729FE81604079961B664A /* OgreStaticPluginLoader.hpp */,
+			);
+			name = Android;
+			sourceTree = "<group>";
+		};
+		1CFC14A6A5E8447899EFECB7 /* World */ = {
+			isa = PBXGroup;
+			children = (
+				026A7D96643B4E279CC2D7F8 /* Atlas */,
+				C574A5EAD9D9432E87067514 /* Camera */,
+				1DAB0F7BCE2E45CAB3C4B97D /* Character */,
+				A8F7DDA948474CD9978F68C6 /* Objects */,
+				79F0D82C74E24AE5BE33A015 /* WorldGUI */,
+				6B312E71525E4D42A4186F25 /* Damage.hpp */,
+				1E07E032655E4B90AD16A258 /* DamageTypes.hpp */,
+				8987EA7860A84081A85D2E7C /* GlobalCollisionShapesTypes.hpp */,
+				43B830991E004F5FA15357E2 /* HitableInterface.hpp */,
+				60739B270FE046109E5FE72D /* Hitpoints.hpp */,
+				83871E067A9C4AF8842763F1 /* InteractionInterface.hpp */,
+				EAFDEBB749194E5AB5F9BA27 /* World.hpp */,
+				94083DBC76C44BA0B59AEACE /* WorldEntity.hpp */,
+			);
+			name = World;
+			sourceTree = "<group>";
+		};
+		1DAB0F7BCE2E45CAB3C4B97D /* Character */ = {
+			isa = PBXGroup;
+			children = (
+				26F1D4A2B2B14DE7A34F9BFA /* Character.hpp */,
+				0A24CC515482404581551D7E /* CharacterController.hpp */,
+				0F2F083C8E4C4CBB9D90FA4D /* CharacterController_Physics.hpp */,
+				CF84543BD0F54D8F91F65CF8 /* Person.hpp */,
+				A3CF67F199844B1F82D04840 /* PersonController.hpp */,
+				1D84B8B28E01482BA124551A /* Player.hpp */,
+				3D0E6FD566D2449C9E17A929 /* PlayerController.hpp */,
+				47A7DBFD0260414DB8AD9B9A /* PlayerData.hpp */,
+				B274B4B33D7A447CA7B6F665 /* PlayerTool.hpp */,
+				3D9E52DC91E942B9A8C11829 /* SimpleEnemy.hpp */,
+				731B77379ABE4AA4BD48647F /* SimpleEnemyController.hpp */,
+				08779A6B84724B76B716ADE7 /* SimpleFriend.hpp */,
+			);
+			name = Character;
+			sourceTree = "<group>";
+		};
+		22D62BDA6F5946DBB667DA1C /* Camera */ = {
+			isa = PBXGroup;
+			children = (
+				A30A7A7010474B089A6F6EA4 /* AerialCameraPerspective.cpp */,
+			);
+			name = Camera;
+			sourceTree = "<group>";
+		};
+		2E442F2B6D314CEF98BC7B0B /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				65466D45D5DC4FFC956EA9A9 /* TypeDefines.hpp */,
+			);
+			name = Config;
+			sourceTree = "<group>";
+		};
+		2E7886D7750D4E70B1D14AE2 /* tinyxml2 */ = {
+			isa = PBXGroup;
+			children = (
+				AC18C934C5A14B9B82B38B59 /* tinyxml2.hpp */,
+			);
+			name = tinyxml2;
+			sourceTree = "<group>";
+		};
+		30BF120C02E34216AB6074E1 /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				12AFB327A50A4C0ABC82C7E4 /* DebugDrawer.cpp */,
+				EE7AE894E5F44CA68DDAF4C2 /* DeleteSceneNode.cpp */,
+				2FB5EA52FB2B494B966350E4 /* Sleep.cpp */,
+				1D86540E603B4A02BCA69674 /* XMLHelper.cpp */,
+			);
+			name = Util;
+			sourceTree = "<group>";
+		};
+		328414ACD04645E4BD7882D7 /* Atlas */ = {
+			isa = PBXGroup;
+			children = (
+				CFDA7234534F4D67B34FA8B1 /* Atlas.cpp */,
+				70335BCACCCE46EDA1CD6F0B /* Map.cpp */,
+				C7C259EEEE714E718B7A2C74 /* MapPack.cpp */,
+				E5BD4A6751B34310884D7D56 /* Region.cpp */,
+				AD9E7302A1EB41B38ACBBE69 /* TileTypes.cpp */,
+			);
+			name = Atlas;
+			sourceTree = "<group>";
+		};
+		36EA4328393A42A594F94193 /* Actions */ = {
+			isa = PBXGroup;
+			children = (
+				F2E77BED275F4F37B0879E83 /* Action.hpp */,
+				A1D742A8E8AA4275B133270D /* ActionCreator.hpp */,
+				61672CB5EC0047C7B2D21DE9 /* ActionMessage.hpp */,
+				E304F65BF72A43F8ADB45D60 /* ActionTypes.hpp */,
+			);
+			name = Actions;
+			sourceTree = "<group>";
+		};
+		39803D96FB714E86937B390A /* Message */ = {
+			isa = PBXGroup;
+			children = (
+				5FACA7598A254B2FB599A537 /* Message.hpp */,
+				5E36E42BA1D544A8A8CD9E94 /* MessageCreator.hpp */,
+				093B3E3C9D744816BA8D9057 /* MessageDebug.hpp */,
+				23A8FA5F852A436B85FA5E18 /* MessageEntityStateChanged.hpp */,
+				26281FF5D3574F99AC4F9AEA /* MessageHandler.hpp */,
+				025325C2F0CA4992918A2086 /* MessageInjector.hpp */,
+				01687673B0A24F5E88E7E63D /* MessageSwitchMap.hpp */,
+				92D24B4AC8504EC7A619D05A /* MessageTargetReached.hpp */,
+				18ED7890387149428DF016B1 /* MessageTypes.hpp */,
+			);
+			name = Message;
+			sourceTree = "<group>";
+		};
+		3C18995E9199409FB6FDD92D /* GUI */ = {
+			isa = PBXGroup;
+			children = (
+				F4A6B4488F0B4B6CA5866BAB /* GUIDebugPullMenu.cpp */,
+				0704A81329934DCD886BB780 /* GUIManager.cpp */,
+				FB15B9809A2C4BB3AC4C85F2 /* GUIPullMenu.cpp */,
+			);
+			name = GUI;
+			sourceTree = "<group>";
+		};
+		3D1F9F3E8C27474A88603CF7 /* Input */ = {
+			isa = PBXGroup;
+			children = (
+				77177C7A3CB04192977A1C05 /* GameInputListener.cpp */,
+				6B5BB2DBBED246C097ECA15E /* GameInputManager.cpp */,
+				C3D41F14895C4AE9817F02B0 /* InputListener.cpp */,
+			);
+			name = Input;
+			sourceTree = "<group>";
+		};
+		3E14EDD408E94D488E1ADC36 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				78FFE1BBEA3C456BBAE3D551 /* Game.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		41237EE485FC4EF08CF01093 /* Physics */ = {
+			isa = PBXGroup;
+			children = (
+				41E7F7AD36C840239FB49E05 /* BtOgreExtras.hpp */,
+				7D62ECFAE8324ED99B86AA00 /* BtOgreGP.hpp */,
+				2A27D9D520A047CCB94396AE /* BtOgrePG.hpp */,
+				0A5842E48E3F45A2A764579B /* PhysicsManager.hpp */,
+				1701B5B3767B49FFB031DF31 /* PhysicsMasks.hpp */,
+				F30199CF0BE943B6A55CD1F0 /* PhysicsUserPointer.hpp */,
+			);
+			name = Physics;
+			sourceTree = "<group>";
+		};
+		463563F69AD140FEB6889304 /* include */ = {
+			isa = PBXGroup;
+			children = (
+				7004F98A4829465092FB6BA5 /* Common */,
+				617425AEBC514C47BB25024D /* GUIComponents */,
+				DF850C490A7F40C28E4B43EB /* MainMenu */,
+				1CFC14A6A5E8447899EFECB7 /* World */,
+				CE4C1C5749AA4DAC8C975EC7 /* GlobalBuildDefines.hpp */,
+				E6F91F7D050140F9B306C6A2 /* Zelda.hpp */,
+			);
+			name = include;
+			sourceTree = "<group>";
+		};
+		4C80D8D9FE2E4705B4745C73 /* Events */ = {
+			isa = PBXGroup;
+			children = (
+				A748A6A8FCD442D98B6852E7 /* Actions */,
+				1D54DAA51AF2456F8C9C6EEB /* EmitOnCollision.cpp */,
+				45D4A3AC3C1B4F4E88FE1C8A /* Emitter.cpp */,
+				7AB2AD611E56487395234945 /* EmitterCreator.cpp */,
+				47A1D03DDFC64B689FA3CB4A /* EmitterTypes.cpp */,
+				5F9671AF5EE94D72A89987A2 /* Event.cpp */,
+			);
+			name = Events;
+			sourceTree = "<group>";
+		};
+		4D03B584F9D94C8397BB958F /* GameLogic */ = {
+			isa = PBXGroup;
+			children = (
+				4C80D8D9FE2E4705B4745C73 /* Events */,
+				DEEC08643FD94D77973D6566 /* Entity.cpp */,
+				42E2B4B7DD254738BA7E2077 /* EntityManager.cpp */,
+				43C45F20EA42474C9328406C /* EntityStates.cpp */,
+				798998685D664A9CAC8F6B4F /* GameState.cpp */,
+				F7C6ACAEDBB44B39ABA36E7A /* GameStateManager.cpp */,
+				A0F46DC3A76A44699CE6DEFC /* GameStateTypes.cpp */,
+			);
+			name = GameLogic;
+			sourceTree = "<group>";
+		};
+		4F65999DFB2A4CD5A3AE2451 /* WorldGUI */ = {
+			isa = PBXGroup;
+			children = (
+				530455E62EEE4FF58B65D914 /* HUD.cpp */,
+				4296F6D2FAF54DC2B4C4469C /* WorldGUI.cpp */,
+			);
+			name = WorldGUI;
+			sourceTree = "<group>";
+		};
+		4FA037B77E76404E89CEACAA /* FileManager */ = {
+			isa = PBXGroup;
+			children = (
+				C39A9EF756DD44F59A73E5DA /* FileManager.hpp */,
+			);
+			name = FileManager;
+			sourceTree = "<group>";
+		};
+		527017096CD8410B9CFCE813 /* Character */ = {
+			isa = PBXGroup;
+			children = (
+				2EEE5A344DF14958A2EB9229 /* Character.cpp */,
+				24BC2E459D0A47EEB7E5B587 /* CharacterController_Physics.cpp */,
+				3A896039B0AE434693ECDEB9 /* Person.cpp */,
+				63BB430AB21B420F8D3C682A /* PersonController.cpp */,
+				FD8CB8DEC0564D81AE33C850 /* Player.cpp */,
+				6E0ED6E12FB348E89DB6FC24 /* PlayerController.cpp */,
+				7DE880761ED84DBBB6093548 /* PlayerData.cpp */,
+				4F6C5890EC5443068D93FFBE /* PlayerTool.cpp */,
+				1027B7C85BF148D0BC80D338 /* SimpleEnemy.cpp */,
+				05275884FE0B43548C72E2AB /* SimpleEnemyController.cpp */,
+				41047A7694B148ADAEE3812A /* SimpleFriend.cpp */,
+			);
+			name = Character;
+			sourceTree = "<group>";
+		};
+		5951C0F337574E6885DB59FB /* ALL_BUILD */ = {
+			isa = PBXGroup;
+			children = (
+				EA960D90F9B24B63B276E3D2 /* CMake Rules */,
+				56E1D833FE6C4CCF8030625D /* CMakeLists.txt */,
+			);
+			name = ALL_BUILD;
+			sourceTree = "<group>";
+		};
+		5A1F8BDBD9994B8FB6AF4FE7 /* Events */ = {
+			isa = PBXGroup;
+			children = (
+				36EA4328393A42A594F94193 /* Actions */,
+				7797A8BCB5254F81AA312433 /* EmitOnCollision.hpp */,
+				23E4B03BD94B4334904DF1DD /* Emitter.hpp */,
+				B6F41368991644F290C65BE4 /* EmitterCreator.hpp */,
+				216D9AB30C41443DA64DC7D5 /* EmitterTypes.hpp */,
+				70457B95E6554FEA8DDAAC7C /* Event.hpp */,
+			);
+			name = Events;
+			sourceTree = "<group>";
+		};
+		5DA8F2F92B5D428CAEA7D3CC /* GUI */ = {
+			isa = PBXGroup;
+			children = (
+				EAA742BEB2CA46E99AA769E5 /* GUIDebugPullMenu.hpp */,
+				37FD058BCEC74CFF96F6B707 /* GUIManager.hpp */,
+				2A6FD0BD81344E1A85EE1663 /* GUIOverlay.hpp */,
+				E6974FEF37AD445A9BE9251B /* GUIPullMenu.hpp */,
+			);
+			name = GUI;
+			sourceTree = "<group>";
+		};
+		617425AEBC514C47BB25024D /* GUIComponents */ = {
+			isa = PBXGroup;
+			children = (
+				350ED6EF8A4A477D9A96EC16 /* GUICounter.hpp */,
+				6E9FCC805ABB46BDB9BE71E8 /* GUIHeartsDisplay.hpp */,
+			);
+			name = GUIComponents;
+			sourceTree = "<group>";
+		};
+		6329AC7880524E598E3BD123 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				5B30F44A32B247CD83BA721E /* Info.plist */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		635493226C9241718238490A /* Message */ = {
+			isa = PBXGroup;
+			children = (
+				0D8B3F0996914A24866CB773 /* Message.cpp */,
+				FB7615D0E2614A97BF1B9347 /* MessageCreator.cpp */,
+				FAF02EAB354549E588260F8C /* MessageDebug.cpp */,
+				EF06A0E6F6D44339AE506D63 /* MessageEntityStateChanged.cpp */,
+				4954E2F9643149D3A8CEB001 /* MessageHandler.cpp */,
+				910DDA9431154C7D8195E2CB /* MessageSwitchMap.cpp */,
+				9A313A32FC924B24AAE83A4A /* MessageTargetReached.cpp */,
+				D0655A34D36A4499AC60A780 /* MessageTypes.cpp */,
+			);
+			name = Message;
+			sourceTree = "<group>";
+		};
+		6569482C4B1A44E79914E0E6 /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				E551C69525184B51A9234395 /* Assert.hpp */,
+				3BF19580791E41F1AB6FAC32 /* DebugDrawer.hpp */,
+				4C364F6C74ED479EAD955079 /* DeleteSceneNode.hpp */,
+				47956C1801934D83B696C93B /* EnumIdMap.hpp */,
+				88A89DC122FF40D88117A69C /* Sleep.hpp */,
+				1E2C0C145CE64B708E3D2C03 /* XMLHelper.hpp */,
+			);
+			name = Util;
+			sourceTree = "<group>";
+		};
+		676C1A1B3E794726986A7CEE /* XMLResources */ = {
+			isa = PBXGroup;
+			children = (
+				2B3FBE06E80F40ACA61EB0B0 /* Manager.hpp */,
+			);
+			name = XMLResources;
+			sourceTree = "<group>";
+		};
+		7004F98A4829465092FB6BA5 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				1C60C6982F3A4C6094E1C2F1 /* Android */,
+				2E442F2B6D314CEF98BC7B0B /* Config */,
+				E4C13E628C5E4172BF018286 /* DotSceneLoader */,
+				4FA037B77E76404E89CEACAA /* FileManager */,
+				B0E89B4FF73044D58FE8484D /* GameLogic */,
+				5DA8F2F92B5D428CAEA7D3CC /* GUI */,
+				C7D3034F48B44EE98061E72F /* Input */,
+				39803D96FB714E86937B390A /* Message */,
+				B24B91605A124E2C8729F97D /* OSX */,
+				41237EE485FC4EF08CF01093 /* Physics */,
+				2E7886D7750D4E70B1D14AE2 /* tinyxml2 */,
+				6569482C4B1A44E79914E0E6 /* Util */,
+				676C1A1B3E794726986A7CEE /* XMLResources */,
+				89DFA19ACAF74617AACB3158 /* Game.hpp */,
+				743D78391603413E9FA5037E /* InputDefines.hpp */,
+				88CFD4B38D7846A89DE6A3B6 /* Log.hpp */,
+				41EE291B245447A0A602298B /* ShaderGenerator.hpp */,
+			);
+			name = Common;
+			sourceTree = "<group>";
+		};
+		79F0D82C74E24AE5BE33A015 /* WorldGUI */ = {
+			isa = PBXGroup;
+			children = (
+				3A0CF6BCB98943FC911CE048 /* HUD.hpp */,
+				43ABAD1085444A798550FF41 /* WorldGUI.hpp */,
+			);
+			name = WorldGUI;
+			sourceTree = "<group>";
+		};
+		7A861F87F5404DA6A79A994F /* CMake Rules */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "CMake Rules";
+			sourceTree = "<group>";
+		};
+		88645184AF7A43BEA3DD98D5 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				8985E6469C614321AA95C2AC /* Common */,
+				09A877A105CC4BF8A407B603 /* GUIComponents */,
+				AD1D83A7E3804438A1C8EA47 /* MainMenu */,
+				BB8E4E065ABA4F0C92F7C411 /* World */,
+				54A11111DFEA4A0995D423D4 /* Zelda.cpp */,
+			);
+			name = src;
+			sourceTree = "<group>";
+		};
+		8985E6469C614321AA95C2AC /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				E5D157798CB0415AB7E82683 /* DotSceneLoader */,
+				1BC6DA797B3F4B05B8D0F1D8 /* FileManager */,
+				4D03B584F9D94C8397BB958F /* GameLogic */,
+				3C18995E9199409FB6FDD92D /* GUI */,
+				3D1F9F3E8C27474A88603CF7 /* Input */,
+				635493226C9241718238490A /* Message */,
+				0A44AE579ED74EFF9F122E8C /* Physics */,
+				C1870FC933354C479DBCB775 /* tinyxml2 */,
+				30BF120C02E34216AB6074E1 /* Util */,
+				B90601497C2E49F1A2449693 /* XMLResources */,
+				716E22D56B864D3ABDB615BC /* Game.cpp */,
+				F1326A7FEEBE4B20AE887CAF /* main.cpp */,
+			);
+			name = Common;
+			sourceTree = "<group>";
+		};
+		950B010CFCC84839BBC646DB = {
+			isa = PBXGroup;
+			children = (
+				F0207122F67A4ECC98B64B47 /* Sources */,
+				D700144067A14A749166C425 /* Resources */,
+				3E14EDD408E94D488E1ADC36 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		97D0D259B8174B42964C6E1B /* ZERO_CHECK */ = {
+			isa = PBXGroup;
+			children = (
+				7A861F87F5404DA6A79A994F /* CMake Rules */,
+				56E1D833FE6C4CCF8030625D /* CMakeLists.txt */,
+			);
+			name = ZERO_CHECK;
+			sourceTree = "<group>";
+		};
+		A748A6A8FCD442D98B6852E7 /* Actions */ = {
+			isa = PBXGroup;
+			children = (
+				F16F1026ECF04A9FAA40CD00 /* Action.cpp */,
+				23679FF893CE404ABE844E7A /* ActionCreator.cpp */,
+				DFE680EC9A9C42C992491068 /* ActionMessage.cpp */,
+				FEC5F3048EBB480DBE5182F3 /* ActionTypes.cpp */,
+			);
+			name = Actions;
+			sourceTree = "<group>";
+		};
+		A8F7DDA948474CD9978F68C6 /* Objects */ = {
+			isa = PBXGroup;
+			children = (
+				6CC278D9292941F3BA87B9EF /* Object.hpp */,
+				F69556D2EA6A499791AD6835 /* ObjectTypes.hpp */,
+			);
+			name = Objects;
+			sourceTree = "<group>";
+		};
+		A9D77D8FA908413D81303B98 /* Game */ = {
+			isa = PBXGroup;
+			children = (
+				88645184AF7A43BEA3DD98D5 /* src */,
+				463563F69AD140FEB6889304 /* include */,
+				6329AC7880524E598E3BD123 /* Resources */,
+				228F71A56AD84263B966819C /* CMakeLists.txt */,
+			);
+			name = Game;
+			sourceTree = "<group>";
+		};
+		AD1D83A7E3804438A1C8EA47 /* MainMenu */ = {
+			isa = PBXGroup;
+			children = (
+				41FD3EBCC45F4F5685B66C6D /* MainMenu.cpp */,
+				D919E4A4CCA7448980B1CB1A /* SlotSelector.cpp */,
+			);
+			name = MainMenu;
+			sourceTree = "<group>";
+		};
+		B0E89B4FF73044D58FE8484D /* GameLogic */ = {
+			isa = PBXGroup;
+			children = (
+				5A1F8BDBD9994B8FB6AF4FE7 /* Events */,
+				1CCA88310303428F927D5CAE /* Entity.hpp */,
+				3D6DF657E3D24ED19127F5CA /* EntityManager.hpp */,
+				51F2D9E8FE8741B9A3EC62E2 /* EntityStates.hpp */,
+				4E67DD40CE4E4F5E8D97AC2F /* GameState.hpp */,
+				C0E0F84CF2FC41BE8311C373 /* GameStateManager.hpp */,
+				B33EDFB55BF24699905E79AA /* GameStateTypes.hpp */,
+				A791BAC8588B4B5A83566C4A /* OutputStyle.hpp */,
+			);
+			name = GameLogic;
+			sourceTree = "<group>";
+		};
+		B24B91605A124E2C8729F97D /* OSX */ = {
+			isa = PBXGroup;
+			children = (
+				B73CFC6F17A44B13BC035CD7 /* OSX.hpp */,
+			);
+			name = OSX;
+			sourceTree = "<group>";
+		};
+		B90601497C2E49F1A2449693 /* XMLResources */ = {
+			isa = PBXGroup;
+			children = (
+				CD9C3BDBAB3B4DE08F657862 /* Manager.cpp */,
+			);
+			name = XMLResources;
+			sourceTree = "<group>";
+		};
+		BB8E4E065ABA4F0C92F7C411 /* World */ = {
+			isa = PBXGroup;
+			children = (
+				328414ACD04645E4BD7882D7 /* Atlas */,
+				22D62BDA6F5946DBB667DA1C /* Camera */,
+				527017096CD8410B9CFCE813 /* Character */,
+				C92A6A8E09914329B94B5120 /* Objects */,
+				4F65999DFB2A4CD5A3AE2451 /* WorldGUI */,
+				6923434D96BD4064862A22D0 /* Damage.cpp */,
+				50AEE34331364226AE4BEE5C /* GlobalCollisionShapesTypes.cpp */,
+				F86424695A024E6EBB3080FD /* HitableInterface.cpp */,
+				1839859089504E0192468835 /* World.cpp */,
+				09F8D251C5574B39B658F980 /* WorldEntity.cpp */,
+			);
+			name = World;
+			sourceTree = "<group>";
+		};
+		C1870FC933354C479DBCB775 /* tinyxml2 */ = {
+			isa = PBXGroup;
+			children = (
+				24FFCF9F85A14BA788217F17 /* tinyxml2.cpp */,
+			);
+			name = tinyxml2;
+			sourceTree = "<group>";
+		};
+		C574A5EAD9D9432E87067514 /* Camera */ = {
+			isa = PBXGroup;
+			children = (
+				32AADF86AA174A289D18D097 /* AerialCameraPerspective.hpp */,
+			);
+			name = Camera;
+			sourceTree = "<group>";
+		};
+		C7D3034F48B44EE98061E72F /* Input */ = {
+			isa = PBXGroup;
+			children = (
+				688D770DD3B648D99AE6F208 /* GameInputCommand.hpp */,
+				FF859951F74C4B7E9C56DE78 /* GameInputListener.hpp */,
+				F8DBDEFCA937456492BB631B /* GameInputManager.hpp */,
+				CD562D60720942C78F48A801 /* InputDefines.hpp */,
+				F9FDE159CC8840A1BEBB918F /* InputListener.hpp */,
+			);
+			name = Input;
+			sourceTree = "<group>";
+		};
+		C92A6A8E09914329B94B5120 /* Objects */ = {
+			isa = PBXGroup;
+			children = (
+				6778F48FDB3844C7ACAA6A6A /* Object.cpp */,
+				A76FD7E4DF47432681A843F7 /* ObjectTypes.cpp */,
+			);
+			name = Objects;
+			sourceTree = "<group>";
+		};
+		D700144067A14A749166C425 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		DF850C490A7F40C28E4B43EB /* MainMenu */ = {
+			isa = PBXGroup;
+			children = (
+				5C888851180B4D5CB6305FEC /* MainMenu.hpp */,
+				1A1AB322014F447FADBAB796 /* SlotSelector.hpp */,
+			);
+			name = MainMenu;
+			sourceTree = "<group>";
+		};
+		E4C13E628C5E4172BF018286 /* DotSceneLoader */ = {
+			isa = PBXGroup;
+			children = (
+				30B4A742E2104C8AAADE4A8F /* DotSceneLoader.hpp */,
+				AE6CE3F9BBE64E67BBAEB462 /* DotSceneLoaderCallback.hpp */,
+				62D8FEC3ED4B45B39CB0F830 /* UserData.hpp */,
+			);
+			name = DotSceneLoader;
+			sourceTree = "<group>";
+		};
+		E5D157798CB0415AB7E82683 /* DotSceneLoader */ = {
+			isa = PBXGroup;
+			children = (
+				0C088A9C1AF343C1AB42243C /* DotSceneLoader.cpp */,
+				34AAF91ED9E740F3AE552ED5 /* UserData.cpp */,
+			);
+			name = DotSceneLoader;
+			sourceTree = "<group>";
+		};
+		EA960D90F9B24B63B276E3D2 /* CMake Rules */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "CMake Rules";
+			sourceTree = "<group>";
+		};
+		F0207122F67A4ECC98B64B47 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				5951C0F337574E6885DB59FB /* ALL_BUILD */,
+				97D0D259B8174B42964C6E1B /* ZERO_CHECK */,
+				A9D77D8FA908413D81303B98 /* Game */,
+			);
+			name = Sources;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		91ED692F429E449E95E90F24 /* Game */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8261863FE12448E9A3D02F92 /* Build configuration list for PBXNativeTarget "Game" */;
+			buildPhases = (
+				6FD8AB2B2E3A44BEB7F21D15 /* Sources */,
+				A79E683118AE4B42B8BF1391 /* CMake PostBuild Rules */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Game;
+			productName = Game;
+			productReference = 78FFE1BBEA3C456BBAE3D551 /* Game.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		23CA5FFD953B4C06924FBF5F /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+			};
+			buildConfigurationList = A6364A79EB6648168DDAF2AF /* Build configuration list for PBXProject "Zelda" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 950B010CFCC84839BBC646DB;
+			projectDirPath = ..;
+			projectRoot = "";
+			targets = (
+				1CBEE5158BEF4CC5894E97DE /* ALL_BUILD */,
+				70276259F478432882577EDB /* ZERO_CHECK */,
+				91ED692F429E449E95E90F24 /* Game */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		A79E683118AE4B42B8BF1391 /* CMake PostBuild Rules */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			name = "CMake PostBuild Rules";
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "make -C /Users/christoph/Documents/Projects/Zelda/build_mac/Zelda -f /Users/christoph/Documents/Projects/Zelda/build_mac/Zelda/CMakeScripts/Game_postBuildPhase.make$CONFIGURATION all";
+			showEnvVarsInLog = 0;
+		};
+		CF39FBC6A5C94D6B9E66C2E0 /* CMake Rules */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			name = "CMake Rules";
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "make -C /Users/christoph/Documents/Projects/Zelda/build_mac -f /Users/christoph/Documents/Projects/Zelda/build_mac/CMakeScripts/ZERO_CHECK_cmakeRulesBuildPhase.make$CONFIGURATION all";
+			showEnvVarsInLog = 0;
+		};
+		F4234F5B7C2F49E0BC42ED85 /* CMake Rules */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			name = "CMake Rules";
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "make -C /Users/christoph/Documents/Projects/Zelda/build_mac -f /Users/christoph/Documents/Projects/Zelda/build_mac/CMakeScripts/ALL_BUILD_cmakeRulesBuildPhase.make$CONFIGURATION all";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		6FD8AB2B2E3A44BEB7F21D15 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5D6A0DAC010944C7B9F5528B /* DotSceneLoader.cpp in Sources */,
+				FC2D11C799624709867771F0 /* UserData.cpp in Sources */,
+				8460C1DBF8A24494BBDCE1BA /* FileManager.cpp in Sources */,
+				BE26258D1A1C4ED4B8963C64 /* GUIDebugPullMenu.cpp in Sources */,
+				6D4763056CDB400EAA722D90 /* GUIManager.cpp in Sources */,
+				8A592E6887D54A7F85062FEF /* GUIPullMenu.cpp in Sources */,
+				30B4641CE07042F589EA3056 /* Game.cpp in Sources */,
+				A4115AB0FE9E4545A98E3E42 /* Entity.cpp in Sources */,
+				4B8484B971174405B865E678 /* EntityManager.cpp in Sources */,
+				96B88211CD1E4C1F87C46E5B /* EntityStates.cpp in Sources */,
+				E5D264B149AF4D9997C9C9F5 /* Action.cpp in Sources */,
+				5DD3825B58BF49F3B1CA07EB /* ActionCreator.cpp in Sources */,
+				C0755B3873E847259AE90201 /* ActionMessage.cpp in Sources */,
+				FDE56286DC9F4E99A652B8F5 /* ActionTypes.cpp in Sources */,
+				0D7594BBE2D54425BE86FCEE /* EmitOnCollision.cpp in Sources */,
+				D8DE0016A8144AEB80192B2B /* Emitter.cpp in Sources */,
+				A6982F1815E74FA6BB55B787 /* EmitterCreator.cpp in Sources */,
+				B35DA506537348CB9457009A /* EmitterTypes.cpp in Sources */,
+				45CE6FC371274A72879C4FCD /* Event.cpp in Sources */,
+				8104F6D18BD9415EA7BE2382 /* GameState.cpp in Sources */,
+				662A1250A0AB45AB83B4836C /* GameStateManager.cpp in Sources */,
+				0F767CBEB8014B6787563ADB /* GameStateTypes.cpp in Sources */,
+				9287C0EB0F094729B706B585 /* GameInputListener.cpp in Sources */,
+				A449569DEC14416596D98B0B /* GameInputManager.cpp in Sources */,
+				3B84C9E46BA64E99B0D4A186 /* InputListener.cpp in Sources */,
+				F7EC8D011F964EA19328241A /* Message.cpp in Sources */,
+				09C5320F849F43D195803919 /* MessageCreator.cpp in Sources */,
+				39782813C60248CCA1FB9004 /* MessageDebug.cpp in Sources */,
+				F61EF74C740C46B38756817C /* MessageEntityStateChanged.cpp in Sources */,
+				1FFAAE8CDFAB490FA7AC30D4 /* MessageHandler.cpp in Sources */,
+				7B28BFC0398D40F4A886FC84 /* MessageSwitchMap.cpp in Sources */,
+				D94EB531EFF2450D87404501 /* MessageTargetReached.cpp in Sources */,
+				3342DA733F314D2685A42F9E /* MessageTypes.cpp in Sources */,
+				AA227114A47C4C0FB6484D98 /* BtOgre.cpp in Sources */,
+				AC8C0F91741F49DBB304299E /* BtOgreExtras.cpp in Sources */,
+				A3F6FD501772460987E1D5F8 /* PhysicsManager.cpp in Sources */,
+				CA9E1539E84A48F5923FDEF3 /* DebugDrawer.cpp in Sources */,
+				4FB36061EC474A98BF1A9576 /* DeleteSceneNode.cpp in Sources */,
+				EC40164768084F30AAF7C56C /* Sleep.cpp in Sources */,
+				DEB74A90A15044AF8D3B3268 /* XMLHelper.cpp in Sources */,
+				DE3531D6E69B463B81EBDDA6 /* Manager.cpp in Sources */,
+				32D7B35787BF4ADBB27C2EA9 /* main.cpp in Sources */,
+				AF15FA088D3D4A398096627A /* tinyxml2.cpp in Sources */,
+				CC53330C3E1B4778A47D24C4 /* GUICounter.cpp in Sources */,
+				0475007BCC8645DCBAF191E6 /* GUIHeartsDisplay.cpp in Sources */,
+				183814EEFA734E68ABA83892 /* MainMenu.cpp in Sources */,
+				16DAB87334874CAA96A2F90B /* SlotSelector.cpp in Sources */,
+				50684C9EE41C445C982BD25B /* Atlas.cpp in Sources */,
+				5D659E66C24C43658A3E89A6 /* Map.cpp in Sources */,
+				C2A35B01D3344E70ABFBE0BC /* MapPack.cpp in Sources */,
+				0A9E0FF6A78942E0B4926564 /* Region.cpp in Sources */,
+				569AF7115C16467C837D94F9 /* TileTypes.cpp in Sources */,
+				7B85356223A94779B32621FA /* AerialCameraPerspective.cpp in Sources */,
+				ED0F9BE71D5243F7AD0A41AC /* Character.cpp in Sources */,
+				3390653606F7486A8AE087B7 /* CharacterController_Physics.cpp in Sources */,
+				08F1CABB18424FDCBF8C8B79 /* Person.cpp in Sources */,
+				CC47BD9B65CD42FF99E4ECD8 /* PersonController.cpp in Sources */,
+				B37563CA1A95446DB2B772A7 /* Player.cpp in Sources */,
+				093FD06D4CEB4A9DB9117305 /* PlayerController.cpp in Sources */,
+				FFD8BC925DE34A478481A67F /* PlayerData.cpp in Sources */,
+				A57EA35D265A49A79B7D8F27 /* PlayerTool.cpp in Sources */,
+				D2077157BB8F4891A8870EA9 /* SimpleEnemy.cpp in Sources */,
+				0BC0A660B4D04A17894636D8 /* SimpleEnemyController.cpp in Sources */,
+				D97DB3A1C4F444798BBB7830 /* SimpleFriend.cpp in Sources */,
+				8187433942B64A9BB099F8C2 /* Damage.cpp in Sources */,
+				D9B2C9D5B47C4A9A92DA15DB /* GlobalCollisionShapesTypes.cpp in Sources */,
+				5DC48BF99FD34E29AD25D578 /* HitableInterface.cpp in Sources */,
+				11CBCEB67E094C9080219574 /* Object.cpp in Sources */,
+				46CFD302292D487D8423F078 /* ObjectTypes.cpp in Sources */,
+				19E22EAF00154406AEF61B6B /* World.cpp in Sources */,
+				DD25B3495135405AB714721D /* WorldEntity.cpp in Sources */,
+				F1D6CB6C92674F9CAE1DDAF6 /* HUD.cpp in Sources */,
+				596D3A3DB661475FBB2ACFF7 /* WorldGUI.cpp in Sources */,
+				F4505CBC6BA8478DB469269C /* Zelda.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		243574BF2255487C9F0A4B66 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 91ED692F429E449E95E90F24 /* Game */;
+			targetProxy = 3DCD86CD65764761AFF77001 /* PBXContainerItemProxy */;
+		};
+		53FFE47B2D2646D79067D499 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 70276259F478432882577EDB /* ZERO_CHECK */;
+			targetProxy = D05F17A6406B460CA0185F00 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		01AA5DF266ED4DF6998113B8 /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = i386;
+				SDKROOT = /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk;
+				SYMROOT = /Users/christoph/Documents/Projects/Zelda/build_mac/build;
+			};
+			name = RelWithDebInfo;
+		};
+		2555B4C1DA6C4B058A7B355B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = i386;
+				COMBINE_HIDPI_IMAGES = YES;
+				CONFIGURATION_BUILD_DIR = /Users/christoph/Documents/Projects/Zelda/build_mac/bin/Debug;
+				EXECUTABLE_PREFIX = "";
+				EXECUTABLE_SUFFIX = "";
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = "'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'";
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					/Users/christoph/Documents/Projects/Zelda/build_mac/include,
+					/Users/christoph/Documents/Projects/Zelda/Zelda/..,
+					/Users/christoph/Documents/Projects/Zelda/Zelda/.,
+					/opt/local/include/bullet,
+					/Users/christoph/Documents/Projects/ogredeps/build_xcode/ogredeps/include/OIS,
+					"/Users/christoph/Documents/Projects/cegui/build_xcode/sdk/include/cegui-0",
+					/Users/christoph/Documents/Projects/ogre/build_xcode/sdk/include/OGRE,
+					/Users/christoph/Documents/Projects/ogre/build_xcode/sdk/include/OGRE/OSX,
+					/Users/christoph/Documents/Projects/ogre/build_xcode/sdk/include/OGRE/Overlay,
+					/Users/christoph/Documents/Projects/ogre/build_xcode/sdk/include/OGRE/RenderSystems/GL,
+					/Users/christoph/Documents/Projects/ogre/build_xcode/sdk/include/OGRE/RenderSystems/GL/OSX,
+					/Users/christoph/Documents/Projects/ogre/build_xcode/sdk/include/OIS,
+					/Users/christoph/Documents/Projects/ogre/build_xcode/sdk/Dependencies/include,
+					/Users/christoph/Documents/Projects/ogre/build_xcode/sdk/boost,
+					/include,
+					/opt/local/include,
+				);
+				INFOPLIST_FILE = /Users/christoph/Documents/Projects/Zelda/build_mac/Zelda/CMakeFiles/Game.dir/Info.plist;
+				INSTALL_PATH = "";
+				LIBRARY_SEARCH_PATHS = "";
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_CFLAGS = (
+					"-std=c++11",
+					"-Wall",
+				);
+				OTHER_CPLUSPLUSFLAGS = (
+					"-x",
+					"objective-c++",
+					"-std=c++11",
+					"-Wall",
+				);
+				OTHER_LDFLAGS = (
+					"-L/opt/local/lib",
+					"-F",
+					/Library/Frameworks,
+					"-framework",
+					IOKIT,
+					"-framework",
+					Cocoa,
+					"-framework",
+					Carbon,
+					"-framework",
+					CoreVideo,
+					"-framework",
+					ApplicationServices,
+					"-framework",
+					Ogre,
+					"-framework",
+					OgreOverlay,
+					"-Wl,-search_paths_first",
+					"-Wl,-headerpad_max_install_names",
+					/opt/local/lib/libBulletSoftBody.dylib,
+					/opt/local/lib/libBulletDynamics.dylib,
+					/opt/local/lib/libBulletCollision.dylib,
+					/opt/local/lib/libLinearMath.dylib,
+					/Users/christoph/Documents/Projects/ogredeps/build_xcode/ogredeps/lib/libOIS.a,
+					"/Users/christoph/Documents/Projects/cegui/build_xcode/sdk/lib/libCEGUIBase-0_d.dylib",
+					"/Users/christoph/Documents/Projects/cegui/build_xcode/sdk/lib/libCEGUIOgreRenderer-0_d.dylib",
+					"-lpthread",
+				);
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = Game;
+				SECTORDER_FLAGS = "";
+				SYMROOT = /Users/christoph/Documents/Projects/Zelda/build_mac/Zelda;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = Debug;
+		};
+		2914F1C74ADF4AB1B77CEC0C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = i386;
+				SDKROOT = /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk;
+				SYMROOT = /Users/christoph/Documents/Projects/Zelda/build_mac/build;
+			};
+			name = Release;
+		};
+		3039923269484BECBFDDED26 /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = i386;
+				COMBINE_HIDPI_IMAGES = YES;
+				CONFIGURATION_BUILD_DIR = /Users/christoph/Documents/Projects/Zelda/build_mac/bin/MinSizeRel;
+				EXECUTABLE_PREFIX = "";
+				EXECUTABLE_SUFFIX = "";
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = s;
+				GCC_PREPROCESSOR_DEFINITIONS = "'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'";
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					/Users/christoph/Documents/Projects/Zelda/build_mac/include,
+					/Users/christoph/Documents/Projects/Zelda/Zelda/..,
+					/Users/christoph/Documents/Projects/Zelda/Zelda/.,
+					/opt/local/include/bullet,
+					/Users/christoph/Documents/Projects/ogredeps/build_xcode/ogredeps/include/OIS,
+					"/Users/christoph/Documents/Projects/cegui/build_xcode/sdk/include/cegui-0",
+					/Users/christoph/Documents/Projects/ogre/build_xcode/sdk/include/OGRE,
+					/Users/christoph/Documents/Projects/ogre/build_xcode/sdk/include/OGRE/OSX,
+					/Users/christoph/Documents/Projects/ogre/build_xcode/sdk/include/OGRE/Overlay,
+					/Users/christoph/Documents/Projects/ogre/build_xcode/sdk/include/OGRE/RenderSystems/GL,
+					/Users/christoph/Documents/Projects/ogre/build_xcode/sdk/include/OGRE/RenderSystems/GL/OSX,
+					/Users/christoph/Documents/Projects/ogre/build_xcode/sdk/include/OIS,
+					/Users/christoph/Documents/Projects/ogre/build_xcode/sdk/Dependencies/include,
+					/Users/christoph/Documents/Projects/ogre/build_xcode/sdk/boost,
+					/include,
+					/opt/local/include,
+				);
+				INFOPLIST_FILE = /Users/christoph/Documents/Projects/Zelda/build_mac/Zelda/CMakeFiles/Game.dir/Info.plist;
+				INSTALL_PATH = "";
+				LIBRARY_SEARCH_PATHS = "";
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_CFLAGS = (
+					"-DNDEBUG",
+					"-std=c++11",
+					"-Wall",
+				);
+				OTHER_CPLUSPLUSFLAGS = (
+					"-x",
+					"objective-c++",
+					"-DNDEBUG",
+					"-std=c++11",
+					"-Wall",
+				);
+				OTHER_LDFLAGS = (
+					"-L/opt/local/lib",
+					"-F",
+					/Library/Frameworks,
+					"-framework",
+					IOKIT,
+					"-framework",
+					Cocoa,
+					"-framework",
+					Carbon,
+					"-framework",
+					CoreVideo,
+					"-framework",
+					ApplicationServices,
+					"-framework",
+					Ogre,
+					"-framework",
+					OgreOverlay,
+					"-Wl,-search_paths_first",
+					"-Wl,-headerpad_max_install_names",
+					/opt/local/lib/libBulletSoftBody.dylib,
+					/opt/local/lib/libBulletDynamics.dylib,
+					/opt/local/lib/libBulletCollision.dylib,
+					/opt/local/lib/libLinearMath.dylib,
+					/Users/christoph/Documents/Projects/ogredeps/build_xcode/ogredeps/lib/libOIS.a,
+					"/Users/christoph/Documents/Projects/cegui/build_xcode/sdk/lib/libCEGUIBase-0_d.dylib",
+					"/Users/christoph/Documents/Projects/cegui/build_xcode/sdk/lib/libCEGUIOgreRenderer-0_d.dylib",
+					"-lpthread",
+				);
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = Game;
+				SECTORDER_FLAGS = "";
+				SYMROOT = /Users/christoph/Documents/Projects/Zelda/build_mac/Zelda;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = MinSizeRel;
+		};
+		35FDA2F284B14746AD717F9F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = i386;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = "'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'";
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_CFLAGS = "  ";
+				OTHER_LDFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ZERO_CHECK;
+				SECTORDER_FLAGS = "";
+				SYMROOT = /Users/christoph/Documents/Projects/Zelda/build_mac;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = Release;
+		};
+		36F130147ECC44859901B423 /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = i386;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = "'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'";
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_CFLAGS = "  ";
+				OTHER_LDFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ALL_BUILD;
+				SECTORDER_FLAGS = "";
+				SYMROOT = /Users/christoph/Documents/Projects/Zelda/build_mac;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = RelWithDebInfo;
+		};
+		3BC9E3AA89834483AC6BA67B /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = i386;
+				SDKROOT = /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk;
+				SYMROOT = /Users/christoph/Documents/Projects/Zelda/build_mac/build;
+			};
+			name = MinSizeRel;
+		};
+		3E4D03D13C2C450885DDF061 /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = i386;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = "'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'";
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_CFLAGS = "  ";
+				OTHER_LDFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ZERO_CHECK;
+				SECTORDER_FLAGS = "";
+				SYMROOT = /Users/christoph/Documents/Projects/Zelda/build_mac;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = MinSizeRel;
+		};
+		40B76FF770C94285A6A08C9C /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = i386;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = "'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'";
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_CFLAGS = "  ";
+				OTHER_LDFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ZERO_CHECK;
+				SECTORDER_FLAGS = "";
+				SYMROOT = /Users/christoph/Documents/Projects/Zelda/build_mac;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = RelWithDebInfo;
+		};
+		4A42A6D2F1D94BF089C97576 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = i386;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = "'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'";
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_CFLAGS = "  ";
+				OTHER_LDFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ALL_BUILD;
+				SECTORDER_FLAGS = "";
+				SYMROOT = /Users/christoph/Documents/Projects/Zelda/build_mac;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = Release;
+		};
+		865CAD6C16E7449A932B46C8 /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = i386;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = "'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'";
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_CFLAGS = "  ";
+				OTHER_LDFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ALL_BUILD;
+				SECTORDER_FLAGS = "";
+				SYMROOT = /Users/christoph/Documents/Projects/Zelda/build_mac;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = MinSizeRel;
+		};
+		869280A66013406EB78628F0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = i386;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = "'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'";
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_CFLAGS = "  ";
+				OTHER_LDFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ZERO_CHECK;
+				SECTORDER_FLAGS = "";
+				SYMROOT = /Users/christoph/Documents/Projects/Zelda/build_mac;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = Debug;
+		};
+		917C06C9F688419D963166ED /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = i386;
+				SDKROOT = /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk;
+				SYMROOT = /Users/christoph/Documents/Projects/Zelda/build_mac/build;
+			};
+			name = Debug;
+		};
+		A6CD8C6BA4D34B27B3EB8BA9 /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = i386;
+				COMBINE_HIDPI_IMAGES = YES;
+				CONFIGURATION_BUILD_DIR = /Users/christoph/Documents/Projects/Zelda/build_mac/bin/RelWithDebInfo;
+				EXECUTABLE_PREFIX = "";
+				EXECUTABLE_SUFFIX = "";
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 2;
+				GCC_PREPROCESSOR_DEFINITIONS = "'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'";
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					/Users/christoph/Documents/Projects/Zelda/build_mac/include,
+					/Users/christoph/Documents/Projects/Zelda/Zelda/..,
+					/Users/christoph/Documents/Projects/Zelda/Zelda/.,
+					/opt/local/include/bullet,
+					/Users/christoph/Documents/Projects/ogredeps/build_xcode/ogredeps/include/OIS,
+					"/Users/christoph/Documents/Projects/cegui/build_xcode/sdk/include/cegui-0",
+					/Users/christoph/Documents/Projects/ogre/build_xcode/sdk/include/OGRE,
+					/Users/christoph/Documents/Projects/ogre/build_xcode/sdk/include/OGRE/OSX,
+					/Users/christoph/Documents/Projects/ogre/build_xcode/sdk/include/OGRE/Overlay,
+					/Users/christoph/Documents/Projects/ogre/build_xcode/sdk/include/OGRE/RenderSystems/GL,
+					/Users/christoph/Documents/Projects/ogre/build_xcode/sdk/include/OGRE/RenderSystems/GL/OSX,
+					/Users/christoph/Documents/Projects/ogre/build_xcode/sdk/include/OIS,
+					/Users/christoph/Documents/Projects/ogre/build_xcode/sdk/Dependencies/include,
+					/Users/christoph/Documents/Projects/ogre/build_xcode/sdk/boost,
+					/include,
+					/opt/local/include,
+				);
+				INFOPLIST_FILE = /Users/christoph/Documents/Projects/Zelda/build_mac/Zelda/CMakeFiles/Game.dir/Info.plist;
+				INSTALL_PATH = "";
+				LIBRARY_SEARCH_PATHS = "";
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_CFLAGS = (
+					"-DNDEBUG",
+					"-std=c++11",
+					"-Wall",
+				);
+				OTHER_CPLUSPLUSFLAGS = (
+					"-x",
+					"objective-c++",
+					"-DNDEBUG",
+					"-std=c++11",
+					"-Wall",
+				);
+				OTHER_LDFLAGS = (
+					"-L/opt/local/lib",
+					"-F",
+					/Library/Frameworks,
+					"-framework",
+					IOKIT,
+					"-framework",
+					Cocoa,
+					"-framework",
+					Carbon,
+					"-framework",
+					CoreVideo,
+					"-framework",
+					ApplicationServices,
+					"-framework",
+					Ogre,
+					"-framework",
+					OgreOverlay,
+					"-Wl,-search_paths_first",
+					"-Wl,-headerpad_max_install_names",
+					/opt/local/lib/libBulletSoftBody.dylib,
+					/opt/local/lib/libBulletDynamics.dylib,
+					/opt/local/lib/libBulletCollision.dylib,
+					/opt/local/lib/libLinearMath.dylib,
+					/Users/christoph/Documents/Projects/ogredeps/build_xcode/ogredeps/lib/libOIS.a,
+					"/Users/christoph/Documents/Projects/cegui/build_xcode/sdk/lib/libCEGUIBase-0_d.dylib",
+					"/Users/christoph/Documents/Projects/cegui/build_xcode/sdk/lib/libCEGUIOgreRenderer-0_d.dylib",
+					"-lpthread",
+				);
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = Game;
+				SECTORDER_FLAGS = "";
+				SYMROOT = /Users/christoph/Documents/Projects/Zelda/build_mac/Zelda;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = RelWithDebInfo;
+		};
+		BB1B8406DB284848A0E839CB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = i386;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = "'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'";
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_CFLAGS = "  ";
+				OTHER_LDFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ALL_BUILD;
+				SECTORDER_FLAGS = "";
+				SYMROOT = /Users/christoph/Documents/Projects/Zelda/build_mac;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = Debug;
+		};
+		C78A5359FAEE4188AED46E2F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = i386;
+				COMBINE_HIDPI_IMAGES = YES;
+				CONFIGURATION_BUILD_DIR = /Users/christoph/Documents/Projects/Zelda/build_mac/bin/Release;
+				EXECUTABLE_PREFIX = "";
+				EXECUTABLE_SUFFIX = "";
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_PREPROCESSOR_DEFINITIONS = "'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'";
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					/Users/christoph/Documents/Projects/Zelda/build_mac/include,
+					/Users/christoph/Documents/Projects/Zelda/Zelda/..,
+					/Users/christoph/Documents/Projects/Zelda/Zelda/.,
+					/opt/local/include/bullet,
+					/Users/christoph/Documents/Projects/ogredeps/build_xcode/ogredeps/include/OIS,
+					"/Users/christoph/Documents/Projects/cegui/build_xcode/sdk/include/cegui-0",
+					/Users/christoph/Documents/Projects/ogre/build_xcode/sdk/include/OGRE,
+					/Users/christoph/Documents/Projects/ogre/build_xcode/sdk/include/OGRE/OSX,
+					/Users/christoph/Documents/Projects/ogre/build_xcode/sdk/include/OGRE/Overlay,
+					/Users/christoph/Documents/Projects/ogre/build_xcode/sdk/include/OGRE/RenderSystems/GL,
+					/Users/christoph/Documents/Projects/ogre/build_xcode/sdk/include/OGRE/RenderSystems/GL/OSX,
+					/Users/christoph/Documents/Projects/ogre/build_xcode/sdk/include/OIS,
+					/Users/christoph/Documents/Projects/ogre/build_xcode/sdk/Dependencies/include,
+					/Users/christoph/Documents/Projects/ogre/build_xcode/sdk/boost,
+					/include,
+					/opt/local/include,
+				);
+				INFOPLIST_FILE = /Users/christoph/Documents/Projects/Zelda/build_mac/Zelda/CMakeFiles/Game.dir/Info.plist;
+				INSTALL_PATH = "";
+				LIBRARY_SEARCH_PATHS = "";
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_CFLAGS = (
+					"-DNDEBUG",
+					"-std=c++11",
+					"-Wall",
+				);
+				OTHER_CPLUSPLUSFLAGS = (
+					"-x",
+					"objective-c++",
+					"-DNDEBUG",
+					"-std=c++11",
+					"-Wall",
+				);
+				OTHER_LDFLAGS = (
+					"-L/opt/local/lib",
+					"-F",
+					/Library/Frameworks,
+					"-framework",
+					IOKIT,
+					"-framework",
+					Cocoa,
+					"-framework",
+					Carbon,
+					"-framework",
+					CoreVideo,
+					"-framework",
+					ApplicationServices,
+					"-framework",
+					Ogre,
+					"-framework",
+					OgreOverlay,
+					"-Wl,-search_paths_first",
+					"-Wl,-headerpad_max_install_names",
+					/opt/local/lib/libBulletSoftBody.dylib,
+					/opt/local/lib/libBulletDynamics.dylib,
+					/opt/local/lib/libBulletCollision.dylib,
+					/opt/local/lib/libLinearMath.dylib,
+					/Users/christoph/Documents/Projects/ogredeps/build_xcode/ogredeps/lib/libOIS.a,
+					"/Users/christoph/Documents/Projects/cegui/build_xcode/sdk/lib/libCEGUIBase-0_d.dylib",
+					"/Users/christoph/Documents/Projects/cegui/build_xcode/sdk/lib/libCEGUIOgreRenderer-0_d.dylib",
+					"-lpthread",
+				);
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = Game;
+				SECTORDER_FLAGS = "";
+				SYMROOT = /Users/christoph/Documents/Projects/Zelda/build_mac/Zelda;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		6B2D99FE990947A0ABC1D78D /* Build configuration list for PBXAggregateTarget "ZERO_CHECK" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				869280A66013406EB78628F0 /* Debug */,
+				35FDA2F284B14746AD717F9F /* Release */,
+				3E4D03D13C2C450885DDF061 /* MinSizeRel */,
+				40B76FF770C94285A6A08C9C /* RelWithDebInfo */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		8261863FE12448E9A3D02F92 /* Build configuration list for PBXNativeTarget "Game" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2555B4C1DA6C4B058A7B355B /* Debug */,
+				C78A5359FAEE4188AED46E2F /* Release */,
+				3039923269484BECBFDDED26 /* MinSizeRel */,
+				A6CD8C6BA4D34B27B3EB8BA9 /* RelWithDebInfo */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		A6364A79EB6648168DDAF2AF /* Build configuration list for PBXProject "Zelda" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				917C06C9F688419D963166ED /* Debug */,
+				2914F1C74ADF4AB1B77CEC0C /* Release */,
+				3BC9E3AA89834483AC6BA67B /* MinSizeRel */,
+				01AA5DF266ED4DF6998113B8 /* RelWithDebInfo */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		FBB99ADF9BEE4B5DA5401000 /* Build configuration list for PBXAggregateTarget "ALL_BUILD" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BB1B8406DB284848A0E839CB /* Debug */,
+				4A42A6D2F1D94BF089C97576 /* Release */,
+				865CAD6C16E7449A932B46C8 /* MinSizeRel */,
+				36F130147ECC44859901B423 /* RelWithDebInfo */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 23CA5FFD953B4C06924FBF5F /* Project object */;
+}
