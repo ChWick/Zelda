@@ -35,6 +35,10 @@ private:
   Ogre::Camera *m_pWorldCamera;
   CAerialCameraPerspective *m_pCameraPerspective;
   CWorldGUI *m_pWorldGUI;
+
+  Ogre::Material* m_pWaterSideWaveMaterial;
+  Ogre::Real m_fWaderSideWaveMaterialNextImageIn;
+  int m_iWaterSideWaveMaterialCurrentImage;
 public:
   CWorld();
   ~CWorld();

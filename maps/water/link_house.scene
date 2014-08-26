@@ -1,0 +1,30 @@
+<scene export_time="1409065942.547767" previous_export_time="1409065863.714565" formatVersion="1.0.1" exported_by="christoph" >
+  <nodes >
+    <node name="wave" >
+      <position x="0.000000" y="0.000000" z="-0.000000" />
+      <rotation qy="0.000000" qx="0.000000" qz="-0.000000" qw="1.000000" />
+      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <entity velocity_max="0.0" actor="False" friction_x="1.0" lock_trans_y="False" physics_type="NO_COLLISION" inertia_tensor="0.4000000059604645" mass="1.0" anisotropic_friction="False" velocity_min="0.0" meshFile="wave.mesh" mass_radius="1.0" name="wave" ghost="False" lock_rot_x="False" friction_z="1.0" lock_trans_x="False" damping_rot="0.10000000149011612" lock_rot_z="False" damping_trans="0.03999999910593033" lock_trans_z="False" friction_y="1.0" lock_rot_y="False" />
+    </node>
+    <node name="water_side_wave" >
+      <position x="0.100000" y="0.000000" z="-0.000000" />
+      <rotation qy="0.000000" qx="0.000000" qz="-0.000000" qw="1.000000" />
+      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <entity velocity_max="0.0" actor="False" friction_x="1.0" lock_trans_y="False" physics_type="NO_COLLISION" inertia_tensor="0.4000000059604645" mass="1.0" anisotropic_friction="False" velocity_min="0.0" meshFile="water_side_wave.mesh" mass_radius="1.0" name="water_side_wave" ghost="False" lock_rot_x="False" friction_z="1.0" lock_trans_x="False" damping_rot="0.10000000149011612" lock_rot_z="False" damping_trans="0.03999999910593033" lock_trans_z="False" friction_y="1.0" lock_rot_y="False" />
+    </node>
+  </nodes>
+  <externals />
+  <environment >
+    <colourBackground b="0.05087608844041824" g="0.05087608844041824" r="0.05087608844041824" />
+    <colourAmbient b="0.0" g="0.0" r="0.0" />
+    <colourDiffuse b="0.05087608844041824" g="0.05087608844041824" r="0.05087608844041824" />
+  </environment>
+</scene>

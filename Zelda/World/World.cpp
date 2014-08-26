@@ -24,6 +24,7 @@
 #include "Atlas/Map.hpp"
 #include <OgreResourceGroupManager.h>
 #include <OgreCamera.h>
+#include <OgreMaterialManager.h>
 #include <OgreViewport.h>
 #include "Camera/AerialCameraPerspective.hpp"
 #include "../Common/Log.hpp"
@@ -32,7 +33,9 @@
 CWorld::CWorld()
   : CGameState(GST_WORLD),
     m_pPlayer(nullptr),
-    m_pWorldGUI(nullptr) {
+    m_pWorldGUI(nullptr),
+    m_fWaderSideWaveMaterialNextImageIn(0),
+    m_iWaterSideWaveMaterialCurrentImage(0) {
 
   LOGV("Creating World");
 
@@ -67,6 +70,9 @@ CWorld::CWorld()
 
   LOGV("Creating the world gui");
   m_pWorldGUI = new CWorldGUI(this);
+
+  // safe water_side_wave material top adjust image in vertex program
+  m_pWaterSideWaveMaterial = Ogre::MaterialManager::getSingleton().getByName("water_side_wave").get();
 }
 
 CWorld::~CWorld() {
@@ -82,6 +88,13 @@ void CWorld::preRender(Ogre::Real tpf) {
 
 void CWorld::update(Ogre::Real tpf) {
   CGameState::update(tpf);
+
+  m_fWaderSideWaveMaterialNextImageIn -= tpf;
+  if (m_fWaderSideWaveMaterialNextImageIn <= 0) {
+    m_fWaderSideWaveMaterialNextImageIn += 1.0f / 24.f;
+    m_iWaterSideWaveMaterialCurrentImage = (m_iWaterSideWaveMaterialCurrentImage + 1) % 30;
+  }
+    m_pWaterSideWaveMaterial->getSupportedTechnique(0)->getPass(0)->getVertexProgramParameters()->setNamedConstant("selectedTile", m_iWaterSideWaveMaterialCurrentImage);
 }
 
 bool CWorld::frameRenderingQueued(const Ogre::FrameEvent& evt) {

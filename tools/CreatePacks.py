@@ -28,6 +28,7 @@ def makeLightWorldZip() :
 	zipf.write('../maps/fence/fence_plank.mesh', 'meshes/fence_plank.mesh', zipfile.ZIP_DEFLATED)
 
 	# tiles
+	copyAllOfType(zipf, '../maps/water/*.mesh', 'meshes')
 	copyAllOfType(zipf, '../maps/tiles/*.mesh', 'meshes')
 	copyAllOfType(zipf, '../maps/tree/*.mesh', 'meshes')
 	copyAllOfType(zipf, '../maps/flower/*.mesh', 'meshes')
@@ -40,7 +41,9 @@ def makeGameZip() :
 
 	zipf = zipfile.ZipFile('../packs/game.zip', 'w');
 
-	zipf.write('../packs/game/materials/rupee.material', 'materials/rupee.material', zipfile.ZIP_DEFLATED)
+	copyAllOfType(zipf, '../packs/game/textures/*', 'textures')
+	copyAllOfType(zipf, '../packs/game/materials/*.material', 'materials')
+	copyAllOfType(zipf, '../packs/game/programs/*', 'programs')
 	zipf.write('../models/test/Cylinder.mesh', 'meshes/Cylinder.mesh', zipfile.ZIP_DEFLATED)
 
 	zipf.close()
