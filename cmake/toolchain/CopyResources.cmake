@@ -10,7 +10,12 @@ add_custom_command(TARGET Game POST_BUILD
 # define copy functions
 
 if (APPLE)
-	function(copy_directory directory file)
+	function(copy_directory directory)
+		add_custom_command(TARGET Game POST_BUILD
+			COMMAND ditto "${RESOURCES_ROOT_DIR}/${directory}" "${RESOURCES_OUTPUT_DIR}/${directory}")
+	endfunction(copy_directory)
+
+	function(copy_files directory file)
 		add_custom_command(TARGET Game POST_BUILD
 	    	COMMAND mkdir ARGS -p "${RESOURCES_OUTPUT_DIR}/${directory}")
 
@@ -20,19 +25,23 @@ if (APPLE)
 				COMMAND ditto ${single_file} ${RESOURCES_OUTPUT_DIR}/${directory}/
 				)
 		endforeach(single_file)
-	endfunction(copy_directory)
+	endfunction(copy_files)
 
 else()
-	function(copy_directory directory file)
+	function(copy_directory directory)
+		file(COPY "${RESOURCES_ROOT_DIR}/${directory}" DESTINATION "${RESOURCES_OUTPUT_DIR}/${directory}")
+	endfunction(copy_directory)
+
+	function(copy_files directory file)
 		file(GLOB files "${RESOURCES_ROOT_DIR}/${directory}${file}")
 		file(COPY ${files} DESTINATION ${RESOURCES_OUTPUT_DIR}/${directory})
-	endfunction(copy_directory)
+	endfunction(copy_files)
 endif()
 
 
 set (RESOURCES_ROOT_DIR ${CMAKE_SOURCE_DIR})
 
-copy_directory("" "cegui")
-copy_directory("" "RTShaderLib")
-copy_directory("packs/" "*.zip")
-copy_directory("maps/Atlases/LightWorld/" "*.zip")
+copy_directory("cegui")
+copy_directory("RTShaderLib")
+copy_files("packs/" "*.zip")
+copy_files("maps/Atlases/LightWorld/" "*.zip")
