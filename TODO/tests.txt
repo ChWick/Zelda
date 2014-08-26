@@ -1,0 +1,5 @@
+[WICHTIG]
+
+[UNWICHTIG]
+- Es scheint so, dass trotz 5% Wsk auf Hertz, nie eines erscheint. Erhoeht man die WSK auf 50% erscheinen aber viele Herzen. Vllt hatte ich nur Pech
+  Moegliche Ursache: Zufallsgenerator wird nicht initialisiert? Immer gleiche Zufallszahlen?

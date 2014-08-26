@@ -1,0 +1,1 @@
+/usr/bin/c++       CMakeFiles/Example10.dir/Example10.o  -o ../bin/Example10 -rdynamic ../lib/libPagedGeometry.a -lX11 -lOgreMain -lpthread -lOgreTerrain -lOgrePaging -lOgreMain -lpthread -lOgrePaging -lOgreMain -lpthread -lOIS -lboost_system -lOgreTerrain -lOIS 

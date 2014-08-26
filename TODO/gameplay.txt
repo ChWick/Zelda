@@ -1,0 +1,15 @@
+[HUD]
+
+[Tree]
+interact on pegasus boots (if player runs vs tree)
+
+[Sign]
+define values for arrows on the sign (direction of the way, or location)
+
+[Animation]
+Fall/Jump animation
+fix bug on falling, while having a lifted object
+synchronize top and base animation if walking (should be always the same time position)
+Swimming
+Lift big stone
+Pegasus boots run

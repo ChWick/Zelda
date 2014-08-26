@@ -1,0 +1,7 @@
+[general]
+set green texture to floor
+finish the map :-)
+setup enemies in the map
+
+[link house]
+make nicer
