@@ -22,6 +22,10 @@
 
 #include "../Common/GameLogic/GameState.hpp"
 #include <OgrePrerequisites.h>
+#if OGRE_PLATFORM == OGRE_PLATFORM_APPLE && !defined(__LP64__)
+#  include <Carbon/Carbon.h>
+#endif
+#include <OgreMaterial.h>
 
 class CPlayer;
 class CAtlas;
@@ -36,7 +40,7 @@ private:
   CAerialCameraPerspective *m_pCameraPerspective;
   CWorldGUI *m_pWorldGUI;
 
-  Ogre::Material* m_pWaterSideWaveMaterial;
+  Ogre::MaterialPtr m_pWaterSideWaveMaterial;
   Ogre::Real m_fWaderSideWaveMaterialNextImageIn;
   int m_iWaterSideWaveMaterialCurrentImage;
 public:

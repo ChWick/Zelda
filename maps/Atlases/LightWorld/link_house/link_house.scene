@@ -1,5 +1,25 @@
-<scene export_time="1409066004.40426" previous_export_time="1409065813.332542" formatVersion="1.0.1" exported_by="christoph" >
+<scene export_time="1409076040.808434" previous_export_time="1409075811.837526" formatVersion="1.0.1" exported_by="christoph" >
   <nodes >
+    <node name="water" >
+      <position x="1.400000" y="0.000000" z="-1.400000" />
+      <rotation qy="1.000000" qx="0.000000" qz="-0.000000" qw="0.000001" />
+      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <entity velocity_max="0.0" actor="False" friction_x="1.0" lock_trans_y="False" physics_type="NO_COLLISION" inertia_tensor="0.4000000059604645" mass="1.0" anisotropic_friction="False" velocity_min="0.0" meshFile="water.mesh" mass_radius="1.0" name="water" ghost="False" lock_rot_x="False" friction_z="1.0" lock_trans_x="False" damping_rot="0.10000000149011612" lock_rot_z="False" damping_trans="0.03999999910593033" lock_trans_z="False" friction_y="1.0" lock_rot_y="False" />
+    </node>
+    <node name="link_house" >
+      <position x="0.000000" y="0.000000" z="-0.000000" />
+      <rotation qy="0.000000" qx="0.000000" qz="-0.000000" qw="1.000000" />
+      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <entity velocity_max="0.0" actor="False" friction_x="1.0" lock_trans_y="False" physics_type="NO_COLLISION" inertia_tensor="0.4000000059604645" mass="1.0" anisotropic_friction="False" velocity_min="0.0" meshFile="link_house.mesh" mass_radius="1.0" name="link_house" ghost="False" lock_rot_x="False" friction_z="1.0" lock_trans_x="False" damping_rot="0.10000000149011612" lock_rot_z="False" damping_trans="0.03999999910593033" lock_trans_z="False" friction_y="1.0" lock_rot_y="False" />
+    </node>
     <node name="wave.011" >
       <position x="1.538775" y="-0.200000" z="-1.395389" />
       <rotation qy="0.000000" qx="0.000000" qz="-0.000000" qw="1.000000" />
@@ -109,27 +129,6 @@
         <actuators />
       </game>
       <entity velocity_max="0.0" actor="False" friction_x="1.0" lock_trans_y="False" physics_type="NO_COLLISION" inertia_tensor="0.4000000059604645" mass="1.0" anisotropic_friction="False" velocity_min="0.0" meshFile="wave.mesh" mass_radius="1.0" name="wave" ghost="False" lock_rot_x="False" friction_z="1.0" lock_trans_x="False" damping_rot="0.10000000149011612" lock_rot_z="False" damping_trans="0.03999999910593033" lock_trans_z="False" friction_y="1.0" lock_rot_y="False" />
-    </node>
-    <node name="link_house" >
-      <position x="0.900000" y="0.000000" z="-0.600000" />
-      <rotation qy="0.000000" qx="0.000000" qz="-0.000000" qw="1.000000" />
-      <scale x="1.000000" y="1.000000" z="1.000000" />
-      <game >
-        <sensors />
-        <actuators />
-      </game>
-      <entity velocity_max="0.0" actor="False" friction_x="1.0" lock_trans_y="False" physics_type="STATIC" inertia_tensor="0.4000000059604645" mass="1.0" anisotropic_friction="False" velocity_min="0.0" meshFile="link_house.mesh" mass_radius="1.0" name="link_house" ghost="False" lock_rot_x="False" friction_z="1.0" lock_trans_x="False" damping_rot="0.10000000149011612" lock_rot_z="False" damping_trans="0.03999999910593033" lock_trans_z="False" friction_y="1.0" lock_rot_y="False" />
-    </node>
-    <node name="water" >
-      <position x="1.900000" y="-0.200000" z="0.600000" />
-      <rotation qy="0.000000" qx="0.000000" qz="-0.000000" qw="1.000000" />
-      <scale x="1.000000" y="1.000000" z="1.000000" />
-      <user_data value="true" type="str" name="water" />
-      <game >
-        <sensors />
-        <actuators />
-      </game>
-      <entity velocity_max="0.0" actor="False" friction_x="1.0" lock_trans_y="False" collisionPrim="triangle_mesh" physics_type="NO_COLLISION" inertia_tensor="0.4000000059604645" mass="1.0" anisotropic_friction="False" velocity_min="0.0" meshFile="water.mesh" mass_radius="1.0" name="water" ghost="False" lock_rot_x="False" friction_z="1.0" lock_trans_x="False" damping_rot="0.10000000149011612" lock_rot_z="False" damping_trans="0.03999999910593033" lock_trans_z="False" friction_y="1.0" lock_rot_y="False" />
     </node>
     <node name="flower.019" >
       <position x="-0.373502" y="0.000000" z="-1.473280" />
@@ -931,16 +930,6 @@
         <actuators />
       </game>
       <entity velocity_max="0.0" actor="False" friction_x="1.0" lock_trans_y="False" physics_type="NO_COLLISION" inertia_tensor="0.4000000059604645" mass="1.0" anisotropic_friction="False" velocity_min="0.0" meshFile="house_knob.mesh" mass_radius="1.0" name="house_knob" ghost="False" lock_rot_x="False" friction_z="1.0" lock_trans_x="False" damping_rot="0.10000000149011612" lock_rot_z="False" damping_trans="0.03999999910593033" lock_trans_z="False" friction_y="1.0" lock_rot_y="False" />
-    </node>
-    <node name="water_side_wave" >
-      <position x="1.000000" y="0.000000" z="-0.800000" />
-      <rotation qy="0.000000" qx="0.000000" qz="-0.000000" qw="1.000000" />
-      <scale x="1.000000" y="1.000000" z="1.000000" />
-      <game >
-        <sensors />
-        <actuators />
-      </game>
-      <entity velocity_max="0.0" actor="False" friction_x="1.0" lock_trans_y="False" physics_type="NO_COLLISION" inertia_tensor="0.4000000059604645" mass="1.0" anisotropic_friction="False" velocity_min="0.0" meshFile="water_side_wave.mesh" mass_radius="1.0" name="water_side_wave" ghost="False" lock_rot_x="False" friction_z="1.0" lock_trans_x="False" damping_rot="0.10000000149011612" lock_rot_z="False" damping_trans="0.03999999910593033" lock_trans_z="False" friction_y="1.0" lock_rot_y="False" />
     </node>
     <node name="house_red_roof" >
       <position x="-0.400000" y="0.200000" z="-0.000000" />

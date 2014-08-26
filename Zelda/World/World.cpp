@@ -72,7 +72,8 @@ CWorld::CWorld()
   m_pWorldGUI = new CWorldGUI(this);
 
   // safe water_side_wave material top adjust image in vertex program
-  m_pWaterSideWaveMaterial = Ogre::MaterialManager::getSingleton().getByName("water_side_wave").get();
+  m_pWaterSideWaveMaterial = Ogre::MaterialManager::getSingleton().getByName("water_side_wave");
+  m_pWaterSideWaveMaterial->load();
 }
 
 CWorld::~CWorld() {
@@ -93,8 +94,8 @@ void CWorld::update(Ogre::Real tpf) {
   if (m_fWaderSideWaveMaterialNextImageIn <= 0) {
     m_fWaderSideWaveMaterialNextImageIn += 1.0f / 24.f;
     m_iWaterSideWaveMaterialCurrentImage = (m_iWaterSideWaveMaterialCurrentImage + 1) % 30;
-  }
     m_pWaterSideWaveMaterial->getSupportedTechnique(0)->getPass(0)->getVertexProgramParameters()->setNamedConstant("selectedTile", m_iWaterSideWaveMaterialCurrentImage);
+  }
 }
 
 bool CWorld::frameRenderingQueued(const Ogre::FrameEvent& evt) {
