@@ -219,6 +219,7 @@ void CPerson::initBody(Ogre::SceneNode *pParentSceneNode) {
     pModelSN->setScale(PERSON_SCALE, PERSON_SCALE, PERSON_SCALE);
     m_pBodyEntity = pParentSceneNode->getCreator()->createEntity(pModelSN->getName() + ".mesh", meshName + ".mesh");
     m_pBodyEntity->setCastShadows(true);
+    //m_pBodyEntity->setMaterialName("water_side_wave");
     pModelSN->attachObject(m_pBodyEntity);
 
     m_pSceneNode->setUserAny(Ogre::Any(dynamic_cast<CCharacter*>(this)));

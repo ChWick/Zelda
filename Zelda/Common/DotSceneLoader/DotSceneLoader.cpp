@@ -40,6 +40,9 @@ void DotSceneLoader::cleanup() {
 	mStaticObjects.clear();
 	if (mSceneMgr) {
 		for (auto &entPair : m_lEntityBufferMap) {
+      if (entPair.second->getParentSceneNode()) {
+        entPair.second->getParentSceneNode()->detachObject(entPair.second);
+      }
 			mSceneMgr->destroyEntity(entPair.second);
 		}
 		mSceneMgr = NULL;
@@ -163,6 +166,7 @@ void DotSceneLoader::parseDotScene(const String &SceneName, const String &groupN
 
 	// remove callbacks
 	m_lCallbacks.clear();
+  cleanup();
 }
 
 void DotSceneLoader::processScene(XMLElement *XMLRoot)

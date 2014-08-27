@@ -31,6 +31,7 @@
 #include "../Objects/Object.hpp"
 #include "BulletCollision/CollisionShapes/btSphereShape.h"
 #include <BulletCollision/CollisionShapes/btCapsuleShape.h>
+#include <BulletCollision/CollisionShapes/btBoxShape.h>
 #include "../Character/Person.hpp"
 #include "../../Common/Util/Assert.hpp"
 #include "../../Common/Message/MessageEntityStateChanged.hpp"
@@ -43,7 +44,8 @@ CMap::CMap(CEntity *pAtlas, CMapPackPtr mapPack, Ogre::SceneNode *pParentSceneNo
     m_PhysicsManager(pParentSceneNode->getCreator()),
     m_MapPack(mapPack),
     m_pPlayer(pPlayer),
-    m_pFirstFlowerEntity(nullptr) {
+    m_pFirstFlowerEntity(nullptr),
+    m_pFlowerAnimationState(nullptr) {
 
   Ogre::LogManager::getSingleton().logMessage("Construction of map '" + m_MapPack->getName() + "'");
 
@@ -84,10 +86,24 @@ CMap::CMap(CEntity *pAtlas, CMapPackPtr mapPack, Ogre::SceneNode *pParentSceneNo
                               m_MapPack->getName() + Ogre::StringConverter::toString(MAP_COUNTER++));
 
 
-  CreateCube(btVector3(0, 10, 0.2), 1);
-  CreateCube(btVector3(0, 200, 0.3), 100);
+  //CreateCube(btVector3(0, 10, 0.2), 1);
+  //CreateCube(btVector3(0, 200, 0.3), 100);
 
   //new CObject(m_MapPack->getName() + "rupee", this, this, OBJECT_GREEN_BUSH);
+
+
+  /*btCollisionShape *pBox = new btBoxShape(btVector3(10, 0.1, 10));
+  btRigidBody *pRB = new btRigidBody(0, new btDefaultMotionState(), pBox);
+  m_pCollisionObject = pRB;
+  m_PhysicsManager.getWorld()->addRigidBody(pRB);
+
+  if (mapPack->getName() == "link_house") {
+    Ogre::Entity *pEnt = m_pSceneNode->getCreator()->createEntity("link_house.mesh");
+    pEnt->setMaterialName("water_side_wave");
+    m_pSceneNode->attachObject(pEnt);
+    //m_pStaticGeometry->addEntity(pEnt, Ogre::Vector3(0, 0, 0));
+    //m_pSceneNode->getCreator()->destroyEntity(pEnt);
+  }*/
 
   m_pStaticGeometry->build();
   rebuildStaticGeometryChangedTiles();
@@ -101,6 +117,8 @@ void CMap::start() {
 }
 
 void CMap::exit() {
+  if (!m_pSceneNode) {return;}
+  m_SceneLoader.cleanup();
   Ogre::LogManager::getSingleton().logMessage("Destruction of map '" + m_MapPack->getName() + "'");
   
   for (int i = 0; i < TT_COUNT; i++) {
@@ -139,7 +157,7 @@ void CMap::CreateCube(const btVector3 &Position, btScalar Mass)
     size = boundingB.getSize()*0.95f;
 
     // apply a material to the cube so it isn't gray like the ground
-    entity->setMaterialName("Examples/Rockwall");
+    entity->setMaterialName("water_side_wave");
     entity->setCastShadows(true);
 
     // Create a sceneNode and attach the entity for rendering

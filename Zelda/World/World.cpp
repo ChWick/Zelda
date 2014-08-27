@@ -37,6 +37,8 @@ CWorld::CWorld()
     m_fWaderSideWaveMaterialNextImageIn(0),
     m_iWaterSideWaveMaterialCurrentImage(0) {
 
+    Ogre::MaterialManager::getSingleton().setVerbose(true);
+
   LOGV("Creating World");
 
   Ogre::ResourceGroupManager::getSingleton().initialiseResourceGroup("World");
@@ -92,7 +94,7 @@ void CWorld::update(Ogre::Real tpf) {
 
   m_fWaderSideWaveMaterialNextImageIn -= tpf;
   if (m_fWaderSideWaveMaterialNextImageIn <= 0) {
-    m_fWaderSideWaveMaterialNextImageIn += 1.0f / 24.f;
+    m_fWaderSideWaveMaterialNextImageIn = 1.0f / 24.f;
     m_iWaterSideWaveMaterialCurrentImage = (m_iWaterSideWaveMaterialCurrentImage + 1) % 30;
     m_pWaterSideWaveMaterial->getSupportedTechnique(0)->getPass(0)->getVertexProgramParameters()->setNamedConstant("selectedTile", m_iWaterSideWaveMaterialCurrentImage);
   }
