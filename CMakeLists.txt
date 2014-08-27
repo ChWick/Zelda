@@ -19,7 +19,6 @@ if (ANDROID)
 endif()
 
 
-
 include(toolchain/AddSdkPaths)
 
 if (APPLE)
@@ -27,7 +26,7 @@ if (APPLE)
 else()
 	# On other systems find Ogre
 	find_package(Ogre)
-	
+	find_package(boost)
 endif()
 
 find_package(bullet)
