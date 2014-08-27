@@ -1,0 +1,131 @@
+/*
+	Instructions:
+ 
+	- Have a reference to both the vertex program and fragment program in your material
+	- Set the parameters of the vertex program correctly, according to the number of
+	  stacks/slices in your texture
+	- Give your particle emitter a ColourFader that changes the alpha over time.
+	  The alpha value won't actually be used to change the transparency of the texture,
+	  but instead it will be used to move along the UV coordinates over time.
+*/
+ 
+vertex_program water_side_wave_vp_hlsl hlsl {
+	source water_side_wave.hlsl
+	entry_point main_vp
+	target vs_2_0
+ 
+	default_params {
+		param_named numTilesU float 1
+		param_named numTilesV float 1
+		param_named_auto worldViewProj worldviewproj_matrix
+	}
+}
+ 
+fragment_program water_side_wave_fp_hlsl hlsl {
+	source water_side_wave.hlsl
+	entry_point main_fp
+}
+
+vertex_program water_side_wave_vs_glsl glsl {
+	source water_side_wave_vp.glsl
+ 
+	default_params {
+		param_named numTilesU float 1
+		param_named numTilesV float 1
+		param_named_auto worldViewProj worldviewproj_matrix
+	}
+}
+ 
+fragment_program water_side_wave_ps_glsl glsl {
+	source water_side_wave_ps.glsl
+	default_params
+	{
+		param_named tex0 int 0
+	}
+}
+
+//------------------------
+//Unified Definitions
+//------------------------
+vertex_program water_side_wave_vs_gl_unified unified
+{
+	delegate water_side_wave_vs_glsl
+	delegate water_side_wave_vs_glsles
+}
+
+fragment_program water_side_wave_ps_gl_unified unified
+{
+	delegate water_side_wave_ps_glsl
+	delegate water_side_wave_ps_glsles
+}
+
+material water_side_wave {
+	receive_shadows off
+
+	/*technique
+	{
+		pass
+		{
+			lighting off
+
+      		scene_blend alpha_blend
+      		depth_write off
+
+      		vertex_program_ref water_side_wave_vp_hlsl {
+				param_named numTilesU float 6
+				param_named numTilesV float 6
+			}
+ 
+			fragment_program_ref water_side_wave_fp_hlsl {
+			}
+
+			texture_unit
+			{
+				texture side_wave.png
+				colour_op alpha_blend
+			}
+		}
+	}*/
+
+	technique
+	{
+		pass
+		{
+			lighting off
+
+      		scene_blend alpha_blend
+      		depth_write off
+
+      		vertex_program_ref water_side_wave_vs_glsl {
+				param_named numTilesU float 6
+				param_named numTilesV float 6
+			}
+ 
+			fragment_program_ref water_side_wave_ps_glsl {
+			}
+
+			texture_unit
+			{
+				texture side_wave.png
+				colour_op alpha_blend
+			}
+		}
+	}
+
+	technique
+	{
+		pass
+		{
+			lighting off
+
+      		scene_blend alpha_blend
+      		depth_write off
+
+			texture_unit
+			{
+				texture side_wave.png
+				colour_op alpha_blend
+			}
+		}
+	}
+}
