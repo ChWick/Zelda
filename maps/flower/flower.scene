@@ -1,29 +1,29 @@
-<scene formatVersion="1.0.1" previous_export_time="1408986413.718637" exported_by="christoph" export_time="1408986935.949975" >
+<scene previous_export_time="1408986935.949975" formatVersion="1.0.1" export_time="1409264728.240493" exported_by="christoph" >
   <nodes >
     <node name="flower_armature" >
-      <position z="-0.000000" x="0.000000" y="0.000000" />
-      <rotation qy="0.000000" qx="0.000000" qz="-0.000000" qw="1.000000" />
-      <scale z="1.000000" x="1.000000" y="1.000000" />
+      <position x="0.000000" y="0.000000" z="-0.000000" />
+      <rotation qw="1.000000" qx="0.000000" qz="-0.000000" qy="0.000000" />
+      <scale x="1.000000" y="1.000000" z="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
     </node>
     <node name="flower" >
-      <position z="-0.000000" x="0.000000" y="0.000000" />
-      <rotation qy="0.000000" qx="0.000000" qz="-0.000000" qw="1.000000" />
-      <scale z="1.000000" x="1.000000" y="1.000000" />
+      <position x="0.000000" y="0.000000" z="-0.000000" />
+      <rotation qw="1.000000" qx="0.000000" qz="-0.000000" qy="0.000000" />
+      <scale x="1.000000" y="1.000000" z="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity mass_radius="1.0" physics_type="NO_COLLISION" lock_trans_x="False" actor="False" inertia_tensor="0.4000000059604645" friction_y="1.0" lock_trans_y="False" mass="1.0" lock_rot_y="False" friction_x="1.0" name="flower" lock_trans_z="False" damping_trans="0.03999999910593033" velocity_min="0.0" damping_rot="0.10000000149011612" meshFile="flower.mesh" ghost="False" anisotropic_friction="False" lock_rot_z="False" friction_z="1.0" velocity_max="0.0" lock_rot_x="False" />
+      <entity mass_radius="1.0" mass="1.0" meshFile="flower.mesh" actor="False" lock_trans_x="False" velocity_min="0.0" lock_rot_y="False" ghost="False" velocity_max="0.0" damping_rot="0.10000000149011612" inertia_tensor="0.4000000059604645" lock_trans_y="False" friction_x="1.0" physics_type="NO_COLLISION" anisotropic_friction="False" lock_rot_x="False" name="flower" lock_trans_z="False" friction_y="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_rot_z="False" />
     </node>
   </nodes>
   <externals />
   <environment >
-    <colourBackground g="0.05087608844041824" r="0.05087608844041824" b="0.05087608844041824" />
-    <colourDiffuse g="0.05087608844041824" r="0.05087608844041824" b="0.05087608844041824" />
-    <colourAmbient g="0.0" r="0.0" b="0.0" />
+    <colourAmbient b="0.0" r="0.0" g="0.0" />
+    <colourDiffuse b="0.05087608844041824" r="0.05087608844041824" g="0.05087608844041824" />
+    <colourBackground b="0.05087608844041824" r="0.05087608844041824" g="0.05087608844041824" />
   </environment>
 </scene>
