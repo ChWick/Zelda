@@ -46,7 +46,7 @@ void CGUIDirectionInput::update(Ogre::Real tpf) {
   }
 
   OIS::Keyboard *pKeyboard = CGame::getSingleton().getInputContext().mKeyboard;
-  if (pKeyboard) {
+  if (pKeyboard && !m_bHitOnce) {
     if (pKeyboard->isKeyDown(OIS::KC_LEFT)) {
       m_vCurrentDotPosition.d_x = -m_fMaxRadius;
       m_bHitOnce = true;
