@@ -436,7 +436,7 @@ void CGame::createScene() {
 #endif
 
 #ifdef DEBUG_SHOW_OGRE_TRAY
-  mTrayMgr->showFrameStats(OgreBites::TL_BOTTOMLEFT);
+  mTrayMgr->showFrameStats(OgreBites::TL_TOPLEFT);
   //mTrayMgr->showLogo(OgreBites::TL_BOTTOMRIGHT);
 
   // create a params panel for displaying sample details

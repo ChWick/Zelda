@@ -17,22 +17,32 @@
  * Zelda. If not, see http://www.gnu.org/licenses/.
  *****************************************************************************/
 
-#include "../../Common/GUI/GUIManager.hpp"
-#include "WorldGUI.hpp"
-#include "../../Common/GUI/GUIPullMenu.hpp"
-#include "HUD.hpp"
-#include "../../Common/GUI/GUIDirectionInput.hpp"
+#ifndef _GUI_DIRECTION_INPUT_HPP_
+#define _GUI_DIRECTION_INPUT_HPP_
 
-CWorldGUI::CWorldGUI(CEntity *pParentEntity)
-  : CGUIOverlay("world_gui", pParentEntity, CGUIManager::getSingleton().getRoot(),
-                CGUIManager::getSingleton().getRoot()->createChild("DefaultWindow", "world_gui_root")) {
+#include "GUIOverlay.hpp"
+#include "../Input/InputListener.hpp"
 
-  CGUIManager::getSingleton().addGUIOverlay(this);
+class CGUIDirectionInput :
+  public CGUIOverlay {
+private:
+  const CEGUI::Vector2f m_vDotCenter;
+  const float m_fMaxRadius;
+  CEGUI::Vector2f m_vCurrentDotPosition;
+  CEGUI::Window *m_pDot;
+  bool m_bHitOnce;
+public:
+  CGUIDirectionInput(CEntity *pParentEntity,
+                     CEGUI::Window *pParentWindow,
+                     float fPixelSize);
 
-  m_pHUD = new CHUD(this, m_pRoot);
-  new CGUIPullMenu("test", this, m_pRoot, CGUIPullMenu::PMD_RIGHT, 400);
-  new CGUIDirectionInput(this, m_pRoot, m_pRoot->getPixelSize().d_width * 0.2);
-}
-CWorldGUI::~CWorldGUI() {
-  CGUIManager::getSingleton().removeGUIOverlay(this);
-}
+  virtual ~CGUIDirectionInput();
+
+  void update(Ogre::Real tpf);
+protected:
+
+private:
+  void processInput(const CEGUI::Vector2f &vPosition);
+};
+
+#endif // _GUI_DIRECTION_INPUT_HPP_

@@ -29,6 +29,7 @@
 #include "MapPackParserListener.hpp"
 #include <OgreStaticGeometry.h>
 #include "TileTypes.hpp"
+#include <OgreMaterial.h>
 
 class CMap : public CWorldEntity,
              private CMapPackParserListener,
@@ -45,6 +46,7 @@ private:
   Ogre::Entity *m_apTileEntities[TT_COUNT];
   Ogre::Entity *m_pFirstFlowerEntity;
   Ogre::AnimationState *m_pFlowerAnimationState;
+  Ogre::MaterialPtr m_pWaterSideWaveMaterial;
 public:
   CMap(CEntity *pAtlas, CMapPackPtr mapPack, Ogre::SceneNode *pParentSceneNode, CWorldEntity *pPlayer);
   virtual ~CMap();

@@ -107,6 +107,10 @@ CMap::CMap(CEntity *pAtlas, CMapPackPtr mapPack, Ogre::SceneNode *pParentSceneNo
 
   m_pStaticGeometry->build();
   rebuildStaticGeometryChangedTiles();
+
+  m_pWaterSideWaveMaterial = Ogre::MaterialManager::getSingleton().getByName("water_side_wave");
+  m_pWaterSideWaveMaterial->touch();
+  m_pWaterSideWaveMaterial->load();
 }
 
 CMap::~CMap() {
