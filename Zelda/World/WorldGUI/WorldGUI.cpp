@@ -22,6 +22,7 @@
 #include "../../Common/GUI/GUIPullMenu.hpp"
 #include "HUD.hpp"
 #include "../../Common/GUI/GUIDirectionInput.hpp"
+#include "WorldGUISimpleTouchButtons.hpp"
 
 CWorldGUI::CWorldGUI(CEntity *pParentEntity)
   : CGUIOverlay("world_gui", pParentEntity, CGUIManager::getSingleton().getRoot(),
@@ -32,6 +33,7 @@ CWorldGUI::CWorldGUI(CEntity *pParentEntity)
   m_pHUD = new CHUD(this, m_pRoot);
   new CGUIPullMenu("test", this, m_pRoot, CGUIPullMenu::PMD_RIGHT, 400);
   new CGUIDirectionInput(this, m_pRoot, m_pRoot->getPixelSize().d_width * 0.2);
+  new CWorldGUISimpleTouchButton("interact", this, m_pRoot, STB_INTERACT, m_pRoot->getPixelSize().d_width * 0.14);
 }
 CWorldGUI::~CWorldGUI() {
   CGUIManager::getSingleton().removeGUIOverlay(this);
