@@ -54,6 +54,11 @@ CMap::CMap(CEntity *pAtlas, CMapPackPtr mapPack, Ogre::SceneNode *pParentSceneNo
                                      CPhysicsCollisionObject(new btSphereShape(0.04), Ogre::Vector3::NEGATIVE_UNIT_Y * 0.03));
   m_PhysicsManager.addCollisionShape(GLOBAL_COLLISION_SHAPES_TYPES_ID_MAP.toString(GCST_PERSON_CAPSULE),
                                      CPhysicsCollisionObject(new btCapsuleShape(CPerson::PERSON_RADIUS, CPerson::PERSON_HEIGHT - 2 * CPerson::PERSON_RADIUS)));
+  btCompoundShape *pHouseEntranceShape = new btCompoundShape();
+  pHouseEntranceShape->addChildShape(btTransform(btQuaternion::getIdentity(), btVector3(-0.069, 0.08, 0.02)), new btBoxShape(btVector3(0.01, 0.08, 0.02)));
+  pHouseEntranceShape->addChildShape(btTransform(btQuaternion::getIdentity(), btVector3(0.069, 0.08, 0.02)), new btBoxShape(btVector3(0.01, 0.08, 0.02)));
+  pHouseEntranceShape->addChildShape(btTransform(btQuaternion::getIdentity(), btVector3(0.0, 0.16, 0.02)), new btBoxShape(btVector3(0.07, 0.01, 0.02)));
+  m_PhysicsManager.addCollisionShape(GLOBAL_COLLISION_SHAPES_TYPES_ID_MAP.toString(GCST_HOUSE_ENTRANCE), CPhysicsCollisionObject(pHouseEntranceShape, Ogre::Vector3::ZERO));
 
   // Create global entites
   for (int i = 0; i < TT_COUNT; i++) {

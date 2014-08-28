@@ -714,6 +714,7 @@ void DotSceneLoader::processEntity(XMLElement *XMLNode, SceneNode *pParent, CUse
   String name = getAttrib(XMLNode, "name");
   String id = getAttrib(XMLNode, "id");
   String meshFile = getAttrib(XMLNode, "meshFile");
+  String meshName = meshFile.substr(0, meshFile.length() - 5); // without .mesh
   String materialFile = getAttrib(XMLNode, "materialFile");
   String physicsType = getAttrib(XMLNode, "physics_type");
 
@@ -825,8 +826,8 @@ void DotSceneLoader::processEntity(XMLElement *XMLNode, SceneNode *pParent, CUse
 
     // if there is a motion state, create the shape
           if (ms) {
-      if (m_pPhysicsManager->hasCollisionShape(meshFile)) {
-        auto colShape = m_pPhysicsManager->getCollisionShape(meshFile);
+      if (m_pPhysicsManager->hasCollisionShape(meshName)) {
+        auto colShape = m_pPhysicsManager->getCollisionShape(meshName);
         shape = colShape.getShape();
         centerOffset = colShape.getOffset();
       }
@@ -863,8 +864,8 @@ void DotSceneLoader::processEntity(XMLElement *XMLNode, SceneNode *pParent, CUse
           throw Ogre::Exception(0, "Unknown Collision Prim: " + collisionPrim, __FILE__);
         }
 
-        for (auto &cb : m_lCallbacks) {cb->physicsShapeCreated(shape, meshFile);}
-        m_pPhysicsManager->addCollisionShape(meshFile, CPhysicsCollisionObject(shape, centerOffset));
+        for (auto &cb : m_lCallbacks) {cb->physicsShapeCreated(shape, meshName);}
+        m_pPhysicsManager->addCollisionShape(meshName, CPhysicsCollisionObject(shape, centerOffset));
       }
           }
     pParent->detachObject(pEntity);
