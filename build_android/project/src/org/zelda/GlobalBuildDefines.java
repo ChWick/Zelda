@@ -15,10 +15,10 @@ public final class GlobalBuildDefines {
     public final static boolean ENABLE_CHEATS = 0 == 1;
 
     // Flag to define wheter to enable touch-screen input
-    public final static boolean ENABLE_INPUT_TOUCH = 0 == 1;
+    public final static boolean ENABLE_INPUT_TOUCH = 1 == 1;
 
     // Index of the input platform (0: keyboard, 1: touch, 2: amazon remote control)
-    public final static int PROJECT_INPUT_PLATFORM = 0;
+    public final static int PROJECT_INPUT_PLATFORM = 1;
 
     // define whether there are input buttons
     public final static boolean PROJECT_HAS_INPUT_BUTTONS_IMAGESET = PROJECT_INPUT_PLATFORM == 0 || PROJECT_INPUT_PLATFORM == 2;

@@ -44,6 +44,24 @@ fragment_program water_side_wave_ps_glsl glsl {
 	}
 }
 
+vertex_program water_side_wave_vs_glsles glsles {
+	source water_side_wave_vp.glsles
+ 
+	default_params {
+		param_named numTilesU float 1
+		param_named numTilesV float 1
+		param_named_auto worldViewProj worldviewproj_matrix
+	}
+}
+ 
+fragment_program water_side_wave_ps_glsles glsles {
+	source water_side_wave_ps.glsles
+	default_params
+	{
+		param_named tex0 int 0
+	}
+}
+
 //------------------------
 //Unified Definitions
 //------------------------
@@ -62,7 +80,7 @@ fragment_program water_side_wave_ps_gl_unified unified
 material water_side_wave {
 	receive_shadows off
 
-	/*technique
+	technique
 	{
 		pass
 		{
@@ -85,7 +103,7 @@ material water_side_wave {
 				colour_op alpha_blend
 			}
 		}
-	}*/
+	}
 
 	technique
 	{
@@ -96,12 +114,12 @@ material water_side_wave {
       		scene_blend alpha_blend
       		depth_write off
 
-      		vertex_program_ref water_side_wave_vs_glsl {
+      		vertex_program_ref water_side_wave_vs_gl_unified {
 				param_named numTilesU float 6
 				param_named numTilesV float 6
 			}
  
-			fragment_program_ref water_side_wave_ps_glsl {
+			fragment_program_ref water_side_wave_ps_gl_unified {
 			}
 
 			texture_unit
@@ -112,7 +130,7 @@ material water_side_wave {
 		}
 	}
 
-	technique
+	/*technique
 	{
 		pass
 		{
@@ -127,5 +145,5 @@ material water_side_wave {
 				colour_op alpha_blend
 			}
 		}
-	}
+	}*/
 }

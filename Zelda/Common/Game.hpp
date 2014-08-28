@@ -37,6 +37,7 @@
 #include <android_native_app_glue.h>
 #include "Android/OgreAPKFileSystemArchive.h"
 #include "Android/OgreAPKZipArchive.h"
+#include <OgreArchiveManager.h>
 #endif
 
 #include "ShaderGenerator.hpp"
