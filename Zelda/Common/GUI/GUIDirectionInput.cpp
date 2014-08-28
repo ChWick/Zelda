@@ -8,7 +8,7 @@ CGUIDirectionInput::CGUIDirectionInput(CEntity *pParentEntity,
                                        CEGUI::Window *pParentWindow,
                                        float fPixelSize
                                        )
- : CGUIOverlay("input_direction", pParentEntity, pParentWindow, pParentWindow->createChild("DefaultWindow", "input_direction_root")),
+ : CGUITouchButton("input_direction", pParentEntity, pParentWindow, pParentWindow->createChild("DefaultWindow", "input_direction_root")),
    m_vDotCenter(fPixelSize / 2, pParentWindow->getPixelSize().d_height - fPixelSize / 2),
    m_fMaxRadius(0.25 * fPixelSize) {
 
@@ -24,50 +24,34 @@ CGUIDirectionInput::CGUIDirectionInput(CEntity *pParentEntity,
 CGUIDirectionInput::~CGUIDirectionInput() {
 }
 
-void CGUIDirectionInput::update(Ogre::Real tpf) {
-  m_bHitOnce = false;
+void CGUIDirectionInput::handleButtonPress(bool bActive) {
 
-  // update input
-  OIS::Mouse *pMouse = CGame::getSingleton().getInputContext().mMouse;
-  if (pMouse) {
-    processInput(Vector2f(pMouse->getMouseState().X.abs,
-				      pMouse->getMouseState().Y.abs));
-  }
-
-  OIS::MultiTouch *pMultiTouch = CGame::getSingleton().getInputContext().mMultiTouch;
-  if (pMultiTouch) {
-    const std::vector<OIS::MultiTouchState> &mts = pMultiTouch->getMultiTouchStates();
-    for (auto &state : mts) {
-      if (state.touchType == OIS::MT_Moved || state.touchType == OIS::MT_Pressed) {
-	processInput(Vector2f(state.X.abs,
-					  state.Y.abs));
+  if (!bActive) {
+    // update input
+    OIS::Keyboard *pKeyboard = CGame::getSingleton().getInputContext().mKeyboard;
+    if (pKeyboard && !m_bHitOnce) {
+      if (pKeyboard->isKeyDown(OIS::KC_LEFT)) {
+        m_vCurrentDotPosition.d_x = -m_fMaxRadius;
+        m_bHitOnce = true;
       }
-    }
-  }
-
-  OIS::Keyboard *pKeyboard = CGame::getSingleton().getInputContext().mKeyboard;
-  if (pKeyboard && !m_bHitOnce) {
-    if (pKeyboard->isKeyDown(OIS::KC_LEFT)) {
-      m_vCurrentDotPosition.d_x = -m_fMaxRadius;
-      m_bHitOnce = true;
-    }
-    else if (pKeyboard->isKeyDown(OIS::KC_RIGHT)) {
-      m_vCurrentDotPosition.d_x = +m_fMaxRadius;
-      m_bHitOnce = true;
-    }
-    else {
-      m_vCurrentDotPosition.d_x = 0;
-    }
-    if (pKeyboard->isKeyDown(OIS::KC_UP)) {
-      m_vCurrentDotPosition.d_y = -m_fMaxRadius;
-      m_bHitOnce = true;
-    }
-    else if (pKeyboard->isKeyDown(OIS::KC_DOWN)) {
-      m_vCurrentDotPosition.d_y = m_fMaxRadius;
-      m_bHitOnce = true;
-    }
-    else {
-      m_vCurrentDotPosition.d_y = 0;
+      else if (pKeyboard->isKeyDown(OIS::KC_RIGHT)) {
+        m_vCurrentDotPosition.d_x = +m_fMaxRadius;
+        m_bHitOnce = true;
+      }
+      else {
+        m_vCurrentDotPosition.d_x = 0;
+      }
+      if (pKeyboard->isKeyDown(OIS::KC_UP)) {
+        m_vCurrentDotPosition.d_y = -m_fMaxRadius;
+        m_bHitOnce = true;
+      }
+      else if (pKeyboard->isKeyDown(OIS::KC_DOWN)) {
+        m_vCurrentDotPosition.d_y = m_fMaxRadius;
+        m_bHitOnce = true;
+      }
+      else {
+        m_vCurrentDotPosition.d_y = 0;
+      }
     }
   }
 

@@ -24,7 +24,7 @@
 
 class CGUITouchButton :
   public CGUIOverlay {
-private:
+protected:
   bool m_bHitOnce;
 public:
   CGUITouchButton(const std::string &id,

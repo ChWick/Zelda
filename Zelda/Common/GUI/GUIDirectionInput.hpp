@@ -20,17 +20,16 @@
 #ifndef _GUI_DIRECTION_INPUT_HPP_
 #define _GUI_DIRECTION_INPUT_HPP_
 
-#include "GUIOverlay.hpp"
+#include "GUITouchButton.hpp"
 #include "../Input/InputListener.hpp"
 
 class CGUIDirectionInput :
-  public CGUIOverlay {
+  public CGUITouchButton {
 private:
   const CEGUI::Vector2f m_vDotCenter;
   const float m_fMaxRadius;
   CEGUI::Vector2f m_vCurrentDotPosition;
   CEGUI::Window *m_pDot;
-  bool m_bHitOnce;
 public:
   CGUIDirectionInput(CEntity *pParentEntity,
                      CEGUI::Window *pParentWindow,
@@ -38,11 +37,10 @@ public:
 
   virtual ~CGUIDirectionInput();
 
-  void update(Ogre::Real tpf);
 protected:
-
-private:
   void processInput(const CEGUI::Vector2f &vPosition);
+private:
+  void handleButtonPress(bool);
 };
 
 #endif // _GUI_DIRECTION_INPUT_HPP_
