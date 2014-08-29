@@ -80,6 +80,7 @@ protected:
 	bool m_touchingContact;
 	btVector3 m_touchingNormal;
 
+  bool  m_bStuck;
 	bool  m_wasOnGround;
 	bool  m_wasJumping;
 	bool	m_useGhostObjectSweepTest;
@@ -182,6 +183,7 @@ public:
 	}
 
 	bool onGround () const;
+  bool isStuck() const {return m_bStuck;}
 	void setUpInterpolate (bool value);
 
 

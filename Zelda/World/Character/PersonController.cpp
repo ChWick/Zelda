@@ -212,16 +212,14 @@ void CPersonController::updateCharacter(const Ogre::Real deltaTime) {
       mCCPhysics->setWalkDirection(btVector3(0, 0, 0));
       mCCPerson->setIsMoving(false);
     }
-    m_vUserData = mBodyNode->getPosition();
   }
   else if (m_uiCurrentMoveState == MS_RUNNING) {
     mGoalDirection = mBodyNode->getOrientation().zAxis();
 		mCCPhysics->setWalkDirection(BtOgre::Convert::toBullet(mGoalDirection) * posIncrementPerSecond);
 		mCCPerson->setIsMoving(true);
-    if (m_vUserData.squaredDistance(mBodyNode->getPosition()) < posIncrementPerSecond * posIncrementPerSecond * 0.02 * deltaTime * deltaTime) {
-      //changeMoveState(MS_NORMAL);
+    if (mCCPhysics->isStuck()) {
+      changeMoveState(MS_NORMAL);
     }
-    m_vUserData = mBodyNode->getPosition();
   }
 	else if (m_uiCurrentMoveState >= MS_USER_STATE) {
 		userUpdateCharacter(deltaTime);

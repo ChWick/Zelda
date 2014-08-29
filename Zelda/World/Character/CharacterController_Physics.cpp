@@ -357,7 +357,7 @@ void CharacterControllerPhysics::stepForwardAndStrafe ( btCollisionWorld* collis
 	}
 
 	int maxIter = 10;
-
+  btVector3 vAverageHitPoint(0, 0, 0);
 	while (fraction > btScalar(0.01) && maxIter-- > 0)
 	{
 		start.setOrigin (m_currentPosition);
@@ -396,6 +396,7 @@ void CharacterControllerPhysics::stepForwardAndStrafe ( btCollisionWorld* collis
 			// we moved only a fraction
 			btScalar hitDistance;
 			hitDistance = (callback.m_hitPointWorld - m_currentPosition).length();
+      vAverageHitPoint += callback.m_hitNormalWorld;
 
       if (pOther->getBroadphaseHandle()->m_collisionFilterGroup == COL_BORDER) {
         // border, check for jump
@@ -443,6 +444,18 @@ void CharacterControllerPhysics::stepForwardAndStrafe ( btCollisionWorld* collis
 	//		break;
 
 	}
+
+  m_bStuck = false;
+  if (maxIter < 9) {
+    // check if we are stuck
+    btVector3 vAvColDir(vAverageHitPoint);
+    vAvColDir.normalize();
+    btScalar cosangle = vAvColDir.dot(m_normalizedDirection);
+    if (cosangle < -0.85f) {
+      // character is stuck
+      m_bStuck = true;
+    }
+  }
 }
 
 void CharacterControllerPhysics::stepDown ( btCollisionWorld* collisionWorld, btScalar dt)
