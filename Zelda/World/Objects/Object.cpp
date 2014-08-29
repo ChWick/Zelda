@@ -114,6 +114,7 @@ void CObject::createPhysics() {
     break;
   case OBJECT_GREEN_BUSH:
   case OBJECT_LIGHT_STONE:
+  case OBJECT_LIGHT_STONE_PILE:
     if (m_eState == EST_LIFTED) {
       group = COL_DAMAGE_P;
       mask = MASK_DAMAGE_P_COLLIDES_WITH;

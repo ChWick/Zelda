@@ -60,6 +60,15 @@ CMap::CMap(CEntity *pAtlas, CMapPackPtr mapPack, Ogre::SceneNode *pParentSceneNo
   pHouseEntranceShape->addChildShape(btTransform(btQuaternion::getIdentity(), btVector3(0.0, 0.16, 0.02)), new btBoxShape(btVector3(0.07, 0.01, 0.02)));
   m_PhysicsManager.addCollisionShape(GLOBAL_COLLISION_SHAPES_TYPES_ID_MAP.toString(GCST_HOUSE_ENTRANCE), CPhysicsCollisionObject(pHouseEntranceShape, Ogre::Vector3::ZERO));
 
+  btCompoundShape *pStonePileShape = new btCompoundShape();
+  pStonePileShape->addChildShape(btTransform(btQuaternion::getIdentity(), btVector3(0.05, 0.02, 0.05)), new btSphereShape(0.04));
+  pStonePileShape->addChildShape(btTransform(btQuaternion::getIdentity(), btVector3(-0.05, 0.02, 0.05)), new btSphereShape(0.04));
+  pStonePileShape->addChildShape(btTransform(btQuaternion::getIdentity(), btVector3(0.05, 0.02, -0.05)), new btSphereShape(0.04));
+  pStonePileShape->addChildShape(btTransform(btQuaternion::getIdentity(), btVector3(-0.05, 0.02, -0.05)), new btSphereShape(0.04));
+  pStonePileShape->addChildShape(btTransform(btQuaternion::getIdentity(), btVector3(-0.0, 0.06, -0.0)), new btSphereShape(0.04));
+  m_PhysicsManager.addCollisionShape(GLOBAL_COLLISION_SHAPES_TYPES_ID_MAP.toString(GCST_STONE_PILE), CPhysicsCollisionObject(pStonePileShape, Ogre::Vector3::ZERO));
+
+
   // Create global entites
   for (int i = 0; i < TT_COUNT; i++) {
     m_apTileEntities[i] = pParentSceneNode->getCreator()->createEntity(TILE_TYPE_ID_MAP.toData(static_cast<ETileTypes>(i)).sMeshName);
@@ -330,7 +339,7 @@ void CMap::parseRegion(const SRegionInfo &region) {
 // ############################################################################3
 // CDotSceneLoaderCallback
 void CMap::physicsShapeCreated(btCollisionShape *pShape, const std::string &sMeshName) {
-  EObjectTypes objectType(OBJECT_TYPE_ID_MAP.getFromMesh(sMeshName));
+  EObjectTypes objectType(OBJECT_TYPE_ID_MAP.getFromMesh(sMeshName + ".mesh"));
   if (objectType != OBJECT_COUNT) {
     pShape->setLocalScaling(pShape->getLocalScaling() * OBJECT_TYPE_ID_MAP.toData(objectType).vPhysicsShapeScale);
   }

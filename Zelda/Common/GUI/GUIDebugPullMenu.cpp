@@ -34,6 +34,7 @@ CGUIDebugPullMenu::CGUIDebugPullMenu(CEntity *pParentEntity,
   m_pContent->setSize(USize::one());
 
   float fPos = 0;
+  createButton("OgreTray/Checkbox", "debug_drawer", "Toggle debug drawer", fPos)->subscribeEvent(ToggleButton::EventSelectStateChanged, Event::Subscriber(&CGUIDebugPullMenu::onToggleDebugDrawer, this));
   createButton("OgreTray/Checkbox", "physics", "Toggle physics debug", fPos)->subscribeEvent(ToggleButton::EventSelectStateChanged, Event::Subscriber(&CGUIDebugPullMenu::onTogglePhysics, this));
 }
 
@@ -48,8 +49,14 @@ CEGUI::Window *CGUIDebugPullMenu::createButton(const CEGUI::String &wnd, const C
   return pButton;
 }
 
+bool CGUIDebugPullMenu::onToggleDebugDrawer(const CEGUI::EventArgs &args) {
+  ToggleButton *pTB = dynamic_cast<ToggleButton*>(dynamic_cast<const WindowEventArgs&>(args).window);
+  CMessageHandler::getSingleton().addMessage(new CMessageDebug(CMessageDebug::DM_TOGGLE_DEBUG_DRAWER, pTB->isSelected()));
+  return true;
+}
 
 bool CGUIDebugPullMenu::onTogglePhysics(const CEGUI::EventArgs &args) {
-  CMessageHandler::getSingleton().addMessage(new CMessageDebug(CMessageDebug::DM_TOGGLE_PHYSICS, true));
+  ToggleButton *pTB = dynamic_cast<ToggleButton*>(dynamic_cast<const WindowEventArgs&>(args).window);
+  CMessageHandler::getSingleton().addMessage(new CMessageDebug(CMessageDebug::DM_TOGGLE_PHYSICS, pTB->isSelected()));
   return true;
 }

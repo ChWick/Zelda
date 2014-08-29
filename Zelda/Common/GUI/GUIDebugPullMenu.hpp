@@ -33,6 +33,7 @@ public:
 private:
   CEGUI::Window *createButton(const CEGUI::String &wnd, const CEGUI::String &id, const CEGUI::String &text, float &fPos);
 
+  bool onToggleDebugDrawer(const CEGUI::EventArgs &args);
   bool onTogglePhysics(const CEGUI::EventArgs &args);
 };
 

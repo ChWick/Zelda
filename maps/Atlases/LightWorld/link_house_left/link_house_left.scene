@@ -1,1261 +1,1271 @@
-<scene previous_export_time="1409264330.459686" formatVersion="1.0.1" export_time="1409264358.922798" exported_by="christoph" >
+<scene exported_by="christoph" export_time="1409306515.607694" formatVersion="1.0.1" previous_export_time="1409264358.922798" >
   <nodes >
-    <node name="link_house_left" >
-      <position x="0.500000" y="0.200000" z="1.200000" />
-      <rotation qw="0.707107" qx="0.000000" qz="-0.000000" qy="0.707107" />
-      <scale x="1.000000" y="1.000000" z="1.000000" />
+    <node name="lw_light_stone_pile" >
+      <position x="0.900000" z="-1.000000" y="0.000000" />
+      <rotation qx="0.000000" qy="0.000000" qw="1.000000" qz="-0.000000" />
+      <scale x="1.000000" z="1.000000" y="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity mass_radius="1.0" mass="1.0" meshFile="link_house_left.mesh" actor="False" lock_trans_x="False" velocity_min="0.0" lock_rot_y="False" ghost="False" velocity_max="0.0" damping_rot="0.10000000149011612" inertia_tensor="0.4000000059604645" lock_trans_y="False" friction_x="1.0" physics_type="NO_COLLISION" anisotropic_friction="False" lock_rot_x="False" name="link_house_left" lock_trans_z="False" friction_y="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_rot_z="False" />
+      <entity lock_rot_x="False" lock_trans_x="False" friction_x="1.0" velocity_max="0.0" friction_z="1.0" anisotropic_friction="False" actor="False" lock_trans_z="False" damping_trans="0.03999999910593033" damping_rot="0.10000000149011612" friction_y="1.0" collisionPrim="convex_hull" mass="1.0" lock_trans_y="False" lock_rot_y="False" meshFile="lw_light_stone_pile.mesh" name="lw_light_stone_pile" inertia_tensor="0.4000000059604645" physics_type="STATIC" velocity_min="0.0" ghost="False" lock_rot_z="False" mass_radius="1.0" />
+    </node>
+    <node name="link_house_left" >
+      <position x="0.500000" z="1.200000" y="0.200000" />
+      <rotation qx="0.000000" qy="0.707107" qw="0.707107" qz="-0.000000" />
+      <scale x="1.000000" z="1.000000" y="1.000000" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <entity lock_rot_x="False" lock_trans_x="False" friction_x="1.0" velocity_max="0.0" friction_z="1.0" anisotropic_friction="False" actor="False" lock_trans_z="False" damping_trans="0.03999999910593033" damping_rot="0.10000000149011612" friction_y="1.0" mass="1.0" lock_trans_y="False" lock_rot_y="False" meshFile="link_house_left.mesh" name="link_house_left" inertia_tensor="0.4000000059604645" physics_type="NO_COLLISION" velocity_min="0.0" ghost="False" lock_rot_z="False" mass_radius="1.0" />
     </node>
     <node name="flower.035" >
-      <position x="-0.873502" y="0.000000" z="-0.973280" />
-      <rotation qw="1.000000" qx="0.000000" qz="-0.000000" qy="0.000000" />
-      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <position x="-0.873502" z="-0.973280" y="0.000000" />
+      <rotation qx="0.000000" qy="0.000000" qw="1.000000" qz="-0.000000" />
+      <scale x="1.000000" z="1.000000" y="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity mass_radius="1.0" mass="1.0" meshFile="flower.mesh" actor="False" lock_trans_x="False" velocity_min="0.0" lock_rot_y="False" ghost="False" velocity_max="0.0" damping_rot="0.10000000149011612" inertia_tensor="0.4000000059604645" lock_trans_y="False" friction_x="1.0" physics_type="NO_COLLISION" anisotropic_friction="False" lock_rot_x="False" name="flower" lock_trans_z="False" friction_y="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_rot_z="False" />
+      <entity lock_rot_x="False" lock_trans_x="False" friction_x="1.0" velocity_max="0.0" friction_z="1.0" anisotropic_friction="False" actor="False" lock_trans_z="False" damping_trans="0.03999999910593033" damping_rot="0.10000000149011612" friction_y="1.0" mass="1.0" lock_trans_y="False" lock_rot_y="False" meshFile="flower.mesh" name="flower" inertia_tensor="0.4000000059604645" physics_type="NO_COLLISION" velocity_min="0.0" ghost="False" lock_rot_z="False" mass_radius="1.0" />
     </node>
     <node name="flower.034" >
-      <position x="0.326498" y="0.000000" z="0.326720" />
-      <rotation qw="1.000000" qx="0.000000" qz="-0.000000" qy="0.000000" />
-      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <position x="0.326498" z="0.326720" y="0.000000" />
+      <rotation qx="0.000000" qy="0.000000" qw="1.000000" qz="-0.000000" />
+      <scale x="1.000000" z="1.000000" y="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity mass_radius="1.0" mass="1.0" meshFile="flower.mesh" actor="False" lock_trans_x="False" velocity_min="0.0" lock_rot_y="False" ghost="False" velocity_max="0.0" damping_rot="0.10000000149011612" inertia_tensor="0.4000000059604645" lock_trans_y="False" friction_x="1.0" physics_type="NO_COLLISION" anisotropic_friction="False" lock_rot_x="False" name="flower" lock_trans_z="False" friction_y="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_rot_z="False" />
+      <entity lock_rot_x="False" lock_trans_x="False" friction_x="1.0" velocity_max="0.0" friction_z="1.0" anisotropic_friction="False" actor="False" lock_trans_z="False" damping_trans="0.03999999910593033" damping_rot="0.10000000149011612" friction_y="1.0" mass="1.0" lock_trans_y="False" lock_rot_y="False" meshFile="flower.mesh" name="flower" inertia_tensor="0.4000000059604645" physics_type="NO_COLLISION" velocity_min="0.0" ghost="False" lock_rot_z="False" mass_radius="1.0" />
     </node>
     <node name="flower.033" >
-      <position x="1.326498" y="0.200000" z="0.426720" />
-      <rotation qw="1.000000" qx="0.000000" qz="-0.000000" qy="0.000000" />
-      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <position x="1.326498" z="0.426720" y="0.200000" />
+      <rotation qx="0.000000" qy="0.000000" qw="1.000000" qz="-0.000000" />
+      <scale x="1.000000" z="1.000000" y="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity mass_radius="1.0" mass="1.0" meshFile="flower.mesh" actor="False" lock_trans_x="False" velocity_min="0.0" lock_rot_y="False" ghost="False" velocity_max="0.0" damping_rot="0.10000000149011612" inertia_tensor="0.4000000059604645" lock_trans_y="False" friction_x="1.0" physics_type="NO_COLLISION" anisotropic_friction="False" lock_rot_x="False" name="flower" lock_trans_z="False" friction_y="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_rot_z="False" />
+      <entity lock_rot_x="False" lock_trans_x="False" friction_x="1.0" velocity_max="0.0" friction_z="1.0" anisotropic_friction="False" actor="False" lock_trans_z="False" damping_trans="0.03999999910593033" damping_rot="0.10000000149011612" friction_y="1.0" mass="1.0" lock_trans_y="False" lock_rot_y="False" meshFile="flower.mesh" name="flower" inertia_tensor="0.4000000059604645" physics_type="NO_COLLISION" velocity_min="0.0" ghost="False" lock_rot_z="False" mass_radius="1.0" />
     </node>
     <node name="flower.032" >
-      <position x="1.526498" y="0.200000" z="0.226720" />
-      <rotation qw="1.000000" qx="0.000000" qz="-0.000000" qy="0.000000" />
-      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <position x="1.526498" z="0.226720" y="0.200000" />
+      <rotation qx="0.000000" qy="0.000000" qw="1.000000" qz="-0.000000" />
+      <scale x="1.000000" z="1.000000" y="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity mass_radius="1.0" mass="1.0" meshFile="flower.mesh" actor="False" lock_trans_x="False" velocity_min="0.0" lock_rot_y="False" ghost="False" velocity_max="0.0" damping_rot="0.10000000149011612" inertia_tensor="0.4000000059604645" lock_trans_y="False" friction_x="1.0" physics_type="NO_COLLISION" anisotropic_friction="False" lock_rot_x="False" name="flower" lock_trans_z="False" friction_y="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_rot_z="False" />
+      <entity lock_rot_x="False" lock_trans_x="False" friction_x="1.0" velocity_max="0.0" friction_z="1.0" anisotropic_friction="False" actor="False" lock_trans_z="False" damping_trans="0.03999999910593033" damping_rot="0.10000000149011612" friction_y="1.0" mass="1.0" lock_trans_y="False" lock_rot_y="False" meshFile="flower.mesh" name="flower" inertia_tensor="0.4000000059604645" physics_type="NO_COLLISION" velocity_min="0.0" ghost="False" lock_rot_z="False" mass_radius="1.0" />
     </node>
     <node name="flower.031" >
-      <position x="0.880734" y="0.000000" z="-0.820413" />
-      <rotation qw="1.000000" qx="0.000000" qz="-0.000000" qy="0.000000" />
-      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <position x="0.880734" z="-0.820413" y="0.000000" />
+      <rotation qx="0.000000" qy="0.000000" qw="1.000000" qz="-0.000000" />
+      <scale x="1.000000" z="1.000000" y="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity mass_radius="1.0" mass="1.0" meshFile="flower.mesh" actor="False" lock_trans_x="False" velocity_min="0.0" lock_rot_y="False" ghost="False" velocity_max="0.0" damping_rot="0.10000000149011612" inertia_tensor="0.4000000059604645" lock_trans_y="False" friction_x="1.0" physics_type="NO_COLLISION" anisotropic_friction="False" lock_rot_x="False" name="flower" lock_trans_z="False" friction_y="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_rot_z="False" />
+      <entity lock_rot_x="False" lock_trans_x="False" friction_x="1.0" velocity_max="0.0" friction_z="1.0" anisotropic_friction="False" actor="False" lock_trans_z="False" damping_trans="0.03999999910593033" damping_rot="0.10000000149011612" friction_y="1.0" mass="1.0" lock_trans_y="False" lock_rot_y="False" meshFile="flower.mesh" name="flower" inertia_tensor="0.4000000059604645" physics_type="NO_COLLISION" velocity_min="0.0" ghost="False" lock_rot_z="False" mass_radius="1.0" />
     </node>
     <node name="flower.030" >
-      <position x="0.829014" y="0.000000" z="-0.870413" />
-      <rotation qw="1.000000" qx="0.000000" qz="-0.000000" qy="0.000000" />
-      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <position x="0.829014" z="-0.870413" y="0.000000" />
+      <rotation qx="0.000000" qy="0.000000" qw="1.000000" qz="-0.000000" />
+      <scale x="1.000000" z="1.000000" y="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity mass_radius="1.0" mass="1.0" meshFile="flower.mesh" actor="False" lock_trans_x="False" velocity_min="0.0" lock_rot_y="False" ghost="False" velocity_max="0.0" damping_rot="0.10000000149011612" inertia_tensor="0.4000000059604645" lock_trans_y="False" friction_x="1.0" physics_type="NO_COLLISION" anisotropic_friction="False" lock_rot_x="False" name="flower" lock_trans_z="False" friction_y="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_rot_z="False" />
+      <entity lock_rot_x="False" lock_trans_x="False" friction_x="1.0" velocity_max="0.0" friction_z="1.0" anisotropic_friction="False" actor="False" lock_trans_z="False" damping_trans="0.03999999910593033" damping_rot="0.10000000149011612" friction_y="1.0" mass="1.0" lock_trans_y="False" lock_rot_y="False" meshFile="flower.mesh" name="flower" inertia_tensor="0.4000000059604645" physics_type="NO_COLLISION" velocity_min="0.0" ghost="False" lock_rot_z="False" mass_radius="1.0" />
     </node>
     <node name="flower.029" >
-      <position x="0.926498" y="0.000000" z="-0.873280" />
-      <rotation qw="1.000000" qx="0.000000" qz="-0.000000" qy="0.000000" />
-      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <position x="0.926498" z="-0.873280" y="0.000000" />
+      <rotation qx="0.000000" qy="0.000000" qw="1.000000" qz="-0.000000" />
+      <scale x="1.000000" z="1.000000" y="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity mass_radius="1.0" mass="1.0" meshFile="flower.mesh" actor="False" lock_trans_x="False" velocity_min="0.0" lock_rot_y="False" ghost="False" velocity_max="0.0" damping_rot="0.10000000149011612" inertia_tensor="0.4000000059604645" lock_trans_y="False" friction_x="1.0" physics_type="NO_COLLISION" anisotropic_friction="False" lock_rot_x="False" name="flower" lock_trans_z="False" friction_y="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_rot_z="False" />
+      <entity lock_rot_x="False" lock_trans_x="False" friction_x="1.0" velocity_max="0.0" friction_z="1.0" anisotropic_friction="False" actor="False" lock_trans_z="False" damping_trans="0.03999999910593033" damping_rot="0.10000000149011612" friction_y="1.0" mass="1.0" lock_trans_y="False" lock_rot_y="False" meshFile="flower.mesh" name="flower" inertia_tensor="0.4000000059604645" physics_type="NO_COLLISION" velocity_min="0.0" ghost="False" lock_rot_z="False" mass_radius="1.0" />
     </node>
     <node name="flower.000" >
-      <position x="1.126498" y="0.000000" z="-0.273280" />
-      <rotation qw="1.000000" qx="0.000000" qz="-0.000000" qy="0.000000" />
-      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <position x="1.126498" z="-0.273280" y="0.000000" />
+      <rotation qx="0.000000" qy="0.000000" qw="1.000000" qz="-0.000000" />
+      <scale x="1.000000" z="1.000000" y="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity mass_radius="1.0" mass="1.0" meshFile="flower.mesh" actor="False" lock_trans_x="False" velocity_min="0.0" lock_rot_y="False" ghost="False" velocity_max="0.0" damping_rot="0.10000000149011612" inertia_tensor="0.4000000059604645" lock_trans_y="False" friction_x="1.0" physics_type="NO_COLLISION" anisotropic_friction="False" lock_rot_x="False" name="flower" lock_trans_z="False" friction_y="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_rot_z="False" />
+      <entity lock_rot_x="False" lock_trans_x="False" friction_x="1.0" velocity_max="0.0" friction_z="1.0" anisotropic_friction="False" actor="False" lock_trans_z="False" damping_trans="0.03999999910593033" damping_rot="0.10000000149011612" friction_y="1.0" mass="1.0" lock_trans_y="False" lock_rot_y="False" meshFile="flower.mesh" name="flower" inertia_tensor="0.4000000059604645" physics_type="NO_COLLISION" velocity_min="0.0" ghost="False" lock_rot_z="False" mass_radius="1.0" />
     </node>
     <node name="flower.028" >
-      <position x="-0.673501" y="0.000000" z="-1.473280" />
-      <rotation qw="1.000000" qx="0.000000" qz="-0.000000" qy="0.000000" />
-      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <position x="-0.673501" z="-1.473280" y="0.000000" />
+      <rotation qx="0.000000" qy="0.000000" qw="1.000000" qz="-0.000000" />
+      <scale x="1.000000" z="1.000000" y="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity mass_radius="1.0" mass="1.0" meshFile="flower.mesh" actor="False" lock_trans_x="False" velocity_min="0.0" lock_rot_y="False" ghost="False" velocity_max="0.0" damping_rot="0.10000000149011612" inertia_tensor="0.4000000059604645" lock_trans_y="False" friction_x="1.0" physics_type="NO_COLLISION" anisotropic_friction="False" lock_rot_x="False" name="flower" lock_trans_z="False" friction_y="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_rot_z="False" />
+      <entity lock_rot_x="False" lock_trans_x="False" friction_x="1.0" velocity_max="0.0" friction_z="1.0" anisotropic_friction="False" actor="False" lock_trans_z="False" damping_trans="0.03999999910593033" damping_rot="0.10000000149011612" friction_y="1.0" mass="1.0" lock_trans_y="False" lock_rot_y="False" meshFile="flower.mesh" name="flower" inertia_tensor="0.4000000059604645" physics_type="NO_COLLISION" velocity_min="0.0" ghost="False" lock_rot_z="False" mass_radius="1.0" />
     </node>
     <node name="flower.027" >
-      <position x="-0.673501" y="0.000000" z="-1.373280" />
-      <rotation qw="1.000000" qx="0.000000" qz="-0.000000" qy="0.000000" />
-      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <position x="-0.673501" z="-1.373280" y="0.000000" />
+      <rotation qx="0.000000" qy="0.000000" qw="1.000000" qz="-0.000000" />
+      <scale x="1.000000" z="1.000000" y="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity mass_radius="1.0" mass="1.0" meshFile="flower.mesh" actor="False" lock_trans_x="False" velocity_min="0.0" lock_rot_y="False" ghost="False" velocity_max="0.0" damping_rot="0.10000000149011612" inertia_tensor="0.4000000059604645" lock_trans_y="False" friction_x="1.0" physics_type="NO_COLLISION" anisotropic_friction="False" lock_rot_x="False" name="flower" lock_trans_z="False" friction_y="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_rot_z="False" />
+      <entity lock_rot_x="False" lock_trans_x="False" friction_x="1.0" velocity_max="0.0" friction_z="1.0" anisotropic_friction="False" actor="False" lock_trans_z="False" damping_trans="0.03999999910593033" damping_rot="0.10000000149011612" friction_y="1.0" mass="1.0" lock_trans_y="False" lock_rot_y="False" meshFile="flower.mesh" name="flower" inertia_tensor="0.4000000059604645" physics_type="NO_COLLISION" velocity_min="0.0" ghost="False" lock_rot_z="False" mass_radius="1.0" />
     </node>
     <node name="flower.026" >
-      <position x="-0.473502" y="0.000000" z="-1.173280" />
-      <rotation qw="1.000000" qx="0.000000" qz="-0.000000" qy="0.000000" />
-      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <position x="-0.473502" z="-1.173280" y="0.000000" />
+      <rotation qx="0.000000" qy="0.000000" qw="1.000000" qz="-0.000000" />
+      <scale x="1.000000" z="1.000000" y="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity mass_radius="1.0" mass="1.0" meshFile="flower.mesh" actor="False" lock_trans_x="False" velocity_min="0.0" lock_rot_y="False" ghost="False" velocity_max="0.0" damping_rot="0.10000000149011612" inertia_tensor="0.4000000059604645" lock_trans_y="False" friction_x="1.0" physics_type="NO_COLLISION" anisotropic_friction="False" lock_rot_x="False" name="flower" lock_trans_z="False" friction_y="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_rot_z="False" />
+      <entity lock_rot_x="False" lock_trans_x="False" friction_x="1.0" velocity_max="0.0" friction_z="1.0" anisotropic_friction="False" actor="False" lock_trans_z="False" damping_trans="0.03999999910593033" damping_rot="0.10000000149011612" friction_y="1.0" mass="1.0" lock_trans_y="False" lock_rot_y="False" meshFile="flower.mesh" name="flower" inertia_tensor="0.4000000059604645" physics_type="NO_COLLISION" velocity_min="0.0" ghost="False" lock_rot_z="False" mass_radius="1.0" />
     </node>
     <node name="flower.025" >
-      <position x="-0.919266" y="0.000000" z="-0.920413" />
-      <rotation qw="1.000000" qx="0.000000" qz="-0.000000" qy="0.000000" />
-      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <position x="-0.919266" z="-0.920413" y="0.000000" />
+      <rotation qx="0.000000" qy="0.000000" qw="1.000000" qz="-0.000000" />
+      <scale x="1.000000" z="1.000000" y="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity mass_radius="1.0" mass="1.0" meshFile="flower.mesh" actor="False" lock_trans_x="False" velocity_min="0.0" lock_rot_y="False" ghost="False" velocity_max="0.0" damping_rot="0.10000000149011612" inertia_tensor="0.4000000059604645" lock_trans_y="False" friction_x="1.0" physics_type="NO_COLLISION" anisotropic_friction="False" lock_rot_x="False" name="flower" lock_trans_z="False" friction_y="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_rot_z="False" />
+      <entity lock_rot_x="False" lock_trans_x="False" friction_x="1.0" velocity_max="0.0" friction_z="1.0" anisotropic_friction="False" actor="False" lock_trans_z="False" damping_trans="0.03999999910593033" damping_rot="0.10000000149011612" friction_y="1.0" mass="1.0" lock_trans_y="False" lock_rot_y="False" meshFile="flower.mesh" name="flower" inertia_tensor="0.4000000059604645" physics_type="NO_COLLISION" velocity_min="0.0" ghost="False" lock_rot_z="False" mass_radius="1.0" />
     </node>
     <node name="flower.024" >
-      <position x="-0.970986" y="0.000000" z="-0.970413" />
-      <rotation qw="1.000000" qx="0.000000" qz="-0.000000" qy="0.000000" />
-      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <position x="-0.970986" z="-0.970413" y="0.000000" />
+      <rotation qx="0.000000" qy="0.000000" qw="1.000000" qz="-0.000000" />
+      <scale x="1.000000" z="1.000000" y="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity mass_radius="1.0" mass="1.0" meshFile="flower.mesh" actor="False" lock_trans_x="False" velocity_min="0.0" lock_rot_y="False" ghost="False" velocity_max="0.0" damping_rot="0.10000000149011612" inertia_tensor="0.4000000059604645" lock_trans_y="False" friction_x="1.0" physics_type="NO_COLLISION" anisotropic_friction="False" lock_rot_x="False" name="flower" lock_trans_z="False" friction_y="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_rot_z="False" />
+      <entity lock_rot_x="False" lock_trans_x="False" friction_x="1.0" velocity_max="0.0" friction_z="1.0" anisotropic_friction="False" actor="False" lock_trans_z="False" damping_trans="0.03999999910593033" damping_rot="0.10000000149011612" friction_y="1.0" mass="1.0" lock_trans_y="False" lock_rot_y="False" meshFile="flower.mesh" name="flower" inertia_tensor="0.4000000059604645" physics_type="NO_COLLISION" velocity_min="0.0" ghost="False" lock_rot_z="False" mass_radius="1.0" />
     </node>
     <node name="flower.023" >
-      <position x="-0.770986" y="0.000000" z="-1.070413" />
-      <rotation qw="1.000000" qx="0.000000" qz="-0.000000" qy="0.000000" />
-      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <position x="-0.770986" z="-1.070413" y="0.000000" />
+      <rotation qx="0.000000" qy="0.000000" qw="1.000000" qz="-0.000000" />
+      <scale x="1.000000" z="1.000000" y="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity mass_radius="1.0" mass="1.0" meshFile="flower.mesh" actor="False" lock_trans_x="False" velocity_min="0.0" lock_rot_y="False" ghost="False" velocity_max="0.0" damping_rot="0.10000000149011612" inertia_tensor="0.4000000059604645" lock_trans_y="False" friction_x="1.0" physics_type="NO_COLLISION" anisotropic_friction="False" lock_rot_x="False" name="flower" lock_trans_z="False" friction_y="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_rot_z="False" />
+      <entity lock_rot_x="False" lock_trans_x="False" friction_x="1.0" velocity_max="0.0" friction_z="1.0" anisotropic_friction="False" actor="False" lock_trans_z="False" damping_trans="0.03999999910593033" damping_rot="0.10000000149011612" friction_y="1.0" mass="1.0" lock_trans_y="False" lock_rot_y="False" meshFile="flower.mesh" name="flower" inertia_tensor="0.4000000059604645" physics_type="NO_COLLISION" velocity_min="0.0" ghost="False" lock_rot_z="False" mass_radius="1.0" />
     </node>
     <node name="flower.022" >
-      <position x="-0.719266" y="0.000000" z="-1.020413" />
-      <rotation qw="1.000000" qx="0.000000" qz="-0.000000" qy="0.000000" />
-      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <position x="-0.719266" z="-1.020413" y="0.000000" />
+      <rotation qx="0.000000" qy="0.000000" qw="1.000000" qz="-0.000000" />
+      <scale x="1.000000" z="1.000000" y="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity mass_radius="1.0" mass="1.0" meshFile="flower.mesh" actor="False" lock_trans_x="False" velocity_min="0.0" lock_rot_y="False" ghost="False" velocity_max="0.0" damping_rot="0.10000000149011612" inertia_tensor="0.4000000059604645" lock_trans_y="False" friction_x="1.0" physics_type="NO_COLLISION" anisotropic_friction="False" lock_rot_x="False" name="flower" lock_trans_z="False" friction_y="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_rot_z="False" />
+      <entity lock_rot_x="False" lock_trans_x="False" friction_x="1.0" velocity_max="0.0" friction_z="1.0" anisotropic_friction="False" actor="False" lock_trans_z="False" damping_trans="0.03999999910593033" damping_rot="0.10000000149011612" friction_y="1.0" mass="1.0" lock_trans_y="False" lock_rot_y="False" meshFile="flower.mesh" name="flower" inertia_tensor="0.4000000059604645" physics_type="NO_COLLISION" velocity_min="0.0" ghost="False" lock_rot_z="False" mass_radius="1.0" />
     </node>
     <node name="flower.021" >
-      <position x="-0.619266" y="0.000000" z="-1.020413" />
-      <rotation qw="1.000000" qx="0.000000" qz="-0.000000" qy="0.000000" />
-      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <position x="-0.619266" z="-1.020413" y="0.000000" />
+      <rotation qx="0.000000" qy="0.000000" qw="1.000000" qz="-0.000000" />
+      <scale x="1.000000" z="1.000000" y="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity mass_radius="1.0" mass="1.0" meshFile="flower.mesh" actor="False" lock_trans_x="False" velocity_min="0.0" lock_rot_y="False" ghost="False" velocity_max="0.0" damping_rot="0.10000000149011612" inertia_tensor="0.4000000059604645" lock_trans_y="False" friction_x="1.0" physics_type="NO_COLLISION" anisotropic_friction="False" lock_rot_x="False" name="flower" lock_trans_z="False" friction_y="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_rot_z="False" />
+      <entity lock_rot_x="False" lock_trans_x="False" friction_x="1.0" velocity_max="0.0" friction_z="1.0" anisotropic_friction="False" actor="False" lock_trans_z="False" damping_trans="0.03999999910593033" damping_rot="0.10000000149011612" friction_y="1.0" mass="1.0" lock_trans_y="False" lock_rot_y="False" meshFile="flower.mesh" name="flower" inertia_tensor="0.4000000059604645" physics_type="NO_COLLISION" velocity_min="0.0" ghost="False" lock_rot_z="False" mass_radius="1.0" />
     </node>
     <node name="flower.020" >
-      <position x="-0.670986" y="0.000000" z="-1.070413" />
-      <rotation qw="1.000000" qx="0.000000" qz="-0.000000" qy="0.000000" />
-      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <position x="-0.670986" z="-1.070413" y="0.000000" />
+      <rotation qx="0.000000" qy="0.000000" qw="1.000000" qz="-0.000000" />
+      <scale x="1.000000" z="1.000000" y="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity mass_radius="1.0" mass="1.0" meshFile="flower.mesh" actor="False" lock_trans_x="False" velocity_min="0.0" lock_rot_y="False" ghost="False" velocity_max="0.0" damping_rot="0.10000000149011612" inertia_tensor="0.4000000059604645" lock_trans_y="False" friction_x="1.0" physics_type="NO_COLLISION" anisotropic_friction="False" lock_rot_x="False" name="flower" lock_trans_z="False" friction_y="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_rot_z="False" />
+      <entity lock_rot_x="False" lock_trans_x="False" friction_x="1.0" velocity_max="0.0" friction_z="1.0" anisotropic_friction="False" actor="False" lock_trans_z="False" damping_trans="0.03999999910593033" damping_rot="0.10000000149011612" friction_y="1.0" mass="1.0" lock_trans_y="False" lock_rot_y="False" meshFile="flower.mesh" name="flower" inertia_tensor="0.4000000059604645" physics_type="NO_COLLISION" velocity_min="0.0" ghost="False" lock_rot_z="False" mass_radius="1.0" />
     </node>
     <node name="flower.019" >
-      <position x="-0.570986" y="0.000000" z="-1.170413" />
-      <rotation qw="1.000000" qx="0.000000" qz="-0.000000" qy="0.000000" />
-      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <position x="-0.570986" z="-1.170413" y="0.000000" />
+      <rotation qx="0.000000" qy="0.000000" qw="1.000000" qz="-0.000000" />
+      <scale x="1.000000" z="1.000000" y="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity mass_radius="1.0" mass="1.0" meshFile="flower.mesh" actor="False" lock_trans_x="False" velocity_min="0.0" lock_rot_y="False" ghost="False" velocity_max="0.0" damping_rot="0.10000000149011612" inertia_tensor="0.4000000059604645" lock_trans_y="False" friction_x="1.0" physics_type="NO_COLLISION" anisotropic_friction="False" lock_rot_x="False" name="flower" lock_trans_z="False" friction_y="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_rot_z="False" />
+      <entity lock_rot_x="False" lock_trans_x="False" friction_x="1.0" velocity_max="0.0" friction_z="1.0" anisotropic_friction="False" actor="False" lock_trans_z="False" damping_trans="0.03999999910593033" damping_rot="0.10000000149011612" friction_y="1.0" mass="1.0" lock_trans_y="False" lock_rot_y="False" meshFile="flower.mesh" name="flower" inertia_tensor="0.4000000059604645" physics_type="NO_COLLISION" velocity_min="0.0" ghost="False" lock_rot_z="False" mass_radius="1.0" />
     </node>
     <node name="flower.018" >
-      <position x="-0.519266" y="0.000000" z="-1.120413" />
-      <rotation qw="1.000000" qx="0.000000" qz="-0.000000" qy="0.000000" />
-      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <position x="-0.519266" z="-1.120413" y="0.000000" />
+      <rotation qx="0.000000" qy="0.000000" qw="1.000000" qz="-0.000000" />
+      <scale x="1.000000" z="1.000000" y="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity mass_radius="1.0" mass="1.0" meshFile="flower.mesh" actor="False" lock_trans_x="False" velocity_min="0.0" lock_rot_y="False" ghost="False" velocity_max="0.0" damping_rot="0.10000000149011612" inertia_tensor="0.4000000059604645" lock_trans_y="False" friction_x="1.0" physics_type="NO_COLLISION" anisotropic_friction="False" lock_rot_x="False" name="flower" lock_trans_z="False" friction_y="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_rot_z="False" />
+      <entity lock_rot_x="False" lock_trans_x="False" friction_x="1.0" velocity_max="0.0" friction_z="1.0" anisotropic_friction="False" actor="False" lock_trans_z="False" damping_trans="0.03999999910593033" damping_rot="0.10000000149011612" friction_y="1.0" mass="1.0" lock_trans_y="False" lock_rot_y="False" meshFile="flower.mesh" name="flower" inertia_tensor="0.4000000059604645" physics_type="NO_COLLISION" velocity_min="0.0" ghost="False" lock_rot_z="False" mass_radius="1.0" />
     </node>
     <node name="flower.017" >
-      <position x="-0.619266" y="0.000000" z="-1.120413" />
-      <rotation qw="1.000000" qx="0.000000" qz="-0.000000" qy="0.000000" />
-      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <position x="-0.619266" z="-1.120413" y="0.000000" />
+      <rotation qx="0.000000" qy="0.000000" qw="1.000000" qz="-0.000000" />
+      <scale x="1.000000" z="1.000000" y="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity mass_radius="1.0" mass="1.0" meshFile="flower.mesh" actor="False" lock_trans_x="False" velocity_min="0.0" lock_rot_y="False" ghost="False" velocity_max="0.0" damping_rot="0.10000000149011612" inertia_tensor="0.4000000059604645" lock_trans_y="False" friction_x="1.0" physics_type="NO_COLLISION" anisotropic_friction="False" lock_rot_x="False" name="flower" lock_trans_z="False" friction_y="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_rot_z="False" />
+      <entity lock_rot_x="False" lock_trans_x="False" friction_x="1.0" velocity_max="0.0" friction_z="1.0" anisotropic_friction="False" actor="False" lock_trans_z="False" damping_trans="0.03999999910593033" damping_rot="0.10000000149011612" friction_y="1.0" mass="1.0" lock_trans_y="False" lock_rot_y="False" meshFile="flower.mesh" name="flower" inertia_tensor="0.4000000059604645" physics_type="NO_COLLISION" velocity_min="0.0" ghost="False" lock_rot_z="False" mass_radius="1.0" />
     </node>
     <node name="flower.016" >
-      <position x="-0.670986" y="0.000000" z="-1.170413" />
-      <rotation qw="1.000000" qx="0.000000" qz="-0.000000" qy="0.000000" />
-      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <position x="-0.670986" z="-1.170413" y="0.000000" />
+      <rotation qx="0.000000" qy="0.000000" qw="1.000000" qz="-0.000000" />
+      <scale x="1.000000" z="1.000000" y="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity mass_radius="1.0" mass="1.0" meshFile="flower.mesh" actor="False" lock_trans_x="False" velocity_min="0.0" lock_rot_y="False" ghost="False" velocity_max="0.0" damping_rot="0.10000000149011612" inertia_tensor="0.4000000059604645" lock_trans_y="False" friction_x="1.0" physics_type="NO_COLLISION" anisotropic_friction="False" lock_rot_x="False" name="flower" lock_trans_z="False" friction_y="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_rot_z="False" />
+      <entity lock_rot_x="False" lock_trans_x="False" friction_x="1.0" velocity_max="0.0" friction_z="1.0" anisotropic_friction="False" actor="False" lock_trans_z="False" damping_trans="0.03999999910593033" damping_rot="0.10000000149011612" friction_y="1.0" mass="1.0" lock_trans_y="False" lock_rot_y="False" meshFile="flower.mesh" name="flower" inertia_tensor="0.4000000059604645" physics_type="NO_COLLISION" velocity_min="0.0" ghost="False" lock_rot_z="False" mass_radius="1.0" />
     </node>
     <node name="flower.015" >
-      <position x="-0.670986" y="0.000000" z="-1.270413" />
-      <rotation qw="1.000000" qx="0.000000" qz="-0.000000" qy="0.000000" />
-      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <position x="-0.670986" z="-1.270413" y="0.000000" />
+      <rotation qx="0.000000" qy="0.000000" qw="1.000000" qz="-0.000000" />
+      <scale x="1.000000" z="1.000000" y="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity mass_radius="1.0" mass="1.0" meshFile="flower.mesh" actor="False" lock_trans_x="False" velocity_min="0.0" lock_rot_y="False" ghost="False" velocity_max="0.0" damping_rot="0.10000000149011612" inertia_tensor="0.4000000059604645" lock_trans_y="False" friction_x="1.0" physics_type="NO_COLLISION" anisotropic_friction="False" lock_rot_x="False" name="flower" lock_trans_z="False" friction_y="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_rot_z="False" />
+      <entity lock_rot_x="False" lock_trans_x="False" friction_x="1.0" velocity_max="0.0" friction_z="1.0" anisotropic_friction="False" actor="False" lock_trans_z="False" damping_trans="0.03999999910593033" damping_rot="0.10000000149011612" friction_y="1.0" mass="1.0" lock_trans_y="False" lock_rot_y="False" meshFile="flower.mesh" name="flower" inertia_tensor="0.4000000059604645" physics_type="NO_COLLISION" velocity_min="0.0" ghost="False" lock_rot_z="False" mass_radius="1.0" />
     </node>
     <node name="flower.014" >
-      <position x="-0.619266" y="0.000000" z="-1.220413" />
-      <rotation qw="1.000000" qx="0.000000" qz="-0.000000" qy="0.000000" />
-      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <position x="-0.619266" z="-1.220413" y="0.000000" />
+      <rotation qx="0.000000" qy="0.000000" qw="1.000000" qz="-0.000000" />
+      <scale x="1.000000" z="1.000000" y="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity mass_radius="1.0" mass="1.0" meshFile="flower.mesh" actor="False" lock_trans_x="False" velocity_min="0.0" lock_rot_y="False" ghost="False" velocity_max="0.0" damping_rot="0.10000000149011612" inertia_tensor="0.4000000059604645" lock_trans_y="False" friction_x="1.0" physics_type="NO_COLLISION" anisotropic_friction="False" lock_rot_x="False" name="flower" lock_trans_z="False" friction_y="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_rot_z="False" />
+      <entity lock_rot_x="False" lock_trans_x="False" friction_x="1.0" velocity_max="0.0" friction_z="1.0" anisotropic_friction="False" actor="False" lock_trans_z="False" damping_trans="0.03999999910593033" damping_rot="0.10000000149011612" friction_y="1.0" mass="1.0" lock_trans_y="False" lock_rot_y="False" meshFile="flower.mesh" name="flower" inertia_tensor="0.4000000059604645" physics_type="NO_COLLISION" velocity_min="0.0" ghost="False" lock_rot_z="False" mass_radius="1.0" />
     </node>
     <node name="flower.013" >
-      <position x="-0.719266" y="0.000000" z="-1.320413" />
-      <rotation qw="1.000000" qx="0.000000" qz="-0.000000" qy="0.000000" />
-      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <position x="-0.719266" z="-1.320413" y="0.000000" />
+      <rotation qx="0.000000" qy="0.000000" qw="1.000000" qz="-0.000000" />
+      <scale x="1.000000" z="1.000000" y="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity mass_radius="1.0" mass="1.0" meshFile="flower.mesh" actor="False" lock_trans_x="False" velocity_min="0.0" lock_rot_y="False" ghost="False" velocity_max="0.0" damping_rot="0.10000000149011612" inertia_tensor="0.4000000059604645" lock_trans_y="False" friction_x="1.0" physics_type="NO_COLLISION" anisotropic_friction="False" lock_rot_x="False" name="flower" lock_trans_z="False" friction_y="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_rot_z="False" />
+      <entity lock_rot_x="False" lock_trans_x="False" friction_x="1.0" velocity_max="0.0" friction_z="1.0" anisotropic_friction="False" actor="False" lock_trans_z="False" damping_trans="0.03999999910593033" damping_rot="0.10000000149011612" friction_y="1.0" mass="1.0" lock_trans_y="False" lock_rot_y="False" meshFile="flower.mesh" name="flower" inertia_tensor="0.4000000059604645" physics_type="NO_COLLISION" velocity_min="0.0" ghost="False" lock_rot_z="False" mass_radius="1.0" />
     </node>
     <node name="flower.012" >
-      <position x="-0.770986" y="0.000000" z="-1.370413" />
-      <rotation qw="1.000000" qx="0.000000" qz="-0.000000" qy="0.000000" />
-      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <position x="-0.770986" z="-1.370413" y="0.000000" />
+      <rotation qx="0.000000" qy="0.000000" qw="1.000000" qz="-0.000000" />
+      <scale x="1.000000" z="1.000000" y="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity mass_radius="1.0" mass="1.0" meshFile="flower.mesh" actor="False" lock_trans_x="False" velocity_min="0.0" lock_rot_y="False" ghost="False" velocity_max="0.0" damping_rot="0.10000000149011612" inertia_tensor="0.4000000059604645" lock_trans_y="False" friction_x="1.0" physics_type="NO_COLLISION" anisotropic_friction="False" lock_rot_x="False" name="flower" lock_trans_z="False" friction_y="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_rot_z="False" />
+      <entity lock_rot_x="False" lock_trans_x="False" friction_x="1.0" velocity_max="0.0" friction_z="1.0" anisotropic_friction="False" actor="False" lock_trans_z="False" damping_trans="0.03999999910593033" damping_rot="0.10000000149011612" friction_y="1.0" mass="1.0" lock_trans_y="False" lock_rot_y="False" meshFile="flower.mesh" name="flower" inertia_tensor="0.4000000059604645" physics_type="NO_COLLISION" velocity_min="0.0" ghost="False" lock_rot_z="False" mass_radius="1.0" />
     </node>
     <node name="flower.011" >
-      <position x="-0.770986" y="0.000000" z="-1.270413" />
-      <rotation qw="1.000000" qx="0.000000" qz="-0.000000" qy="0.000000" />
-      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <position x="-0.770986" z="-1.270413" y="0.000000" />
+      <rotation qx="0.000000" qy="0.000000" qw="1.000000" qz="-0.000000" />
+      <scale x="1.000000" z="1.000000" y="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity mass_radius="1.0" mass="1.0" meshFile="flower.mesh" actor="False" lock_trans_x="False" velocity_min="0.0" lock_rot_y="False" ghost="False" velocity_max="0.0" damping_rot="0.10000000149011612" inertia_tensor="0.4000000059604645" lock_trans_y="False" friction_x="1.0" physics_type="NO_COLLISION" anisotropic_friction="False" lock_rot_x="False" name="flower" lock_trans_z="False" friction_y="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_rot_z="False" />
+      <entity lock_rot_x="False" lock_trans_x="False" friction_x="1.0" velocity_max="0.0" friction_z="1.0" anisotropic_friction="False" actor="False" lock_trans_z="False" damping_trans="0.03999999910593033" damping_rot="0.10000000149011612" friction_y="1.0" mass="1.0" lock_trans_y="False" lock_rot_y="False" meshFile="flower.mesh" name="flower" inertia_tensor="0.4000000059604645" physics_type="NO_COLLISION" velocity_min="0.0" ghost="False" lock_rot_z="False" mass_radius="1.0" />
     </node>
     <node name="flower.010" >
-      <position x="-0.719266" y="0.000000" z="-1.220413" />
-      <rotation qw="1.000000" qx="0.000000" qz="-0.000000" qy="0.000000" />
-      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <position x="-0.719266" z="-1.220413" y="0.000000" />
+      <rotation qx="0.000000" qy="0.000000" qw="1.000000" qz="-0.000000" />
+      <scale x="1.000000" z="1.000000" y="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity mass_radius="1.0" mass="1.0" meshFile="flower.mesh" actor="False" lock_trans_x="False" velocity_min="0.0" lock_rot_y="False" ghost="False" velocity_max="0.0" damping_rot="0.10000000149011612" inertia_tensor="0.4000000059604645" lock_trans_y="False" friction_x="1.0" physics_type="NO_COLLISION" anisotropic_friction="False" lock_rot_x="False" name="flower" lock_trans_z="False" friction_y="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_rot_z="False" />
+      <entity lock_rot_x="False" lock_trans_x="False" friction_x="1.0" velocity_max="0.0" friction_z="1.0" anisotropic_friction="False" actor="False" lock_trans_z="False" damping_trans="0.03999999910593033" damping_rot="0.10000000149011612" friction_y="1.0" mass="1.0" lock_trans_y="False" lock_rot_y="False" meshFile="flower.mesh" name="flower" inertia_tensor="0.4000000059604645" physics_type="NO_COLLISION" velocity_min="0.0" ghost="False" lock_rot_z="False" mass_radius="1.0" />
     </node>
     <node name="flower.009" >
-      <position x="-0.719266" y="0.000000" z="-1.120413" />
-      <rotation qw="1.000000" qx="0.000000" qz="-0.000000" qy="0.000000" />
-      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <position x="-0.719266" z="-1.120413" y="0.000000" />
+      <rotation qx="0.000000" qy="0.000000" qw="1.000000" qz="-0.000000" />
+      <scale x="1.000000" z="1.000000" y="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity mass_radius="1.0" mass="1.0" meshFile="flower.mesh" actor="False" lock_trans_x="False" velocity_min="0.0" lock_rot_y="False" ghost="False" velocity_max="0.0" damping_rot="0.10000000149011612" inertia_tensor="0.4000000059604645" lock_trans_y="False" friction_x="1.0" physics_type="NO_COLLISION" anisotropic_friction="False" lock_rot_x="False" name="flower" lock_trans_z="False" friction_y="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_rot_z="False" />
+      <entity lock_rot_x="False" lock_trans_x="False" friction_x="1.0" velocity_max="0.0" friction_z="1.0" anisotropic_friction="False" actor="False" lock_trans_z="False" damping_trans="0.03999999910593033" damping_rot="0.10000000149011612" friction_y="1.0" mass="1.0" lock_trans_y="False" lock_rot_y="False" meshFile="flower.mesh" name="flower" inertia_tensor="0.4000000059604645" physics_type="NO_COLLISION" velocity_min="0.0" ghost="False" lock_rot_z="False" mass_radius="1.0" />
     </node>
     <node name="flower.008" >
-      <position x="-0.770986" y="0.000000" z="-1.170413" />
-      <rotation qw="1.000000" qx="0.000000" qz="-0.000000" qy="0.000000" />
-      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <position x="-0.770986" z="-1.170413" y="0.000000" />
+      <rotation qx="0.000000" qy="0.000000" qw="1.000000" qz="-0.000000" />
+      <scale x="1.000000" z="1.000000" y="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity mass_radius="1.0" mass="1.0" meshFile="flower.mesh" actor="False" lock_trans_x="False" velocity_min="0.0" lock_rot_y="False" ghost="False" velocity_max="0.0" damping_rot="0.10000000149011612" inertia_tensor="0.4000000059604645" lock_trans_y="False" friction_x="1.0" physics_type="NO_COLLISION" anisotropic_friction="False" lock_rot_x="False" name="flower" lock_trans_z="False" friction_y="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_rot_z="False" />
+      <entity lock_rot_x="False" lock_trans_x="False" friction_x="1.0" velocity_max="0.0" friction_z="1.0" anisotropic_friction="False" actor="False" lock_trans_z="False" damping_trans="0.03999999910593033" damping_rot="0.10000000149011612" friction_y="1.0" mass="1.0" lock_trans_y="False" lock_rot_y="False" meshFile="flower.mesh" name="flower" inertia_tensor="0.4000000059604645" physics_type="NO_COLLISION" velocity_min="0.0" ghost="False" lock_rot_z="False" mass_radius="1.0" />
     </node>
     <node name="flower.007" >
-      <position x="-0.870986" y="0.000000" z="-1.170413" />
-      <rotation qw="1.000000" qx="0.000000" qz="-0.000000" qy="0.000000" />
-      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <position x="-0.870986" z="-1.170413" y="0.000000" />
+      <rotation qx="0.000000" qy="0.000000" qw="1.000000" qz="-0.000000" />
+      <scale x="1.000000" z="1.000000" y="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity mass_radius="1.0" mass="1.0" meshFile="flower.mesh" actor="False" lock_trans_x="False" velocity_min="0.0" lock_rot_y="False" ghost="False" velocity_max="0.0" damping_rot="0.10000000149011612" inertia_tensor="0.4000000059604645" lock_trans_y="False" friction_x="1.0" physics_type="NO_COLLISION" anisotropic_friction="False" lock_rot_x="False" name="flower" lock_trans_z="False" friction_y="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_rot_z="False" />
+      <entity lock_rot_x="False" lock_trans_x="False" friction_x="1.0" velocity_max="0.0" friction_z="1.0" anisotropic_friction="False" actor="False" lock_trans_z="False" damping_trans="0.03999999910593033" damping_rot="0.10000000149011612" friction_y="1.0" mass="1.0" lock_trans_y="False" lock_rot_y="False" meshFile="flower.mesh" name="flower" inertia_tensor="0.4000000059604645" physics_type="NO_COLLISION" velocity_min="0.0" ghost="False" lock_rot_z="False" mass_radius="1.0" />
     </node>
     <node name="flower.006" >
-      <position x="-0.819266" y="0.000000" z="-1.120413" />
-      <rotation qw="1.000000" qx="0.000000" qz="-0.000000" qy="0.000000" />
-      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <position x="-0.819266" z="-1.120413" y="0.000000" />
+      <rotation qx="0.000000" qy="0.000000" qw="1.000000" qz="-0.000000" />
+      <scale x="1.000000" z="1.000000" y="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity mass_radius="1.0" mass="1.0" meshFile="flower.mesh" actor="False" lock_trans_x="False" velocity_min="0.0" lock_rot_y="False" ghost="False" velocity_max="0.0" damping_rot="0.10000000149011612" inertia_tensor="0.4000000059604645" lock_trans_y="False" friction_x="1.0" physics_type="NO_COLLISION" anisotropic_friction="False" lock_rot_x="False" name="flower" lock_trans_z="False" friction_y="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_rot_z="False" />
+      <entity lock_rot_x="False" lock_trans_x="False" friction_x="1.0" velocity_max="0.0" friction_z="1.0" anisotropic_friction="False" actor="False" lock_trans_z="False" damping_trans="0.03999999910593033" damping_rot="0.10000000149011612" friction_y="1.0" mass="1.0" lock_trans_y="False" lock_rot_y="False" meshFile="flower.mesh" name="flower" inertia_tensor="0.4000000059604645" physics_type="NO_COLLISION" velocity_min="0.0" ghost="False" lock_rot_z="False" mass_radius="1.0" />
     </node>
     <node name="flower.005" >
-      <position x="-0.819266" y="0.000000" z="-1.020413" />
-      <rotation qw="1.000000" qx="0.000000" qz="-0.000000" qy="0.000000" />
-      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <position x="-0.819266" z="-1.020413" y="0.000000" />
+      <rotation qx="0.000000" qy="0.000000" qw="1.000000" qz="-0.000000" />
+      <scale x="1.000000" z="1.000000" y="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity mass_radius="1.0" mass="1.0" meshFile="flower.mesh" actor="False" lock_trans_x="False" velocity_min="0.0" lock_rot_y="False" ghost="False" velocity_max="0.0" damping_rot="0.10000000149011612" inertia_tensor="0.4000000059604645" lock_trans_y="False" friction_x="1.0" physics_type="NO_COLLISION" anisotropic_friction="False" lock_rot_x="False" name="flower" lock_trans_z="False" friction_y="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_rot_z="False" />
+      <entity lock_rot_x="False" lock_trans_x="False" friction_x="1.0" velocity_max="0.0" friction_z="1.0" anisotropic_friction="False" actor="False" lock_trans_z="False" damping_trans="0.03999999910593033" damping_rot="0.10000000149011612" friction_y="1.0" mass="1.0" lock_trans_y="False" lock_rot_y="False" meshFile="flower.mesh" name="flower" inertia_tensor="0.4000000059604645" physics_type="NO_COLLISION" velocity_min="0.0" ghost="False" lock_rot_z="False" mass_radius="1.0" />
     </node>
     <node name="flower.004" >
-      <position x="-0.870986" y="0.000000" z="-1.070413" />
-      <rotation qw="1.000000" qx="0.000000" qz="-0.000000" qy="0.000000" />
-      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <position x="-0.870986" z="-1.070413" y="0.000000" />
+      <rotation qx="0.000000" qy="0.000000" qw="1.000000" qz="-0.000000" />
+      <scale x="1.000000" z="1.000000" y="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity mass_radius="1.0" mass="1.0" meshFile="flower.mesh" actor="False" lock_trans_x="False" velocity_min="0.0" lock_rot_y="False" ghost="False" velocity_max="0.0" damping_rot="0.10000000149011612" inertia_tensor="0.4000000059604645" lock_trans_y="False" friction_x="1.0" physics_type="NO_COLLISION" anisotropic_friction="False" lock_rot_x="False" name="flower" lock_trans_z="False" friction_y="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_rot_z="False" />
+      <entity lock_rot_x="False" lock_trans_x="False" friction_x="1.0" velocity_max="0.0" friction_z="1.0" anisotropic_friction="False" actor="False" lock_trans_z="False" damping_trans="0.03999999910593033" damping_rot="0.10000000149011612" friction_y="1.0" mass="1.0" lock_trans_y="False" lock_rot_y="False" meshFile="flower.mesh" name="flower" inertia_tensor="0.4000000059604645" physics_type="NO_COLLISION" velocity_min="0.0" ghost="False" lock_rot_z="False" mass_radius="1.0" />
     </node>
     <node name="physics_floor_top_wall" >
-      <position x="0.000000" y="0.200000" z="-1.400000" />
-      <rotation qw="1.000000" qx="0.000000" qz="-0.000000" qy="0.000000" />
-      <scale x="1.000000" y="1.000000" z="1.000000" />
-      <user_data value="true" name="border" type="str" />
+      <position x="0.000000" z="-1.400000" y="0.200000" />
+      <rotation qx="0.000000" qy="0.000000" qw="1.000000" qz="-0.000000" />
+      <scale x="1.000000" z="1.000000" y="1.000000" />
+      <user_data type="str" name="border" value="true" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity mass_radius="1.0" mass="1.0" meshFile="physics_floor_top_wall.mesh" actor="False" lock_trans_x="False" velocity_min="0.0" collisionPrim="triangle_mesh" ghost="True" velocity_max="0.0" damping_rot="0.10000000149011612" inertia_tensor="0.4000000059604645" lock_trans_y="False" friction_x="1.0" physics_type="STATIC" anisotropic_friction="False" lock_rot_x="False" name="physics_floor_top_wall" lock_trans_z="False" friction_y="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_rot_y="False" lock_rot_z="False" />
+      <entity lock_rot_x="False" lock_trans_x="False" friction_x="1.0" velocity_max="0.0" friction_z="1.0" anisotropic_friction="False" actor="False" lock_trans_z="False" damping_trans="0.03999999910593033" damping_rot="0.10000000149011612" friction_y="1.0" collisionPrim="triangle_mesh" mass="1.0" lock_trans_y="False" lock_rot_y="False" meshFile="physics_floor_top_wall.mesh" name="physics_floor_top_wall" inertia_tensor="0.4000000059604645" physics_type="STATIC" velocity_min="0.0" ghost="True" lock_rot_z="False" mass_radius="1.0" />
     </node>
     <node name="physics_floor.002" >
-      <position x="0.000000" y="0.200000" z="-1.400000" />
-      <rotation qw="1.000000" qx="0.000000" qz="-0.000000" qy="0.000000" />
-      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <position x="0.000000" z="-1.400000" y="0.200000" />
+      <rotation qx="0.000000" qy="0.000000" qw="1.000000" qz="-0.000000" />
+      <scale x="1.000000" z="1.000000" y="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity mass_radius="1.0" mass="1.0" meshFile="physics_floor_top.mesh" actor="False" lock_trans_x="False" velocity_min="0.0" collisionPrim="triangle_mesh" ghost="True" velocity_max="0.0" damping_rot="0.10000000149011612" inertia_tensor="0.4000000059604645" lock_trans_y="False" friction_x="1.0" physics_type="STATIC" anisotropic_friction="False" lock_rot_x="False" name="physics_floor_top" lock_trans_z="False" friction_y="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_rot_y="False" lock_rot_z="False" />
+      <entity lock_rot_x="False" lock_trans_x="False" friction_x="1.0" velocity_max="0.0" friction_z="1.0" anisotropic_friction="False" actor="False" lock_trans_z="False" damping_trans="0.03999999910593033" damping_rot="0.10000000149011612" friction_y="1.0" collisionPrim="triangle_mesh" mass="1.0" lock_trans_y="False" lock_rot_y="False" meshFile="physics_floor_top.mesh" name="physics_floor_top" inertia_tensor="0.4000000059604645" physics_type="STATIC" velocity_min="0.0" ghost="True" lock_rot_z="False" mass_radius="1.0" />
     </node>
     <node name="physics_floor.001" >
-      <position x="0.000000" y="0.200000" z="-0.000000" />
-      <rotation qw="1.000000" qx="0.000000" qz="-0.000000" qy="0.000000" />
-      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <position x="0.000000" z="-0.000000" y="0.200000" />
+      <rotation qx="0.000000" qy="0.000000" qw="1.000000" qz="-0.000000" />
+      <scale x="1.000000" z="1.000000" y="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity mass_radius="1.0" mass="1.0" meshFile="physics_wall_bot.mesh" actor="False" lock_trans_x="False" velocity_min="0.0" collisionPrim="triangle_mesh" ghost="True" velocity_max="0.0" damping_rot="0.10000000149011612" inertia_tensor="0.4000000059604645" lock_trans_y="False" friction_x="1.0" physics_type="STATIC" anisotropic_friction="False" lock_rot_x="False" name="physics_wall_bot" lock_trans_z="False" friction_y="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_rot_y="False" lock_rot_z="False" />
+      <entity lock_rot_x="False" lock_trans_x="False" friction_x="1.0" velocity_max="0.0" friction_z="1.0" anisotropic_friction="False" actor="False" lock_trans_z="False" damping_trans="0.03999999910593033" damping_rot="0.10000000149011612" friction_y="1.0" collisionPrim="triangle_mesh" mass="1.0" lock_trans_y="False" lock_rot_y="False" meshFile="physics_wall_bot.mesh" name="physics_wall_bot" inertia_tensor="0.4000000059604645" physics_type="STATIC" velocity_min="0.0" ghost="True" lock_rot_z="False" mass_radius="1.0" />
     </node>
     <node name="GreenBush.044" >
-      <position x="-0.150000" y="0.000000" z="-0.950000" />
-      <rotation qw="1.000000" qx="0.000000" qz="-0.000000" qy="0.000000" />
-      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <position x="-0.150000" z="-0.950000" y="0.000000" />
+      <rotation qx="0.000000" qy="0.000000" qw="1.000000" qz="-0.000000" />
+      <scale x="1.000000" z="1.000000" y="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity mass_radius="1.0" mass="1.0" meshFile="GreenBush.mesh" actor="False" lock_trans_x="False" velocity_min="0.0" lock_rot_y="False" ghost="False" velocity_max="0.0" damping_rot="0.10000000149011612" inertia_tensor="0.4000000059604645" lock_trans_y="False" friction_x="1.0" physics_type="STATIC" anisotropic_friction="False" lock_rot_x="False" name="GreenBush" lock_trans_z="False" friction_y="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_rot_z="False" />
+      <entity lock_rot_x="False" lock_trans_x="False" friction_x="1.0" velocity_max="0.0" friction_z="1.0" anisotropic_friction="False" actor="False" lock_trans_z="False" damping_trans="0.03999999910593033" damping_rot="0.10000000149011612" friction_y="1.0" mass="1.0" lock_trans_y="False" lock_rot_y="False" meshFile="GreenBush.mesh" name="GreenBush" inertia_tensor="0.4000000059604645" physics_type="STATIC" velocity_min="0.0" ghost="False" lock_rot_z="False" mass_radius="1.0" />
     </node>
     <node name="GreenBush.043" >
-      <position x="-0.150000" y="0.000000" z="-1.050000" />
-      <rotation qw="1.000000" qx="0.000000" qz="-0.000000" qy="0.000000" />
-      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <position x="-0.150000" z="-1.050000" y="0.000000" />
+      <rotation qx="0.000000" qy="0.000000" qw="1.000000" qz="-0.000000" />
+      <scale x="1.000000" z="1.000000" y="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity mass_radius="1.0" mass="1.0" meshFile="GreenBush.mesh" actor="False" lock_trans_x="False" velocity_min="0.0" lock_rot_y="False" ghost="False" velocity_max="0.0" damping_rot="0.10000000149011612" inertia_tensor="0.4000000059604645" lock_trans_y="False" friction_x="1.0" physics_type="STATIC" anisotropic_friction="False" lock_rot_x="False" name="GreenBush" lock_trans_z="False" friction_y="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_rot_z="False" />
+      <entity lock_rot_x="False" lock_trans_x="False" friction_x="1.0" velocity_max="0.0" friction_z="1.0" anisotropic_friction="False" actor="False" lock_trans_z="False" damping_trans="0.03999999910593033" damping_rot="0.10000000149011612" friction_y="1.0" mass="1.0" lock_trans_y="False" lock_rot_y="False" meshFile="GreenBush.mesh" name="GreenBush" inertia_tensor="0.4000000059604645" physics_type="STATIC" velocity_min="0.0" ghost="False" lock_rot_z="False" mass_radius="1.0" />
     </node>
     <node name="GreenBush.042" >
-      <position x="-0.050000" y="0.000000" z="-1.050000" />
-      <rotation qw="1.000000" qx="0.000000" qz="-0.000000" qy="0.000000" />
-      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <position x="-0.050000" z="-1.050000" y="0.000000" />
+      <rotation qx="0.000000" qy="0.000000" qw="1.000000" qz="-0.000000" />
+      <scale x="1.000000" z="1.000000" y="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity mass_radius="1.0" mass="1.0" meshFile="GreenBush.mesh" actor="False" lock_trans_x="False" velocity_min="0.0" lock_rot_y="False" ghost="False" velocity_max="0.0" damping_rot="0.10000000149011612" inertia_tensor="0.4000000059604645" lock_trans_y="False" friction_x="1.0" physics_type="STATIC" anisotropic_friction="False" lock_rot_x="False" name="GreenBush" lock_trans_z="False" friction_y="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_rot_z="False" />
+      <entity lock_rot_x="False" lock_trans_x="False" friction_x="1.0" velocity_max="0.0" friction_z="1.0" anisotropic_friction="False" actor="False" lock_trans_z="False" damping_trans="0.03999999910593033" damping_rot="0.10000000149011612" friction_y="1.0" mass="1.0" lock_trans_y="False" lock_rot_y="False" meshFile="GreenBush.mesh" name="GreenBush" inertia_tensor="0.4000000059604645" physics_type="STATIC" velocity_min="0.0" ghost="False" lock_rot_z="False" mass_radius="1.0" />
     </node>
     <node name="GreenBush.041" >
-      <position x="-0.050000" y="0.000000" z="-0.950000" />
-      <rotation qw="1.000000" qx="0.000000" qz="-0.000000" qy="0.000000" />
-      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <position x="-0.050000" z="-0.950000" y="0.000000" />
+      <rotation qx="0.000000" qy="0.000000" qw="1.000000" qz="-0.000000" />
+      <scale x="1.000000" z="1.000000" y="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity mass_radius="1.0" mass="1.0" meshFile="GreenBush.mesh" actor="False" lock_trans_x="False" velocity_min="0.0" lock_rot_y="False" ghost="False" velocity_max="0.0" damping_rot="0.10000000149011612" inertia_tensor="0.4000000059604645" lock_trans_y="False" friction_x="1.0" physics_type="STATIC" anisotropic_friction="False" lock_rot_x="False" name="GreenBush" lock_trans_z="False" friction_y="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_rot_z="False" />
+      <entity lock_rot_x="False" lock_trans_x="False" friction_x="1.0" velocity_max="0.0" friction_z="1.0" anisotropic_friction="False" actor="False" lock_trans_z="False" damping_trans="0.03999999910593033" damping_rot="0.10000000149011612" friction_y="1.0" mass="1.0" lock_trans_y="False" lock_rot_y="False" meshFile="GreenBush.mesh" name="GreenBush" inertia_tensor="0.4000000059604645" physics_type="STATIC" velocity_min="0.0" ghost="False" lock_rot_z="False" mass_radius="1.0" />
     </node>
     <node name="GreenBush.040" >
-      <position x="0.150000" y="0.000000" z="-0.950000" />
-      <rotation qw="1.000000" qx="0.000000" qz="-0.000000" qy="0.000000" />
-      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <position x="0.150000" z="-0.950000" y="0.000000" />
+      <rotation qx="0.000000" qy="0.000000" qw="1.000000" qz="-0.000000" />
+      <scale x="1.000000" z="1.000000" y="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity mass_radius="1.0" mass="1.0" meshFile="GreenBush.mesh" actor="False" lock_trans_x="False" velocity_min="0.0" lock_rot_y="False" ghost="False" velocity_max="0.0" damping_rot="0.10000000149011612" inertia_tensor="0.4000000059604645" lock_trans_y="False" friction_x="1.0" physics_type="STATIC" anisotropic_friction="False" lock_rot_x="False" name="GreenBush" lock_trans_z="False" friction_y="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_rot_z="False" />
+      <entity lock_rot_x="False" lock_trans_x="False" friction_x="1.0" velocity_max="0.0" friction_z="1.0" anisotropic_friction="False" actor="False" lock_trans_z="False" damping_trans="0.03999999910593033" damping_rot="0.10000000149011612" friction_y="1.0" mass="1.0" lock_trans_y="False" lock_rot_y="False" meshFile="GreenBush.mesh" name="GreenBush" inertia_tensor="0.4000000059604645" physics_type="STATIC" velocity_min="0.0" ghost="False" lock_rot_z="False" mass_radius="1.0" />
     </node>
     <node name="GreenBush.039" >
-      <position x="0.150000" y="0.000000" z="-1.050000" />
-      <rotation qw="1.000000" qx="0.000000" qz="-0.000000" qy="0.000000" />
-      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <position x="0.150000" z="-1.050000" y="0.000000" />
+      <rotation qx="0.000000" qy="0.000000" qw="1.000000" qz="-0.000000" />
+      <scale x="1.000000" z="1.000000" y="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity mass_radius="1.0" mass="1.0" meshFile="GreenBush.mesh" actor="False" lock_trans_x="False" velocity_min="0.0" lock_rot_y="False" ghost="False" velocity_max="0.0" damping_rot="0.10000000149011612" inertia_tensor="0.4000000059604645" lock_trans_y="False" friction_x="1.0" physics_type="STATIC" anisotropic_friction="False" lock_rot_x="False" name="GreenBush" lock_trans_z="False" friction_y="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_rot_z="False" />
+      <entity lock_rot_x="False" lock_trans_x="False" friction_x="1.0" velocity_max="0.0" friction_z="1.0" anisotropic_friction="False" actor="False" lock_trans_z="False" damping_trans="0.03999999910593033" damping_rot="0.10000000149011612" friction_y="1.0" mass="1.0" lock_trans_y="False" lock_rot_y="False" meshFile="GreenBush.mesh" name="GreenBush" inertia_tensor="0.4000000059604645" physics_type="STATIC" velocity_min="0.0" ghost="False" lock_rot_z="False" mass_radius="1.0" />
     </node>
     <node name="GreenBush.038" >
-      <position x="0.250000" y="0.000000" z="-1.050000" />
-      <rotation qw="1.000000" qx="0.000000" qz="-0.000000" qy="0.000000" />
-      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <position x="0.250000" z="-1.050000" y="0.000000" />
+      <rotation qx="0.000000" qy="0.000000" qw="1.000000" qz="-0.000000" />
+      <scale x="1.000000" z="1.000000" y="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity mass_radius="1.0" mass="1.0" meshFile="GreenBush.mesh" actor="False" lock_trans_x="False" velocity_min="0.0" lock_rot_y="False" ghost="False" velocity_max="0.0" damping_rot="0.10000000149011612" inertia_tensor="0.4000000059604645" lock_trans_y="False" friction_x="1.0" physics_type="STATIC" anisotropic_friction="False" lock_rot_x="False" name="GreenBush" lock_trans_z="False" friction_y="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_rot_z="False" />
+      <entity lock_rot_x="False" lock_trans_x="False" friction_x="1.0" velocity_max="0.0" friction_z="1.0" anisotropic_friction="False" actor="False" lock_trans_z="False" damping_trans="0.03999999910593033" damping_rot="0.10000000149011612" friction_y="1.0" mass="1.0" lock_trans_y="False" lock_rot_y="False" meshFile="GreenBush.mesh" name="GreenBush" inertia_tensor="0.4000000059604645" physics_type="STATIC" velocity_min="0.0" ghost="False" lock_rot_z="False" mass_radius="1.0" />
     </node>
     <node name="GreenBush.037" >
-      <position x="0.250000" y="0.000000" z="-0.950000" />
-      <rotation qw="1.000000" qx="0.000000" qz="-0.000000" qy="0.000000" />
-      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <position x="0.250000" z="-0.950000" y="0.000000" />
+      <rotation qx="0.000000" qy="0.000000" qw="1.000000" qz="-0.000000" />
+      <scale x="1.000000" z="1.000000" y="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity mass_radius="1.0" mass="1.0" meshFile="GreenBush.mesh" actor="False" lock_trans_x="False" velocity_min="0.0" lock_rot_y="False" ghost="False" velocity_max="0.0" damping_rot="0.10000000149011612" inertia_tensor="0.4000000059604645" lock_trans_y="False" friction_x="1.0" physics_type="STATIC" anisotropic_friction="False" lock_rot_x="False" name="GreenBush" lock_trans_z="False" friction_y="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_rot_z="False" />
+      <entity lock_rot_x="False" lock_trans_x="False" friction_x="1.0" velocity_max="0.0" friction_z="1.0" anisotropic_friction="False" actor="False" lock_trans_z="False" damping_trans="0.03999999910593033" damping_rot="0.10000000149011612" friction_y="1.0" mass="1.0" lock_trans_y="False" lock_rot_y="False" meshFile="GreenBush.mesh" name="GreenBush" inertia_tensor="0.4000000059604645" physics_type="STATIC" velocity_min="0.0" ghost="False" lock_rot_z="False" mass_radius="1.0" />
     </node>
     <node name="GreenBush.036" >
-      <position x="0.050000" y="0.000000" z="-1.050000" />
-      <rotation qw="1.000000" qx="0.000000" qz="-0.000000" qy="0.000000" />
-      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <position x="0.050000" z="-1.050000" y="0.000000" />
+      <rotation qx="0.000000" qy="0.000000" qw="1.000000" qz="-0.000000" />
+      <scale x="1.000000" z="1.000000" y="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity mass_radius="1.0" mass="1.0" meshFile="GreenBush.mesh" actor="False" lock_trans_x="False" velocity_min="0.0" lock_rot_y="False" ghost="False" velocity_max="0.0" damping_rot="0.10000000149011612" inertia_tensor="0.4000000059604645" lock_trans_y="False" friction_x="1.0" physics_type="STATIC" anisotropic_friction="False" lock_rot_x="False" name="GreenBush" lock_trans_z="False" friction_y="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_rot_z="False" />
+      <entity lock_rot_x="False" lock_trans_x="False" friction_x="1.0" velocity_max="0.0" friction_z="1.0" anisotropic_friction="False" actor="False" lock_trans_z="False" damping_trans="0.03999999910593033" damping_rot="0.10000000149011612" friction_y="1.0" mass="1.0" lock_trans_y="False" lock_rot_y="False" meshFile="GreenBush.mesh" name="GreenBush" inertia_tensor="0.4000000059604645" physics_type="STATIC" velocity_min="0.0" ghost="False" lock_rot_z="False" mass_radius="1.0" />
     </node>
     <node name="GreenBush.035" >
-      <position x="0.050000" y="0.000000" z="-0.950000" />
-      <rotation qw="1.000000" qx="0.000000" qz="-0.000000" qy="0.000000" />
-      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <position x="0.050000" z="-0.950000" y="0.000000" />
+      <rotation qx="0.000000" qy="0.000000" qw="1.000000" qz="-0.000000" />
+      <scale x="1.000000" z="1.000000" y="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity mass_radius="1.0" mass="1.0" meshFile="GreenBush.mesh" actor="False" lock_trans_x="False" velocity_min="0.0" lock_rot_y="False" ghost="False" velocity_max="0.0" damping_rot="0.10000000149011612" inertia_tensor="0.4000000059604645" lock_trans_y="False" friction_x="1.0" physics_type="STATIC" anisotropic_friction="False" lock_rot_x="False" name="GreenBush" lock_trans_z="False" friction_y="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_rot_z="False" />
+      <entity lock_rot_x="False" lock_trans_x="False" friction_x="1.0" velocity_max="0.0" friction_z="1.0" anisotropic_friction="False" actor="False" lock_trans_z="False" damping_trans="0.03999999910593033" damping_rot="0.10000000149011612" friction_y="1.0" mass="1.0" lock_trans_y="False" lock_rot_y="False" meshFile="GreenBush.mesh" name="GreenBush" inertia_tensor="0.4000000059604645" physics_type="STATIC" velocity_min="0.0" ghost="False" lock_rot_z="False" mass_radius="1.0" />
     </node>
     <node name="GreenBush.034" >
-      <position x="-0.850000" y="0.000000" z="0.850000" />
-      <rotation qw="1.000000" qx="0.000000" qz="-0.000000" qy="0.000000" />
-      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <position x="-0.850000" z="0.850000" y="0.000000" />
+      <rotation qx="0.000000" qy="0.000000" qw="1.000000" qz="-0.000000" />
+      <scale x="1.000000" z="1.000000" y="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity mass_radius="1.0" mass="1.0" meshFile="GreenBush.mesh" actor="False" lock_trans_x="False" velocity_min="0.0" lock_rot_y="False" ghost="False" velocity_max="0.0" damping_rot="0.10000000149011612" inertia_tensor="0.4000000059604645" lock_trans_y="False" friction_x="1.0" physics_type="STATIC" anisotropic_friction="False" lock_rot_x="False" name="GreenBush" lock_trans_z="False" friction_y="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_rot_z="False" />
+      <entity lock_rot_x="False" lock_trans_x="False" friction_x="1.0" velocity_max="0.0" friction_z="1.0" anisotropic_friction="False" actor="False" lock_trans_z="False" damping_trans="0.03999999910593033" damping_rot="0.10000000149011612" friction_y="1.0" mass="1.0" lock_trans_y="False" lock_rot_y="False" meshFile="GreenBush.mesh" name="GreenBush" inertia_tensor="0.4000000059604645" physics_type="STATIC" velocity_min="0.0" ghost="False" lock_rot_z="False" mass_radius="1.0" />
     </node>
     <node name="GreenBush.033" >
-      <position x="-0.850000" y="0.000000" z="0.750000" />
-      <rotation qw="1.000000" qx="0.000000" qz="-0.000000" qy="0.000000" />
-      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <position x="-0.850000" z="0.750000" y="0.000000" />
+      <rotation qx="0.000000" qy="0.000000" qw="1.000000" qz="-0.000000" />
+      <scale x="1.000000" z="1.000000" y="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity mass_radius="1.0" mass="1.0" meshFile="GreenBush.mesh" actor="False" lock_trans_x="False" velocity_min="0.0" lock_rot_y="False" ghost="False" velocity_max="0.0" damping_rot="0.10000000149011612" inertia_tensor="0.4000000059604645" lock_trans_y="False" friction_x="1.0" physics_type="STATIC" anisotropic_friction="False" lock_rot_x="False" name="GreenBush" lock_trans_z="False" friction_y="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_rot_z="False" />
+      <entity lock_rot_x="False" lock_trans_x="False" friction_x="1.0" velocity_max="0.0" friction_z="1.0" anisotropic_friction="False" actor="False" lock_trans_z="False" damping_trans="0.03999999910593033" damping_rot="0.10000000149011612" friction_y="1.0" mass="1.0" lock_trans_y="False" lock_rot_y="False" meshFile="GreenBush.mesh" name="GreenBush" inertia_tensor="0.4000000059604645" physics_type="STATIC" velocity_min="0.0" ghost="False" lock_rot_z="False" mass_radius="1.0" />
     </node>
     <node name="GreenBush.032" >
-      <position x="-0.650000" y="0.000000" z="0.850000" />
-      <rotation qw="1.000000" qx="0.000000" qz="-0.000000" qy="0.000000" />
-      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <position x="-0.650000" z="0.850000" y="0.000000" />
+      <rotation qx="0.000000" qy="0.000000" qw="1.000000" qz="-0.000000" />
+      <scale x="1.000000" z="1.000000" y="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity mass_radius="1.0" mass="1.0" meshFile="GreenBush.mesh" actor="False" lock_trans_x="False" velocity_min="0.0" lock_rot_y="False" ghost="False" velocity_max="0.0" damping_rot="0.10000000149011612" inertia_tensor="0.4000000059604645" lock_trans_y="False" friction_x="1.0" physics_type="STATIC" anisotropic_friction="False" lock_rot_x="False" name="GreenBush" lock_trans_z="False" friction_y="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_rot_z="False" />
+      <entity lock_rot_x="False" lock_trans_x="False" friction_x="1.0" velocity_max="0.0" friction_z="1.0" anisotropic_friction="False" actor="False" lock_trans_z="False" damping_trans="0.03999999910593033" damping_rot="0.10000000149011612" friction_y="1.0" mass="1.0" lock_trans_y="False" lock_rot_y="False" meshFile="GreenBush.mesh" name="GreenBush" inertia_tensor="0.4000000059604645" physics_type="STATIC" velocity_min="0.0" ghost="False" lock_rot_z="False" mass_radius="1.0" />
     </node>
     <node name="GreenBush.031" >
-      <position x="-0.650000" y="0.000000" z="0.750000" />
-      <rotation qw="1.000000" qx="0.000000" qz="-0.000000" qy="0.000000" />
-      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <position x="-0.650000" z="0.750000" y="0.000000" />
+      <rotation qx="0.000000" qy="0.000000" qw="1.000000" qz="-0.000000" />
+      <scale x="1.000000" z="1.000000" y="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity mass_radius="1.0" mass="1.0" meshFile="GreenBush.mesh" actor="False" lock_trans_x="False" velocity_min="0.0" lock_rot_y="False" ghost="False" velocity_max="0.0" damping_rot="0.10000000149011612" inertia_tensor="0.4000000059604645" lock_trans_y="False" friction_x="1.0" physics_type="STATIC" anisotropic_friction="False" lock_rot_x="False" name="GreenBush" lock_trans_z="False" friction_y="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_rot_z="False" />
+      <entity lock_rot_x="False" lock_trans_x="False" friction_x="1.0" velocity_max="0.0" friction_z="1.0" anisotropic_friction="False" actor="False" lock_trans_z="False" damping_trans="0.03999999910593033" damping_rot="0.10000000149011612" friction_y="1.0" mass="1.0" lock_trans_y="False" lock_rot_y="False" meshFile="GreenBush.mesh" name="GreenBush" inertia_tensor="0.4000000059604645" physics_type="STATIC" velocity_min="0.0" ghost="False" lock_rot_z="False" mass_radius="1.0" />
     </node>
     <node name="GreenBush.030" >
-      <position x="-0.750000" y="0.000000" z="0.750000" />
-      <rotation qw="1.000000" qx="0.000000" qz="-0.000000" qy="0.000000" />
-      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <position x="-0.750000" z="0.750000" y="0.000000" />
+      <rotation qx="0.000000" qy="0.000000" qw="1.000000" qz="-0.000000" />
+      <scale x="1.000000" z="1.000000" y="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity mass_radius="1.0" mass="1.0" meshFile="GreenBush.mesh" actor="False" lock_trans_x="False" velocity_min="0.0" lock_rot_y="False" ghost="False" velocity_max="0.0" damping_rot="0.10000000149011612" inertia_tensor="0.4000000059604645" lock_trans_y="False" friction_x="1.0" physics_type="STATIC" anisotropic_friction="False" lock_rot_x="False" name="GreenBush" lock_trans_z="False" friction_y="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_rot_z="False" />
+      <entity lock_rot_x="False" lock_trans_x="False" friction_x="1.0" velocity_max="0.0" friction_z="1.0" anisotropic_friction="False" actor="False" lock_trans_z="False" damping_trans="0.03999999910593033" damping_rot="0.10000000149011612" friction_y="1.0" mass="1.0" lock_trans_y="False" lock_rot_y="False" meshFile="GreenBush.mesh" name="GreenBush" inertia_tensor="0.4000000059604645" physics_type="STATIC" velocity_min="0.0" ghost="False" lock_rot_z="False" mass_radius="1.0" />
     </node>
     <node name="GreenBush.029" >
-      <position x="-0.750000" y="0.000000" z="0.850000" />
-      <rotation qw="1.000000" qx="0.000000" qz="-0.000000" qy="0.000000" />
-      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <position x="-0.750000" z="0.850000" y="0.000000" />
+      <rotation qx="0.000000" qy="0.000000" qw="1.000000" qz="-0.000000" />
+      <scale x="1.000000" z="1.000000" y="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity mass_radius="1.0" mass="1.0" meshFile="GreenBush.mesh" actor="False" lock_trans_x="False" velocity_min="0.0" lock_rot_y="False" ghost="False" velocity_max="0.0" damping_rot="0.10000000149011612" inertia_tensor="0.4000000059604645" lock_trans_y="False" friction_x="1.0" physics_type="STATIC" anisotropic_friction="False" lock_rot_x="False" name="GreenBush" lock_trans_z="False" friction_y="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_rot_z="False" />
+      <entity lock_rot_x="False" lock_trans_x="False" friction_x="1.0" velocity_max="0.0" friction_z="1.0" anisotropic_friction="False" actor="False" lock_trans_z="False" damping_trans="0.03999999910593033" damping_rot="0.10000000149011612" friction_y="1.0" mass="1.0" lock_trans_y="False" lock_rot_y="False" meshFile="GreenBush.mesh" name="GreenBush" inertia_tensor="0.4000000059604645" physics_type="STATIC" velocity_min="0.0" ghost="False" lock_rot_z="False" mass_radius="1.0" />
     </node>
     <node name="GreenBush.028" >
-      <position x="-0.350000" y="0.000000" z="0.850000" />
-      <rotation qw="1.000000" qx="0.000000" qz="-0.000000" qy="0.000000" />
-      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <position x="-0.350000" z="0.850000" y="0.000000" />
+      <rotation qx="0.000000" qy="0.000000" qw="1.000000" qz="-0.000000" />
+      <scale x="1.000000" z="1.000000" y="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity mass_radius="1.0" mass="1.0" meshFile="GreenBush.mesh" actor="False" lock_trans_x="False" velocity_min="0.0" lock_rot_y="False" ghost="False" velocity_max="0.0" damping_rot="0.10000000149011612" inertia_tensor="0.4000000059604645" lock_trans_y="False" friction_x="1.0" physics_type="STATIC" anisotropic_friction="False" lock_rot_x="False" name="GreenBush" lock_trans_z="False" friction_y="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_rot_z="False" />
+      <entity lock_rot_x="False" lock_trans_x="False" friction_x="1.0" velocity_max="0.0" friction_z="1.0" anisotropic_friction="False" actor="False" lock_trans_z="False" damping_trans="0.03999999910593033" damping_rot="0.10000000149011612" friction_y="1.0" mass="1.0" lock_trans_y="False" lock_rot_y="False" meshFile="GreenBush.mesh" name="GreenBush" inertia_tensor="0.4000000059604645" physics_type="STATIC" velocity_min="0.0" ghost="False" lock_rot_z="False" mass_radius="1.0" />
     </node>
     <node name="GreenBush.027" >
-      <position x="-0.350000" y="0.000000" z="0.750000" />
-      <rotation qw="1.000000" qx="0.000000" qz="-0.000000" qy="0.000000" />
-      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <position x="-0.350000" z="0.750000" y="0.000000" />
+      <rotation qx="0.000000" qy="0.000000" qw="1.000000" qz="-0.000000" />
+      <scale x="1.000000" z="1.000000" y="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity mass_radius="1.0" mass="1.0" meshFile="GreenBush.mesh" actor="False" lock_trans_x="False" velocity_min="0.0" lock_rot_y="False" ghost="False" velocity_max="0.0" damping_rot="0.10000000149011612" inertia_tensor="0.4000000059604645" lock_trans_y="False" friction_x="1.0" physics_type="STATIC" anisotropic_friction="False" lock_rot_x="False" name="GreenBush" lock_trans_z="False" friction_y="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_rot_z="False" />
+      <entity lock_rot_x="False" lock_trans_x="False" friction_x="1.0" velocity_max="0.0" friction_z="1.0" anisotropic_friction="False" actor="False" lock_trans_z="False" damping_trans="0.03999999910593033" damping_rot="0.10000000149011612" friction_y="1.0" mass="1.0" lock_trans_y="False" lock_rot_y="False" meshFile="GreenBush.mesh" name="GreenBush" inertia_tensor="0.4000000059604645" physics_type="STATIC" velocity_min="0.0" ghost="False" lock_rot_z="False" mass_radius="1.0" />
     </node>
     <node name="GreenBush.026" >
-      <position x="-0.250000" y="0.000000" z="0.750000" />
-      <rotation qw="1.000000" qx="0.000000" qz="-0.000000" qy="0.000000" />
-      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <position x="-0.250000" z="0.750000" y="0.000000" />
+      <rotation qx="0.000000" qy="0.000000" qw="1.000000" qz="-0.000000" />
+      <scale x="1.000000" z="1.000000" y="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity mass_radius="1.0" mass="1.0" meshFile="GreenBush.mesh" actor="False" lock_trans_x="False" velocity_min="0.0" lock_rot_y="False" ghost="False" velocity_max="0.0" damping_rot="0.10000000149011612" inertia_tensor="0.4000000059604645" lock_trans_y="False" friction_x="1.0" physics_type="STATIC" anisotropic_friction="False" lock_rot_x="False" name="GreenBush" lock_trans_z="False" friction_y="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_rot_z="False" />
+      <entity lock_rot_x="False" lock_trans_x="False" friction_x="1.0" velocity_max="0.0" friction_z="1.0" anisotropic_friction="False" actor="False" lock_trans_z="False" damping_trans="0.03999999910593033" damping_rot="0.10000000149011612" friction_y="1.0" mass="1.0" lock_trans_y="False" lock_rot_y="False" meshFile="GreenBush.mesh" name="GreenBush" inertia_tensor="0.4000000059604645" physics_type="STATIC" velocity_min="0.0" ghost="False" lock_rot_z="False" mass_radius="1.0" />
     </node>
     <node name="GreenBush.025" >
-      <position x="-0.250000" y="0.000000" z="0.850000" />
-      <rotation qw="1.000000" qx="0.000000" qz="-0.000000" qy="0.000000" />
-      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <position x="-0.250000" z="0.850000" y="0.000000" />
+      <rotation qx="0.000000" qy="0.000000" qw="1.000000" qz="-0.000000" />
+      <scale x="1.000000" z="1.000000" y="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity mass_radius="1.0" mass="1.0" meshFile="GreenBush.mesh" actor="False" lock_trans_x="False" velocity_min="0.0" lock_rot_y="False" ghost="False" velocity_max="0.0" damping_rot="0.10000000149011612" inertia_tensor="0.4000000059604645" lock_trans_y="False" friction_x="1.0" physics_type="STATIC" anisotropic_friction="False" lock_rot_x="False" name="GreenBush" lock_trans_z="False" friction_y="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_rot_z="False" />
+      <entity lock_rot_x="False" lock_trans_x="False" friction_x="1.0" velocity_max="0.0" friction_z="1.0" anisotropic_friction="False" actor="False" lock_trans_z="False" damping_trans="0.03999999910593033" damping_rot="0.10000000149011612" friction_y="1.0" mass="1.0" lock_trans_y="False" lock_rot_y="False" meshFile="GreenBush.mesh" name="GreenBush" inertia_tensor="0.4000000059604645" physics_type="STATIC" velocity_min="0.0" ghost="False" lock_rot_z="False" mass_radius="1.0" />
     </node>
     <node name="GreenBush.024" >
-      <position x="-0.450000" y="0.000000" z="0.750000" />
-      <rotation qw="1.000000" qx="0.000000" qz="-0.000000" qy="0.000000" />
-      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <position x="-0.450000" z="0.750000" y="0.000000" />
+      <rotation qx="0.000000" qy="0.000000" qw="1.000000" qz="-0.000000" />
+      <scale x="1.000000" z="1.000000" y="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity mass_radius="1.0" mass="1.0" meshFile="GreenBush.mesh" actor="False" lock_trans_x="False" velocity_min="0.0" lock_rot_y="False" ghost="False" velocity_max="0.0" damping_rot="0.10000000149011612" inertia_tensor="0.4000000059604645" lock_trans_y="False" friction_x="1.0" physics_type="STATIC" anisotropic_friction="False" lock_rot_x="False" name="GreenBush" lock_trans_z="False" friction_y="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_rot_z="False" />
+      <entity lock_rot_x="False" lock_trans_x="False" friction_x="1.0" velocity_max="0.0" friction_z="1.0" anisotropic_friction="False" actor="False" lock_trans_z="False" damping_trans="0.03999999910593033" damping_rot="0.10000000149011612" friction_y="1.0" mass="1.0" lock_trans_y="False" lock_rot_y="False" meshFile="GreenBush.mesh" name="GreenBush" inertia_tensor="0.4000000059604645" physics_type="STATIC" velocity_min="0.0" ghost="False" lock_rot_z="False" mass_radius="1.0" />
     </node>
     <node name="GreenBush.023" >
-      <position x="-0.450000" y="0.000000" z="0.850000" />
-      <rotation qw="1.000000" qx="0.000000" qz="-0.000000" qy="0.000000" />
-      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <position x="-0.450000" z="0.850000" y="0.000000" />
+      <rotation qx="0.000000" qy="0.000000" qw="1.000000" qz="-0.000000" />
+      <scale x="1.000000" z="1.000000" y="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity mass_radius="1.0" mass="1.0" meshFile="GreenBush.mesh" actor="False" lock_trans_x="False" velocity_min="0.0" lock_rot_y="False" ghost="False" velocity_max="0.0" damping_rot="0.10000000149011612" inertia_tensor="0.4000000059604645" lock_trans_y="False" friction_x="1.0" physics_type="STATIC" anisotropic_friction="False" lock_rot_x="False" name="GreenBush" lock_trans_z="False" friction_y="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_rot_z="False" />
+      <entity lock_rot_x="False" lock_trans_x="False" friction_x="1.0" velocity_max="0.0" friction_z="1.0" anisotropic_friction="False" actor="False" lock_trans_z="False" damping_trans="0.03999999910593033" damping_rot="0.10000000149011612" friction_y="1.0" mass="1.0" lock_trans_y="False" lock_rot_y="False" meshFile="GreenBush.mesh" name="GreenBush" inertia_tensor="0.4000000059604645" physics_type="STATIC" velocity_min="0.0" ghost="False" lock_rot_z="False" mass_radius="1.0" />
     </node>
     <node name="green_tree.060" >
-      <position x="-1.650000" y="0.000000" z="1.300000" />
-      <rotation qw="1.000000" qx="0.000000" qz="-0.000000" qy="0.000000" />
-      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <position x="-1.650000" z="1.300000" y="0.000000" />
+      <rotation qx="0.000000" qy="0.000000" qw="1.000000" qz="-0.000000" />
+      <scale x="1.000000" z="1.000000" y="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity mass_radius="1.0" mass="1.0" meshFile="green_tree.mesh" actor="False" lock_trans_x="False" velocity_min="0.0" collisionPrim="cylinder" ghost="False" velocity_max="0.0" damping_rot="0.10000000149011612" inertia_tensor="0.4000000059604645" lock_trans_y="False" friction_x="1.0" physics_type="NO_COLLISION" anisotropic_friction="False" lock_rot_x="False" name="green_tree" lock_trans_z="False" friction_y="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_rot_y="False" lock_rot_z="False" />
+      <entity lock_rot_x="False" lock_trans_x="False" friction_x="1.0" velocity_max="0.0" friction_z="1.0" anisotropic_friction="False" actor="False" lock_trans_z="False" damping_trans="0.03999999910593033" damping_rot="0.10000000149011612" friction_y="1.0" collisionPrim="cylinder" mass="1.0" lock_trans_y="False" lock_rot_y="False" meshFile="green_tree.mesh" name="green_tree" inertia_tensor="0.4000000059604645" physics_type="NO_COLLISION" velocity_min="0.0" ghost="False" lock_rot_z="False" mass_radius="1.0" />
     </node>
     <node name="green_tree.059" >
-      <position x="-1.500000" y="0.000000" z="1.600000" />
-      <rotation qw="1.000000" qx="0.000000" qz="-0.000000" qy="0.000000" />
-      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <position x="-1.500000" z="1.600000" y="0.000000" />
+      <rotation qx="0.000000" qy="0.000000" qw="1.000000" qz="-0.000000" />
+      <scale x="1.000000" z="1.000000" y="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity mass_radius="1.0" mass="1.0" meshFile="green_tree.mesh" actor="False" lock_trans_x="False" velocity_min="0.0" collisionPrim="cylinder" ghost="False" velocity_max="0.0" damping_rot="0.10000000149011612" inertia_tensor="0.4000000059604645" lock_trans_y="False" friction_x="1.0" physics_type="NO_COLLISION" anisotropic_friction="False" lock_rot_x="False" name="green_tree" lock_trans_z="False" friction_y="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_rot_y="False" lock_rot_z="False" />
+      <entity lock_rot_x="False" lock_trans_x="False" friction_x="1.0" velocity_max="0.0" friction_z="1.0" anisotropic_friction="False" actor="False" lock_trans_z="False" damping_trans="0.03999999910593033" damping_rot="0.10000000149011612" friction_y="1.0" collisionPrim="cylinder" mass="1.0" lock_trans_y="False" lock_rot_y="False" meshFile="green_tree.mesh" name="green_tree" inertia_tensor="0.4000000059604645" physics_type="NO_COLLISION" velocity_min="0.0" ghost="False" lock_rot_z="False" mass_radius="1.0" />
     </node>
     <node name="green_tree.058" >
-      <position x="-1.200000" y="0.000000" z="1.600000" />
-      <rotation qw="1.000000" qx="0.000000" qz="-0.000000" qy="0.000000" />
-      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <position x="-1.200000" z="1.600000" y="0.000000" />
+      <rotation qx="0.000000" qy="0.000000" qw="1.000000" qz="-0.000000" />
+      <scale x="1.000000" z="1.000000" y="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity mass_radius="1.0" mass="1.0" meshFile="green_tree.mesh" actor="False" lock_trans_x="False" velocity_min="0.0" collisionPrim="cylinder" ghost="False" velocity_max="0.0" damping_rot="0.10000000149011612" inertia_tensor="0.4000000059604645" lock_trans_y="False" friction_x="1.0" physics_type="NO_COLLISION" anisotropic_friction="False" lock_rot_x="False" name="green_tree" lock_trans_z="False" friction_y="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_rot_y="False" lock_rot_z="False" />
+      <entity lock_rot_x="False" lock_trans_x="False" friction_x="1.0" velocity_max="0.0" friction_z="1.0" anisotropic_friction="False" actor="False" lock_trans_z="False" damping_trans="0.03999999910593033" damping_rot="0.10000000149011612" friction_y="1.0" collisionPrim="cylinder" mass="1.0" lock_trans_y="False" lock_rot_y="False" meshFile="green_tree.mesh" name="green_tree" inertia_tensor="0.4000000059604645" physics_type="NO_COLLISION" velocity_min="0.0" ghost="False" lock_rot_z="False" mass_radius="1.0" />
     </node>
     <node name="green_tree.057" >
-      <position x="-0.900000" y="0.000000" z="1.600000" />
-      <rotation qw="1.000000" qx="0.000000" qz="-0.000000" qy="0.000000" />
-      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <position x="-0.900000" z="1.600000" y="0.000000" />
+      <rotation qx="0.000000" qy="0.000000" qw="1.000000" qz="-0.000000" />
+      <scale x="1.000000" z="1.000000" y="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity mass_radius="1.0" mass="1.0" meshFile="green_tree.mesh" actor="False" lock_trans_x="False" velocity_min="0.0" collisionPrim="cylinder" ghost="False" velocity_max="0.0" damping_rot="0.10000000149011612" inertia_tensor="0.4000000059604645" lock_trans_y="False" friction_x="1.0" physics_type="STATIC" anisotropic_friction="False" lock_rot_x="False" name="green_tree" lock_trans_z="False" friction_y="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_rot_y="False" lock_rot_z="False" />
+      <entity lock_rot_x="False" lock_trans_x="False" friction_x="1.0" velocity_max="0.0" friction_z="1.0" anisotropic_friction="False" actor="False" lock_trans_z="False" damping_trans="0.03999999910593033" damping_rot="0.10000000149011612" friction_y="1.0" collisionPrim="cylinder" mass="1.0" lock_trans_y="False" lock_rot_y="False" meshFile="green_tree.mesh" name="green_tree" inertia_tensor="0.4000000059604645" physics_type="STATIC" velocity_min="0.0" ghost="False" lock_rot_z="False" mass_radius="1.0" />
     </node>
     <node name="green_tree.056" >
-      <position x="-1.350000" y="0.000000" z="1.300000" />
-      <rotation qw="1.000000" qx="0.000000" qz="-0.000000" qy="0.000000" />
-      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <position x="-1.350000" z="1.300000" y="0.000000" />
+      <rotation qx="0.000000" qy="0.000000" qw="1.000000" qz="-0.000000" />
+      <scale x="1.000000" z="1.000000" y="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity mass_radius="1.0" mass="1.0" meshFile="green_tree.mesh" actor="False" lock_trans_x="False" velocity_min="0.0" collisionPrim="cylinder" ghost="False" velocity_max="0.0" damping_rot="0.10000000149011612" inertia_tensor="0.4000000059604645" lock_trans_y="False" friction_x="1.0" physics_type="STATIC" anisotropic_friction="False" lock_rot_x="False" name="green_tree" lock_trans_z="False" friction_y="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_rot_y="False" lock_rot_z="False" />
+      <entity lock_rot_x="False" lock_trans_x="False" friction_x="1.0" velocity_max="0.0" friction_z="1.0" anisotropic_friction="False" actor="False" lock_trans_z="False" damping_trans="0.03999999910593033" damping_rot="0.10000000149011612" friction_y="1.0" collisionPrim="cylinder" mass="1.0" lock_trans_y="False" lock_rot_y="False" meshFile="green_tree.mesh" name="green_tree" inertia_tensor="0.4000000059604645" physics_type="STATIC" velocity_min="0.0" ghost="False" lock_rot_z="False" mass_radius="1.0" />
     </node>
     <node name="green_tree.055" >
-      <position x="-1.050000" y="0.000000" z="1.300000" />
-      <rotation qw="1.000000" qx="0.000000" qz="-0.000000" qy="0.000000" />
-      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <position x="-1.050000" z="1.300000" y="0.000000" />
+      <rotation qx="0.000000" qy="0.000000" qw="1.000000" qz="-0.000000" />
+      <scale x="1.000000" z="1.000000" y="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity mass_radius="1.0" mass="1.0" meshFile="green_tree.mesh" actor="False" lock_trans_x="False" velocity_min="0.0" collisionPrim="cylinder" ghost="False" velocity_max="0.0" damping_rot="0.10000000149011612" inertia_tensor="0.4000000059604645" lock_trans_y="False" friction_x="1.0" physics_type="STATIC" anisotropic_friction="False" lock_rot_x="False" name="green_tree" lock_trans_z="False" friction_y="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_rot_y="False" lock_rot_z="False" />
+      <entity lock_rot_x="False" lock_trans_x="False" friction_x="1.0" velocity_max="0.0" friction_z="1.0" anisotropic_friction="False" actor="False" lock_trans_z="False" damping_trans="0.03999999910593033" damping_rot="0.10000000149011612" friction_y="1.0" collisionPrim="cylinder" mass="1.0" lock_trans_y="False" lock_rot_y="False" meshFile="green_tree.mesh" name="green_tree" inertia_tensor="0.4000000059604645" physics_type="STATIC" velocity_min="0.0" ghost="False" lock_rot_z="False" mass_radius="1.0" />
     </node>
     <node name="green_tree.053" >
-      <position x="-1.350000" y="0.000000" z="0.700000" />
-      <rotation qw="1.000000" qx="0.000000" qz="-0.000000" qy="0.000000" />
-      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <position x="-1.350000" z="0.700000" y="0.000000" />
+      <rotation qx="0.000000" qy="0.000000" qw="1.000000" qz="-0.000000" />
+      <scale x="1.000000" z="1.000000" y="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity mass_radius="1.0" mass="1.0" meshFile="green_tree.mesh" actor="False" lock_trans_x="False" velocity_min="0.0" collisionPrim="cylinder" ghost="False" velocity_max="0.0" damping_rot="0.10000000149011612" inertia_tensor="0.4000000059604645" lock_trans_y="False" friction_x="1.0" physics_type="STATIC" anisotropic_friction="False" lock_rot_x="False" name="green_tree" lock_trans_z="False" friction_y="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_rot_y="False" lock_rot_z="False" />
+      <entity lock_rot_x="False" lock_trans_x="False" friction_x="1.0" velocity_max="0.0" friction_z="1.0" anisotropic_friction="False" actor="False" lock_trans_z="False" damping_trans="0.03999999910593033" damping_rot="0.10000000149011612" friction_y="1.0" collisionPrim="cylinder" mass="1.0" lock_trans_y="False" lock_rot_y="False" meshFile="green_tree.mesh" name="green_tree" inertia_tensor="0.4000000059604645" physics_type="STATIC" velocity_min="0.0" ghost="False" lock_rot_z="False" mass_radius="1.0" />
     </node>
     <node name="green_tree.044" >
-      <position x="-1.350000" y="0.000000" z="0.100000" />
-      <rotation qw="1.000000" qx="0.000000" qz="-0.000000" qy="0.000000" />
-      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <position x="-1.350000" z="0.100000" y="0.000000" />
+      <rotation qx="0.000000" qy="0.000000" qw="1.000000" qz="-0.000000" />
+      <scale x="1.000000" z="1.000000" y="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity mass_radius="1.0" mass="1.0" meshFile="green_tree.mesh" actor="False" lock_trans_x="False" velocity_min="0.0" collisionPrim="cylinder" ghost="False" velocity_max="0.0" damping_rot="0.10000000149011612" inertia_tensor="0.4000000059604645" lock_trans_y="False" friction_x="1.0" physics_type="STATIC" anisotropic_friction="False" lock_rot_x="False" name="green_tree" lock_trans_z="False" friction_y="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_rot_y="False" lock_rot_z="False" />
+      <entity lock_rot_x="False" lock_trans_x="False" friction_x="1.0" velocity_max="0.0" friction_z="1.0" anisotropic_friction="False" actor="False" lock_trans_z="False" damping_trans="0.03999999910593033" damping_rot="0.10000000149011612" friction_y="1.0" collisionPrim="cylinder" mass="1.0" lock_trans_y="False" lock_rot_y="False" meshFile="green_tree.mesh" name="green_tree" inertia_tensor="0.4000000059604645" physics_type="STATIC" velocity_min="0.0" ghost="False" lock_rot_z="False" mass_radius="1.0" />
     </node>
     <node name="green_tree.054" >
-      <position x="-1.500000" y="0.000000" z="1.000000" />
-      <rotation qw="1.000000" qx="0.000000" qz="-0.000000" qy="0.000000" />
-      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <position x="-1.500000" z="1.000000" y="0.000000" />
+      <rotation qx="0.000000" qy="0.000000" qw="1.000000" qz="-0.000000" />
+      <scale x="1.000000" z="1.000000" y="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity mass_radius="1.0" mass="1.0" meshFile="green_tree.mesh" actor="False" lock_trans_x="False" velocity_min="0.0" collisionPrim="cylinder" ghost="False" velocity_max="0.0" damping_rot="0.10000000149011612" inertia_tensor="0.4000000059604645" lock_trans_y="False" friction_x="1.0" physics_type="STATIC" anisotropic_friction="False" lock_rot_x="False" name="green_tree" lock_trans_z="False" friction_y="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_rot_y="False" lock_rot_z="False" />
+      <entity lock_rot_x="False" lock_trans_x="False" friction_x="1.0" velocity_max="0.0" friction_z="1.0" anisotropic_friction="False" actor="False" lock_trans_z="False" damping_trans="0.03999999910593033" damping_rot="0.10000000149011612" friction_y="1.0" collisionPrim="cylinder" mass="1.0" lock_trans_y="False" lock_rot_y="False" meshFile="green_tree.mesh" name="green_tree" inertia_tensor="0.4000000059604645" physics_type="STATIC" velocity_min="0.0" ghost="False" lock_rot_z="False" mass_radius="1.0" />
     </node>
     <node name="green_tree.052" >
-      <position x="-1.650000" y="0.000000" z="0.700000" />
-      <rotation qw="1.000000" qx="0.000000" qz="-0.000000" qy="0.000000" />
-      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <position x="-1.650000" z="0.700000" y="0.000000" />
+      <rotation qx="0.000000" qy="0.000000" qw="1.000000" qz="-0.000000" />
+      <scale x="1.000000" z="1.000000" y="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity mass_radius="1.0" mass="1.0" meshFile="green_tree.mesh" actor="False" lock_trans_x="False" velocity_min="0.0" collisionPrim="cylinder" ghost="False" velocity_max="0.0" damping_rot="0.10000000149011612" inertia_tensor="0.4000000059604645" lock_trans_y="False" friction_x="1.0" physics_type="NO_COLLISION" anisotropic_friction="False" lock_rot_x="False" name="green_tree" lock_trans_z="False" friction_y="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_rot_y="False" lock_rot_z="False" />
+      <entity lock_rot_x="False" lock_trans_x="False" friction_x="1.0" velocity_max="0.0" friction_z="1.0" anisotropic_friction="False" actor="False" lock_trans_z="False" damping_trans="0.03999999910593033" damping_rot="0.10000000149011612" friction_y="1.0" collisionPrim="cylinder" mass="1.0" lock_trans_y="False" lock_rot_y="False" meshFile="green_tree.mesh" name="green_tree" inertia_tensor="0.4000000059604645" physics_type="NO_COLLISION" velocity_min="0.0" ghost="False" lock_rot_z="False" mass_radius="1.0" />
     </node>
     <node name="green_tree.051" >
-      <position x="-1.650000" y="0.000000" z="-1.700000" />
-      <rotation qw="1.000000" qx="0.000000" qz="-0.000000" qy="0.000000" />
-      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <position x="-1.650000" z="-1.700000" y="0.000000" />
+      <rotation qx="0.000000" qy="0.000000" qw="1.000000" qz="-0.000000" />
+      <scale x="1.000000" z="1.000000" y="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity mass_radius="1.0" mass="1.0" meshFile="green_tree.mesh" actor="False" lock_trans_x="False" velocity_min="0.0" collisionPrim="cylinder" ghost="False" velocity_max="0.0" damping_rot="0.10000000149011612" inertia_tensor="0.4000000059604645" lock_trans_y="False" friction_x="1.0" physics_type="NO_COLLISION" anisotropic_friction="False" lock_rot_x="False" name="green_tree" lock_trans_z="False" friction_y="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_rot_y="False" lock_rot_z="False" />
+      <entity lock_rot_x="False" lock_trans_x="False" friction_x="1.0" velocity_max="0.0" friction_z="1.0" anisotropic_friction="False" actor="False" lock_trans_z="False" damping_trans="0.03999999910593033" damping_rot="0.10000000149011612" friction_y="1.0" collisionPrim="cylinder" mass="1.0" lock_trans_y="False" lock_rot_y="False" meshFile="green_tree.mesh" name="green_tree" inertia_tensor="0.4000000059604645" physics_type="NO_COLLISION" velocity_min="0.0" ghost="False" lock_rot_z="False" mass_radius="1.0" />
     </node>
     <node name="green_tree.050" >
-      <position x="-1.350000" y="0.000000" z="-1.700000" />
-      <rotation qw="1.000000" qx="0.000000" qz="-0.000000" qy="0.000000" />
-      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <position x="-1.350000" z="-1.700000" y="0.000000" />
+      <rotation qx="0.000000" qy="0.000000" qw="1.000000" qz="-0.000000" />
+      <scale x="1.000000" z="1.000000" y="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity mass_radius="1.0" mass="1.0" meshFile="green_tree.mesh" actor="False" lock_trans_x="False" velocity_min="0.0" collisionPrim="cylinder" ghost="False" velocity_max="0.0" damping_rot="0.10000000149011612" inertia_tensor="0.4000000059604645" lock_trans_y="False" friction_x="1.0" physics_type="NO_COLLISION" anisotropic_friction="False" lock_rot_x="False" name="green_tree" lock_trans_z="False" friction_y="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_rot_y="False" lock_rot_z="False" />
+      <entity lock_rot_x="False" lock_trans_x="False" friction_x="1.0" velocity_max="0.0" friction_z="1.0" anisotropic_friction="False" actor="False" lock_trans_z="False" damping_trans="0.03999999910593033" damping_rot="0.10000000149011612" friction_y="1.0" collisionPrim="cylinder" mass="1.0" lock_trans_y="False" lock_rot_y="False" meshFile="green_tree.mesh" name="green_tree" inertia_tensor="0.4000000059604645" physics_type="NO_COLLISION" velocity_min="0.0" ghost="False" lock_rot_z="False" mass_radius="1.0" />
     </node>
     <node name="green_tree.049" >
-      <position x="-1.050000" y="0.000000" z="-1.700000" />
-      <rotation qw="1.000000" qx="0.000000" qz="-0.000000" qy="0.000000" />
-      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <position x="-1.050000" z="-1.700000" y="0.000000" />
+      <rotation qx="0.000000" qy="0.000000" qw="1.000000" qz="-0.000000" />
+      <scale x="1.000000" z="1.000000" y="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity mass_radius="1.0" mass="1.0" meshFile="green_tree.mesh" actor="False" lock_trans_x="False" velocity_min="0.0" collisionPrim="cylinder" ghost="False" velocity_max="0.0" damping_rot="0.10000000149011612" inertia_tensor="0.4000000059604645" lock_trans_y="False" friction_x="1.0" physics_type="STATIC" anisotropic_friction="False" lock_rot_x="False" name="green_tree" lock_trans_z="False" friction_y="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_rot_y="False" lock_rot_z="False" />
+      <entity lock_rot_x="False" lock_trans_x="False" friction_x="1.0" velocity_max="0.0" friction_z="1.0" anisotropic_friction="False" actor="False" lock_trans_z="False" damping_trans="0.03999999910593033" damping_rot="0.10000000149011612" friction_y="1.0" collisionPrim="cylinder" mass="1.0" lock_trans_y="False" lock_rot_y="False" meshFile="green_tree.mesh" name="green_tree" inertia_tensor="0.4000000059604645" physics_type="STATIC" velocity_min="0.0" ghost="False" lock_rot_z="False" mass_radius="1.0" />
     </node>
     <node name="green_tree.042" >
-      <position x="-1.350000" y="0.000000" z="-1.100000" />
-      <rotation qw="1.000000" qx="0.000000" qz="-0.000000" qy="0.000000" />
-      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <position x="-1.350000" z="-1.100000" y="0.000000" />
+      <rotation qx="0.000000" qy="0.000000" qw="1.000000" qz="-0.000000" />
+      <scale x="1.000000" z="1.000000" y="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity mass_radius="1.0" mass="1.0" meshFile="green_tree.mesh" actor="False" lock_trans_x="False" velocity_min="0.0" collisionPrim="cylinder" ghost="False" velocity_max="0.0" damping_rot="0.10000000149011612" inertia_tensor="0.4000000059604645" lock_trans_y="False" friction_x="1.0" physics_type="STATIC" anisotropic_friction="False" lock_rot_x="False" name="green_tree" lock_trans_z="False" friction_y="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_rot_y="False" lock_rot_z="False" />
+      <entity lock_rot_x="False" lock_trans_x="False" friction_x="1.0" velocity_max="0.0" friction_z="1.0" anisotropic_friction="False" actor="False" lock_trans_z="False" damping_trans="0.03999999910593033" damping_rot="0.10000000149011612" friction_y="1.0" collisionPrim="cylinder" mass="1.0" lock_trans_y="False" lock_rot_y="False" meshFile="green_tree.mesh" name="green_tree" inertia_tensor="0.4000000059604645" physics_type="STATIC" velocity_min="0.0" ghost="False" lock_rot_z="False" mass_radius="1.0" />
     </node>
     <node name="green_tree.048" >
-      <position x="-1.050000" y="0.000000" z="-0.500000" />
-      <rotation qw="1.000000" qx="0.000000" qz="-0.000000" qy="0.000000" />
-      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <position x="-1.050000" z="-0.500000" y="0.000000" />
+      <rotation qx="0.000000" qy="0.000000" qw="1.000000" qz="-0.000000" />
+      <scale x="1.000000" z="1.000000" y="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity mass_radius="1.0" mass="1.0" meshFile="green_tree.mesh" actor="False" lock_trans_x="False" velocity_min="0.0" collisionPrim="cylinder" ghost="False" velocity_max="0.0" damping_rot="0.10000000149011612" inertia_tensor="0.4000000059604645" lock_trans_y="False" friction_x="1.0" physics_type="STATIC" anisotropic_friction="False" lock_rot_x="False" name="green_tree" lock_trans_z="False" friction_y="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_rot_y="False" lock_rot_z="False" />
+      <entity lock_rot_x="False" lock_trans_x="False" friction_x="1.0" velocity_max="0.0" friction_z="1.0" anisotropic_friction="False" actor="False" lock_trans_z="False" damping_trans="0.03999999910593033" damping_rot="0.10000000149011612" friction_y="1.0" collisionPrim="cylinder" mass="1.0" lock_trans_y="False" lock_rot_y="False" meshFile="green_tree.mesh" name="green_tree" inertia_tensor="0.4000000059604645" physics_type="STATIC" velocity_min="0.0" ghost="False" lock_rot_z="False" mass_radius="1.0" />
     </node>
     <node name="green_tree.047" >
-      <position x="-1.650000" y="0.000000" z="-1.100000" />
-      <rotation qw="1.000000" qx="0.000000" qz="-0.000000" qy="0.000000" />
-      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <position x="-1.650000" z="-1.100000" y="0.000000" />
+      <rotation qx="0.000000" qy="0.000000" qw="1.000000" qz="-0.000000" />
+      <scale x="1.000000" z="1.000000" y="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity mass_radius="1.0" mass="1.0" meshFile="green_tree.mesh" actor="False" lock_trans_x="False" velocity_min="0.0" collisionPrim="cylinder" ghost="False" velocity_max="0.0" damping_rot="0.10000000149011612" inertia_tensor="0.4000000059604645" lock_trans_y="False" friction_x="1.0" physics_type="NO_COLLISION" anisotropic_friction="False" lock_rot_x="False" name="green_tree" lock_trans_z="False" friction_y="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_rot_y="False" lock_rot_z="False" />
+      <entity lock_rot_x="False" lock_trans_x="False" friction_x="1.0" velocity_max="0.0" friction_z="1.0" anisotropic_friction="False" actor="False" lock_trans_z="False" damping_trans="0.03999999910593033" damping_rot="0.10000000149011612" friction_y="1.0" collisionPrim="cylinder" mass="1.0" lock_trans_y="False" lock_rot_y="False" meshFile="green_tree.mesh" name="green_tree" inertia_tensor="0.4000000059604645" physics_type="NO_COLLISION" velocity_min="0.0" ghost="False" lock_rot_z="False" mass_radius="1.0" />
     </node>
     <node name="green_tree.046" >
-      <position x="-1.650000" y="0.000000" z="-0.500000" />
-      <rotation qw="1.000000" qx="0.000000" qz="-0.000000" qy="0.000000" />
-      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <position x="-1.650000" z="-0.500000" y="0.000000" />
+      <rotation qx="0.000000" qy="0.000000" qw="1.000000" qz="-0.000000" />
+      <scale x="1.000000" z="1.000000" y="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity mass_radius="1.0" mass="1.0" meshFile="green_tree.mesh" actor="False" lock_trans_x="False" velocity_min="0.0" collisionPrim="cylinder" ghost="False" velocity_max="0.0" damping_rot="0.10000000149011612" inertia_tensor="0.4000000059604645" lock_trans_y="False" friction_x="1.0" physics_type="NO_COLLISION" anisotropic_friction="False" lock_rot_x="False" name="green_tree" lock_trans_z="False" friction_y="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_rot_y="False" lock_rot_z="False" />
+      <entity lock_rot_x="False" lock_trans_x="False" friction_x="1.0" velocity_max="0.0" friction_z="1.0" anisotropic_friction="False" actor="False" lock_trans_z="False" damping_trans="0.03999999910593033" damping_rot="0.10000000149011612" friction_y="1.0" collisionPrim="cylinder" mass="1.0" lock_trans_y="False" lock_rot_y="False" meshFile="green_tree.mesh" name="green_tree" inertia_tensor="0.4000000059604645" physics_type="NO_COLLISION" velocity_min="0.0" ghost="False" lock_rot_z="False" mass_radius="1.0" />
     </node>
     <node name="green_tree.045" >
-      <position x="-1.650000" y="0.000000" z="0.100000" />
-      <rotation qw="1.000000" qx="0.000000" qz="-0.000000" qy="0.000000" />
-      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <position x="-1.650000" z="0.100000" y="0.000000" />
+      <rotation qx="0.000000" qy="0.000000" qw="1.000000" qz="-0.000000" />
+      <scale x="1.000000" z="1.000000" y="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity mass_radius="1.0" mass="1.0" meshFile="green_tree.mesh" actor="False" lock_trans_x="False" velocity_min="0.0" collisionPrim="cylinder" ghost="False" velocity_max="0.0" damping_rot="0.10000000149011612" inertia_tensor="0.4000000059604645" lock_trans_y="False" friction_x="1.0" physics_type="NO_COLLISION" anisotropic_friction="False" lock_rot_x="False" name="green_tree" lock_trans_z="False" friction_y="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_rot_y="False" lock_rot_z="False" />
+      <entity lock_rot_x="False" lock_trans_x="False" friction_x="1.0" velocity_max="0.0" friction_z="1.0" anisotropic_friction="False" actor="False" lock_trans_z="False" damping_trans="0.03999999910593033" damping_rot="0.10000000149011612" friction_y="1.0" collisionPrim="cylinder" mass="1.0" lock_trans_y="False" lock_rot_y="False" meshFile="green_tree.mesh" name="green_tree" inertia_tensor="0.4000000059604645" physics_type="NO_COLLISION" velocity_min="0.0" ghost="False" lock_rot_z="False" mass_radius="1.0" />
     </node>
     <node name="green_tree.043" >
-      <position x="-1.350000" y="0.000000" z="-0.500000" />
-      <rotation qw="1.000000" qx="0.000000" qz="-0.000000" qy="0.000000" />
-      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <position x="-1.350000" z="-0.500000" y="0.000000" />
+      <rotation qx="0.000000" qy="0.000000" qw="1.000000" qz="-0.000000" />
+      <scale x="1.000000" z="1.000000" y="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity mass_radius="1.0" mass="1.0" meshFile="green_tree.mesh" actor="False" lock_trans_x="False" velocity_min="0.0" collisionPrim="cylinder" ghost="False" velocity_max="0.0" damping_rot="0.10000000149011612" inertia_tensor="0.4000000059604645" lock_trans_y="False" friction_x="1.0" physics_type="NO_COLLISION" anisotropic_friction="False" lock_rot_x="False" name="green_tree" lock_trans_z="False" friction_y="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_rot_y="False" lock_rot_z="False" />
+      <entity lock_rot_x="False" lock_trans_x="False" friction_x="1.0" velocity_max="0.0" friction_z="1.0" anisotropic_friction="False" actor="False" lock_trans_z="False" damping_trans="0.03999999910593033" damping_rot="0.10000000149011612" friction_y="1.0" collisionPrim="cylinder" mass="1.0" lock_trans_y="False" lock_rot_y="False" meshFile="green_tree.mesh" name="green_tree" inertia_tensor="0.4000000059604645" physics_type="NO_COLLISION" velocity_min="0.0" ghost="False" lock_rot_z="False" mass_radius="1.0" />
     </node>
     <node name="green_tree.041" >
-      <position x="-1.200000" y="0.000000" z="0.400000" />
-      <rotation qw="1.000000" qx="0.000000" qz="-0.000000" qy="0.000000" />
-      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <position x="-1.200000" z="0.400000" y="0.000000" />
+      <rotation qx="0.000000" qy="0.000000" qw="1.000000" qz="-0.000000" />
+      <scale x="1.000000" z="1.000000" y="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity mass_radius="1.0" mass="1.0" meshFile="green_tree.mesh" actor="False" lock_trans_x="False" velocity_min="0.0" collisionPrim="cylinder" ghost="False" velocity_max="0.0" damping_rot="0.10000000149011612" inertia_tensor="0.4000000059604645" lock_trans_y="False" friction_x="1.0" physics_type="STATIC" anisotropic_friction="False" lock_rot_x="False" name="green_tree" lock_trans_z="False" friction_y="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_rot_y="False" lock_rot_z="False" />
+      <entity lock_rot_x="False" lock_trans_x="False" friction_x="1.0" velocity_max="0.0" friction_z="1.0" anisotropic_friction="False" actor="False" lock_trans_z="False" damping_trans="0.03999999910593033" damping_rot="0.10000000149011612" friction_y="1.0" collisionPrim="cylinder" mass="1.0" lock_trans_y="False" lock_rot_y="False" meshFile="green_tree.mesh" name="green_tree" inertia_tensor="0.4000000059604645" physics_type="STATIC" velocity_min="0.0" ghost="False" lock_rot_z="False" mass_radius="1.0" />
     </node>
     <node name="green_tree.040" >
-      <position x="-1.500000" y="0.000000" z="0.400000" />
-      <rotation qw="1.000000" qx="0.000000" qz="-0.000000" qy="0.000000" />
-      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <position x="-1.500000" z="0.400000" y="0.000000" />
+      <rotation qx="0.000000" qy="0.000000" qw="1.000000" qz="-0.000000" />
+      <scale x="1.000000" z="1.000000" y="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity mass_radius="1.0" mass="1.0" meshFile="green_tree.mesh" actor="False" lock_trans_x="False" velocity_min="0.0" collisionPrim="cylinder" ghost="False" velocity_max="0.0" damping_rot="0.10000000149011612" inertia_tensor="0.4000000059604645" lock_trans_y="False" friction_x="1.0" physics_type="NO_COLLISION" anisotropic_friction="False" lock_rot_x="False" name="green_tree" lock_trans_z="False" friction_y="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_rot_y="False" lock_rot_z="False" />
+      <entity lock_rot_x="False" lock_trans_x="False" friction_x="1.0" velocity_max="0.0" friction_z="1.0" anisotropic_friction="False" actor="False" lock_trans_z="False" damping_trans="0.03999999910593033" damping_rot="0.10000000149011612" friction_y="1.0" collisionPrim="cylinder" mass="1.0" lock_trans_y="False" lock_rot_y="False" meshFile="green_tree.mesh" name="green_tree" inertia_tensor="0.4000000059604645" physics_type="NO_COLLISION" velocity_min="0.0" ghost="False" lock_rot_z="False" mass_radius="1.0" />
     </node>
     <node name="green_tree.039" >
-      <position x="-1.500000" y="0.000000" z="-0.200000" />
-      <rotation qw="1.000000" qx="0.000000" qz="-0.000000" qy="0.000000" />
-      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <position x="-1.500000" z="-0.200000" y="0.000000" />
+      <rotation qx="0.000000" qy="0.000000" qw="1.000000" qz="-0.000000" />
+      <scale x="1.000000" z="1.000000" y="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity mass_radius="1.0" mass="1.0" meshFile="green_tree.mesh" actor="False" lock_trans_x="False" velocity_min="0.0" collisionPrim="cylinder" ghost="False" velocity_max="0.0" damping_rot="0.10000000149011612" inertia_tensor="0.4000000059604645" lock_trans_y="False" friction_x="1.0" physics_type="NO_COLLISION" anisotropic_friction="False" lock_rot_x="False" name="green_tree" lock_trans_z="False" friction_y="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_rot_y="False" lock_rot_z="False" />
+      <entity lock_rot_x="False" lock_trans_x="False" friction_x="1.0" velocity_max="0.0" friction_z="1.0" anisotropic_friction="False" actor="False" lock_trans_z="False" damping_trans="0.03999999910593033" damping_rot="0.10000000149011612" friction_y="1.0" collisionPrim="cylinder" mass="1.0" lock_trans_y="False" lock_rot_y="False" meshFile="green_tree.mesh" name="green_tree" inertia_tensor="0.4000000059604645" physics_type="NO_COLLISION" velocity_min="0.0" ghost="False" lock_rot_z="False" mass_radius="1.0" />
     </node>
     <node name="green_tree.038" >
-      <position x="-1.200000" y="0.000000" z="-0.200000" />
-      <rotation qw="1.000000" qx="0.000000" qz="-0.000000" qy="0.000000" />
-      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <position x="-1.200000" z="-0.200000" y="0.000000" />
+      <rotation qx="0.000000" qy="0.000000" qw="1.000000" qz="-0.000000" />
+      <scale x="1.000000" z="1.000000" y="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity mass_radius="1.0" mass="1.0" meshFile="green_tree.mesh" actor="False" lock_trans_x="False" velocity_min="0.0" collisionPrim="cylinder" ghost="False" velocity_max="0.0" damping_rot="0.10000000149011612" inertia_tensor="0.4000000059604645" lock_trans_y="False" friction_x="1.0" physics_type="STATIC" anisotropic_friction="False" lock_rot_x="False" name="green_tree" lock_trans_z="False" friction_y="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_rot_y="False" lock_rot_z="False" />
+      <entity lock_rot_x="False" lock_trans_x="False" friction_x="1.0" velocity_max="0.0" friction_z="1.0" anisotropic_friction="False" actor="False" lock_trans_z="False" damping_trans="0.03999999910593033" damping_rot="0.10000000149011612" friction_y="1.0" collisionPrim="cylinder" mass="1.0" lock_trans_y="False" lock_rot_y="False" meshFile="green_tree.mesh" name="green_tree" inertia_tensor="0.4000000059604645" physics_type="STATIC" velocity_min="0.0" ghost="False" lock_rot_z="False" mass_radius="1.0" />
     </node>
     <node name="green_tree.037" >
-      <position x="-1.200000" y="0.000000" z="-0.800000" />
-      <rotation qw="1.000000" qx="0.000000" qz="-0.000000" qy="0.000000" />
-      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <position x="-1.200000" z="-0.800000" y="0.000000" />
+      <rotation qx="0.000000" qy="0.000000" qw="1.000000" qz="-0.000000" />
+      <scale x="1.000000" z="1.000000" y="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity mass_radius="1.0" mass="1.0" meshFile="green_tree.mesh" actor="False" lock_trans_x="False" velocity_min="0.0" collisionPrim="cylinder" ghost="False" velocity_max="0.0" damping_rot="0.10000000149011612" inertia_tensor="0.4000000059604645" lock_trans_y="False" friction_x="1.0" physics_type="STATIC" anisotropic_friction="False" lock_rot_x="False" name="green_tree" lock_trans_z="False" friction_y="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_rot_y="False" lock_rot_z="False" />
+      <entity lock_rot_x="False" lock_trans_x="False" friction_x="1.0" velocity_max="0.0" friction_z="1.0" anisotropic_friction="False" actor="False" lock_trans_z="False" damping_trans="0.03999999910593033" damping_rot="0.10000000149011612" friction_y="1.0" collisionPrim="cylinder" mass="1.0" lock_trans_y="False" lock_rot_y="False" meshFile="green_tree.mesh" name="green_tree" inertia_tensor="0.4000000059604645" physics_type="STATIC" velocity_min="0.0" ghost="False" lock_rot_z="False" mass_radius="1.0" />
     </node>
     <node name="green_tree.036" >
-      <position x="-1.500000" y="0.000000" z="-0.800000" />
-      <rotation qw="1.000000" qx="0.000000" qz="-0.000000" qy="0.000000" />
-      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <position x="-1.500000" z="-0.800000" y="0.000000" />
+      <rotation qx="0.000000" qy="0.000000" qw="1.000000" qz="-0.000000" />
+      <scale x="1.000000" z="1.000000" y="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity mass_radius="1.0" mass="1.0" meshFile="green_tree.mesh" actor="False" lock_trans_x="False" velocity_min="0.0" collisionPrim="cylinder" ghost="False" velocity_max="0.0" damping_rot="0.10000000149011612" inertia_tensor="0.4000000059604645" lock_trans_y="False" friction_x="1.0" physics_type="NO_COLLISION" anisotropic_friction="False" lock_rot_x="False" name="green_tree" lock_trans_z="False" friction_y="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_rot_y="False" lock_rot_z="False" />
+      <entity lock_rot_x="False" lock_trans_x="False" friction_x="1.0" velocity_max="0.0" friction_z="1.0" anisotropic_friction="False" actor="False" lock_trans_z="False" damping_trans="0.03999999910593033" damping_rot="0.10000000149011612" friction_y="1.0" collisionPrim="cylinder" mass="1.0" lock_trans_y="False" lock_rot_y="False" meshFile="green_tree.mesh" name="green_tree" inertia_tensor="0.4000000059604645" physics_type="NO_COLLISION" velocity_min="0.0" ghost="False" lock_rot_z="False" mass_radius="1.0" />
     </node>
     <node name="green_tree.035" >
-      <position x="-1.500000" y="0.000000" z="-1.400000" />
-      <rotation qw="1.000000" qx="0.000000" qz="-0.000000" qy="0.000000" />
-      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <position x="-1.500000" z="-1.400000" y="0.000000" />
+      <rotation qx="0.000000" qy="0.000000" qw="1.000000" qz="-0.000000" />
+      <scale x="1.000000" z="1.000000" y="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity mass_radius="1.0" mass="1.0" meshFile="green_tree.mesh" actor="False" lock_trans_x="False" velocity_min="0.0" collisionPrim="cylinder" ghost="False" velocity_max="0.0" damping_rot="0.10000000149011612" inertia_tensor="0.4000000059604645" lock_trans_y="False" friction_x="1.0" physics_type="NO_COLLISION" anisotropic_friction="False" lock_rot_x="False" name="green_tree" lock_trans_z="False" friction_y="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_rot_y="False" lock_rot_z="False" />
+      <entity lock_rot_x="False" lock_trans_x="False" friction_x="1.0" velocity_max="0.0" friction_z="1.0" anisotropic_friction="False" actor="False" lock_trans_z="False" damping_trans="0.03999999910593033" damping_rot="0.10000000149011612" friction_y="1.0" collisionPrim="cylinder" mass="1.0" lock_trans_y="False" lock_rot_y="False" meshFile="green_tree.mesh" name="green_tree" inertia_tensor="0.4000000059604645" physics_type="NO_COLLISION" velocity_min="0.0" ghost="False" lock_rot_z="False" mass_radius="1.0" />
     </node>
     <node name="green_tree.034" >
-      <position x="-1.200000" y="0.000000" z="-1.400000" />
-      <rotation qw="1.000000" qx="0.000000" qz="-0.000000" qy="0.000000" />
-      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <position x="-1.200000" z="-1.400000" y="0.000000" />
+      <rotation qx="0.000000" qy="0.000000" qw="1.000000" qz="-0.000000" />
+      <scale x="1.000000" z="1.000000" y="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity mass_radius="1.0" mass="1.0" meshFile="green_tree.mesh" actor="False" lock_trans_x="False" velocity_min="0.0" collisionPrim="cylinder" ghost="False" velocity_max="0.0" damping_rot="0.10000000149011612" inertia_tensor="0.4000000059604645" lock_trans_y="False" friction_x="1.0" physics_type="STATIC" anisotropic_friction="False" lock_rot_x="False" name="green_tree" lock_trans_z="False" friction_y="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_rot_y="False" lock_rot_z="False" />
+      <entity lock_rot_x="False" lock_trans_x="False" friction_x="1.0" velocity_max="0.0" friction_z="1.0" anisotropic_friction="False" actor="False" lock_trans_z="False" damping_trans="0.03999999910593033" damping_rot="0.10000000149011612" friction_y="1.0" collisionPrim="cylinder" mass="1.0" lock_trans_y="False" lock_rot_y="False" meshFile="green_tree.mesh" name="green_tree" inertia_tensor="0.4000000059604645" physics_type="STATIC" velocity_min="0.0" ghost="False" lock_rot_z="False" mass_radius="1.0" />
     </node>
     <node name="green_tree.033" >
-      <position x="-0.000000" y="0.000000" z="-0.400000" />
-      <rotation qw="1.000000" qx="0.000000" qz="-0.000000" qy="0.000000" />
-      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <position x="-0.000000" z="-0.400000" y="0.000000" />
+      <rotation qx="0.000000" qy="0.000000" qw="1.000000" qz="-0.000000" />
+      <scale x="1.000000" z="1.000000" y="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity mass_radius="1.0" mass="1.0" meshFile="green_tree.mesh" actor="False" lock_trans_x="False" velocity_min="0.0" collisionPrim="cylinder" ghost="False" velocity_max="0.0" damping_rot="0.10000000149011612" inertia_tensor="0.4000000059604645" lock_trans_y="False" friction_x="1.0" physics_type="NO_COLLISION" anisotropic_friction="False" lock_rot_x="False" name="green_tree" lock_trans_z="False" friction_y="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_rot_y="False" lock_rot_z="False" />
+      <entity lock_rot_x="False" lock_trans_x="False" friction_x="1.0" velocity_max="0.0" friction_z="1.0" anisotropic_friction="False" actor="False" lock_trans_z="False" damping_trans="0.03999999910593033" damping_rot="0.10000000149011612" friction_y="1.0" collisionPrim="cylinder" mass="1.0" lock_trans_y="False" lock_rot_y="False" meshFile="green_tree.mesh" name="green_tree" inertia_tensor="0.4000000059604645" physics_type="NO_COLLISION" velocity_min="0.0" ghost="False" lock_rot_z="False" mass_radius="1.0" />
     </node>
     <node name="green_tree.032" >
-      <position x="0.300000" y="0.000000" z="-0.400000" />
-      <rotation qw="1.000000" qx="0.000000" qz="-0.000000" qy="0.000000" />
-      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <position x="0.300000" z="-0.400000" y="0.000000" />
+      <rotation qx="0.000000" qy="0.000000" qw="1.000000" qz="-0.000000" />
+      <scale x="1.000000" z="1.000000" y="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity mass_radius="1.0" mass="1.0" meshFile="green_tree.mesh" actor="False" lock_trans_x="False" velocity_min="0.0" collisionPrim="cylinder" ghost="False" velocity_max="0.0" damping_rot="0.10000000149011612" inertia_tensor="0.4000000059604645" lock_trans_y="False" friction_x="1.0" physics_type="STATIC" anisotropic_friction="False" lock_rot_x="False" name="green_tree" lock_trans_z="False" friction_y="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_rot_y="False" lock_rot_z="False" />
+      <entity lock_rot_x="False" lock_trans_x="False" friction_x="1.0" velocity_max="0.0" friction_z="1.0" anisotropic_friction="False" actor="False" lock_trans_z="False" damping_trans="0.03999999910593033" damping_rot="0.10000000149011612" friction_y="1.0" collisionPrim="cylinder" mass="1.0" lock_trans_y="False" lock_rot_y="False" meshFile="green_tree.mesh" name="green_tree" inertia_tensor="0.4000000059604645" physics_type="STATIC" velocity_min="0.0" ghost="False" lock_rot_z="False" mass_radius="1.0" />
     </node>
     <node name="green_tree.031" >
-      <position x="-0.300000" y="0.000000" z="0.200000" />
-      <rotation qw="1.000000" qx="0.000000" qz="-0.000000" qy="0.000000" />
-      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <position x="-0.300000" z="0.200000" y="0.000000" />
+      <rotation qx="0.000000" qy="0.000000" qw="1.000000" qz="-0.000000" />
+      <scale x="1.000000" z="1.000000" y="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity mass_radius="1.0" mass="1.0" meshFile="green_tree.mesh" actor="False" lock_trans_x="False" velocity_min="0.0" collisionPrim="cylinder" ghost="False" velocity_max="0.0" damping_rot="0.10000000149011612" inertia_tensor="0.4000000059604645" lock_trans_y="False" friction_x="1.0" physics_type="STATIC" anisotropic_friction="False" lock_rot_x="False" name="green_tree" lock_trans_z="False" friction_y="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_rot_y="False" lock_rot_z="False" />
+      <entity lock_rot_x="False" lock_trans_x="False" friction_x="1.0" velocity_max="0.0" friction_z="1.0" anisotropic_friction="False" actor="False" lock_trans_z="False" damping_trans="0.03999999910593033" damping_rot="0.10000000149011612" friction_y="1.0" collisionPrim="cylinder" mass="1.0" lock_trans_y="False" lock_rot_y="False" meshFile="green_tree.mesh" name="green_tree" inertia_tensor="0.4000000059604645" physics_type="STATIC" velocity_min="0.0" ghost="False" lock_rot_z="False" mass_radius="1.0" />
     </node>
     <node name="green_tree.030" >
-      <position x="-0.600000" y="0.000000" z="0.200000" />
-      <rotation qw="1.000000" qx="0.000000" qz="-0.000000" qy="0.000000" />
-      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <position x="-0.600000" z="0.200000" y="0.000000" />
+      <rotation qx="0.000000" qy="0.000000" qw="1.000000" qz="-0.000000" />
+      <scale x="1.000000" z="1.000000" y="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity mass_radius="1.0" mass="1.0" meshFile="green_tree.mesh" actor="False" lock_trans_x="False" velocity_min="0.0" collisionPrim="cylinder" ghost="False" velocity_max="0.0" damping_rot="0.10000000149011612" inertia_tensor="0.4000000059604645" lock_trans_y="False" friction_x="1.0" physics_type="STATIC" anisotropic_friction="False" lock_rot_x="False" name="green_tree" lock_trans_z="False" friction_y="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_rot_y="False" lock_rot_z="False" />
+      <entity lock_rot_x="False" lock_trans_x="False" friction_x="1.0" velocity_max="0.0" friction_z="1.0" anisotropic_friction="False" actor="False" lock_trans_z="False" damping_trans="0.03999999910593033" damping_rot="0.10000000149011612" friction_y="1.0" collisionPrim="cylinder" mass="1.0" lock_trans_y="False" lock_rot_y="False" meshFile="green_tree.mesh" name="green_tree" inertia_tensor="0.4000000059604645" physics_type="STATIC" velocity_min="0.0" ghost="False" lock_rot_z="False" mass_radius="1.0" />
     </node>
     <node name="green_tree.029" >
-      <position x="-0.300000" y="0.000000" z="-0.400000" />
-      <rotation qw="1.000000" qx="0.000000" qz="-0.000000" qy="0.000000" />
-      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <position x="-0.300000" z="-0.400000" y="0.000000" />
+      <rotation qx="0.000000" qy="0.000000" qw="1.000000" qz="-0.000000" />
+      <scale x="1.000000" z="1.000000" y="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity mass_radius="1.0" mass="1.0" meshFile="green_tree.mesh" actor="False" lock_trans_x="False" velocity_min="0.0" collisionPrim="cylinder" ghost="False" velocity_max="0.0" damping_rot="0.10000000149011612" inertia_tensor="0.4000000059604645" lock_trans_y="False" friction_x="1.0" physics_type="STATIC" anisotropic_friction="False" lock_rot_x="False" name="green_tree" lock_trans_z="False" friction_y="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_rot_y="False" lock_rot_z="False" />
+      <entity lock_rot_x="False" lock_trans_x="False" friction_x="1.0" velocity_max="0.0" friction_z="1.0" anisotropic_friction="False" actor="False" lock_trans_z="False" damping_trans="0.03999999910593033" damping_rot="0.10000000149011612" friction_y="1.0" collisionPrim="cylinder" mass="1.0" lock_trans_y="False" lock_rot_y="False" meshFile="green_tree.mesh" name="green_tree" inertia_tensor="0.4000000059604645" physics_type="STATIC" velocity_min="0.0" ghost="False" lock_rot_z="False" mass_radius="1.0" />
     </node>
     <node name="green_tree.028" >
-      <position x="-0.150000" y="0.000000" z="0.500000" />
-      <rotation qw="1.000000" qx="0.000000" qz="-0.000000" qy="0.000000" />
-      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <position x="-0.150000" z="0.500000" y="0.000000" />
+      <rotation qx="0.000000" qy="0.000000" qw="1.000000" qz="-0.000000" />
+      <scale x="1.000000" z="1.000000" y="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity mass_radius="1.0" mass="1.0" meshFile="green_tree.mesh" actor="False" lock_trans_x="False" velocity_min="0.0" collisionPrim="cylinder" ghost="False" velocity_max="0.0" damping_rot="0.10000000149011612" inertia_tensor="0.4000000059604645" lock_trans_y="False" friction_x="1.0" physics_type="STATIC" anisotropic_friction="False" lock_rot_x="False" name="green_tree" lock_trans_z="False" friction_y="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_rot_y="False" lock_rot_z="False" />
+      <entity lock_rot_x="False" lock_trans_x="False" friction_x="1.0" velocity_max="0.0" friction_z="1.0" anisotropic_friction="False" actor="False" lock_trans_z="False" damping_trans="0.03999999910593033" damping_rot="0.10000000149011612" friction_y="1.0" collisionPrim="cylinder" mass="1.0" lock_trans_y="False" lock_rot_y="False" meshFile="green_tree.mesh" name="green_tree" inertia_tensor="0.4000000059604645" physics_type="STATIC" velocity_min="0.0" ghost="False" lock_rot_z="False" mass_radius="1.0" />
     </node>
     <node name="green_tree.027" >
-      <position x="-0.450000" y="0.000000" z="0.500000" />
-      <rotation qw="1.000000" qx="0.000000" qz="-0.000000" qy="0.000000" />
-      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <position x="-0.450000" z="0.500000" y="0.000000" />
+      <rotation qx="0.000000" qy="0.000000" qw="1.000000" qz="-0.000000" />
+      <scale x="1.000000" z="1.000000" y="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity mass_radius="1.0" mass="1.0" meshFile="green_tree.mesh" actor="False" lock_trans_x="False" velocity_min="0.0" collisionPrim="cylinder" ghost="False" velocity_max="0.0" damping_rot="0.10000000149011612" inertia_tensor="0.4000000059604645" lock_trans_y="False" friction_x="1.0" physics_type="STATIC" anisotropic_friction="False" lock_rot_x="False" name="green_tree" lock_trans_z="False" friction_y="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_rot_y="False" lock_rot_z="False" />
+      <entity lock_rot_x="False" lock_trans_x="False" friction_x="1.0" velocity_max="0.0" friction_z="1.0" anisotropic_friction="False" actor="False" lock_trans_z="False" damping_trans="0.03999999910593033" damping_rot="0.10000000149011612" friction_y="1.0" collisionPrim="cylinder" mass="1.0" lock_trans_y="False" lock_rot_y="False" meshFile="green_tree.mesh" name="green_tree" inertia_tensor="0.4000000059604645" physics_type="STATIC" velocity_min="0.0" ghost="False" lock_rot_z="False" mass_radius="1.0" />
     </node>
     <node name="green_tree.026" >
-      <position x="-0.750000" y="0.000000" z="0.500000" />
-      <rotation qw="1.000000" qx="0.000000" qz="-0.000000" qy="0.000000" />
-      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <position x="-0.750000" z="0.500000" y="0.000000" />
+      <rotation qx="0.000000" qy="0.000000" qw="1.000000" qz="-0.000000" />
+      <scale x="1.000000" z="1.000000" y="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity mass_radius="1.0" mass="1.0" meshFile="green_tree.mesh" actor="False" lock_trans_x="False" velocity_min="0.0" collisionPrim="cylinder" ghost="False" velocity_max="0.0" damping_rot="0.10000000149011612" inertia_tensor="0.4000000059604645" lock_trans_y="False" friction_x="1.0" physics_type="STATIC" anisotropic_friction="False" lock_rot_x="False" name="green_tree" lock_trans_z="False" friction_y="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_rot_y="False" lock_rot_z="False" />
+      <entity lock_rot_x="False" lock_trans_x="False" friction_x="1.0" velocity_max="0.0" friction_z="1.0" anisotropic_friction="False" actor="False" lock_trans_z="False" damping_trans="0.03999999910593033" damping_rot="0.10000000149011612" friction_y="1.0" collisionPrim="cylinder" mass="1.0" lock_trans_y="False" lock_rot_y="False" meshFile="green_tree.mesh" name="green_tree" inertia_tensor="0.4000000059604645" physics_type="STATIC" velocity_min="0.0" ghost="False" lock_rot_z="False" mass_radius="1.0" />
     </node>
     <node name="green_tree.025" >
-      <position x="-0.450000" y="0.000000" z="-0.100000" />
-      <rotation qw="1.000000" qx="0.000000" qz="-0.000000" qy="0.000000" />
-      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <position x="-0.450000" z="-0.100000" y="0.000000" />
+      <rotation qx="0.000000" qy="0.000000" qw="1.000000" qz="-0.000000" />
+      <scale x="1.000000" z="1.000000" y="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity mass_radius="1.0" mass="1.0" meshFile="green_tree.mesh" actor="False" lock_trans_x="False" velocity_min="0.0" collisionPrim="cylinder" ghost="False" velocity_max="0.0" damping_rot="0.10000000149011612" inertia_tensor="0.4000000059604645" lock_trans_y="False" friction_x="1.0" physics_type="STATIC" anisotropic_friction="False" lock_rot_x="False" name="green_tree" lock_trans_z="False" friction_y="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_rot_y="False" lock_rot_z="False" />
+      <entity lock_rot_x="False" lock_trans_x="False" friction_x="1.0" velocity_max="0.0" friction_z="1.0" anisotropic_friction="False" actor="False" lock_trans_z="False" damping_trans="0.03999999910593033" damping_rot="0.10000000149011612" friction_y="1.0" collisionPrim="cylinder" mass="1.0" lock_trans_y="False" lock_rot_y="False" meshFile="green_tree.mesh" name="green_tree" inertia_tensor="0.4000000059604645" physics_type="STATIC" velocity_min="0.0" ghost="False" lock_rot_z="False" mass_radius="1.0" />
     </node>
     <node name="green_tree.024" >
-      <position x="-0.150000" y="0.000000" z="-0.100000" />
-      <rotation qw="1.000000" qx="0.000000" qz="-0.000000" qy="0.000000" />
-      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <position x="-0.150000" z="-0.100000" y="0.000000" />
+      <rotation qx="0.000000" qy="0.000000" qw="1.000000" qz="-0.000000" />
+      <scale x="1.000000" z="1.000000" y="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity mass_radius="1.0" mass="1.0" meshFile="green_tree.mesh" actor="False" lock_trans_x="False" velocity_min="0.0" collisionPrim="cylinder" ghost="False" velocity_max="0.0" damping_rot="0.10000000149011612" inertia_tensor="0.4000000059604645" lock_trans_y="False" friction_x="1.0" physics_type="STATIC" anisotropic_friction="False" lock_rot_x="False" name="green_tree" lock_trans_z="False" friction_y="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_rot_y="False" lock_rot_z="False" />
+      <entity lock_rot_x="False" lock_trans_x="False" friction_x="1.0" velocity_max="0.0" friction_z="1.0" anisotropic_friction="False" actor="False" lock_trans_z="False" damping_trans="0.03999999910593033" damping_rot="0.10000000149011612" friction_y="1.0" collisionPrim="cylinder" mass="1.0" lock_trans_y="False" lock_rot_y="False" meshFile="green_tree.mesh" name="green_tree" inertia_tensor="0.4000000059604645" physics_type="STATIC" velocity_min="0.0" ghost="False" lock_rot_z="False" mass_radius="1.0" />
     </node>
     <node name="green_tree.023" >
-      <position x="0.150000" y="0.000000" z="-0.100000" />
-      <rotation qw="1.000000" qx="0.000000" qz="-0.000000" qy="0.000000" />
-      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <position x="0.150000" z="-0.100000" y="0.000000" />
+      <rotation qx="0.000000" qy="0.000000" qw="1.000000" qz="-0.000000" />
+      <scale x="1.000000" z="1.000000" y="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity mass_radius="1.0" mass="1.0" meshFile="green_tree.mesh" actor="False" lock_trans_x="False" velocity_min="0.0" collisionPrim="cylinder" ghost="False" velocity_max="0.0" damping_rot="0.10000000149011612" inertia_tensor="0.4000000059604645" lock_trans_y="False" friction_x="1.0" physics_type="STATIC" anisotropic_friction="False" lock_rot_x="False" name="green_tree" lock_trans_z="False" friction_y="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_rot_y="False" lock_rot_z="False" />
+      <entity lock_rot_x="False" lock_trans_x="False" friction_x="1.0" velocity_max="0.0" friction_z="1.0" anisotropic_friction="False" actor="False" lock_trans_z="False" damping_trans="0.03999999910593033" damping_rot="0.10000000149011612" friction_y="1.0" collisionPrim="cylinder" mass="1.0" lock_trans_y="False" lock_rot_y="False" meshFile="green_tree.mesh" name="green_tree" inertia_tensor="0.4000000059604645" physics_type="STATIC" velocity_min="0.0" ghost="False" lock_rot_z="False" mass_radius="1.0" />
     </node>
     <node name="green_tree.022" >
-      <position x="0.150000" y="0.000000" z="-0.700000" />
-      <rotation qw="1.000000" qx="0.000000" qz="-0.000000" qy="0.000000" />
-      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <position x="0.150000" z="-0.700000" y="0.000000" />
+      <rotation qx="0.000000" qy="0.000000" qw="1.000000" qz="-0.000000" />
+      <scale x="1.000000" z="1.000000" y="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity mass_radius="1.0" mass="1.0" meshFile="green_tree.mesh" actor="False" lock_trans_x="False" velocity_min="0.0" collisionPrim="cylinder" ghost="False" velocity_max="0.0" damping_rot="0.10000000149011612" inertia_tensor="0.4000000059604645" lock_trans_y="False" friction_x="1.0" physics_type="STATIC" anisotropic_friction="False" lock_rot_x="False" name="green_tree" lock_trans_z="False" friction_y="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_rot_y="False" lock_rot_z="False" />
+      <entity lock_rot_x="False" lock_trans_x="False" friction_x="1.0" velocity_max="0.0" friction_z="1.0" anisotropic_friction="False" actor="False" lock_trans_z="False" damping_trans="0.03999999910593033" damping_rot="0.10000000149011612" friction_y="1.0" collisionPrim="cylinder" mass="1.0" lock_trans_y="False" lock_rot_y="False" meshFile="green_tree.mesh" name="green_tree" inertia_tensor="0.4000000059604645" physics_type="STATIC" velocity_min="0.0" ghost="False" lock_rot_z="False" mass_radius="1.0" />
     </node>
     <node name="green_tree.021" >
-      <position x="-0.150000" y="0.000000" z="-0.700000" />
-      <rotation qw="1.000000" qx="0.000000" qz="-0.000000" qy="0.000000" />
-      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <position x="-0.150000" z="-0.700000" y="0.000000" />
+      <rotation qx="0.000000" qy="0.000000" qw="1.000000" qz="-0.000000" />
+      <scale x="1.000000" z="1.000000" y="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity mass_radius="1.0" mass="1.0" meshFile="green_tree.mesh" actor="False" lock_trans_x="False" velocity_min="0.0" collisionPrim="cylinder" ghost="False" velocity_max="0.0" damping_rot="0.10000000149011612" inertia_tensor="0.4000000059604645" lock_trans_y="False" friction_x="1.0" physics_type="STATIC" anisotropic_friction="False" lock_rot_x="False" name="green_tree" lock_trans_z="False" friction_y="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_rot_y="False" lock_rot_z="False" />
+      <entity lock_rot_x="False" lock_trans_x="False" friction_x="1.0" velocity_max="0.0" friction_z="1.0" anisotropic_friction="False" actor="False" lock_trans_z="False" damping_trans="0.03999999910593033" damping_rot="0.10000000149011612" friction_y="1.0" collisionPrim="cylinder" mass="1.0" lock_trans_y="False" lock_rot_y="False" meshFile="green_tree.mesh" name="green_tree" inertia_tensor="0.4000000059604645" physics_type="STATIC" velocity_min="0.0" ghost="False" lock_rot_z="False" mass_radius="1.0" />
     </node>
     <node name="green_tree.020" >
-      <position x="-0.450000" y="0.000000" z="-0.700000" />
-      <rotation qw="1.000000" qx="0.000000" qz="-0.000000" qy="0.000000" />
-      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <position x="-0.450000" z="-0.700000" y="0.000000" />
+      <rotation qx="0.000000" qy="0.000000" qw="1.000000" qz="-0.000000" />
+      <scale x="1.000000" z="1.000000" y="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity mass_radius="1.0" mass="1.0" meshFile="green_tree.mesh" actor="False" lock_trans_x="False" velocity_min="0.0" collisionPrim="cylinder" ghost="False" velocity_max="0.0" damping_rot="0.10000000149011612" inertia_tensor="0.4000000059604645" lock_trans_y="False" friction_x="1.0" physics_type="STATIC" anisotropic_friction="False" lock_rot_x="False" name="green_tree" lock_trans_z="False" friction_y="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_rot_y="False" lock_rot_z="False" />
+      <entity lock_rot_x="False" lock_trans_x="False" friction_x="1.0" velocity_max="0.0" friction_z="1.0" anisotropic_friction="False" actor="False" lock_trans_z="False" damping_trans="0.03999999910593033" damping_rot="0.10000000149011612" friction_y="1.0" collisionPrim="cylinder" mass="1.0" lock_trans_y="False" lock_rot_y="False" meshFile="green_tree.mesh" name="green_tree" inertia_tensor="0.4000000059604645" physics_type="STATIC" velocity_min="0.0" ghost="False" lock_rot_z="False" mass_radius="1.0" />
     </node>
     <node name="green_tree.019" >
-      <position x="0.700000" y="0.000000" z="-0.300000" />
-      <rotation qw="1.000000" qx="0.000000" qz="-0.000000" qy="0.000000" />
-      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <position x="0.700000" z="-0.300000" y="0.000000" />
+      <rotation qx="0.000000" qy="0.000000" qw="1.000000" qz="-0.000000" />
+      <scale x="1.000000" z="1.000000" y="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity mass_radius="1.0" mass="1.0" meshFile="green_tree.mesh" actor="False" lock_trans_x="False" velocity_min="0.0" collisionPrim="cylinder" ghost="False" velocity_max="0.0" damping_rot="0.10000000149011612" inertia_tensor="0.4000000059604645" lock_trans_y="False" friction_x="1.0" physics_type="STATIC" anisotropic_friction="False" lock_rot_x="False" name="green_tree" lock_trans_z="False" friction_y="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_rot_y="False" lock_rot_z="False" />
+      <entity lock_rot_x="False" lock_trans_x="False" friction_x="1.0" velocity_max="0.0" friction_z="1.0" anisotropic_friction="False" actor="False" lock_trans_z="False" damping_trans="0.03999999910593033" damping_rot="0.10000000149011612" friction_y="1.0" collisionPrim="cylinder" mass="1.0" lock_trans_y="False" lock_rot_y="False" meshFile="green_tree.mesh" name="green_tree" inertia_tensor="0.4000000059604645" physics_type="STATIC" velocity_min="0.0" ghost="False" lock_rot_z="False" mass_radius="1.0" />
     </node>
     <node name="green_tree.018" >
-      <position x="-0.000000" y="0.000000" z="-1.600000" />
-      <rotation qw="1.000000" qx="0.000000" qz="-0.000000" qy="0.000000" />
-      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <position x="-0.000000" z="-1.600000" y="0.000000" />
+      <rotation qx="0.000000" qy="0.000000" qw="1.000000" qz="-0.000000" />
+      <scale x="1.000000" z="1.000000" y="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity mass_radius="1.0" mass="1.0" meshFile="green_tree.mesh" actor="False" lock_trans_x="False" velocity_min="0.0" collisionPrim="cylinder" ghost="False" velocity_max="0.0" damping_rot="0.10000000149011612" inertia_tensor="0.4000000059604645" lock_trans_y="False" friction_x="1.0" physics_type="NO_COLLISION" anisotropic_friction="False" lock_rot_x="False" name="green_tree" lock_trans_z="False" friction_y="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_rot_y="False" lock_rot_z="False" />
+      <entity lock_rot_x="False" lock_trans_x="False" friction_x="1.0" velocity_max="0.0" friction_z="1.0" anisotropic_friction="False" actor="False" lock_trans_z="False" damping_trans="0.03999999910593033" damping_rot="0.10000000149011612" friction_y="1.0" collisionPrim="cylinder" mass="1.0" lock_trans_y="False" lock_rot_y="False" meshFile="green_tree.mesh" name="green_tree" inertia_tensor="0.4000000059604645" physics_type="NO_COLLISION" velocity_min="0.0" ghost="False" lock_rot_z="False" mass_radius="1.0" />
     </node>
     <node name="green_tree.017" >
-      <position x="0.600000" y="0.000000" z="-1.600000" />
-      <rotation qw="1.000000" qx="0.000000" qz="-0.000000" qy="0.000000" />
-      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <position x="0.600000" z="-1.600000" y="0.000000" />
+      <rotation qx="0.000000" qy="0.000000" qw="1.000000" qz="-0.000000" />
+      <scale x="1.000000" z="1.000000" y="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity mass_radius="1.0" mass="1.0" meshFile="green_tree.mesh" actor="False" lock_trans_x="False" velocity_min="0.0" collisionPrim="cylinder" ghost="False" velocity_max="0.0" damping_rot="0.10000000149011612" inertia_tensor="0.4000000059604645" lock_trans_y="False" friction_x="1.0" physics_type="NO_COLLISION" anisotropic_friction="False" lock_rot_x="False" name="green_tree" lock_trans_z="False" friction_y="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_rot_y="False" lock_rot_z="False" />
+      <entity lock_rot_x="False" lock_trans_x="False" friction_x="1.0" velocity_max="0.0" friction_z="1.0" anisotropic_friction="False" actor="False" lock_trans_z="False" damping_trans="0.03999999910593033" damping_rot="0.10000000149011612" friction_y="1.0" collisionPrim="cylinder" mass="1.0" lock_trans_y="False" lock_rot_y="False" meshFile="green_tree.mesh" name="green_tree" inertia_tensor="0.4000000059604645" physics_type="NO_COLLISION" velocity_min="0.0" ghost="False" lock_rot_z="False" mass_radius="1.0" />
     </node>
     <node name="green_tree.016" >
-      <position x="0.300000" y="0.000000" z="-1.600000" />
-      <rotation qw="1.000000" qx="0.000000" qz="-0.000000" qy="0.000000" />
-      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <position x="0.300000" z="-1.600000" y="0.000000" />
+      <rotation qx="0.000000" qy="0.000000" qw="1.000000" qz="-0.000000" />
+      <scale x="1.000000" z="1.000000" y="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity mass_radius="1.0" mass="1.0" meshFile="green_tree.mesh" actor="False" lock_trans_x="False" velocity_min="0.0" collisionPrim="cylinder" ghost="False" velocity_max="0.0" damping_rot="0.10000000149011612" inertia_tensor="0.4000000059604645" lock_trans_y="False" friction_x="1.0" physics_type="NO_COLLISION" anisotropic_friction="False" lock_rot_x="False" name="green_tree" lock_trans_z="False" friction_y="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_rot_y="False" lock_rot_z="False" />
+      <entity lock_rot_x="False" lock_trans_x="False" friction_x="1.0" velocity_max="0.0" friction_z="1.0" anisotropic_friction="False" actor="False" lock_trans_z="False" damping_trans="0.03999999910593033" damping_rot="0.10000000149011612" friction_y="1.0" collisionPrim="cylinder" mass="1.0" lock_trans_y="False" lock_rot_y="False" meshFile="green_tree.mesh" name="green_tree" inertia_tensor="0.4000000059604645" physics_type="NO_COLLISION" velocity_min="0.0" ghost="False" lock_rot_z="False" mass_radius="1.0" />
     </node>
     <node name="green_tree.015" >
-      <position x="-0.150000" y="0.000000" z="-1.300000" />
-      <rotation qw="1.000000" qx="0.000000" qz="-0.000000" qy="0.000000" />
-      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <position x="-0.150000" z="-1.300000" y="0.000000" />
+      <rotation qx="0.000000" qy="0.000000" qw="1.000000" qz="-0.000000" />
+      <scale x="1.000000" z="1.000000" y="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity mass_radius="1.0" mass="1.0" meshFile="green_tree.mesh" actor="False" lock_trans_x="False" velocity_min="0.0" collisionPrim="cylinder" ghost="False" velocity_max="0.0" damping_rot="0.10000000149011612" inertia_tensor="0.4000000059604645" lock_trans_y="False" friction_x="1.0" physics_type="STATIC" anisotropic_friction="False" lock_rot_x="False" name="green_tree" lock_trans_z="False" friction_y="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_rot_y="False" lock_rot_z="False" />
+      <entity lock_rot_x="False" lock_trans_x="False" friction_x="1.0" velocity_max="0.0" friction_z="1.0" anisotropic_friction="False" actor="False" lock_trans_z="False" damping_trans="0.03999999910593033" damping_rot="0.10000000149011612" friction_y="1.0" collisionPrim="cylinder" mass="1.0" lock_trans_y="False" lock_rot_y="False" meshFile="green_tree.mesh" name="green_tree" inertia_tensor="0.4000000059604645" physics_type="STATIC" velocity_min="0.0" ghost="False" lock_rot_z="False" mass_radius="1.0" />
     </node>
     <node name="green_tree.014" >
-      <position x="0.150000" y="0.000000" z="-1.300000" />
-      <rotation qw="1.000000" qx="0.000000" qz="-0.000000" qy="0.000000" />
-      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <position x="0.150000" z="-1.300000" y="0.000000" />
+      <rotation qx="0.000000" qy="0.000000" qw="1.000000" qz="-0.000000" />
+      <scale x="1.000000" z="1.000000" y="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity mass_radius="1.0" mass="1.0" meshFile="green_tree.mesh" actor="False" lock_trans_x="False" velocity_min="0.0" collisionPrim="cylinder" ghost="False" velocity_max="0.0" damping_rot="0.10000000149011612" inertia_tensor="0.4000000059604645" lock_trans_y="False" friction_x="1.0" physics_type="STATIC" anisotropic_friction="False" lock_rot_x="False" name="green_tree" lock_trans_z="False" friction_y="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_rot_y="False" lock_rot_z="False" />
+      <entity lock_rot_x="False" lock_trans_x="False" friction_x="1.0" velocity_max="0.0" friction_z="1.0" anisotropic_friction="False" actor="False" lock_trans_z="False" damping_trans="0.03999999910593033" damping_rot="0.10000000149011612" friction_y="1.0" collisionPrim="cylinder" mass="1.0" lock_trans_y="False" lock_rot_y="False" meshFile="green_tree.mesh" name="green_tree" inertia_tensor="0.4000000059604645" physics_type="STATIC" velocity_min="0.0" ghost="False" lock_rot_z="False" mass_radius="1.0" />
     </node>
     <node name="green_tree.012" >
-      <position x="0.450000" y="0.000000" z="-1.300000" />
-      <rotation qw="1.000000" qx="0.000000" qz="-0.000000" qy="0.000000" />
-      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <position x="0.450000" z="-1.300000" y="0.000000" />
+      <rotation qx="0.000000" qy="0.000000" qw="1.000000" qz="-0.000000" />
+      <scale x="1.000000" z="1.000000" y="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity mass_radius="1.0" mass="1.0" meshFile="green_tree.mesh" actor="False" lock_trans_x="False" velocity_min="0.0" collisionPrim="cylinder" ghost="False" velocity_max="0.0" damping_rot="0.10000000149011612" inertia_tensor="0.4000000059604645" lock_trans_y="False" friction_x="1.0" physics_type="STATIC" anisotropic_friction="False" lock_rot_x="False" name="green_tree" lock_trans_z="False" friction_y="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_rot_y="False" lock_rot_z="False" />
+      <entity lock_rot_x="False" lock_trans_x="False" friction_x="1.0" velocity_max="0.0" friction_z="1.0" anisotropic_friction="False" actor="False" lock_trans_z="False" damping_trans="0.03999999910593033" damping_rot="0.10000000149011612" friction_y="1.0" collisionPrim="cylinder" mass="1.0" lock_trans_y="False" lock_rot_y="False" meshFile="green_tree.mesh" name="green_tree" inertia_tensor="0.4000000059604645" physics_type="STATIC" velocity_min="0.0" ghost="False" lock_rot_z="False" mass_radius="1.0" />
     </node>
     <node name="green_tree.010" >
-      <position x="0.600000" y="0.000000" z="-1.000000" />
-      <rotation qw="1.000000" qx="0.000000" qz="-0.000000" qy="0.000000" />
-      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <position x="0.600000" z="-1.000000" y="0.000000" />
+      <rotation qx="0.000000" qy="0.000000" qw="1.000000" qz="-0.000000" />
+      <scale x="1.000000" z="1.000000" y="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity mass_radius="1.0" mass="1.0" meshFile="green_tree.mesh" actor="False" lock_trans_x="False" velocity_min="0.0" collisionPrim="cylinder" ghost="False" velocity_max="0.0" damping_rot="0.10000000149011612" inertia_tensor="0.4000000059604645" lock_trans_y="False" friction_x="1.0" physics_type="STATIC" anisotropic_friction="False" lock_rot_x="False" name="green_tree" lock_trans_z="False" friction_y="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_rot_y="False" lock_rot_z="False" />
+      <entity lock_rot_x="False" lock_trans_x="False" friction_x="1.0" velocity_max="0.0" friction_z="1.0" anisotropic_friction="False" actor="False" lock_trans_z="False" damping_trans="0.03999999910593033" damping_rot="0.10000000149011612" friction_y="1.0" collisionPrim="cylinder" mass="1.0" lock_trans_y="False" lock_rot_y="False" meshFile="green_tree.mesh" name="green_tree" inertia_tensor="0.4000000059604645" physics_type="STATIC" velocity_min="0.0" ghost="False" lock_rot_z="False" mass_radius="1.0" />
     </node>
     <node name="green_tree.009" >
-      <position x="1.350000" y="0.000000" z="-1.300000" />
-      <rotation qw="1.000000" qx="0.000000" qz="-0.000000" qy="0.000000" />
-      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <position x="1.350000" z="-1.300000" y="0.000000" />
+      <rotation qx="0.000000" qy="0.000000" qw="1.000000" qz="-0.000000" />
+      <scale x="1.000000" z="1.000000" y="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity mass_radius="1.0" mass="1.0" meshFile="green_tree.mesh" actor="False" lock_trans_x="False" velocity_min="0.0" collisionPrim="cylinder" ghost="False" velocity_max="0.0" damping_rot="0.10000000149011612" inertia_tensor="0.4000000059604645" lock_trans_y="False" friction_x="1.0" physics_type="NO_COLLISION" anisotropic_friction="False" lock_rot_x="False" name="green_tree" lock_trans_z="False" friction_y="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_rot_y="False" lock_rot_z="False" />
+      <entity lock_rot_x="False" lock_trans_x="False" friction_x="1.0" velocity_max="0.0" friction_z="1.0" anisotropic_friction="False" actor="False" lock_trans_z="False" damping_trans="0.03999999910593033" damping_rot="0.10000000149011612" friction_y="1.0" collisionPrim="cylinder" mass="1.0" lock_trans_y="False" lock_rot_y="False" meshFile="green_tree.mesh" name="green_tree" inertia_tensor="0.4000000059604645" physics_type="NO_COLLISION" velocity_min="0.0" ghost="False" lock_rot_z="False" mass_radius="1.0" />
     </node>
     <node name="green_tree.008" >
-      <position x="1.350000" y="0.000000" z="-0.700000" />
-      <rotation qw="1.000000" qx="0.000000" qz="-0.000000" qy="0.000000" />
-      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <position x="1.350000" z="-0.700000" y="0.000000" />
+      <rotation qx="0.000000" qy="0.000000" qw="1.000000" qz="-0.000000" />
+      <scale x="1.000000" z="1.000000" y="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity mass_radius="1.0" mass="1.0" meshFile="green_tree.mesh" actor="False" lock_trans_x="False" velocity_min="0.0" collisionPrim="cylinder" ghost="False" velocity_max="0.0" damping_rot="0.10000000149011612" inertia_tensor="0.4000000059604645" lock_trans_y="False" friction_x="1.0" physics_type="STATIC" anisotropic_friction="False" lock_rot_x="False" name="green_tree" lock_trans_z="False" friction_y="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_rot_y="False" lock_rot_z="False" />
+      <entity lock_rot_x="False" lock_trans_x="False" friction_x="1.0" velocity_max="0.0" friction_z="1.0" anisotropic_friction="False" actor="False" lock_trans_z="False" damping_trans="0.03999999910593033" damping_rot="0.10000000149011612" friction_y="1.0" collisionPrim="cylinder" mass="1.0" lock_trans_y="False" lock_rot_y="False" meshFile="green_tree.mesh" name="green_tree" inertia_tensor="0.4000000059604645" physics_type="STATIC" velocity_min="0.0" ghost="False" lock_rot_z="False" mass_radius="1.0" />
     </node>
     <node name="physics_floor" >
-      <position x="0.000000" y="0.000000" z="-0.000000" />
-      <rotation qw="1.000000" qx="0.000000" qz="-0.000000" qy="0.000000" />
-      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <position x="0.000000" z="-0.000000" y="0.000000" />
+      <rotation qx="0.000000" qy="0.000000" qw="1.000000" qz="-0.000000" />
+      <scale x="1.000000" z="1.000000" y="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity mass_radius="1.0" mass="1.0" meshFile="physics_floor.mesh" actor="False" lock_trans_x="False" velocity_min="0.0" collisionPrim="triangle_mesh" ghost="True" velocity_max="0.0" damping_rot="0.10000000149011612" inertia_tensor="0.4000000059604645" lock_trans_y="False" friction_x="1.0" physics_type="STATIC" anisotropic_friction="False" lock_rot_x="False" name="physics_floor" lock_trans_z="False" friction_y="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_rot_y="False" lock_rot_z="False" />
+      <entity lock_rot_x="False" lock_trans_x="False" friction_x="1.0" velocity_max="0.0" friction_z="1.0" anisotropic_friction="False" actor="False" lock_trans_z="False" damping_trans="0.03999999910593033" damping_rot="0.10000000149011612" friction_y="1.0" collisionPrim="triangle_mesh" mass="1.0" lock_trans_y="False" lock_rot_y="False" meshFile="physics_floor.mesh" name="physics_floor" inertia_tensor="0.4000000059604645" physics_type="STATIC" velocity_min="0.0" ghost="True" lock_rot_z="False" mass_radius="1.0" />
     </node>
     <node name="green_tree.007" >
-      <position x="1.500000" y="0.000000" z="-1.600000" />
-      <rotation qw="1.000000" qx="0.000000" qz="-0.000000" qy="0.000000" />
-      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <position x="1.500000" z="-1.600000" y="0.000000" />
+      <rotation qx="0.000000" qy="0.000000" qw="1.000000" qz="-0.000000" />
+      <scale x="1.000000" z="1.000000" y="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity mass_radius="1.0" mass="1.0" meshFile="green_tree.mesh" actor="False" lock_trans_x="False" velocity_min="0.0" collisionPrim="cylinder" ghost="False" velocity_max="0.0" damping_rot="0.10000000149011612" inertia_tensor="0.4000000059604645" lock_trans_y="False" friction_x="1.0" physics_type="NO_COLLISION" anisotropic_friction="False" lock_rot_x="False" name="green_tree" lock_trans_z="False" friction_y="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_rot_y="False" lock_rot_z="False" />
+      <entity lock_rot_x="False" lock_trans_x="False" friction_x="1.0" velocity_max="0.0" friction_z="1.0" anisotropic_friction="False" actor="False" lock_trans_z="False" damping_trans="0.03999999910593033" damping_rot="0.10000000149011612" friction_y="1.0" collisionPrim="cylinder" mass="1.0" lock_trans_y="False" lock_rot_y="False" meshFile="green_tree.mesh" name="green_tree" inertia_tensor="0.4000000059604645" physics_type="NO_COLLISION" velocity_min="0.0" ghost="False" lock_rot_z="False" mass_radius="1.0" />
     </node>
     <node name="green_tree.006" >
-      <position x="0.900000" y="0.000000" z="-1.600000" />
-      <rotation qw="1.000000" qx="0.000000" qz="-0.000000" qy="0.000000" />
-      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <position x="0.900000" z="-1.600000" y="0.000000" />
+      <rotation qx="0.000000" qy="0.000000" qw="1.000000" qz="-0.000000" />
+      <scale x="1.000000" z="1.000000" y="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity mass_radius="1.0" mass="1.0" meshFile="green_tree.mesh" actor="False" lock_trans_x="False" velocity_min="0.0" collisionPrim="cylinder" ghost="False" velocity_max="0.0" damping_rot="0.10000000149011612" inertia_tensor="0.4000000059604645" lock_trans_y="False" friction_x="1.0" physics_type="NO_COLLISION" anisotropic_friction="False" lock_rot_x="False" name="green_tree" lock_trans_z="False" friction_y="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_rot_y="False" lock_rot_z="False" />
+      <entity lock_rot_x="False" lock_trans_x="False" friction_x="1.0" velocity_max="0.0" friction_z="1.0" anisotropic_friction="False" actor="False" lock_trans_z="False" damping_trans="0.03999999910593033" damping_rot="0.10000000149011612" friction_y="1.0" collisionPrim="cylinder" mass="1.0" lock_trans_y="False" lock_rot_y="False" meshFile="green_tree.mesh" name="green_tree" inertia_tensor="0.4000000059604645" physics_type="NO_COLLISION" velocity_min="0.0" ghost="False" lock_rot_z="False" mass_radius="1.0" />
     </node>
     <node name="green_tree.005" >
-      <position x="-0.300000" y="0.000000" z="-1.600000" />
-      <rotation qw="1.000000" qx="0.000000" qz="-0.000000" qy="0.000000" />
-      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <position x="-0.300000" z="-1.600000" y="0.000000" />
+      <rotation qx="0.000000" qy="0.000000" qw="1.000000" qz="-0.000000" />
+      <scale x="1.000000" z="1.000000" y="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity mass_radius="1.0" mass="1.0" meshFile="green_tree.mesh" actor="False" lock_trans_x="False" velocity_min="0.0" collisionPrim="cylinder" ghost="False" velocity_max="0.0" damping_rot="0.10000000149011612" inertia_tensor="0.4000000059604645" lock_trans_y="False" friction_x="1.0" physics_type="STATIC" anisotropic_friction="False" lock_rot_x="False" name="green_tree" lock_trans_z="False" friction_y="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_rot_y="False" lock_rot_z="False" />
+      <entity lock_rot_x="False" lock_trans_x="False" friction_x="1.0" velocity_max="0.0" friction_z="1.0" anisotropic_friction="False" actor="False" lock_trans_z="False" damping_trans="0.03999999910593033" damping_rot="0.10000000149011612" friction_y="1.0" collisionPrim="cylinder" mass="1.0" lock_trans_y="False" lock_rot_y="False" meshFile="green_tree.mesh" name="green_tree" inertia_tensor="0.4000000059604645" physics_type="STATIC" velocity_min="0.0" ghost="False" lock_rot_z="False" mass_radius="1.0" />
     </node>
     <node name="green_tree.004" >
-      <position x="1.200000" y="0.000000" z="-1.600000" />
-      <rotation qw="1.000000" qx="0.000000" qz="-0.000000" qy="0.000000" />
-      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <position x="1.200000" z="-1.600000" y="0.000000" />
+      <rotation qx="0.000000" qy="0.000000" qw="1.000000" qz="-0.000000" />
+      <scale x="1.000000" z="1.000000" y="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity mass_radius="1.0" mass="1.0" meshFile="green_tree.mesh" actor="False" lock_trans_x="False" velocity_min="0.0" collisionPrim="cylinder" ghost="False" velocity_max="0.0" damping_rot="0.10000000149011612" inertia_tensor="0.4000000059604645" lock_trans_y="False" friction_x="1.0" physics_type="NO_COLLISION" anisotropic_friction="False" lock_rot_x="False" name="green_tree" lock_trans_z="False" friction_y="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_rot_y="False" lock_rot_z="False" />
+      <entity lock_rot_x="False" lock_trans_x="False" friction_x="1.0" velocity_max="0.0" friction_z="1.0" anisotropic_friction="False" actor="False" lock_trans_z="False" damping_trans="0.03999999910593033" damping_rot="0.10000000149011612" friction_y="1.0" collisionPrim="cylinder" mass="1.0" lock_trans_y="False" lock_rot_y="False" meshFile="green_tree.mesh" name="green_tree" inertia_tensor="0.4000000059604645" physics_type="NO_COLLISION" velocity_min="0.0" ghost="False" lock_rot_z="False" mass_radius="1.0" />
     </node>
     <node name="green_tree.003" >
-      <position x="1.650000" y="0.000000" z="-1.300000" />
-      <rotation qw="1.000000" qx="0.000000" qz="-0.000000" qy="0.000000" />
-      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <position x="1.650000" z="-1.300000" y="0.000000" />
+      <rotation qx="0.000000" qy="0.000000" qw="1.000000" qz="-0.000000" />
+      <scale x="1.000000" z="1.000000" y="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity mass_radius="1.0" mass="1.0" meshFile="green_tree.mesh" actor="False" lock_trans_x="False" velocity_min="0.0" collisionPrim="cylinder" ghost="False" velocity_max="0.0" damping_rot="0.10000000149011612" inertia_tensor="0.4000000059604645" lock_trans_y="False" friction_x="1.0" physics_type="NO_COLLISION" anisotropic_friction="False" lock_rot_x="False" name="green_tree" lock_trans_z="False" friction_y="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_rot_y="False" lock_rot_z="False" />
+      <entity lock_rot_x="False" lock_trans_x="False" friction_x="1.0" velocity_max="0.0" friction_z="1.0" anisotropic_friction="False" actor="False" lock_trans_z="False" damping_trans="0.03999999910593033" damping_rot="0.10000000149011612" friction_y="1.0" collisionPrim="cylinder" mass="1.0" lock_trans_y="False" lock_rot_y="False" meshFile="green_tree.mesh" name="green_tree" inertia_tensor="0.4000000059604645" physics_type="NO_COLLISION" velocity_min="0.0" ghost="False" lock_rot_z="False" mass_radius="1.0" />
     </node>
     <node name="green_tree.002" >
-      <position x="1.050000" y="0.000000" z="-1.300000" />
-      <rotation qw="1.000000" qx="0.000000" qz="-0.000000" qy="0.000000" />
-      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <position x="1.050000" z="-1.300000" y="0.000000" />
+      <rotation qx="0.000000" qy="0.000000" qw="1.000000" qz="-0.000000" />
+      <scale x="1.000000" z="1.000000" y="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity mass_radius="1.0" mass="1.0" meshFile="green_tree.mesh" actor="False" lock_trans_x="False" velocity_min="0.0" collisionPrim="cylinder" ghost="False" velocity_max="0.0" damping_rot="0.10000000149011612" inertia_tensor="0.4000000059604645" lock_trans_y="False" friction_x="1.0" physics_type="STATIC" anisotropic_friction="False" lock_rot_x="False" name="green_tree" lock_trans_z="False" friction_y="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_rot_y="False" lock_rot_z="False" />
+      <entity lock_rot_x="False" lock_trans_x="False" friction_x="1.0" velocity_max="0.0" friction_z="1.0" anisotropic_friction="False" actor="False" lock_trans_z="False" damping_trans="0.03999999910593033" damping_rot="0.10000000149011612" friction_y="1.0" collisionPrim="cylinder" mass="1.0" lock_trans_y="False" lock_rot_y="False" meshFile="green_tree.mesh" name="green_tree" inertia_tensor="0.4000000059604645" physics_type="STATIC" velocity_min="0.0" ghost="False" lock_rot_z="False" mass_radius="1.0" />
     </node>
     <node name="green_tree.001" >
-      <position x="0.750000" y="0.000000" z="-1.300000" />
-      <rotation qw="1.000000" qx="0.000000" qz="-0.000000" qy="0.000000" />
-      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <position x="0.750000" z="-1.300000" y="0.000000" />
+      <rotation qx="0.000000" qy="0.000000" qw="1.000000" qz="-0.000000" />
+      <scale x="1.000000" z="1.000000" y="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity mass_radius="1.0" mass="1.0" meshFile="green_tree.mesh" actor="False" lock_trans_x="False" velocity_min="0.0" collisionPrim="cylinder" ghost="False" velocity_max="0.0" damping_rot="0.10000000149011612" inertia_tensor="0.4000000059604645" lock_trans_y="False" friction_x="1.0" physics_type="STATIC" anisotropic_friction="False" lock_rot_x="False" name="green_tree" lock_trans_z="False" friction_y="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_rot_y="False" lock_rot_z="False" />
+      <entity lock_rot_x="False" lock_trans_x="False" friction_x="1.0" velocity_max="0.0" friction_z="1.0" anisotropic_friction="False" actor="False" lock_trans_z="False" damping_trans="0.03999999910593033" damping_rot="0.10000000149011612" friction_y="1.0" collisionPrim="cylinder" mass="1.0" lock_trans_y="False" lock_rot_y="False" meshFile="green_tree.mesh" name="green_tree" inertia_tensor="0.4000000059604645" physics_type="STATIC" velocity_min="0.0" ghost="False" lock_rot_z="False" mass_radius="1.0" />
     </node>
     <node name="green_tree.013" >
-      <position x="1.650000" y="0.000000" z="-0.700000" />
-      <rotation qw="1.000000" qx="0.000000" qz="-0.000000" qy="0.000000" />
-      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <position x="1.650000" z="-0.700000" y="0.000000" />
+      <rotation qx="0.000000" qy="0.000000" qw="1.000000" qz="-0.000000" />
+      <scale x="1.000000" z="1.000000" y="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity mass_radius="1.0" mass="1.0" meshFile="green_tree.mesh" actor="False" lock_trans_x="False" velocity_min="0.0" collisionPrim="cylinder" ghost="False" velocity_max="0.0" damping_rot="0.10000000149011612" inertia_tensor="0.4000000059604645" lock_trans_y="False" friction_x="1.0" physics_type="STATIC" anisotropic_friction="False" lock_rot_x="False" name="green_tree" lock_trans_z="False" friction_y="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_rot_y="False" lock_rot_z="False" />
+      <entity lock_rot_x="False" lock_trans_x="False" friction_x="1.0" velocity_max="0.0" friction_z="1.0" anisotropic_friction="False" actor="False" lock_trans_z="False" damping_trans="0.03999999910593033" damping_rot="0.10000000149011612" friction_y="1.0" collisionPrim="cylinder" mass="1.0" lock_trans_y="False" lock_rot_y="False" meshFile="green_tree.mesh" name="green_tree" inertia_tensor="0.4000000059604645" physics_type="STATIC" velocity_min="0.0" ghost="False" lock_rot_z="False" mass_radius="1.0" />
     </node>
     <node name="green_tree.011" >
-      <position x="1.500000" y="0.000000" z="-1.000000" />
-      <rotation qw="1.000000" qx="0.000000" qz="-0.000000" qy="0.000000" />
-      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <position x="1.500000" z="-1.000000" y="0.000000" />
+      <rotation qx="0.000000" qy="0.000000" qw="1.000000" qz="-0.000000" />
+      <scale x="1.000000" z="1.000000" y="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity mass_radius="1.0" mass="1.0" meshFile="green_tree.mesh" actor="False" lock_trans_x="False" velocity_min="0.0" collisionPrim="cylinder" ghost="False" velocity_max="0.0" damping_rot="0.10000000149011612" inertia_tensor="0.4000000059604645" lock_trans_y="False" friction_x="1.0" physics_type="NO_COLLISION" anisotropic_friction="False" lock_rot_x="False" name="green_tree" lock_trans_z="False" friction_y="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_rot_y="False" lock_rot_z="False" />
+      <entity lock_rot_x="False" lock_trans_x="False" friction_x="1.0" velocity_max="0.0" friction_z="1.0" anisotropic_friction="False" actor="False" lock_trans_z="False" damping_trans="0.03999999910593033" damping_rot="0.10000000149011612" friction_y="1.0" collisionPrim="cylinder" mass="1.0" lock_trans_y="False" lock_rot_y="False" meshFile="green_tree.mesh" name="green_tree" inertia_tensor="0.4000000059604645" physics_type="NO_COLLISION" velocity_min="0.0" ghost="False" lock_rot_z="False" mass_radius="1.0" />
     </node>
     <node name="green_tree" >
-      <position x="1.200000" y="0.000000" z="-1.000000" />
-      <rotation qw="1.000000" qx="0.000000" qz="-0.000000" qy="0.000000" />
-      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <position x="1.200000" z="-1.000000" y="0.000000" />
+      <rotation qx="0.000000" qy="0.000000" qw="1.000000" qz="-0.000000" />
+      <scale x="1.000000" z="1.000000" y="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity mass_radius="1.0" mass="1.0" meshFile="green_tree.mesh" actor="False" lock_trans_x="False" velocity_min="0.0" collisionPrim="cylinder" ghost="False" velocity_max="0.0" damping_rot="0.10000000149011612" inertia_tensor="0.4000000059604645" lock_trans_y="False" friction_x="1.0" physics_type="STATIC" anisotropic_friction="False" lock_rot_x="False" name="green_tree" lock_trans_z="False" friction_y="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_rot_y="False" lock_rot_z="False" />
+      <entity lock_rot_x="False" lock_trans_x="False" friction_x="1.0" velocity_max="0.0" friction_z="1.0" anisotropic_friction="False" actor="False" lock_trans_z="False" damping_trans="0.03999999910593033" damping_rot="0.10000000149011612" friction_y="1.0" collisionPrim="cylinder" mass="1.0" lock_trans_y="False" lock_rot_y="False" meshFile="green_tree.mesh" name="green_tree" inertia_tensor="0.4000000059604645" physics_type="STATIC" velocity_min="0.0" ghost="False" lock_rot_z="False" mass_radius="1.0" />
     </node>
     <node name="tree_cut" >
-      <position x="0.200000" y="0.000000" z="0.500000" />
-      <rotation qw="1.000000" qx="0.000000" qz="-0.000000" qy="0.000000" />
-      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <position x="0.200000" z="0.500000" y="0.000000" />
+      <rotation qx="0.000000" qy="0.000000" qw="1.000000" qz="-0.000000" />
+      <scale x="1.000000" z="1.000000" y="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity mass_radius="1.0" mass="1.0" meshFile="tree_cut.mesh" actor="False" lock_trans_x="False" velocity_min="0.0" collisionPrim="cylinder" ghost="False" velocity_max="0.0" damping_rot="0.10000000149011612" inertia_tensor="0.4000000059604645" lock_trans_y="False" friction_x="1.0" physics_type="STATIC" anisotropic_friction="False" lock_rot_x="False" name="tree_cut" lock_trans_z="False" friction_y="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_rot_y="False" lock_rot_z="False" />
+      <entity lock_rot_x="False" lock_trans_x="False" friction_x="1.0" velocity_max="0.0" friction_z="1.0" anisotropic_friction="False" actor="False" lock_trans_z="False" damping_trans="0.03999999910593033" damping_rot="0.10000000149011612" friction_y="1.0" collisionPrim="cylinder" mass="1.0" lock_trans_y="False" lock_rot_y="False" meshFile="tree_cut.mesh" name="tree_cut" inertia_tensor="0.4000000059604645" physics_type="STATIC" velocity_min="0.0" ghost="False" lock_rot_z="False" mass_radius="1.0" />
     </node>
     <node name="flower.001" >
-      <position x="1.026498" y="0.000000" z="-0.773280" />
-      <rotation qw="1.000000" qx="0.000000" qz="-0.000000" qy="0.000000" />
-      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <position x="1.026498" z="-0.773280" y="0.000000" />
+      <rotation qx="0.000000" qy="0.000000" qw="1.000000" qz="-0.000000" />
+      <scale x="1.000000" z="1.000000" y="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity mass_radius="1.0" mass="1.0" meshFile="flower.mesh" actor="False" lock_trans_x="False" velocity_min="0.0" lock_rot_y="False" ghost="False" velocity_max="0.0" damping_rot="0.10000000149011612" inertia_tensor="0.4000000059604645" lock_trans_y="False" friction_x="1.0" physics_type="NO_COLLISION" anisotropic_friction="False" lock_rot_x="False" name="flower" lock_trans_z="False" friction_y="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_rot_z="False" />
+      <entity lock_rot_x="False" lock_trans_x="False" friction_x="1.0" velocity_max="0.0" friction_z="1.0" anisotropic_friction="False" actor="False" lock_trans_z="False" damping_trans="0.03999999910593033" damping_rot="0.10000000149011612" friction_y="1.0" mass="1.0" lock_trans_y="False" lock_rot_y="False" meshFile="flower.mesh" name="flower" inertia_tensor="0.4000000059604645" physics_type="NO_COLLISION" velocity_min="0.0" ghost="False" lock_rot_z="False" mass_radius="1.0" />
     </node>
     <node name="flower.002" >
-      <position x="-0.970986" y="0.000000" z="-1.070413" />
-      <rotation qw="1.000000" qx="0.000000" qz="-0.000000" qy="0.000000" />
-      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <position x="-0.970986" z="-1.070413" y="0.000000" />
+      <rotation qx="0.000000" qy="0.000000" qw="1.000000" qz="-0.000000" />
+      <scale x="1.000000" z="1.000000" y="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity mass_radius="1.0" mass="1.0" meshFile="flower.mesh" actor="False" lock_trans_x="False" velocity_min="0.0" lock_rot_y="False" ghost="False" velocity_max="0.0" damping_rot="0.10000000149011612" inertia_tensor="0.4000000059604645" lock_trans_y="False" friction_x="1.0" physics_type="NO_COLLISION" anisotropic_friction="False" lock_rot_x="False" name="flower" lock_trans_z="False" friction_y="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_rot_z="False" />
+      <entity lock_rot_x="False" lock_trans_x="False" friction_x="1.0" velocity_max="0.0" friction_z="1.0" anisotropic_friction="False" actor="False" lock_trans_z="False" damping_trans="0.03999999910593033" damping_rot="0.10000000149011612" friction_y="1.0" mass="1.0" lock_trans_y="False" lock_rot_y="False" meshFile="flower.mesh" name="flower" inertia_tensor="0.4000000059604645" physics_type="NO_COLLISION" velocity_min="0.0" ghost="False" lock_rot_z="False" mass_radius="1.0" />
     </node>
     <node name="flower.003" >
-      <position x="-0.919266" y="0.000000" z="-1.020413" />
-      <rotation qw="1.000000" qx="0.000000" qz="-0.000000" qy="0.000000" />
-      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <position x="-0.919266" z="-1.020413" y="0.000000" />
+      <rotation qx="0.000000" qy="0.000000" qw="1.000000" qz="-0.000000" />
+      <scale x="1.000000" z="1.000000" y="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity mass_radius="1.0" mass="1.0" meshFile="flower.mesh" actor="False" lock_trans_x="False" velocity_min="0.0" lock_rot_y="False" ghost="False" velocity_max="0.0" damping_rot="0.10000000149011612" inertia_tensor="0.4000000059604645" lock_trans_y="False" friction_x="1.0" physics_type="NO_COLLISION" anisotropic_friction="False" lock_rot_x="False" name="flower" lock_trans_z="False" friction_y="1.0" friction_z="1.0" damping_trans="0.03999999910593033" lock_rot_z="False" />
+      <entity lock_rot_x="False" lock_trans_x="False" friction_x="1.0" velocity_max="0.0" friction_z="1.0" anisotropic_friction="False" actor="False" lock_trans_z="False" damping_trans="0.03999999910593033" damping_rot="0.10000000149011612" friction_y="1.0" mass="1.0" lock_trans_y="False" lock_rot_y="False" meshFile="flower.mesh" name="flower" inertia_tensor="0.4000000059604645" physics_type="NO_COLLISION" velocity_min="0.0" ghost="False" lock_rot_z="False" mass_radius="1.0" />
     </node>
   </nodes>
   <externals />
   <environment >
-    <colourAmbient b="0.0" r="0.0" g="0.0" />
-    <colourDiffuse b="0.05087608844041824" r="0.05087608844041824" g="0.05087608844041824" />
-    <colourBackground b="0.05087608844041824" r="0.05087608844041824" g="0.05087608844041824" />
+    <colourDiffuse g="0.05087608844041824" r="0.05087608844041824" b="0.05087608844041824" />
+    <colourAmbient g="0.0" r="0.0" b="0.0" />
+    <colourBackground g="0.05087608844041824" r="0.05087608844041824" b="0.05087608844041824" />
   </environment>
 </scene>

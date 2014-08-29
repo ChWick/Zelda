@@ -52,6 +52,7 @@ public:
   virtual ~CAerialCameraPerspective();
 
   void updateCamera(float tpf);
+  void renderDebug(Ogre::Real tpf);
 
   bool isCameraInBounds() const {return m_bCameraInBounds;}
 

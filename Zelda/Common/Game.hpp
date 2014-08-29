@@ -41,6 +41,7 @@
 #endif
 
 #include "ShaderGenerator.hpp"
+#include "Message/MessageInjector.hpp"
 #include <OgreWindowEventUtilities.h>
 
 class CGameStateManager;
@@ -49,12 +50,14 @@ class CGame : public CInputListener,
               public Ogre::FrameListener,
               public Ogre::WindowEventListener,
               protected OgreBites::SdkTrayListener,
-              public Ogre::Singleton<CGame> {
+              public Ogre::Singleton<CGame>,
+              public CMessageInjector {
 protected:
   CGameStateManager *m_pGameStateManager;
   Ogre::Viewport *m_pMainViewPort;
 
 private:
+  bool m_bDebugDrawerEnabled;
   std::vector<std::string> m_vAdditionalLevelDirPaths;
 
 #ifdef INCLUDE_RTSHADER_SYSTEM
@@ -163,6 +166,9 @@ protected:
   // Ogre::WindowEventListener
   virtual void windowResized(Ogre::RenderWindow* rw);
   virtual void windowClosed(Ogre::RenderWindow* rw);
+
+  // MessageInjector
+  void sendMessageToAll(const CMessage &message);
 private:
   void createRoot();
   void setup();

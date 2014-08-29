@@ -23,6 +23,7 @@
 CTileTypeIdMap::CTileTypeIdMap() {
   m_Map[TT_GREEN_SOIL_BUSH_SHADOW] = {"soil_green_bush.mesh"};
   m_Map[TT_GREEN_SOIL_STONE_SHADOW] = {"soil_green_stone.mesh"};
+  m_Map[TT_GREEN_SOIL_STONE_PILE_SHADOW] = {"soil_green_stone_pile_shadow.mesh"};
   
   m_Map[TT_GREEN_SOIL] = {"soil_green.mesh"};
   m_Map[TT_GREEN_SOIL_GRASS_BL_BR] = {"soil_green_bush_bl_br.mesh"};

@@ -100,6 +100,11 @@ void CWorld::update(Ogre::Real tpf) {
   }
 }
 
+void CWorld::renderDebug(Ogre::Real tpf) {
+  m_pCameraPerspective->renderDebug(tpf);
+  CGameState::renderDebug(tpf);
+}
+
 bool CWorld::frameRenderingQueued(const Ogre::FrameEvent& evt) {
 
   return true;

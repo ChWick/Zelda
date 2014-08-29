@@ -93,8 +93,9 @@ void CAerialCameraPerspective::updateCamera(float tpf) {
   m_pCamera->setDirection(-vCurrentOffset);
 
   //LOGI("targetPos: x=%f y=%f", vTargetPosition.x, vTargetPosition.z);
+}
 
-
+void CAerialCameraPerspective::renderDebug(Ogre::Real tpf) {
 #ifdef WORLD_DEBUG_CAMERA_BOUNDS
   for (int i = 0; i < RAY_COUNT; i++) {
     Ogre::Ray r = m_pCamera->getCameraToViewportRay(i % 2, i / 2);

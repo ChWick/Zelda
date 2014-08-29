@@ -52,6 +52,7 @@ SObjectTypeData::SObjectTypeData(bool userHandle, const std::string &meshName, c
 CObjectTypeIdMap::CObjectTypeIdMap() {
   m_Map[OBJECT_GREEN_BUSH] = SObjectTypeData(true, "GreenBush.mesh", "soil", TT_GREEN_SOIL_BUSH_SHADOW, TT_GREEN_SOIL_GRASS_BL_BR_TL_TR, GCST_PICKABLE_OBJECT_SPHERE);
   m_Map[OBJECT_LIGHT_STONE] = SObjectTypeData(true, "light_stone.mesh", "soil", TT_GREEN_SOIL_STONE_SHADOW, TT_GREEN_SOIL, GCST_PICKABLE_OBJECT_SPHERE);
+  m_Map[OBJECT_LIGHT_STONE_PILE] = SObjectTypeData(true, "lw_light_stone_pile.mesh", "soil", TT_GREEN_SOIL_STONE_PILE_SHADOW, TT_GREEN_SOIL, GCST_STONE_PILE);
 
   m_Map[OBJECT_GREEN_TREE] = SObjectTypeData(false, "green_tree.mesh", "soil", btVector3(0.75, 1, 0.75));
   

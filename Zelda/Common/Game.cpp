@@ -29,6 +29,7 @@
 #include "GameLogic/GameStateManager.hpp"
 #include "GameLogic/EntityManager.hpp"
 #include "Util/DebugDrawer.hpp"
+#include "Message/MessageDebug.hpp"
 
 #if OGRE_PLATFORM == OGRE_PLATFORM_ANDROID
 #include "Android/Android.hpp"
@@ -53,6 +54,7 @@ CGame &CGame::getSingleton() {
 CGame::CGame(void)
   :
     m_pGameStateManager(NULL),
+    m_bDebugDrawerEnabled(false),
     mRoot(0),
     mCamera(0),
     mSceneMgr(0),
@@ -81,7 +83,10 @@ CGame::~CGame(void) {
   if (CGameInputManager::getSingletonPtr()) {delete CGameInputManager::getSingletonPtr();}
   if (CInputListenerManager::getSingletonPtr()) {delete CInputListenerManager::getSingletonPtr();}
 
-  if (CMessageHandler::getSingletonPtr()) {delete CMessageHandler::getSingletonPtr();}
+  if (CMessageHandler::getSingletonPtr()) {
+    CMessageHandler::getSingleton().removeInjector(this);
+    delete CMessageHandler::getSingletonPtr();
+  }
   if (CEntityManager::getSingletonPtr()) {delete CEntityManager::getSingletonPtr();}
 
   OGRE_DELETE_T(mFSLayer, FileSystemLayer, Ogre::MEMCATEGORY_GENERAL);
@@ -525,6 +530,7 @@ void CGame::createScene() {
   new CEntityManager();
   Ogre::LogManager::getSingletonPtr()->logMessage("    MessageManager ");
   new CMessageHandler();
+  CMessageHandler::getSingleton().addInjector(this);
   Ogre::LogManager::getSingletonPtr()->logMessage("    GameSate ");
   m_pGameStateManager = new CGameStateManager();
   Ogre::LogManager::getSingletonPtr()->logMessage("    GUIManager ");
@@ -597,7 +603,9 @@ bool CGame::frameStarted(const Ogre::FrameEvent& evt) {
 
   m_pGameStateManager->render(evt.timeSinceLastFrame);
 
-  m_pGameStateManager->renderDebug(evt.timeSinceLastFrame);
+  if (m_bDebugDrawerEnabled) {
+    m_pGameStateManager->renderDebug(evt.timeSinceLastFrame);
+  }
   DebugDrawer::getSingleton().build();
 
 
@@ -824,6 +832,16 @@ void CGame::windowResized(Ogre::RenderWindow* rw) {
 //Unattach OIS before window shutdown (very important under Linux)
 void CGame::windowClosed(Ogre::RenderWindow* rw)
 {
+}
+
+// CMessageInjector
+void CGame::sendMessageToAll(const CMessage &message) {
+  if (message.getType() == MSG_DEBUG) {
+    const CMessageDebug &dbg_msg(dynamic_cast<const CMessageDebug &>(message));
+    if (dbg_msg.getDebugType() == CMessageDebug::DM_TOGGLE_DEBUG_DRAWER) {
+      m_bDebugDrawerEnabled = dbg_msg.isActive();
+    }
+  }
 }
 
 #ifdef INCLUDE_RTSHADER_SYSTEM

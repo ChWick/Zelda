@@ -28,6 +28,7 @@ class CMessageDebug: public CMessage {
 public:
   enum EDebugMessageTypes {
     DM_TOGGLE_PHYSICS,
+    DM_TOGGLE_DEBUG_DRAWER,
   };
 protected:
   const EDebugMessageTypes m_eDebugType;

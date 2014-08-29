@@ -23,9 +23,10 @@ def makeLightWorldZip() :
 
 
 	zipf.write('../maps/bush/GreenBush.mesh', 'meshes/GreenBush.mesh', zipfile.ZIP_DEFLATED)
-	zipf.write('../maps/stone/light_stone.mesh', 'meshes/light_stone.mesh', zipfile.ZIP_DEFLATED)
 	zipf.write('../maps/fence/fence_stake.mesh', 'meshes/fence_stake.mesh', zipfile.ZIP_DEFLATED)
 	zipf.write('../maps/fence/fence_plank.mesh', 'meshes/fence_plank.mesh', zipfile.ZIP_DEFLATED)
+
+	copyAllOfType(zipf, '../maps/stone/*.mesh', 'meshes')
 
 	# tiles
 	copyAllOfType(zipf, '../maps/water/*.mesh', 'meshes')
