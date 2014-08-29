@@ -85,7 +85,7 @@ void CPerson::createPhysics() {
     const CPhysicsCollisionObject &pco = m_pMap->getPhysicsManager()->getCollisionShape(GLOBAL_COLLISION_SHAPES_TYPES_ID_MAP.toString(GCST_PERSON_CAPSULE));
     btConvexShape * capsule = dynamic_cast<btConvexShape*>(pco.getShape());
     characterGhostObject->setCollisionShape(capsule);
-    characterGhostObject->setCollisionFlags(getCollisionGroup());
+    //characterGhostObject->setCollisionFlags(getCollisionGroup());
 
     /*// duck setup
     btConvexShape * duck = new btCapsuleShape(characterWidth, characterHeight / 3);

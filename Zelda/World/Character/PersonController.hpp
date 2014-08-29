@@ -23,7 +23,7 @@
 #include "CharacterController.hpp"
 #include "PlayerTool.hpp"
 
-class btCharacterControllerInterface;
+class CharacterControllerPhysics;
 class CPerson;
 class CDamage;
 
@@ -33,6 +33,8 @@ public:
 	enum EMoveState {
 		MS_NOT_MOVING = 0,		//!< Not moving at all
 		MS_NORMAL,				//!< Normal control of moving (call of updateGoalDirection() )
+    MS_RUN_START,
+    MS_RUNNING,
 		MS_MOVE_TO_POINT,		//!< Person will move to the target position (m_vUserData)
 		MS_PUSHED_BACK,			//!< Person is pushed back
 		MS_STUNNED,				//!< The person is stunned
@@ -49,7 +51,7 @@ protected:
 	bool mJumped;									//!< is the person jumping?
 
 
-	btCharacterControllerInterface * mCCPhysics;	//!< pointer to the kinematic character controller
+	CharacterControllerPhysics * mCCPhysics;	//!< pointer to the kinematic character controller
 	CPerson * mCCPerson;							//!< pointer to the person to controll
 	Ogre::Vector3 mGoalDirection;					//!< direction in witch the person wants to walk
 
@@ -85,7 +87,7 @@ public:
 
 	CPerson *getCCPerson() const {return mCCPerson;}
 	Ogre::SceneNode *getBodyNode() const {return mBodyNode;}
-	btCharacterControllerInterface *getCCPhysics() {return mCCPhysics;}
+	CharacterControllerPhysics *getCCPhysics() {return mCCPhysics;}
 
 	virtual void setPosition(const Ogre::Vector3 &vPos);
     virtual void setOrientation(const Ogre::Quaternion &vRotation);
@@ -106,6 +108,9 @@ public:
 
   void stun(const Ogre::Real fTime = std::numeric_limits<Ogre::Real>::max());
 	void moveToTarget(const Ogre::Vector3 &vPos, const Ogre::Real dRadius = 0.1f, const Ogre::Degree &maxDeviationLookDir = Ogre::Degree(5), bool bAddCharCOMHeight = true, const Ogre::Real fMaxDuraion = 10.0f);
+
+  void startRunning();
+  void endRunning();
 
 protected:
 

@@ -24,15 +24,17 @@
 #include "../../Common/Util/DebugDrawer.hpp"
 #include "../../Common/Message/MessageHandler.hpp"
 #include "../../Common/Message/MessageTargetReached.hpp"
+#include "CharacterController_Physics.hpp"
 
 const Ogre::Real DEFAULT_PUSHED_BACK_TIME = 0.1f;
-const Ogre::Real RUN_SPEED = 6; 					//!< constat for the run speed
+const Ogre::Real WALK_SPEED = 6; 					//!< constant for the walk speed
+const Ogre::Real RUN_SPEED = 18;          //!< constant for the run speed
 const Ogre::Real TURN_SPEED = 500;				//!< constant for the turn speed
 
 CPersonController::CPersonController(CPerson * ccPlayer) {
   mCCPerson = ccPlayer;
 
-	mCCPhysics = mCCPerson->getKinematicCharacterController();
+	mCCPhysics = dynamic_cast<CharacterControllerPhysics*>(mCCPerson->getKinematicCharacterController());
 	mBodyNode = mCCPerson->getSceneNode();
 
 	mJumped = false;
@@ -53,8 +55,9 @@ void CPersonController::updateCharacter(const Ogre::Real deltaTime) {
 	using namespace Ogre;
 
 	m_fTimer -= deltaTime;
-
-	Real posIncrementPerSecond = RUN_SPEED * 0.001f;
+  Ogre::Real runOrWalkSpeed = (m_uiCurrentMoveState == MS_RUNNING) ? RUN_SPEED : WALK_SPEED;
+	Real posIncrementPerSecond = runOrWalkSpeed * 0.001f;
+  mCCPhysics->setSubSteps(ceil(runOrWalkSpeed / WALK_SPEED));
 
 	Vector3 playerPos = mCCPerson->getPosition();
 
@@ -87,7 +90,8 @@ void CPersonController::updateCharacter(const Ogre::Real deltaTime) {
 
 	if (m_uiCurrentMoveState == MS_NORMAL || m_uiCurrentMoveState == MS_MOVE_TO_POINT
         || m_uiCurrentMoveState == MS_MOVE_AROUND_TARGET || m_uiCurrentMoveState == MS_AIMING) {
-		mGoalDirection = Vector3::ZERO;   // we will calculate this
+    
+    mGoalDirection = Vector3::ZERO;   // we will calculate this
 		Ogre::Vector3 vLookDirection;
 		bool bMove = true;
 		if (m_uiCurrentMoveState == MS_MOVE_TO_POINT) {
@@ -118,8 +122,13 @@ void CPersonController::updateCharacter(const Ogre::Real deltaTime) {
             vLookDirection = getCameraDirection();
 		}
 		else {
-			updateGoalDirection();
-			vLookDirection = mGoalDirection;
+      if (m_uiCurrentMoveState != MS_RUNNING) {
+        updateGoalDirection();
+      }
+      else {
+        mGoalDirection = mBodyNode->getOrientation().zAxis();
+      }
+      vLookDirection = mGoalDirection;
 		}
 
 		if (m_uiCurrentMoveState == MS_MOVE_AROUND_TARGET) {
@@ -194,6 +203,26 @@ void CPersonController::updateCharacter(const Ogre::Real deltaTime) {
 			changeMoveState(MS_NORMAL);
 		}
 	}
+  else if (m_uiCurrentMoveState == MS_RUN_START) {
+    if (m_fTimer <= 0) {
+      changeMoveState(MS_RUNNING);
+    }
+    else {
+      mGoalDirection = mBodyNode->getOrientation().zAxis();
+      mCCPhysics->setWalkDirection(btVector3(0, 0, 0));
+      mCCPerson->setIsMoving(false);
+    }
+    m_vUserData = mBodyNode->getPosition();
+  }
+  else if (m_uiCurrentMoveState == MS_RUNNING) {
+    mGoalDirection = mBodyNode->getOrientation().zAxis();
+		mCCPhysics->setWalkDirection(BtOgre::Convert::toBullet(mGoalDirection) * posIncrementPerSecond);
+		mCCPerson->setIsMoving(true);
+    if (m_vUserData.squaredDistance(mBodyNode->getPosition()) < posIncrementPerSecond * posIncrementPerSecond * 0.02 * deltaTime * deltaTime) {
+      //changeMoveState(MS_NORMAL);
+    }
+    m_vUserData = mBodyNode->getPosition();
+  }
 	else if (m_uiCurrentMoveState >= MS_USER_STATE) {
 		userUpdateCharacter(deltaTime);
 	}
@@ -238,6 +267,15 @@ void CPersonController::moveToTarget(const Ogre::Vector3 &vPos, const Ogre::Real
 }
 void CPersonController::stun(const Ogre::Real fTime) {
     changeMoveState(MS_STUNNED, Ogre::Vector3::ZERO, fTime);
+}
+
+void CPersonController::startRunning() {
+  changeMoveState(MS_RUN_START);
+  m_fTimer = 1;
+}
+
+void CPersonController::endRunning() {
+  changeMoveState(MS_NORMAL);
 }
 
 void CPersonController::targetReached() {

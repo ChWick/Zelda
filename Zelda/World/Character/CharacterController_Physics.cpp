@@ -133,6 +133,7 @@ btVector3 CharacterControllerPhysics::perpindicularComponent (const btVector3& d
 
 CharacterControllerPhysics::CharacterControllerPhysics (btPairCachingGhostObject* ghostObject,btConvexShape* convexShape,btScalar stepHeight, int upAxis)
 {
+  mSubSteps = 1;
 	m_upAxis = upAxis;
 	m_addedMargin = 0;
 	m_walkDirection.setValue(0,0,0);
@@ -695,7 +696,10 @@ void CharacterControllerPhysics::playerStep (  btCollisionWorld* collisionWorld,
 
 	stepUp (collisionWorld);
 	if (m_useWalkDirection) {
-		stepForwardAndStrafe (collisionWorld, m_walkDirection, dt);
+    m_walkDirection /= mSubSteps;
+    for (int i = 0; i < mSubSteps; i++) {
+      stepForwardAndStrafe (collisionWorld, m_walkDirection, dt / mSubSteps);
+    }
 	} else {
 		//printf("  time: %f", m_velocityTimeInterval);
 		// still have some time left for moving!

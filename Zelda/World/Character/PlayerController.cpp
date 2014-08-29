@@ -58,6 +58,15 @@ void CPlayerController::receiveInputCommand(const CGameInputCommand &cmd) {
     if (cmd.getState() == GIS_PRESSED) {
       mCCPerson->interact();
     }
+    break;
+  case GIC_RUN:
+    if (cmd.getState() == GIS_PRESSED) {
+      startRunning();
+    }
+    else if (cmd.getState() == GIS_RELEASED) {
+      endRunning();
+    }
+    break;
   default:
     break;
 	}

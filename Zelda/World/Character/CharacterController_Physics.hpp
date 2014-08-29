@@ -42,6 +42,7 @@ class CharacterControllerPhysics : public btCharacterControllerInterface
 {
 protected:
 
+  int mSubSteps;
 	btScalar m_halfHeight;
 
 	btPairCachingGhostObject* m_ghostObject;
@@ -134,6 +135,7 @@ public:
 		m_upAxis = axis;
 	}
 
+  void setSubSteps(int i) {mSubSteps = i;}
 	/// This should probably be called setPositionIncrementPerSimulatorStep.
 	/// This is neither a direction nor a velocity, but the amount to
 	///	increment the position each simulation iteration, regardless
