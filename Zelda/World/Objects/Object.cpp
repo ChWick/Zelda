@@ -210,3 +210,8 @@ CObject::SInteractionResult CObject::interactOnActivate(const Ogre::Vector3 &vIn
 
   return CWorldEntity::interactOnActivate(vInteractDir, pSender);
 }
+
+CObject::EReceiveDamageResult CObject::hit(const CDamage &dmg) {
+  //deleteLater();
+  return RDR_IGNORED;
+}

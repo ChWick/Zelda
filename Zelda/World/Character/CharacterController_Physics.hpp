@@ -166,7 +166,8 @@ public:
 
   void jumpThroughBorderStart(btCollisionWorld* collisionWorld);
   void jumpThroughBorderEnd(btCollisionWorld* collisionWorld);
-	void jump ();
+  void jump () {jump(false);}
+	void jump (bool bForce);
 
 	void setGravity(btScalar gravity);
 	btScalar getGravity() const;

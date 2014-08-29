@@ -780,9 +780,9 @@ void CharacterControllerPhysics::jumpThroughBorderEnd(btCollisionWorld* collisio
   collisionWorld->addCollisionObject(m_ghostObject, group, mask);
 }
 
-void CharacterControllerPhysics::jump ()
+void CharacterControllerPhysics::jump (bool bForce)
 {
-	if (!canJump())
+	if (!canJump() && !bForce)
 		return;
 
 	m_verticalVelocity = m_jumpSpeed;

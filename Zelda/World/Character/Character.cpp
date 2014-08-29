@@ -64,6 +64,27 @@ void CCharacter::enterMap(CMap *pMap, const Ogre::Vector3 &vInitPosition) {
     setPosition(vInitPosition);
 	}
 }
+
+void CCharacter::createDamage(const Ogre::Ray &ray, const CDamage &dmg) const {
+	// try to interact with the world. So detect an object to interact with
+	btCollisionWorld::ClosestRayResultCallback rayCallback(BtOgre::Convert::toBullet(ray.getOrigin()), BtOgre::Convert::toBullet(ray.getPoint(1)));
+  if (m_eFriendOrEnemy == FOE_FRIENDLY) {
+    rayCallback.m_collisionFilterGroup = COL_DAMAGE_P;
+    rayCallback.m_collisionFilterMask = MASK_DAMAGE_P_COLLIDES_WITH;
+  }
+  else {
+    rayCallback.m_collisionFilterGroup = COL_DAMAGE_N;
+    rayCallback.m_collisionFilterMask = MASK_DAMAGE_N_COLLIDES_WITH;
+  }
+	m_pMap->getPhysicsManager()->getWorld()->rayTest(BtOgre::Convert::toBullet(ray.getOrigin()), BtOgre::Convert::toBullet(ray.getPoint(1)), rayCallback);
+	if (rayCallback.hasHit()) {
+    CWorldEntity *pWE = CWorldEntity::getFromUserPointer(rayCallback.m_collisionObject);
+    if (pWE) {
+      pWE->hit(dmg);
+		}
+	}
+}
+
 void CCharacter::destroy() {
 	destroyPhysics();
 	//destroySceneNode(m_pSceneNode);

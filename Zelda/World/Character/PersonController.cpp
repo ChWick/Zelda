@@ -69,7 +69,7 @@ void CPersonController::updateCharacter(const Ogre::Real deltaTime) {
 
 	if (position != playerPos)
 	{
-		mBodyNode->translate((position - playerPos) * 10 * deltaTime);
+		mBodyNode->translate((position - playerPos) * 50 * deltaTime * runOrWalkSpeed / WALK_SPEED);
 		//mBodyNode->setPosition(position);
 
 		if (!mIsFalling && !mCCPhysics->onGround()) // last frame we were on ground and now we're in "air"
@@ -218,7 +218,11 @@ void CPersonController::updateCharacter(const Ogre::Real deltaTime) {
 		mCCPhysics->setWalkDirection(BtOgre::Convert::toBullet(mGoalDirection) * posIncrementPerSecond);
 		mCCPerson->setIsMoving(true);
     if (mCCPhysics->isStuck()) {
-      changeMoveState(MS_NORMAL);
+      changeMoveState(MS_PUSHED_BACK, -mGoalDirection * 0.5, 1);
+
+      for (CWorldEntity *pEnt : mCCPhysics->getCollidingWorldEntities()) {
+        pEnt->hit(CDamage(DMG_RUN));
+      }
     }
   }
 	else if (m_uiCurrentMoveState >= MS_USER_STATE) {

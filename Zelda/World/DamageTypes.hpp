@@ -30,6 +30,8 @@ enum EDamageType {
   DMG_BOMB    = 16,
   DMG_FIRE    = 32,
 
+  DMG_RUN     = 64,
+
   DMG_ALL     = 511,                  //!< Flag for take/block all damage types
 };
 

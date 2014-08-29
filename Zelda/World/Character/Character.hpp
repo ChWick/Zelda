@@ -122,6 +122,8 @@ public:
 
 	void enterMap(CMap *pMap, const Ogre::Vector3 &vInitPosition);
 
+  void createDamage(const Ogre::Ray &ray, const CDamage &dmg) const;
+
 	void animRunStart();
 	void animRunEnd();
 	void animJumpStart();

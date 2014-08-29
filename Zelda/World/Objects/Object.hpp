@@ -38,6 +38,7 @@ protected:
   virtual SInteractionResult interactOnCollision(const Ogre::Vector3 &vInteractDir, CWorldEntity *pSender);
   virtual SInteractionResult interactOnActivate(const Ogre::Vector3 &vInteractDir, CWorldEntity *pSender);
   virtual void changeState(EEntityStateTypes eState);
+  virtual EReceiveDamageResult hit(const CDamage &dmg);
 };
 
 #endif // _OBJECT_HPP_
