@@ -18,6 +18,9 @@ CWorldGUISimpleTouchButton::CWorldGUISimpleTouchButton(const std::string &id,
   case STB_INTERACT:
     m_pRoot->setPosition(UVector2(UDim(1, -fButtonPixelSize), UDim(0, 0)));
     break;
+  case STB_RUN:
+    m_pRoot->setPosition(UVector2(UDim(1, -fButtonPixelSize), UDim(0, fButtonPixelSize)));
+    break;
 
   default:
     break;
@@ -28,6 +31,9 @@ void CWorldGUISimpleTouchButton::handleButtonPress(bool bActive) {
   switch (m_uiType) {
   case STB_INTERACT:
     CGameInputManager::getSingleton().injectCommand(CGameInputCommand(GIC_INTERACT, bActive));
+    break;
+  case STB_RUN:
+    CGameInputManager::getSingleton().injectCommand(CGameInputCommand(GIC_RUN, bActive));
     break;
 
   default:

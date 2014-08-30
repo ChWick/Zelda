@@ -24,6 +24,7 @@
 
 enum ESimpleTouchButtons {
   STB_INTERACT,
+  STB_RUN
 };
 
 class CWorldGUISimpleTouchButton :

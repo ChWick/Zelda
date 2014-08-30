@@ -34,6 +34,7 @@ CWorldGUI::CWorldGUI(CEntity *pParentEntity)
   new CGUIPullMenu("test", this, m_pRoot, CGUIPullMenu::PMD_RIGHT, 400);
   new CGUIDirectionInput(this, m_pRoot, m_pRoot->getPixelSize().d_width * 0.2);
   new CWorldGUISimpleTouchButton("interact", this, m_pRoot, STB_INTERACT, m_pRoot->getPixelSize().d_width * 0.14);
+  new CWorldGUISimpleTouchButton("run", this, m_pRoot, STB_RUN, m_pRoot->getPixelSize().d_width * 0.14);
 }
 CWorldGUI::~CWorldGUI() {
   CGUIManager::getSingleton().removeGUIOverlay(this);
