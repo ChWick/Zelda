@@ -358,8 +358,8 @@ void CMap::parsePlayer(const tinyxml2::XMLElement *pElem) {
   m_pPlayer->readEventsFromXMLElement(pElem, true);
 }
 
-void CMap::parseRegion(const SRegionInfo &region) {
-  new CRegion(this, region);
+void CMap::parseRegion(const tinyxml2::XMLElement *pElem) {
+  new CRegion(this, pElem);
 }
 
 void CMap::parseSceneEntity(const tinyxml2::XMLElement *pElem) {

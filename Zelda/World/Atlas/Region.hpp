@@ -27,6 +27,7 @@ class CRegion : public CWorldEntity {
   const SRegionInfo m_Info;
 public:
   CRegion(CWorldEntity *pParent, const SRegionInfo &info);
+  CRegion(CWorldEntity *pParent, const tinyxml2::XMLElement *pElem);
   ~CRegion();
 
   void exit();

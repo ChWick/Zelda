@@ -23,7 +23,6 @@
 #include "../../Common/Util/XMLHelper.hpp"
 #include <OgreLogManager.h>
 #include "MapPackParserListener.hpp"
-#include "RegionInfo.hpp"
 #include <OgreStringConverter.h>
 #include "../../Common/Log.hpp"
 
@@ -93,14 +92,7 @@ void CMapPack::parseXMLFile() {
 
   for (XMLElement *pElem = pMapElem->FirstChildElement(); pElem; pElem = pElem->NextSiblingElement()) {
     if (strcmp(pElem->Value(), "region") == 0) {
-      SRegionInfo region;
-
-      region.position = Ogre::StringConverter::parseVector3(Attribute(pElem, "position"));
-      region.size = Ogre::StringConverter::parseVector3(Attribute(pElem, "size"));
-      region.ID = Attribute(pElem, "id");
-      region.shape = Attribute(pElem, "shape");
-
-      if (m_pListener) {m_pListener->parseRegion(region);}
+      if (m_pListener) {m_pListener->parseRegion(pElem);}
     }
     else if (strcmp(pElem->Value(), "player") == 0) {
       if (m_pListener) {m_pListener->parsePlayer(pElem);}

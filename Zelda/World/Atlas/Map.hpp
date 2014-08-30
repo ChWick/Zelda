@@ -78,7 +78,7 @@ private:
 
   // CMapPackParserListener
   void parsePlayer(const tinyxml2::XMLElement *);
-  void parseRegion(const SRegionInfo &);
+  void parseRegion(const tinyxml2::XMLElement *pElem);
   void parseSceneEntity(const tinyxml2::XMLElement *);
 
   // CDotSceneLoaderCallback

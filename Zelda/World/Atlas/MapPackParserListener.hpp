@@ -20,8 +20,6 @@
 #ifndef _MAP_PACK_PARSER_LISTENER_HPP_
 #define _MAP_PACK_PARSER_LISTENER_HPP_
 
-struct SRegionInfo;
-
 namespace tinyxml2 {
   class XMLElement;
 };
@@ -29,7 +27,7 @@ namespace tinyxml2 {
 class CMapPackParserListener {
 public:
   virtual void parsePlayer(const tinyxml2::XMLElement *) {}
-  virtual void parseRegion(const SRegionInfo &) {}
+  virtual void parseRegion(const tinyxml2::XMLElement *pElem) {}
   virtual void parseSceneEntity(const tinyxml2::XMLElement *) {}
 };
 

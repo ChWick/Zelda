@@ -24,11 +24,21 @@
 #include "Map.hpp"
 #include "../../Common/Physics/PhysicsManager.hpp"
 #include "../../Common/Physics/PhysicsMasks.hpp"
+#include "../../Common/Util/XMLHelper.hpp"
+
+using namespace XMLHelper;
 
 CRegion::CRegion(CWorldEntity *pParent, const SRegionInfo &info)
   : CWorldEntity(info.ID, pParent, pParent->getMap()),
     m_Info(info) {
+}
 
+CRegion::CRegion(CWorldEntity *pParent, const tinyxml2::XMLElement *pElem)
+  : CWorldEntity(pParent, pParent->getMap(), pElem),
+    m_Info({Ogre::StringConverter::parseVector3(Attribute(pElem, "position")),
+          Ogre::StringConverter::parseVector3(Attribute(pElem, "size")),
+          Attribute(pElem, "id"),
+          Attribute(pElem, "shape")}){
 
 }
 

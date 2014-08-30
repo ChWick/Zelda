@@ -35,6 +35,14 @@ CWorldEntity::CWorldEntity(const std::string &sID, CEntity *pParent, CMap *pMap)
     m_pCollisionObject(nullptr),
     m_pMap(pMap) {
 }
+
+CWorldEntity::CWorldEntity(CEntity *pParent, CMap *pMap, const tinyxml2::XMLElement *pElem)
+  : CEntity(pParent, pElem),
+    m_pSceneNode(nullptr),
+    m_pCollisionObject(nullptr),
+    m_pMap(pMap) {
+}
+
 CWorldEntity::~CWorldEntity() {
 }
 

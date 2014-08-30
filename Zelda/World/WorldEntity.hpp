@@ -34,6 +34,7 @@ protected:
 
 public:
   CWorldEntity(const std::string &sID, CEntity *pParent, CMap *pMap);
+  CWorldEntity(CEntity *pParent, CMap *pMap, const tinyxml2::XMLElement *pElem);
   virtual ~CWorldEntity();
 
   virtual void exit();
