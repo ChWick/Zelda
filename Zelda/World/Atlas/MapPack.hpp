@@ -46,6 +46,7 @@ public:
   ~CMapPack();
 
   void init(CMapPackParserListener *pListener);
+  void parse();
   void exit();
 
   const std::string &getPath() const {return m_sPath;}

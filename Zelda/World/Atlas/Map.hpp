@@ -30,6 +30,7 @@
 #include <OgreStaticGeometry.h>
 #include "TileTypes.hpp"
 #include <OgreMaterial.h>
+#include <map>
 
 class CMap : public CWorldEntity,
              private CMapPackParserListener,
@@ -47,6 +48,7 @@ private:
   Ogre::Entity *m_pFirstFlowerEntity;
   Ogre::AnimationState *m_pFlowerAnimationState;
   Ogre::MaterialPtr m_pWaterSideWaveMaterial;
+  std::map<std::string, Ogre::Entity*> m_mStaticEntitiesMap;
 public:
   CMap(CEntity *pAtlas, CMapPackPtr mapPack, Ogre::SceneNode *pParentSceneNode, CWorldEntity *pPlayer);
   virtual ~CMap();
@@ -66,6 +68,8 @@ public:
   bool frameStarted(const Ogre::FrameEvent& evt);
   bool frameEnded(const Ogre::FrameEvent& evt);
 
+  void addStaticEntity(const std::string &entity, const Ogre::Vector3 &vPosition, const Ogre::Quaternion &vRotation);
+
 private:
   void handleMessage(const CMessage &message);
   void rebuildStaticGeometryChangedTiles();
@@ -75,6 +79,7 @@ private:
   // CMapPackParserListener
   void parsePlayer(const tinyxml2::XMLElement *);
   void parseRegion(const SRegionInfo &);
+  void parseSceneEntity(const tinyxml2::XMLElement *);
 
   // CDotSceneLoaderCallback
   void physicsShapeCreated(btCollisionShape *pShape, const std::string &sMeshName) ;

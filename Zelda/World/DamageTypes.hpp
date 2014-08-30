@@ -20,6 +20,7 @@
 #ifndef _DAMAGE_TYPES_HPP_
 #define _DAMAGE_TYPES_HPP_
 
+#include "../Common/Util/EnumIdMap.hpp"
 
 enum EDamageType {
   DMG_NONE	= 0,
@@ -34,5 +35,17 @@ enum EDamageType {
 
   DMG_ALL     = 511,                  //!< Flag for take/block all damage types
 };
+
+class CDamageTypeIdMap : public CEnumIdMap<unsigned int> {
+public:
+  CDamageTypeIdMap();
+  //! parse a string
+  /** separates string at spaces to add up multiple damage types.
+    * E.g.: "world sword fire"
+    */
+  unsigned int parseString(const std::string &str) const;
+};
+
+extern CDamageTypeIdMap DAMAGE_TYPE_ID_MAP;
 
 #endif // _DAMAGE_TYPES_HPP_

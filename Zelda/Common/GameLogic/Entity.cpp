@@ -238,8 +238,7 @@ void CEntity::destroyChildren() {
 
 void CEntity::destroyEvent(CEvent *pEvent) {
   assert(pEvent);
-  m_lEvents.remove(pEvent);
-  delete pEvent;
+  m_lEventsToDelete.push_back(pEvent);
 }
 
 void CEntity::sendMessageToAll(const CMessage &message) {
@@ -255,9 +254,9 @@ void CEntity::update(Ogre::Real tpf) {
       pEnt->update(tpf);
     }
   }
-  /*for (auto &pEvt : m_lEvents) {
+  for (auto &pEvt : m_lEvents) {
     pEvt->update(tpf);
-  }*/
+  }
 }
 
 void CEntity::preRender(Ogre::Real tpf) {
@@ -292,6 +291,11 @@ bool CEntity::frameRenderingQueued(const Ogre::FrameEvent& evt) {
 }
 
 bool CEntity::frameStarted(const Ogre::FrameEvent& evt) {
+  while (m_lEventsToDelete.size() > 0) {
+    m_lEvents.remove(m_lEventsToDelete.front());
+    delete m_lEventsToDelete.front();
+    m_lEventsToDelete.pop_front();
+  }
   for (auto &pEnt : m_lChildren) {
     pEnt->frameStarted(evt);
   }
@@ -334,6 +338,7 @@ void CEntity::handleMessage(const CMessage &message) {
 
 
 void CEntity::clearEvents() {
+  m_lEventsToDelete.clear();
   while (m_lEvents.size() > 0) {
     delete m_lEvents.front();
     m_lEvents.pop_front();

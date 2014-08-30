@@ -64,7 +64,8 @@ btVector3 worldMax(1000,1000, 1000);
 
     m_pPhyWorld = new btDiscreteDynamicsWorld(mDispatcher, mBroadphaseInterface, mSolver, mCollisionConfig);
     m_pPhyWorld->setGravity(btVector3(0,-GRAVITY_FACTOR,0));
-    m_pPhyWorld->getDispatchInfo().m_allowedCcdPenetration = 0.0000f;
+    m_pPhyWorld->getDispatchInfo().m_allowedCcdPenetration = 0.0001f;
+    m_pPhyWorld->getSolverInfo().m_splitImpulse = true;
 
 #ifdef PHYSICS_DEBUG
     m_pDbgDraw = new BtOgre::DebugDrawer(m_pSceneManager->getRootSceneNode(), m_pPhyWorld);

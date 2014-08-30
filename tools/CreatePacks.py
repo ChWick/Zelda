@@ -45,6 +45,8 @@ def makeGameZip() :
 	copyAllOfType(zipf, '../packs/game/textures/*', 'textures')
 	copyAllOfType(zipf, '../packs/game/materials/*.material', 'materials')
 	copyAllOfType(zipf, '../packs/game/programs/*', 'programs')
+	
+	copyAllOfType(zipf, '../models/Objects/rupee/*.mesh', 'meshes')
 	zipf.write('../models/test/Cylinder.mesh', 'meshes/Cylinder.mesh', zipfile.ZIP_DEFLATED)
 
 	zipf.close()

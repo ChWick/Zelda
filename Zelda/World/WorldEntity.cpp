@@ -24,8 +24,10 @@
 #include "../Common/Physics/BtOgrePG.hpp"
 #include "../Common/Util/DeleteSceneNode.hpp"
 #include "../Common/GameLogic/Events/Event.hpp"
-#include "../Common/GameLogic/Events/EmitOnCollision.hpp"
+#include "../Common/GameLogic/Events/Emitter/EmitOnCollision.hpp"
+#include "../Common/GameLogic/Events/Emitter/EmitOnReceivedDamage.hpp"
 #include "Atlas/Map.hpp"
+#include "Damage.hpp"
 
 CWorldEntity::CWorldEntity(const std::string &sID, CEntity *pParent, CMap *pMap)
   : CEntity(sID, pParent),
@@ -151,4 +153,20 @@ CWorldEntity::SInteractionResult CWorldEntity::interactOnCollision(const Ogre::V
   }
 
   return SInteractionResult();
+}
+
+CWorldEntity::EReceiveDamageResult CWorldEntity::receiveDamage(const CDamage &damage) {
+  using namespace events;
+  for (auto &pEvt : m_lEvents) {
+    for (auto &pEmit : pEvt->getEmitter()) {
+      if (pEmit->getType() == EMIT_ON_RECEIVED_DAMAGE) {
+        CEmitOnReceivedDamage *pEORD(dynamic_cast<CEmitOnReceivedDamage *>(pEmit));
+        if (pEORD->getDamageMask() & damage.getDamageType()) {
+          pEvt->start();
+        }
+      }
+    }
+  }
+
+  return CHitableInterface::receiveDamage(damage);
 }

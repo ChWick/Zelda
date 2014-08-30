@@ -6,6 +6,8 @@ material Rupee
     {
         pass
         {
+            //cull_hardware none
+            //cull_software none
             specular 0.5 0.5 0.5 1.0 12.5
 
             scene_blend alpha_blend
@@ -21,7 +23,7 @@ material Rupee/Green : Rupee
         pass
         {
             ambient 0.0 0.1 0.0 0.5
-            diffuse 0.0 0.800000011920929 0.0 0.5
+            diffuse 0.0 0.800000011920929 0.0 0.8
         }
     }
 }
@@ -33,7 +35,7 @@ material Rupee/Blue : Rupee
         pass
         {
             ambient 0.0 0.0 0.1 0.5
-            diffuse 0.0 0.0 0.800000011920929 0.5
+            diffuse 0.0 0.0 0.800000011920929 0.8
         }
     }
 }
@@ -45,7 +47,7 @@ material Rupee/Red : Rupee
         pass
         {
             ambient 0.1 0.0 0.0 0.5
-            diffuse 0.800000011920929 0.0 0.0 0.5
+            diffuse 0.800000011920929 0.0 0.0 0.8
         }
     }
 }

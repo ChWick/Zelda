@@ -39,6 +39,8 @@ enum EObjectTypes {
 
 struct SObjectTypeData {
   bool bUserHandle;
+  bool bPermanetStatic;
+  std::string sID;
   std::string sMeshName;
   std::string sMaterialName;
 
@@ -51,10 +53,11 @@ struct SObjectTypeData {
 
   SObjectTypeData() {}
   SObjectTypeData(SObjectTypeData &&) = default;
-  SObjectTypeData(bool userHandle, const std::string &meshName, const std::string &materialName);
-  SObjectTypeData(bool userHandle, const std::string &meshName, const std::string &materialName, const btVector3 &physicsShapeScale);
+  SObjectTypeData(bool userHandle, bool isStatic, const std::string &id, const std::string &meshName, const std::string &materialName);
+  SObjectTypeData(bool userHandle, bool isStatic, const std::string &id, const std::string &meshName, const std::string &materialName, const btVector3 &physicsShapeScale);
+  SObjectTypeData(bool userHandle, bool isStatic, const std::string &id, const std::string &meshName, const std::string &materialName, EGlobalCollisionShapesTypes collisionShape);
 
-  SObjectTypeData(bool userHandle, const std::string &meshName, const std::string &materialName, ETileTypes normalTile, ETileTypes removedTile, EGlobalCollisionShapesTypes collisionShape);
+  SObjectTypeData(bool userHandle, bool isStatic, const std::string &id, const std::string &meshName, const std::string &materialName, ETileTypes normalTile, ETileTypes removedTile, EGlobalCollisionShapesTypes collisionShape);
 
   SObjectTypeData &operator=(const SObjectTypeData&) = default;
 };
@@ -63,7 +66,9 @@ class CObjectTypeIdMap : public CEnumIdMap<EObjectTypes, SObjectTypeData> {
 public:
   CObjectTypeIdMap();
 
-  EObjectTypes getFromMesh(const std::string &mesh) const;
+  EObjectTypes getFromID(const std::string &id) const;
+  EObjectTypes getFromMeshName(const std::string &mesh) const;
+  EObjectTypes getFromMeshFileName(const std::string &mesh) const;
 };
 
 extern CObjectTypeIdMap OBJECT_TYPE_ID_MAP;

@@ -22,6 +22,7 @@
 namespace events {
 CActionTypesMap::CActionTypesMap() {
   m_Map[ACTION_MESSAGE] = "message";
+  m_Map[ACTION_CREATE_OBJECT] = "create_object";
 }
 
 CActionTypesMap ACTION_TYPES_MAP;

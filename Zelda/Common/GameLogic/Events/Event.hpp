@@ -22,6 +22,7 @@
 
 #include <string>
 #include <vector>
+#include "RepeatTypes.hpp"
 #include "../../tinyxml2/tinyxml2.h"
 #include "../../Util/XMLHelper.hpp"
 #include "../../GameLogic/OutputStyle.hpp"
@@ -37,6 +38,9 @@ namespace events {
 class CEvent {
 private:
   const std::string m_sID;
+  const ERepeatTypes m_eRepeatType;
+  const Ogre::Real m_fRepeatTime;
+  Ogre::Real m_fTimer;
 protected:
   CEntity &m_Owner;
   bool m_bStarted;
@@ -45,7 +49,7 @@ protected:
   std::vector<CAction *> m_lActions;
 
 public:
-  CEvent(CEntity &owner);
+  CEvent(CEntity &owner, const ERepeatTypes eRepeatType = REPEAT_NONE, Ogre::Real fRepeatTime = 0);
   CEvent(CEntity &owner, const tinyxml2::XMLElement *pElement);
 
   virtual ~CEvent();

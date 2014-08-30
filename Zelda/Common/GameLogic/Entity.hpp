@@ -54,6 +54,7 @@ protected:
   CEntity *m_pParent;
   std::list<CEntity*> m_lChildren;
   std::list<events::CEvent*> m_lEvents;
+  std::list<events::CEvent*> m_lEventsToDelete;
 public:
   CEntity(const std::string &sID, unsigned int uiType, CEntity *pParent);
   CEntity(const std::string &sID, CEntity *pParent);

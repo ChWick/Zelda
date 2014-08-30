@@ -27,6 +27,7 @@ namespace events {
 
 enum EActionTypes {
   ACTION_MESSAGE,
+  ACTION_CREATE_OBJECT,
 };
 
 class CActionTypesMap : public CEnumIdMap<EActionTypes> {

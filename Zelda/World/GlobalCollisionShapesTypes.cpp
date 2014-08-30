@@ -25,6 +25,8 @@ CGlobalCollisionShapesTypesIdMap::CGlobalCollisionShapesTypesIdMap() {
   m_Map[GCST_PERSON_CAPSULE] = "person_capsule";
   m_Map[GCST_HOUSE_ENTRANCE] = "house_entrance";
   m_Map[GCST_STONE_PILE] = "stone_pile";
+  m_Map[GCST_TREE] = "tree";
+  m_Map[GCST_FALLING_OBJECT_SPHERE] = "falling_object_sphere";
 }
 
 CGlobalCollisionShapesTypesIdMap GLOBAL_COLLISION_SHAPES_TYPES_ID_MAP;

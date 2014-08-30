@@ -31,11 +31,15 @@
 #include "../Objects/Object.hpp"
 #include "BulletCollision/CollisionShapes/btSphereShape.h"
 #include <BulletCollision/CollisionShapes/btCapsuleShape.h>
+#include <BulletCollision/CollisionShapes/btCylinderShape.h>
 #include <BulletCollision/CollisionShapes/btBoxShape.h>
 #include "../Character/Person.hpp"
 #include "../../Common/Util/Assert.hpp"
 #include "../../Common/Message/MessageEntityStateChanged.hpp"
 #include "../../Common/DotSceneLoader/UserData.hpp"
+#include "../../Common/Util/XMLHelper.hpp"
+
+using namespace XMLHelper;
 
 int MAP_COUNTER = 0; // Counter to make names unique if objects are switched between maps since renaming a scene node is not possible
 
@@ -68,6 +72,11 @@ CMap::CMap(CEntity *pAtlas, CMapPackPtr mapPack, Ogre::SceneNode *pParentSceneNo
   pStonePileShape->addChildShape(btTransform(btQuaternion::getIdentity(), btVector3(-0.0, 0.06, -0.0)), new btSphereShape(0.04));
   m_PhysicsManager.addCollisionShape(GLOBAL_COLLISION_SHAPES_TYPES_ID_MAP.toString(GCST_STONE_PILE), CPhysicsCollisionObject(pStonePileShape, Ogre::Vector3::ZERO));
 
+  m_PhysicsManager.addCollisionShape(GLOBAL_COLLISION_SHAPES_TYPES_ID_MAP.toString(GCST_TREE),
+                                     CPhysicsCollisionObject(new btCylinderShape(btVector3(0.15, 0.2, 0.15)), Ogre::Vector3::NEGATIVE_UNIT_Y * 0.2));
+  m_PhysicsManager.addCollisionShape(GLOBAL_COLLISION_SHAPES_TYPES_ID_MAP.toString(GCST_FALLING_OBJECT_SPHERE),
+                                     CPhysicsCollisionObject(new btSphereShape(0.02), Ogre::Vector3::NEGATIVE_UNIT_Y * 0));
+
 
   // Create global entites
   for (int i = 0; i < TT_COUNT; i++) {
@@ -99,6 +108,9 @@ CMap::CMap(CEntity *pAtlas, CMapPackPtr mapPack, Ogre::SceneNode *pParentSceneNo
                               m_pSceneNode,
                               m_MapPack->getName() + Ogre::StringConverter::toString(MAP_COUNTER++));
 
+  
+  m_MapPack->parse();
+
 
   //CreateCube(btVector3(0, 10, 0.2), 1);
   //CreateCube(btVector3(0, 200, 0.3), 100);
@@ -125,6 +137,12 @@ CMap::CMap(CEntity *pAtlas, CMapPackPtr mapPack, Ogre::SceneNode *pParentSceneNo
   m_pWaterSideWaveMaterial = Ogre::MaterialManager::getSingleton().getByName("water_side_wave");
   m_pWaterSideWaveMaterial->touch();
   m_pWaterSideWaveMaterial->load();
+
+  // remove entites only used for creating static
+  for (auto entpair : m_mStaticEntitiesMap) {
+    m_pSceneNode->getCreator()->destroyEntity(entpair.second);
+  }
+  m_mStaticEntitiesMap.clear();
 }
 
 CMap::~CMap() {
@@ -215,6 +233,14 @@ void CMap::moveMap(const Ogre::Vector3 &offset) {
   translateStaticGeometry(m_pStaticGeometry, offset);
   translateStaticGeometry(m_pStaticGeometryChangedTiles, offset);
   translateStaticGeometry(m_pStaticGeometryFixedTiles, offset);
+}
+
+void CMap::addStaticEntity(const std::string &entity, const Ogre::Vector3 &vPosition, const Ogre::Quaternion &vRotation) {
+  if (m_mStaticEntitiesMap.find(entity) == m_mStaticEntitiesMap.end()) {
+    m_mStaticEntitiesMap[entity] = m_pSceneNode->getCreator()->createEntity(entity);
+  }
+
+  m_pStaticGeometry->addEntity(m_mStaticEntitiesMap.at(entity), vPosition, vRotation);
 }
 
 void CMap::translateStaticGeometry(Ogre::StaticGeometry *pSG, const Ogre::Vector3 &vVec) {
@@ -336,10 +362,18 @@ void CMap::parseRegion(const SRegionInfo &region) {
   new CRegion(this, region);
 }
 
+void CMap::parseSceneEntity(const tinyxml2::XMLElement *pElem) {
+  CEntity *pEntity = getChild(Attribute(pElem, "id"));
+  ASSERT(pEntity);
+  if (pEntity) {
+    pEntity->readEventsFromXMLElement(pElem, true);
+  }
+}
+
 // ############################################################################3
 // CDotSceneLoaderCallback
 void CMap::physicsShapeCreated(btCollisionShape *pShape, const std::string &sMeshName) {
-  EObjectTypes objectType(OBJECT_TYPE_ID_MAP.getFromMesh(sMeshName + ".mesh"));
+  EObjectTypes objectType(OBJECT_TYPE_ID_MAP.getFromMeshName(sMeshName));
   if (objectType != OBJECT_COUNT) {
     pShape->setLocalScaling(pShape->getLocalScaling() * OBJECT_TYPE_ID_MAP.toData(objectType).vPhysicsShapeScale);
   }
@@ -373,9 +407,9 @@ void CMap::staticObjectAdded(Ogre::Entity *pEntity, Ogre::SceneNode *pParent) {
 CDotSceneLoaderCallback::EResults CMap::preEntityAdded(tinyxml2::XMLElement *XMLNode, Ogre::SceneNode *pParent, CUserData &userData) {
   CWorldEntity *pEntity(nullptr);
   
-  EObjectTypes objectType(OBJECT_TYPE_ID_MAP.getFromMesh(XMLNode->Attribute("meshFile")));
+  EObjectTypes objectType(OBJECT_TYPE_ID_MAP.getFromMeshFileName(XMLNode->Attribute("meshFile")));
   if (objectType != OBJECT_COUNT && OBJECT_TYPE_ID_MAP.toData(objectType).bUserHandle) {
-    pEntity = new CObject(pParent->getName(), this, this, objectType, pParent);
+    pEntity = new CObject(userData.getStringUserData("name"), this, this, objectType, pParent);
 
     pEntity->setPosition(pParent->getPosition());
     pEntity->getSceneNode()->setInitialState();

@@ -26,10 +26,12 @@
 class CObject : public CWorldEntity {
 protected:
 public:
-  CObject(const std::string &id, CWorldEntity *pParent, CMap *pMap, EObjectTypes eObjectType, Ogre::SceneNode *pSceneNode = nullptr);
+   CObject(const std::string &id, CWorldEntity *pParent, CMap *pMap, EObjectTypes eObjectType, Ogre::SceneNode *pSceneNode = nullptr);
 
-  
+
   virtual void enterMap(CMap *pMap, const Ogre::Vector3 &vPosition);
+  
+  void createInnerObject(EObjectTypes eType);
 
 protected:
   void destroyPhysics();

@@ -23,6 +23,7 @@
 #include <OgreException.h>
 
 #include "ActionMessage.hpp"
+#include "ActionCreateObject.hpp"
 
 using namespace XMLHelper;
 
@@ -33,6 +34,8 @@ namespace events {
     switch (type) {
     case ACTION_MESSAGE:
       return new CActionMessage(pElem, owner);
+    case ACTION_CREATE_OBJECT:
+      return new CActionCreateObject(pElem, owner);
     }
 
     throw Ogre::Exception(0, "New action type not added in createAction", __FILE__);

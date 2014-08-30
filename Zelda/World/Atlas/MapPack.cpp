@@ -59,6 +59,10 @@ void CMapPack::init(CMapPackParserListener *pListener) {
   Ogre::ResourceGroupManager::getSingleton().initialiseResourceGroup(m_sResourceGroup);
   Ogre::ResourceGroupManager::getSingleton().loadResourceGroup(m_sResourceGroup);
 
+  m_sSceneFile = m_sName + ".scene";
+}
+
+void CMapPack::parse() {
   parseXMLFile();
 }
 
@@ -84,7 +88,6 @@ void CMapPack::parseXMLFile() {
   doc.Parse(dataStream->getAsString().c_str());
 
   XMLElement *pMapElem = doc.FirstChildElement();
-  m_sSceneFile = Attribute(pMapElem, "scene");
   m_vGlobalPosition = Ogre::StringConverter::parseVector3(Attribute(pMapElem, "global_position"));
   m_vGlobalSize = Ogre::StringConverter::parseVector2(Attribute(pMapElem, "global_size"));
 
@@ -101,6 +104,9 @@ void CMapPack::parseXMLFile() {
     }
     else if (strcmp(pElem->Value(), "player") == 0) {
       if (m_pListener) {m_pListener->parsePlayer(pElem);}
+    }
+    else if (strcmp(pElem->Value(), "scene_entity") == 0) {
+      if (m_pListener) {m_pListener->parseSceneEntity(pElem);}
     }
   }
 }

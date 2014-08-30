@@ -30,6 +30,7 @@ class CMapPackParserListener {
 public:
   virtual void parsePlayer(const tinyxml2::XMLElement *) {}
   virtual void parseRegion(const SRegionInfo &) {}
+  virtual void parseSceneEntity(const tinyxml2::XMLElement *) {}
 };
 
 #endif // _MAP_PACK_PARSER_LISTENER_HPP_

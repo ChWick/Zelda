@@ -516,6 +516,7 @@ void DotSceneLoader::processNode(XMLElement *XMLNode, SceneNode *pParent)
     String id = getAttrib(XMLNode, "id");
     bool isTarget = getAttribBool(XMLNode, "isTarget");
     CUserData userData(XMLNode);
+    userData.setUserData("name", getAttrib(XMLNode, "name"));
 
     XMLElement *pElement;
 
@@ -884,7 +885,7 @@ void DotSceneLoader::processEntity(XMLElement *XMLNode, SceneNode *pParent, CUse
               //info.m_friction = 0.9;
               //info.m_angularDamping = getAttribReal(XMLNode, "damping_rot", 0);
               //info.m_linearDamping = getAttribReal(XMLNode, "damping_trans", 0);
-              //info.m_restitution = 0.4;
+              info.m_restitution = 0.9;
               //info.m_angularSleepingThreshold = 0.01;
               //info.m_linearSleepingThreshold = 0.01;
               //info.m_additionalDamping = true;

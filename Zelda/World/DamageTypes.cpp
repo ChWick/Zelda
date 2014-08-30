@@ -1,0 +1,50 @@
+/*****************************************************************************
+ * Copyright 2014 Christoph Wick
+ *
+ * This file is part of Zelda.
+ *
+ * Zelda is free software: you can redistribute it and/or modify it under the
+ * terms of the GNU General Public License as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option) any later
+ * version.
+ *
+ * Zelda is distributed in the hope that it will be useful, but WITHOUT ANY
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+ * details.
+ *
+ * You should have received a copy of the GNU General Public License along with
+ * Zelda. If not, see http://www.gnu.org/licenses/.
+ *****************************************************************************/
+
+#include "DamageTypes.hpp"
+
+using namespace std;
+
+CDamageTypeIdMap::CDamageTypeIdMap() {
+  m_Map[DMG_NONE]    = "none";
+  m_Map[DMG_WORLD]   = "world";
+  m_Map[DMG_SWORD]   = "sword";
+  m_Map[DMG_ARROW]   = "arrow";
+  m_Map[DMG_HAMMER]  = "hammer";
+  m_Map[DMG_BOMB]    = "bomb";
+  m_Map[DMG_FIRE]    = "fire";
+
+  m_Map[DMG_RUN]     = "run";
+
+  m_Map[DMG_ALL]     = "all";
+}
+
+unsigned int CDamageTypeIdMap::parseString(const std::string &str) const {
+  unsigned int uiDmg = DMG_NONE;
+
+  istringstream stream(str);
+  string token;
+  while (getline(stream, token, ' ')) {
+    uiDmg |= CEnumIdMap<unsigned int>::parseString(token);
+  }
+
+  return uiDmg;
+}
+
+CDamageTypeIdMap DAMAGE_TYPE_ID_MAP;

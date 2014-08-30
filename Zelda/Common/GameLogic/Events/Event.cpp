@@ -21,21 +21,28 @@
 #include "OgreException.h"
 #include "../../Log.hpp"
 #include "OgreStringConverter.h"
-#include "EmitterCreator.hpp"
-#include "Emitter.hpp"
+#include "Emitter/EmitterCreator.hpp"
+#include "Emitter/Emitter.hpp"
 #include "Actions/ActionCreator.hpp"
 #include "Actions/Action.hpp"
+#include "../Entity.hpp"
 
 using namespace XMLHelper;
 
 namespace events {
-CEvent::CEvent(CEntity &owner)
+CEvent::CEvent(CEntity &owner, const ERepeatTypes eRepeatType, Ogre::Real fRepeatTime)
   : m_sID("unset id"),
+    m_eRepeatType(eRepeatType),
+    m_fRepeatTime(fRepeatTime),
+    m_fTimer(0),
     m_Owner(owner),
     m_bStarted(false) {
 }
 CEvent::CEvent(CEntity &owner, const tinyxml2::XMLElement *pElement)
   : m_sID(Attribute(pElement, "id", "unset id")),
+    m_eRepeatType(REPEAT_TYPES_MAP.parseString(Attribute(pElement, "repeat", "none"))),
+    m_fRepeatTime(RealAttribute(pElement, "time", 0)),
+    m_fTimer(0),
     m_Owner(owner),
     m_bStarted(BoolAttribute(pElement, "started", false)) {
 
@@ -67,6 +74,19 @@ void CEvent::start() {
     for (CAction *pAction : m_lActions) {
       pAction->start();
     }
+
+    switch (m_eRepeatType) {
+    case REPEAT_NONE:
+      // delete event
+      m_Owner.destroyEvent(this);
+      break;
+    case REPEAT_INFINITE:
+      stop();
+      break;
+    case REPEAT_TIMED:
+      m_fTimer = m_fRepeatTime;
+      break;
+    }
   }
 }
 void CEvent::stop() {
@@ -81,13 +101,21 @@ void CEvent::stop() {
 }
 
 void CEvent::update(float tpf) {
-  if (m_bStarted) {return;}
+  if (m_bStarted) {
+    if (m_eRepeatType == REPEAT_TIMED) {
+      m_fTimer -= tpf;
+      if (m_fTimer <= 0) {
+        stop();
+      }
+    }
+    return;
+  }
 
-  for (CEmitter *pEmitter : m_lEmitter) {
+  /*for (CEmitter *pEmitter : m_lEmitter) {
     if (pEmitter->isFiring(tpf)) {
       start();
     }
-  }
+  }*/
 }
 
 void CEvent::writeToXMLElement(tinyxml2::XMLElement *pElement, EOutputStyle eStyle) const {
