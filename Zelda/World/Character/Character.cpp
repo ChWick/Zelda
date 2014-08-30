@@ -58,7 +58,7 @@ void CCharacter::enterMap(CMap *pMap, const Ogre::Vector3 &vInitPosition) {
 	setupInternal();
 
 	if (bSwitchMapOnly) {
-    m_pCharacterController->moveToTarget(vInitPosition, 0.1f, Ogre::Degree(5), false, 5.f);
+    m_pCharacterController->moveToTarget(vInitPosition, 0.02f, Ogre::Degree(5), false, 5.f);
 	}
 	else {
     setPosition(vInitPosition);

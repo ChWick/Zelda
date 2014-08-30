@@ -17,14 +17,19 @@
  * Zelda. If not, see http://www.gnu.org/licenses/.
  *****************************************************************************/
 
-#include "MessageTypes.hpp"
+#ifndef _MESSAGE_PLAYER_PICKUP_ITEM_
+#define _MESSAGE_PLAYER_PICKUP_ITEM_
 
-CMessageTypesMap::CMessageTypesMap() {
-  m_Map[MSG_SWITCH_MAP] = "switch_map";
-  m_Map[MSG_TARGET_REACHED] = "target_reached";
-  m_Map[MSG_DEBUG] = "debug";
-  m_Map[MSG_ENTITY_STATE_CHANGED] = "entity_type_changed";
-  m_Map[MSG_PLAYER_PICKUP_ITEM] = "player_pickup_item";
-}
+#include "Message.hpp"
 
-CMessageTypesMap MESSAGE_TYPES_MAP;
+class CMessagePlayerPickupItem: public CMessage {
+protected:
+  const unsigned int m_uiItemType;
+public:
+  CMessagePlayerPickupItem(unsigned int uiItemType);
+
+  unsigned int getItemType() const {return m_uiItemType;}
+
+};
+
+#endif // _MESSAGE_PLAYER_PICKUP_ITEM_

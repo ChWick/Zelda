@@ -29,6 +29,11 @@
 #include "../GlobalCollisionShapesTypes.hpp"
 #include "../Atlas/Map.hpp"
 #include "../../Common/Util/Assert.hpp"
+#include "../../Common/GameLogic/Events/Emitter/EmitOnCollision.hpp"
+#include "../../Common/GameLogic/Events/Actions/ActionDeleteObject.hpp"
+#include "../../Common/GameLogic/Events/Actions/ActionMessage.hpp"
+#include "../../Common/GameLogic/Events/Event.hpp"
+#include "../../Common/Message/MessagePlayerPickupItem.hpp"
 
 unsigned int OBJECT_INNER_OBJECT_ID_NUMBER_COUNTER = 0;
 
@@ -62,6 +67,17 @@ CObject::CObject(const std::string &id, CWorldEntity *pParent, CMap *pMap, EObje
   }
 
   createPhysics();
+
+  switch (m_uiType) {
+  case OBJECT_GREEN_RUPEE:
+  case OBJECT_BLUE_RUPEE:
+  case OBJECT_RED_RUPEE:
+    makePickable();
+    break;
+
+  default:
+    break;
+  }
 }
 
 void CObject::destroyPhysics() {
@@ -129,8 +145,8 @@ void CObject::createPhysics() {
     pRigidBody->setDamping(0.9, 0);
     pRigidBody->setRestitution(0.6);
     pRigidBody->setFriction(0.1);
-    group = COL_DAMAGE_P;
-    mask |= MASK_DAMAGE_P_COLLIDES_WITH;
+    group = COL_DAMAGE_N;
+    mask |= MASK_DAMAGE_N_COLLIDES_WITH;
     pRigidBody->setCcdMotionThreshold(0.1);
     pRigidBody->setCcdSweptSphereRadius(0.02f);
     break;
@@ -152,6 +168,22 @@ void CObject::createPhysics() {
 
 
   m_pMap->getPhysicsManager()->getWorld()->addRigidBody(pRigidBody, group, mask);
+}
+
+void CObject::makePickable() {
+  using namespace events;
+  CEvent *pEvent = new CEvent(*this);
+
+  CEmitter *pEmitOnCollision = new CEmitOnCollision("player", *pEvent);
+  pEvent->addEmitter(pEmitOnCollision);
+
+  CAction *pDeleteThisAction = new CActionDeleteObject(this, *pEvent);
+  pEvent->addAction(pDeleteThisAction);
+
+  CAction *pMessageAction = new CActionMessage(new CMessagePlayerPickupItem(m_uiType), *pEvent);
+  pEvent->addAction(pMessageAction);
+
+  addEvent(pEvent);
 }
 
 void CObject::enterMap(CMap *pMap, const Ogre::Vector3 &vPosition) {

@@ -17,14 +17,26 @@
  * Zelda. If not, see http://www.gnu.org/licenses/.
  *****************************************************************************/
 
-#include "MessageTypes.hpp"
+#ifndef _ACTION_DELETE_OBJECT_HPP_
+#define _ACTION_DELETE_OBJECT_HPP_
 
-CMessageTypesMap::CMessageTypesMap() {
-  m_Map[MSG_SWITCH_MAP] = "switch_map";
-  m_Map[MSG_TARGET_REACHED] = "target_reached";
-  m_Map[MSG_DEBUG] = "debug";
-  m_Map[MSG_ENTITY_STATE_CHANGED] = "entity_type_changed";
-  m_Map[MSG_PLAYER_PICKUP_ITEM] = "player_pickup_item";
-}
+#include "Action.hpp"
 
-CMessageTypesMap MESSAGE_TYPES_MAP;
+class CEntity;
+
+namespace events {
+  class CActionDeleteObject : public CAction {
+  protected:
+    const std::string m_sID;
+    CEntity *m_pEntity;
+  public:
+    CActionDeleteObject(const tinyxml2::XMLElement *pElem, const CEvent &owner);
+    CActionDeleteObject(CEntity *pEntity, const CEvent &owner);
+    ~CActionDeleteObject();
+
+  protected:
+    void start();
+  };
+};
+
+#endif // _ACTION_DELETE_OBJECT_HPP_

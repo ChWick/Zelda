@@ -51,7 +51,7 @@ CGUICounter::CGUICounter(const std::string &id,
   updateText();
 }
 
-void CGUICounter::setCurrentCount(int iNewCount, bool bAnimate) {
+void CGUICounter::setDesiredCount(int iNewCount, bool bAnimate) {
   if (!bAnimate) {
     m_iCurrentCount = m_iDesiredCount = iNewCount;
   }

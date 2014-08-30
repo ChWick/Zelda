@@ -38,7 +38,8 @@ public:
               const CEGUI::String &sImage,
               const CEGUI::UVector2 &vPosition = CEGUI::UVector2(CEGUI::UDim(0, 0), CEGUI::UDim(0, 0)));
 
-  void setCurrentCount(int iNewCount, bool bAnimate = true);
+  void setDesiredCount(int iNewCount, bool bAnimate = true);
+  void addCount(int iToAdd, bool bAnimate = true) {setDesiredCount(m_iDesiredCount + iToAdd, bAnimate);}
 
   void update(Ogre::Real tpf);
 

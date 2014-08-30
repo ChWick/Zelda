@@ -67,6 +67,9 @@ public:
   const std::vector<CAction *> &getActions() const {return m_lActions;}
   CEntity &getOwner() const {return m_Owner;}
 
+  void addEmitter(CEmitter *pEmitter) {m_lEmitter.push_back(pEmitter);}
+  void addAction(CAction *pAction) {m_lActions.push_back(pAction);}
+
   virtual void writeToXMLElement(tinyxml2::XMLElement *pElement, EOutputStyle eStyle) const;
 
 protected:

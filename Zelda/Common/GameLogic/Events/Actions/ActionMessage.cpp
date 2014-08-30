@@ -21,6 +21,7 @@
 #include "../../../Util/XMLHelper.hpp"
 #include "../../../Message/MessageCreator.hpp"
 #include "../../../Message/MessageHandler.hpp"
+#include "../../../Util/Assert.hpp"
 
 namespace events {
 
@@ -29,6 +30,13 @@ CActionMessage::CActionMessage(const tinyxml2::XMLElement *pElem, const CEvent &
 
   m_pMessage = createMessage(pElem);
 }
+
+CActionMessage::CActionMessage(CMessage *pMessage, const CEvent &owner)
+  : CAction(ACTION_MESSAGE, owner),
+    m_pMessage(pMessage) {
+  ASSERT(m_pMessage);
+}
+
 CActionMessage::~CActionMessage() {
   delete m_pMessage;
 }

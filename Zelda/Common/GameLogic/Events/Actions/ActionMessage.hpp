@@ -30,6 +30,8 @@ namespace events {
     CMessage *m_pMessage;
   public:
     CActionMessage(const tinyxml2::XMLElement *pElem, const CEvent &owner);
+    CActionMessage(CMessage *pMessage, const CEvent &owner);
+
     ~CActionMessage();
 
   protected:

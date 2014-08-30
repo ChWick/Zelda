@@ -28,6 +28,7 @@ namespace events {
     const std::string m_ID;
   public:
     CEmitOnCollision(const tinyxml2::XMLElement *pElem, const CEvent &owner);
+    CEmitOnCollision(const std::string &sID, const CEvent &owner);
 
     bool isFiring(float tpf);
 

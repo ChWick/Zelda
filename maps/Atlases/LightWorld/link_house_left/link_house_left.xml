@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map global_position="-3.2 0 0" global_size="3.2 3.2">
   <player>
-    <event>
+    <event repeat="infinite">
       <emitter type="collision" id="right_margin"/>
       <action type="message" message_type="switch_map" map="link_house"/>
     </event>

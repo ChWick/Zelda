@@ -17,14 +17,40 @@
  * Zelda. If not, see http://www.gnu.org/licenses/.
  *****************************************************************************/
 
-#include "MessageTypes.hpp"
+#include "ActionDeleteObject.hpp"
+#include "../../../Util/XMLHelper.hpp"
+#include "../Event.hpp"
+#include "../../Entity.hpp"
+#include "../../../Log.hpp"
 
-CMessageTypesMap::CMessageTypesMap() {
-  m_Map[MSG_SWITCH_MAP] = "switch_map";
-  m_Map[MSG_TARGET_REACHED] = "target_reached";
-  m_Map[MSG_DEBUG] = "debug";
-  m_Map[MSG_ENTITY_STATE_CHANGED] = "entity_type_changed";
-  m_Map[MSG_PLAYER_PICKUP_ITEM] = "player_pickup_item";
+using namespace XMLHelper;
+
+namespace events {
+
+CActionDeleteObject::CActionDeleteObject(const tinyxml2::XMLElement *pElem, const CEvent &owner)
+  : CAction(pElem, owner),
+    m_sID(Attribute(pElem, "id")),
+    m_pEntity(nullptr) {
+
 }
 
-CMessageTypesMap MESSAGE_TYPES_MAP;
+CActionDeleteObject::CActionDeleteObject(CEntity *pEntity, const CEvent &owner)
+  : CAction(ACTION_DELETE_OBJECT, owner),
+    m_sID(pEntity->getID()),
+    m_pEntity(pEntity) {
+}
+
+CActionDeleteObject::~CActionDeleteObject() {
+}
+
+void CActionDeleteObject::start() {
+  if (m_pEntity) {
+    m_pEntity->deleteLater();
+  }
+  else {
+    // get from id
+    LOGI("Has not be implemented! %s", __FILE__);
+  }
+}
+
+};

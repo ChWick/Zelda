@@ -20,6 +20,7 @@
 #include "HUD.hpp"
 #include "../../GUIComponents/GUIHeartsDisplay.hpp"
 #include "../../GUIComponents/GUICounter.hpp"
+#include "../../Common/Message/MessagePlayerPickupItem.hpp"
 
 using namespace CEGUI;
 
@@ -37,4 +38,10 @@ CHUD::CHUD(CEntity *pParentEntity, CEGUI::Window *pParentWindow)
   m_pRupeeCounter = new CGUICounter("counter_rupee", this, m_pRoot, 4, "hud/Rupee", UVector2(UDim(0.3, 0), UDim(0.05, 0)));
   m_pBombCounter = new CGUICounter("counter_bomb", this, m_pRoot, 4, "hud/Bomb", UVector2(UDim(0.35, 0), UDim(0.05, 0)));
   m_pArrowCounter = new CGUICounter("counter_arrow", this, m_pRoot, 4, "hud/Arrows", UVector2(UDim(0.4, 0), UDim(0.05, 0)));
+}
+
+void CHUD::handleMessage(const CMessage &message) {
+  if (message.getType() == MSG_PLAYER_PICKUP_ITEM) {
+    m_pRupeeCounter->addCount(10);
+  }
 }

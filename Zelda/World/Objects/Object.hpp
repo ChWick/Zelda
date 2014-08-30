@@ -37,6 +37,8 @@ protected:
   void destroyPhysics();
   void createPhysics();
 
+  void makePickable();
+
   virtual SInteractionResult interactOnCollision(const Ogre::Vector3 &vInteractDir, CWorldEntity *pSender);
   virtual SInteractionResult interactOnActivate(const Ogre::Vector3 &vInteractDir, CWorldEntity *pSender);
   virtual void changeState(EEntityStateTypes eState);

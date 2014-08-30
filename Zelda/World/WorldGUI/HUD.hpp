@@ -33,5 +33,8 @@ private:
   CGUICounter *m_pArrowCounter;
 public:
   CHUD(CEntity *pParentEntity, CEGUI::Window *pParentWindow);
+
+private:
+  void handleMessage(const CMessage &message);
 };
 #endif // _HUD_HPP_

@@ -27,6 +27,7 @@ enum EMessageTypes {
   MSG_TARGET_REACHED,
   MSG_DEBUG,
   MSG_ENTITY_STATE_CHANGED,
+  MSG_PLAYER_PICKUP_ITEM,
 };
 
 class CMessageTypesMap : public CEnumIdMap<EMessageTypes> {

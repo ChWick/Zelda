@@ -29,6 +29,11 @@ CEmitOnCollision::CEmitOnCollision(const tinyxml2::XMLElement *pElem, const CEve
     m_ID(XMLHelper::Attribute(pElem, "id")) {
 }
 
+CEmitOnCollision::CEmitOnCollision(const std::string &sID, const CEvent &owner)
+  : CEmitter(EMIT_ON_COLLISION, owner),
+    m_ID(sID) {
+}
+
 bool CEmitOnCollision::isFiring(float tpf) {
   //return m_Owner.getOwner().collidesWith(m_ID);
   return false;
