@@ -1,0 +1,31 @@
+material link_head
+{
+    receive_shadows off
+
+    technique
+    {
+        pass
+        {
+            texture_unit
+            {
+                texture link_head.png
+            }
+        }
+    }
+}
+
+material link_armor
+{
+    receive_shadows off
+
+    technique
+    {
+        pass
+        {
+            texture_unit
+            {
+                texture link_armor.png
+            }
+        }
+    }
+}

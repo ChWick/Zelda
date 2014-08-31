@@ -39,9 +39,9 @@ const Ogre::String CPerson::PERSON_LEFT_HANDLE("Handle.L");
 const Ogre::String CPerson::PERSON_RIGHT_HANDLE("Handle.R");
 const Ogre::Real CPerson::PERSON_HEIGHT = 0.15f;
 const Ogre::Real CPerson::PERSON_RADIUS = 0.05f;
-const Ogre::Real CPerson::PERSON_SCALE  = 1.f;
-const Ogre::Real CPerson::PERSON_PHYSICS_OFFSET = 0;
-const Ogre::Real CPerson::PERSON_FLOOR_OFFSET = 0.075;
+const Ogre::Real CPerson::PERSON_SCALE  = 0.03f;
+const Ogre::Real CPerson::PERSON_PHYSICS_OFFSET = 0.075;
+const Ogre::Real CPerson::PERSON_FLOOR_OFFSET = 0.0;
 
 
 CPerson::CPerson(const std::string &sID, CEntity *pParent, const EFriendOrEnemyStates foe)
@@ -212,22 +212,20 @@ void CPerson::setLeftHandleRotation(const Ogre::Degree &degree, Ogre::Real speed
 }
 
 void CPerson::initBody(Ogre::SceneNode *pParentSceneNode) {
-	Ogre::String meshName = "Cylinder";
+	Ogre::String meshName = "link";
     // create main model
     m_pSceneNode = pParentSceneNode->createChildSceneNode(m_sID + meshName);
     Ogre::SceneNode *pModelSN = m_pSceneNode->createChildSceneNode();
     pModelSN->setScale(PERSON_SCALE, PERSON_SCALE, PERSON_SCALE);
+    pModelSN->setPosition(0, -PERSON_PHYSICS_OFFSET, 0);
     m_pBodyEntity = pParentSceneNode->getCreator()->createEntity(pModelSN->getName() + ".mesh", meshName + ".mesh");
     m_pBodyEntity->setCastShadows(true);
-    m_pBodyEntity->setMaterialName("water_side_wave");
     pModelSN->attachObject(m_pBodyEntity);
 
     m_pSceneNode->setUserAny(Ogre::Any(dynamic_cast<CCharacter*>(this)));
     m_pBodyEntity->setUserAny(Ogre::Any(dynamic_cast<CCharacter*>(this)));
 
 	createBlinkingMaterials();
-
-	pModelSN->setPosition(0, 0, 0);
 }
 
 void CPerson::createHandObject(const Ogre::String &parentBone, EHands handPos, const Ogre::String &meshName) {
