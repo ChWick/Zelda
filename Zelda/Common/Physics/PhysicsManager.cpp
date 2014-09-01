@@ -162,11 +162,11 @@ void CPhysicsManager::update(Ogre::Real tpf) {
 		m_Messages.pop_front();
 	}
 
-  float fixedsubstep = 1.f/1000.f;
-  int maxNumSubsteps = 1;
+  float fixedsubstep = 1.f/60.f;
+  int maxNumSubsteps = 2;
 
 	 //Update Bullet world. Don't forget the debugDrawWorld() part!
-  m_pPhyWorld->stepSimulation(tpf, 1);
+  m_pPhyWorld->stepSimulation(tpf, maxNumSubsteps);
 
 
 #ifdef PHYSICS_DEBUG

@@ -57,7 +57,7 @@ void CPersonController::updateCharacter(const Ogre::Real deltaTime) {
 	m_fTimer -= deltaTime;
   Ogre::Real runOrWalkSpeed = (m_uiCurrentMoveState == MS_RUNNING) ? RUN_SPEED : WALK_SPEED;
 	Real posIncrementPerSecond = runOrWalkSpeed * 0.001f;
-  mCCPhysics->setSubSteps(ceil(runOrWalkSpeed / WALK_SPEED));
+	mCCPhysics->setSubSteps(ceil(runOrWalkSpeed / WALK_SPEED));
 
 	Vector3 playerPos = mCCPerson->getPosition();
 
@@ -69,7 +69,11 @@ void CPersonController::updateCharacter(const Ogre::Real deltaTime) {
 
 	if (position != playerPos)
 	{
-		mBodyNode->translate((position - playerPos) * 50 * deltaTime * runOrWalkSpeed / WALK_SPEED);
+	  Ogre::Vector3 vTranslateDirection = position - playerPos;
+	  Ogre::Real fTranslateDistance = vTranslateDirection.normalise();
+	  Ogre::Real fDesiredDistance = 50 * deltaTime * runOrWalkSpeed / WALK_SPEED;
+	  
+	  mBodyNode->translate(vTranslateDirection * std::min<Ogre::Real>(fTranslateDistance, fDesiredDistance));
 		//mBodyNode->setPosition(position);
 
 		if (!mIsFalling && !mCCPhysics->onGround()) // last frame we were on ground and now we're in "air"
