@@ -41,7 +41,7 @@ const Ogre::Real CPerson::PERSON_HEIGHT = 0.15f;
 const Ogre::Real CPerson::PERSON_RADIUS = 0.05f;
 const Ogre::Real CPerson::PERSON_SCALE  = 0.03f;
 const Ogre::Real CPerson::PERSON_PHYSICS_OFFSET = 0.075;
-const Ogre::Real CPerson::PERSON_FLOOR_OFFSET = 0.0;
+const Ogre::Real CPerson::PERSON_FLOOR_OFFSET = 0.075;
 
 
 CPerson::CPerson(const std::string &sID, CEntity *pParent, const EFriendOrEnemyStates foe)
@@ -148,15 +148,15 @@ void CPerson::destroyPhysics() {
 void CPerson::setupAnimations() {
 	Ogre::StringVector animNames(ANIM_COUNT);
 	animNames[ANIM_IDLE] = "Idle";
-	animNames[ANIM_RUN] = "Run";
+	//animNames[ANIM_RUN] = "Run";
 	animNames[ANIM_WALK] = "Walk";
-	animNames[ANIM_HANDS_CLOSED] = "HandsClosed";
+	/*animNames[ANIM_HANDS_CLOSED] = "HandsClosed";
 	animNames[ANIM_HANDS_RELAXED] = "HandsRelaxed";
 	animNames[ANIM_SLICE_HORIZONTAL] = "SliceHorizontal";
 	animNames[ANIM_BOW_SHOT] = "BowShot";
 	animNames[ANIM_JUMP_START] = "JumpStart";
 	animNames[ANIM_JUMP_LOOP] = "JumpLoop";
-	animNames[ANIM_JUMP_END] = "JumpEnd";
+	animNames[ANIM_JUMP_END] = "JumpEnd";*/
 
 	// this is very important due to the nature of the exported animations
     m_pBodyEntity->getSkeleton()->setBlendMode(Ogre::ANIMBLEND_CUMULATIVE);
@@ -170,29 +170,29 @@ void CPerson::setupAnimations() {
         m_Anims[i]->setWeight(0);
     }
 
-    m_Anims[ANIM_HANDS_CLOSED]->setWeight(1);
-    m_Anims[ANIM_HANDS_RELAXED]->setWeight(1);
+    //m_Anims[ANIM_HANDS_CLOSED]->setWeight(1);
+    //m_Anims[ANIM_HANDS_RELAXED]->setWeight(1);
 
-    m_Anims[ANIM_JUMP_END]->setLoop(false);
-    m_Anims[ANIM_JUMP_START]->setLoop(false);
+    //m_Anims[ANIM_JUMP_END]->setLoop(false);
+    //m_Anims[ANIM_JUMP_START]->setLoop(false);
 
 
 	// relax the hands since we're not holding anything
-	m_Anims[ANIM_HANDS_RELAXED]->setEnabled(true);
+	//m_Anims[ANIM_HANDS_RELAXED]->setEnabled(true);
 
 
     // start off in the idle state (top and bottom together)
     setAnimation(ANIM_IDLE);
 
     // we will manually set the direction of the tool in the left hand
-    Ogre::Bone *pLHandleBone = m_pBodyEntity->getSkeleton()->getBone(PERSON_LEFT_HANDLE);
+    /*Ogre::Bone *pLHandleBone = m_pBodyEntity->getSkeleton()->getBone(PERSON_LEFT_HANDLE);
     pLHandleBone->setManuallyControlled(true);
     int numAnimations = m_pBodyEntity->getSkeleton()->getNumAnimations();
     for(int i=0;i<numAnimations;i++){
         // remonveall possible tracks of the bone in the animations
        Ogre::Animation * anim = m_pBodyEntity->getSkeleton()->getAnimation(i);
        anim->destroyNodeTrack(pLHandleBone->getHandle());
-    }
+    }*/
 }
 void CPerson::setLeftHandleRotation(const Ogre::Degree &degree, Ogre::Real speed) {
     m_degLeftHandleRotationToTarget = degree - m_degLeftHandleCurrentRotation;
@@ -226,6 +226,7 @@ void CPerson::initBody(Ogre::SceneNode *pParentSceneNode) {
     m_pBodyEntity->setUserAny(Ogre::Any(dynamic_cast<CCharacter*>(this)));
 
 	createBlinkingMaterials();
+  setupAnimations();
 }
 
 void CPerson::createHandObject(const Ogre::String &parentBone, EHands handPos, const Ogre::String &meshName) {

@@ -390,8 +390,13 @@ void CGame::createScene() {
   mSceneMgr = mRoot->createSceneManager(Ogre::ST_GENERIC, "MainSceneManager");
   mSceneMgr->addRenderQueueListener(mOverlaySystem);
 
+  if (mRoot->getRenderSystem()->getCapabilities()->hasCapability(Ogre::RSC_HWSTENCIL)) {
+    mSceneMgr->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_MODULATIVE);
+  }
+  else {
+    mSceneMgr->setShadowTechnique(Ogre::SHADOWTYPE_TEXTURE_MODULATIVE);
+  }
 
-  mSceneMgr->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_MODULATIVE  );
   //-------------------------------------------------------------------------------------
   // create camera
   // Create the camera

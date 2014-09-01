@@ -112,9 +112,9 @@ void CCharacter::update(Ogre::Real fTime) {
   CWorldEntity::update(fTime);
 
   m_pCharacterController->updateCharacter(fTime);
-  //preUpdateBoundsCallback(fTime);
-  //preAnimationUpdateCallback(fTime);
-  //updateAnimations(fTime);
+  preUpdateBoundsCallback(fTime);
+  preAnimationUpdateCallback(fTime);
+  updateAnimations(fTime);
 }
 
 void CCharacter::updateAnimations(Ogre::Real fTime) {
@@ -133,7 +133,7 @@ void CCharacter::updateAnimations(Ogre::Real fTime) {
 }
 
 void CCharacter::updateAnimationsCallback(const Ogre::Real fTime) {
-  if (m_uiAnimID == ANIM_JUMP_END && m_Anims[ANIM_JUMP_END]->hasEnded()) {
+  /*if (m_uiAnimID == ANIM_JUMP_END && m_Anims[ANIM_JUMP_END]->hasEnded()) {
     if (!m_bMoving) {
       setAnimation(ANIM_IDLE);
     }
@@ -143,13 +143,13 @@ void CCharacter::updateAnimationsCallback(const Ogre::Real fTime) {
   }
   else if (m_uiAnimID == ANIM_JUMP_START && m_Anims[ANIM_JUMP_START]->hasEnded()) {
     setAnimation(ANIM_JUMP_LOOP);
-  }
+  }*/
 
   if (m_bMoving && (m_uiAnimID == ANIM_IDLE || m_uiAnimID == ANIM_NONE)) {
-    setAnimation(ANIM_RUN);
+    setAnimation(ANIM_WALK);
   }
   else if (!m_bMoving) {
-    if (m_uiAnimID == ANIM_RUN || m_uiAnimID == ANIM_NONE) {
+    if (m_uiAnimID == ANIM_WALK || m_uiAnimID == ANIM_NONE) {
       setAnimation(ANIM_IDLE);
     }
   }

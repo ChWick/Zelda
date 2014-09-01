@@ -51,8 +51,8 @@ public:
 	//! Animationen die man als Charakter haben kann
 	enum EDefaultAnimationIDs {
 		ANIM_IDLE,
-		ANIM_RUN,
 		ANIM_WALK,
+		/*ANIM_RUN,
 		ANIM_HANDS_CLOSED,
 		ANIM_HANDS_RELAXED,
 		ANIM_SLICE_HORIZONTAL,
@@ -65,7 +65,7 @@ public:
 		ANIM_RUN_HEAVY,
 		ANIM_FALL,
 		ANIM_WALK_ON_LADDER,
-		ANIM_WALK_ON_LADDER_END,
+		ANIM_WALK_ON_LADDER_END,*/
 
 		ANIM_COUNT
 	};

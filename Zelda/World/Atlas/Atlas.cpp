@@ -114,7 +114,7 @@ void CAtlas::handleMessage(const CMessage &message) {
         m_bSwitchingMaps = true;
 
         Ogre::Vector3 vPlayerPos = m_pPlayer->getPosition() + vMapPositionOffset;
-        m_pPlayer->enterMap(m_pNextMap, vPlayerPos + vDirection * 0.3);
+        m_pPlayer->enterMap(m_pNextMap, vPlayerPos + vDirection * 0.2);
         m_pPlayer->setPosition(vPlayerPos);
 
         m_bPlayerTargetReached = false;

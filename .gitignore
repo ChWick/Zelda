@@ -50,6 +50,7 @@ Makefile
 cotire*
 CMakeCache.txt
 *.mesh.xml
+*.skeleton.xml
 *.blend1
 *.blend2
 *.blend3
