@@ -55,6 +55,8 @@ public:
   virtual bool frameEnded(const Ogre::FrameEvent& evt);
 
 
+  void attack(unsigned int uiTool);
+
   virtual bool collidesWith(const std::string &sEntityID) const;
   virtual void interact() {}
 
@@ -65,8 +67,6 @@ protected:
 	void destroyPhysics();
 	virtual void setupAnimations();
 	virtual void initBody(Ogre::SceneNode *pParentSceneNode);
-
-  void attack(unsigned int uiTool);
 
 	void updateAnimationsCallback(const Ogre::Real fTime);
 	void postUpdateAnimationsCallback(const Ogre::Real fTime);
@@ -82,7 +82,7 @@ protected:
 	void removeBlinkingMaterials();
 
 	friend class CShield;
-private:
+protected:
 	void createHandObject(const Ogre::String &parentBone, EHands handPos, const Ogre::String &meshName);
 };
 

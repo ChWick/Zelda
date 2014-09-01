@@ -206,6 +206,10 @@ void CPersonController::updateCharacter(const Ogre::Real deltaTime) {
 		if (m_fTimer <= 0) {
 			changeMoveState(MS_NORMAL);
 		}
+    else {
+      mCCPhysics->setWalkDirection(btVector3(0, 0, 0));
+      mCCPerson->setIsMoving(false);
+    }
 	}
   else if (m_uiCurrentMoveState == MS_RUN_START) {
     if (m_fTimer <= 0) {

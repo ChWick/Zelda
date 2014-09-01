@@ -54,6 +54,11 @@ void CPlayerController::receiveInputCommand(const CGameInputCommand &cmd) {
 	case GIC_REAR:
 		mKeyDirection.z = cmd.getIntValue();
 		break;
+  case GIC_SWORD:
+    if (cmd.getState() == GIS_PRESSED) {
+      mCCPerson->attack(0);
+    }
+    break;
   case GIC_INTERACT:
     if (cmd.getState() == GIS_PRESSED) {
       mCCPerson->interact();

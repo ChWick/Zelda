@@ -35,11 +35,11 @@
 //const Ogre::Real PERSONS_MASS = 1.0f;
 const Ogre::String CPerson::PERSON_SHEATH("Sheath");
 const Ogre::String CPerson::PERSON_SHIELD_PACKED("ShieldPacked");
-const Ogre::String CPerson::PERSON_LEFT_HANDLE("Handle.L");
-const Ogre::String CPerson::PERSON_RIGHT_HANDLE("Handle.R");
+const Ogre::String CPerson::PERSON_LEFT_HANDLE("Handle_L");
+const Ogre::String CPerson::PERSON_RIGHT_HANDLE("Handle_R");
 const Ogre::Real CPerson::PERSON_HEIGHT = 0.10f;
 const Ogre::Real CPerson::PERSON_RADIUS = 0.03f;
-const Ogre::Real CPerson::PERSON_SCALE  = 0.03f;
+const Ogre::Real CPerson::PERSON_SCALE  = 1.5f;
 const Ogre::Real CPerson::PERSON_PHYSICS_OFFSET = PERSON_HEIGHT / 2 + 0.005;
 const Ogre::Real CPerson::PERSON_FLOOR_OFFSET = PERSON_HEIGHT / 2;
 
@@ -149,6 +149,7 @@ void CPerson::setupAnimations() {
 	Ogre::StringVector animNames(ANIM_COUNT);
 	animNames[ANIM_IDLE] = "Idle";
 	//animNames[ANIM_RUN] = "Run";
+	animNames[ANIM_SLICE_HORIZONTAL] = "SwordAttack";
 	animNames[ANIM_WALK] = "Walk";
 	/*animNames[ANIM_HANDS_CLOSED] = "HandsClosed";
 	animNames[ANIM_HANDS_RELAXED] = "HandsRelaxed";
@@ -185,14 +186,14 @@ void CPerson::setupAnimations() {
     setAnimation(ANIM_IDLE);
 
     // we will manually set the direction of the tool in the left hand
-    /*Ogre::Bone *pLHandleBone = m_pBodyEntity->getSkeleton()->getBone(PERSON_LEFT_HANDLE);
+    Ogre::Bone *pLHandleBone = m_pBodyEntity->getSkeleton()->getBone(PERSON_LEFT_HANDLE);
     pLHandleBone->setManuallyControlled(true);
     int numAnimations = m_pBodyEntity->getSkeleton()->getNumAnimations();
     for(int i=0;i<numAnimations;i++){
         // remonveall possible tracks of the bone in the animations
        Ogre::Animation * anim = m_pBodyEntity->getSkeleton()->getAnimation(i);
        anim->destroyNodeTrack(pLHandleBone->getHandle());
-    }*/
+    }
 }
 void CPerson::setLeftHandleRotation(const Ogre::Degree &degree, Ogre::Real speed) {
     m_degLeftHandleRotationToTarget = degree - m_degLeftHandleCurrentRotation;
@@ -216,7 +217,7 @@ void CPerson::initBody(Ogre::SceneNode *pParentSceneNode) {
     // create main model
     m_pSceneNode = pParentSceneNode->createChildSceneNode(m_sID + meshName);
     Ogre::SceneNode *pModelSN = m_pSceneNode->createChildSceneNode();
-    pModelSN->setScale(PERSON_SCALE * 1.5, PERSON_SCALE * 0.6, PERSON_SCALE * 1.5);
+    pModelSN->setScale(PERSON_SCALE, PERSON_SCALE, PERSON_SCALE);
     pModelSN->setPosition(0, -PERSON_PHYSICS_OFFSET, 0);
     m_pBodyEntity = pParentSceneNode->getCreator()->createEntity(pModelSN->getName() + ".mesh", meshName + ".mesh");
     m_pBodyEntity->setCastShadows(true);
@@ -230,6 +231,7 @@ void CPerson::initBody(Ogre::SceneNode *pParentSceneNode) {
 }
 
 void CPerson::createHandObject(const Ogre::String &parentBone, EHands handPos, const Ogre::String &meshName) {
+  m_pBodyEntity->attachObjectToBone(parentBone, m_pSceneNode->getCreator()->createEntity(meshName));
 }
 
 void CPerson::postUpdateAnimationsCallback(const Ogre::Real fTime) {
@@ -279,4 +281,12 @@ void CPerson::endBeingInvulnerableCallback() {
 	/*for (unsigned int i = 0; i < m_pBodyEntity->getNumSubEntities(); i++) {
 		m_pBodyEntity->getSubEntity(i)->setMaterialName(CBlinkingMaterialManager::getSingleton().getNonBlinkingMat(m_pBodyEntity->getSubEntity(i)->getMaterialName()));
 	}*/
+}
+
+
+void CPerson::attack(unsigned int uiTool) {
+  if (m_uiAnimID == ANIM_NONE || m_uiAnimID == ANIM_IDLE || m_uiAnimID == ANIM_WALK) {
+    animAttack();
+    dynamic_cast<CPersonController*>(m_pCharacterController)->stun(m_Anims[ANIM_SLICE_HORIZONTAL]->getLength());
+  }
 }

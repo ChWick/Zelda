@@ -133,6 +133,9 @@ void CCharacter::updateAnimations(Ogre::Real fTime) {
 }
 
 void CCharacter::updateAnimationsCallback(const Ogre::Real fTime) {
+  if (m_uiAnimID == ANIM_SLICE_HORIZONTAL && m_fTimer >= m_Anims[ANIM_SLICE_HORIZONTAL]->getLength()) {
+    setAnimation(ANIM_IDLE);
+  }
   /*if (m_uiAnimID == ANIM_JUMP_END && m_Anims[ANIM_JUMP_END]->hasEnded()) {
     if (!m_bMoving) {
       setAnimation(ANIM_IDLE);
@@ -227,7 +230,7 @@ void CCharacter::animJumpEnd()
 	m_fTimer = 0;
 }
 void CCharacter::animAttack() {
-  //setAnimation(ANIM_SLICE_HORIZONTAL, true);
+  setAnimation(ANIM_SLICE_HORIZONTAL, true);
   m_fTimer = 0;
 }
 void CCharacter::animAttackEnd() {

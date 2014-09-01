@@ -29,3 +29,19 @@ material link_armor
         }
     }
 }
+
+material link_sword
+{
+    receive_shadows off
+
+    technique
+    {
+        pass
+        {
+            texture_unit
+            {
+                texture link_sword.png
+            }
+        }
+    }
+}

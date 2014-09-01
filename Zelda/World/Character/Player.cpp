@@ -57,7 +57,7 @@ void CPlayer::setupInternal()  {
 	Ogre::LogManager::getSingleton().logMessage("Creating swords");
 	//createTool(CPlayerTool::TOOL_SWORD, false);
 	//createShield(CShield::ST_SIMPLE_SHIELD, false);
-	//createHandObject(PERSON_RIGHT_HANDLE, RIGHT_HAND, "SimpleShield");
+	createHandObject(PERSON_LEFT_HANDLE, RIGHT_HAND, "link_sword.mesh");
 
 
 	/*LogManager::getSingleton().logMessage("Creating the chains");
