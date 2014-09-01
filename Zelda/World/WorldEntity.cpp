@@ -163,7 +163,7 @@ CWorldEntity::SInteractionResult CWorldEntity::interactOnCollision(const Ogre::V
   return SInteractionResult();
 }
 
-CWorldEntity::EReceiveDamageResult CWorldEntity::receiveDamage(const CDamage &damage) {
+void CWorldEntity::damageAccepted(const CDamage &damage) {
   using namespace events;
   for (auto &pEvt : m_lEvents) {
     for (auto &pEmit : pEvt->getEmitter()) {
@@ -175,6 +175,4 @@ CWorldEntity::EReceiveDamageResult CWorldEntity::receiveDamage(const CDamage &da
       }
     }
   }
-
-  return CHitableInterface::receiveDamage(damage);
 }

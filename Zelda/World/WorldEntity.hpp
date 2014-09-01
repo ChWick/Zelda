@@ -73,7 +73,7 @@ public:
   virtual SInteractionResult interactOnCollision(const Ogre::Vector3 &vInteractDir, CWorldEntity *pSender);
 
 protected:
-  virtual EReceiveDamageResult receiveDamage(const CDamage &damage);
+  virtual void damageAccepted(const CDamage &damage);
 };
 
 #endif // _WORLD_ENTITY_HPP_

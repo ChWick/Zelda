@@ -24,7 +24,6 @@
 #include "../Atlas/TileTypes.hpp"
 #include "../GlobalCollisionShapesTypes.hpp"
 #include <LinearMath/btVector3.h>
-#include "../DamageTypes.hpp"
 
 enum EObjectTypes {
   OBJECT_GREEN_BUSH,
@@ -45,7 +44,7 @@ struct SObjectTypeData {
   std::string sMeshName;
   std::string sMaterialName;
 
-  EDamageType eDamageSourceMask;
+  unsigned int eDamageSourceMask;
 
   ETileTypes eNormalTile;
   ETileTypes eRemovedTile;
@@ -56,11 +55,11 @@ struct SObjectTypeData {
 
   SObjectTypeData() {}
   SObjectTypeData(SObjectTypeData &&) = default;
-  SObjectTypeData(bool userHandle, bool isStatic, const std::string &id, const std::string &meshName, const std::string &materialName, EDamageType damageSourceMask);
-  SObjectTypeData(bool userHandle, bool isStatic, const std::string &id, const std::string &meshName, const std::string &materialName, EDamageType damageSourceMask, const btVector3 &physicsShapeScale);
-  SObjectTypeData(bool userHandle, bool isStatic, const std::string &id, const std::string &meshName, const std::string &materialName, EDamageType damageSourceMask, EGlobalCollisionShapesTypes collisionShape);
+  SObjectTypeData(bool userHandle, bool isStatic, const std::string &id, const std::string &meshName, const std::string &materialName, unsigned int damageSourceMask);
+  SObjectTypeData(bool userHandle, bool isStatic, const std::string &id, const std::string &meshName, const std::string &materialName, unsigned int damageSourceMask, const btVector3 &physicsShapeScale);
+  SObjectTypeData(bool userHandle, bool isStatic, const std::string &id, const std::string &meshName, const std::string &materialName, unsigned int damageSourceMask, EGlobalCollisionShapesTypes collisionShape);
 
-  SObjectTypeData(bool userHandle, bool isStatic, const std::string &id, const std::string &meshName, const std::string &materialName, EDamageType damageSourceMask, ETileTypes normalTile, ETileTypes removedTile, EGlobalCollisionShapesTypes collisionShape);
+  SObjectTypeData(bool userHandle, bool isStatic, const std::string &id, const std::string &meshName, const std::string &materialName, unsigned int damageSourceMask, ETileTypes normalTile, ETileTypes removedTile, EGlobalCollisionShapesTypes collisionShape);
 
   SObjectTypeData &operator=(const SObjectTypeData&) = default;
 };

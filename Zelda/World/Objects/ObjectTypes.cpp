@@ -18,8 +18,9 @@
  *****************************************************************************/
 
 #include "ObjectTypes.hpp"
+#include "../DamageTypes.hpp"
 
-SObjectTypeData::SObjectTypeData(bool userHandle, bool isStatic, const std::string &id, const std::string &meshName, const std::string &materialName, EDamageType damageSourceMask)
+SObjectTypeData::SObjectTypeData(bool userHandle, bool isStatic, const std::string &id, const std::string &meshName, const std::string &materialName, unsigned int damageSourceMask)
   : bUserHandle(userHandle),
     bPermanetStatic(isStatic),
     sID(id),
@@ -32,7 +33,7 @@ SObjectTypeData::SObjectTypeData(bool userHandle, bool isStatic, const std::stri
     vPhysicsShapeScale(1, 1, 1) {
 }
 
-SObjectTypeData::SObjectTypeData(bool userHandle, bool isStatic, const std::string &id, const std::string &meshName, const std::string &materialName, EDamageType damageSourceMask, const btVector3 &physicsShapeScale)
+SObjectTypeData::SObjectTypeData(bool userHandle, bool isStatic, const std::string &id, const std::string &meshName, const std::string &materialName, unsigned int damageSourceMask, const btVector3 &physicsShapeScale)
   : bUserHandle(userHandle),
     bPermanetStatic(isStatic),
     sID(id),
@@ -45,7 +46,7 @@ SObjectTypeData::SObjectTypeData(bool userHandle, bool isStatic, const std::stri
     vPhysicsShapeScale(physicsShapeScale) {
 }
 
-SObjectTypeData::SObjectTypeData(bool userHandle, bool isStatic, const std::string &id, const std::string &meshName, const std::string &materialName, EDamageType damageSourceMask, EGlobalCollisionShapesTypes collisionShape)
+SObjectTypeData::SObjectTypeData(bool userHandle, bool isStatic, const std::string &id, const std::string &meshName, const std::string &materialName, unsigned int damageSourceMask, EGlobalCollisionShapesTypes collisionShape)
   : bUserHandle(userHandle),
     bPermanetStatic(isStatic),
     sID(id),
@@ -58,7 +59,7 @@ SObjectTypeData::SObjectTypeData(bool userHandle, bool isStatic, const std::stri
     vPhysicsShapeScale(1, 1, 1) {
 }
 
-SObjectTypeData::SObjectTypeData(bool userHandle, bool isStatic, const std::string &id, const std::string &meshName, const std::string &materialName, EDamageType damageSourceMask, ETileTypes normalTile, ETileTypes removedTile, EGlobalCollisionShapesTypes collisionShape)
+SObjectTypeData::SObjectTypeData(bool userHandle, bool isStatic, const std::string &id, const std::string &meshName, const std::string &materialName, unsigned int damageSourceMask, ETileTypes normalTile, ETileTypes removedTile, EGlobalCollisionShapesTypes collisionShape)
   : bUserHandle(userHandle),
     bPermanetStatic(isStatic),
     sID(id),
@@ -74,9 +75,9 @@ SObjectTypeData::SObjectTypeData(bool userHandle, bool isStatic, const std::stri
 CObjectTypeIdMap::CObjectTypeIdMap() {
   m_Map[OBJECT_GREEN_BUSH] = SObjectTypeData(true, false, "green_bush", "GreenBush", "soil", DMG_SWORD, TT_GREEN_SOIL_BUSH_SHADOW, TT_GREEN_SOIL_GRASS_BL_BR_TL_TR, GCST_PICKABLE_OBJECT_SPHERE);
   m_Map[OBJECT_LIGHT_STONE] = SObjectTypeData(true, false, "light_stone", "light_stone", "soil", DMG_NONE, TT_GREEN_SOIL_STONE_SHADOW, TT_GREEN_SOIL, GCST_PICKABLE_OBJECT_SPHERE);
-  m_Map[OBJECT_LIGHT_STONE_PILE] = SObjectTypeData(true, true, "lw_light_stone_pile", "lw_light_stone_pile", "soil", DMG_WORLD, TT_GREEN_SOIL_STONE_PILE_SHADOW, TT_GREEN_SOIL, GCST_STONE_PILE);
+  m_Map[OBJECT_LIGHT_STONE_PILE] = SObjectTypeData(true, false, "lw_light_stone_pile", "lw_light_stone_pile", "soil", DMG_WORLD | DMG_RUN, TT_GREEN_SOIL_STONE_PILE_SHADOW, TT_GREEN_SOIL, GCST_STONE_PILE);
 
-  m_Map[OBJECT_GREEN_TREE] = SObjectTypeData(true, true, "green_tree", "green_tree", "soil", DMG_NONE, GCST_TREE);
+  m_Map[OBJECT_GREEN_TREE] = SObjectTypeData(true, true, "green_tree", "green_tree", "soil", DMG_RUN, GCST_TREE);
   
   m_Map[OBJECT_GREEN_RUPEE] = SObjectTypeData(true, false, "rupee_green", "rupee", "Rupee/Green", DMG_NONE, GCST_FALLING_OBJECT_SPHERE);
   m_Map[OBJECT_BLUE_RUPEE] = SObjectTypeData(true, false, "rupee_blue", "rupee", "Rupee/Blue", DMG_NONE, GCST_FALLING_OBJECT_SPHERE);

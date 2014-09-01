@@ -58,6 +58,7 @@ CObject::CObject(const std::string &id, CWorldEntity *pParent, CMap *pMap, EObje
   // create entity
   if (m_ObjectTypeData.bPermanetStatic) {
     m_pMap->addStaticEntity(m_ObjectTypeData.sMeshName + ".mesh", m_pSceneNode->getPosition(), m_pSceneNode->getOrientation());
+    setMaxHP(HP_INFINITY);
   }
   else {
     pEntity = pSceneManager->createEntity(id + "ent", m_ObjectTypeData.sMeshName + ".mesh", "World");
@@ -78,6 +79,7 @@ CObject::CObject(const std::string &id, CWorldEntity *pParent, CMap *pMap, EObje
   default:
     break;
   }
+
 }
 
 void CObject::destroyPhysics() {
@@ -264,6 +266,7 @@ CObject::SInteractionResult CObject::interactOnActivate(const Ogre::Vector3 &vIn
 
 CObject::EReceiveDamageResult CObject::receiveDamage(const CDamage &dmg) {
   if ((m_ObjectTypeData.eDamageSourceMask & dmg.getDamageType()) == dmg.getDamageType()) {
+    CWorldEntity::receiveDamage(dmg);
     return RDR_ACCEPTED;
   }
   return RDR_IGNORED;
