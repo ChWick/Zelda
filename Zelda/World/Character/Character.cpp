@@ -239,6 +239,10 @@ void CCharacter::setIsMoving(bool isMoving) {
 	m_bMoving = isMoving;
 }
 
+bool CCharacter::isReadyForNewAction() {
+  return m_uiAnimID == ANIM_NONE || m_uiAnimID == ANIM_IDLE || m_uiAnimID == ANIM_WALK;
+}
+
 short CCharacter::getCollisionMask() {
     switch (m_eFriendOrEnemy) {
     case FOE_ENEMY:

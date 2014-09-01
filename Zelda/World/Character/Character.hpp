@@ -159,6 +159,7 @@ protected:
 	virtual short getCollisionMask();
 	virtual short getCollisionGroup();
 
+  virtual bool isReadyForNewAction();
 	void fadeAnimations(const Ogre::Real deltaTime);
 };
 

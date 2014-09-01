@@ -88,7 +88,7 @@ CHitableInterface::EReceiveDamageResult CHitableInterface::hit(const CDamage &da
   EReceiveDamageResult r = receiveDamage(damage);
   switch (r) {
   case RDR_ACCEPTED:
-    changeHP(damage.getDamageValue());
+    changeHP(-damage.getDamageValue());
     damageAccepted(damage);
     break;
   case RDR_BLOCKED:

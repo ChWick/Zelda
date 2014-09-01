@@ -34,11 +34,13 @@
 #include "../../Common/GameLogic/Events/Actions/ActionMessage.hpp"
 #include "../../Common/GameLogic/Events/Event.hpp"
 #include "../../Common/Message/MessagePlayerPickupItem.hpp"
+#include "../Damage.hpp"
 
 unsigned int OBJECT_INNER_OBJECT_ID_NUMBER_COUNTER = 0;
 
 CObject::CObject(const std::string &id, CWorldEntity *pParent, CMap *pMap, EObjectTypes eObjectType, Ogre::SceneNode *pSceneNode)
-  : CWorldEntity(id, pParent, pMap) {
+  : CWorldEntity(id, pParent, pMap),
+    m_ObjectTypeData(OBJECT_TYPE_ID_MAP.toData(eObjectType)) {
 
   setType(eObjectType);
 
@@ -53,15 +55,13 @@ CObject::CObject(const std::string &id, CWorldEntity *pParent, CMap *pMap, EObje
 
   Ogre::Entity *pEntity(nullptr);
 
-  const SObjectTypeData &objectTypeData(OBJECT_TYPE_ID_MAP.toData(eObjectType));
-
   // create entity
-  if (objectTypeData.bPermanetStatic) {
-    m_pMap->addStaticEntity(objectTypeData.sMeshName + ".mesh", m_pSceneNode->getPosition(), m_pSceneNode->getOrientation());
+  if (m_ObjectTypeData.bPermanetStatic) {
+    m_pMap->addStaticEntity(m_ObjectTypeData.sMeshName + ".mesh", m_pSceneNode->getPosition(), m_pSceneNode->getOrientation());
   }
   else {
-    pEntity = pSceneManager->createEntity(id + "ent", objectTypeData.sMeshName + ".mesh", "World");
-    pEntity->setMaterialName(objectTypeData.sMaterialName);
+    pEntity = pSceneManager->createEntity(id + "ent", m_ObjectTypeData.sMeshName + ".mesh", "World");
+    pEntity->setMaterialName(m_ObjectTypeData.sMaterialName);
     m_pSceneNode->attachObject(pEntity);
     pEntity->setCastShadows(false);
   }
@@ -81,12 +81,10 @@ CObject::CObject(const std::string &id, CWorldEntity *pParent, CMap *pMap, EObje
 }
 
 void CObject::destroyPhysics() {
-  const SObjectTypeData &objectTypeData(OBJECT_TYPE_ID_MAP.toData(static_cast<EObjectTypes>(m_uiType)));
-
   if (m_pCollisionObject) {
     btRigidBody *pRigidBody(btRigidBody::upcast(m_pCollisionObject));
     m_pMap->getPhysicsManager()->getWorld()->removeRigidBody(pRigidBody);
-    if (objectTypeData.eCollisionShape == GCST_COUNT) {
+    if (m_ObjectTypeData.eCollisionShape == GCST_COUNT) {
       delete m_pCollisionObject->getCollisionShape();
     }
     delete pRigidBody->getMotionState();
@@ -97,15 +95,14 @@ void CObject::destroyPhysics() {
 
 void CObject::createPhysics() {
   ASSERT(!m_pCollisionObject);
-  const SObjectTypeData &objectTypeData(OBJECT_TYPE_ID_MAP.toData(static_cast<EObjectTypes>(m_uiType)));
 
   btCollisionShape *pCollisionShape(nullptr);
   btVector3 vCollisionShapeOffset;
   btVector3 vInertia;
-  float fMass = objectTypeData.bPermanetStatic ? 0 : 0.1;
+  float fMass = m_ObjectTypeData.bPermanetStatic ? 0 : 0.1;
 
-  if (objectTypeData.eCollisionShape != GCST_COUNT) {
-    const CPhysicsCollisionObject &pco = m_pMap->getPhysicsManager()->getCollisionShape(GLOBAL_COLLISION_SHAPES_TYPES_ID_MAP.toString(objectTypeData.eCollisionShape));
+  if (m_ObjectTypeData.eCollisionShape != GCST_COUNT) {
+    const CPhysicsCollisionObject &pco = m_pMap->getPhysicsManager()->getCollisionShape(GLOBAL_COLLISION_SHAPES_TYPES_ID_MAP.toString(m_ObjectTypeData.eCollisionShape));
     pCollisionShape = pco.getShape();
     vCollisionShapeOffset = BtOgre::Convert::toBullet(pco.getOffset());
   }
@@ -117,7 +114,7 @@ void CObject::createPhysics() {
 
   pCollisionShape->calculateLocalInertia(fMass, vInertia);
   btMotionState *pMotionState(nullptr);
-  if (objectTypeData.bPermanetStatic) {
+  if (m_ObjectTypeData.bPermanetStatic) {
     pMotionState = new btDefaultMotionState(btTransform(btQuaternion::getIdentity(), vCollisionShapeOffset));
   }
   else {
@@ -265,9 +262,10 @@ CObject::SInteractionResult CObject::interactOnActivate(const Ogre::Vector3 &vIn
   return CWorldEntity::interactOnActivate(vInteractDir, pSender);
 }
 
-CObject::EReceiveDamageResult CObject::hit(const CDamage &dmg) {
-  CWorldEntity::hit(dmg); // for processing events
-  //deleteLater();
+CObject::EReceiveDamageResult CObject::receiveDamage(const CDamage &dmg) {
+  if ((m_ObjectTypeData.eDamageSourceMask & dmg.getDamageType()) == dmg.getDamageType()) {
+    return RDR_ACCEPTED;
+  }
   return RDR_IGNORED;
 }
 
@@ -282,5 +280,9 @@ void CObject::createInnerObject(EObjectTypes eType) {
 
   default:
     break;
+  }
 }
+
+void CObject::killedCallback() {
+  deleteLater();
 }

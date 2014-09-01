@@ -24,6 +24,7 @@
 #include "../Atlas/TileTypes.hpp"
 #include "../GlobalCollisionShapesTypes.hpp"
 #include <LinearMath/btVector3.h>
+#include "../DamageTypes.hpp"
 
 enum EObjectTypes {
   OBJECT_GREEN_BUSH,
@@ -44,6 +45,8 @@ struct SObjectTypeData {
   std::string sMeshName;
   std::string sMaterialName;
 
+  EDamageType eDamageSourceMask;
+
   ETileTypes eNormalTile;
   ETileTypes eRemovedTile;
 
@@ -53,11 +56,11 @@ struct SObjectTypeData {
 
   SObjectTypeData() {}
   SObjectTypeData(SObjectTypeData &&) = default;
-  SObjectTypeData(bool userHandle, bool isStatic, const std::string &id, const std::string &meshName, const std::string &materialName);
-  SObjectTypeData(bool userHandle, bool isStatic, const std::string &id, const std::string &meshName, const std::string &materialName, const btVector3 &physicsShapeScale);
-  SObjectTypeData(bool userHandle, bool isStatic, const std::string &id, const std::string &meshName, const std::string &materialName, EGlobalCollisionShapesTypes collisionShape);
+  SObjectTypeData(bool userHandle, bool isStatic, const std::string &id, const std::string &meshName, const std::string &materialName, EDamageType damageSourceMask);
+  SObjectTypeData(bool userHandle, bool isStatic, const std::string &id, const std::string &meshName, const std::string &materialName, EDamageType damageSourceMask, const btVector3 &physicsShapeScale);
+  SObjectTypeData(bool userHandle, bool isStatic, const std::string &id, const std::string &meshName, const std::string &materialName, EDamageType damageSourceMask, EGlobalCollisionShapesTypes collisionShape);
 
-  SObjectTypeData(bool userHandle, bool isStatic, const std::string &id, const std::string &meshName, const std::string &materialName, ETileTypes normalTile, ETileTypes removedTile, EGlobalCollisionShapesTypes collisionShape);
+  SObjectTypeData(bool userHandle, bool isStatic, const std::string &id, const std::string &meshName, const std::string &materialName, EDamageType damageSourceMask, ETileTypes normalTile, ETileTypes removedTile, EGlobalCollisionShapesTypes collisionShape);
 
   SObjectTypeData &operator=(const SObjectTypeData&) = default;
 };

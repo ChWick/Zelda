@@ -21,6 +21,7 @@
 #include "PersonController.hpp"
 #include "../Atlas/Map.hpp"
 //#include "BlinkingMaterialManager.h"
+#include "../../Common/Util/DebugDrawer.hpp"
 #include "CharacterController_Physics.hpp"
 #include <OgreStringVector.h>
 #include <OgreEntity.h>
@@ -239,6 +240,19 @@ void CPerson::postUpdateAnimationsCallback(const Ogre::Real fTime) {
 }
 void CPerson::updateAnimationsCallback(const Ogre::Real fTime) {
     CCharacter::updateAnimationsCallback(fTime);
+
+  if (m_uiAnimID == ANIM_SLICE_HORIZONTAL) {
+    Ogre::Real fAnimPart = m_fTimer / m_Anims[ANIM_SLICE_HORIZONTAL]->getLength();
+    if (fAnimPart > 0.8) {
+    }
+    else if (fAnimPart > 0.4) {
+      const Ogre::Vector3 vDir = -m_pBodyEntity->getParentNode()->convertLocalToWorldOrientation(m_pBodyEntity->getSkeleton()->getBone(PERSON_LEFT_HANDLE)->_getDerivedOrientation()).zAxis();
+      const Ogre::Vector3 vPos = m_pBodyEntity->getParentNode()->convertLocalToWorldPosition(m_pBodyEntity->getSkeleton()->getBone(PERSON_LEFT_HANDLE)->_getDerivedPosition());
+
+      //DebugDrawer::getSingleton().drawLine(vPos, vPos + vDir * 0.08, Ogre::ColourValue::Blue);
+      createDamage(Ogre::Ray(vPos, vDir * 0.08), CDamage(DMG_SWORD));
+    }
+  }
 }
 
 bool CPerson::collidesWith(const std::string &sEntityID) const {
@@ -285,7 +299,7 @@ void CPerson::endBeingInvulnerableCallback() {
 
 
 void CPerson::attack(unsigned int uiTool) {
-  if (m_uiAnimID == ANIM_NONE || m_uiAnimID == ANIM_IDLE || m_uiAnimID == ANIM_WALK) {
+  if (isReadyForNewAction()) {
     animAttack();
     dynamic_cast<CPersonController*>(m_pCharacterController)->stun(m_Anims[ANIM_SLICE_HORIZONTAL]->getLength());
   }

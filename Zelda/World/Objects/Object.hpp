@@ -25,6 +25,7 @@
 
 class CObject : public CWorldEntity {
 protected:
+  const SObjectTypeData &m_ObjectTypeData;
 public:
    CObject(const std::string &id, CWorldEntity *pParent, CMap *pMap, EObjectTypes eObjectType, Ogre::SceneNode *pSceneNode = nullptr);
 
@@ -42,7 +43,10 @@ protected:
   virtual SInteractionResult interactOnCollision(const Ogre::Vector3 &vInteractDir, CWorldEntity *pSender);
   virtual SInteractionResult interactOnActivate(const Ogre::Vector3 &vInteractDir, CWorldEntity *pSender);
   virtual void changeState(EEntityStateTypes eState);
-  virtual EReceiveDamageResult hit(const CDamage &dmg);
+  virtual EReceiveDamageResult receiveDamage(const CDamage &dmg);
+
+  
+	virtual void killedCallback();
 };
 
 #endif // _OBJECT_HPP_
