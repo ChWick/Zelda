@@ -22,6 +22,8 @@
 
 #include "Character.hpp"
 
+struct SPersonData;
+
 //! Class for a general person
 /** It will define physics, animations, based on the same skeleton/mesh
   */
@@ -29,7 +31,6 @@ class CPerson : public CCharacter {
 public:
 	static const Ogre::Real PERSON_HEIGHT;
 	static const Ogre::Real PERSON_RADIUS;
-	static const Ogre::Real PERSON_SCALE;
   static const Ogre::Real PERSON_PHYSICS_OFFSET;
   static const Ogre::Real PERSON_FLOOR_OFFSET;
 protected:
@@ -39,6 +40,9 @@ protected:
 	static const Ogre::String PERSON_SHIELD_PACKED;
 
 	enum EHands {LEFT_HAND, RIGHT_HAND, NUM_HANDS};
+
+protected:
+  const SPersonData &m_PersonData;
 private:
     Ogre::Degree m_degLeftHandleCurrentRotation;
     Ogre::Degree m_degLeftHandleRotationToTarget;
@@ -47,7 +51,7 @@ protected:
 	unsigned int m_uiTakeDamageFlags;               //!< from which dmg types the person can take damage (default all)
 	unsigned int m_uiBlockDamageFlags;              //!< which dmg type will be blocked (default all)
 public:
-	CPerson(const std::string &sID, CEntity *pParent, const EFriendOrEnemyStates foe);
+	CPerson(const std::string &sID, CEntity *pParent, const SPersonData &personData);
 	virtual ~CPerson();
 
 	virtual void destroy();

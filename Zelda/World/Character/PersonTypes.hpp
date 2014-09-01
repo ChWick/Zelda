@@ -17,25 +17,32 @@
  * Zelda. If not, see http://www.gnu.org/licenses/.
  *****************************************************************************/
 
-#include "SimpleFriend.hpp"
-#include "PlayerTool.hpp"
-#include "PersonTypes.hpp"
+#ifndef _PERSON_TYPES_HPP_
+#define _PERSON_TYPES_HPP_
 
-SimpleFriend::SimpleFriend(const std::string &sID, CEntity *pParent, ESimpleFriendTypes eType)
-: CPerson(sID, pParent, PERSON_TYPE_ID_MAP.toData(PERSON_SOLDIER_BLUE)), m_eType(eType){
-    //ctor
-}
+#include "../../Common/Util/EnumIdMap.hpp"
+#include <OgreVector3.h>
+#include "FriendOrEnemyStates.hpp"
 
-SimpleFriend::~SimpleFriend()
-{
-    //dtor
-}
-void SimpleFriend::setupInternal() {
-	switch (m_eType) {
-	case SF_LINKS_FATHER:
-		//createTool(CPlayerTool::TOOL_SWORD, true);
-		//createShield(CShield::ST_SIMPLE_SHIELD, true);
-		//m_bSwordsDrawn = true;
-		break;
-	}
-}
+enum EPersonTypes {
+  PERSON_LINK,
+
+  PERSON_SOLDIER_BLUE
+};
+
+struct SPersonData {
+  EPersonTypes eType;
+  std::string sMeshName;
+  std::string sMaterialName;
+  Ogre::Vector3 vScale;
+  EFriendOrEnemyStates eFriendOrEnemyState;
+};
+
+class CPersonTypeIdMap : public CEnumIdMap<EPersonTypes, SPersonData> {
+public:
+  CPersonTypeIdMap();
+};
+
+extern CPersonTypeIdMap PERSON_TYPE_ID_MAP;
+
+#endif // _PERSON_TYPES_HPP_

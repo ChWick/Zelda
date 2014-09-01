@@ -27,6 +27,7 @@
 #include "../../Common/Physics/BtOgreExtras.hpp"
 #include "../../Common/Util/Assert.hpp"
 #include "../../Common/GameLogic/Events/Event.hpp"
+#include "PersonTypes.hpp"
 
 #define TURN_SCALE 4
 #define MAX_SPEED_SCALE 5
@@ -35,7 +36,7 @@ Ogre::Real g_fCurrentSpeedScale = 1;
 const Ogre::Real PLAYER_ENEMY_NOTIFY_RADIUS_SQR = 100.f; // already squared!
 
 CPlayer::CPlayer(CEntity *pParent, const Ogre::Camera* pCamera, Ogre::SceneManager *pPlayerSceneManager)
-	: CPerson("player", pParent, FOE_FRIENDLY),
+	: CPerson("player", pParent, PERSON_TYPE_ID_MAP.toData(PERSON_LINK)),
     m_pLiftedEntity(nullptr),
 		m_pCamera(pCamera),
     m_pPlayerSceneManager(pPlayerSceneManager) {

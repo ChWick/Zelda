@@ -1,0 +1,15 @@
+material soldier_blue
+{
+    receive_shadows off
+
+    technique
+    {
+        pass
+        {
+            texture_unit
+            {
+                texture soldier_blue.png
+            }
+        }
+    }
+}

@@ -32,6 +32,7 @@
 #include "../../Common/Physics/PhysicsMasks.hpp"
 #include <BulletDynamics/Character/btKinematicCharacterController.h>
 #include "../GlobalCollisionShapesTypes.hpp"
+#include "PersonTypes.hpp"
 
 //const Ogre::Real PERSONS_MASS = 1.0f;
 const Ogre::String CPerson::PERSON_SHEATH("Sheath");
@@ -40,13 +41,13 @@ const Ogre::String CPerson::PERSON_LEFT_HANDLE("Handle_L");
 const Ogre::String CPerson::PERSON_RIGHT_HANDLE("Handle_R");
 const Ogre::Real CPerson::PERSON_HEIGHT = 0.10f;
 const Ogre::Real CPerson::PERSON_RADIUS = 0.03f;
-const Ogre::Real CPerson::PERSON_SCALE  = 1.5f;
 const Ogre::Real CPerson::PERSON_PHYSICS_OFFSET = PERSON_HEIGHT / 2 + 0.005;
 const Ogre::Real CPerson::PERSON_FLOOR_OFFSET = PERSON_HEIGHT / 2;
 
 
-CPerson::CPerson(const std::string &sID, CEntity *pParent, const EFriendOrEnemyStates foe)
-  : CCharacter(sID, pParent, foe) {
+CPerson::CPerson(const std::string &sID, CEntity *pParent, const SPersonData &personData)
+  : CCharacter(sID, pParent, personData.eFriendOrEnemyState),
+  m_PersonData(personData) {
 	m_degLeftHandleCurrentRotation = 0;
 	m_degLeftHandleRotationSpeed = 0;
 	m_degLeftHandleRotationToTarget = 0;
@@ -214,11 +215,11 @@ void CPerson::setLeftHandleRotation(const Ogre::Degree &degree, Ogre::Real speed
 }
 
 void CPerson::initBody(Ogre::SceneNode *pParentSceneNode) {
-	Ogre::String meshName = "link";
+	Ogre::String meshName = m_PersonData.sMeshName;
     // create main model
     m_pSceneNode = pParentSceneNode->createChildSceneNode(m_sID + meshName);
     Ogre::SceneNode *pModelSN = m_pSceneNode->createChildSceneNode();
-    pModelSN->setScale(PERSON_SCALE, PERSON_SCALE, PERSON_SCALE);
+    pModelSN->setScale(m_PersonData.vScale);
     pModelSN->setPosition(0, -PERSON_PHYSICS_OFFSET, 0);
     m_pBodyEntity = pParentSceneNode->getCreator()->createEntity(pModelSN->getName() + ".mesh", meshName + ".mesh");
     m_pBodyEntity->setCastShadows(true);

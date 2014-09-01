@@ -21,9 +21,10 @@
 #include "SimpleEnemyController.hpp"
 #include "../Atlas/Map.hpp"
 #include "../Damage.hpp"
+#include "PersonTypes.hpp"
 
 CSimpleEnemy::CSimpleEnemy(const std::string &sID, CEntity *pParent, EEnemyTypes eEnemyType)
-	: CPerson(sID, pParent, FOE_ENEMY), m_eEnemyType(eEnemyType) {
+	: CPerson(sID, pParent, PERSON_TYPE_ID_MAP.toData(PERSON_SOLDIER_BLUE)), m_eEnemyType(eEnemyType) {
 }
 void CSimpleEnemy::setupInternal() {
 	/*switch (m_eEnemyType) {

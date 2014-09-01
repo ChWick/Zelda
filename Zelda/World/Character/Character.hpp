@@ -22,6 +22,7 @@
 
 #include "../WorldEntity.hpp"
 #include <LinearMath/btAlignedObjectArray.h>
+#include "FriendOrEnemyStates.hpp"
 
 class btRigidBody;
 class CMap;
@@ -69,11 +70,7 @@ public:
 
 		ANIM_COUNT
 	};
-	// states of friendlyness (e.g. for friendly fire)
-	enum EFriendOrEnemyStates {
-		FOE_FRIENDLY,		//!< Friendly
-		FOE_ENEMY,			//!< a evil person, not the player... ganons folks
-	};
+
 	static const unsigned int ANIM_NONE = ANIM_COUNT;						//!< ANIM_NONE definition: == m_uiAnimationCount
 	enum EFadeStade {
 		FADE_NONE = 0,

@@ -17,25 +17,13 @@
  * Zelda. If not, see http://www.gnu.org/licenses/.
  *****************************************************************************/
 
-#include "SimpleFriend.hpp"
-#include "PlayerTool.hpp"
-#include "PersonTypes.hpp"
+#ifndef _FRIEND_OR_ENEMY_STATES_HPP_
+#define _FRIEND_OR_ENEMY_STATES_HPP_
 
-SimpleFriend::SimpleFriend(const std::string &sID, CEntity *pParent, ESimpleFriendTypes eType)
-: CPerson(sID, pParent, PERSON_TYPE_ID_MAP.toData(PERSON_SOLDIER_BLUE)), m_eType(eType){
-    //ctor
-}
+// states of friendlyness (e.g. for friendly fire)
+enum EFriendOrEnemyStates {
+  FOE_FRIENDLY,		//!< Friendly
+  FOE_ENEMY,			//!< a evil person, not the player... ganons folks
+};
 
-SimpleFriend::~SimpleFriend()
-{
-    //dtor
-}
-void SimpleFriend::setupInternal() {
-	switch (m_eType) {
-	case SF_LINKS_FATHER:
-		//createTool(CPlayerTool::TOOL_SWORD, true);
-		//createShield(CShield::ST_SIMPLE_SHIELD, true);
-		//m_bSwordsDrawn = true;
-		break;
-	}
-}
+#endif
