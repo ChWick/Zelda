@@ -71,7 +71,7 @@ void CPersonController::updateCharacter(const Ogre::Real deltaTime) {
 	{
 	  Ogre::Vector3 vTranslateDirection = position - playerPos;
 	  Ogre::Real fTranslateDistance = vTranslateDirection.normalise();
-	  Ogre::Real fDesiredDistance = 50 * deltaTime * runOrWalkSpeed / WALK_SPEED;
+	  Ogre::Real fDesiredDistance = 20 * deltaTime * runOrWalkSpeed / WALK_SPEED * fTranslateDistance;
 	  
 	  mBodyNode->translate(vTranslateDirection * std::min<Ogre::Real>(fTranslateDistance, fDesiredDistance));
 		//mBodyNode->setPosition(position);

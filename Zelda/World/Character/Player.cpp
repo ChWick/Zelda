@@ -96,7 +96,7 @@ void CPlayer::interact() {
   }
 
 	Ogre::Vector3 startPos(getFloorPosition() + Ogre::Vector3::UNIT_Y * PERSON_HEIGHT * 0.2);
-	Ogre::Vector3 endPos(startPos + getOrientation().zAxis() * PERSON_RADIUS * 1.2f);
+	Ogre::Vector3 endPos(startPos + getOrientation().zAxis() * PERSON_RADIUS * 1.5f);
 	// try to interact with the world. So detect an object to interact with
 	btCollisionWorld::ClosestRayResultCallback rayCallback(BtOgre::Convert::toBullet(startPos), BtOgre::Convert::toBullet(endPos));
 	rayCallback.m_collisionFilterGroup = COL_CHARACTER_P;
@@ -137,7 +137,7 @@ void CPlayer::renderDebug(Ogre::Real tpf) {
 
   // draw interaction
 	Ogre::Vector3 startPos(getFloorPosition() + Ogre::Vector3::UNIT_Y * PERSON_HEIGHT * 0.2);
-	Ogre::Vector3 endPos(startPos + getOrientation().zAxis() * PERSON_RADIUS * 1.2f);
+	Ogre::Vector3 endPos(startPos + getOrientation().zAxis() * PERSON_RADIUS * 1.5f);
 	DebugDrawer::getSingleton().drawLine(startPos, endPos, Ogre::ColourValue::Red);
 }
 

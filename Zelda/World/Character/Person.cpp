@@ -37,11 +37,11 @@ const Ogre::String CPerson::PERSON_SHEATH("Sheath");
 const Ogre::String CPerson::PERSON_SHIELD_PACKED("ShieldPacked");
 const Ogre::String CPerson::PERSON_LEFT_HANDLE("Handle.L");
 const Ogre::String CPerson::PERSON_RIGHT_HANDLE("Handle.R");
-const Ogre::Real CPerson::PERSON_HEIGHT = 0.15f;
-const Ogre::Real CPerson::PERSON_RADIUS = 0.05f;
+const Ogre::Real CPerson::PERSON_HEIGHT = 0.10f;
+const Ogre::Real CPerson::PERSON_RADIUS = 0.03f;
 const Ogre::Real CPerson::PERSON_SCALE  = 0.03f;
-const Ogre::Real CPerson::PERSON_PHYSICS_OFFSET = 0.075;
-const Ogre::Real CPerson::PERSON_FLOOR_OFFSET = 0.075;
+const Ogre::Real CPerson::PERSON_PHYSICS_OFFSET = PERSON_HEIGHT / 2 + 0.005;
+const Ogre::Real CPerson::PERSON_FLOOR_OFFSET = PERSON_HEIGHT / 2;
 
 
 CPerson::CPerson(const std::string &sID, CEntity *pParent, const EFriendOrEnemyStates foe)
@@ -216,7 +216,7 @@ void CPerson::initBody(Ogre::SceneNode *pParentSceneNode) {
     // create main model
     m_pSceneNode = pParentSceneNode->createChildSceneNode(m_sID + meshName);
     Ogre::SceneNode *pModelSN = m_pSceneNode->createChildSceneNode();
-    pModelSN->setScale(PERSON_SCALE, PERSON_SCALE, PERSON_SCALE);
+    pModelSN->setScale(PERSON_SCALE * 1.5, PERSON_SCALE * 0.6, PERSON_SCALE * 1.5);
     pModelSN->setPosition(0, -PERSON_PHYSICS_OFFSET, 0);
     m_pBodyEntity = pParentSceneNode->getCreator()->createEntity(pModelSN->getName() + ".mesh", meshName + ".mesh");
     m_pBodyEntity->setCastShadows(true);

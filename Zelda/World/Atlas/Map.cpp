@@ -65,15 +65,15 @@ CMap::CMap(CEntity *pAtlas, CMapPackPtr mapPack, Ogre::SceneNode *pParentSceneNo
   m_PhysicsManager.addCollisionShape(GLOBAL_COLLISION_SHAPES_TYPES_ID_MAP.toString(GCST_HOUSE_ENTRANCE), CPhysicsCollisionObject(pHouseEntranceShape, Ogre::Vector3::ZERO));
 
   btCompoundShape *pStonePileShape = new btCompoundShape();
-  pStonePileShape->addChildShape(btTransform(btQuaternion::getIdentity(), btVector3(0.05, 0.02, 0.05)), new btSphereShape(0.04));
-  pStonePileShape->addChildShape(btTransform(btQuaternion::getIdentity(), btVector3(-0.05, 0.02, 0.05)), new btSphereShape(0.04));
-  pStonePileShape->addChildShape(btTransform(btQuaternion::getIdentity(), btVector3(0.05, 0.02, -0.05)), new btSphereShape(0.04));
-  pStonePileShape->addChildShape(btTransform(btQuaternion::getIdentity(), btVector3(-0.05, 0.02, -0.05)), new btSphereShape(0.04));
+  pStonePileShape->addChildShape(btTransform(btQuaternion::getIdentity(), btVector3(0.05, 0.025, 0.05)), new btSphereShape(0.04));
+  pStonePileShape->addChildShape(btTransform(btQuaternion::getIdentity(), btVector3(-0.05, 0.025, 0.05)), new btSphereShape(0.04));
+  pStonePileShape->addChildShape(btTransform(btQuaternion::getIdentity(), btVector3(0.05, 0.025, -0.05)), new btSphereShape(0.04));
+  pStonePileShape->addChildShape(btTransform(btQuaternion::getIdentity(), btVector3(-0.05, 0.025, -0.05)), new btSphereShape(0.04));
   pStonePileShape->addChildShape(btTransform(btQuaternion::getIdentity(), btVector3(-0.0, 0.06, -0.0)), new btSphereShape(0.04));
   m_PhysicsManager.addCollisionShape(GLOBAL_COLLISION_SHAPES_TYPES_ID_MAP.toString(GCST_STONE_PILE), CPhysicsCollisionObject(pStonePileShape, Ogre::Vector3::ZERO));
 
   m_PhysicsManager.addCollisionShape(GLOBAL_COLLISION_SHAPES_TYPES_ID_MAP.toString(GCST_TREE),
-                                     CPhysicsCollisionObject(new btCylinderShape(btVector3(0.15, 0.2, 0.15)), Ogre::Vector3::NEGATIVE_UNIT_Y * 0.2));
+                                     CPhysicsCollisionObject(new btCylinderShape(btVector3(0.173, 0.2, 0.173)), Ogre::Vector3::NEGATIVE_UNIT_Y * 0.2));
   m_PhysicsManager.addCollisionShape(GLOBAL_COLLISION_SHAPES_TYPES_ID_MAP.toString(GCST_FALLING_OBJECT_SPHERE),
                                      CPhysicsCollisionObject(new btSphereShape(0.02), Ogre::Vector3::NEGATIVE_UNIT_Y * 0));
 
