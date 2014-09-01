@@ -29,7 +29,7 @@ if (APPLE)
 
 else()
 	function(copy_directory directory)
-		file(COPY "${RESOURCES_ROOT_DIR}/${directory}" DESTINATION "${RESOURCES_OUTPUT_DIR}/${directory}")
+		file(COPY "${RESOURCES_ROOT_DIR}/${directory}" DESTINATION "${RESOURCES_OUTPUT_DIR}")
 	endfunction(copy_directory)
 
 	function(copy_files directory file)

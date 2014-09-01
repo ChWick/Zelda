@@ -394,7 +394,9 @@ void CGame::createScene() {
     mSceneMgr->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_MODULATIVE);
   }
   else {
-    mSceneMgr->setShadowTechnique(Ogre::SHADOWTYPE_TEXTURE_MODULATIVE);
+    // texture modulative leads to crash on android
+    // shadows can be supported by vertex programs, to be done!
+    //mSceneMgr->setShadowTechnique(Ogre::SHADOWTYPE_TEXTURE_MODULATIVE);
   }
 
   //-------------------------------------------------------------------------------------
