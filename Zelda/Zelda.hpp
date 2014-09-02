@@ -24,6 +24,7 @@
 
 class CZelda : public CGame {
 protected:
+  void initEnumIdMaps();
   void chooseGameState();
 
   void postGUIManagerInitialised();

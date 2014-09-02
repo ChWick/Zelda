@@ -24,6 +24,7 @@
 #include "../../Common/Util/DebugDrawer.hpp"
 #include "CharacterController_Physics.hpp"
 #include <OgreStringVector.h>
+#include <OgreStringConverter.h>
 #include <OgreEntity.h>
 #include <OgreBone.h>
 #include <OgreSkeletonInstance.h>
@@ -33,6 +34,7 @@
 #include <BulletDynamics/Character/btKinematicCharacterController.h>
 #include "../GlobalCollisionShapesTypes.hpp"
 #include "PersonTypes.hpp"
+#include "../../Common/Log.hpp"
 
 //const Ogre::Real PERSONS_MASS = 1.0f;
 const Ogre::String CPerson::PERSON_SHEATH("Sheath");

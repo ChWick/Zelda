@@ -211,6 +211,7 @@ private:
 
 protected:
   // virtual function to setup user game
+  virtual void initEnumIdMaps();
   virtual void chooseGameState() {}
   virtual void postGUIManagerInitialised() {}
 };

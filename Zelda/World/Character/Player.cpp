@@ -32,6 +32,8 @@
 #include <OgreBone.h>
 #include <OgreSkeleton.h>
 #include <OgreSkeletonInstance.h>
+#include "../../Common/Log.hpp"
+
 
 #define TURN_SCALE 4
 #define MAX_SPEED_SCALE 5

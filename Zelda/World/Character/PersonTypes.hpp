@@ -40,7 +40,7 @@ struct SPersonData {
 
 class CPersonTypeIdMap : public CEnumIdMap<EPersonTypes, SPersonData> {
 public:
-  CPersonTypeIdMap();
+  void init();
 };
 
 extern CPersonTypeIdMap PERSON_TYPE_ID_MAP;

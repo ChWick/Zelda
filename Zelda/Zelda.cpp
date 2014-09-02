@@ -23,6 +23,11 @@
 #include "MainMenu/MainMenu.hpp"
 #include "World/World.hpp"
 #include "Common/Log.hpp"
+#include "World/Character/PersonTypes.hpp"
+
+void CZelda::initEnumIdMaps() {
+  PERSON_TYPE_ID_MAP.init();
+}
 
 void CZelda::chooseGameState() {
   LOGV("choosing came state");

@@ -30,6 +30,7 @@
 #include "GameLogic/EntityManager.hpp"
 #include "Util/DebugDrawer.hpp"
 #include "Message/MessageDebug.hpp"
+#include "Log.hpp"
 
 #if OGRE_PLATFORM == OGRE_PLATFORM_ANDROID
 #include "Android/Android.hpp"
@@ -381,6 +382,9 @@ void CGame::createScene() {
   if (!mWindow) {
     Ogre::LogManager::getSingletonPtr()->logMessage(Ogre::LML_CRITICAL, "mWindow is not set!");
   }
+
+  LOGI("Initializing enum id maps");
+  initEnumIdMaps();
 
   //-------------------------------------------------------------------------------------
   // choose scenemanager
@@ -956,4 +960,6 @@ bool CGame::renderOneFrame() {
 #else
   return mRoot->renderOneFrame();
 #endif
+}
+void CGame::initEnumIdMaps() {
 }
