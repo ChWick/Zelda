@@ -30,7 +30,7 @@ material link_armor
     }
 }
 
-material link_sword
+material link_tools
 {
     receive_shadows off
 
@@ -40,7 +40,7 @@ material link_sword
         {
             texture_unit
             {
-                texture link_sword.png
+                texture link_tools.png
             }
         }
     }
