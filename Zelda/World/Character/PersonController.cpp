@@ -31,7 +31,7 @@ const Ogre::Real WALK_SPEED = 6; 					//!< constant for the walk speed
 const Ogre::Real RUN_SPEED = 18;          //!< constant for the run speed
 const Ogre::Real TURN_SPEED = 500;				//!< constant for the turn speed
 const Ogre::Real WALK_SPEED_SCALE = 0.001;
-const Ogre::Real PUSHED_SPEED = 40;
+const Ogre::Real PUSHED_SPEED = 30;
 
 CPersonController::CPersonController(CPerson * ccPlayer) {
   mCCPerson = ccPlayer;
@@ -58,7 +58,7 @@ void CPersonController::updateCharacter(const Ogre::Real deltaTime) {
 	using namespace Ogre;
 
 	m_fTimer -= deltaTime;
-	Real posIncrementPerSecond = m_fMoveSpeed * WALK_SPEED_SCALE;
+	Real posIncrementPerSecond = m_fMoveSpeed;
 
 	Vector3 playerPos = mCCPerson->getPosition();
 
@@ -197,7 +197,7 @@ void CPersonController::updateCharacter(const Ogre::Real deltaTime) {
 				changeMoveState(MS_NORMAL);
 			}
 		}
-    move(true, WALK_SPEED_SCALE * PUSHED_SPEED, m_vUserData);
+    move(true, PUSHED_SPEED, m_vUserData);
 	}
 	else if (m_uiCurrentMoveState == MS_STUNNED) {
 		if (m_fTimer <= 0) {
@@ -271,7 +271,7 @@ void CPersonController::changeMoveState(unsigned int uiNewMoveState, const Ogre:
 
 void CPersonController::move(bool bMove, Ogre::Real fSpeed, const Ogre::Vector3 &vDir) {
   if (bMove) {
-		mCCPhysics->setWalkDirection(BtOgre::Convert::toBullet(vDir * fSpeed));
+		mCCPhysics->setWalkDirection(BtOgre::Convert::toBullet(vDir * fSpeed * WALK_SPEED_SCALE));
     mCCPhysics->setSubSteps(std::max<int>(ceil(fSpeed / WALK_SPEED), 1));
   }
   else {
