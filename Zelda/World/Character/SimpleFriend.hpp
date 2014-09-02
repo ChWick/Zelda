@@ -40,6 +40,7 @@ public:
 
 protected:
 	void setupInternal();
+  void setupAnimations();
 private:
 };
 

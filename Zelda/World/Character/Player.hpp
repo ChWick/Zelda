@@ -45,6 +45,7 @@ public:
 protected:
   void enterMap(CMap *pMap, const Ogre::Vector3 &vInitPosition);
 	void setupInternal();
+  void setupAnimations();
 	void hitpointsChangedCallback();
 	void maxHitpointsChangedCallback();
 	void setupBody(SceneManager* sceneMgr);

@@ -112,7 +112,7 @@ public:
 
 protected:
 	// all values scaled in world units!
-	CCharacter(const std::string &sID, CEntity *pParent, const EFriendOrEnemyStates foe);
+	CCharacter(const std::string &sID, CEntity *pParent, const EFriendOrEnemyStates foe, unsigned int uiAnimationCount = ANIM_COUNT);
 
 public:
 	virtual ~CCharacter();

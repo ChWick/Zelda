@@ -26,6 +26,12 @@ class CPlayer;
 
 class CSimpleEnemy : public CPerson {
 public:
+  enum ESimpleEnemyAnimations {
+    SE_ANIM_SCOUT,
+    SE_ANIM_WALK,
+
+    SE_ANIM_COUNT,
+  };
 	enum EEnemyTypes {
 		ET_GREEN_SWORD,
 		ET_BLOCKER,         // soldier that stands still and only blocks the player (start of game e.g.)
@@ -39,8 +45,11 @@ public:
 
 protected:
 	void setupInternal();
+  void setupAnimations();
 	virtual CCharacterController *createCharacterController();
 	void killedCallback();
+
+  void updateAnimationsCallback(const Ogre::Real fTime);
 };
 
 #endif

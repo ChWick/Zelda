@@ -39,6 +39,8 @@
 #include "../../Common/DotSceneLoader/UserData.hpp"
 #include "../../Common/Util/XMLHelper.hpp"
 
+#include "../Character/SimpleEnemy.hpp"
+
 using namespace XMLHelper;
 
 int MAP_COUNTER = 0; // Counter to make names unique if objects are switched between maps since renaming a scene node is not possible
@@ -116,6 +118,8 @@ CMap::CMap(CEntity *pAtlas, CMapPackPtr mapPack, Ogre::SceneNode *pParentSceneNo
   //CreateCube(btVector3(0, 200, 0.3), 100);
 
   //new CObject(m_MapPack->getName() + "rupee", this, this, OBJECT_GREEN_BUSH);
+  CSimpleEnemy *pEnemy = new CSimpleEnemy("enemy", this, CSimpleEnemy::ET_GREEN_SWORD);
+  pEnemy->enterMap(this, Ogre::Vector3(0, 4, 1));
 
 
   /*btCollisionShape *pBox = new btBoxShape(btVector3(10, 0.1, 10));

@@ -39,3 +39,6 @@ void SimpleFriend::setupInternal() {
 		break;
 	}
 }
+
+void SimpleFriend::setupAnimations() {
+}

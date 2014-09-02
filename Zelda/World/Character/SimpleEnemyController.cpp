@@ -24,7 +24,7 @@
 float test = 0.45;
 float test2 = 2;
 void CSimpleEnemyController::postUpdateCharacter() {
-    Ogre::Real fDistSqr = m_pPlayer->getPosition().squaredDistance(mCCPerson->getPosition());
+    /*Ogre::Real fDistSqr = m_pPlayer->getPosition().squaredDistance(mCCPerson->getPosition());
 
     if (fDistSqr < test * test) {
         if (m_uiCurrentMoveState == MS_NOT_MOVING || m_uiCurrentMoveState == MS_NORMAL) {
@@ -43,7 +43,7 @@ void CSimpleEnemyController::postUpdateCharacter() {
 	}
 	else {
         changeMoveState(MS_NOT_MOVING);
-	}
+	}*/
 }
 void CSimpleEnemyController::userUpdateCharacter(const Ogre::Real tpf) {
 	// no user state

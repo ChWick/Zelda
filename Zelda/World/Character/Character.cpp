@@ -25,9 +25,9 @@
 #include <BulletDynamics/Character/btCharacterControllerInterface.h>
 #include <OgreAnimationState.h>
 
-CCharacter::CCharacter(const std::string &sID, CEntity *pParent, const EFriendOrEnemyStates foe)
+CCharacter::CCharacter(const std::string &sID, CEntity *pParent, const EFriendOrEnemyStates foe, unsigned int uiAnimationCount)
 	: CWorldEntity(sID, pParent, nullptr),
-	  m_uiAnimationCount(ANIM_COUNT),
+	  m_uiAnimationCount(uiAnimationCount),
 		m_fTimer(0),
 		m_fAnimSpeed(1),
     m_eFriendOrEnemy(foe),
@@ -50,6 +50,7 @@ void CCharacter::enterMap(CMap *pMap, const Ogre::Vector3 &vInitPosition) {
   if (!bSwitchMapOnly) {
     // use atlas scene node
     initBody(m_pMap->getParent()->getSceneNode());
+    setupAnimations();
   }
 	createPhysics();
 	if (m_pCharacterController) {delete m_pCharacterController;}
@@ -118,6 +119,8 @@ void CCharacter::update(Ogre::Real fTime) {
 }
 
 void CCharacter::updateAnimations(Ogre::Real fTime) {
+  if (m_uiAnimID >= m_uiAnimationCount) {return;}
+  
   m_fTimer += fTime;
   m_fAnimSpeed = 1;
 

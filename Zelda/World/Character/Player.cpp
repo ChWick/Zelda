@@ -28,6 +28,10 @@
 #include "../../Common/Util/Assert.hpp"
 #include "../../Common/GameLogic/Events/Event.hpp"
 #include "PersonTypes.hpp"
+#include <OgreEntity.h>
+#include <OgreBone.h>
+#include <OgreSkeleton.h>
+#include <OgreSkeletonInstance.h>
 
 #define TURN_SCALE 4
 #define MAX_SPEED_SCALE 5
@@ -37,9 +41,9 @@ const Ogre::Real PLAYER_ENEMY_NOTIFY_RADIUS_SQR = 100.f; // already squared!
 
 CPlayer::CPlayer(CEntity *pParent, const Ogre::Camera* pCamera, Ogre::SceneManager *pPlayerSceneManager)
 	: CPerson("player", pParent, PERSON_TYPE_ID_MAP.toData(PERSON_LINK)),
-    m_pLiftedEntity(nullptr),
 		m_pCamera(pCamera),
-    m_pPlayerSceneManager(pPlayerSceneManager) {
+    m_pPlayerSceneManager(pPlayerSceneManager),
+    m_pLiftedEntity(nullptr) {
 }
 CPlayer::~CPlayer() {
 }
@@ -82,6 +86,58 @@ void CPlayer::setupInternal()  {
 		mSwordTrail->setInitialWidth(i, 0.5 * SCALE);
 	}*/
 }
+
+void CPlayer::setupAnimations() {
+	Ogre::StringVector animNames(ANIM_COUNT);
+	animNames[ANIM_IDLE] = "Idle";
+	//animNames[ANIM_RUN] = "Run";
+	animNames[ANIM_SLICE_HORIZONTAL] = "SwordAttack";
+	animNames[ANIM_WALK] = "Walk";
+	/*animNames[ANIM_HANDS_CLOSED] = "HandsClosed";
+	animNames[ANIM_HANDS_RELAXED] = "HandsRelaxed";
+	animNames[ANIM_SLICE_HORIZONTAL] = "SliceHorizontal";
+	animNames[ANIM_BOW_SHOT] = "BowShot";
+	animNames[ANIM_JUMP_START] = "JumpStart";
+	animNames[ANIM_JUMP_LOOP] = "JumpLoop";
+	animNames[ANIM_JUMP_END] = "JumpEnd";*/
+
+	// this is very important due to the nature of the exported animations
+    m_pBodyEntity->getSkeleton()->setBlendMode(Ogre::ANIMBLEND_CUMULATIVE);
+
+    // populate our animation list
+    for (unsigned int i = 0; i < m_uiAnimationCount; i++) {
+        m_Anims[i] = m_pBodyEntity->getAnimationState(animNames[i]);
+        m_Anims[i]->setLoop(true);
+        m_FadingStates[i] = FADE_NONE;
+        m_Anims[i]->setEnabled(false);
+        m_Anims[i]->setWeight(0);
+    }
+
+    //m_Anims[ANIM_HANDS_CLOSED]->setWeight(1);
+    //m_Anims[ANIM_HANDS_RELAXED]->setWeight(1);
+
+    //m_Anims[ANIM_JUMP_END]->setLoop(false);
+    //m_Anims[ANIM_JUMP_START]->setLoop(false);
+
+
+	// relax the hands since we're not holding anything
+	//m_Anims[ANIM_HANDS_RELAXED]->setEnabled(true);
+
+
+    // start off in the idle state (top and bottom together)
+    setAnimation(ANIM_IDLE);
+
+    // we will manually set the direction of the tool in the left hand
+    Ogre::Bone *pLHandleBone = m_pBodyEntity->getSkeleton()->getBone(PERSON_LEFT_HANDLE);
+    pLHandleBone->setManuallyControlled(true);
+    int numAnimations = m_pBodyEntity->getSkeleton()->getNumAnimations();
+    for(int i=0;i<numAnimations;i++){
+        // remonveall possible tracks of the bone in the animations
+       Ogre::Animation * anim = m_pBodyEntity->getSkeleton()->getAnimation(i);
+       anim->destroyNodeTrack(pLHandleBone->getHandle());
+    }
+}
+
 void CPlayer::startup(const Ogre::Vector3 &playerPosition, const Ogre::Vector3 &playerLookDirection, const Ogre::Real cameraYaw, const Ogre::Real cameraPitch) {
 	m_pSceneNode->setPosition(playerPosition + Ogre::Vector3::UNIT_Y * PERSON_HEIGHT);
 	m_pSceneNode->lookAt(playerLookDirection, Ogre::Node::TS_LOCAL);

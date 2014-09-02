@@ -51,7 +51,7 @@ protected:
 	unsigned int m_uiTakeDamageFlags;               //!< from which dmg types the person can take damage (default all)
 	unsigned int m_uiBlockDamageFlags;              //!< which dmg type will be blocked (default all)
 public:
-	CPerson(const std::string &sID, CEntity *pParent, const SPersonData &personData);
+	CPerson(const std::string &sID, CEntity *pParent, const SPersonData &personData, unsigned int uiAnimationCount = ANIM_COUNT);
 	virtual ~CPerson();
 
 	virtual void destroy();
@@ -69,7 +69,6 @@ public:
 protected:
 	void createPhysics();
 	void destroyPhysics();
-	virtual void setupAnimations();
 	virtual void initBody(Ogre::SceneNode *pParentSceneNode);
 
 	void updateAnimationsCallback(const Ogre::Real fTime);
