@@ -19,6 +19,8 @@
 
 #include "HitableInterface.hpp"
 #include "Damage.hpp"
+#include "../Common/Message/MessageHandler.hpp"
+#include "../Common/Message/MessageHitpointsChanged.hpp"
 
 void CHitableInterface::update(float tpf) {
   if (m_bInvulnerable) {
@@ -107,4 +109,12 @@ CHitableInterface::EReceiveDamageResult CHitableInterface::hit(const CDamage &da
   }
 
   return r;
+}
+
+void CHitableInterface::maxHitpointsChangedCallback() {
+  CMessageHandler::getSingleton().addMessage(new CMessageHitpointsChanged(*this));
+}
+
+void CHitableInterface::hitpointsChangedCallback() {
+  CMessageHandler::getSingleton().addMessage(new CMessageHitpointsChanged(*this));
 }

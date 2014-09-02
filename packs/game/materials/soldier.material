@@ -1,4 +1,4 @@
-material soldier_blue
+material soldier
 {
     receive_shadows off
 
@@ -17,8 +17,18 @@ material soldier_blue
 
             texture_unit
             {
-                texture soldier_blue.png
+                texture_alias       soldier_texture
             }
         }
     }
+}
+
+material soldier_blue : soldier
+{
+    set_texture_alias soldier_texture soldier_blue.png
+}
+
+material soldier_green : soldier
+{
+    set_texture_alias soldier_texture soldier_green.png
 }

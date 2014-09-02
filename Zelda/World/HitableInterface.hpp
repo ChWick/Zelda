@@ -58,8 +58,8 @@ public:
   virtual EReceiveDamageResult hit(const CDamage &damage);
 
 protected:
-	virtual void hitpointsChangedCallback() {}
-	virtual void maxHitpointsChangedCallback() {}
+	virtual void hitpointsChangedCallback();
+	virtual void maxHitpointsChangedCallback();
 	virtual void killedCallback() {}
 	virtual void startBeingInvulnerableCallback() {}
 	virtual void endBeingInvulnerableCallback() {}

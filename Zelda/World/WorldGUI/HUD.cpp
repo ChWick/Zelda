@@ -21,6 +21,9 @@
 #include "../../GUIComponents/GUIHeartsDisplay.hpp"
 #include "../../GUIComponents/GUICounter.hpp"
 #include "../../Common/Message/MessagePlayerPickupItem.hpp"
+#include "../../Common/Message/MessageHitpointsChanged.hpp"
+#include "../HitableInterface.hpp"
+#include "../WorldEntity.hpp"
 
 using namespace CEGUI;
 
@@ -43,5 +46,12 @@ CHUD::CHUD(CEntity *pParentEntity, CEGUI::Window *pParentWindow)
 void CHUD::handleMessage(const CMessage &message) {
   if (message.getType() == MSG_PLAYER_PICKUP_ITEM) {
     m_pRupeeCounter->addCount(10);
+  }
+  else if (message.getType() == MSG_HITPOINTS_CHANGED) {
+    const CMessageHitpointsChanged &msg_hp_change(dynamic_cast<const CMessageHitpointsChanged&>(message));
+    if (dynamic_cast<const CWorldEntity *>(&msg_hp_change.getHitableInterface()) && dynamic_cast<const CWorldEntity&>(msg_hp_change.getHitableInterface()).getID() == "player") {
+      m_pHeartsDisplay->changeMaximalHitpoints(msg_hp_change.getHitableInterface().getMaxHP());
+      m_pHeartsDisplay->changeCurrentHitpoints(msg_hp_change.getHitableInterface().getCurrentHP());
+    }
   }
 }

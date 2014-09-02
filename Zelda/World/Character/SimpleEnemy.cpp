@@ -30,7 +30,7 @@
 #include "CharacterController_Physics.hpp"
 
 CSimpleEnemy::CSimpleEnemy(const std::string &sID, CEntity *pParent, EEnemyTypes eEnemyType)
-	: CPerson(sID, pParent, PERSON_TYPE_ID_MAP.toData(PERSON_SOLDIER_BLUE), SE_ANIM_COUNT), m_eEnemyType(eEnemyType) {
+	: CPerson(sID, pParent, PERSON_TYPE_ID_MAP.toData(PERSON_SOLDIER_GREEN_SWORD), SE_ANIM_COUNT), m_eEnemyType(eEnemyType) {
 }
 void CSimpleEnemy::setupInternal() {
 	/*switch (m_eEnemyType) {

@@ -47,8 +47,6 @@ protected:
 	void setupInternal();
   void setupAnimations();
   EReceiveDamageResult receiveDamage(const CDamage &dmg);
-	void hitpointsChangedCallback();
-	void maxHitpointsChangedCallback();
 	void setupBody(SceneManager* sceneMgr);
 	void setupCamera(Camera* cam);
 	void preUpdateBoundsCallback(const Ogre::Real fTime);

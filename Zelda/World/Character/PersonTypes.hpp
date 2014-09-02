@@ -28,7 +28,8 @@
 enum EPersonTypes {
   PERSON_LINK,
 
-  PERSON_SOLDIER_BLUE
+  PERSON_SOLDIER_BLUE,
+  PERSON_SOLDIER_GREEN_SWORD
 };
 
 struct SPersonData {

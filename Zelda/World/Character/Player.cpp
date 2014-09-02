@@ -204,14 +204,7 @@ void CPlayer::preUpdateBoundsCallback(const Ogre::Real deltaTime) {
     CPersonController *pPersonController = dynamic_cast<CPersonController*>(m_pCharacterController);
 	// check if player is in war mode (swords drawn), then im enemy is near change view
 }
-void CPlayer::hitpointsChangedCallback() {
-	//CHUD::getSingleton().setHP(getCurrentHP());
-	//CPlayerData::getSingleton().setHP(getCurrentHP());
-}
-void CPlayer::maxHitpointsChangedCallback() {
-	//CHUD::getSingleton().setMaxHp(getMaxHP());
-	//CPlayerData::getSingleton().setMaxHP(getMaxHP());
-}
+
 /*void CPlayer::objectChangedMap(CObject *pBefore, CObject *pAfter) {
 	CPlayerInteractiveArea *pPIA = dynamic_cast<CPlayerInteractiveArea*>(pBefore);
 	if (pPIA && pPIA == m_pInteractingArea) {
@@ -248,6 +241,6 @@ void CPlayer::throwLifted() {
 
 CPlayer::EReceiveDamageResult CPlayer::receiveDamage(const CDamage &dmg) {
   this->makeInvulnerable(1);
-  dynamic_cast<CPersonController*>(m_pCharacterController)->changeMoveState(CPersonController::MS_PUSHED_BACK, dmg.getDamageDirection(), 0.2, 0.8);
+  dynamic_cast<CPersonController*>(m_pCharacterController)->changeMoveState(CPersonController::MS_PUSHED_BACK, dmg.getDamageDirection(), 0.2, 0.4);
   return RDR_ACCEPTED;
 }

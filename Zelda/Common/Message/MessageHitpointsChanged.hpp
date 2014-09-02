@@ -17,25 +17,22 @@
  * Zelda. If not, see http://www.gnu.org/licenses/.
  *****************************************************************************/
 
-#ifndef _MESSAGE_TYPES_HPP_
-#define _MESSAGE_TYPES_HPP_
+#ifndef _MESSAGE_HITPOINTS_CHANGED_HPP_
+#define _MESSAGE_HITPOINTS_CHANGED_HPP_
 
-#include "../Util/EnumIdMap.hpp"
+#include "Message.hpp"
 
-enum EMessageTypes {
-  MSG_SWITCH_MAP,
-  MSG_TARGET_REACHED,
-  MSG_DEBUG,
-  MSG_ENTITY_STATE_CHANGED,
-  MSG_PLAYER_PICKUP_ITEM,
-  MSG_HITPOINTS_CHANGED,
-};
+class CHitableInterface;
 
-class CMessageTypesMap : public CEnumIdMap<EMessageTypes> {
+class CMessageHitpointsChanged : public CMessage {
 public:
-  CMessageTypesMap();
+protected:
+  const CHitableInterface &m_HitableInterface;
+public:
+  CMessageHitpointsChanged(const CHitableInterface &hitableInterface);
+
+  const CHitableInterface &getHitableInterface() const {return m_HitableInterface;}
+
 };
 
-extern CMessageTypesMap MESSAGE_TYPES_MAP;
-
-#endif // _MESSAGE_TYPES_HPP_
+#endif // _MESSAGE_HITPOINTS_CHANGED_HPP_

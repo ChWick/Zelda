@@ -25,6 +25,7 @@ CMessageTypesMap::CMessageTypesMap() {
   m_Map[MSG_DEBUG] = "debug";
   m_Map[MSG_ENTITY_STATE_CHANGED] = "entity_type_changed";
   m_Map[MSG_PLAYER_PICKUP_ITEM] = "player_pickup_item";
+  m_Map[MSG_HITPOINTS_CHANGED] = "hitpoints_changed";
 }
 
 CMessageTypesMap MESSAGE_TYPES_MAP;
