@@ -41,6 +41,17 @@ void CSimpleEnemyController::start() {
 }
 
 void CSimpleEnemyController::postUpdateCharacter(Ogre::Real tpf) {
+  if (m_eCurrentKIState == KI_WALK_TO_PLAYER) {
+    m_vCurrentWalkDir = (m_pPlayer->getPosition() - mCCPerson->getPosition()).normalisedCopy() * 1.5;
+    if (notifiedByPlayer() == false) {
+      m_eCurrentKIState = KI_SCOUTING;
+      m_fTimeToNextAction = mCCPerson->getAnimations()[CSimpleEnemy::SE_ANIM_SCOUT]->getLength();
+    }
+  }
+  else {
+    if (notifiedByPlayer()) {
+    m_eCurrentKIState = KI_WALK_TO_PLAYER;
+  }
   m_fTimeToNextAction -= tpf;
   if (dynamic_cast<CharacterControllerPhysics*>(mCCPhysics)->isStuck()) {
     m_vCurrentWalkDir = Ogre::Quaternion(Ogre::Degree(180), Ogre::Vector3::UNIT_Y) * m_vCurrentWalkDir;
@@ -57,6 +68,9 @@ void CSimpleEnemyController::postUpdateCharacter(Ogre::Real tpf) {
       m_fTimeToNextAction = 2;
     }
   }
+  }
+
+
     /*Ogre::Real fDistSqr = m_pPlayer->getPosition().squaredDistance(mCCPerson->getPosition());
 
     if (fDistSqr < test * test) {
@@ -80,7 +94,7 @@ void CSimpleEnemyController::postUpdateCharacter(Ogre::Real tpf) {
 }
 
 void CSimpleEnemyController::updateGoalDirection() {
-  if (m_eCurrentKIState == KI_PATROLING) {
+  if (m_eCurrentKIState == KI_PATROLING || m_eCurrentKIState == KI_WALK_TO_PLAYER) {
     mGoalDirection = m_vCurrentWalkDir;
   }
   else if (m_eCurrentKIState == KI_SCOUTING){
@@ -91,4 +105,11 @@ void CSimpleEnemyController::updateGoalDirection() {
 void CSimpleEnemyController::userUpdateCharacter(const Ogre::Real tpf) {
 	// no user state
 	//changeMoveState(MS_MOVE_TO_POINT, m_pPlayer->getPosition(), test, Ogre::Degree(10).valueRadians());
+}
+
+bool CSimpleEnemyController::notifiedByPlayer() {
+  if (m_pPlayer->getPosition().squaredDistance(mCCPerson->getPosition()) < 0.25) {
+    return true;
+  }
+  return false;
 }

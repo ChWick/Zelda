@@ -27,6 +27,7 @@
 #include <OgreSkeletonInstance.h>
 #include <OgreSceneNode.h>
 #include "../../Common/Util/DebugDrawer.hpp"
+#include "CharacterController_Physics.hpp"
 
 CSimpleEnemy::CSimpleEnemy(const std::string &sID, CEntity *pParent, EEnemyTypes eEnemyType)
 	: CPerson(sID, pParent, PERSON_TYPE_ID_MAP.toData(PERSON_SOLDIER_BLUE), SE_ANIM_COUNT), m_eEnemyType(eEnemyType) {
@@ -91,13 +92,19 @@ void CSimpleEnemy::killedCallback() {
 	//InnerObjectGenerator::createInnerObject(*m_pCurrentMap, getPosition(), InnerObjectGenerator::IOLT_DEFAULT);
 }
 
-void CSimpleEnemy::setPlayer(CPlayer *pPlayer) {
+void CSimpleEnemy::setPlayer(CWorldEntity *pPlayer) {
 	dynamic_cast<CSimpleEnemyController*>(m_pCharacterController)->setPlayer(pPlayer);
 }
 
 void CSimpleEnemy::updateAnimationsCallback(const Ogre::Real fTime) {
+  for (CWorldEntity *pEnt : dynamic_cast<CharacterControllerPhysics*>(mCCPhysics)->getCollidingWorldEntities()) {
+    if (dynamic_cast<CCharacter*>(pEnt) && dynamic_cast<CCharacter*>(pEnt)->getFriendOrEnemyState() == FOE_FRIENDLY) {
+      pEnt->hit(CDamage(DMG_SWORD, m_pSceneNode->getOrientation().zAxis()));
+    }
+  }
+
   CSimpleEnemyController::EKIState eKIState = dynamic_cast<CSimpleEnemyController*>(m_pCharacterController)->getCurrentKIState();
-  if (eKIState == CSimpleEnemyController::KI_PATROLING) {
+  if (eKIState == CSimpleEnemyController::KI_PATROLING || eKIState == CSimpleEnemyController::KI_WALK_TO_PLAYER) {
     if (m_uiAnimID != SE_ANIM_WALK) {
       setAnimation(SE_ANIM_WALK, true);
     }

@@ -120,6 +120,7 @@ CMap::CMap(CEntity *pAtlas, CMapPackPtr mapPack, Ogre::SceneNode *pParentSceneNo
   //new CObject(m_MapPack->getName() + "rupee", this, this, OBJECT_GREEN_BUSH);
   CSimpleEnemy *pEnemy = new CSimpleEnemy("enemy", this, CSimpleEnemy::ET_GREEN_SWORD);
   pEnemy->enterMap(this, Ogre::Vector3(0, 4, 1));
+  pEnemy->setPlayer(m_pPlayer);
 
 
   /*btCollisionShape *pBox = new btBoxShape(btVector3(10, 0.1, 10));

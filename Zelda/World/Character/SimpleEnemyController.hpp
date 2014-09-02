@@ -22,30 +22,32 @@
 
 #include "PersonController.hpp"
 
-class CPlayer;
+class CWorldEntity;
 
 class CSimpleEnemyController : public CPersonController {
 public:
   enum EKIState {
     KI_SCOUTING,
     KI_PATROLING,
+    KI_WALK_TO_PLAYER,
   };
 private:
 
-	CPlayer *m_pPlayer;			// the player, needed for KI calculations
+	CWorldEntity *m_pPlayer;			// the player, needed for KI calculations
   Ogre::Vector3 m_vCurrentWalkDir;
   Ogre::Real m_fTimeToNextAction;
   EKIState m_eCurrentKIState;
 
 public:
 	CSimpleEnemyController(CPerson * ccPerson);
-	void setPlayer(CPlayer *pPlayer) {assert(pPlayer); m_pPlayer = pPlayer;}
+	void setPlayer(CWorldEntity *pPlayer) {assert(pPlayer); m_pPlayer = pPlayer;}
   void start();
   EKIState getCurrentKIState() const {return m_eCurrentKIState;}
 protected:
   void updateGoalDirection();
 	void userUpdateCharacter(const Ogre::Real tpf);
 	void postUpdateCharacter(Ogre::Real tpf);
+  bool notifiedByPlayer();
 };
 
 #endif

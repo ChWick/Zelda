@@ -242,6 +242,7 @@ CObject::SInteractionResult CObject::interactOnCollision(const Ogre::Vector3 &vI
   case OBJECT_GREEN_BUSH:
   case OBJECT_LIGHT_STONE:
     if (m_eState == EST_THROWN) {
+      pSender->hit(CDamage(DMG_WORLD, BtOgre::Convert::toOgre(btRigidBody::upcast(this->getCollisionObject())->getLinearVelocity()).normalisedCopy(), HP_ONE_HEART));
       deleteLater();
     }
     break;

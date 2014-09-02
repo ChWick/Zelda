@@ -41,7 +41,7 @@ private:
 public:
 	CSimpleEnemy(const std::string &sID, CEntity *pParent, EEnemyTypes eEnemyType);
 
-	void setPlayer(CPlayer *pPlayer);
+	void setPlayer(CWorldEntity *pPlayer);
 
 protected:
 	void setupInternal();
