@@ -85,6 +85,7 @@ void CHitableInterface::changeHP(Hitpoints uiHP) {
 }
 
 CHitableInterface::EReceiveDamageResult CHitableInterface::hit(const CDamage &damage) {
+  if (m_bInvulnerable) {return RDR_IGNORED;}
   bool bWasInvunerable = m_bInvulnerable;
   EReceiveDamageResult r = receiveDamage(damage);
   switch (r) {

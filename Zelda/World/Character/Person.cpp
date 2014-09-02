@@ -202,11 +202,11 @@ void CPerson::updateAnimationsCallback(const Ogre::Real fTime) {
     if (fAnimPart > 0.8) {
     }
     else if (fAnimPart > 0.4) {
-      const Ogre::Vector3 vDir = -m_pBodyEntity->getParentNode()->convertLocalToWorldOrientation(m_pBodyEntity->getSkeleton()->getBone(PERSON_LEFT_HANDLE)->_getDerivedOrientation()).zAxis();
+      const Ogre::Vector3 vDir = m_pBodyEntity->getParentNode()->convertLocalToWorldOrientation(m_pBodyEntity->getSkeleton()->getBone(PERSON_LEFT_HANDLE)->_getDerivedOrientation()).yAxis();
       const Ogre::Vector3 vPos = m_pBodyEntity->getParentNode()->convertLocalToWorldPosition(m_pBodyEntity->getSkeleton()->getBone(PERSON_LEFT_HANDLE)->_getDerivedPosition());
 
-      //DebugDrawer::getSingleton().drawLine(vPos, vPos + vDir * 0.08, Ogre::ColourValue::Blue);
-      createDamage(Ogre::Ray(vPos, vDir * 0.08), CDamage(DMG_SWORD));
+      DebugDrawer::getSingleton().drawLine(vPos, vPos + vDir * 0.08, Ogre::ColourValue::Blue);
+      createDamage(Ogre::Ray(vPos, vDir * 0.08), CDamage(DMG_SWORD, m_pSceneNode->getOrientation().zAxis()));
     }
   }
 }

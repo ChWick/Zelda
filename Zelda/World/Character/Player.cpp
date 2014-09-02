@@ -245,3 +245,9 @@ void CPlayer::throwLifted() {
 
   m_pLiftedEntity = nullptr;
 }
+
+CPlayer::EReceiveDamageResult CPlayer::receiveDamage(const CDamage &dmg) {
+  this->makeInvulnerable(1);
+  dynamic_cast<CPersonController*>(m_pCharacterController)->changeMoveState(CPersonController::MS_PUSHED_BACK, dmg.getDamageDirection(), 0.2, 0.8);
+  return RDR_ACCEPTED;
+}

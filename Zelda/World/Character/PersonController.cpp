@@ -30,6 +30,8 @@ const Ogre::Real DEFAULT_PUSHED_BACK_TIME = 0.1f;
 const Ogre::Real WALK_SPEED = 6; 					//!< constant for the walk speed
 const Ogre::Real RUN_SPEED = 18;          //!< constant for the run speed
 const Ogre::Real TURN_SPEED = 500;				//!< constant for the turn speed
+const Ogre::Real WALK_SPEED_SCALE = 0.001;
+const Ogre::Real PUSHED_SPEED = 40;
 
 CPersonController::CPersonController(CPerson * ccPlayer) {
   mCCPerson = ccPlayer;
@@ -56,9 +58,7 @@ void CPersonController::updateCharacter(const Ogre::Real deltaTime) {
 	using namespace Ogre;
 
 	m_fTimer -= deltaTime;
-  Ogre::Real runOrWalkSpeed = (m_uiCurrentMoveState == MS_RUNNING) ? RUN_SPEED : m_fMoveSpeed;
-	Real posIncrementPerSecond = runOrWalkSpeed * 0.001f;
-	mCCPhysics->setSubSteps(ceil(runOrWalkSpeed / WALK_SPEED));
+	Real posIncrementPerSecond = m_fMoveSpeed * WALK_SPEED_SCALE;
 
 	Vector3 playerPos = mCCPerson->getPosition();
 
@@ -72,7 +72,7 @@ void CPersonController::updateCharacter(const Ogre::Real deltaTime) {
 	{
 	  Ogre::Vector3 vTranslateDirection = position - playerPos;
 	  Ogre::Real fTranslateDistance = vTranslateDirection.normalise();
-	  Ogre::Real fDesiredDistance = 20 * deltaTime * runOrWalkSpeed / WALK_SPEED * fTranslateDistance;
+	  Ogre::Real fDesiredDistance = 20 * deltaTime * m_fMoveSpeed / WALK_SPEED * fTranslateDistance;
 	  
 	  mBodyNode->translate(vTranslateDirection * std::min<Ogre::Real>(fTranslateDistance, fDesiredDistance));
 		//mBodyNode->setPosition(position);
@@ -176,18 +176,15 @@ void CPersonController::updateCharacter(const Ogre::Real deltaTime) {
 
 			if (mGoalDirection != Vector3::ZERO) {
 				if (bMove) {
-					mCCPhysics->setWalkDirection(BtOgre::Convert::toBullet(mGoalDirection * posIncrementPerSecond));
-					mCCPerson->setIsMoving(true);
+          move(true, posIncrementPerSecond, mGoalDirection);
 				}
 				else {
-					mCCPhysics->setWalkDirection(btVector3(0, 0, 0));
-					mCCPerson->setIsMoving(false);
+					move(false);
 				}
 			}
 			else
 			{
-				mCCPhysics->setWalkDirection(btVector3(0, 0, 0));
-				mCCPerson->setIsMoving(false);
+				move(false);
 			}
 		}
 	}
@@ -200,16 +197,14 @@ void CPersonController::updateCharacter(const Ogre::Real deltaTime) {
 				changeMoveState(MS_NORMAL);
 			}
 		}
-		mCCPhysics->setWalkDirection(BtOgre::Convert::toBullet(m_vUserData) * posIncrementPerSecond);
-		mCCPerson->setIsMoving(true);
+    move(true, WALK_SPEED_SCALE * PUSHED_SPEED, m_vUserData);
 	}
 	else if (m_uiCurrentMoveState == MS_STUNNED) {
 		if (m_fTimer <= 0) {
 			changeMoveState(MS_NORMAL);
 		}
     else {
-      mCCPhysics->setWalkDirection(btVector3(0, 0, 0));
-      mCCPerson->setIsMoving(false);
+      move(false);
     }
 	}
   else if (m_uiCurrentMoveState == MS_RUN_START) {
@@ -218,14 +213,15 @@ void CPersonController::updateCharacter(const Ogre::Real deltaTime) {
     }
     else {
       mGoalDirection = mBodyNode->getOrientation().zAxis();
-      mCCPhysics->setWalkDirection(btVector3(0, 0, 0));
-      mCCPerson->setIsMoving(false);
+      
+      move(false);
     }
   }
   else if (m_uiCurrentMoveState == MS_RUNNING) {
     mGoalDirection = mBodyNode->getOrientation().zAxis();
-		mCCPhysics->setWalkDirection(BtOgre::Convert::toBullet(mGoalDirection) * posIncrementPerSecond);
-		mCCPerson->setIsMoving(true);
+
+    move(true, RUN_SPEED / WALK_SPEED * posIncrementPerSecond, mGoalDirection);
+
     if (mCCPhysics->isStuck()) {
       changeMoveState(MS_PUSHED_BACK, -mGoalDirection * 0.5, 1);
 
@@ -272,6 +268,19 @@ void CPersonController::changeMoveState(unsigned int uiNewMoveState, const Ogre:
         m_fTimer = getStunnedTime();
 	}
 }
+
+void CPersonController::move(bool bMove, Ogre::Real fSpeed, const Ogre::Vector3 &vDir) {
+  if (bMove) {
+		mCCPhysics->setWalkDirection(BtOgre::Convert::toBullet(vDir * fSpeed));
+    mCCPhysics->setSubSteps(std::max<int>(ceil(fSpeed / WALK_SPEED), 1));
+  }
+  else {
+    mCCPhysics->setWalkDirection(btVector3(0, 0, 0));
+    mCCPhysics->setSubSteps(1);
+  }
+  mCCPerson->setIsMoving(bMove);
+}
+
 void CPersonController::moveToTarget(const Ogre::Vector3 &vPos, const Ogre::Real dRadius, const Ogre::Degree &maxDeviationLookDir, bool bAddCharCOMHeight, const Ogre::Real fMaxDuraion) {
     changeMoveState(MS_MOVE_TO_POINT, vPos + ((bAddCharCOMHeight) ? Ogre::Vector3(0, CPerson::PERSON_HEIGHT, 0): Ogre::Vector3::ZERO), dRadius, maxDeviationLookDir.valueRadians());
     m_fTimer = fMaxDuraion;

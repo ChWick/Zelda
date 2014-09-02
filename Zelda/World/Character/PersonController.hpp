@@ -115,6 +115,8 @@ public:
 
 protected:
 
+  void move(bool bMoving, Ogre::Real fSpeed = 0, const Ogre::Vector3 &vDir = Ogre::Vector3::ZERO);
+
 	virtual void updateGoalDirection();
 	virtual void userUpdateCharacter(const Ogre::Real tpf) {}
 	virtual void postUpdateCharacter(Ogre::Real tpf) {} // one can handle the current state, e.g. if it's MS_NOT_MOVING or MS_NORMAL

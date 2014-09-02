@@ -25,6 +25,8 @@
 #include <OgreEntity.h>
 #include <OgreBone.h>
 #include <OgreSkeletonInstance.h>
+#include <OgreSceneNode.h>
+#include "../../Common/Util/DebugDrawer.hpp"
 
 CSimpleEnemy::CSimpleEnemy(const std::string &sID, CEntity *pParent, EEnemyTypes eEnemyType)
 	: CPerson(sID, pParent, PERSON_TYPE_ID_MAP.toData(PERSON_SOLDIER_BLUE), SE_ANIM_COUNT), m_eEnemyType(eEnemyType) {
@@ -80,6 +82,7 @@ CCharacterController *CSimpleEnemy::createCharacterController() {
 
 CSimpleEnemy::EReceiveDamageResult CSimpleEnemy::receiveDamage(const CDamage &dmg) {
   this->makeInvulnerable(1);
+  dynamic_cast<CSimpleEnemyController*>(m_pCharacterController)->changeMoveState(CSimpleEnemyController::MS_PUSHED_BACK, dmg.getDamageDirection(), 0.2, 0.8);
   return RDR_ACCEPTED;
 }
 
@@ -104,4 +107,10 @@ void CSimpleEnemy::updateAnimationsCallback(const Ogre::Real fTime) {
       setAnimation(SE_ANIM_SCOUT, true);
     }
   }
+
+  const Ogre::Vector3 vDir = m_pBodyEntity->getParentNode()->convertLocalToWorldOrientation(m_pBodyEntity->getSkeleton()->getBone(PERSON_RIGHT_HANDLE)->_getDerivedOrientation()).yAxis();
+  const Ogre::Vector3 vPos = m_pBodyEntity->getParentNode()->convertLocalToWorldPosition(m_pBodyEntity->getSkeleton()->getBone(PERSON_RIGHT_HANDLE)->_getDerivedPosition());
+
+  DebugDrawer::getSingleton().drawLine(vPos, vPos + vDir * 0.1, Ogre::ColourValue::Blue);
+  createDamage(Ogre::Ray(vPos, vDir * 0.1), CDamage(DMG_SWORD, m_pSceneNode->getOrientation().zAxis()));
 }
