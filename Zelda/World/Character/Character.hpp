@@ -105,6 +105,8 @@ public:
 	btCharacterControllerInterface *getKinematicCharacterController() const {return mCCPhysics;}
 	CCharacterController *getCharacterController() const {return m_pCharacterController;}
 	const EFriendOrEnemyStates getFriendOrEnemyState() const {return m_eFriendOrEnemy;}
+  const Ogre::vector<Ogre::AnimationState*>::type &getAnimations() const {return m_Anims;}
+  unsigned int getCurrentAnimationID() const {return m_uiAnimID;}
 
 	// reimplemented
 	void setPosition(const Ogre::Vector3 &vPos);

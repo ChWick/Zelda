@@ -52,7 +52,7 @@ public:
 protected:
 
 	virtual void updateGoalDirection();
-	virtual void postUpdateCharacter();
+	virtual void postUpdateCharacter(Ogre::Real tpf);
 
 private:
 	Quaternion updateOrientation(Real deltaTime);

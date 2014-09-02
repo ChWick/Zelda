@@ -38,6 +38,7 @@ CPersonController::CPersonController(CPerson * ccPlayer) {
 	mBodyNode = mCCPerson->getSceneNode();
 
 	mJumped = false;
+  m_fMoveSpeed = WALK_SPEED;
 	//mIsFalling = mCCPhysics->onGround();
 	mWalkDirection = Ogre::Vector3::ZERO;
 
@@ -55,7 +56,7 @@ void CPersonController::updateCharacter(const Ogre::Real deltaTime) {
 	using namespace Ogre;
 
 	m_fTimer -= deltaTime;
-  Ogre::Real runOrWalkSpeed = (m_uiCurrentMoveState == MS_RUNNING) ? RUN_SPEED : WALK_SPEED;
+  Ogre::Real runOrWalkSpeed = (m_uiCurrentMoveState == MS_RUNNING) ? RUN_SPEED : m_fMoveSpeed;
 	Real posIncrementPerSecond = runOrWalkSpeed * 0.001f;
 	mCCPhysics->setSubSteps(ceil(runOrWalkSpeed / WALK_SPEED));
 
@@ -238,7 +239,7 @@ void CPersonController::updateCharacter(const Ogre::Real deltaTime) {
 	}
 
 	// give the user the choice to deal with the current state, e.g. change state if MS_NOT_MOVING
-	postUpdateCharacter();
+	postUpdateCharacter(deltaTime);
 
 
 	if (m_uiCurrentMoveState == MS_MOVE_TO_POINT) {

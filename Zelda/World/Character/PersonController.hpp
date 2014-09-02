@@ -49,6 +49,7 @@ protected:
 	Ogre::Real m_fTimer;							//!< timer
 	bool mIsFalling;								//!< is the person falling?
 	bool mJumped;									//!< is the person jumping?
+  Ogre::Real m_fMoveSpeed;    // current movement speed
 
 
 	CharacterControllerPhysics * mCCPhysics;	//!< pointer to the kinematic character controller
@@ -116,7 +117,7 @@ protected:
 
 	virtual void updateGoalDirection();
 	virtual void userUpdateCharacter(const Ogre::Real tpf) {}
-	virtual void postUpdateCharacter() {} // one can handle the current state, e.g. if it's MS_NOT_MOVING or MS_NORMAL
+	virtual void postUpdateCharacter(Ogre::Real tpf) {} // one can handle the current state, e.g. if it's MS_NOT_MOVING or MS_NORMAL
 
 	void selectNextTool();
 	void selectPreviousTool();

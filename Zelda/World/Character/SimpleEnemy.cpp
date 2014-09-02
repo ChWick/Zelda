@@ -79,7 +79,7 @@ CCharacterController *CSimpleEnemy::createCharacterController() {
 }
 
 void CSimpleEnemy::killedCallback() {
-	//m_pCurrentMap->destroyLater(this);
+	deleteLater();
 	//InnerObjectGenerator::createInnerObject(*m_pCurrentMap, getPosition(), InnerObjectGenerator::IOLT_DEFAULT);
 }
 
@@ -88,4 +88,15 @@ void CSimpleEnemy::setPlayer(CPlayer *pPlayer) {
 }
 
 void CSimpleEnemy::updateAnimationsCallback(const Ogre::Real fTime) {
+  CSimpleEnemyController::EKIState eKIState = dynamic_cast<CSimpleEnemyController*>(m_pCharacterController)->getCurrentKIState();
+  if (eKIState == CSimpleEnemyController::KI_PATROLING) {
+    if (m_uiAnimID != SE_ANIM_WALK) {
+      setAnimation(SE_ANIM_WALK, true);
+    }
+  }
+  else if (eKIState == CSimpleEnemyController::KI_SCOUTING) {
+    if (m_uiAnimID != SE_ANIM_SCOUT) {
+      setAnimation(SE_ANIM_SCOUT, true);
+    }
+  }
 }

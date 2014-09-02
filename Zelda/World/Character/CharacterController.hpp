@@ -30,6 +30,8 @@ public:
     }
 	virtual ~CCharacterController() {}
 
+  virtual inline void start() {}
+
 	virtual void updateCharacter(Ogre::Real tpf) = 0;
 
 	virtual void setPosition(const Ogre::Vector3 &vPos) = 0;

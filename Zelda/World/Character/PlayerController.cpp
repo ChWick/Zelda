@@ -196,7 +196,7 @@ void CPlayerController::updateGoalDirection() {
 		mGoalDirection.normalise();
 	}
 }
-void CPlayerController::postUpdateCharacter() {
+void CPlayerController::postUpdateCharacter(Ogre::Real tpf) {
 	if (m_uiCurrentMoveState == MS_NOT_MOVING) {
 		changeMoveState(MS_NORMAL);
 	}

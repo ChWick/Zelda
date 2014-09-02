@@ -63,6 +63,7 @@ void CCharacter::enterMap(CMap *pMap, const Ogre::Vector3 &vInitPosition) {
 	}
 	else {
     setPosition(vInitPosition);
+    m_pCharacterController->start();
 	}
 }
 

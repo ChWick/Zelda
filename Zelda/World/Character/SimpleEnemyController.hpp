@@ -25,17 +25,27 @@
 class CPlayer;
 
 class CSimpleEnemyController : public CPersonController {
-private:
-	CPlayer *m_pPlayer;			// the player, needed for KI calculations
 public:
-	CSimpleEnemyController(CPerson * ccPerson)
-		: CPersonController(ccPerson), m_pPlayer(NULL) {
-		changeMoveState(MS_USER_STATE);
-	}
+  enum EKIState {
+    KI_SCOUTING,
+    KI_PATROLING,
+  };
+private:
+
+	CPlayer *m_pPlayer;			// the player, needed for KI calculations
+  Ogre::Vector3 m_vCurrentWalkDir;
+  Ogre::Real m_fTimeToNextAction;
+  EKIState m_eCurrentKIState;
+
+public:
+	CSimpleEnemyController(CPerson * ccPerson);
 	void setPlayer(CPlayer *pPlayer) {assert(pPlayer); m_pPlayer = pPlayer;}
+  void start();
+  EKIState getCurrentKIState() const {return m_eCurrentKIState;}
 protected:
+  void updateGoalDirection();
 	void userUpdateCharacter(const Ogre::Real tpf);
-	void postUpdateCharacter();
+	void postUpdateCharacter(Ogre::Real tpf);
 };
 
 #endif

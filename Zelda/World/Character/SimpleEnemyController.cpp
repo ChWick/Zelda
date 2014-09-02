@@ -18,12 +18,45 @@
  *****************************************************************************/
 
 #include "SimpleEnemyController.hpp"
+#include "SimpleEnemy.hpp"
+#include "CharacterController_Physics.hpp"
 #include "Person.hpp"
 #include "Player.hpp"
+#include <OgreMath.h>
+#include <OgreAnimationState.h>
 
 float test = 0.45;
 float test2 = 2;
-void CSimpleEnemyController::postUpdateCharacter() {
+CSimpleEnemyController::CSimpleEnemyController(CPerson * ccPerson)
+  : CPersonController(ccPerson), m_pPlayer(NULL) {
+  changeMoveState(MS_USER_STATE);
+
+  m_fMoveSpeed = 3;
+}
+void CSimpleEnemyController::start() {
+  m_fTimeToNextAction = 2;
+  m_vCurrentWalkDir = Ogre::Vector3::UNIT_X;
+  changeMoveState(MS_NORMAL);
+  m_eCurrentKIState = KI_PATROLING;
+}
+
+void CSimpleEnemyController::postUpdateCharacter(Ogre::Real tpf) {
+  m_fTimeToNextAction -= tpf;
+  if (dynamic_cast<CharacterControllerPhysics*>(mCCPhysics)->isStuck()) {
+    m_vCurrentWalkDir = Ogre::Quaternion(Ogre::Degree(180), Ogre::Vector3::UNIT_Y) * m_vCurrentWalkDir;
+  }
+  if (m_fTimeToNextAction < 0) {
+    if (m_eCurrentKIState == KI_PATROLING) {
+      m_eCurrentKIState = KI_SCOUTING;
+      m_fTimeToNextAction = mCCPerson->getAnimations()[CSimpleEnemy::SE_ANIM_SCOUT]->getLength();
+    }
+    else if (m_eCurrentKIState == KI_SCOUTING){
+      m_eCurrentKIState = KI_PATROLING;
+      
+      m_vCurrentWalkDir = Ogre::Quaternion(Ogre::Degree((Ogre::Math::UnitRandom() > 0.5) ? 90 : -90), Ogre::Vector3::UNIT_Y) * m_vCurrentWalkDir;
+      m_fTimeToNextAction = 2;
+    }
+  }
     /*Ogre::Real fDistSqr = m_pPlayer->getPosition().squaredDistance(mCCPerson->getPosition());
 
     if (fDistSqr < test * test) {
@@ -45,6 +78,16 @@ void CSimpleEnemyController::postUpdateCharacter() {
         changeMoveState(MS_NOT_MOVING);
 	}*/
 }
+
+void CSimpleEnemyController::updateGoalDirection() {
+  if (m_eCurrentKIState == KI_PATROLING) {
+    mGoalDirection = m_vCurrentWalkDir;
+  }
+  else if (m_eCurrentKIState == KI_SCOUTING){
+    mGoalDirection = Ogre::Vector3::ZERO;
+  }
+}
+
 void CSimpleEnemyController::userUpdateCharacter(const Ogre::Real tpf) {
 	// no user state
 	//changeMoveState(MS_MOVE_TO_POINT, m_pPlayer->getPosition(), test, Ogre::Degree(10).valueRadians());
