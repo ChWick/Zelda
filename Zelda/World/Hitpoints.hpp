@@ -24,6 +24,7 @@
 
 typedef int Hitpoints;
 enum EHitpointsConstants {
+  HP_NONE       = 0,
 	HP_ONE_HEART	= 100,
 	HP_HALF_HEART	= 50,
 	HP_QUARTER_HEART = 25,

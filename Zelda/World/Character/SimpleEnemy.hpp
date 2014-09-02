@@ -47,6 +47,7 @@ protected:
 	void setupInternal();
   void setupAnimations();
 	virtual CCharacterController *createCharacterController();
+  EReceiveDamageResult receiveDamage(const CDamage &dmg);
 	void killedCallback();
 
   void updateAnimationsCallback(const Ogre::Real fTime);

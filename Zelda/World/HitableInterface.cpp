@@ -85,10 +85,13 @@ void CHitableInterface::changeHP(Hitpoints uiHP) {
 }
 
 CHitableInterface::EReceiveDamageResult CHitableInterface::hit(const CDamage &damage) {
+  bool bWasInvunerable = m_bInvulnerable;
   EReceiveDamageResult r = receiveDamage(damage);
   switch (r) {
   case RDR_ACCEPTED:
-    changeHP(-damage.getDamageValue());
+    if (!bWasInvunerable) {
+      changeHP(-damage.getDamageValue());
+    }
     damageAccepted(damage);
     break;
   case RDR_BLOCKED:

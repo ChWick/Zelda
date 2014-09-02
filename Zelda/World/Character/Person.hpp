@@ -21,6 +21,7 @@
 #define _PERSON_H_
 
 #include "Character.hpp"
+#include <OgreMaterial.h>
 
 struct SPersonData;
 
@@ -43,6 +44,7 @@ protected:
 
 protected:
   const SPersonData &m_PersonData;
+    Ogre::MaterialPtr m_pMaterial;
 private:
     Ogre::Degree m_degLeftHandleCurrentRotation;
     Ogre::Degree m_degLeftHandleRotationToTarget;

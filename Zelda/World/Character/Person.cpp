@@ -55,6 +55,7 @@ CPerson::CPerson(const std::string &sID, CEntity *pParent, const SPersonData &pe
 	m_degLeftHandleRotationToTarget = 0;
 
 	m_uiTakeDamageFlags = m_uiBlockDamageFlags = DMG_ALL;
+  setCurAndMaxHP(personData.hitpoints);
 }
 CPerson::~CPerson() {
 }
@@ -126,6 +127,8 @@ void CPerson::createPhysics() {
 
     //pCC->start();
     //pCC->setBorderDetectionShapeGroupAndMask(getCollisionGroup(), COL_WALL);
+
+  setThisAsCollisionObjectsUserPointer();
 }
 void CPerson::destroyPhysics() {
 
@@ -224,30 +227,18 @@ bool CPerson::frameEnded(const Ogre::FrameEvent& evt) {
 }
 
 void CPerson::createBlinkingMaterials() {
-/*	assert(m_pBodyEntity);
-
-	for (unsigned int i = 0; i < m_pBodyEntity->getNumSubEntities(); i++) {
-		auto pSubEnt = m_pBodyEntity->getSubEntity(i);
-		CBlinkingMaterialManager::getSingleton().createMaterial(pSubEnt->getMaterialName());
-	}*/
+	assert(m_pBodyEntity);
+  m_pMaterial = Ogre::MaterialManager::getSingleton().getByName(m_PersonData.sMaterialName)->clone(m_sID + "mat_" + m_PersonData.sMaterialName);
+  m_pBodyEntity->setMaterial(m_pMaterial);
 }
 void CPerson::removeBlinkingMaterials() {
-	/*assert(m_pBodyEntity);
-
-	for (unsigned int i = 0; i < m_pBodyEntity->getNumSubEntities(); i++) {
-		auto pSubEnt = m_pBodyEntity->getSubEntity(i);
-		CBlinkingMaterialManager::getSingleton().removeMaterial(pSubEnt->getMaterialName());
-	}*/
+	Ogre::MaterialManager::getSingleton().remove(m_pMaterial->getName());
 }
 void CPerson::startBeingInvulnerableCallback() {
-	/*for (unsigned int i = 0; i < m_pBodyEntity->getNumSubEntities(); i++) {
-		m_pBodyEntity->getSubEntity(i)->setMaterialName(CBlinkingMaterialManager::getSingleton().getBlinkingMat(m_pBodyEntity->getSubEntity(i)->getMaterialName()));
-	}*/
+	m_pMaterial->getSupportedTechnique(0)->getPass(0)->getFragmentProgramParameters()->setNamedConstant("blinking_intensity", 1.f);
 }
 void CPerson::endBeingInvulnerableCallback() {
-	/*for (unsigned int i = 0; i < m_pBodyEntity->getNumSubEntities(); i++) {
-		m_pBodyEntity->getSubEntity(i)->setMaterialName(CBlinkingMaterialManager::getSingleton().getNonBlinkingMat(m_pBodyEntity->getSubEntity(i)->getMaterialName()));
-	}*/
+	m_pMaterial->getSupportedTechnique(0)->getPass(0)->getFragmentProgramParameters()->setNamedConstant("blinking_intensity", 0.f);
 }
 
 

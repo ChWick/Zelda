@@ -23,6 +23,7 @@
 #include "../../Common/Util/EnumIdMap.hpp"
 #include <OgreVector3.h>
 #include "FriendOrEnemyStates.hpp"
+#include "../Hitpoints.hpp"
 
 enum EPersonTypes {
   PERSON_LINK,
@@ -36,6 +37,7 @@ struct SPersonData {
   std::string sMaterialName;
   Ogre::Vector3 vScale;
   EFriendOrEnemyStates eFriendOrEnemyState;
+  Hitpoints hitpoints;
 };
 
 class CPersonTypeIdMap : public CEnumIdMap<EPersonTypes, SPersonData> {

@@ -27,7 +27,6 @@
 
 class CDamage {
 public:
-    static const Hitpoints DMG_BASE[];
 private:
 	const EDamageType m_eDamageType;
 	const Hitpoints m_hpDamageValue;		//!< Schaden in Prozent an Herzen (100 = 1 Herz, 50 = 1/2 Herz)

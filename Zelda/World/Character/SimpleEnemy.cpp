@@ -78,6 +78,11 @@ CCharacterController *CSimpleEnemy::createCharacterController() {
 	return new CSimpleEnemyController(this);
 }
 
+CSimpleEnemy::EReceiveDamageResult CSimpleEnemy::receiveDamage(const CDamage &dmg) {
+  this->makeInvulnerable(1);
+  return RDR_ACCEPTED;
+}
+
 void CSimpleEnemy::killedCallback() {
 	deleteLater();
 	//InnerObjectGenerator::createInnerObject(*m_pCurrentMap, getPosition(), InnerObjectGenerator::IOLT_DEFAULT);

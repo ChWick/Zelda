@@ -42,6 +42,10 @@ CCharacter::CCharacter(const std::string &sID, CEntity *pParent, const EFriendOr
 }
 CCharacter::~CCharacter() {
 }
+void CCharacter::exit() {
+  CWorldEntity::exit();
+  destroyPhysics();
+}
 void CCharacter::enterMap(CMap *pMap, const Ogre::Vector3 &vInitPosition) {
   bool bSwitchMapOnly = m_pMap != nullptr;
 

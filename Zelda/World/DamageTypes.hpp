@@ -21,6 +21,7 @@
 #define _DAMAGE_TYPES_HPP_
 
 #include "../Common/Util/EnumIdMap.hpp"
+#include "Hitpoints.hpp"
 
 enum EDamageType {
   DMG_NONE	= 0,
@@ -47,5 +48,17 @@ public:
 };
 
 extern CDamageTypeIdMap DAMAGE_TYPE_ID_MAP;
+
+
+struct SDamageData {
+  Hitpoints defaultDamage;
+};
+
+class CDamageDataMap : public CEnumIdMap<EDamageType, SDamageData> {
+public:
+  void init();
+};
+
+extern CDamageDataMap DAMAGE_DATA_MAP;
 
 #endif // _DAMAGE_TYPES_HPP_

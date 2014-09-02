@@ -48,3 +48,16 @@ unsigned int CDamageTypeIdMap::parseString(const std::string &str) const {
 }
 
 CDamageTypeIdMap DAMAGE_TYPE_ID_MAP;
+
+void CDamageDataMap::init() {
+  m_Map[DMG_NONE] = {HP_NONE};
+  m_Map[DMG_WORLD] = {HP_ONE_HEART};
+  m_Map[DMG_SWORD] = {HP_HALF_HEART};
+  m_Map[DMG_ARROW] = {HP_ONE_HEART};
+  m_Map[DMG_HAMMER] = {HP_ONE_HEART};
+  m_Map[DMG_BOMB] = {HP_ONE_HEART};
+  m_Map[DMG_FIRE] = {HP_ONE_HEART};
+  m_Map[DMG_RUN] = {HP_NONE};
+}
+
+CDamageDataMap DAMAGE_DATA_MAP;
