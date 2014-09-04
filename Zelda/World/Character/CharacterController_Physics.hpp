@@ -32,6 +32,7 @@
 #include <LinearMath/btDefaultMotionState.h>
 #include <BulletDynamics/Character/btCharacterControllerInterface.h>
 #include <BulletDynamics/Character/btKinematicCharacterController.h>
+#include "CharacterControllerPhysicsListener.hpp"
 
 class CWorldEntity;
 
@@ -41,7 +42,7 @@ class CWorldEntity;
 class CharacterControllerPhysics : public btCharacterControllerInterface
 {
 protected:
-
+  CCharacterControllerPhysicsListener &m_Listener;
   int mSubSteps;
 	btScalar m_halfHeight;
 
@@ -108,7 +109,7 @@ public:
 
 	BT_DECLARE_ALIGNED_ALLOCATOR();
 
-	CharacterControllerPhysics (btPairCachingGhostObject* ghostObject,btConvexShape* convexShape,btScalar stepHeight, int upAxis = 1);
+	CharacterControllerPhysics (CCharacterControllerPhysicsListener &listener, btPairCachingGhostObject* ghostObject,btConvexShape* convexShape,btScalar stepHeight, int upAxis = 1);
 	~CharacterControllerPhysics ();
 
 

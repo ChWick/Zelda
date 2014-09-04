@@ -106,7 +106,7 @@ void CPerson::createPhysics() {
 
 
     //mCharacter = new CharacterControllerManager(mSceneManager, mCamera, characterGhostObject, capsule, stepHeight, CPhysicsManager::getSingleton().getCollisionWorld(), origin);
-    btCharacterControllerInterface *pCC = new CharacterControllerPhysics(characterGhostObject, capsule, stepHeight);
+    btCharacterControllerInterface *pCC = new CharacterControllerPhysics(*this, characterGhostObject, capsule, stepHeight);
     //btCharacterControllerInterface *pCC = new btKinematicCharacterController(characterGhostObject, capsule, stepHeight, 1);
     mCCPhysics = pCC;
     //pCC->setMaxSlope(0.5);

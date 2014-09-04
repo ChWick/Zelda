@@ -23,6 +23,7 @@
 #include "../WorldEntity.hpp"
 #include <LinearMath/btAlignedObjectArray.h>
 #include "FriendOrEnemyStates.hpp"
+#include "CharacterControllerPhysicsListener.hpp"
 
 class btRigidBody;
 class CMap;
@@ -37,7 +38,7 @@ class btCharacterControllerInterface;
 /*!
 Elternklassen f&uur: Charakter kann zerst&ouml;rt werden, Charakter kann Schaden verursachen.
 */
-class CCharacter : public CWorldEntity {
+class CCharacter : public CWorldEntity, protected CCharacterControllerPhysicsListener {
 public:
 	enum EDefaultAnimationFlags {
 		ANIM_FLAG_NONE			= 0,
@@ -54,8 +55,8 @@ public:
 		ANIM_IDLE,
 		ANIM_WALK,
 		ANIM_SLICE_HORIZONTAL,
-		/*ANIM_RUN,
-		ANIM_HANDS_CLOSED,
+		ANIM_RUN,
+		/*ANIM_HANDS_CLOSED,
 		ANIM_HANDS_RELAXED,
 		ANIM_BOW_SHOT,
 		ANIM_JUMP_START,

@@ -92,7 +92,7 @@ void CPlayer::setupInternal()  {
 void CPlayer::setupAnimations() {
 	Ogre::StringVector animNames(ANIM_COUNT);
 	animNames[ANIM_IDLE] = "Idle";
-	//animNames[ANIM_RUN] = "Run";
+	animNames[ANIM_RUN] = "RunPegasus";
 	animNames[ANIM_SLICE_HORIZONTAL] = "SwordAttack";
 	animNames[ANIM_WALK] = "Walk";
 	/*animNames[ANIM_HANDS_CLOSED] = "HandsClosed";
@@ -191,6 +191,40 @@ void CPlayer::updateLiftedObject(const Ogre::Real fTime) {
   
 }
 
+void CPlayer::updateAnimationsCallback(const Ogre::Real fTime) {
+  if (m_uiAnimID == ANIM_SLICE_HORIZONTAL && m_fTimer >= m_Anims[ANIM_SLICE_HORIZONTAL]->getLength()) {
+    setAnimation(ANIM_IDLE);
+  }
+  /*if (m_uiAnimID == ANIM_JUMP_END && m_Anims[ANIM_JUMP_END]->hasEnded()) {
+    if (!m_bMoving) {
+      setAnimation(ANIM_IDLE);
+    }
+    else {
+      setAnimation(ANIM_RUN);
+    }
+  }
+  else if (m_uiAnimID == ANIM_JUMP_START && m_Anims[ANIM_JUMP_START]->hasEnded()) {
+    setAnimation(ANIM_JUMP_LOOP);
+  }*/
+  if (dynamic_cast<CPersonController*>(m_pCharacterController)->getMoveState() == CPersonController::MS_RUNNING) {
+    if (m_uiAnimID != ANIM_RUN) {
+      setAnimation(ANIM_RUN);
+    }
+  }
+  else if (m_bMoving) {
+    if (m_uiAnimID == ANIM_IDLE || m_uiAnimID == ANIM_NONE || m_uiAnimID == ANIM_RUN) {
+      setAnimation(ANIM_WALK);
+    }
+  }
+  else if (!m_bMoving) {
+    if (m_uiAnimID == ANIM_WALK || m_uiAnimID == ANIM_NONE || m_uiAnimID == ANIM_RUN) {
+      setAnimation(ANIM_IDLE);
+    }
+  }
+
+  CPerson::updateAnimationsCallback(fTime);
+}
+
 void CPlayer::renderDebug(Ogre::Real tpf) {
   CPerson::renderDebug(tpf);
 
@@ -201,7 +235,6 @@ void CPlayer::renderDebug(Ogre::Real tpf) {
 }
 
 void CPlayer::preUpdateBoundsCallback(const Ogre::Real deltaTime) {
-    CPersonController *pPersonController = dynamic_cast<CPersonController*>(m_pCharacterController);
 	// check if player is in war mode (swords drawn), then im enemy is near change view
 }
 
@@ -243,4 +276,15 @@ CPlayer::EReceiveDamageResult CPlayer::receiveDamage(const CDamage &dmg) {
   this->makeInvulnerable(1);
   dynamic_cast<CPersonController*>(m_pCharacterController)->changeMoveState(CPersonController::MS_PUSHED_BACK, dmg.getDamageDirection(), 0.2, 0.4);
   return RDR_ACCEPTED;
+}
+
+void CPlayer::postStepForwardAndStrafe() {
+  CPersonController *pPersonController = dynamic_cast<CPersonController*>(m_pCharacterController);
+  if (pPersonController->getMoveState() == CPersonController::MS_RUNNING) {
+    const Ogre::Vector3 vDir = m_pSceneNode->getOrientation().zAxis();//m_pBodyEntity->getParentNode()->convertLocalToWorldOrientation(m_pBodyEntity->getSkeleton()->getBone(PERSON_LEFT_HANDLE)->_getDerivedOrientation()).yAxis();
+    const Ogre::Vector3 vPos = BtOgre::Convert::toOgre(m_pCollisionObject->getWorldTransform().getOrigin()) + Ogre::Vector3::UNIT_Y * (PERSON_HEIGHT * 0.15 - PERSON_PHYSICS_OFFSET);/* - m_pBodyEntity->getParentNode()->getPosition() + m_pBodyEntity->getParentNode()->convertLocalToWorldPosition(m_pBodyEntity->getSkeleton()->getBone(PERSON_LEFT_HANDLE)->_getDerivedPosition())*/;
+
+    DebugDrawer::getSingleton().drawLine(vPos, vPos + vDir * 0.08, Ogre::ColourValue::Blue);
+    createDamage(Ogre::Ray(vPos, vDir * 0.08), CDamage(DMG_SWORD, m_pSceneNode->getOrientation().zAxis()));
+  }
 }

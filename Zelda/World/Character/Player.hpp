@@ -52,9 +52,11 @@ protected:
 	void preUpdateBoundsCallback(const Ogre::Real fTime);
 	void updateWalkAnimation();
 	void updateLiftedObject(const Ogre::Real fTime);
+  void updateAnimationsCallback(const Ogre::Real fTime);
   void interact();
   void lift(CWorldEntity *pObjectToLift);
   void throwLifted();
+  void postStepForwardAndStrafe();
 
 	virtual CCharacterController *createCharacterController();
 };

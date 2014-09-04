@@ -44,6 +44,8 @@ protected:
   virtual SInteractionResult interactOnActivate(const Ogre::Vector3 &vInteractDir, CWorldEntity *pSender);
   virtual void changeState(EEntityStateTypes eState);
   virtual EReceiveDamageResult receiveDamage(const CDamage &dmg);
+  virtual EReceiveDamageResult hit(const CDamage &dmg);
+
 
   
 	virtual void killedCallback();

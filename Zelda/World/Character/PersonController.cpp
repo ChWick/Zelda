@@ -223,10 +223,16 @@ void CPersonController::updateCharacter(const Ogre::Real deltaTime) {
     move(true, RUN_SPEED / WALK_SPEED * posIncrementPerSecond, mGoalDirection);
 
     if (mCCPhysics->isStuck()) {
-      changeMoveState(MS_PUSHED_BACK, -mGoalDirection * 0.5, 1);
-
+      bool bOneDestroyed = false;
       for (CWorldEntity *pEnt : mCCPhysics->getCollidingWorldEntities()) {
-        pEnt->hit(CDamage(DMG_RUN));
+        if (pEnt->hit(CDamage(DMG_RUN)) == CHitableInterface::RDR_ACCEPTED) {
+          bOneDestroyed = true;
+        }
+
+      }
+
+      if (!bOneDestroyed && mCCPhysics->getCollidingWorldEntities().size() > 0) {
+        changeMoveState(MS_PUSHED_BACK, -mGoalDirection * 0.05, 1);
       }
     }
   }

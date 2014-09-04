@@ -58,7 +58,7 @@ CObject::CObject(const std::string &id, CWorldEntity *pParent, CMap *pMap, EObje
   // create entity
   if (m_ObjectTypeData.bPermanetStatic) {
     m_pMap->addStaticEntity(m_ObjectTypeData.sMeshName + ".mesh", m_pSceneNode->getPosition(), m_pSceneNode->getOrientation());
-    setMaxHP(HP_INFINITY);
+    setCurAndMaxHP(HP_INFINITY);
   }
   else {
     pEntity = pSceneManager->createEntity(id + "ent", m_ObjectTypeData.sMeshName + ".mesh", "World");
@@ -271,6 +271,24 @@ CObject::EReceiveDamageResult CObject::receiveDamage(const CDamage &dmg) {
     return RDR_ACCEPTED;
   }
   return RDR_IGNORED;
+}
+
+CObject::EReceiveDamageResult CObject::hit(const CDamage &dmg) {
+  EReceiveDamageResult r = CWorldEntity::hit(dmg);
+
+  if (r != RDR_ACCEPTED) {
+    return r;
+  }
+
+  // tree accepts damage, but always blocks it
+
+  switch (m_uiType) {
+  case OBJECT_LIGHT_STONE_PILE:
+  case OBJECT_GREEN_TREE:
+    return RDR_BLOCKED;
+  default:
+    return r;
+  }
 }
 
 void CObject::createInnerObject(EObjectTypes eType) {

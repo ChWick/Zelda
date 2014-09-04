@@ -131,7 +131,8 @@ btVector3 CharacterControllerPhysics::perpindicularComponent (const btVector3& d
 	return direction - parallelComponent(direction, normal);
 }
 
-CharacterControllerPhysics::CharacterControllerPhysics (btPairCachingGhostObject* ghostObject,btConvexShape* convexShape,btScalar stepHeight, int upAxis)
+CharacterControllerPhysics::CharacterControllerPhysics (CCharacterControllerPhysicsListener &listener, btPairCachingGhostObject* ghostObject,btConvexShape* convexShape,btScalar stepHeight, int upAxis)
+  : m_Listener(listener)
 {
   mSubSteps = 1;
 	m_upAxis = upAxis;
@@ -712,6 +713,7 @@ void CharacterControllerPhysics::playerStep (  btCollisionWorld* collisionWorld,
     m_walkDirection /= mSubSteps;
     for (int i = 0; i < mSubSteps; i++) {
       stepForwardAndStrafe (collisionWorld, m_walkDirection, dt / mSubSteps);
+      m_Listener.postStepForwardAndStrafe();
     }
 	} else {
 		//printf("  time: %f", m_velocityTimeInterval);
