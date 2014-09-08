@@ -11,3 +11,5 @@ assets
 bin
 obj
 AndroidManifest.xml
+systemlibs
+lint.xml

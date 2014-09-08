@@ -43,6 +43,7 @@ build_windows
 build_mac
 build_xcode
 build_ios
+build_codeblocks
 *~
 *CMakeFiles*
 cmake_install.cmake
