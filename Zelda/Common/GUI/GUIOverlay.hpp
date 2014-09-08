@@ -42,6 +42,8 @@ public:
     }
   }
 
+  CEGUI::Window *getRoot() const {return m_pRoot;}
+
   virtual void changeTouchButtonSize(float fSize) {}
   virtual void onGUIScalingChanged(float fScaling) {}
 private:

@@ -452,7 +452,8 @@ void CGame::createScene() {
 #endif
 
 #ifdef DEBUG_SHOW_OGRE_TRAY
-  mTrayMgr->showFrameStats(OgreBites::TL_TOPLEFT);
+  // frame stats are now in cegui pull menu
+  //mTrayMgr->showFrameStats(OgreBites::TL_TOPLEFT);
   //mTrayMgr->showLogo(OgreBites::TL_BOTTOMRIGHT);
 
   // create a params panel for displaying sample details
@@ -700,19 +701,19 @@ bool CGame::keyPressed( const OIS::KeyEvent &arg )
       case Ogre::PM_SOLID:
         newVal = "Wireframe";
         pm = Ogre::PM_WIREFRAME;
-        
+
         m_pMainViewPort->setClearEveryFrame(true);
         break;
       case Ogre::PM_WIREFRAME:
         newVal = "Points";
         pm = Ogre::PM_POINTS;
-        
+
         m_pMainViewPort->setClearEveryFrame(true);
         break;
       default:
         newVal = "Solid";
         pm = Ogre::PM_SOLID;
-        
+
         m_pMainViewPort->setClearEveryFrame(true, Ogre::FBT_DEPTH);
       }
 

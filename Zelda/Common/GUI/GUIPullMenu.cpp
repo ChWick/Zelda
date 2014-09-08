@@ -27,7 +27,8 @@ CGUIPullMenu::CGUIPullMenu(const std::string &id,
                            CEntity *pParentEntity,
                            CEGUI::Window *pParentWindow,
                            EPullMenuPositions ePosition,
-                           const float fSize)
+                           const float fSize,
+                           const CEGUI::String sWindowType)
   : CGUIOverlay(id, pParentEntity, pParentWindow, pParentWindow->createChild("DefaultWindow", id + "_root")),
     m_ePosition(ePosition),
     m_fSize((fSize < 0) ? ((ePosition & PMD_HORIZONTAL ? pParentWindow->getPixelSize().d_width : pParentWindow->getPixelSize().d_height) - 50 ) : fSize),
@@ -49,7 +50,7 @@ CGUIPullMenu::CGUIPullMenu(const std::string &id,
   m_pDragButton->setProperty("VertFormatting", "CentreAligned");
   m_pDragButton->setAlwaysOnTop(true);
 
-  m_pDragWindow = m_pRoot->createChild("OgreTray/Group", "DragWindow");
+  m_pDragWindow = m_pRoot->createChild(sWindowType, "DragWindow");
   m_pDragWindow->setText("Drag Window");
 
   switch (ePosition) {

@@ -25,6 +25,12 @@
 class CGUIDebugPullMenu : public CGUIPullMenu {
 private:
   CEGUI::Window *m_pContent;
+  CEGUI::Window *m_pFrameStatsGroup;
+  CEGUI::Window *m_pAverageFps;
+  CEGUI::Window *m_pBestFps;
+  CEGUI::Window *m_pWorstFps;
+  CEGUI::Window *m_pBatches;
+  CEGUI::Window *m_pTriangles;
 public:
   CGUIDebugPullMenu(CEntity *pParentEntity,
                     CEGUI::Window *pParentWindow,
@@ -32,6 +38,9 @@ public:
 
 private:
   CEGUI::Window *createButton(const CEGUI::String &wnd, const CEGUI::String &id, const CEGUI::String &text, float &fPos);
+  CEGUI::Window *createFrameStatsButton(const CEGUI::String &id, const CEGUI::String &sLabel, CEGUI::Window *&pWindow, int iIndex);
+
+  void update(Ogre::Real tpf);
 
   bool onToggleDebugDrawer(const CEGUI::EventArgs &args);
   bool onTogglePhysics(const CEGUI::EventArgs &args);

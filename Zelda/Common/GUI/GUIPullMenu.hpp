@@ -37,7 +37,7 @@ public:
     PMD_HORIZONTAL = PMD_LEFT | PMD_RIGHT,
     PMD_VERTICAL = PMD_TOP | PMD_BOTTOM,
   };
-private:
+public:
   enum EDragState {
     DS_SLEEPING,
     DS_DRAGGING,
@@ -64,7 +64,8 @@ public:
                CEntity *pParentEntity,
                CEGUI::Window *pParentWindow,
                EPullMenuPositions ePosition,
-               const float fPixSize = -1
+               const float fPixSize = -1,
+               const CEGUI::String sWindowType = "OgreTray/Group"
                );
 
   virtual ~CGUIPullMenu();
@@ -72,6 +73,7 @@ public:
   void update(Ogre::Real tpf);
 
   CEGUI::Window *getDragWindow() const {return m_pDragWindow;}
+  EDragState getDragState() const {return m_eDragState;}
 protected:
   virtual void onPullStarted() {}
   virtual void onOpened() {}

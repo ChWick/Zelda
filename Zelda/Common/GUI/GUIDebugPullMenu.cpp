@@ -20,6 +20,7 @@
 #include "GUIDebugPullMenu.hpp"
 #include "../Message/MessageDebug.hpp"
 #include "../Message/MessageHandler.hpp"
+#include "../Game.hpp"
 
 using namespace CEGUI;
 
@@ -27,7 +28,7 @@ CGUIDebugPullMenu::CGUIDebugPullMenu(CEntity *pParentEntity,
                                      CEGUI::Window *pParentWindow,
                                      EPullMenuPositions ePosition)
   : CGUIPullMenu("DebugPullMenu", pParentEntity, pParentWindow, ePosition, 400) {
-  
+
   getDragWindow()->setText("Debug");
 
   m_pContent = getDragWindow()->createChild("OgreTray/ScrollablePane", "pane");
@@ -36,6 +37,18 @@ CGUIDebugPullMenu::CGUIDebugPullMenu(CEntity *pParentEntity,
   float fPos = 0;
   createButton("OgreTray/Checkbox", "debug_drawer", "Toggle debug drawer", fPos)->subscribeEvent(ToggleButton::EventSelectStateChanged, Event::Subscriber(&CGUIDebugPullMenu::onToggleDebugDrawer, this));
   createButton("OgreTray/Checkbox", "physics", "Toggle physics debug", fPos)->subscribeEvent(ToggleButton::EventSelectStateChanged, Event::Subscriber(&CGUIDebugPullMenu::onTogglePhysics, this));
+
+  m_pFrameStatsGroup = m_pContent->createChild("OgreTray/Group", "frame_stats");
+  m_pFrameStatsGroup->setText("fps: 0");
+  m_pFrameStatsGroup->setPosition(UVector2(UDim(0, 0), UDim(0, fPos)));
+  m_pFrameStatsGroup->setSize(USize(UDim(1, 0), UDim(0, 150)));
+  fPos += 155;
+
+  createFrameStatsButton("av_fps", "Average FPS:", m_pAverageFps, 0);
+  createFrameStatsButton("best_fps", "Best FPS:", m_pBestFps, 1);
+  createFrameStatsButton("worst_fps", "Worst FPS:", m_pWorstFps, 2);
+  createFrameStatsButton("batches", "Batches:", m_pBatches, 4);
+  createFrameStatsButton("triangles", "Triangles:", m_pTriangles, 3);
 }
 
 
@@ -49,6 +62,21 @@ CEGUI::Window *CGUIDebugPullMenu::createButton(const CEGUI::String &wnd, const C
   return pButton;
 }
 
+CEGUI::Window *CGUIDebugPullMenu::createFrameStatsButton(const CEGUI::String &id, const CEGUI::String &sLabel, CEGUI::Window *&pWindow, int iIndex) {
+  Window *pLabel = m_pFrameStatsGroup->createChild("OgreTray/Label", id + "_label");
+  pLabel->setSize(USize(UDim(0.5, 0), UDim(1.f / 5.f, -2)));
+  pLabel->setPosition(UVector2(UDim(0, 0), UDim(iIndex * 1.f / 5.f, 2)));
+  pLabel->setText(sLabel);
+  pLabel->setProperty("HorzFormatting", "LeftAligned");
+
+  pWindow = m_pFrameStatsGroup->createChild("OgreTray/Label", id);
+  pWindow->setSize(USize(UDim(0.5, 0), UDim(1.f / 5.f, -2)));
+  pWindow->setPosition(UVector2(UDim(0.5, 0), UDim(iIndex * 1.f / 5.f, 2)));
+  pWindow->setProperty("HorzFormatting", "RightAligned");
+
+  return pWindow;
+}
+
 bool CGUIDebugPullMenu::onToggleDebugDrawer(const CEGUI::EventArgs &args) {
   ToggleButton *pTB = dynamic_cast<ToggleButton*>(dynamic_cast<const WindowEventArgs&>(args).window);
   CMessageHandler::getSingleton().addMessage(new CMessageDebug(CMessageDebug::DM_TOGGLE_DEBUG_DRAWER, pTB->isSelected()));
@@ -59,4 +87,17 @@ bool CGUIDebugPullMenu::onTogglePhysics(const CEGUI::EventArgs &args) {
   ToggleButton *pTB = dynamic_cast<ToggleButton*>(dynamic_cast<const WindowEventArgs&>(args).window);
   CMessageHandler::getSingleton().addMessage(new CMessageDebug(CMessageDebug::DM_TOGGLE_PHYSICS, pTB->isSelected()));
   return true;
+}
+
+void CGUIDebugPullMenu::update(Ogre::Real tpf) {
+  CGUIPullMenu::update(tpf);
+  if (getDragState() != DS_SLEEPING) {
+    const Ogre::RenderTarget::FrameStats stats(CGame::getSingleton().getRenderWindow()->getStatistics());
+    m_pFrameStatsGroup->setText("FPS: " + PropertyHelper<int>::toString(stats.lastFPS));
+    m_pAverageFps->setText(PropertyHelper<int>::toString(stats.avgFPS));
+    m_pBestFps->setText(PropertyHelper<int>::toString(stats.bestFPS));
+    m_pWorstFps->setText(PropertyHelper<int>::toString(stats.worstFPS));
+    m_pBatches->setText(PropertyHelper<int>::toString(stats.batchCount));
+    m_pTriangles->setText(PropertyHelper<int>::toString(stats.triangleCount));
+  }
 }
