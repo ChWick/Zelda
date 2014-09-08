@@ -7717,7 +7717,7 @@
 1410163567 /home/christoph/Documents/Projects/Zelda/Zelda/Common/GUI/GUIDebugPullMenu.hpp
 	"GUIPullMenu.hpp"
 
-1410163567 /home/christoph/Documents/Projects/Zelda/Zelda/Common/GUI/GUIPullMenu.hpp
+1410175402 /home/christoph/Documents/Projects/Zelda/Zelda/Common/GUI/GUIPullMenu.hpp
 	"GUIOverlay.hpp"
 	"../Input/InputListener.hpp"
 
@@ -7740,7 +7740,7 @@
 	"GUIDebugPullMenu.hpp"
 	<dependencies/OgreSdkUtil/SdkTrays.h>
 
-1410163567 source:/home/christoph/Documents/Projects/Zelda/Zelda/Common/GUI/GUIPullMenu.cpp
+1410177079 source:/home/christoph/Documents/Projects/Zelda/Zelda/Common/GUI/GUIPullMenu.cpp
 	"GUIPullMenu.hpp"
 	"../Input/InputDefines.hpp"
 	"../Log.hpp"
@@ -8014,7 +8014,7 @@
 	"../../Common/Message/MessageInjector.hpp"
 	<OgreVector2.h>
 
-1410166053 source:/home/christoph/Documents/Projects/Zelda/Zelda/World/Atlas/Map.cpp
+1410169414 source:/home/christoph/Documents/Projects/Zelda/Zelda/World/Atlas/Map.cpp
 	"Map.hpp"
 	"../../Common/Physics/BtOgrePG.hpp"
 	"../../Common/Util/DeleteSceneNode.hpp"
@@ -8347,13 +8347,14 @@
 1410163567 /home/christoph/Documents/Projects/Zelda/Zelda/World/WorldGUI/HUD.hpp
 	"../../Common/GUI/GUIOverlay.hpp"
 
-1410163567 source:/home/christoph/Documents/Projects/Zelda/Zelda/World/WorldGUI/WorldGUI.cpp
+1410177060 source:/home/christoph/Documents/Projects/Zelda/Zelda/World/WorldGUI/WorldGUI.cpp
 	"../../Common/GUI/GUIManager.hpp"
 	"WorldGUI.hpp"
 	"../../Common/GUI/GUIPullMenu.hpp"
 	"HUD.hpp"
 	"../../Common/GUI/GUIDirectionInput.hpp"
 	"WorldGUISimpleTouchButtons.hpp"
+	"WorldGUIItemViewer.hpp"
 
 1410163567 /home/christoph/Documents/Projects/Zelda/Zelda/World/WorldGUI/WorldGUISimpleTouchButtons.hpp
 	"../../Common/GUI/GUITouchButton.hpp"
@@ -8374,4 +8375,18 @@
 
 1410163567 /home/christoph/Documents/Projects/Zelda/Zelda/Zelda.hpp
 	"Common/Game.hpp"
+
+1410175239 /home/christoph/Documents/Projects/Zelda/Zelda/World/WorldGUI/WorldGUIItemViewer.hpp
+	"../../Common/GUI/GUIOverlay.hpp"
+	"../../Common/GUI/GUIPullMenu.hpp"
+
+1410175138 source:/home/christoph/Documents/Projects/Zelda/Zelda/World/WorldGUI/WorldGUIItemSelector.cpp
+	"WorldGUIItemSelector.hpp"
+
+1410172213 /home/christoph/Documents/Projects/Zelda/Zelda/World/WorldGUI/WorldGUIItemSelector.hpp
+	"../../Common/GUI/GUIOverlay.hpp"
+
+1410175969 source:/home/christoph/Documents/Projects/Zelda/Zelda/World/WorldGUI/WorldGUIItemViewer.cpp
+	"WorldGUIItemViewer.hpp"
+	"WorldGUIItemSelector.hpp"
 

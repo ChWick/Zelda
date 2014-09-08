@@ -27,10 +27,10 @@ CGUIPullMenu::CGUIPullMenu(const std::string &id,
                            CEntity *pParentEntity,
                            CEGUI::Window *pParentWindow,
                            EPullMenuPositions ePosition,
-                           const float &fSize)
+                           const float fSize)
   : CGUIOverlay(id, pParentEntity, pParentWindow, pParentWindow->createChild("DefaultWindow", id + "_root")),
     m_ePosition(ePosition),
-    m_fSize(fSize),
+    m_fSize((fSize < 0) ? ((ePosition & PMD_HORIZONTAL ? pParentWindow->getPixelSize().d_width : pParentWindow->getPixelSize().d_height) - 50 ) : fSize),
     m_fDragButtonSize(50),
     m_bPressed(false),
     m_eDragState(DS_SLEEPING),
@@ -41,6 +41,7 @@ CGUIPullMenu::CGUIPullMenu(const std::string &id,
   CInputListenerManager::getSingleton().addInputListener(this);
 
   m_pRoot->setAlwaysOnTop(true);
+  m_pRoot->setMousePassThroughEnabled(true);
 
   m_pDragButton = m_pRoot->createChild("OgreTray/StaticImage", "DragButton");
   m_pDragButton->setAlpha(0.5);

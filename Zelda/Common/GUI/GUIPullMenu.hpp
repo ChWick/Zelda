@@ -64,7 +64,7 @@ public:
                CEntity *pParentEntity,
                CEGUI::Window *pParentWindow,
                EPullMenuPositions ePosition,
-               const float &fPixSize
+               const float fPixSize = -1
                );
 
   virtual ~CGUIPullMenu();
