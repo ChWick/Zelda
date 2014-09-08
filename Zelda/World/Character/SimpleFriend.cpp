@@ -22,7 +22,7 @@
 #include "PersonTypes.hpp"
 
 SimpleFriend::SimpleFriend(const std::string &sID, CEntity *pParent, ESimpleFriendTypes eType)
-: CPerson(sID, pParent, PERSON_TYPE_ID_MAP.toData(PERSON_SOLDIER_BLUE)), m_eType(eType){
+: CPerson(sID, pParent, PERSON_DATA_ID_MAP.toData(PERSON_SOLDIER_BLUE)), m_eType(eType){
     //ctor
 }
 

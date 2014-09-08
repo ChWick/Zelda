@@ -32,14 +32,11 @@ public:
 
     SE_ANIM_COUNT,
   };
-	enum EEnemyTypes {
-		ET_GREEN_SWORD,
-		ET_BLOCKER,         // soldier that stands still and only blocks the player (start of game e.g.)
-	};
+
 private:
-	const EEnemyTypes m_eEnemyType;
 public:
-	CSimpleEnemy(const std::string &sID, CEntity *pParent, EEnemyTypes eEnemyType);
+	CSimpleEnemy(const std::string &sID, CEntity *pParent);
+	CSimpleEnemy(const tinyxml2::XMLElement *pElem, CEntity *pParent);
 
 	void setPlayer(CWorldEntity *pPlayer);
 

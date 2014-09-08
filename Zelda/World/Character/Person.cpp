@@ -35,6 +35,9 @@
 #include "../GlobalCollisionShapesTypes.hpp"
 #include "PersonTypes.hpp"
 #include "../../Common/Log.hpp"
+#include "../../Common/Util/XMLHelper.hpp"
+
+using namespace XMLHelper;
 
 //const Ogre::Real PERSONS_MASS = 1.0f;
 const Ogre::String CPerson::PERSON_SHEATH("Sheath");
@@ -57,6 +60,19 @@ CPerson::CPerson(const std::string &sID, CEntity *pParent, const SPersonData &pe
 	m_uiTakeDamageFlags = m_uiBlockDamageFlags = DMG_ALL;
   setCurAndMaxHP(personData.hitpoints);
 }
+
+CPerson::CPerson(const tinyxml2::XMLElement *pElem, CEntity *pParent, unsigned int uiAnimationCount)
+  : CCharacter(pElem, pParent, PERSON_DATA_ID_MAP.toData(PERSON_TYPE_ID_MAP.parseString(Attribute(pElem, "person_type"))).eFriendOrEnemyState, uiAnimationCount),
+    m_PersonData(PERSON_DATA_ID_MAP.toData(PERSON_TYPE_ID_MAP.parseString(Attribute(pElem, "person_type")))) {
+
+	m_degLeftHandleCurrentRotation = 0;
+	m_degLeftHandleRotationSpeed = 0;
+	m_degLeftHandleRotationToTarget = 0;
+
+	m_uiTakeDamageFlags = m_uiBlockDamageFlags = DMG_ALL;
+  setCurAndMaxHP(m_PersonData.hitpoints);
+}
+
 CPerson::~CPerson() {
 }
 CCharacterController *CPerson::createCharacterController() {

@@ -15,4 +15,6 @@
       <action type="create_object" object_type="rupee_red" location="inner"/>
     </event>
   </scene_entity>
+  <new_entity entity_type="simple_enemy" id="enemy_1" position="1 1 0" person_type="soldier_green_sword">
+  </new_entity>
 </map>

@@ -42,7 +42,7 @@ Ogre::Real g_fCurrentSpeedScale = 1;
 const Ogre::Real PLAYER_ENEMY_NOTIFY_RADIUS_SQR = 100.f; // already squared!
 
 CPlayer::CPlayer(CEntity *pParent, const Ogre::Camera* pCamera, Ogre::SceneManager *pPlayerSceneManager)
-	: CPerson("player", pParent, PERSON_TYPE_ID_MAP.toData(PERSON_LINK)),
+	: CPerson("player", pParent, PERSON_DATA_ID_MAP.toData(PERSON_LINK)),
 		m_pCamera(pCamera),
     m_pPlayerSceneManager(pPlayerSceneManager),
     m_pLiftedEntity(nullptr) {
@@ -188,7 +188,7 @@ void CPlayer::updateLiftedObject(const Ogre::Real fTime) {
   if (!m_pLiftedEntity) {return;}
 
   m_pLiftedEntity->setPosition(getPosition() + Ogre::Vector3::UNIT_Y * (PERSON_HEIGHT - PERSON_FLOOR_OFFSET));
-  
+
 }
 
 void CPlayer::updateAnimationsCallback(const Ogre::Real fTime) {
@@ -262,7 +262,7 @@ void CPlayer::lift(CWorldEntity *pObjectToLift) {
 
 void CPlayer::throwLifted() {
   ASSERT(m_pLiftedEntity);
-  
+
   m_pLiftedEntity->changeState(EST_THROWN);
 
   btRigidBody *pRB = btRigidBody::upcast(m_pLiftedEntity->getCollisionObject());

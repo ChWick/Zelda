@@ -110,7 +110,7 @@ CMap::CMap(CEntity *pAtlas, CMapPackPtr mapPack, Ogre::SceneNode *pParentSceneNo
                               m_pSceneNode,
                               m_MapPack->getName() + Ogre::StringConverter::toString(MAP_COUNTER++));
 
-  
+
   m_MapPack->parse();
 
 
@@ -118,10 +118,6 @@ CMap::CMap(CEntity *pAtlas, CMapPackPtr mapPack, Ogre::SceneNode *pParentSceneNo
   //CreateCube(btVector3(0, 200, 0.3), 100);
 
   //new CObject(m_MapPack->getName() + "rupee", this, this, OBJECT_GREEN_BUSH);
-  CSimpleEnemy *pEnemy = new CSimpleEnemy("enemy", this, CSimpleEnemy::ET_GREEN_SWORD);
-  pEnemy->enterMap(this, Ogre::Vector3(0, 4, 1));
-  pEnemy->setPlayer(m_pPlayer);
-
 
   /*btCollisionShape *pBox = new btBoxShape(btVector3(10, 0.1, 10));
   btRigidBody *pRB = new btRigidBody(0, new btDefaultMotionState(), pBox);
@@ -161,7 +157,7 @@ void CMap::exit() {
   if (!m_pSceneNode) {return;}
   m_SceneLoader.cleanup();
   Ogre::LogManager::getSingleton().logMessage("Destruction of map '" + m_MapPack->getName() + "'");
-  
+
   for (int i = 0; i < TT_COUNT; i++) {
     m_pSceneNode->getCreator()->destroyEntity(m_apTileEntities[i]);
   }
@@ -295,7 +291,7 @@ void CMap::handleMessage(const CMessage &message) {
 
       m_pStaticGeometryFixedTiles->destroy();
       rebuildStaticGeometryChangedTiles();
-      
+
       if (pObject->getType() == OBJECT_GREEN_BUSH) {
         m_pStaticGeometryFixedTiles->addEntity(m_apTileEntities[TT_GREEN_SOIL + std::rand() % (TT_GREEN_SOIL_GRASS_BR_TL_TR - TT_GREEN_SOIL + 1)], pObject->getSceneNode()->getInitialPosition());
         m_pStaticGeometryFixedTiles->addEntity(m_apTileEntities[TT_GREEN_BUSH_TRUNK], pObject->getSceneNode()->getInitialPosition());
@@ -315,7 +311,7 @@ void CMap::rebuildStaticGeometryChangedTiles() {
   for (CEntity *pChild : m_lChildren) {
     CObject *pObject(dynamic_cast<CObject*>(pChild));
     if (!pObject) {continue;}
-    
+
     if (pObject->getState() == EST_NORMAL) {
       const SObjectTypeData &data(OBJECT_TYPE_ID_MAP.toData(static_cast<EObjectTypes>(pObject->getType())));
       if (data.eNormalTile != TT_COUNT) {
@@ -375,6 +371,15 @@ void CMap::parseSceneEntity(const tinyxml2::XMLElement *pElem) {
   }
 }
 
+void CMap::parseNewEntity(const tinyxml2::XMLElement *pElem) {
+  std::string sEntityType(Attribute(pElem, "entity_type"));
+  if (sEntityType == "simple_enemy") {
+    CSimpleEnemy *pEnemy = new CSimpleEnemy(pElem, this);
+    pEnemy->enterMap(this, Ogre::StringConverter::parseVector3(Attribute(pElem, "position")));
+    pEnemy->setPlayer(m_pPlayer);
+  }
+}
+
 // ############################################################################3
 // CDotSceneLoaderCallback
 void CMap::physicsShapeCreated(btCollisionShape *pShape, const std::string &sMeshName) {
@@ -411,7 +416,7 @@ void CMap::staticObjectAdded(Ogre::Entity *pEntity, Ogre::SceneNode *pParent) {
 
 CDotSceneLoaderCallback::EResults CMap::preEntityAdded(tinyxml2::XMLElement *XMLNode, Ogre::SceneNode *pParent, CUserData &userData) {
   CWorldEntity *pEntity(nullptr);
-  
+
   EObjectTypes objectType(OBJECT_TYPE_ID_MAP.getFromMeshFileName(XMLNode->Attribute("meshFile")));
   if (objectType != OBJECT_COUNT && OBJECT_TYPE_ID_MAP.toData(objectType).bUserHandle) {
     pEntity = new CObject(userData.getStringUserData("name"), this, this, objectType, pParent);

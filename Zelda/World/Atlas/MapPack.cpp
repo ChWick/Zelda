@@ -100,5 +100,8 @@ void CMapPack::parseXMLFile() {
     else if (strcmp(pElem->Value(), "scene_entity") == 0) {
       if (m_pListener) {m_pListener->parseSceneEntity(pElem);}
     }
+    else if (strcmp(pElem->Value(), "new_entity") == 0) {
+      if (m_pListener) {m_pListener->parseNewEntity(pElem);}
+    }
   }
 }

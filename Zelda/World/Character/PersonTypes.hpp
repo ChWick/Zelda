@@ -41,11 +41,17 @@ struct SPersonData {
   Hitpoints hitpoints;
 };
 
-class CPersonTypeIdMap : public CEnumIdMap<EPersonTypes, SPersonData> {
+class CPersonTypeIdMap : public CEnumIdMap<EPersonTypes> {
+public:
+  void init();
+};
+
+class CPersonDataIdMap : public CEnumIdMap<EPersonTypes, SPersonData> {
 public:
   void init();
 };
 
 extern CPersonTypeIdMap PERSON_TYPE_ID_MAP;
+extern CPersonDataIdMap PERSON_DATA_ID_MAP;
 
 #endif // _PERSON_TYPES_HPP_

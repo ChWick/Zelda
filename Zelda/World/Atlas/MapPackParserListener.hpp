@@ -29,6 +29,7 @@ public:
   virtual void parsePlayer(const tinyxml2::XMLElement *) {}
   virtual void parseRegion(const tinyxml2::XMLElement *pElem) {}
   virtual void parseSceneEntity(const tinyxml2::XMLElement *) {}
+  virtual void parseNewEntity(const tinyxml2::XMLElement *) {}
 };
 
 #endif // _MAP_PACK_PARSER_LISTENER_HPP_

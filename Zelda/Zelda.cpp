@@ -28,6 +28,7 @@
 
 void CZelda::initEnumIdMaps() {
   PERSON_TYPE_ID_MAP.init();
+  PERSON_DATA_ID_MAP.init();
   DAMAGE_DATA_MAP.init();
 }
 

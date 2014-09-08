@@ -25,6 +25,7 @@
 #include <BulletDynamics/Character/btCharacterControllerInterface.h>
 #include <OgreAnimationState.h>
 
+// map will be set on enter map, in construction, m_pMap is nullptr
 CCharacter::CCharacter(const std::string &sID, CEntity *pParent, const EFriendOrEnemyStates foe, unsigned int uiAnimationCount)
 	: CWorldEntity(sID, pParent, nullptr),
 	  m_uiAnimationCount(uiAnimationCount),
@@ -40,6 +41,23 @@ CCharacter::CCharacter(const std::string &sID, CEntity *pParent, const EFriendOr
   m_FadingStates.resize(m_uiAnimationCount);
   m_uiAnimID = m_uiAnimationCount;
 }
+
+CCharacter::CCharacter(const tinyxml2::XMLElement *pElem, CEntity *pParent, const EFriendOrEnemyStates foe, unsigned int uiAnimationCount)
+  : CWorldEntity(pParent, nullptr, pElem),
+    m_uiAnimationCount(uiAnimationCount),
+    m_fTimer(0),
+    m_fAnimSpeed(1),
+    m_eFriendOrEnemy(foe),
+    m_pCharacterController(nullptr) {
+
+  mCCPhysics = NULL;
+  m_bMoving = false;
+  m_fYaw = 0;
+  m_Anims.resize(m_uiAnimationCount);
+  m_FadingStates.resize(m_uiAnimationCount);
+  m_uiAnimID = m_uiAnimationCount;
+}
+
 CCharacter::~CCharacter() {
 }
 void CCharacter::exit() {
@@ -125,7 +143,7 @@ void CCharacter::update(Ogre::Real fTime) {
 
 void CCharacter::updateAnimations(Ogre::Real fTime) {
   if (m_uiAnimID >= m_uiAnimationCount) {return;}
-  
+
   m_fTimer += fTime;
   m_fAnimSpeed = 1;
 
