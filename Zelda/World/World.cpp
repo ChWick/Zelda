@@ -59,6 +59,7 @@ CWorld::CWorld()
 
   // create the player
   LOGV("Creating Player");
+  m_ItemStatusStorage.load();
   m_pPlayer = new CPlayer(this, m_pWorldCamera, CGame::getSingleton().getSceneManager());
 
   // create the atlas

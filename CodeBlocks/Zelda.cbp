@@ -139,6 +139,7 @@
 		<Unit filename="../Zelda/Common/Message/MessageHandler.hpp" />
 		<Unit filename="../Zelda/Common/Message/MessageHitpointsChanged.cpp" />
 		<Unit filename="../Zelda/Common/Message/MessageHitpointsChanged.hpp" />
+		<Unit filename="../Zelda/Common/Message/MessageInjector.cpp" />
 		<Unit filename="../Zelda/Common/Message/MessageInjector.hpp" />
 		<Unit filename="../Zelda/Common/Message/MessagePlayerPickupItem.cpp" />
 		<Unit filename="../Zelda/Common/Message/MessagePlayerPickupItem.hpp" />
@@ -233,6 +234,16 @@
 		<Unit filename="../Zelda/World/HitableInterface.hpp" />
 		<Unit filename="../Zelda/World/Hitpoints.hpp" />
 		<Unit filename="../Zelda/World/InteractionInterface.hpp" />
+		<Unit filename="../Zelda/World/Items/ItemData.cpp" />
+		<Unit filename="../Zelda/World/Items/ItemData.hpp" />
+		<Unit filename="../Zelda/World/Items/ItemStatus.cpp" />
+		<Unit filename="../Zelda/World/Items/ItemStatus.hpp" />
+		<Unit filename="../Zelda/World/Items/ItemTypes.cpp" />
+		<Unit filename="../Zelda/World/Items/ItemTypes.hpp" />
+		<Unit filename="../Zelda/World/Messages/MessageItem.cpp" />
+		<Unit filename="../Zelda/World/Messages/MessageItem.hpp" />
+		<Unit filename="../Zelda/World/Messages/UserMessageTypes.cpp" />
+		<Unit filename="../Zelda/World/Messages/UserMessageTypes.hpp" />
 		<Unit filename="../Zelda/World/Objects/Object.cpp" />
 		<Unit filename="../Zelda/World/Objects/Object.hpp" />
 		<Unit filename="../Zelda/World/Objects/ObjectTypes.cpp" />
@@ -245,6 +256,10 @@
 		<Unit filename="../Zelda/World/WorldGUI/HUD.hpp" />
 		<Unit filename="../Zelda/World/WorldGUI/WorldGUI.cpp" />
 		<Unit filename="../Zelda/World/WorldGUI/WorldGUI.hpp" />
+		<Unit filename="../Zelda/World/WorldGUI/WorldGUIItemSelector.cpp" />
+		<Unit filename="../Zelda/World/WorldGUI/WorldGUIItemSelector.hpp" />
+		<Unit filename="../Zelda/World/WorldGUI/WorldGUIItemViewer.cpp" />
+		<Unit filename="../Zelda/World/WorldGUI/WorldGUIItemViewer.hpp" />
 		<Unit filename="../Zelda/World/WorldGUI/WorldGUISimpleTouchButtons.cpp" />
 		<Unit filename="../Zelda/World/WorldGUI/WorldGUISimpleTouchButtons.hpp" />
 		<Unit filename="../Zelda/Zelda.cpp" />

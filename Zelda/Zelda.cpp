@@ -25,11 +25,16 @@
 #include "Common/Log.hpp"
 #include "World/Character/PersonTypes.hpp"
 #include "World/DamageTypes.hpp"
+#include "World/Items/ItemTypes.hpp"
+#include "World/Items/ItemData.hpp"
 
 void CZelda::initEnumIdMaps() {
   PERSON_TYPE_ID_MAP.init();
   PERSON_DATA_ID_MAP.init();
   DAMAGE_DATA_MAP.init();
+
+  ITEM_TYPE_ID_MAP.init();
+  ITEM_DATA_MAP.init();
 }
 
 void CZelda::chooseGameState() {

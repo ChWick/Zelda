@@ -41,11 +41,8 @@ CGameStateManager::CGameStateManager()
   m_eNextGameState(GS_COUNT),
   m_bForce(true),
   m_bAdShown(false) {
-
-  CMessageHandler::getSingleton().addInjector(this);
 }
 CGameStateManager::~CGameStateManager() {
-  CMessageHandler::getSingleton().removeInjector(this);
 }
 void CGameStateManager::init() {
   m_bAdShown = false;

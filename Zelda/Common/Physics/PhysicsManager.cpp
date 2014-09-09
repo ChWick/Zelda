@@ -47,7 +47,6 @@ CPhysicsManager::CPhysicsManager(Ogre::SceneManager *pSceneManager)
 
 #if PHYSICS_MANAGER_DEBUG == 1
   CInputListenerManager::getSingleton().addInputListener(this);
-  CMessageHandler::getSingleton().addInjector(this);
 #endif // PHYSICS_MANAGER_DEBUG
 
   Ogre::LogManager::getSingleton().logMessage("Creating new PhysicsManager");
@@ -88,7 +87,6 @@ void CPhysicsManager::exit() {
 
 #if PHYSICS_MANAGER_DEBUG == 1
   CInputListenerManager::getSingleton().removeInputListener(this);
-  CMessageHandler::getSingleton().removeInjector(this);
 #endif // PHYSICS_MANAGER_DEBUG
 
 #ifdef PHYSICS_DEBUG

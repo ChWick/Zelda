@@ -13,8 +13,30 @@
 
 	<Image name="Blank" xPos="64" yPos="128" width="64" height="64" />
 	<Image name="Sword" xPos="64" yPos="64" width="64" height="64" />
-	<Image name="Bow" xPos="128" yPos="64" width="64" height="64" />
-	<Image name="Hammer" xPos="128" yPos="128" width="64" height="64" />
-	<Image name="Bomb" xPos="256" yPos="0" width="64" height="64" />
-	<Image name="Lamp" xPos="256" yPos="64" width="64" height="64" />
+
+	<Image name="Bow" xPos="0" yPos="256" width="64" height="64" />
+	<Image name="Boomerang" xPos="64" yPos="256" width="64" height="64" />
+	<Image name="Hookshot" xPos="128" yPos="256" width="64" height="64" />
+	<Image name="Bomb" xPos="192" yPos="256" width="64" height="64" />
+	<Image name="MagicPowder" xPos="256" yPos="256" width="64" height="64" />
+	<Image name="FireRod" xPos="0" yPos="320" width="64" height="64" />
+	<Image name="IceRod" xPos="64" yPos="320" width="64" height="64" />
+	<Image name="BombosMedallion" xPos="128" yPos="320" width="64" height="64" />
+	<Image name="EtherMedallion" xPos="192" yPos="320" width="64" height="64" />
+	<Image name="QuakeMedallion" xPos="256" yPos="320" width="64" height="64" />
+
+	<Image name="Lamp" xPos="0" yPos="384" width="64" height="64" />
+	<Image name="Hammer" xPos="64" yPos="384" width="64" height="64" />
+	<Image name="Ocarina" xPos="128" yPos="384" width="64" height="64" />
+	<Image name="Net" xPos="192" yPos="384" width="64" height="64" />
+	<Image name="Book" xPos="256" yPos="384" width="64" height="64" />
+
+	<Image name="Bottle" xPos="0" yPos="448" width="64" height="64" />
+	<Image name="CaneOfSomaria" xPos="64" yPos="448" width="64" height="64" />
+	<Image name="CaneOfByrna" xPos="128" yPos="448" width="64" height="64" />
+	<Image name="Cloak" xPos="192" yPos="448" width="64" height="64" />
+	<Image name="Mirror" xPos="256" yPos="448" width="64" height="64" />
+
+	<Image name="Shovel" xPos="256" yPos="128" width="64" height="64" />
+	<Image name="Mushroom" xPos="256" yPos="192" width="64" height="64" />
 </Imageset>

@@ -21,6 +21,7 @@
 #define _WORLD_HPP_
 
 #include "../Common/GameLogic/GameState.hpp"
+#include "Items/ItemStatus.hpp"
 #include <OgrePrerequisites.h>
 #if OGRE_PLATFORM == OGRE_PLATFORM_APPLE && !defined(__LP64__)
 #  include <Carbon/Carbon.h>
@@ -34,6 +35,7 @@ class CWorldGUI;
 
 class CWorld : public CGameState {
 private:
+  CItemStatusStorage m_ItemStatusStorage;
   CPlayer *m_pPlayer;
   CAtlas *m_pAtlas;
   Ogre::Camera *m_pWorldCamera;

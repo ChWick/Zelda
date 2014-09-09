@@ -25,7 +25,7 @@ using namespace XMLHelper;
 CMessage::CMessage(const tinyxml2::XMLElement *pElement)
   : m_Type(MESSAGE_TYPES_MAP.parseString(Attribute(pElement, "message_type"))) {
 }
-CMessage::CMessage(EMessageTypes type)
+CMessage::CMessage(unsigned int type)
   : m_Type(type) {
 }
 CMessage::~CMessage() {

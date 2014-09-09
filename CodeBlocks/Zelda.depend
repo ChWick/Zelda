@@ -7214,7 +7214,7 @@
 	<OgreSingleton.h>
 	<OgreRenderWindow.h>
 
-1410163567 /home/christoph/Documents/Projects/Zelda/Zelda/Common/Message/MessageInjector.hpp
+1410266939 /home/christoph/Documents/Projects/Zelda/Zelda/Common/Message/MessageInjector.hpp
 
 1410163567 /home/christoph/Documents/Projects/Zelda/Zelda/Common/Physics/PhysicsMasks.hpp
 
@@ -7249,7 +7249,7 @@
 
 1410167566 /home/christoph/Documents/Projects/Zelda/CodeBlocks/GlobalBuildDefines.hpp
 
-1410163567 source:/home/christoph/Documents/Projects/Zelda/Zelda/Common/Game.cpp
+1410266905 source:/home/christoph/Documents/Projects/Zelda/Zelda/Common/Game.cpp
 	"GUI/GUIManager.hpp"
 	"Game.hpp"
 	<OgreCodec.h>
@@ -7282,7 +7282,7 @@
 	"../Window.h"
 	<vector>
 
-1410163567 /home/christoph/Documents/Projects/Zelda/Zelda/Common/GUI/GUIOverlay.hpp
+1410178282 /home/christoph/Documents/Projects/Zelda/Zelda/Common/GUI/GUIOverlay.hpp
 	<CEGUI/CEGUI.h>
 	"../GameLogic/Entity.hpp"
 
@@ -7433,10 +7433,10 @@
 	<list>
 	"Message.hpp"
 
-1410163567 /home/christoph/Documents/Projects/Zelda/Zelda/Common/Message/Message.hpp
+1410264373 /home/christoph/Documents/Projects/Zelda/Zelda/Common/Message/Message.hpp
 	"MessageTypes.hpp"
 
-1410163567 /home/christoph/Documents/Projects/Zelda/Zelda/Common/Message/MessageTypes.hpp
+1410263796 /home/christoph/Documents/Projects/Zelda/Zelda/Common/Message/MessageTypes.hpp
 	"../Util/EnumIdMap.hpp"
 
 1410163567 /home/christoph/Documents/Projects/Zelda/Zelda/Common/GameLogic/GameStateManager.hpp
@@ -7695,7 +7695,7 @@
 1410163567 /home/christoph/Documents/Projects/Zelda/Zelda/Common/GameLogic/GameStateTypes.hpp
 	"../Util/EnumIdMap.hpp"
 
-1410163567 source:/home/christoph/Documents/Projects/Zelda/Zelda/Common/GameLogic/GameStateManager.cpp
+1410266929 source:/home/christoph/Documents/Projects/Zelda/Zelda/Common/GameLogic/GameStateManager.cpp
 	"GameStateManager.hpp"
 	<OgreException.h>
 	<OgreLogManager.h>
@@ -7709,15 +7709,16 @@
 1410163567 source:/home/christoph/Documents/Projects/Zelda/Zelda/Common/GameLogic/GameStateTypes.cpp
 	"GameStateTypes.hpp"
 
-1410163567 source:/home/christoph/Documents/Projects/Zelda/Zelda/Common/GUI/GUIDebugPullMenu.cpp
+1410180366 source:/home/christoph/Documents/Projects/Zelda/Zelda/Common/GUI/GUIDebugPullMenu.cpp
 	"GUIDebugPullMenu.hpp"
 	"../Message/MessageDebug.hpp"
 	"../Message/MessageHandler.hpp"
+	"../Game.hpp"
 
-1410163567 /home/christoph/Documents/Projects/Zelda/Zelda/Common/GUI/GUIDebugPullMenu.hpp
+1410180204 /home/christoph/Documents/Projects/Zelda/Zelda/Common/GUI/GUIDebugPullMenu.hpp
 	"GUIPullMenu.hpp"
 
-1410175402 /home/christoph/Documents/Projects/Zelda/Zelda/Common/GUI/GUIPullMenu.hpp
+1410179185 /home/christoph/Documents/Projects/Zelda/Zelda/Common/GUI/GUIPullMenu.hpp
 	"GUIOverlay.hpp"
 	"../Input/InputListener.hpp"
 
@@ -7740,7 +7741,7 @@
 	"GUIDebugPullMenu.hpp"
 	<dependencies/OgreSdkUtil/SdkTrays.h>
 
-1410177079 source:/home/christoph/Documents/Projects/Zelda/Zelda/Common/GUI/GUIPullMenu.cpp
+1410178100 source:/home/christoph/Documents/Projects/Zelda/Zelda/Common/GUI/GUIPullMenu.cpp
 	"GUIPullMenu.hpp"
 	"../Input/InputDefines.hpp"
 	"../Log.hpp"
@@ -7792,11 +7793,11 @@
 	"OgrePlatform.h"
 	"../Config/TypeDefines.hpp"
 
-1410163567 source:/home/christoph/Documents/Projects/Zelda/Zelda/Common/Message/Message.cpp
+1410264383 source:/home/christoph/Documents/Projects/Zelda/Zelda/Common/Message/Message.cpp
 	"Message.hpp"
 	"../Util/XMLHelper.hpp"
 
-1410163567 source:/home/christoph/Documents/Projects/Zelda/Zelda/Common/Message/MessageCreator.cpp
+1410264434 source:/home/christoph/Documents/Projects/Zelda/Zelda/Common/Message/MessageCreator.cpp
 	"MessageCreator.hpp"
 	"MessageTypes.hpp"
 	"../Util/XMLHelper.hpp"
@@ -7853,7 +7854,7 @@
 1410163567 source:/home/christoph/Documents/Projects/Zelda/Zelda/Common/Physics/BtOgreExtras.cpp
 	"BtOgreExtras.hpp"
 
-1410163567 source:/home/christoph/Documents/Projects/Zelda/Zelda/Common/Physics/PhysicsManager.cpp
+1410266901 source:/home/christoph/Documents/Projects/Zelda/Zelda/Common/Physics/PhysicsManager.cpp
 	"PhysicsManager.hpp"
 	<btBulletCollisionCommon.h>
 	<btBulletDynamicsCommon.h>
@@ -7968,8 +7969,9 @@
 	"../Common/GameLogic/GameStateTypes.hpp"
 	"../World/World.hpp"
 
-1410163567 /home/christoph/Documents/Projects/Zelda/Zelda/World/World.hpp
+1410256981 /home/christoph/Documents/Projects/Zelda/Zelda/World/World.hpp
 	"../Common/GameLogic/GameState.hpp"
+	"Items/ItemStatus.hpp"
 	<OgrePrerequisites.h>
 	<Carbon/Carbon.h>
 	<OgreMaterial.h>
@@ -8086,7 +8088,7 @@
 1410163567 source:/home/christoph/Documents/Projects/Zelda/Zelda/World/Atlas/TileTypes.cpp
 	"TileTypes.hpp"
 
-1410163567 source:/home/christoph/Documents/Projects/Zelda/Zelda/World/Camera/AerialCameraPerspective.cpp
+1410266799 source:/home/christoph/Documents/Projects/Zelda/Zelda/World/Camera/AerialCameraPerspective.cpp
 	"AerialCameraPerspective.hpp"
 	<OgreVector3.h>
 	<OgreSceneNode.h>
@@ -8305,7 +8307,7 @@
 	"ObjectTypes.hpp"
 	"../DamageTypes.hpp"
 
-1410163567 source:/home/christoph/Documents/Projects/Zelda/Zelda/World/World.cpp
+1410273921 source:/home/christoph/Documents/Projects/Zelda/Zelda/World/World.cpp
 	"World.hpp"
 	"Atlas/Atlas.hpp"
 	"Character/Player.hpp"
@@ -8319,7 +8321,7 @@
 	"../Common/Log.hpp"
 	"WorldGUI/WorldGUI.hpp"
 
-1410163567 /home/christoph/Documents/Projects/Zelda/Zelda/World/WorldGUI/WorldGUI.hpp
+1410257052 /home/christoph/Documents/Projects/Zelda/Zelda/World/WorldGUI/WorldGUI.hpp
 	"../../Common/GUI/GUIOverlay.hpp"
 
 1410163567 source:/home/christoph/Documents/Projects/Zelda/Zelda/World/WorldEntity.cpp
@@ -8363,7 +8365,7 @@
 	"WorldGUISimpleTouchButtons.hpp"
 	"../../Common/Input/GameInputManager.hpp"
 
-1410166378 source:/home/christoph/Documents/Projects/Zelda/Zelda/Zelda.cpp
+1410186709 source:/home/christoph/Documents/Projects/Zelda/Zelda/Zelda.cpp
 	"Common/GUI/GUIManager.hpp"
 	"Zelda.hpp"
 	"Common/GameLogic/GameStateManager.hpp"
@@ -8372,6 +8374,8 @@
 	"Common/Log.hpp"
 	"World/Character/PersonTypes.hpp"
 	"World/DamageTypes.hpp"
+	"World/Items/ItemTypes.hpp"
+	"World/Items/ItemData.hpp"
 
 1410163567 /home/christoph/Documents/Projects/Zelda/Zelda/Zelda.hpp
 	"Common/Game.hpp"
@@ -8380,13 +8384,59 @@
 	"../../Common/GUI/GUIOverlay.hpp"
 	"../../Common/GUI/GUIPullMenu.hpp"
 
-1410175138 source:/home/christoph/Documents/Projects/Zelda/Zelda/World/WorldGUI/WorldGUIItemSelector.cpp
+1410274301 source:/home/christoph/Documents/Projects/Zelda/Zelda/World/WorldGUI/WorldGUIItemSelector.cpp
 	"WorldGUIItemSelector.hpp"
+	"../Messages/UserMessageTypes.hpp"
+	"../Messages/MessageItem.hpp"
+	"../Items/ItemStatus.hpp"
+	"../../Common/Util/Assert.hpp"
+	"../Items/ItemData.hpp"
 
-1410172213 /home/christoph/Documents/Projects/Zelda/Zelda/World/WorldGUI/WorldGUIItemSelector.hpp
+1410270368 /home/christoph/Documents/Projects/Zelda/Zelda/World/WorldGUI/WorldGUIItemSelector.hpp
 	"../../Common/GUI/GUIOverlay.hpp"
+	"../../Common/Message/MessageInjector.hpp"
+	"../Items/ItemTypes.hpp"
 
-1410175969 source:/home/christoph/Documents/Projects/Zelda/Zelda/World/WorldGUI/WorldGUIItemViewer.cpp
+1410178611 source:/home/christoph/Documents/Projects/Zelda/Zelda/World/WorldGUI/WorldGUIItemViewer.cpp
 	"WorldGUIItemViewer.hpp"
 	"WorldGUIItemSelector.hpp"
+
+1410273822 /home/christoph/Documents/Projects/Zelda/Zelda/World/Items/ItemStatus.hpp
+	"ItemTypes.hpp"
+
+1410274145 /home/christoph/Documents/Projects/Zelda/Zelda/World/Items/ItemTypes.hpp
+	"../../Common/Util/EnumIdMap.hpp"
+
+1410264550 source:/home/christoph/Documents/Projects/Zelda/Zelda/World/Items/ItemData.cpp
+	"ItemData.hpp"
+
+1410252132 /home/christoph/Documents/Projects/Zelda/Zelda/World/Items/ItemData.hpp
+	"ItemTypes.hpp"
+
+1410265863 source:/home/christoph/Documents/Projects/Zelda/Zelda/World/Items/ItemStatus.cpp
+	"ItemStatus.hpp"
+	"ItemData.hpp"
+	"../Messages/MessageItem.hpp"
+	"../../Common/Message/MessageHandler.hpp"
+
+1410187203 source:/home/christoph/Documents/Projects/Zelda/Zelda/World/Items/ItemTypes.cpp
+	"ItemTypes.hpp"
+
+1410266530 source:/home/christoph/Documents/Projects/Zelda/Zelda/World/Messages/MessageItem.cpp
+	"MessageItem.hpp"
+	"UserMessageTypes.hpp"
+
+1410266515 /home/christoph/Documents/Projects/Zelda/Zelda/World/Messages/MessageItem.hpp
+	"../../Common/Message/Message.hpp"
+	"../Items/ItemTypes.hpp"
+
+1410263784 /home/christoph/Documents/Projects/Zelda/Zelda/World/Messages/UserMessageTypes.hpp
+	"../../Common/Message/MessageTypes.hpp"
+
+1410263649 source:/home/christoph/Documents/Projects/Zelda/Zelda/World/Messages/UserMessageTypes.cpp
+	"UserMessageTypes.hpp"
+
+1410266896 source:/home/christoph/Documents/Projects/Zelda/Zelda/Common/Message/MessageInjector.cpp
+	"MessageInjector.hpp"
+	"MessageHandler.hpp"
 

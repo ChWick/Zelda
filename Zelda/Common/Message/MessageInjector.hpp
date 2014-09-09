@@ -24,6 +24,9 @@ class CMessage;
 
 class CMessageInjector {
 public:
+  CMessageInjector();
+  virtual ~CMessageInjector();
+
   virtual void sendMessageToAll(const CMessage &message) = 0;
 };
 

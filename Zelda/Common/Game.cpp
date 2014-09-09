@@ -85,7 +85,6 @@ CGame::~CGame(void) {
   if (CInputListenerManager::getSingletonPtr()) {delete CInputListenerManager::getSingletonPtr();}
 
   if (CMessageHandler::getSingletonPtr()) {
-    CMessageHandler::getSingleton().removeInjector(this);
     delete CMessageHandler::getSingletonPtr();
   }
   if (CEntityManager::getSingletonPtr()) {delete CEntityManager::getSingletonPtr();}
@@ -542,7 +541,6 @@ void CGame::createScene() {
   new CEntityManager();
   Ogre::LogManager::getSingletonPtr()->logMessage("    MessageManager ");
   new CMessageHandler();
-  CMessageHandler::getSingleton().addInjector(this);
   Ogre::LogManager::getSingletonPtr()->logMessage("    GameSate ");
   m_pGameStateManager = new CGameStateManager();
   Ogre::LogManager::getSingletonPtr()->logMessage("    GUIManager ");

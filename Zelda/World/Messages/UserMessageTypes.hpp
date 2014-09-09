@@ -17,24 +17,20 @@
  * Zelda. If not, see http://www.gnu.org/licenses/.
  *****************************************************************************/
 
-#include "MessageCreator.hpp"
-#include "MessageTypes.hpp"
-#include "../Util/XMLHelper.hpp"
-#include <OgreException.h>
+#ifndef _USER_MESSAGE_TYPES_HPP_
+#define _USER_MESSAGE_TYPES_HPP_
 
-#include "MessageSwitchMap.hpp"
+#include "../../Common/Message/MessageTypes.hpp"
 
-using namespace XMLHelper;
+enum EUserMessageTypes {
+  MSG_ITEM = MSG_USER,
+};
 
-CMessage *createMessage(const tinyxml2::XMLElement *pElem) {
-  unsigned int type(MESSAGE_TYPES_MAP.parseString(Attribute(pElem, "message_type")));
+class CUserMessageTypesMap : public CMessageTypesMap {
+public:
+  CUserMessageTypesMap();
+};
 
-  switch (type) {
-  case MSG_SWITCH_MAP:
-    return new CMessageSwitchMap(pElem);
-  default:
-    break;
-  }
+extern CUserMessageTypesMap USER_MESSAGE_TYPES_MAP;
 
-  throw Ogre::Exception(0, "New message type not added in createMessage", __FILE__);
-}
+#endif // _USER_MESSAGE_TYPES_HPP_

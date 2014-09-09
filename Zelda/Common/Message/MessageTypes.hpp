@@ -29,9 +29,11 @@ enum EMessageTypes {
   MSG_ENTITY_STATE_CHANGED,
   MSG_PLAYER_PICKUP_ITEM,
   MSG_HITPOINTS_CHANGED,
+
+  MSG_USER,
 };
 
-class CMessageTypesMap : public CEnumIdMap<EMessageTypes> {
+class CMessageTypesMap : public CEnumIdMap<unsigned int> {
 public:
   CMessageTypesMap();
 };

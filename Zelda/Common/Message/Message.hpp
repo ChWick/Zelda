@@ -28,14 +28,14 @@ namespace tinyxml2 {
 
 class CMessage {
 protected:
-  const EMessageTypes m_Type;
+  const unsigned int m_Type;
 
 public:
   CMessage(const tinyxml2::XMLElement *pElement);
-  CMessage(EMessageTypes type);
+  CMessage(unsigned int type);
   virtual ~CMessage();
 
-  EMessageTypes getType() const {return m_Type;}
+  unsigned int getType() const {return m_Type;}
 };
 
 #endif
