@@ -12,7 +12,8 @@ using namespace CEGUI;
 CWorldGUIItemSelector::CWorldGUIItemSelector(CEntity *pParentEntity, CEGUI::Window *pParentWindow)
   : CGUIOverlay("world_gui_item_selector", pParentEntity, pParentWindow, pParentWindow->createChild("OgreTray/Group", "item_selector")),
     CGameInputListener(false),
-    m_eCurrentItemSlot(ITEM_SLOT_COUNT) {
+    m_eCurrentItemSlot(ITEM_SLOT_COUNT),
+    m_pMultipleSelector(nullptr) {
 
   m_pRoot->setText("ITEM");
 
@@ -25,6 +26,12 @@ CWorldGUIItemSelector::CWorldGUIItemSelector(CEntity *pParentEntity, CEGUI::Wind
   }
 
   stop();
+}
+CWorldGUIItemSelector::~CWorldGUIItemSelector() {
+  if (m_pMultipleSelector) {
+    delete m_pMultipleSelector;
+    m_pMultipleSelector = nullptr;
+  }
 }
 
 void CWorldGUIItemSelector::start() {
@@ -55,12 +62,23 @@ CEGUI::Window *CWorldGUIItemSelector::getWindowFromItem(EItemSlotTypes eItemSlot
 }
 
 bool CWorldGUIItemSelector::onSelectedItemChanged(const CEGUI::EventArgs &args) {
+  if (m_pMultipleSelector) {delete m_pMultipleSelector; m_pMultipleSelector = nullptr;}
+
   const WindowEventArgs &wnd_args(dynamic_cast<const WindowEventArgs&>(args));
   ASSERT(wnd_args.window->getUserData());
 
   const SItemStatus *pItemStatus(static_cast<SItemStatus*>(wnd_args.window->getUserData()));
   m_eCurrentItemSlot = pItemStatus->eItemPlace;
-  CMessageHandler::getSingleton().addMessage(new CMessageItem(CMessageItem::IM_SELECTION_CHANGED, pItemStatus->getBestItem().front()));
+  std::vector<EItemVariantTypes> items(pItemStatus->getBestItem());
+  ASSERT(items.size() > 0);
+  if (items.size() == 1) {
+    // just select the item
+    CMessageHandler::getSingleton().addMessage(new CMessageItem(CMessageItem::IM_SELECTION_CHANGED, items.front()));
+  }
+  else {
+    // display a selection window
+    m_pMultipleSelector = new CWorldGUIItemSelectorMultipleSelect(items, m_pRoot, wnd_args.window->getPosition(), wnd_args.window->getPixelSize().d_width);
+  }
 
 
   return true;
@@ -138,6 +156,11 @@ void CWorldGUIItemSelector::selectFirstAvailable() {
 void CWorldGUIItemSelector::selectNextLeft() {
   if (m_eCurrentItemSlot == ITEM_SLOT_COUNT) {selectFirstAvailable(); return;}
 
+  if (m_pMultipleSelector) {
+    m_pMultipleSelector->selectNextLeft();
+    return;
+  }
+
   for (int i = 1; i < ITEM_SLOT_COUNT; i++) {
     EItemSlotTypes eNewSlot = static_cast<EItemSlotTypes>((m_eCurrentItemSlot - i + ITEM_SLOT_COUNT) % ITEM_SLOT_COUNT);
     if (getWindowFromItem(eNewSlot)->isVisible()) {
@@ -149,6 +172,11 @@ void CWorldGUIItemSelector::selectNextLeft() {
 
 void CWorldGUIItemSelector::selectNextRight() {
   if (m_eCurrentItemSlot == ITEM_SLOT_COUNT) {selectFirstAvailable(); return;}
+
+  if (m_pMultipleSelector) {
+    m_pMultipleSelector->selectNextRight();
+    return;
+  }
 
   for (int i = 1; i < ITEM_SLOT_COUNT; i++) {
     EItemSlotTypes eNewSlot = static_cast<EItemSlotTypes>((i + m_eCurrentItemSlot) % ITEM_SLOT_COUNT);
@@ -179,4 +207,63 @@ void CWorldGUIItemSelector::selectNextDown() {
       return;
     }
   }
+}
+
+
+
+// ===============================================================================================
+// CWorldGUIItemSelectorMultipleSelect
+// ===============================================================================================
+
+CWorldGUIItemSelectorMultipleSelect::CWorldGUIItemSelectorMultipleSelect(const std::vector<EItemVariantTypes> items,
+                                                                         CEGUI::Window *pParent, const CEGUI::UVector2 &vCenter, float fSize)
+  : m_vItems(items),
+    m_iSelectedItem(-1) {
+  m_pRoot = pParent->createChild("DefaultWindow", "multiple_select");
+  m_pRoot->setSize(USize(UDim(0, m_vItems.size() * fSize), UDim(0, fSize)));
+  m_pRoot->setPosition(vCenter + UVector2(UDim(0, fSize / 3), UDim(0, fSize / 3)));
+  m_pRoot->setAlwaysOnTop(true);
+
+  for (int i = 0; i < m_vItems.size(); i++) {
+    createButton(i);
+  }
+
+  selectNextRight();
+}
+
+CWorldGUIItemSelectorMultipleSelect::~CWorldGUIItemSelectorMultipleSelect() {
+  m_pRoot->destroy();
+}
+
+void CWorldGUIItemSelectorMultipleSelect::selectNextRight() {
+  if (m_iSelectedItem + 1 >= m_vItems.size()) {return;}
+  m_iSelectedItem++;
+
+  dynamic_cast<ToggleButton*>(m_pRoot->getChild(PropertyHelper<int>::toString(m_iSelectedItem)))->setSelected(true);
+}
+
+void CWorldGUIItemSelectorMultipleSelect::selectNextLeft() {
+  if (m_iSelectedItem - 1 < 0) {return;}
+  m_iSelectedItem--;
+
+  dynamic_cast<ToggleButton*>(m_pRoot->getChild(PropertyHelper<int>::toString(m_iSelectedItem)))->setSelected(true);
+}
+
+void CWorldGUIItemSelectorMultipleSelect::createButton(int iIndex) {
+  Window *pButton = m_pRoot->createChild("OgreTray/ToggleRadioButton", PropertyHelper<int>::toString(iIndex));
+  pButton->setPosition(UVector2(UDim(iIndex * 1.f / m_vItems.size(), 0), UDim(0, 0)));
+  pButton->setSize(USize(UDim(1.f / m_vItems.size(), 0), UDim(1, 0)));
+  pButton->setProperty("Image", "hud/" + ITEM_VARIANT_DATA_MAP.toData(m_vItems[iIndex]).sImagesetName);
+  pButton->setUserData(const_cast<EItemVariantTypes*>(&m_vItems[iIndex]));
+  pButton->subscribeEvent(ToggleButton::EventSelectStateChanged, Event::Subscriber(&CWorldGUIItemSelectorMultipleSelect::onSelectedItemChanged, this));
+}
+
+bool CWorldGUIItemSelectorMultipleSelect::onSelectedItemChanged(const CEGUI::EventArgs &args) {
+  const WindowEventArgs &wnd_args(dynamic_cast<const WindowEventArgs&>(args));
+  ASSERT(wnd_args.window->getUserData());
+
+  const EItemVariantTypes eItemVariant(*static_cast<EItemVariantTypes*>(wnd_args.window->getUserData()));
+  CMessageHandler::getSingleton().addMessage(new CMessageItem(CMessageItem::IM_SELECTION_CHANGED, eItemVariant));
+
+  return true;
 }

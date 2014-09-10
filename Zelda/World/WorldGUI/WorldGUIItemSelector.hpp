@@ -8,11 +8,15 @@
 
 struct SItemStatus;
 
+class CWorldGUIItemSelectorMultipleSelect;
+
 class CWorldGUIItemSelector : public CGUIOverlay, public CGameInputListener {
 private:
   EItemSlotTypes m_eCurrentItemSlot;
+  CWorldGUIItemSelectorMultipleSelect *m_pMultipleSelector;
 public:
   CWorldGUIItemSelector(CEntity *pParentEntity, CEGUI::Window *pParentWindow);
+  ~CWorldGUIItemSelector();
 
   void start();
   void stop();
@@ -35,6 +39,23 @@ private:
   void selectNextRight();
   void selectNextUp();
   void selectNextDown();
+};
+
+class CWorldGUIItemSelectorMultipleSelect {
+private:
+  const std::vector<EItemVariantTypes> m_vItems;
+  CEGUI::Window *m_pRoot;
+  int m_iSelectedItem;
+public:
+  CWorldGUIItemSelectorMultipleSelect(const std::vector<EItemVariantTypes> items, CEGUI::Window *pParent, const CEGUI::UVector2 &vCenter, float fSize);
+  ~CWorldGUIItemSelectorMultipleSelect();
+
+  void selectNextRight();
+  void selectNextLeft();
+
+private:
+  void createButton(int iIndex);
+  bool onSelectedItemChanged(const CEGUI::EventArgs &args);
 };
 
 #endif // _WORLD_GUI_ITEM_SELECTOR_HPP_
