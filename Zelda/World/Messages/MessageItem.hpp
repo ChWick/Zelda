@@ -34,14 +34,17 @@ public:
   };
 protected:
   const EItemMessageTypes m_eItemMessageType;
-  const EItemTypes m_eItemType;
+  const EItemSlotTypes m_eItemSlotType;
+  const EItemVariantTypes m_eItemVariantType;
   const CItemStatusStorage *m_pItemStatusStorage;
 public:
-  CMessageItem(const EItemMessageTypes eItemMessageType, const EItemTypes eItemType);
+  CMessageItem(const EItemMessageTypes eItemMessageType, const EItemVariantTypes eItemVariantType);
+  CMessageItem(const EItemMessageTypes eItemMessageType, const EItemSlotTypes eItemSlotType);
   CMessageItem(const EItemMessageTypes eItemMessageType, CItemStatusStorage const * const pItemStatusStorage);
 
   EItemMessageTypes getItemMessageType() const {return m_eItemMessageType;}
-  EItemTypes getItemType() const {return m_eItemType;}
+  EItemSlotTypes getItemSlotType() const {return m_eItemSlotType;}
+  EItemVariantTypes getItemVariantType() const {return m_eItemVariantType;}
   const CItemStatusStorage *getStatusStorage() const {return m_pItemStatusStorage;}
 
 };

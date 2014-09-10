@@ -33,8 +33,11 @@ void CZelda::initEnumIdMaps() {
   PERSON_DATA_ID_MAP.init();
   DAMAGE_DATA_MAP.init();
 
-  ITEM_TYPE_ID_MAP.init();
-  ITEM_DATA_MAP.init();
+  ITEM_SLOT_ID_MAP.init();
+  ITEM_VARIANT_ID_MAP.init();
+
+  ITEM_SLOT_DATA_MAP.init();
+  ITEM_VARIANT_DATA_MAP.init();
 }
 
 void CZelda::chooseGameState() {

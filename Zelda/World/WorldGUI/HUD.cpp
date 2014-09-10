@@ -22,8 +22,11 @@
 #include "../../GUIComponents/GUICounter.hpp"
 #include "../../Common/Message/MessagePlayerPickupItem.hpp"
 #include "../../Common/Message/MessageHitpointsChanged.hpp"
+#include "../Messages/MessageItem.hpp"
+#include "../Messages/UserMessageTypes.hpp"
 #include "../HitableInterface.hpp"
 #include "../WorldEntity.hpp"
+#include "../Items/ItemData.hpp"
 
 using namespace CEGUI;
 
@@ -35,6 +38,11 @@ CHUD::CHUD(CEntity *pParentEntity, CEGUI::Window *pParentWindow)
   m_pLivesText->setPosition(UVector2(UDim(0.5, 0), UDim(0, 0)));
   m_pLivesText->setSize(USize(UDim(0.5, 0), UDim(0.05, 0)));
   m_pLivesText->setProperty("NormalTextColour", "FFFFFFFF");
+
+  m_pCurrentItemDisplay = m_pRoot->createChild("OgreTray/StaticImage", "item_display");
+  m_pCurrentItemDisplay->setPosition(UVector2(UDim(0.2, 0), UDim(0.05, 0)));
+  m_pCurrentItemDisplay->setSize(USize(UDim(0, 60), UDim(0, 60)));
+  m_pCurrentItemDisplay->setProperty("Image", "hud/Bow");
 
   m_pHeartsDisplay = new CGUIHeartsDisplay(this, m_pRoot, UVector2(UDim(0.5, 0), UDim(0.05, 0)));
 
@@ -52,6 +60,12 @@ void CHUD::handleMessage(const CMessage &message) {
     if (dynamic_cast<const CWorldEntity *>(&msg_hp_change.getHitableInterface()) && dynamic_cast<const CWorldEntity&>(msg_hp_change.getHitableInterface()).getID() == "player") {
       m_pHeartsDisplay->changeMaximalHitpoints(msg_hp_change.getHitableInterface().getMaxHP());
       m_pHeartsDisplay->changeCurrentHitpoints(msg_hp_change.getHitableInterface().getCurrentHP());
+    }
+  }
+  else if (message.getType() == MSG_ITEM) {
+    const CMessageItem &msg_item(dynamic_cast<const CMessageItem&>(message));
+    if (msg_item.getItemMessageType() == CMessageItem::IM_SELECTION_CHANGED) {
+      m_pCurrentItemDisplay->setProperty("Image", "hud/" + ITEM_VARIANT_DATA_MAP.toData(msg_item.getItemVariantType()).sImagesetName);
     }
   }
 }

@@ -31,6 +31,7 @@ private:
   CGUICounter *m_pRupeeCounter;
   CGUICounter *m_pBombCounter;
   CGUICounter *m_pArrowCounter;
+  CEGUI::Window *m_pCurrentItemDisplay;
 public:
   CHUD(CEntity *pParentEntity, CEGUI::Window *pParentWindow);
 

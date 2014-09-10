@@ -16,11 +16,11 @@ private:
   CEGUI::Window *createItem(int x, int y, float fButtonSize);
 
   CEGUI::String getItemID(int x, int y);
-  CEGUI::Window *getWindowFromItem(EItemTypes eItemType);
+  CEGUI::Window *getWindowFromItem(EItemSlotTypes eItemSlotType);
 
   bool onSelectedItemChanged(const CEGUI::EventArgs &args);
 
-  void updateItemStatus(const SItemStatus &itemStatus);
+  bool updateItemStatus(const SItemStatus &itemStatus);
 
   void handleMessage(const CMessage &message);
 };
