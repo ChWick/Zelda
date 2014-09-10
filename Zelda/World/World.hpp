@@ -28,18 +28,13 @@
 #endif
 #include <OgreMaterial.h>
 
-class CPlayer;
 class CAtlas;
-class CAerialCameraPerspective;
 class CWorldGUI;
 
 class CWorld : public CGameState {
 private:
   CItemStatusStorage m_ItemStatusStorage;
-  CPlayer *m_pPlayer;
   CAtlas *m_pAtlas;
-  Ogre::Camera *m_pWorldCamera;
-  CAerialCameraPerspective *m_pCameraPerspective;
   CWorldGUI *m_pWorldGUI;
 
   Ogre::MaterialPtr m_pWaterSideWaveMaterial;

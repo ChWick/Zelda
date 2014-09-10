@@ -26,27 +26,53 @@
 #include "../../Common/Message/MessageHandler.hpp"
 #include "../Camera/AerialCameraPerspective.hpp"
 #include "../../Common/FileManager/FileManager.hpp"
+#include "../Character/Player.hpp"
+#include <OgreViewport.h>
+#include <OgreSceneManager.h>
+#include "../../Common/Game.hpp"
 
-CAtlas::CAtlas(CEntity *pParent, Ogre::SceneNode *pRootSceneNode, CWorldEntity *pPlayer, CAerialCameraPerspective* &pCameraPerspective)
+CAtlas::CAtlas(CEntity *pParent, Ogre::SceneNode *pRootSceneNode)
   : CWorldEntity("atlas", pParent, nullptr),
     m_pCurrentMap(nullptr),
     m_pNextMap(nullptr),
-    m_pPlayer(pPlayer),
-    m_pCameraPerspective(pCameraPerspective),
+    m_pPlayer(nullptr),
+    m_pCameraPerspective(nullptr),
     m_bSwitchingMaps(false),
     m_bPlayerTargetReached(false) {
 
-  LOGV("Creating the atlas");
-
+  LOGV("Creating the Atlas");
   m_pSceneNode = pRootSceneNode->createChildSceneNode("Atlas");
 
-  m_pCurrentMap = new CMap(this, CMapPackPtr(new CMapPack(CFileManager::getResourcePath("maps/Atlases/LightWorld/"), "link_house_left")), m_pSceneNode, pPlayer);
+  // create the world camera
+  m_pWorldCamera = pRootSceneNode->getCreator()->createCamera("WorldCamera");
+  m_pWorldCamera->setNearClipDistance(0.001f);
+  m_pWorldCamera->setFarClipDistance(1000.0f);
+  // default position
+  m_pWorldCamera->setPosition(Ogre::Vector3(0,1,1));
+  m_pWorldCamera->lookAt(Ogre::Vector3(0,0,0));
+  //m_pWorldCamera->setProjectionType(Ogre::PT_ORTHOGRAPHIC);
+
+  Ogre::Viewport *vp = CGame::getSingleton().getMainViewPort();
+  m_pWorldCamera->setAspectRatio(Ogre::Real(vp->getActualWidth()) / Ogre::Real(vp->getActualHeight()));
+  vp->setCamera(m_pWorldCamera);
+  m_pWorldCamera->setOrthoWindowWidth(1.6);
+
+  LOGV(" - Creating Player");
+  m_pPlayer = new CPlayer(this, m_pWorldCamera, CGame::getSingleton().getSceneManager());
+
+  //m_pCameraPerspective = new CAerialCameraPerspective(m_pWorldCamera, (Ogre::SceneNode*)m_pAtlas->getChildren().front()->getSceneNode()->getChild(0));
+  m_pCameraPerspective = new CAerialCameraPerspective(m_pWorldCamera, m_pPlayer);
+
+  LOGV(" - Creating initial map");
+  m_pCurrentMap = new CMap(this, CMapPackPtr(new CMapPack(CFileManager::getResourcePath("maps/Atlases/LightWorld/"), "link_house_left")), m_pSceneNode, m_pPlayer);
   m_pPlayer->enterMap(m_pCurrentMap, Ogre::Vector3(0, 2, 0));
   m_pCurrentMap->start();
 
   CMessageHandler::getSingleton().addMessage(new CMessageSwitchMap(m_pCurrentMap->getMapPack()->getName(), CMessageSwitchMap::FINISHED, m_pCurrentMap, nullptr));
 }
 CAtlas::~CAtlas() {
+  delete m_pCameraPerspective;
+  delete m_pPlayer;
 }
 
 void CAtlas::update(Ogre::Real tpf) {
@@ -63,14 +89,27 @@ void CAtlas::update(Ogre::Real tpf) {
     CWorldEntity::update(tpf);
   }
 }
+
+void CAtlas::renderDebug(Ogre::Real tpf) {
+  m_pCameraPerspective->renderDebug(tpf);
+  CWorldEntity::renderDebug(tpf);
+}
+
+void CAtlas::preRender(Ogre::Real tpf) {
+  m_pCameraPerspective->updateCamera(tpf);
+  CWorldEntity::preRender(tpf);
+}
+
 bool CAtlas::frameRenderingQueued(const Ogre::FrameEvent& evt) {
   //if (m_bSwitchingMaps) {return true;}
   return CWorldEntity::frameRenderingQueued(evt);
 }
+
 bool CAtlas::frameStarted(const Ogre::FrameEvent& evt) {
   //if (m_bSwitchingMaps) {return true;}
   return CWorldEntity::frameStarted(evt);
 }
+
 bool CAtlas::frameEnded(const Ogre::FrameEvent& evt) {
   //if (m_bSwitchingMaps) {return true;}
   return CWorldEntity::frameEnded(evt);
@@ -133,5 +172,15 @@ void CAtlas::handleMessage(const CMessage &message) {
         CMessageHandler::getSingleton().addMessage(new CMessageSwitchMap(m_pCurrentMap->getMapPack()->getName(), CMessageSwitchMap::FINISHED, m_pCurrentMap, nullptr));
       }
     }
+  }
+}
+
+void CAtlas::updatePause(int iPauseType, bool bPause) {
+  if (iPauseType & PAUSE_ATLAS_RENDER) {
+    m_bPauseRender = bPause;
+    m_pSceneNode->setVisible(!bPause);
+  }
+  if (iPauseType & PAUSE_ATLAS_UPDATE) {
+    m_bPauseUpdate = bPause;
   }
 }

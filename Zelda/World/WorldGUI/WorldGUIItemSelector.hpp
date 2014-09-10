@@ -14,6 +14,9 @@ private:
 public:
   CWorldGUIItemSelector(CEntity *pParentEntity, CEGUI::Window *pParentWindow);
 
+  void start();
+  void stop();
+
 private:
   CEGUI::Window *createItem(int x, int y, float fButtonSize);
 

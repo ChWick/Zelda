@@ -11,7 +11,7 @@ using namespace CEGUI;
 
 CWorldGUIItemSelector::CWorldGUIItemSelector(CEntity *pParentEntity, CEGUI::Window *pParentWindow)
   : CGUIOverlay("world_gui_item_selector", pParentEntity, pParentWindow, pParentWindow->createChild("OgreTray/Group", "item_selector")),
-    CGameInputListener(true),
+    CGameInputListener(false),
     m_eCurrentItemSlot(ITEM_SLOT_COUNT) {
 
   m_pRoot->setText("ITEM");
@@ -23,6 +23,16 @@ CWorldGUIItemSelector::CWorldGUIItemSelector(CEntity *pParentEntity, CEGUI::Wind
       createItem(x, y, fButtonSize);
     }
   }
+
+  stop();
+}
+
+void CWorldGUIItemSelector::start() {
+  setGameInputListenerEnabled(true);
+}
+
+void CWorldGUIItemSelector::stop() {
+  setGameInputListenerEnabled(false);
 }
 
 CEGUI::Window *CWorldGUIItemSelector::createItem(int x, int y, float fButtonSize) {

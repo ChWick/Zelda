@@ -261,7 +261,7 @@ void CEntity::update(Ogre::Real tpf) {
 
 void CEntity::preRender(Ogre::Real tpf) {
   for (auto &pEnt : m_lChildren) {
-    if (!pEnt->m_bPauseRender) {
+    if (!pEnt->m_bPauseUpdate) {
       pEnt->preRender(tpf);
     }
   }
@@ -285,7 +285,9 @@ void CEntity::renderDebug(Ogre::Real tpf) {
 
 bool CEntity::frameRenderingQueued(const Ogre::FrameEvent& evt) {
   for (auto &pEnt : m_lChildren) {
-    pEnt->frameRenderingQueued(evt);
+    if (!pEnt->m_bPauseUpdate) {
+      pEnt->frameRenderingQueued(evt);
+    }
   }
   return true;
 }
@@ -297,14 +299,18 @@ bool CEntity::frameStarted(const Ogre::FrameEvent& evt) {
     m_lEventsToDelete.pop_front();
   }
   for (auto &pEnt : m_lChildren) {
-    pEnt->frameStarted(evt);
+    if (!pEnt->m_bPauseUpdate) {
+      pEnt->frameStarted(evt);
+    }
   }
   return true;
 }
 
 bool CEntity::frameEnded(const Ogre::FrameEvent& evt) {
   for (auto &pEnt : m_lChildren) {
-    pEnt->frameEnded(evt);
+    if (!pEnt->m_bPauseUpdate) {
+      pEnt->frameEnded(evt);
+    }
   }
   return true;
 }
