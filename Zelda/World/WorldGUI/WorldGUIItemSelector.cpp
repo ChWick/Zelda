@@ -5,11 +5,14 @@
 #include "../../Common/Util/Assert.hpp"
 #include "../Items/ItemData.hpp"
 #include "../../Common/Message/MessageHandler.hpp"
+#include "../../Common/Input/GameInputCommand.hpp"
 
 using namespace CEGUI;
 
 CWorldGUIItemSelector::CWorldGUIItemSelector(CEntity *pParentEntity, CEGUI::Window *pParentWindow)
-  : CGUIOverlay("world_gui_item_selector", pParentEntity, pParentWindow, pParentWindow->createChild("OgreTray/Group", "item_selector")) {
+  : CGUIOverlay("world_gui_item_selector", pParentEntity, pParentWindow, pParentWindow->createChild("OgreTray/Group", "item_selector")),
+    CGameInputListener(true),
+    m_eCurrentItemSlot(ITEM_SLOT_COUNT) {
 
   m_pRoot->setText("ITEM");
 
@@ -46,7 +49,9 @@ bool CWorldGUIItemSelector::onSelectedItemChanged(const CEGUI::EventArgs &args) 
   ASSERT(wnd_args.window->getUserData());
 
   const SItemStatus *pItemStatus(static_cast<SItemStatus*>(wnd_args.window->getUserData()));
+  m_eCurrentItemSlot = pItemStatus->eItemPlace;
   CMessageHandler::getSingleton().addMessage(new CMessageItem(CMessageItem::IM_SELECTION_CHANGED, pItemStatus->getBestItem().front()));
+
 
   return true;
 }
@@ -79,19 +84,89 @@ void CWorldGUIItemSelector::handleMessage(const CMessage &message) {
     if (messageItem.getItemMessageType() == CMessageItem::IM_STATUS_LOADED) {
       ASSERT(messageItem.getStatusStorage());
 
-      EItemSlotTypes eFirstAvailableItem = ITEM_SLOT_COUNT;
-
       for (int i = 0; i < ITEM_SLOT_COUNT; i++) {
-        bool bAvailable = updateItemStatus(messageItem.getStatusStorage()->getStatus(static_cast<EItemSlotTypes>(i)));
-        if (eFirstAvailableItem == ITEM_SLOT_COUNT && bAvailable) {
-          eFirstAvailableItem = static_cast<EItemSlotTypes>(i);
-        }
+        updateItemStatus(messageItem.getStatusStorage()->getStatus(static_cast<EItemSlotTypes>(i)));
       }
 
-      dynamic_cast<ToggleButton*>(getWindowFromItem(eFirstAvailableItem))->setSelected(true);
+      selectFirstAvailable();
     }
     else if (messageItem.getItemMessageType() == CMessageItem::IM_SELECTION_CHANGED) {
       //dynamic_cast<ToggleButton*>(getWindowFromItem(messageItem))->setSelected(true);
+    }
+  }
+}
+
+void CWorldGUIItemSelector::receiveInputCommand(const CGameInputCommand &cmd) {
+  if (cmd.getState() != GIS_PRESSED) {return;}
+  switch (cmd.getType()) {
+  case GIC_LEFT:
+    selectNextLeft();
+    break;
+  case GIC_RIGHT:
+    selectNextRight();
+    break;
+  case GIC_FRONT:
+    selectNextUp();
+    break;
+  case GIC_REAR:
+    selectNextDown();
+    break;
+  default:
+    break;
+  }
+}
+
+void CWorldGUIItemSelector::selectFirstAvailable() {
+  for (int i = 0; i < ITEM_SLOT_COUNT; i++) {
+    if (getWindowFromItem(static_cast<EItemSlotTypes>(i))->isVisible()) {
+      dynamic_cast<ToggleButton*>(getWindowFromItem(static_cast<EItemSlotTypes>(i)))->setSelected(true);
+      return;
+    }
+  }
+}
+
+void CWorldGUIItemSelector::selectNextLeft() {
+  if (m_eCurrentItemSlot == ITEM_SLOT_COUNT) {selectFirstAvailable(); return;}
+
+  for (int i = 1; i < ITEM_SLOT_COUNT; i++) {
+    EItemSlotTypes eNewSlot = static_cast<EItemSlotTypes>((m_eCurrentItemSlot - i + ITEM_SLOT_COUNT) % ITEM_SLOT_COUNT);
+    if (getWindowFromItem(eNewSlot)->isVisible()) {
+      dynamic_cast<ToggleButton*>(getWindowFromItem(eNewSlot))->setSelected(true);
+      return;
+    }
+  }
+}
+
+void CWorldGUIItemSelector::selectNextRight() {
+  if (m_eCurrentItemSlot == ITEM_SLOT_COUNT) {selectFirstAvailable(); return;}
+
+  for (int i = 1; i < ITEM_SLOT_COUNT; i++) {
+    EItemSlotTypes eNewSlot = static_cast<EItemSlotTypes>((i + m_eCurrentItemSlot) % ITEM_SLOT_COUNT);
+    if (getWindowFromItem(eNewSlot)->isVisible()) {
+      dynamic_cast<ToggleButton*>(getWindowFromItem(eNewSlot))->setSelected(true);
+      return;
+    }
+  }
+}
+
+void CWorldGUIItemSelector::selectNextUp() {
+  if (m_eCurrentItemSlot == ITEM_SLOT_COUNT) {selectFirstAvailable(); return;}
+
+  for (int i = 1; i < ITEM_SLOT_COUNT; i++) {
+    EItemSlotTypes eNewSlot = static_cast<EItemSlotTypes>((m_eCurrentItemSlot - i * 5+ ITEM_SLOT_COUNT) % ITEM_SLOT_COUNT);
+    if (getWindowFromItem(eNewSlot)->isVisible()) {
+      dynamic_cast<ToggleButton*>(getWindowFromItem(eNewSlot))->setSelected(true);
+      return;
+    }
+  }
+}
+
+void CWorldGUIItemSelector::selectNextDown() {
+  for (int i = 1; i < ITEM_SLOT_COUNT; i++) {
+    EItemSlotTypes eNewSlot = static_cast<EItemSlotTypes>((i * 5 + m_eCurrentItemSlot) % ITEM_SLOT_COUNT);
+    if (getWindowFromItem(eNewSlot)->isVisible()) {
+      dynamic_cast<ToggleButton*>(getWindowFromItem(eNewSlot))->setSelected(true);
+      return;
     }
   }
 }

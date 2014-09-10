@@ -150,6 +150,13 @@
 		<Unit filename="../Zelda/Common/Message/MessageTypes.cpp" />
 		<Unit filename="../Zelda/Common/Message/MessageTypes.hpp" />
 		<Unit filename="../Zelda/Common/OSX/OSX.hpp" />
+		<Unit filename="../Zelda/Common/PauseManager/PauseCaller.cpp" />
+		<Unit filename="../Zelda/Common/PauseManager/PauseCaller.hpp" />
+		<Unit filename="../Zelda/Common/PauseManager/PauseListener.cpp" />
+		<Unit filename="../Zelda/Common/PauseManager/PauseListener.hpp" />
+		<Unit filename="../Zelda/Common/PauseManager/PauseManager.cpp" />
+		<Unit filename="../Zelda/Common/PauseManager/PauseManager.hpp" />
+		<Unit filename="../Zelda/Common/PauseManager/PauseTypes.hpp" />
 		<Unit filename="../Zelda/Common/Physics/BtOgre.cpp" />
 		<Unit filename="../Zelda/Common/Physics/BtOgreExtras.cpp" />
 		<Unit filename="../Zelda/Common/Physics/BtOgreExtras.hpp" />
