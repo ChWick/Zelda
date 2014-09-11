@@ -231,6 +231,8 @@
 		<Unit filename="../Zelda/World/Character/SimpleEnemyController.hpp" />
 		<Unit filename="../Zelda/World/Character/SimpleFriend.cpp" />
 		<Unit filename="../Zelda/World/Character/SimpleFriend.hpp" />
+		<Unit filename="../Zelda/World/Character/StandingPerson.cpp" />
+		<Unit filename="../Zelda/World/Character/StandingPerson.hpp" />
 		<Unit filename="../Zelda/World/Damage.cpp" />
 		<Unit filename="../Zelda/World/Damage.hpp" />
 		<Unit filename="../Zelda/World/DamageTypes.cpp" />

@@ -70,8 +70,8 @@ public:
   virtual const Ogre::Vector3 getFloorPosition() const;
 
 protected:
-	void createPhysics();
-	void destroyPhysics();
+	virtual void createPhysics();
+	virtual void destroyPhysics();
 	virtual void initBody(Ogre::SceneNode *pParentSceneNode);
 
 	void updateAnimationsCallback(const Ogre::Real fTime);
