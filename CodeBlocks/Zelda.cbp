@@ -53,6 +53,10 @@
 			<Add directory="/bin/Debug" />
 			<Add directory="/bin/Release" />
 		</Linker>
+		<ExtraCommands>
+			<Add before="python ../tools/CreatePacks.py" />
+			<Mode after="always" />
+		</ExtraCommands>
 		<Unit filename="../Zelda/Common/Android/Android.hpp" />
 		<Unit filename="../Zelda/Common/Android/AndroidInput.hpp" />
 		<Unit filename="../Zelda/Common/Android/Logger.hpp" />

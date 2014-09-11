@@ -40,6 +40,7 @@
 #include "../../Common/Util/XMLHelper.hpp"
 
 #include "../Character/SimpleEnemy.hpp"
+#include "../Character/StandingPerson.hpp"
 
 using namespace XMLHelper;
 
@@ -373,10 +374,19 @@ void CMap::parseSceneEntity(const tinyxml2::XMLElement *pElem) {
 
 void CMap::parseNewEntity(const tinyxml2::XMLElement *pElem) {
   std::string sEntityType(Attribute(pElem, "entity_type"));
+
+  Ogre::Real rotation(RealAttribute(pElem, "rotation",0));
+  Ogre::Quaternion qOrientation(Ogre::Degree(rotation), Ogre::Vector3::UNIT_Y);
   if (sEntityType == "simple_enemy") {
     CSimpleEnemy *pEnemy = new CSimpleEnemy(pElem, this);
     pEnemy->enterMap(this, Ogre::StringConverter::parseVector3(Attribute(pElem, "position")));
     pEnemy->setPlayer(m_pPlayer);
+    pEnemy->setOrientation(qOrientation);
+  }
+  else if (sEntityType == "standing_person") {
+    CStandingPerson *pPerson = new CStandingPerson(pElem, this);
+    pPerson->enterMap(this, Ogre::StringConverter::parseVector3(Attribute(pElem, "position")));
+    pPerson->setOrientation(qOrientation);
   }
 }
 

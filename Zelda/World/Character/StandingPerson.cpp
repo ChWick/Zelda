@@ -27,41 +27,15 @@
 #include "../../Common/Physics/PhysicsManager.hpp"
 #include "../Atlas/Map.hpp"
 #include "../GlobalCollisionShapesTypes.hpp"
+#include "PersonController.hpp"
 
 
 CStandingPerson::CStandingPerson(const tinyxml2::XMLElement *pElem, CEntity *pParent)
   : CPerson(pElem, pParent, SP_ANIM_COUNT) {
 }
 
-void CStandingPerson::createPhysics() {
-  using namespace Ogre;
-
-  assert(m_pSceneNode);
-
-  btPairCachingGhostObject * characterGhostObject = new btPairCachingGhostObject();
-
-  const CPhysicsCollisionObject &pco = m_pMap->getPhysicsManager()->getCollisionShape(GLOBAL_COLLISION_SHAPES_TYPES_ID_MAP.toString(GCST_PERSON_CAPSULE));
-  btConvexShape * capsule = dynamic_cast<btConvexShape*>(pco.getShape());
-  characterGhostObject->setCollisionShape(capsule);
-
-  m_pMap->getPhysicsManager()->getWorld()->addCollisionObject(characterGhostObject, getCollisionGroup(), getCollisionMask());
-  m_pCollisionObject = characterGhostObject;
-
-  setThisAsCollisionObjectsUserPointer();
-}
-void CStandingPerson::destroyPhysics() {
-	if (m_pCollisionObject) {
-		m_pMap->getPhysicsManager()->getWorld()->removeCollisionObject(m_pCollisionObject);
-
-		m_pMap->getPhysicsManager()->getBroadphase()->resetPool(m_pMap->getPhysicsManager()->getWorld()->getDispatcher());
-		m_pMap->getPhysicsManager()->getBroadphase()->getOverlappingPairCache()->cleanProxyFromPairs(m_pCollisionObject->getBroadphaseHandle(), m_pMap->getPhysicsManager()->getWorld()->getDispatcher());
-
-		delete m_pCollisionObject;
-		m_pCollisionObject = NULL;
-	}
-}
-
 void CStandingPerson::setupInternal() {
+  dynamic_cast<CPersonController*>(m_pCharacterController)->stun();
 }
 
 void CStandingPerson::setupAnimations() {

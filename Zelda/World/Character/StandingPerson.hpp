@@ -37,8 +37,6 @@ public:
 	CStandingPerson(const tinyxml2::XMLElement *pElem, CEntity *pParent);
 
 protected:
-  void createPhysics();
-  void destroyPhysics();
 	void setupInternal();
   void setupAnimations();
   EReceiveDamageResult receiveDamage(const CDamage &dmg);

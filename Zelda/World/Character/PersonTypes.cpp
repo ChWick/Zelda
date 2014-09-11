@@ -5,7 +5,7 @@ CPersonDataIdMap PERSON_DATA_ID_MAP;
 
 
 void CPersonTypeIdMap::init() {
-  m_Map[PERSON_LINK] = "link
+  m_Map[PERSON_LINK] = "link";
   m_Map[PERSON_SOLDIER_BLOCK] = "soldier_block";
   m_Map[PERSON_SOLDIER_BLUE] = "soldier_blue";
   m_Map[PERSON_SOLDIER_GREEN_SWORD] = "soldier_green_sword";
