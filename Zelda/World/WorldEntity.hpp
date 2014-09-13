@@ -69,8 +69,9 @@ public:
   static CWorldEntity *getFromUserPointer(btCollisionObject *pCO);
   static CWorldEntity *getFromUserPointer(const btCollisionObject *pCO);
 
-  
+
   virtual SInteractionResult interactOnCollision(const Ogre::Vector3 &vInteractDir, CWorldEntity *pSender);
+  virtual SInteractionResult interactOnActivate(const Ogre::Vector3 &vInteractDir, CWorldEntity *pSender);
 
 protected:
   virtual void damageAccepted(const CDamage &damage);

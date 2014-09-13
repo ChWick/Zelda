@@ -163,6 +163,19 @@ CWorldEntity::SInteractionResult CWorldEntity::interactOnCollision(const Ogre::V
   return SInteractionResult();
 }
 
+CWorldEntity::SInteractionResult CWorldEntity::interactOnActivate(const Ogre::Vector3 &vInteractDir, CWorldEntity *pSender) {
+  using namespace events;
+  for (auto &pEvt : m_lEvents) {
+    for (auto &pEmit : pEvt->getEmitter()) {
+      if (pEmit->getType() == EMIT_ON_INTERACTION) {
+        pEvt->start();
+      }
+    }
+  }
+
+  return CInteractionInterface::interactOnActivate(vInteractDir, pSender);
+}
+
 void CWorldEntity::damageAccepted(const CDamage &damage) {
   using namespace events;
   for (auto &pEvt : m_lEvents) {

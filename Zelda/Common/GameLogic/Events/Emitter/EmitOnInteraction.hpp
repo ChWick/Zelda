@@ -17,26 +17,17 @@
  * Zelda. If not, see http://www.gnu.org/licenses/.
  *****************************************************************************/
 
-#ifndef _EMITTER_TYPES_HPP_
-#define _EMITTER_TYPES_HPP_
+#ifndef _EMIT_ON_INTERACTION_HPP_
+#define _EMIT_ON_INTERACTION_HPP_
 
-#include "../../../Util/EnumIdMap.hpp"
+#include "Emitter.hpp"
 
 namespace events {
-
-
-enum EEmitterTypes {
-  EMIT_ON_COLLISION,
-  EMIT_ON_INTERACTION,
-  EMIT_ON_RECEIVED_DAMAGE,
+  class CEmitOnInteraction : public CEmitter {
+  private:
+  public:
+    CEmitOnInteraction(const tinyxml2::XMLElement *pElem, const CEvent &owner);
+  };
 };
 
-class CEmitterTypesMap : public CEnumIdMap<EEmitterTypes> {
-public:
-  CEmitterTypesMap();
-};
-
-extern CEmitterTypesMap EMITTER_TYPES_MAP;
-};
-
-#endif // _EMITTER_TYPES_HPP_
+#endif // _EMIT_ON_INTERACTION_HPP_

@@ -22,6 +22,7 @@
 #include "../Event.hpp"
 #include "../../Entity.hpp"
 #include "../../../Log.hpp"
+#include "../../../../World/WorldEntity.hpp"
 
 using namespace XMLHelper;
 
@@ -48,8 +49,7 @@ void CActionDeleteObject::start() {
     m_pEntity->deleteLater();
   }
   else {
-    // get from id
-    LOGI("Has not be implemented! %s", __FILE__);
+    m_Owner.getOwner().getRoot()->getChildRecursive(m_sID)->deleteLater();
   }
 }
 

@@ -19,6 +19,10 @@
   </new_entity>
 
   <new_entity entity_type="standing_person" id="block_1" rotation="0" position="1 1 0" person_type="soldier_green_sword">
+    <event>
+      <emitter type="interaction" />
+      <action type="delete_object" id="block_1"/>
+    </event>
   </new_entity>
   <new_entity entity_type="standing_person" id="block_2" rotation="180" position="1 1 0.1" person_type="soldier_green_sword">
   </new_entity>

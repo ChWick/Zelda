@@ -23,6 +23,7 @@
 #include <OgreException.h>
 
 #include "EmitOnCollision.hpp"
+#include "EmitOnInteraction.hpp"
 #include "EmitOnReceivedDamage.hpp"
 
 using namespace XMLHelper;
@@ -34,6 +35,8 @@ namespace events {
     switch (type) {
     case EMIT_ON_COLLISION:
       return new CEmitOnCollision(pElem, owner);
+    case EMIT_ON_INTERACTION:
+      return new CEmitOnInteraction(pElem, owner);
     case EMIT_ON_RECEIVED_DAMAGE:
       return new CEmitOnReceivedDamage(pElem, owner);
     }

@@ -102,6 +102,8 @@
 		<Unit filename="../Zelda/Common/GameLogic/Events/Actions/ActionTypes.hpp" />
 		<Unit filename="../Zelda/Common/GameLogic/Events/Emitter/EmitOnCollision.cpp" />
 		<Unit filename="../Zelda/Common/GameLogic/Events/Emitter/EmitOnCollision.hpp" />
+		<Unit filename="../Zelda/Common/GameLogic/Events/Emitter/EmitOnInteraction.cpp" />
+		<Unit filename="../Zelda/Common/GameLogic/Events/Emitter/EmitOnInteraction.hpp" />
 		<Unit filename="../Zelda/Common/GameLogic/Events/Emitter/EmitOnReceivedDamage.cpp" />
 		<Unit filename="../Zelda/Common/GameLogic/Events/Emitter/EmitOnReceivedDamage.hpp" />
 		<Unit filename="../Zelda/Common/GameLogic/Events/Emitter/Emitter.cpp" />

@@ -22,6 +22,7 @@
 namespace events {
 CEmitterTypesMap::CEmitterTypesMap() {
   m_Map[EMIT_ON_COLLISION] = "collision";
+  m_Map[EMIT_ON_INTERACTION] = "interaction";
   m_Map[EMIT_ON_RECEIVED_DAMAGE] = "received_damage";
 }
 

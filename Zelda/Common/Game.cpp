@@ -543,6 +543,7 @@ void CGame::createScene() {
   new CEntityManager();
   Ogre::LogManager::getSingletonPtr()->logMessage("    MessageManager ");
   new CMessageHandler();
+  CMessageHandler::getSingleton().addInjector(this);
   LOGI("    PauseManager");
   new CPauseManager();
   Ogre::LogManager::getSingletonPtr()->logMessage("    GameSate ");
