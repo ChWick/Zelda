@@ -32,6 +32,7 @@
 #include "Message/MessageDebug.hpp"
 #include "Log.hpp"
 #include "PauseManager/PauseManager.hpp"
+#include "Lua/LuaScriptManager.hpp"
 
 #if OGRE_PLATFORM == OGRE_PLATFORM_ANDROID
 #include "Android/Android.hpp"
@@ -99,6 +100,8 @@ CGame::~CGame(void) {
 #if OGRE_VERSION >= ((1 << 16) | (9 << 8) | 0)
     if (mOverlaySystem) {OGRE_DELETE mOverlaySystem;}
 #endif
+    delete Ogre::ResourceGroupManager::getSingleton()._getResourceManager("LuaScript");
+
     OGRE_DELETE mRoot;
   }
 }
@@ -200,6 +203,9 @@ void CGame::createRoot() {
   Ogre::LogManager::getSingletonPtr()->logMessage("*** Finished OverlaySystem***");
 }
 void CGame::locateResources() {
+  // add custom resource managers
+  new CLuaScriptManager();
+
   // this is first added, that we use these files first if existing
   for (const std::string &path : m_vAdditionalLevelDirPaths) {
     Ogre::ResourceGroupManager::getSingleton().

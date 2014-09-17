@@ -48,6 +48,9 @@ LOCAL_LDLIBS	+= @OIS_LIB@
 # tinyxml2 lib
 LOCAL_LDLIBS	+= @TINYXML2_LIB@
 
+# lua lib
+LOCAL_LDLIBS	+= @LUA_LIB@
+
 # other deps
 LOCAL_LDLIBS	+= @NDKOUT@/obj/local/@ANDROID_ABI@/libcpufeatures.a
 LOCAL_LDLIBS	+= @CMAKE_BINARY_DIR@/systemlibs/@ANDROID_ABI@/libstdc++.a
@@ -90,6 +93,9 @@ LOCAL_CFLAGS	+= -I@OGRE_DEPS_FREETYPE_FT_PATH@
 LOCAL_CFLAGS	+= -I@OIS_H_PATH@
 # tinyxml2 path
 LOCAL_CFLAGS	+= -I@TINYXML2_H_PATH@
+
+# lua path
+LOCAL_CFLAGS	+= -I@LUA_H_PATH@
 
 # local path
 LOCAL_CFLAGS	+= -I@PROJECT_CONFIG_OUT@/

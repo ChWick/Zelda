@@ -133,6 +133,10 @@
 		<Unit filename="../Zelda/Common/Input/InputListener.hpp" />
 		<Unit filename="../Zelda/Common/InputDefines.hpp" />
 		<Unit filename="../Zelda/Common/Log.hpp" />
+		<Unit filename="../Zelda/Common/Lua/LuaScript.cpp" />
+		<Unit filename="../Zelda/Common/Lua/LuaScript.hpp" />
+		<Unit filename="../Zelda/Common/Lua/LuaScriptManager.cpp" />
+		<Unit filename="../Zelda/Common/Lua/LuaScriptManager.hpp" />
 		<Unit filename="../Zelda/Common/Message/Message.cpp" />
 		<Unit filename="../Zelda/Common/Message/Message.hpp" />
 		<Unit filename="../Zelda/Common/Message/MessageCreator.cpp" />
@@ -295,6 +299,7 @@
 				<lib name="CEGUI-0-OGRE" />
 				<lib name="OIS" />
 				<lib name="OGRE-Overlay" />
+				<lib name="lua5.2" />
 			</lib_finder>
 		</Extensions>
 	</Project>

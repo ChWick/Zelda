@@ -1,11 +1,11 @@
 ################################################################################
-# Custom cmake module for CMAKE to find LUA
+# Custom cmake module to find tinyxml2
 ################################################################################
 include(FindPackageHandleStandardArgs)
 
-find_path(LUA_H_PATH NAMES lua.hpp PATH_SUFFIXES lua5.2)
-find_library(LUA_LIB NAMES lua lua5.2)
-find_library(LUA_LIB_DBG NAMES lua5.2_d lua_d)
+find_path(LUA_H_PATH NAMES lua.h PATH_SUFFIXES lua PATHS ${LUA_SDK_ROOT}/include)
+find_library(LUA_LIB NAMES liblua PATHS ${LUA_SDK_ROOT}/lib)
+find_library(LUA_LIB_DBG NAMES liblua_d PATHS ${LUA_SDK_ROOT}/lib)
 
 mark_as_advanced(LUA_H_PATH LUA_LIB LUA_LIB_DBG)
 

@@ -34,6 +34,7 @@ set(Game_include_directories
     ${CEGUI_INCLUDE_DIR}
     ${TINYXML2_INCLUDE_DIR}
     ${BOOST_INCLUDE_DIR}
+    ${LUA_INCLUDE_DIR}
 )
 set(Game_link_libraries
     ${BULLET_LIBRARIES}
@@ -42,6 +43,7 @@ set(Game_link_libraries
     ${CEGUI_LIBRARIES}
     ${TINYXML2_LIBRARIES}
     ${BOOST_LIBRARIES}
+    ${LUA_LIBRARIES}
 )
 
 set(Game_link_libraries
