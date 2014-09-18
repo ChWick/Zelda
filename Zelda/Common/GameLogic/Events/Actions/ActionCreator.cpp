@@ -25,6 +25,7 @@
 #include "ActionMessage.hpp"
 #include "ActionCreateObject.hpp"
 #include "ActionDeleteObject.hpp"
+#include "ActionStartScript.hpp"
 
 using namespace XMLHelper;
 
@@ -39,6 +40,8 @@ namespace events {
       return new CActionCreateObject(pElem, owner);
     case ACTION_DELETE_OBJECT:
       return new CActionDeleteObject(pElem, owner);
+    case ACTION_START_SCRIPT:
+      return new CActionStartScript(pElem, owner);
     }
 
     throw Ogre::Exception(0, "New action type not added in createAction", __FILE__);

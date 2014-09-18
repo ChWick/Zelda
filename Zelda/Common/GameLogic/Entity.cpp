@@ -72,9 +72,11 @@ CEntity::CEntity(
     m_bPauseUpdate(BoolAttribute(pElem, "pause_update", false)),
     m_pParent(NULL) {
 
-  attachTo(pParent);
 
   readEventsFromXMLElement(pElem, false);
+
+  // at last attach to parent, if there is an exception, delete will be called automatically
+  attachTo(pParent);
 }
 CEntity::~CEntity() {
   std::list<CEntity *> lClone(m_lChildren);

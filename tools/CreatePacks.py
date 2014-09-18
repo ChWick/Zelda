@@ -86,7 +86,8 @@ def makeMapPack(name, world, files, includeHouse=False) :
 
 	for file in files :
 		zipf.write(os.path.join(dataPath, file), file, zipfile.ZIP_DEFLATED)
-
+        # copy scripts
+        copyAllOfType(zipf, os.path.join(dataPath, 'scripts/*'), 'scripts')
 	zipf.close()
 	
 

@@ -17,15 +17,26 @@
  * Zelda. If not, see http://www.gnu.org/licenses/.
  *****************************************************************************/
 
-#include "ActionTypes.hpp"
+#include "ActionStartScript.hpp"
+#include "../../../Util/XMLHelper.hpp"
+#include "../../../Util/Assert.hpp"
+#include "../../../Lua/LuaScriptManager.hpp"
 
+using namespace XMLHelper;
 namespace events {
-CActionTypesMap::CActionTypesMap() {
-  m_Map[ACTION_MESSAGE] = "message";
-  m_Map[ACTION_CREATE_OBJECT] = "create_object";
-  m_Map[ACTION_DELETE_OBJECT] = "delete_object";
-  m_Map[ACTION_START_SCRIPT] = "start_script";
+
+CActionStartScript::CActionStartScript(const tinyxml2::XMLElement *pElem, const CEvent &owner)
+  : CAction(pElem, owner),
+    mScript(CLuaScriptManager::getSingleton().getResourceByName(Attribute(pElem, "file"),
+                                                                Attribute(pElem, "resource_group", Ogre::ResourceGroupManager::AUTODETECT_RESOURCE_GROUP_NAME))
+            .dynamicCast<CLuaScript>()) {
 }
 
-CActionTypesMap ACTION_TYPES_MAP;
+CActionStartScript::~CActionStartScript() {
+}
+
+void CActionStartScript::start() {
+  mScript->start();
+}
+
 };

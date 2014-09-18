@@ -17,15 +17,28 @@
  * Zelda. If not, see http://www.gnu.org/licenses/.
  *****************************************************************************/
 
-#include "ActionTypes.hpp"
+#ifndef _ACTION_START_SCRIPT_HPP_
+#define _ACTION_START_SCRIPT_HPP_
+
+
+#include "Action.hpp"
+#include "../../../Lua/LuaScript.hpp"
+
+class CMessage;
 
 namespace events {
-CActionTypesMap::CActionTypesMap() {
-  m_Map[ACTION_MESSAGE] = "message";
-  m_Map[ACTION_CREATE_OBJECT] = "create_object";
-  m_Map[ACTION_DELETE_OBJECT] = "delete_object";
-  m_Map[ACTION_START_SCRIPT] = "start_script";
-}
+  class CActionStartScript : public CAction {
+  protected:
+    CMessage *m_pMessage;
+    CLuaScriptPtr mScript;
+  public:
+    CActionStartScript(const tinyxml2::XMLElement *pElem, const CEvent &owner);
 
-CActionTypesMap ACTION_TYPES_MAP;
+    ~CActionStartScript();
+
+  protected:
+    void start();
+  };
 };
+
+#endif // _ACTION_START_SCRIPT_HPP_

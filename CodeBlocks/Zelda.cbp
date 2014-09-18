@@ -98,6 +98,8 @@
 		<Unit filename="../Zelda/Common/GameLogic/Events/Actions/ActionDeleteObject.hpp" />
 		<Unit filename="../Zelda/Common/GameLogic/Events/Actions/ActionMessage.cpp" />
 		<Unit filename="../Zelda/Common/GameLogic/Events/Actions/ActionMessage.hpp" />
+		<Unit filename="../Zelda/Common/GameLogic/Events/Actions/ActionStartScript.cpp" />
+		<Unit filename="../Zelda/Common/GameLogic/Events/Actions/ActionStartScript.hpp" />
 		<Unit filename="../Zelda/Common/GameLogic/Events/Actions/ActionTypes.cpp" />
 		<Unit filename="../Zelda/Common/GameLogic/Events/Actions/ActionTypes.hpp" />
 		<Unit filename="../Zelda/Common/GameLogic/Events/Emitter/EmitOnCollision.cpp" />
@@ -135,6 +137,8 @@
 		<Unit filename="../Zelda/Common/Log.hpp" />
 		<Unit filename="../Zelda/Common/Lua/LuaScript.cpp" />
 		<Unit filename="../Zelda/Common/Lua/LuaScript.hpp" />
+		<Unit filename="../Zelda/Common/Lua/LuaScriptBridge.cpp" />
+		<Unit filename="../Zelda/Common/Lua/LuaScriptBridge.hpp" />
 		<Unit filename="../Zelda/Common/Lua/LuaScriptManager.cpp" />
 		<Unit filename="../Zelda/Common/Lua/LuaScriptManager.hpp" />
 		<Unit filename="../Zelda/Common/Message/Message.cpp" />

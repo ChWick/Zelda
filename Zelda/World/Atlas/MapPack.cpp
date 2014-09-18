@@ -55,6 +55,12 @@ void CMapPack::init(CMapPackParserListener *pListener) {
 #else
   Ogre::ResourceGroupManager::getSingleton().addResourceLocation(m_sPath + m_sName + ".zip", "Zip", m_sResourceGroup);
 #endif // OGRE_PLATFORM
+  Ogre::StringVectorPtr files(Ogre::ResourceGroupManager::getSingleton().listResourceNames(m_sResourceGroup));
+  for (const Ogre::String &r : *files) {
+    if (r.find(".lua") != Ogre::String::npos) {
+      Ogre::ResourceGroupManager::getSingleton().declareResource(r, "LuaScript");
+    }
+  }
   Ogre::ResourceGroupManager::getSingleton().initialiseResourceGroup(m_sResourceGroup);
   Ogre::ResourceGroupManager::getSingleton().loadResourceGroup(m_sResourceGroup);
 

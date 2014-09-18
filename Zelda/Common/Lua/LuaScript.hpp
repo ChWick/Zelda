@@ -5,6 +5,10 @@
 
 struct lua_State;
 
+class CLuaScript;
+
+typedef Ogre::SharedPtr<CLuaScript> CLuaScriptPtr;
+
 class CLuaScript : public Ogre::Resource
 {
 private:
@@ -23,9 +27,11 @@ public:
      Ogre::ManualResourceLoader *loader = 0);
 
   virtual ~CLuaScript();
+
+  virtual CLuaScriptPtr clone(const Ogre::String& newName, bool changeGroup = false, const Ogre::String& newGroup = Ogre::StringUtil::BLANK);
+
+  void start();
 };
 
-
-typedef Ogre::SharedPtr<CLuaScript> CLuaScriptPtr;
 
 #endif // _LUA_SCRIPT_HPP_

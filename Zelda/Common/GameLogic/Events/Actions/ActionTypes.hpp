@@ -29,6 +29,7 @@ enum EActionTypes {
   ACTION_MESSAGE,
   ACTION_CREATE_OBJECT,
   ACTION_DELETE_OBJECT,
+  ACTION_START_SCRIPT,
 };
 
 class CActionTypesMap : public CEnumIdMap<EActionTypes> {
