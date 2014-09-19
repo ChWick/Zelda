@@ -1,5 +1,6 @@
 #include "GUITextBox.hpp"
 #include "../Common/Input/GameInputCommand.hpp"
+#include "../TextConverter.hpp"
 
 const unsigned int TEXT_BOX_CHARACTERS_PER_LINE = 20;
 const unsigned int TEXT_BOX_NUM_ROWS = 3;
@@ -21,7 +22,10 @@ CGUITextBox::CGUITextBox(const std::string &id,
   pause(PAUSE_ALL_WORLD_UPDATE);
 
   mTextWindow = m_pRoot->createChild("OgreTray/StaticText", "text_window");
-  mCompleteText = "asdfa asdfasdf asdf asdfasdfa asdf asdf asd fasdfkjsdlf asldkal dsajfkjsf ajdf askfja asf";
+  mCompleteText = "${name} asdfa asdfasdf asdf asdfasdfa asdf asdf asd fasdfkjsdlf asldkal dsajfkjsf ajdf askfja asf";
+
+  CTextConverter::getSingleton().convert(mCompleteText);
+
   mTextToDisplay = mCompleteText;
 
   onResume();

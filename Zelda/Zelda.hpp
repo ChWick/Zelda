@@ -23,7 +23,10 @@
 #include "Common/Game.hpp"
 
 class CZelda : public CGame {
+public:
+  ~CZelda();
 protected:
+  void initSingletons();
   void initEnumIdMaps();
   void chooseGameState();
 

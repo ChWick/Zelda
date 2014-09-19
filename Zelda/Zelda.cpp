@@ -27,6 +27,15 @@
 #include "World/DamageTypes.hpp"
 #include "World/Items/ItemTypes.hpp"
 #include "World/Items/ItemData.hpp"
+#include "TextConverter.hpp"
+
+CZelda::~CZelda() {
+  if (CTextConverter::getSingletonPtr()) {delete CTextConverter::getSingletonPtr();}
+}
+
+void CZelda::initSingletons() {
+  new CTextConverter();
+}
 
 void CZelda::initEnumIdMaps() {
   PERSON_TYPE_ID_MAP.init();

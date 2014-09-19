@@ -564,6 +564,8 @@ void CGame::createScene() {
   Ogre::LogManager::getSingletonPtr()->logMessage("    DebugDrawer ");
   new DebugDrawer(mSceneMgr, 0.7f);
 
+  initSingletons();
+
 
   Ogre::LogManager::getSingletonPtr()->logMessage("    init GameState ");
   m_pGameStateManager->init();

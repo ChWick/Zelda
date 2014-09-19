@@ -19,6 +19,7 @@
 
 #include "GameInputListener.hpp"
 #include "GameInputManager.hpp"
+
 CGameInputListener::CGameInputListener(bool bDefaultEnabled, int pauseFlags)
   : m_bGameInputListenerEnabled(bDefaultEnabled),
     mGameInputListenerPauseFlags(pauseFlags) {
