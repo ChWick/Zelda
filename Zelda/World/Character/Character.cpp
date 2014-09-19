@@ -26,8 +26,8 @@
 #include <OgreAnimationState.h>
 
 // map will be set on enter map, in construction, m_pMap is nullptr
-CCharacter::CCharacter(const std::string &sID, CEntity *pParent, const EFriendOrEnemyStates foe, unsigned int uiAnimationCount)
-	: CWorldEntity(sID, pParent, nullptr),
+CCharacter::CCharacter(const std::string &sID, CEntity *pParent, CMap *pMap, const EFriendOrEnemyStates foe, unsigned int uiAnimationCount)
+	: CWorldEntity(sID, pParent, pMap),
 	  m_uiAnimationCount(uiAnimationCount),
 		m_fTimer(0),
 		m_fAnimSpeed(1),
@@ -42,8 +42,8 @@ CCharacter::CCharacter(const std::string &sID, CEntity *pParent, const EFriendOr
   m_uiAnimID = m_uiAnimationCount;
 }
 
-CCharacter::CCharacter(const tinyxml2::XMLElement *pElem, CEntity *pParent, const EFriendOrEnemyStates foe, unsigned int uiAnimationCount)
-  : CWorldEntity(pParent, nullptr, pElem),
+CCharacter::CCharacter(const tinyxml2::XMLElement *pElem, CEntity *pParent, CMap *pMap, const EFriendOrEnemyStates foe, unsigned int uiAnimationCount)
+  : CWorldEntity(pParent, pMap, pElem),
     m_uiAnimationCount(uiAnimationCount),
     m_fTimer(0),
     m_fAnimSpeed(1),
@@ -69,7 +69,7 @@ void CCharacter::enterMap(CMap *pMap, const Ogre::Vector3 &vInitPosition) {
 
   m_pMap = pMap;
 
-  if (!bSwitchMapOnly) {
+  if (!bSwitchMapOnly || !m_pSceneNode) {
     // use atlas scene node
     initBody(m_pMap->getParent()->getSceneNode());
     setupAnimations();

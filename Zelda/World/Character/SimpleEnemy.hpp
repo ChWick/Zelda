@@ -35,8 +35,8 @@ public:
 
 private:
 public:
-	CSimpleEnemy(const std::string &sID, CEntity *pParent);
-	CSimpleEnemy(const tinyxml2::XMLElement *pElem, CEntity *pParent);
+	CSimpleEnemy(const std::string &sID, CEntity *pParent, CMap *pMap);
+	CSimpleEnemy(const tinyxml2::XMLElement *pElem, CEntity *pParent, CMap *pMap);
 
 	void setPlayer(CWorldEntity *pPlayer);
 

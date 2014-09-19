@@ -21,6 +21,8 @@
 #include "../../../Util/XMLHelper.hpp"
 #include "../../../Util/Assert.hpp"
 #include "../../../Lua/LuaScriptManager.hpp"
+#include "../../Entity.hpp"
+#include "../Event.hpp"
 
 using namespace XMLHelper;
 namespace events {
@@ -28,8 +30,9 @@ namespace events {
 CActionStartScript::CActionStartScript(const tinyxml2::XMLElement *pElem, const CEvent &owner)
   : CAction(pElem, owner),
     mScript(CLuaScriptManager::getSingleton().getResourceByName(Attribute(pElem, "file"),
-                                                                Attribute(pElem, "resource_group", Ogre::ResourceGroupManager::AUTODETECT_RESOURCE_GROUP_NAME))
+                                                                Attribute(pElem, "resource_group", owner.getOwner().getResourceGroup()))
             .dynamicCast<CLuaScript>()) {
+  ASSERT(mScript.isNull() == false);
 }
 
 CActionStartScript::~CActionStartScript() {

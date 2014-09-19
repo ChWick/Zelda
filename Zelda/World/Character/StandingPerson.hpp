@@ -34,7 +34,7 @@ public:
 
 private:
 public:
-	CStandingPerson(const tinyxml2::XMLElement *pElem, CEntity *pParent);
+	CStandingPerson(const tinyxml2::XMLElement *pElem, CEntity *pParent, CMap *pMap);
 
 protected:
 	void setupInternal();

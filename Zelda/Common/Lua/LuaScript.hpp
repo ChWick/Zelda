@@ -2,8 +2,7 @@
 #define _LUA_SCRIPT_HPP_
 
 #include <OgreResourceManager.h>
-
-struct lua_State;
+#include <lua.hpp>
 
 class CLuaScript;
 
@@ -31,6 +30,10 @@ public:
   virtual CLuaScriptPtr clone(const Ogre::String& newName, bool changeGroup = false, const Ogre::String& newGroup = Ogre::StringUtil::BLANK);
 
   void start();
+
+private:
+  void registerCFunctionsToLua();
+  void registerSingleCFunctionsToLua(lua_CFunction fn, const char *label);
 };
 
 

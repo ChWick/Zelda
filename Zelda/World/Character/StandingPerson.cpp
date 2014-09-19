@@ -30,8 +30,8 @@
 #include "PersonController.hpp"
 
 
-CStandingPerson::CStandingPerson(const tinyxml2::XMLElement *pElem, CEntity *pParent)
-  : CPerson(pElem, pParent, SP_ANIM_COUNT) {
+CStandingPerson::CStandingPerson(const tinyxml2::XMLElement *pElem, CEntity *pParent, CMap *pMap)
+  : CPerson(pElem, pParent, pMap, SP_ANIM_COUNT) {
 }
 
 void CStandingPerson::setupInternal() {

@@ -26,13 +26,15 @@
 #include "../Message/MessageEntityStateChanged.hpp"
 #include "../Message/MessageHandler.hpp"
 #include "EntityManager.hpp"
+#include <OgreResourceGroupManager.h>
 
 using namespace events;
 using namespace XMLHelper;
 
 
-CEntity::CEntity(const std::string &sID, unsigned int uiType, CEntity *pParent)
+CEntity::CEntity(const std::string &sID, unsigned int uiType, CEntity *pParent, const std::string &sResourceGroup)
   : m_sID(sID),
+    m_sResourceGroup(sResourceGroup),
     m_uiType(uiType),
     m_eState(EST_NORMAL),
     m_bPauseRender(false),
@@ -41,8 +43,9 @@ CEntity::CEntity(const std::string &sID, unsigned int uiType, CEntity *pParent)
   attachTo(pParent);
 }
 
-CEntity::CEntity(const std::string &sID, CEntity *pParent)
+CEntity::CEntity(const std::string &sID, CEntity *pParent, const std::string &sResourceGroup)
   : m_sID(sID),
+    m_sResourceGroup(sResourceGroup),
     m_uiType(0),
     m_eState(EST_NORMAL),
     m_bPauseRender(false),
@@ -52,6 +55,7 @@ CEntity::CEntity(const std::string &sID, CEntity *pParent)
 }
 CEntity::CEntity(const CEntity &src)
   : m_sID(src.m_sID),
+    m_sResourceGroup(src.m_sResourceGroup),
     m_uiType(src.m_uiType),
     m_eState(EST_NORMAL),
     m_bPauseRender(src.m_bPauseRender),
@@ -64,8 +68,10 @@ CEntity::CEntity(const CEntity &src)
 }
 CEntity::CEntity(
 		 CEntity *pParent,
-		 const tinyxml2::XMLElement *pElem)
+		 const tinyxml2::XMLElement *pElem,
+		 const std::string &sResourceGroup)
   : m_sID(Attribute(pElem, "id", m_sID)),
+    m_sResourceGroup(Attribute(pElem, "resource_group", sResourceGroup)),
     m_uiType(IntAttribute(pElem, "type", 0)),
     m_eState(ENTITY_STATE_ID_MAP.parseString(Attribute(pElem, "state", ENTITY_STATE_ID_MAP.toString(EST_NORMAL)))),
     m_bPauseRender(BoolAttribute(pElem, "pause_render", false)),

@@ -28,6 +28,7 @@
 #include "../tinyxml2/tinyxml2.h"
 #include "OutputStyle.hpp"
 #include "EntityStates.hpp"
+#include <OgreResourceGroupManager.h>
 
 namespace events {
   class CEvent;
@@ -45,6 +46,7 @@ class CMessage;
 class CEntity : public CMessageInjector {
 protected:
   std::string m_sID;                          //!< id of the entity
+  std::string m_sResourceGroup;               //!< in which resource group to search for entities resources
   unsigned int m_uiType;                      //!< one can set a type
   EEntityStateTypes m_eState;                 //!< state of the entity
 
@@ -56,11 +58,11 @@ protected:
   std::list<events::CEvent*> m_lEvents;
   std::list<events::CEvent*> m_lEventsToDelete;
 public:
-  CEntity(const std::string &sID, unsigned int uiType, CEntity *pParent);
-  CEntity(const std::string &sID, CEntity *pParent);
+  CEntity(const std::string &sID, unsigned int uiType, CEntity *pParent, const std::string &sResourceGroup = Ogre::ResourceGroupManager::AUTODETECT_RESOURCE_GROUP_NAME);
+  CEntity(const std::string &sID, CEntity *pParent, const std::string &sResourceGroup = Ogre::ResourceGroupManager::AUTODETECT_RESOURCE_GROUP_NAME);
   CEntity(
 	  CEntity *pParent,
-	  const tinyxml2::XMLElement *pElem);
+	  const tinyxml2::XMLElement *pElem, const std::string &sResourceGroup = Ogre::ResourceGroupManager::AUTODETECT_RESOURCE_GROUP_NAME);
   CEntity(const CEntity &src);
   virtual ~CEntity();
 
@@ -124,6 +126,9 @@ public:
   const std::string &getID() const {return m_sID;}
   std::string &getID() {return m_sID;}
   void setID(const std::string &sID) {m_sID = sID;}
+
+  //! Resource group in which the assigned resources are searched for
+  const std::string &getResourceGroup() const {return m_sResourceGroup;}
 
   virtual void changeState(EEntityStateTypes eState);
   EEntityStateTypes getState() const {return m_eState;}

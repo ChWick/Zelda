@@ -47,7 +47,7 @@ using namespace XMLHelper;
 int MAP_COUNTER = 0; // Counter to make names unique if objects are switched between maps since renaming a scene node is not possible
 
 CMap::CMap(CEntity *pAtlas, CMapPackPtr mapPack, Ogre::SceneNode *pParentSceneNode, CWorldEntity *pPlayer)
-  : CWorldEntity(mapPack->getName(), pAtlas, this),
+  : CWorldEntity(mapPack->getName(), pAtlas, this, mapPack->getResourceGroup()),
     m_PhysicsManager(pParentSceneNode->getCreator()),
     m_MapPack(mapPack),
     m_pPlayer(pPlayer),
@@ -378,13 +378,13 @@ void CMap::parseNewEntity(const tinyxml2::XMLElement *pElem) {
   Ogre::Real rotation(RealAttribute(pElem, "rotation",0));
   Ogre::Quaternion qOrientation(Ogre::Degree(rotation), Ogre::Vector3::UNIT_Y);
   if (sEntityType == "simple_enemy") {
-    CSimpleEnemy *pEnemy = new CSimpleEnemy(pElem, this);
+    CSimpleEnemy *pEnemy = new CSimpleEnemy(pElem, this, this);
     pEnemy->enterMap(this, Ogre::StringConverter::parseVector3(Attribute(pElem, "position")));
     pEnemy->setPlayer(m_pPlayer);
     pEnemy->setOrientation(qOrientation);
   }
   else if (sEntityType == "standing_person") {
-    CStandingPerson *pPerson = new CStandingPerson(pElem, this);
+    CStandingPerson *pPerson = new CStandingPerson(pElem, this, this);
     pPerson->enterMap(this, Ogre::StringConverter::parseVector3(Attribute(pElem, "position")));
     pPerson->setOrientation(qOrientation);
   }

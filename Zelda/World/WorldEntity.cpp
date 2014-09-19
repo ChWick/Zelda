@@ -27,17 +27,18 @@
 #include "../Common/GameLogic/Events/Emitter/EmitOnCollision.hpp"
 #include "../Common/GameLogic/Events/Emitter/EmitOnReceivedDamage.hpp"
 #include "Atlas/Map.hpp"
+#include "Atlas/MapPack.hpp"
 #include "Damage.hpp"
 
-CWorldEntity::CWorldEntity(const std::string &sID, CEntity *pParent, CMap *pMap)
-  : CEntity(sID, pParent),
+CWorldEntity::CWorldEntity(const std::string &sID, CEntity *pParent, CMap *pMap, const std::string &sResourceGroup)
+  : CEntity(sID, pParent, (sResourceGroup == Ogre::ResourceGroupManager::AUTODETECT_RESOURCE_GROUP_NAME && pMap && pMap->getMapPack().get()) ? pMap->getMapPack()->getResourceGroup() : sResourceGroup),
     m_pSceneNode(nullptr),
     m_pCollisionObject(nullptr),
     m_pMap(pMap) {
 }
 
-CWorldEntity::CWorldEntity(CEntity *pParent, CMap *pMap, const tinyxml2::XMLElement *pElem)
-  : CEntity(pParent, pElem),
+CWorldEntity::CWorldEntity(CEntity *pParent, CMap *pMap, const tinyxml2::XMLElement *pElem, const std::string &sResourceGroup)
+  : CEntity(pParent, pElem, (sResourceGroup == Ogre::ResourceGroupManager::AUTODETECT_RESOURCE_GROUP_NAME && pMap && pMap->getMapPack().get()) ? pMap->getMapPack()->getResourceGroup() : sResourceGroup),
     m_pSceneNode(nullptr),
     m_pCollisionObject(nullptr),
     m_pMap(pMap) {
@@ -188,4 +189,10 @@ void CWorldEntity::damageAccepted(const CDamage &damage) {
       }
     }
   }
+}
+
+void CWorldEntity::enterMap(CMap *pMap, const Ogre::Vector3 &vPosition) {
+  m_pMap = pMap;
+  m_sResourceGroup = pMap->getMapPack()->getResourceGroup();
+  setPosition(vPosition);
 }

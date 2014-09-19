@@ -53,8 +53,8 @@ protected:
 	unsigned int m_uiTakeDamageFlags;               //!< from which dmg types the person can take damage (default all)
 	unsigned int m_uiBlockDamageFlags;              //!< which dmg type will be blocked (default all)
 public:
-	CPerson(const std::string &sID, CEntity *pParent, const SPersonData &personData, unsigned int uiAnimationCount = ANIM_COUNT);
-	CPerson(const tinyxml2::XMLElement *pElem, CEntity *pParent, unsigned int uiAnimationCount);
+	CPerson(const std::string &sID, CEntity *pParent, CMap *pMap, const SPersonData &personData, unsigned int uiAnimationCount = ANIM_COUNT);
+	CPerson(const tinyxml2::XMLElement *pElem, CEntity *pParent, CMap *pMap, unsigned int uiAnimationCount);
 	virtual ~CPerson();
 
 	virtual void destroy();

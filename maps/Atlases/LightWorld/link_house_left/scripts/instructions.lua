@@ -1,3 +1,3 @@
 function start()
-	log("test from lua")
+	 log("log message from lua");
 end

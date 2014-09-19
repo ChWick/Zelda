@@ -50,8 +50,8 @@ const Ogre::Real CPerson::PERSON_PHYSICS_OFFSET = PERSON_HEIGHT / 2 + 0.005;
 const Ogre::Real CPerson::PERSON_FLOOR_OFFSET = PERSON_HEIGHT / 2;
 
 
-CPerson::CPerson(const std::string &sID, CEntity *pParent, const SPersonData &personData, unsigned int uiAnimationCount)
-  : CCharacter(sID, pParent, personData.eFriendOrEnemyState, uiAnimationCount),
+CPerson::CPerson(const std::string &sID, CEntity *pParent, CMap *pMap, const SPersonData &personData, unsigned int uiAnimationCount)
+  : CCharacter(sID, pParent, pMap, personData.eFriendOrEnemyState, uiAnimationCount),
   m_PersonData(personData) {
 	m_degLeftHandleCurrentRotation = 0;
 	m_degLeftHandleRotationSpeed = 0;
@@ -61,8 +61,8 @@ CPerson::CPerson(const std::string &sID, CEntity *pParent, const SPersonData &pe
   setCurAndMaxHP(personData.hitpoints);
 }
 
-CPerson::CPerson(const tinyxml2::XMLElement *pElem, CEntity *pParent, unsigned int uiAnimationCount)
-  : CCharacter(pElem, pParent, PERSON_DATA_ID_MAP.toData(PERSON_TYPE_ID_MAP.parseString(Attribute(pElem, "person_type"))).eFriendOrEnemyState, uiAnimationCount),
+CPerson::CPerson(const tinyxml2::XMLElement *pElem, CEntity *pParent, CMap *pMap, unsigned int uiAnimationCount)
+  : CCharacter(pElem, pParent, pMap, PERSON_DATA_ID_MAP.toData(PERSON_TYPE_ID_MAP.parseString(Attribute(pElem, "person_type"))).eFriendOrEnemyState, uiAnimationCount),
     m_PersonData(PERSON_DATA_ID_MAP.toData(PERSON_TYPE_ID_MAP.parseString(Attribute(pElem, "person_type")))) {
 
 	m_degLeftHandleCurrentRotation = 0;

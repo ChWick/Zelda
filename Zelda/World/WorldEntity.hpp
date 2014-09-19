@@ -33,8 +33,8 @@ protected:
 	CMap *m_pMap;
 
 public:
-  CWorldEntity(const std::string &sID, CEntity *pParent, CMap *pMap);
-  CWorldEntity(CEntity *pParent, CMap *pMap, const tinyxml2::XMLElement *pElem);
+  CWorldEntity(const std::string &sID, CEntity *pParent, CMap *pMap, const std::string &sResourceGroup = Ogre::ResourceGroupManager::AUTODETECT_RESOURCE_GROUP_NAME);
+  CWorldEntity(CEntity *pParent, CMap *pMap, const tinyxml2::XMLElement *pElem, const std::string &sResourceGroup = Ogre::ResourceGroupManager::AUTODETECT_RESOURCE_GROUP_NAME);
   virtual ~CWorldEntity();
 
   virtual void exit();
@@ -60,7 +60,7 @@ public:
   virtual Ogre::SceneNode *getSceneNode() const;
   virtual btCollisionObject *getCollisionObject() const;
   virtual CMap *getMap() const {return m_pMap;}
-  virtual void enterMap(CMap *pMap, const Ogre::Vector3 &vPosition) {m_pMap = pMap; setPosition(vPosition);}
+  virtual void enterMap(CMap *pMap, const Ogre::Vector3 &vPosition);
 
   virtual void update(Ogre::Real tpf);
 

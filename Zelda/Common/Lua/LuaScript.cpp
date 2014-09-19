@@ -3,6 +3,7 @@
 #include "../Util/Assert.hpp"
 #include "../Log.hpp"
 #include "LuaScriptManager.hpp"
+#include "LuaScriptBridge.hpp"
 
 CLuaScript::CLuaScript(Ogre::ResourceManager* creator, const Ogre::String &name,
                  Ogre::ResourceHandle handle, const Ogre::String &group, bool isManual,
@@ -67,6 +68,8 @@ void CLuaScript::loadImpl() {
   else {
     throw Ogre::Exception(status, "Error while loading lua script '" + script + "' from string.", __FILE__);
   }
+
+  registerCFunctionsToLua();
 }
 
 void CLuaScript::unloadImpl() {
@@ -86,9 +89,18 @@ size_t CLuaScript::calculateSize() const {
 void CLuaScript::start() {
   ASSERT(mLuaState);
   lua_getglobal(mLuaState, "start");
-  ASSERT(lua_gettop(mLuaState) == 0); // no arguments passed
+  //ASSERT(lua_gettop(mLuaState) == 0); // no arguments passed
   ASSERT(lua_isfunction(mLuaState, -1));
   if (lua_pcall(mLuaState, 0, 0, 0) != LUA_OK) {
     LOGW("Lua call of 'start' failed");
   }
+}
+
+void CLuaScript::registerCFunctionsToLua() {
+  registerSingleCFunctionsToLua(log, "log");
+}
+
+void CLuaScript::registerSingleCFunctionsToLua(lua_CFunction fn, const char *label) {
+  lua_pushcfunction(mLuaState, fn);
+  lua_setglobal(mLuaState, label);
 }

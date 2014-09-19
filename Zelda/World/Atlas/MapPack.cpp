@@ -51,14 +51,15 @@ void CMapPack::init(CMapPackParserListener *pListener) {
 
   Ogre::ResourceGroupManager::getSingleton().createResourceGroup(m_sResourceGroup, false);
 #if OGRE_PLATFORM == OGRE_PLATFORM_ANDROID
-  Ogre::ResourceGroupManager::getSingleton().addResourceLocation(m_sPath + m_sName + ".zip", "APKZip", m_sResourceGroup);
+  Ogre::ResourceGroupManager::getSingleton().addResourceLocation(m_sPath + m_sName + ".zip", "APKZip", m_sResourceGroup, true, true);
 #else
-  Ogre::ResourceGroupManager::getSingleton().addResourceLocation(m_sPath + m_sName + ".zip", "Zip", m_sResourceGroup);
+  Ogre::ResourceGroupManager::getSingleton().addResourceLocation(m_sPath + m_sName + ".zip", "Zip", m_sResourceGroup, true, true);
 #endif // OGRE_PLATFORM
   Ogre::StringVectorPtr files(Ogre::ResourceGroupManager::getSingleton().listResourceNames(m_sResourceGroup));
   for (const Ogre::String &r : *files) {
     if (r.find(".lua") != Ogre::String::npos) {
-      Ogre::ResourceGroupManager::getSingleton().declareResource(r, "LuaScript");
+      Ogre::ResourceGroupManager::getSingleton().declareResource(r, "LuaScript", m_sResourceGroup);
+      LOGV("Added lua script at '%s' with name '%s'", r.c_str(), r.c_str());
     }
   }
   Ogre::ResourceGroupManager::getSingleton().initialiseResourceGroup(m_sResourceGroup);

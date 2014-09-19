@@ -115,8 +115,8 @@ public:
 
 protected:
 	// all values scaled in world units!
-	CCharacter(const std::string &sID, CEntity *pParent, const EFriendOrEnemyStates foe, unsigned int uiAnimationCount = ANIM_COUNT);
-	CCharacter(const tinyxml2::XMLElement *pElem, CEntity *pParent, const EFriendOrEnemyStates foe, unsigned int uiAnimationCount = ANIM_COUNT);
+	CCharacter(const std::string &sID, CEntity *pParent, CMap *pMap, const EFriendOrEnemyStates foe, unsigned int uiAnimationCount = ANIM_COUNT);
+	CCharacter(const tinyxml2::XMLElement *pElem, CEntity *pParent, CMap *pMap, const EFriendOrEnemyStates foe, unsigned int uiAnimationCount = ANIM_COUNT);
 
 public:
 	virtual ~CCharacter();
