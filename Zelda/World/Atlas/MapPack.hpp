@@ -60,6 +60,7 @@ public:
   const Ogre::Vector2 &getGlobalSize() const {return m_vGlobalSize;}
 
   const std::string &getSceneFile() const {return m_sSceneFile;}
+  const XMLResources::CManager &getLanguageManager() const {return mLanguageManager;}
 
 private:
   void parseXMLFile();

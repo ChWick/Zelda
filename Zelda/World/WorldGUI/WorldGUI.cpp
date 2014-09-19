@@ -24,6 +24,7 @@
 #include "../../Common/GUI/GUIDirectionInput.hpp"
 #include "WorldGUISimpleTouchButtons.hpp"
 #include "WorldGUIItemViewer.hpp"
+#include "../../GUIComponents/GUITextBox.hpp"
 
 CWorldGUI::CWorldGUI(CEntity *pParentEntity)
   : CGUIOverlay("world_gui", pParentEntity, CGUIManager::getSingleton().getRoot(),
@@ -40,6 +41,7 @@ CWorldGUI::CWorldGUI(CEntity *pParentEntity)
   new CWorldGUISimpleTouchButton("interact", this, m_pRoot, STB_INTERACT, m_pRoot->getPixelSize().d_width * 0.14);
   new CWorldGUISimpleTouchButton("run", this, m_pRoot, STB_RUN, m_pRoot->getPixelSize().d_width * 0.14);
   new CWorldGUISimpleTouchButton("sword", this, m_pRoot, STB_SWORD, m_pRoot->getPixelSize().d_width * 0.14);
+  new CGUITextBox("text_box", this, m_pRoot);
 }
 CWorldGUI::~CWorldGUI() {
   CGUIManager::getSingleton().removeGUIOverlay(this);
