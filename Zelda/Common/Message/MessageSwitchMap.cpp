@@ -23,7 +23,7 @@
 using namespace XMLHelper;
 
 CMessageSwitchMap::CMessageSwitchMap(const tinyxml2::XMLElement *pElem)
-  : CMessage(pElem),
+  : CMessage(MSG_SWITCH_MAP, pElem),
     m_sMap(Attribute(pElem, "map")),
     m_eStatus(INJECT),
     m_pFromMap(nullptr),

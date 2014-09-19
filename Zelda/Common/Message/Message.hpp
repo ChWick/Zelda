@@ -31,7 +31,7 @@ protected:
   const unsigned int m_Type;
 
 public:
-  CMessage(const tinyxml2::XMLElement *pElement);
+  CMessage(unsigned int type, const tinyxml2::XMLElement *pElement);
   CMessage(unsigned int type);
   virtual ~CMessage();
 

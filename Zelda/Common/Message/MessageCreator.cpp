@@ -21,13 +21,31 @@
 #include "MessageTypes.hpp"
 #include "../Util/XMLHelper.hpp"
 #include <OgreException.h>
+#include "../Util/Assert.hpp"
 
 #include "MessageSwitchMap.hpp"
 
 using namespace XMLHelper;
 
-CMessage *createMessage(const tinyxml2::XMLElement *pElem) {
-  unsigned int type(MESSAGE_TYPES_MAP.parseString(Attribute(pElem, "message_type")));
+template <> CMessageCreator* Ogre::Singleton<CMessageCreator>::msSingleton = 0;
+
+CMessageCreator &CMessageCreator::getSingleton() {
+  ASSERT(msSingleton);
+  return *msSingleton;
+}
+CMessageCreator *CMessageCreator::getSingletonPtr() {
+  return msSingleton;
+}
+
+CMessageCreator::CMessageCreator()
+  : m_sMessageTypeAttributeName("message_type") {
+}
+
+CMessageCreator::~CMessageCreator() {
+}
+
+CMessage *CMessageCreator::createMessage(const tinyxml2::XMLElement *pElem) {
+  unsigned int type(MESSAGE_TYPES_MAP.parseString(Attribute(pElem, m_sMessageTypeAttributeName.c_str())));
 
   switch (type) {
   case MSG_SWITCH_MAP:

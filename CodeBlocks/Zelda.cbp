@@ -200,6 +200,8 @@
 		<Unit filename="../Zelda/GUIComponents/GUICounter.hpp" />
 		<Unit filename="../Zelda/GUIComponents/GUIHeartsDisplay.cpp" />
 		<Unit filename="../Zelda/GUIComponents/GUIHeartsDisplay.hpp" />
+		<Unit filename="../Zelda/GUIComponents/GUITextBox.cpp" />
+		<Unit filename="../Zelda/GUIComponents/GUITextBox.hpp" />
 		<Unit filename="../Zelda/MainMenu/MainMenu.cpp" />
 		<Unit filename="../Zelda/MainMenu/MainMenu.hpp" />
 		<Unit filename="../Zelda/MainMenu/SlotSelector.cpp" />
@@ -265,6 +267,10 @@
 		<Unit filename="../Zelda/World/Items/ItemTypes.hpp" />
 		<Unit filename="../Zelda/World/Messages/MessageItem.cpp" />
 		<Unit filename="../Zelda/World/Messages/MessageItem.hpp" />
+		<Unit filename="../Zelda/World/Messages/MessageShowText.cpp" />
+		<Unit filename="../Zelda/World/Messages/MessageShowText.hpp" />
+		<Unit filename="../Zelda/World/Messages/UserMessageCreator.cpp" />
+		<Unit filename="../Zelda/World/Messages/UserMessageCreator.hpp" />
 		<Unit filename="../Zelda/World/Messages/UserMessageTypes.cpp" />
 		<Unit filename="../Zelda/World/Messages/UserMessageTypes.hpp" />
 		<Unit filename="../Zelda/World/Objects/Object.cpp" />

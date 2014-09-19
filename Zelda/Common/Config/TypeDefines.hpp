@@ -32,4 +32,8 @@
 #define ENTITY_HEADER "Common/GameLogic/Entity.hpp"
 #define ENTITY CEntity
 
+// The message creator
+#define MESSAGE_CREATOR_HEADER "World/Messages/UserMessageCreator.hpp"
+#define MESSAGE_CREATOR CUserMessageCreator
+
 #endif // _TYPE_DEFINES_HPP_

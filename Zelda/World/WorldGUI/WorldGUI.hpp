@@ -30,5 +30,8 @@ private:
 public:
   CWorldGUI(CEntity *pParentEntity);
   ~CWorldGUI();
+
+protected:
+  void handleMessage(const CMessage &message);
 };
 #endif // _WORLD_GUI_HPP_

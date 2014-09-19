@@ -33,6 +33,7 @@
 #include "Log.hpp"
 #include "PauseManager/PauseManager.hpp"
 #include "Lua/LuaScriptManager.hpp"
+#include MESSAGE_CREATOR_HEADER
 
 #if OGRE_PLATFORM == OGRE_PLATFORM_ANDROID
 #include "Android/Android.hpp"
@@ -86,6 +87,7 @@ CGame::~CGame(void) {
   if (CGameInputManager::getSingletonPtr()) {delete CGameInputManager::getSingletonPtr();}
   if (CInputListenerManager::getSingletonPtr()) {delete CInputListenerManager::getSingletonPtr();}
   if (CPauseManager::getSingletonPtr()) {delete CPauseManager::getSingletonPtr();}
+  if (MESSAGE_CREATOR::getSingletonPtr()) {delete MESSAGE_CREATOR::getSingletonPtr();}
 
   if (CMessageHandler::getSingletonPtr()) {
     delete CMessageHandler::getSingletonPtr();
@@ -552,6 +554,8 @@ void CGame::createScene() {
   CMessageHandler::getSingleton().addInjector(this);
   LOGI("    PauseManager");
   new CPauseManager();
+  LOGI("    MessageCreator");
+  new MESSAGE_CREATOR();
   Ogre::LogManager::getSingletonPtr()->logMessage("    GameSate ");
   m_pGameStateManager = new CGameStateManager();
   Ogre::LogManager::getSingletonPtr()->logMessage("    GUIManager ");

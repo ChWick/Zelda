@@ -41,6 +41,8 @@ CGameStateManager::CGameStateManager()
   m_eNextGameState(GS_COUNT),
   m_bForce(true),
   m_bAdShown(false) {
+  // add root as message injector, since entities are not added automatically!
+  CMessageHandler::getSingleton().addInjector(this);
 }
 CGameStateManager::~CGameStateManager() {
 }

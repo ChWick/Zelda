@@ -17,17 +17,21 @@
  * Zelda. If not, see http://www.gnu.org/licenses/.
  *****************************************************************************/
 
-#ifndef _MESSAGE_INJECTOR_HPP_
-#define _MESSAGE_INJECTOR_HPP_
+#ifndef _MESSAGE_SHOW_TEXT_HPP_
+#define _MESSAGE_SHOW_TEXT_HPP_
 
-class CMessage;
+#include "../../Common/Message/Message.hpp"
 
-class CMessageInjector {
+
+class CMessageShowText: public CMessage {
 public:
-  CMessageInjector(bool bAutoAddAsInjector = true);
-  virtual ~CMessageInjector();
+protected:
+  const std::string m_sLanguageString;
+public:
+  CMessageShowText(const std::string &sLanguageString);
+  CMessageShowText(const tinyxml2::XMLElement *pElem);
 
-  virtual void sendMessageToAll(const CMessage &message) = 0;
+  const std::string &getLanguageString() const {return m_sLanguageString;}
 };
 
-#endif
+#endif // _MESSAGE_SHOW_TEXT_HPP_

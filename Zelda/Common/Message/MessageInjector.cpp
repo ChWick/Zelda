@@ -1,8 +1,8 @@
 #include "MessageInjector.hpp"
 #include "MessageHandler.hpp"
 
-CMessageInjector::CMessageInjector() {
-  if (CMessageHandler::getSingletonPtr()) {
+CMessageInjector::CMessageInjector(bool bAutoAddAsInjector) {
+  if (bAutoAddAsInjector && CMessageHandler::getSingletonPtr()) {
     CMessageHandler::getSingleton().addInjector(this);
   }
 }

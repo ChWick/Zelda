@@ -20,13 +20,28 @@
 #ifndef _MESSAGE_CREATOR_HPP_
 #define _MESSAGE_CREATOR_HPP_
 
+#include <OgreSingleton.h>
+
 namespace tinyxml2 {
   class XMLElement;
 };
 
 class CMessage;
 
-CMessage *createMessage(const tinyxml2::XMLElement *pElem);
+class CMessageCreator : public Ogre::Singleton<CMessageCreator> {
+protected:
+  const std::string m_sMessageTypeAttributeName;
+public:
+  CMessageCreator();
+  virtual ~CMessageCreator();
+
+  static CMessageCreator &getSingleton();
+  static CMessageCreator *getSingletonPtr();
+
+
+  virtual CMessage *createMessage(const tinyxml2::XMLElement *pElem);
+};
+
 
 #endif // _MESSAGE_CREATOR_HPP_
 

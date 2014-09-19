@@ -42,6 +42,9 @@ void CGUITextBox::update(Ogre::Real tpf) {
         mTextWindow->setText(mTextWindow->getText() + "_");
       }
     }
+    else if (mStatus == QUESTION) {
+      deleteLater();
+    }
   }
 }
 

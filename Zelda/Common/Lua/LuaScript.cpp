@@ -98,6 +98,7 @@ void CLuaScript::start() {
 
 void CLuaScript::registerCFunctionsToLua() {
   registerSingleCFunctionsToLua(log, "log");
+  registerSingleCFunctionsToLua(message, "message");
 }
 
 void CLuaScript::registerSingleCFunctionsToLua(lua_CFunction fn, const char *label) {

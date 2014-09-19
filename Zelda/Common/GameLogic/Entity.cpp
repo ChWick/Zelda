@@ -33,7 +33,8 @@ using namespace XMLHelper;
 
 
 CEntity::CEntity(const std::string &sID, unsigned int uiType, CEntity *pParent, const std::string &sResourceGroup)
-  : m_sID(sID),
+  : CMessageInjector(false),
+    m_sID(sID),
     m_sResourceGroup(sResourceGroup),
     m_uiType(uiType),
     m_eState(EST_NORMAL),
@@ -44,7 +45,8 @@ CEntity::CEntity(const std::string &sID, unsigned int uiType, CEntity *pParent, 
 }
 
 CEntity::CEntity(const std::string &sID, CEntity *pParent, const std::string &sResourceGroup)
-  : m_sID(sID),
+  : CMessageInjector(false),
+    m_sID(sID),
     m_sResourceGroup(sResourceGroup),
     m_uiType(0),
     m_eState(EST_NORMAL),
@@ -54,7 +56,8 @@ CEntity::CEntity(const std::string &sID, CEntity *pParent, const std::string &sR
   attachTo(pParent);
 }
 CEntity::CEntity(const CEntity &src)
-  : m_sID(src.m_sID),
+  : CMessageInjector(false),
+    m_sID(src.m_sID),
     m_sResourceGroup(src.m_sResourceGroup),
     m_uiType(src.m_uiType),
     m_eState(EST_NORMAL),
@@ -70,7 +73,8 @@ CEntity::CEntity(
 		 CEntity *pParent,
 		 const tinyxml2::XMLElement *pElem,
 		 const std::string &sResourceGroup)
-  : m_sID(Attribute(pElem, "id", m_sID)),
+  : CMessageInjector(false),
+    m_sID(Attribute(pElem, "id", m_sID)),
     m_sResourceGroup(Attribute(pElem, "resource_group", sResourceGroup)),
     m_uiType(IntAttribute(pElem, "type", 0)),
     m_eState(ENTITY_STATE_ID_MAP.parseString(Attribute(pElem, "state", ENTITY_STATE_ID_MAP.toString(EST_NORMAL)))),

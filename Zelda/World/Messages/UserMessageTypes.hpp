@@ -24,6 +24,9 @@
 
 enum EUserMessageTypes {
   MSG_ITEM = MSG_USER,
+  MSG_SHOW_TEXT,
+
+  MSG_USER_COUNT,
 };
 
 class CUserMessageTypesMap : public CMessageTypesMap {
