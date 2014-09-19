@@ -34,7 +34,8 @@ CMapPack::CMapPack(const std::string &path, const std::string &name)
     m_sName(name),
     m_sResourceGroup(name + "_RG"),
     m_bInitialized(false),
-    m_pListener(nullptr) {
+    m_pListener(nullptr),
+    mLanguageManager(name + "_RG", "language/", false) {
 
   LOGV("Created map pack for: '%s%s'", path.c_str(), name.c_str());
 }
@@ -66,6 +67,7 @@ void CMapPack::init(CMapPackParserListener *pListener) {
   Ogre::ResourceGroupManager::getSingleton().loadResourceGroup(m_sResourceGroup);
 
   m_sSceneFile = m_sName + ".scene";
+  mLanguageManager.loadLanguage();
 }
 
 void CMapPack::parse() {

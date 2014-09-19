@@ -24,6 +24,7 @@
 #include <memory>
 #include <OgreVector3.h>
 #include <OgreVector2.h>
+#include "../../Common/XMLResources/Manager.hpp"
 
 class CMapPackParserListener;
 
@@ -41,6 +42,8 @@ private:
 
   Ogre::Vector3 m_vGlobalPosition;
   Ogre::Vector2 m_vGlobalSize;
+
+  XMLResources::CManager mLanguageManager;
 public:
   CMapPack(const std::string &path, const std::string &name);
   ~CMapPack();

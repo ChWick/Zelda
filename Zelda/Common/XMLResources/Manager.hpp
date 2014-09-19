@@ -26,6 +26,7 @@
 #include <OgreException.h>
 #include <OgreResourceGroupManager.h>
 #include <CEGUI/String.h>
+#include "../Log.hpp"
 
 namespace XMLResources {
   class CManager {
@@ -52,7 +53,12 @@ namespace XMLResources {
     void loadLanguage() {
       parse(m_sPrefix + "values/strings.xml");
       if (LANGUAGE_CODE.length() > 0) {
-	parse(m_sPrefix + "values-" + LANGUAGE_CODE + "/strings.xml");
+        try {
+          parse(m_sPrefix + "values-" + LANGUAGE_CODE + "/strings.xml");
+        }
+        catch (const Ogre::Exception &e) {
+          LOGW("Language file not found. Falling back to default language.");
+        }
       }
     }
   private:

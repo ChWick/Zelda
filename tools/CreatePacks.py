@@ -8,9 +8,17 @@ def zipdir(path, zip):
         for file in files:
             zip.write(os.path.join(root, file))
 
-def copyAllOfType(zipf, pattern, outputdir) :
-	for f in glob.glob(pattern) :
-		zipf.write(f, os.path.join(outputdir, ntpath.basename(f)), zipfile.ZIP_DEFLATED)
+def copyAllOfType(zipf, pattern, outputdir, recursive=False) :
+    for f in glob.glob(pattern) :
+        if f.endswith('~') :
+            continue
+
+        zipf.write(f, os.path.join(outputdir, ntpath.basename(f)), zipfile.ZIP_DEFLATED)
+        
+        if recursive :
+            copyAllOfType(zipf, os.path.join(f, "*"), os.path.join(outputdir, ntpath.basename(f)), True)
+
+                
 
 def makeLightWorldZip() :
 	print('Creating light_world.zip')
@@ -88,6 +96,7 @@ def makeMapPack(name, world, files, includeHouse=False) :
 		zipf.write(os.path.join(dataPath, file), file, zipfile.ZIP_DEFLATED)
         # copy scripts
         copyAllOfType(zipf, os.path.join(dataPath, 'scripts/*'), 'scripts')
+        copyAllOfType(zipf, os.path.join(dataPath, 'language/*'), 'language', True)
 	zipf.close()
 	
 
