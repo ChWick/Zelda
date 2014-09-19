@@ -19,10 +19,16 @@
 
 #include "GameInputListener.hpp"
 #include "GameInputManager.hpp"
-CGameInputListener::CGameInputListener(bool bDefaultEnabled)
-  : m_bGameInputListenerEnabled(bDefaultEnabled) {
+CGameInputListener::CGameInputListener(bool bDefaultEnabled, int pauseFlags)
+  : m_bGameInputListenerEnabled(bDefaultEnabled),
+    mGameInputListenerPauseFlags(pauseFlags) {
   CGameInputManager::getSingleton().addInputListener(this);
 }
+
 CGameInputListener::~CGameInputListener() {
   CGameInputManager::getSingleton().removeInputListener(this);
+}
+
+void CGameInputListener::updatePause(int iPauseType, bool bPause) {
+  if (iPauseType & mGameInputListenerPauseFlags) {m_bGameInputListenerEnabled = !bPause;}
 }

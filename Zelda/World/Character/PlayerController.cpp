@@ -27,6 +27,7 @@ using namespace Ogre;
 
 CPlayerController::CPlayerController(SceneManager * scnMgr, const Ogre::Camera *pCamera, CPlayer * ccPlayer)
 	: CPersonController(ccPlayer),
+    CGameInputListener(true, PAUSE_ATLAS_UPDATE),
 		m_pCamera(pCamera) {
     mCCPerson = ccPlayer;
 	mSceneManager = scnMgr;

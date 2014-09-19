@@ -20,13 +20,16 @@
 #ifndef _GAME_INPUT_LISTENER_HPP_
 #define _GAME_INPUT_LISTENER_HPP_
 
+#include "../PauseManager/PauseListener.hpp"
+
 class CGameInputCommand;
 
-class CGameInputListener {
+class CGameInputListener : public CPauseListener {
 private:
   bool m_bGameInputListenerEnabled;
+  int mGameInputListenerPauseFlags;
 public:
-  CGameInputListener(bool bDefaultEnabled = true);
+  CGameInputListener(bool bDefaultEnabled = true, int pauseFlags = 0);
   ~CGameInputListener();
   virtual void receiveInputCommand(const CGameInputCommand &cmd) = 0;
 
@@ -34,6 +37,11 @@ public:
     m_bGameInputListenerEnabled = bEnabled;}
   bool isGameInputListenerEnabled() const {
     return m_bGameInputListenerEnabled;}
+
+  void setGameInputListenerFlags(int iPauseFlags) {mGameInputListenerPauseFlags = iPauseFlags;}
+
+private:
+  void updatePause(int iPauseType, bool bPause);
 };
 
 #endif

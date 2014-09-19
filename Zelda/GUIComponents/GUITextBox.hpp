@@ -22,8 +22,9 @@
 
 #include "../Common/GUI/GUIOverlay.hpp"
 #include "../Common/Input/GameInputListener.hpp"
+#include "../Common/PauseManager/PauseCaller.hpp"
 
-class CGUITextBox : public CGUIOverlay, public CGameInputListener {
+class CGUITextBox : public CGUIOverlay, public CGameInputListener, public CPauseCaller {
 private:
   enum EStatus {
     WAITING,
@@ -48,6 +49,8 @@ public:
   CGUITextBox(const std::string &id,
               CEntity *pParentEntity,
               CEGUI::Window *pParentWindow);
+
+  ~CGUITextBox();
 
   void update(Ogre::Real tpf);
 

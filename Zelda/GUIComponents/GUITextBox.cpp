@@ -17,11 +17,18 @@ CGUITextBox::CGUITextBox(const std::string &id,
     mRowsWritten(0),
     mCursorShown(false),
     mDisplayedRows(0) {
+
+  pause(PAUSE_ALL_WORLD_UPDATE);
+
   mTextWindow = m_pRoot->createChild("OgreTray/StaticText", "text_window");
   mCompleteText = "asdfa asdfasdf asdf asdfasdfa asdf asdf asd fasdfkjsdlf asldkal dsajfkjsf ajdf askfja asf";
   mTextToDisplay = mCompleteText;
 
   onResume();
+}
+
+CGUITextBox::~CGUITextBox() {
+  unpause(PAUSE_ALL);
 }
 
 void CGUITextBox::update(Ogre::Real tpf) {
