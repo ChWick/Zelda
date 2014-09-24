@@ -27,8 +27,10 @@
 class CGUITextBox : public CGUIOverlay, public CGameInputListener, public CPauseCaller {
 private:
   enum EStatus {
+    NONE,
     WAITING,
-    QUESTION,
+    QUESTION_NONE,
+    QUESTION_UNDERSTAND_EVERYTHING,
     REVEAL,
   };
 
@@ -36,6 +38,7 @@ private:
   EStatus mStatus;
   Ogre::Real mTimer;
 
+  CEGUI::String mOriginalText;
   CEGUI::String mCompleteText;
   CEGUI::String mTextToDisplay;
   CEGUI::String mTextToAdd;
@@ -45,10 +48,13 @@ private:
   unsigned int mNextCharacterCounter;
   unsigned int mCurrentLineSize;
   bool mCursorShown;
+  unsigned int mContinueOnCharacterCount;
+  EStatus mStatusAfterWaiting;
 public:
   CGUITextBox(const std::string &id,
               CEntity *pParentEntity,
-              CEGUI::Window *pParentWindow);
+              CEGUI::Window *pParentWindow,
+              const CEGUI::String &unparsedText);
 
   ~CGUITextBox();
 
@@ -60,6 +66,8 @@ private:
   void showNextCharacter();
   int nextWordLength();
   bool lineFull();
+
+  void showQuestionUnderstandEverything();
 
   void onResume();
 

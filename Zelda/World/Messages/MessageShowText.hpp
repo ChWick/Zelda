@@ -21,14 +21,27 @@
 #define _MESSAGE_SHOW_TEXT_HPP_
 
 #include "../../Common/Message/Message.hpp"
+#include "../../Common/Util/EnumIdMap.hpp"
 
 
 class CMessageShowText: public CMessage {
 public:
+  enum EStatus {
+    REQUEST,    //!< when a text box shall be shown
+    FINISHED,   //!< when a text box has closed
+    FINISHED_RESULT_REPEAT, //!< when a text box has closed with a question result: repeat
+    FINISHED_RESULT_CONTINUE, //!< when a text box has closed with a question result: continue
+  };
+  class CStatusIDMap : public CEnumIdMap<EStatus> {
+  public:
+    CStatusIDMap();
+  };
+  const static CStatusIDMap STATUS_ID_MAP;
 protected:
   const std::string m_sLanguageString;
+  const EStatus mStatus;
 public:
-  CMessageShowText(const std::string &sLanguageString);
+  CMessageShowText(const std::string &sLanguageString, EStatus status = REQUEST);
   CMessageShowText(const tinyxml2::XMLElement *pElem);
 
   const std::string &getLanguageString() const {return m_sLanguageString;}

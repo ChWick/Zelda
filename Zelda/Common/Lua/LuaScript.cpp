@@ -88,6 +88,7 @@ size_t CLuaScript::calculateSize() const {
 
 void CLuaScript::start() {
   ASSERT(mLuaState);
+  mThread;
   lua_getglobal(mLuaState, "start");
   //ASSERT(lua_gettop(mLuaState) == 0); // no arguments passed
   ASSERT(lua_isfunction(mLuaState, -1));

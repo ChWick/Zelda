@@ -206,6 +206,8 @@
 		<Unit filename="../Zelda/MainMenu/MainMenu.hpp" />
 		<Unit filename="../Zelda/MainMenu/SlotSelector.cpp" />
 		<Unit filename="../Zelda/MainMenu/SlotSelector.hpp" />
+		<Unit filename="../Zelda/TextConverter.cpp" />
+		<Unit filename="../Zelda/TextConverter.hpp" />
 		<Unit filename="../Zelda/World/Atlas/Atlas.cpp" />
 		<Unit filename="../Zelda/World/Atlas/Atlas.hpp" />
 		<Unit filename="../Zelda/World/Atlas/Map.cpp" />

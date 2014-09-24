@@ -39,6 +39,9 @@ void CTextConverter::convert(CEGUI::String &text) {
     if (id == "name") {
       toReplace = "testName";
     }
+    else if (id == "button_open" || id == "button_attack" || id == "button_lift" || id == "button_map") {
+      toReplace = "unset button";
+    }
     else {
       toReplace = mCurrentMap->getMapPack()->getLanguageManager().getCEGUIString(id.c_str());
     }

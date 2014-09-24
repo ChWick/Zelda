@@ -65,11 +65,12 @@ void CCharacter::exit() {
   destroyPhysics();
 }
 void CCharacter::enterMap(CMap *pMap, const Ogre::Vector3 &vInitPosition) {
-  bool bSwitchMapOnly = m_pMap != nullptr;
+  // switch map only, if map an scene node are existing
+  bool bSwitchMapOnly = m_pMap && m_pSceneNode;
 
   m_pMap = pMap;
 
-  if (!bSwitchMapOnly || !m_pSceneNode) {
+  if (!bSwitchMapOnly) {
     // use atlas scene node
     initBody(m_pMap->getParent()->getSceneNode());
     setupAnimations();

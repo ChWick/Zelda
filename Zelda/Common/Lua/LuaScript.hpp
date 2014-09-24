@@ -3,6 +3,7 @@
 
 #include <OgreResourceManager.h>
 #include <lua.hpp>
+#include <thread>
 
 class CLuaScript;
 
@@ -11,6 +12,7 @@ typedef Ogre::SharedPtr<CLuaScript> CLuaScriptPtr;
 class CLuaScript : public Ogre::Resource
 {
 private:
+  std::thread mThread;
   lua_State *mLuaState;
 protected:
 

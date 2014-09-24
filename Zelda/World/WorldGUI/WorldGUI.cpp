@@ -51,6 +51,7 @@ CWorldGUI::~CWorldGUI() {
 
 void CWorldGUI::handleMessage(const CMessage &message) {
   if (message.getType() == MSG_SHOW_TEXT) {
-    new CGUITextBox("text_box", this, m_pRoot);
+    const CMessageShowText &msg_show_text(dynamic_cast<const CMessageShowText&>(message));
+    new CGUITextBox("text_box", this, m_pRoot, msg_show_text.getLanguageString());
   }
 }
