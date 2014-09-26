@@ -1,6 +1,6 @@
 #include "TextConverter.hpp"
-#include "../Common/Util/Assert.hpp"
-#include "../Common/Message/MessageSwitchMap.hpp"
+#include "Common/Util/Assert.hpp"
+#include "Common/Message/MessageSwitchMap.hpp"
 #include "World/Messages/UserMessageTypes.hpp"
 #include "World/Atlas/Map.hpp"
 #include "World/Atlas/MapPack.hpp"

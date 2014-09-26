@@ -2,7 +2,7 @@
 #define _TEXT_CONVERTER_HPP_
 
 #include <OgreSingleton.h>
-#include "../Common/Message/MessageInjector.hpp"
+#include "Common/Message/MessageInjector.hpp"
 #include <CEGUI/String.h>
 
 class CMap;
