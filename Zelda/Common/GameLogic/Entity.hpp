@@ -29,6 +29,7 @@
 #include "OutputStyle.hpp"
 #include "EntityStates.hpp"
 #include <OgreResourceGroupManager.h>
+#include <mutex>
 
 namespace events {
   class CEvent;
@@ -45,6 +46,7 @@ class CMessage;
 //! Class for an arbitrary entity
 class CEntity : public CMessageInjector {
 protected:
+  std::mutex mMutex;                          //!< mutex of the entity, when data is changed/accessed
   std::string m_sID;                          //!< id of the entity
   std::string m_sResourceGroup;               //!< in which resource group to search for entities resources
   unsigned int m_uiType;                      //!< one can set a type
@@ -123,6 +125,8 @@ public:
   // =============
 
   // general
+  std::mutex &getMutex() {return mMutex;}
+
   const std::string &getID() const {return m_sID;}
   std::string &getID() {return m_sID;}
   void setID(const std::string &sID) {m_sID = sID;}

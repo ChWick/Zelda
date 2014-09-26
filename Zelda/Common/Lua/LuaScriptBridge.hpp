@@ -11,4 +11,7 @@ int message(lua_State *l);
 //! c function call by lua to access entities
 int entity(lua_State *l);
 
+//! c function call by lua to create a text message
+int textMessage(lua_State *l);
+
 #endif // _LUA_SCRIPT_BRIDGE_HPP_

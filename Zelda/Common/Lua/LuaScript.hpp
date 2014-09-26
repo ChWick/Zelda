@@ -4,6 +4,7 @@
 #include <OgreResourceManager.h>
 #include <lua.hpp>
 #include <thread>
+#include <mutex>
 
 class CLuaScript;
 
@@ -13,6 +14,7 @@ class CLuaScript : public Ogre::Resource
 {
 private:
   std::thread mThread;
+  std::mutex mLuaStateMutex;
   lua_State *mLuaState;
 protected:
 
@@ -32,6 +34,8 @@ public:
   virtual CLuaScriptPtr clone(const Ogre::String& newName, bool changeGroup = false, const Ogre::String& newGroup = Ogre::StringUtil::BLANK);
 
   void start();
+  std::mutex &getLuaStateMutex() {return mLuaStateMutex;}
+  lua_State *getLuaState() {return mLuaState;}
 
 private:
   void registerCFunctionsToLua();

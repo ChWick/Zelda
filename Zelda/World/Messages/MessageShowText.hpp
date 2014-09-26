@@ -22,6 +22,7 @@
 
 #include "../../Common/Message/Message.hpp"
 #include "../../Common/Util/EnumIdMap.hpp"
+#include "../../GUIComponents/GUITextBox.hpp"
 
 
 class CMessageShowText: public CMessage {
@@ -36,15 +37,19 @@ public:
   public:
     CStatusIDMap();
   };
-  const static CStatusIDMap STATUS_ID_MAP;
 protected:
   const std::string m_sLanguageString;
   const EStatus mStatus;
+  std::shared_ptr<CGUITextBox::SResult> mResult;
 public:
-  CMessageShowText(const std::string &sLanguageString, EStatus status = REQUEST);
-  CMessageShowText(const tinyxml2::XMLElement *pElem);
+  CMessageShowText(const std::string &sLanguageString, std::shared_ptr<CGUITextBox::SResult> result, EStatus status = REQUEST);
+  CMessageShowText(const tinyxml2::XMLElement *pElem, std::shared_ptr<CGUITextBox::SResult> result);
 
   const std::string &getLanguageString() const {return m_sLanguageString;}
+  std::shared_ptr<CGUITextBox::SResult> getResult() const {return mResult;}
+  EStatus getStatus() const {return mStatus;}
 };
+
+extern const CMessageShowText::CStatusIDMap STATUS_ID_MAP;
 
 #endif // _MESSAGE_SHOW_TEXT_HPP_

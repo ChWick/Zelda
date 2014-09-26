@@ -24,3 +24,8 @@ void usleep(unsigned long us) {
   return Sleep(static_cast<DWORD>(us / 1000));
 }
 #endif
+
+
+void msleep(unsigned long ms) {
+  usleep(ms * 1000);
+}

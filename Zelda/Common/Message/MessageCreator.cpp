@@ -44,7 +44,7 @@ CMessageCreator::CMessageCreator()
 CMessageCreator::~CMessageCreator() {
 }
 
-CMessage *CMessageCreator::createMessage(const tinyxml2::XMLElement *pElem) {
+CMessage *CMessageCreator::createMessage(const tinyxml2::XMLElement *pElem, const Ogre::Any &any) {
   unsigned int type(MESSAGE_TYPES_MAP.parseString(Attribute(pElem, m_sMessageTypeAttributeName.c_str())));
 
   switch (type) {

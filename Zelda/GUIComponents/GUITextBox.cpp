@@ -13,8 +13,10 @@ const Ogre::Real TEXT_CURSOR_BLINK_TIME = 0.5;
 CGUITextBox::CGUITextBox(const std::string &id,
                           CEntity *pParentEntity,
                           CEGUI::Window *pParentWindow,
-                          const CEGUI::String &unparsedText)
+                          const CEGUI::String &unparsedText,
+                          std::shared_ptr<CGUITextBox::SResult> result)
   : CGUIOverlay(id, pParentEntity, pParentWindow, pParentWindow->createChild("DefaultWindow", id + "_root")),
+    mResult(result),
     mCurrentRowToWrite(0),
     mTimer(0),
     mNextCharacterCounter(0),
@@ -22,7 +24,7 @@ CGUITextBox::CGUITextBox(const std::string &id,
     mRowsWritten(0),
     mCursorShown(false),
     mDisplayedRows(0),
-    mStatusAfterWaiting(NONE) {
+    mStatus(NONE) {
 
   pause(PAUSE_ALL_WORLD_UPDATE);
 
@@ -38,7 +40,7 @@ CGUITextBox::CGUITextBox(const std::string &id,
 
 CGUITextBox::~CGUITextBox() {
   unpause(PAUSE_ALL);
-  CMessageHandler::getSingleton().addMessage(new CMessageShowText("", CMessageShowText::FINISHED));
+  CMessageHandler::getSingleton().addMessage(new CMessageShowText("", mResult, CMessageShowText::FINISHED));
 }
 
 void CGUITextBox::update(Ogre::Real tpf) {
@@ -59,10 +61,6 @@ void CGUITextBox::update(Ogre::Real tpf) {
         mTextWindow->setText(mTextWindow->getText() + "_");
       }
     }
-    else if (mStatus == QUESTION_UNDERSTAND_EVERYTHING) {
-      mTimer = TEXT_REVEAL_TIME;
-      showNextCharacter();
-    }
   }
 }
 
@@ -75,7 +73,7 @@ void CGUITextBox::stripCursor() {
 void CGUITextBox::showNextCharacter() {
   if (mNextCharacterCounter >= mTextToDisplay.size()) {
     if (mStatus == REVEAL)
-      mStatus = WAITING;
+      mStatus = QUESTION;
 
     return;
   }
@@ -109,16 +107,6 @@ void CGUITextBox::showNextCharacter() {
     mTextWindow->setText(mTextWindow->getText() + characterToAdd);
     showNextCharacter();
   }
-  else if (characterToAdd == '#') {
-    int endPos = mTextToDisplay.find(" ", mNextCharacterCounter);
-    ASSERT(endPos != CEGUI::String::npos);
-    CEGUI::String command(mTextToDisplay.substr(mNextCharacterCounter, endPos - mNextCharacterCounter));
-    mNextCharacterCounter = endPos;
-    std::string test(command.c_str());
-    if (command == "understand_everything") {
-      showQuestionUnderstandEverything();
-    }
-  }
   else {
     mTextWindow->setText(mTextWindow->getText() + characterToAdd);
   }
@@ -146,32 +134,16 @@ bool CGUITextBox::lineFull() {
   return mCurrentLineSize + nextWordLength() > TEXT_BOX_CHARACTERS_PER_LINE;
 }
 
-void CGUITextBox::showQuestionUnderstandEverything() {
-  mContinueOnCharacterCount = mNextCharacterCounter;
-  mStatus = WAITING;
-  mStatusAfterWaiting = QUESTION_UNDERSTAND_EVERYTHING;
-  mTextToDisplay = "Question\nyes []\nno []";
-  mRowsWritten = 0;
-  mNextCharacterCounter = 0;
-  mCurrentLineSize = 0;
-}
-
 void CGUITextBox::onResume() {
-  if (mStatusAfterWaiting != NONE) {
-    if (mStatusAfterWaiting == QUESTION_UNDERSTAND_EVERYTHING) {
-      mTextWindow->setText("");
-    }
-    mStatus = mStatusAfterWaiting;
-    mStatusAfterWaiting = NONE;
-  }
-  else {
-    mStatus = REVEAL;
-  }
-
-  if (mStatus == QUESTION_NONE) {
+  if (mStatus == QUESTION) {
     deleteLater();
+    mResult->mMutex.lock();
+    mResult->mResult = RESULT_CONTINUE;
+    mResult->mMutex.unlock();
     return;
   }
+
+  mStatus = REVEAL;
 
   stripCursor();
 
@@ -185,7 +157,7 @@ void CGUITextBox::onResume() {
 }
 
 void CGUITextBox::receiveInputCommand(const CGameInputCommand &cmd) {
-  if (mStatus == WAITING || mStatus == QUESTION_NONE) {
+  if (mStatus == WAITING || mStatus == QUESTION) {
     if (cmd.getType() == GIC_INTERACT || cmd.getType() == GIC_SWORD) {
       if (cmd.getState() == GIS_PRESSED) {
         onResume();

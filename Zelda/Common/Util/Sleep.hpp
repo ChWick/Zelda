@@ -29,4 +29,6 @@ void usleep(unsigned long us);
 #include <unistd.h>
 #endif
 
+void msleep(unsigned long ms);
+
 #endif

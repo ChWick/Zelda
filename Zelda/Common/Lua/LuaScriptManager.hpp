@@ -19,6 +19,7 @@ public:
    virtual ~CLuaScriptManager();
 
    virtual CLuaScriptPtr load(const Ogre::String &name, const Ogre::String &group);
+   CLuaScriptPtr getByLuaState(lua_State *state);
 
    static CLuaScriptManager &getSingleton();
    static CLuaScriptManager *getSingletonPtr();

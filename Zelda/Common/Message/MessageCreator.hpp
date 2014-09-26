@@ -21,6 +21,7 @@
 #define _MESSAGE_CREATOR_HPP_
 
 #include <OgreSingleton.h>
+#include <OgreAny.h>
 
 namespace tinyxml2 {
   class XMLElement;
@@ -39,7 +40,7 @@ public:
   static CMessageCreator *getSingletonPtr();
 
 
-  virtual CMessage *createMessage(const tinyxml2::XMLElement *pElem);
+  virtual CMessage *createMessage(const tinyxml2::XMLElement *pElem, const Ogre::Any &any = Ogre::Any());
 };
 
 

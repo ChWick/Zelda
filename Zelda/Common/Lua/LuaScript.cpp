@@ -76,9 +76,18 @@ void CLuaScript::unloadImpl() {
   /* If you were storing a pointer to an object, then you would check the pointer here,
   and if it is not NULL, you would destruct the object and set its pointer to NULL again.
   */
+  mLuaStateMutex.lock();
   if (mLuaState) {
-    lua_close(mLuaState);
+    lua_State *buffer = mLuaState;
     mLuaState = nullptr;
+    mLuaStateMutex.unlock();
+    if (mThread.joinable()) {
+      mThread.join(); // w8 for finished
+    }
+    lua_close(buffer);
+  }
+  else {
+    mLuaStateMutex.unlock();
   }
 }
 
@@ -86,20 +95,29 @@ size_t CLuaScript::calculateSize() const {
   return sizeof(mLuaState); // correct would be to compute the total size of the action lua state
 }
 
-void CLuaScript::start() {
-  ASSERT(mLuaState);
-  mThread;
-  lua_getglobal(mLuaState, "start");
+void startLuaScriptThread(lua_State *pLuaState, CLuaScript *script) {
+  std::mutex &luaStateMutex(script->getLuaStateMutex());
+  luaStateMutex.lock();
+  lua_getglobal(pLuaState, "start");
   //ASSERT(lua_gettop(mLuaState) == 0); // no arguments passed
-  ASSERT(lua_isfunction(mLuaState, -1));
-  if (lua_pcall(mLuaState, 0, 0, 0) != LUA_OK) {
+  ASSERT(lua_isfunction(pLuaState, -1));
+  luaStateMutex.unlock();
+
+  if (lua_pcall(pLuaState, 0, 0, 0) != LUA_OK) {
     LOGW("Lua call of 'start' failed");
   }
+}
+
+void CLuaScript::start() {
+  ASSERT(mLuaState);
+  mThread = std::thread(startLuaScriptThread, mLuaState, this);
+  //startLuaScriptThread(mLuaState, this);
 }
 
 void CLuaScript::registerCFunctionsToLua() {
   registerSingleCFunctionsToLua(log, "log");
   registerSingleCFunctionsToLua(message, "message");
+  registerSingleCFunctionsToLua(textMessage, "textMessage");
 }
 
 void CLuaScript::registerSingleCFunctionsToLua(lua_CFunction fn, const char *label) {

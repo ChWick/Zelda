@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="block_text_1">What're you doing up this late, kid? #understand_everything You can stay up when you're grown up! Now go home!</string>
+  <string name="block_text_1">What're you doing up this late, kid? You can stay up when you're grown up! Now go home!</string>
   <string name="block_text_2">I see you brought a map so you don't get lost. (Press the ${button_map} Button to see your map).</string>
   <string name="block_text_3">You look strong for a kid. How much can you lift? (Press the ${button_lift} Button while touching a thing to lift it.)</string>
   <string name="block_text_4">I'll bet you can't wait until you are old enough to use a sword! (Press the ${button_attack} to use your sword when u get it.)</string>

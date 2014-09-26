@@ -25,15 +25,25 @@
 #include "../Common/PauseManager/PauseCaller.hpp"
 
 class CGUITextBox : public CGUIOverlay, public CGameInputListener, public CPauseCaller {
-private:
+public:
   enum EStatus {
     NONE,
     WAITING,
-    QUESTION_NONE,
-    QUESTION_UNDERSTAND_EVERYTHING,
+    QUESTION,
     REVEAL,
   };
+  enum EResultTypes {
+    RESULT_NONE = 0,
+    RESULT_REPEAT,
+    RESULT_CONTINUE,
+  };
+  struct SResult {
+    EResultTypes mResult;
+    std::mutex mMutex;
 
+  };
+private:
+  std::shared_ptr<CGUITextBox::SResult> mResult;
   CEGUI::Window *mTextWindow;
   EStatus mStatus;
   Ogre::Real mTimer;
@@ -48,13 +58,12 @@ private:
   unsigned int mNextCharacterCounter;
   unsigned int mCurrentLineSize;
   bool mCursorShown;
-  unsigned int mContinueOnCharacterCount;
-  EStatus mStatusAfterWaiting;
 public:
   CGUITextBox(const std::string &id,
               CEntity *pParentEntity,
               CEGUI::Window *pParentWindow,
-              const CEGUI::String &unparsedText);
+              const CEGUI::String &unparsedText,
+              std::shared_ptr<CGUITextBox::SResult> result);
 
   ~CGUITextBox();
 
@@ -66,8 +75,6 @@ private:
   void showNextCharacter();
   int nextWordLength();
   bool lineFull();
-
-  void showQuestionUnderstandEverything();
 
   void onResume();
 
