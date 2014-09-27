@@ -68,3 +68,19 @@ material water : light_world_soil_alpha {
 	
 }
 
+material inner_house
+{
+	receive_shadows on
+
+	technique
+	{
+		pass
+		{
+			texture_unit
+			{
+				texture inner_house.png
+			}
+		}
+	}
+		   
+}

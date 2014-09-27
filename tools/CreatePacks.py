@@ -25,11 +25,12 @@ def makeLightWorldZip() :
 
 	zipf = zipfile.ZipFile('../packs/light_world.zip', 'w');
 
-	zipf.write('../packs/light_world/textures/tiles.png', 'textures/tiles.png', zipfile.ZIP_DEFLATED)
-	zipf.write('../packs/light_world/textures/house.png', 'textures/house.png', zipfile.ZIP_DEFLATED)
-	zipf.write('../packs/light_world/materials/light_world.material', 'materials/light_world.material', zipfile.ZIP_DEFLATED)
+        # local resources
+        copyAllOfType(zipf, '../packs/light_world/textures/*', 'textures')
+        copyAllOfType(zipf, '../packs/light_world/materials/*', 'materials')
+        copyAllOfType(zipf, '../packs/light_world/meshes/*', 'meshes')
 
-
+        # other mesh fiels
 	zipf.write('../maps/bush/GreenBush.mesh', 'meshes/GreenBush.mesh', zipfile.ZIP_DEFLATED)
 	zipf.write('../maps/fence/fence_stake.mesh', 'meshes/fence_stake.mesh', zipfile.ZIP_DEFLATED)
 	zipf.write('../maps/fence/fence_plank.mesh', 'meshes/fence_plank.mesh', zipfile.ZIP_DEFLATED)
@@ -108,6 +109,9 @@ if __name__ == '__main__':
     makeGameZip()
     makeSdkTrays()
 
-    makeMapPack('link_house', 'LightWorld', ['physics_border_top.mesh', 'physics_floor.mesh', 'physics_floor_top.mesh', 'wall_bot_right.mesh', 'wall_bot.mesh', 'wall_to_water.mesh', 'house_red_roof.mesh', 'house_roof_border.mesh', 'house_wall.mesh', 'water.mesh'], includeHouse=True)
-    makeMapPack('link_house_left', 'LightWorld', ['physics_floor.mesh', 'physics_floor_top.mesh', 'physics_floor_top_wall.mesh', 'physics_wall_bot.mesh'])
+    lightWorld = 'LightWorld'
+
+    makeMapPack('link_house', lightWorld, ['physics_border_top.mesh', 'physics_floor.mesh', 'physics_floor_top.mesh', 'wall_bot_right.mesh', 'wall_bot.mesh', 'wall_to_water.mesh', 'house_red_roof.mesh', 'house_roof_border.mesh', 'house_wall.mesh', 'water.mesh'], includeHouse=True)
+    makeMapPack('link_house_left', lightWorld, ['physics_floor.mesh', 'physics_floor_top.mesh', 'physics_floor_top_wall.mesh', 'physics_wall_bot.mesh'])
+    makeMapPack('inner_house_link', lightWorld, ['physics_floor.mesh', 'physics_wall.mesh', 'vision_plane.mesh'])
 
