@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map scene="inner_house_link.scene" global_position="0 0 0" global_size="3.2 3.2">
-  <region id="bottom_margin" position="0 0 1.6" size="1.6 1 0.01" shape="box">
+  <region id="bottom_margin" position="0 0 0.45" size="1.6 1 0.01" shape="box">
     <event repeat="infinite">
       <emitter type="collision" id="player"/>
       <action type="message" message_type="switch_map" map="link_house"/>

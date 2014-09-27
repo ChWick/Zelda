@@ -64,7 +64,7 @@ CAtlas::CAtlas(CEntity *pParent, Ogre::SceneNode *pRootSceneNode)
   m_pCameraPerspective = new CAerialCameraPerspective(m_pWorldCamera, m_pPlayer);
 
   LOGV(" - Creating initial map");
-  m_pCurrentMap = new CMap(this, CMapPackPtr(new CMapPack(CFileManager::getResourcePath("maps/Atlases/LightWorld/"), "link_house_left")), m_pSceneNode, m_pPlayer);
+  m_pCurrentMap = new CMap(this, CMapPackPtr(new CMapPack(CFileManager::getResourcePath("maps/Atlases/LightWorld/"), "inner_house_link")), m_pSceneNode, m_pPlayer);
   m_pPlayer->enterMap(m_pCurrentMap, Ogre::Vector3(0, 2, 0));
   m_pCurrentMap->start();
 
