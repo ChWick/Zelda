@@ -7,11 +7,11 @@ material AlphaFadeMaterial
       scene_blend alpha_blend
       depth_check off
 
-      vertex_program_ref ellipse_fade_vs_unified
+      vertex_program_ref alpha_fade_vs_unified
       {
       }
 
-      fragment_program_ref ellipse_fade_ps_unified
+      fragment_program_ref alpha_fade_ps_unified
       {
       }
     }

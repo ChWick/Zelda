@@ -1,0 +1,53 @@
+vertex_program alpha_fade_vs_hlsl hlsl {
+	source alpha_fade.hlsl
+	entry_point main_vp
+}
+
+vertex_program alpha_fade_vs_glsl glsl {
+	source alpha_fade_vs.glsl
+}
+
+vertex_program alpha_fade_vs_glsles glsles {
+	source alpha_fade_vs.glsles
+}
+
+fragment_program alpha_fade_ps_hlsl hlsl {
+	source alpha_fade.hlsl
+	entry_point main_fp
+}
+
+fragment_program alpha_fade_ps_glsl glsl {
+	source alpha_fade_ps.glsl
+}
+
+fragment_program alpha_fade_ps_glsles glsles {
+	source alpha_fade_ps.glsles
+}
+
+//------------------------
+//Unified Definitions
+//------------------------
+
+vertex_program alpha_fade_vs_unified unified
+{
+	delegate alpha_fade_vs_glsl
+	delegate alpha_fade_vs_glsles
+	delegate alpha_fade_vs_hlsl
+
+	default_params
+	{
+	}
+}
+
+fragment_program alpha_fade_ps_unified unified
+{
+	delegate alpha_fade_ps_glsl
+	delegate alpha_fade_ps_glsles
+	delegate alpha_fade_ps_hlsl
+
+	default_params
+	{
+		param_named	progress 	float	0.5
+		param_named	offset		float2	0	0
+	}
+}
