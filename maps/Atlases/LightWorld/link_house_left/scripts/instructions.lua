@@ -11,11 +11,7 @@ function start()
     blockStartMessage = 1
   end
 
-  status = 1	
   chatText = "${block_text_" .. tostring(blockStartMessage) .. "}"
-  res = textMessage(makeXmlMessage(chatText))
-  if (res == 2) then
-     res = textMessage(makeXmlMessage(chatText))
-  end
-     
+  textMessage(makeXmlMessage(chatText))
+       
 end

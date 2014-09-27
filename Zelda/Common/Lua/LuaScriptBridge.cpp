@@ -15,15 +15,17 @@ using namespace tinyxml2;
 #define LUA_BRIDGE_START                                                                      \
   CLuaScriptPtr luaScript(CLuaScriptManager::getSingleton().getByLuaState(l));                \
   std::mutex &luaStateMutex(luaScript->getLuaStateMutex());                                   \
-  luaStateMutex.lock();                                                                       \
-  if (luaScript->getLuaState() == nullptr) {return -1;}                                       \
-  luaStateMutex.unlock();
+  {                                                                                           \
+    std::lock_guard<std::mutex> lock(luaStateMutex);                                          \
+    if (luaScript->getLuaState() == nullptr) {return -1;}                                     \
+  }
 
 #define LUA_WAIT(t)                                                                           \
   msleep(t);                                                                                  \
-  luaStateMutex.lock();                                                                       \
-  if (luaScript->getLuaState() == nullptr) {return -1;}                                       \
-  luaStateMutex.unlock();
+  {                                                                                           \
+    std::lock_guard<std::mutex> lock(luaStateMutex);                                          \
+    if (luaScript->getLuaState() == nullptr) {return -1;}                                     \
+  }
 
 
 int log(lua_State *l) {

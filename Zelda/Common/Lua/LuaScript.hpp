@@ -16,6 +16,7 @@ private:
   std::thread mThread;
   std::mutex mLuaStateMutex;
   lua_State *mLuaState;
+  bool mStarted;
 protected:
 
   // must implement these from the Ogre::Resource interface
@@ -36,6 +37,8 @@ public:
   void start();
   std::mutex &getLuaStateMutex() {return mLuaStateMutex;}
   lua_State *getLuaState() {return mLuaState;}
+
+  void setStarted(bool b) {mStarted = b;}
 
 private:
   void registerCFunctionsToLua();

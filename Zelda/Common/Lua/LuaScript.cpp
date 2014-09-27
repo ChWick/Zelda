@@ -9,7 +9,8 @@ CLuaScript::CLuaScript(Ogre::ResourceManager* creator, const Ogre::String &name,
                  Ogre::ResourceHandle handle, const Ogre::String &group, bool isManual,
                  Ogre::ManualResourceLoader *loader)
   : Ogre::Resource(creator, name, handle, group, isManual, loader),
-    mLuaState(nullptr)
+    mLuaState(nullptr),
+    mStarted(false)
 {
   /* If you were storing a pointer to an object, then you would set that pointer to NULL here.
   */
@@ -70,6 +71,8 @@ void CLuaScript::loadImpl() {
   }
 
   registerCFunctionsToLua();
+
+  mStarted = false;
 }
 
 void CLuaScript::unloadImpl() {
@@ -81,7 +84,8 @@ void CLuaScript::unloadImpl() {
     lua_State *buffer = mLuaState;
     mLuaState = nullptr;
     mLuaStateMutex.unlock();
-    if (mThread.joinable()) {
+    if (mStarted) {
+      mStarted = false;
       mThread.join(); // w8 for finished
     }
     lua_close(buffer);
@@ -89,6 +93,7 @@ void CLuaScript::unloadImpl() {
   else {
     mLuaStateMutex.unlock();
   }
+
 }
 
 size_t CLuaScript::calculateSize() const {
@@ -98,6 +103,7 @@ size_t CLuaScript::calculateSize() const {
 void startLuaScriptThread(lua_State *pLuaState, CLuaScript *script) {
   std::mutex &luaStateMutex(script->getLuaStateMutex());
   luaStateMutex.lock();
+  script->setStarted(true);
   lua_getglobal(pLuaState, "start");
   //ASSERT(lua_gettop(mLuaState) == 0); // no arguments passed
   ASSERT(lua_isfunction(pLuaState, -1));
@@ -106,10 +112,23 @@ void startLuaScriptThread(lua_State *pLuaState, CLuaScript *script) {
   if (lua_pcall(pLuaState, 0, 0, 0) != LUA_OK) {
     LOGW("Lua call of 'start' failed");
   }
+
+  luaStateMutex.lock();
+  script->setStarted(false);
+  luaStateMutex.unlock();
 }
 
 void CLuaScript::start() {
+  std::lock_guard<std::mutex> lock(mLuaStateMutex);
+
+  if (mStarted) {
+    LOGW("Lua script already running");
+    return;
+  }
   ASSERT(mLuaState);
+  if (mThread.joinable()) {
+    mThread.join(); // old has to be finished.
+  }
   mThread = std::thread(startLuaScriptThread, mLuaState, this);
   //startLuaScriptThread(mLuaState, this);
 }
