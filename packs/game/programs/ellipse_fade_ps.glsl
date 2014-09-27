@@ -10,8 +10,8 @@ void main() {
   float x = oVPos.x + offset.x;
   float y = oVPos.y + offset.y;
   
-  float a = 3.0 * progress;
-  float b = 2.0 * progress;
+  float a = 3.0 * (1.0 - progress);
+  float b = 2.0 * (1.0 - progress);
   
   if (x * x / (a * a) + y * y / (b * b) < 1.0) {
     col = 0.0;

@@ -15,6 +15,9 @@ public:
 
 class CFader {
 public:
+  const static Ogre::String ELLIPTIC_FADER;
+  const static Ogre::String ALPHA_FADER;
+
   enum EFadeOperation {
     FADE_NONE,
     FADE_IN,

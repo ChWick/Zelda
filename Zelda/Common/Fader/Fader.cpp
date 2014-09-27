@@ -2,6 +2,9 @@
 #include <OgreTechnique.h>
 #include <OgrePass.h>
 
+const Ogre::String CFader::ELLIPTIC_FADER("EllipticFade");
+const Ogre::String CFader::ALPHA_FADER("AlphaFade");
+
 CFader::CFader(const Ogre::String &overlay, CFaderCallback *pCallback)
     :
   m_fProgress(0),

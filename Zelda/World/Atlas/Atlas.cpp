@@ -39,7 +39,8 @@ CAtlas::CAtlas(CEntity *pParent, Ogre::SceneNode *pRootSceneNode)
     m_pCameraPerspective(nullptr),
     m_bSwitchingMaps(false),
     m_bPlayerTargetReached(false),
-    mFader("EllipticFade", this) {
+    mEllipticFader(CFader::ELLIPTIC_FADER, this),
+    mAlphaFader(CFader::ALPHA_FADER, this) {
 
   LOGV("Creating the Atlas");
   m_pSceneNode = pRootSceneNode->createChildSceneNode("Atlas");
@@ -71,7 +72,7 @@ CAtlas::CAtlas(CEntity *pParent, Ogre::SceneNode *pRootSceneNode)
 
   CMessageHandler::getSingleton().addMessage(new CMessageSwitchMap(m_pCurrentMap->getMapPack()->getName(), CMessageSwitchMap::FINISHED, m_pCurrentMap, nullptr));
 
-  mFader.startFadeOut(1);
+  mEllipticFader.startFadeIn(1);
 }
 CAtlas::~CAtlas() {
   delete m_pCameraPerspective;
@@ -79,7 +80,8 @@ CAtlas::~CAtlas() {
 }
 
 void CAtlas::update(Ogre::Real tpf) {
-  mFader.fade(tpf);
+  mEllipticFader.fade(tpf);
+  mAlphaFader.fade(tpf);
 
   if (m_bSwitchingMaps) {
     if (m_pCameraPerspective->isCameraInBounds() && m_bPlayerTargetReached) {
@@ -188,4 +190,12 @@ void CAtlas::updatePause(int iPauseType, bool bPause) {
   if (iPauseType & PAUSE_ATLAS_UPDATE) {
     m_bPauseUpdate = bPause;
   }
+}
+
+void CAtlas::fadeInCallback() {
+  mAlphaFader.startFadeOut(1);
+}
+
+void CAtlas::fadeOutCallback() {
+  mAlphaFader.startFadeIn(1);
 }

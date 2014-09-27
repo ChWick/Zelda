@@ -67,6 +67,8 @@
 		<Unit filename="../Zelda/Common/DotSceneLoader/DotSceneLoaderCallback.hpp" />
 		<Unit filename="../Zelda/Common/DotSceneLoader/UserData.cpp" />
 		<Unit filename="../Zelda/Common/DotSceneLoader/UserData.hpp" />
+		<Unit filename="../Zelda/Common/Fader/Fader.cpp" />
+		<Unit filename="../Zelda/Common/Fader/Fader.hpp" />
 		<Unit filename="../Zelda/Common/FileManager/FileManager.cpp" />
 		<Unit filename="../Zelda/Common/FileManager/FileManager.hpp" />
 		<Unit filename="../Zelda/Common/GUI/GUIDebugPullMenu.cpp" />

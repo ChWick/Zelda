@@ -38,7 +38,8 @@ private:
   bool m_bSwitchingMaps;          //!< Is the map currently switch from current to next map
   bool m_bPlayerTargetReached;
 
-  CFader mFader;
+  CFader mEllipticFader;
+  CFader mAlphaFader;
 public:
   CAtlas(CEntity *pParent, Ogre::SceneNode *pRootSceneNode);
   ~CAtlas();
@@ -56,8 +57,8 @@ protected:
   void handleMessage(const CMessage &message);
   void updatePause(int iPauseType, bool bPause);
 
-  virtual void fadeInCallback() {mFader.startFadeOut(1);}
-  virtual void fadeOutCallback() {mFader.startFadeIn(1);}
+  virtual void fadeInCallback();
+  virtual void fadeOutCallback();
 };
 
 #endif // _ATLAS_HPP_
