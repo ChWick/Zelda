@@ -6,6 +6,23 @@ GreenBush.mesh
 GreenBushTrunk.mesh
 light_stone.mesh
 green_tree.mesh
+vase_plate.mesh
+
+# inner house shared meshes
+inner_house.png
+inner_house_bed.mesh
+inner_house_big_table.mesh
+inner_house_candlestand.mesh
+inner_house_chimney.mesh
+inner_house_entrance.mesh
+inner_house_small_table.mesh
+inner_house_flask.mesh
+inner_house_plate.mesh
+inner_house_shelf.mesh
+inner_house_simple_single_chair.mesh
+inner_house_small_table.mesh
+inner_house_table_leg.mesh
+inner_house_window.mesh
 
 # materials are in light_world pack
 *.material
