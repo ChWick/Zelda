@@ -1,0 +1,40 @@
+material AlphaFadeMaterial
+{
+  technique
+  {
+    pass
+    {
+      scene_blend alpha_blend
+      depth_check off
+
+      vertex_program_ref ellipse_fade_vs_unified
+      {
+      }
+
+      fragment_program_ref ellipse_fade_ps_unified
+      {
+      }
+    }
+  }
+}
+
+material EllipticFadeMaterial
+{
+  technique
+  {
+    pass
+    {
+      lighting off
+      scene_blend alpha_blend
+      depth_check off
+
+      vertex_program_ref ellipse_fade_vs_unified
+      {
+      }
+
+      fragment_program_ref ellipse_fade_ps_unified
+      {
+      }
+    }
+  }
+}

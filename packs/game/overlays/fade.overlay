@@ -1,0 +1,25 @@
+AlphaFade
+{
+  zorder 650
+  container Panel(AlphaFadeInOutPanel)
+  {
+    left 0
+    top 0
+    width 1
+    height 1
+    material AlphaFadeMaterial
+  }
+}
+
+EllipticFade
+{
+  zorder 650
+  container Panel(EllipticFadeInOutPanel)
+  {
+    left 0
+    top 0
+    width 1
+    height 1
+    material EllipticFadeMaterial
+  }
+}

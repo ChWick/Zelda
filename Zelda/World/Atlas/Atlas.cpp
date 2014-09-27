@@ -38,7 +38,8 @@ CAtlas::CAtlas(CEntity *pParent, Ogre::SceneNode *pRootSceneNode)
     m_pPlayer(nullptr),
     m_pCameraPerspective(nullptr),
     m_bSwitchingMaps(false),
-    m_bPlayerTargetReached(false) {
+    m_bPlayerTargetReached(false),
+    mFader("AlphaFade") {
 
   LOGV("Creating the Atlas");
   m_pSceneNode = pRootSceneNode->createChildSceneNode("Atlas");
@@ -76,6 +77,8 @@ CAtlas::~CAtlas() {
 }
 
 void CAtlas::update(Ogre::Real tpf) {
+  //mFader.fade(tpf);
+
   if (m_bSwitchingMaps) {
     if (m_pCameraPerspective->isCameraInBounds() && m_bPlayerTargetReached) {
       m_pCurrentMap->deleteNow();

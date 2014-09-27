@@ -22,11 +22,12 @@
 
 #include "../WorldEntity.hpp"
 #include "../../Common/PauseManager/PauseListener.hpp"
+#include "../../Common/Fader/Fader.hpp"
 
 class CMap;
 class CAerialCameraPerspective;
 
-class CAtlas : public CWorldEntity, public CPauseListener {
+class CAtlas : public CWorldEntity, public CPauseListener, public CFaderCallback {
 private:
   CMap *m_pCurrentMap;
   CMap *m_pNextMap;
@@ -37,6 +38,7 @@ private:
   bool m_bSwitchingMaps;          //!< Is the map currently switch from current to next map
   bool m_bPlayerTargetReached;
 
+  CFader mFader;
 public:
   CAtlas(CEntity *pParent, Ogre::SceneNode *pRootSceneNode);
   ~CAtlas();
@@ -53,6 +55,9 @@ public:
 protected:
   void handleMessage(const CMessage &message);
   void updatePause(int iPauseType, bool bPause);
+
+  virtual void fadeInCallback() {mFader.startFadeOut(1);}
+  virtual void fadeOutCallback() {mFader.startFadeIn(1);}
 };
 
 #endif // _ATLAS_HPP_
