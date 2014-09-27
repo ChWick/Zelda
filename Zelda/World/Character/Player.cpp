@@ -154,11 +154,13 @@ void CPlayer::interact() {
     return;
   }
 
-	Ogre::Vector3 startPos(getFloorPosition() + Ogre::Vector3::UNIT_Y * PERSON_HEIGHT * 0.4);
-	Ogre::Vector3 endPos(startPos + getOrientation().zAxis() * PERSON_RADIUS * 2.5f);
+  // start outside player capsule
+	Ogre::Vector3 startPos(getFloorPosition() + Ogre::Vector3::UNIT_Y * PERSON_HEIGHT * 0.4 + getOrientation().zAxis() * PERSON_RADIUS * 1.1f);
+	Ogre::Vector3 endPos(startPos + getOrientation().zAxis() * PERSON_RADIUS * 1.5f);
+
 	// try to interact with the world. So detect an object to interact with
 	btCollisionWorld::ClosestRayResultCallback rayCallback(BtOgre::Convert::toBullet(startPos), BtOgre::Convert::toBullet(endPos));
-	rayCallback.m_collisionFilterGroup = COL_INTERACTIVE;
+	rayCallback.m_collisionFilterGroup = COL_CHARACTER_P;
 	rayCallback.m_collisionFilterMask = MASK_PLAYER_P_COLLIDES_WITH;
 	m_pMap->getPhysicsManager()->getWorld()->rayTest(BtOgre::Convert::toBullet(startPos), BtOgre::Convert::toBullet(endPos), rayCallback);
 	if (rayCallback.hasHit()) {
