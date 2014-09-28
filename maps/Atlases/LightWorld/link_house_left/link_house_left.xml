@@ -6,7 +6,7 @@
   <region id="right_margin" position="1.6 0 0" size="0.01 1 1.6" shape="box">
     <event repeat="infinite">
       <emitter type="collision" id="player"/>
-      <action type="message" message_type="switch_map" map="link_house"/>
+      <action type="message" message_type="switch_map" map="link_house" switch_map_type="move_camera"/>
     </event>
   </region>
   <scene_entity id="green_tree.019">

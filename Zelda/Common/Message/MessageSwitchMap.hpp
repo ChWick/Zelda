@@ -22,6 +22,21 @@
 
 #include "Message.hpp"
 #include <string>
+#include "../Util/EnumIdMap.hpp"
+
+enum ESwitchMapTypes {
+  SMT_MOVE_CAMERA,
+  SMT_FADE_ELLIPTIC,
+  SMT_FADE_ALPHA,
+};
+
+class CSwitchMapTypes : public CEnumIdMap<ESwitchMapTypes> {
+public:
+  CSwitchMapTypes();
+};
+
+extern const CSwitchMapTypes SWITCH_MAP_TYPES_ID_MAP;
+
 
 class CMap;
 
@@ -35,6 +50,7 @@ public:
 protected:
   const std::string m_sMap;
   ESwitchMapStatus m_eStatus;
+  ESwitchMapTypes m_eSwitchMapType;
 
   const CMap *m_pFromMap;
   const CMap *m_pToMap;
@@ -42,11 +58,13 @@ public:
   CMessageSwitchMap(const tinyxml2::XMLElement *pElem);
   CMessageSwitchMap(const std::string &sMap,
                     ESwitchMapStatus eStatus,
+                    ESwitchMapTypes eSwitchMapType,
                     const CMap *pFromMap,
                     const CMap *pToMap);
 
   const std::string &getMap() const {return m_sMap;}
   const ESwitchMapStatus getStatus() const {return m_eStatus;}
+  const ESwitchMapTypes getSwitchMapType() const {return m_eSwitchMapType;}
   const CMap *getFromMap() const {return m_pFromMap;}
   const CMap *getToMap() const {return m_pToMap;}
 };

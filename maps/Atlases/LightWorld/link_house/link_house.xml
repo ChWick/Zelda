@@ -5,7 +5,7 @@
   <region id="left_margin" position="-1.6 0 0" size="0.01 1 1.6" shape="box">   
     <event repeat="infinite">
       <emitter type="collision" id="player"/>
-      <action type="message" message_type="switch_map" map="link_house_left"/>
+      <action type="message" message_type="switch_map" map="link_house_left" switch_map_type="move_camera"/>
     </event>
   </region>
   <region id="right_margin" position="1.6 0 0" size="0.01 1 1.6" shape="box"/>

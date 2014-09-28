@@ -70,7 +70,7 @@ CAtlas::CAtlas(CEntity *pParent, Ogre::SceneNode *pRootSceneNode)
   m_pPlayer->enterMap(m_pCurrentMap, Ogre::Vector3(0, 2, 0));
   m_pCurrentMap->start();
 
-  CMessageHandler::getSingleton().addMessage(new CMessageSwitchMap(m_pCurrentMap->getMapPack()->getName(), CMessageSwitchMap::FINISHED, m_pCurrentMap, nullptr));
+  CMessageHandler::getSingleton().addMessage(new CMessageSwitchMap(m_pCurrentMap->getMapPack()->getName(), CMessageSwitchMap::FINISHED, m_eSwitchMapType, m_pCurrentMap, nullptr));
 
   mEllipticFader.startFadeIn(1);
 }
@@ -83,7 +83,7 @@ void CAtlas::update(Ogre::Real tpf) {
   mEllipticFader.fade(tpf);
   mAlphaFader.fade(tpf);
 
-  if (m_bSwitchingMaps) {
+  if (m_bSwitchingMaps && m_eSwitchMapType == SMT_MOVE_CAMERA) {
     if (m_pCameraPerspective->isCameraInBounds() && m_bPlayerTargetReached) {
       m_pCurrentMap->deleteNow();
       m_pCurrentMap = m_pNextMap;
@@ -127,19 +127,24 @@ void CAtlas::handleMessage(const CMessage &message) {
     if (m_bSwitchingMaps) {return;}
     const CMessageSwitchMap &switch_map_message(dynamic_cast<const CMessageSwitchMap&>(message));
     if (switch_map_message.getStatus() == CMessageSwitchMap::INJECT) {
-        LOGI("Atlas: changing map to '%s'", switch_map_message.getMap().c_str());
+      LOGI("Atlas: changing map to '%s'", switch_map_message.getMap().c_str());
+      // get new switch type
+      m_eSwitchMapType = switch_map_message.getSwitchMapType();
+      m_sNextMap = switch_map_message.getMap();
+      m_bSwitchingMaps = true;
 
+      if (m_eSwitchMapType == SMT_MOVE_CAMERA) {
+        // player position in new map
+        Ogre::Vector3 vPlayerPos, vPlayerMoveToPos;
 
+        // create next map
         m_pNextMap = new CMap(this, CMapPackPtr(new CMapPack(CFileManager::getResourcePath("maps/Atlases/LightWorld/"), switch_map_message.getMap())), m_pSceneNode, m_pPlayer);
-
 
         CMapPackPtr nextPack = m_pNextMap->getMapPack();
         CMapPackPtr currPack = m_pCurrentMap->getMapPack();
 
         Ogre::Vector3 vMapPositionOffset = currPack->getGlobalPosition() - nextPack->getGlobalPosition();
         m_pCurrentMap->moveMap(vMapPositionOffset);
-
-
 
 
         // determine direction
@@ -157,15 +162,24 @@ void CAtlas::handleMessage(const CMessage &message) {
           vDirection.z = 1;
         }
 
-        m_bSwitchingMaps = true;
 
-        Ogre::Vector3 vPlayerPos = m_pPlayer->getPosition() + vMapPositionOffset;
-        m_pPlayer->enterMap(m_pNextMap, vPlayerPos + vDirection * 0.2);
+        vPlayerPos = m_pPlayer->getPosition() + vMapPositionOffset;
+        vPlayerMoveToPos = vPlayerPos + vDirection * 0.2;
+
+        // change players map
+        m_pPlayer->enterMap(m_pNextMap, vPlayerMoveToPos);
         m_pPlayer->setPosition(vPlayerPos);
-
         m_bPlayerTargetReached = false;
 
-        CMessageHandler::getSingleton().addMessage(new CMessageSwitchMap(m_pNextMap->getMapPack()->getName(), CMessageSwitchMap::SWITCHING, m_pCurrentMap, m_pNextMap));
+        CMessageHandler::getSingleton().addMessage(new CMessageSwitchMap(m_pNextMap->getMapPack()->getName(), CMessageSwitchMap::SWITCHING, m_eSwitchMapType, m_pCurrentMap, m_pNextMap));
+      }
+      else if (m_eSwitchMapType == SMT_FADE_ALPHA) {
+        mAlphaFader.startFadeOut(1);
+      }
+      else if (m_eSwitchMapType == SMT_FADE_ELLIPTIC) {
+        mEllipticFader.startFadeOut(1);
+      }
+
     }
   }
   else if (message.getType() == MSG_TARGET_REACHED) {
@@ -176,7 +190,7 @@ void CAtlas::handleMessage(const CMessage &message) {
 
         m_pNextMap->start();
 
-        CMessageHandler::getSingleton().addMessage(new CMessageSwitchMap(m_pCurrentMap->getMapPack()->getName(), CMessageSwitchMap::FINISHED, m_pCurrentMap, nullptr));
+        CMessageHandler::getSingleton().addMessage(new CMessageSwitchMap(m_pCurrentMap->getMapPack()->getName(), CMessageSwitchMap::FINISHED, m_eSwitchMapType, m_pCurrentMap, nullptr));
       }
     }
   }
@@ -193,9 +207,35 @@ void CAtlas::updatePause(int iPauseType, bool bPause) {
 }
 
 void CAtlas::fadeInCallback() {
-  mAlphaFader.startFadeOut(1);
 }
 
 void CAtlas::fadeOutCallback() {
-  mAlphaFader.startFadeIn(1);
+  if (m_eSwitchMapType == SMT_FADE_ALPHA || m_eSwitchMapType == SMT_FADE_ELLIPTIC) {
+    // delete old map
+    m_pCurrentMap->deleteNow();
+    m_bSwitchingMaps = false;
+
+    Ogre::Vector3 vPlayerPos;
+
+    // create next = current map
+    m_pCurrentMap = new CMap(this, CMapPackPtr(new CMapPack(CFileManager::getResourcePath("maps/Atlases/LightWorld/"), m_sNextMap)), m_pSceneNode, m_pPlayer);
+    CMapPackPtr currPack = m_pCurrentMap->getMapPack();
+
+    vPlayerPos = Ogre::Vector3(0, 2, 0);
+
+    m_pPlayer->enterMap(m_pCurrentMap, vPlayerPos);
+    m_pPlayer->setPosition(vPlayerPos);
+    m_bPlayerTargetReached = false;
+
+    CMessageHandler::getSingleton().addMessage(new CMessageSwitchMap(m_pCurrentMap->getMapPack()->getName(), CMessageSwitchMap::FINISHED, m_eSwitchMapType, m_pCurrentMap, nullptr));
+
+    if (m_eSwitchMapType == SMT_FADE_ELLIPTIC) {
+      mEllipticFader.startFadeIn(1);
+    }
+    else {
+      mAlphaFader.startFadeIn(1);
+    }
+
+    m_pCurrentMap->start();
+  }
 }

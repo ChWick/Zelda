@@ -23,6 +23,7 @@
 #include "../WorldEntity.hpp"
 #include "../../Common/PauseManager/PauseListener.hpp"
 #include "../../Common/Fader/Fader.hpp"
+#include "../../Common/Message/MessageSwitchMap.hpp"
 
 class CMap;
 class CAerialCameraPerspective;
@@ -35,7 +36,9 @@ private:
   Ogre::Camera *m_pWorldCamera;
   CAerialCameraPerspective *m_pCameraPerspective;
 
-  bool m_bSwitchingMaps;          //!< Is the map currently switch from current to next map
+  bool m_bSwitchingMaps;              //!< Is the map currently switch from current to next map
+  ESwitchMapTypes m_eSwitchMapType;   //!< Type of the map switch
+  std::string m_sNextMap;             //!< Next map after fading
   bool m_bPlayerTargetReached;
 
   CFader mEllipticFader;
