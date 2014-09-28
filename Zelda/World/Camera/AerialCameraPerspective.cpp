@@ -43,6 +43,7 @@ CAerialCameraPerspective::CAerialCameraPerspective(Ogre::Camera *pCamera,
     m_pTarget(pTarget),
     m_vMinCamPoint(Ogre::Vector2::ZERO),
     m_vMaxCamPoint(Ogre::Vector2::ZERO),
+    m_fVisionLevelOffset(0),
     m_bSwitchingMap(false),
     m_bCameraInBounds(false) {
   //m_pSceneNode = pTargetSceneNode->createChildSceneNode(AERIAL_CAMERA_OFFSET);
@@ -65,17 +66,17 @@ void CAerialCameraPerspective::updateCamera(float tpf) {
   Ogre::Vector3 vDelta;
   // update camera bounds
   m_pCamera->setPosition(vTargetPosition);
-  vRayPos = getRayPlaneHitPosition(RAY_TOP_LEFT);
+  vRayPos = getRayPlaneHitPosition(RAY_TOP_LEFT, m_fVisionLevelOffset);
   vDelta = Ogre::Vector3(std::max<Ogre::Real>(m_vMinCamPoint.x - vRayPos.x, 0), 0, std::max<Ogre::Real>(m_vMinCamPoint.y - vRayPos.z, 0));
   vTargetPosition += vDelta;
 
   m_pCamera->setPosition(vTargetPosition);
-  vRayPos = getRayPlaneHitPosition(RAY_TOP_RIGHT);
+  vRayPos = getRayPlaneHitPosition(RAY_TOP_RIGHT, m_fVisionLevelOffset);
   vDelta = Ogre::Vector3(std::min<Ogre::Real>(m_vMaxCamPoint.x - vRayPos.x, 0), 0, std::max<Ogre::Real>(m_vMinCamPoint.y - vRayPos.z, 0));
   vTargetPosition += vDelta;
 
   m_pCamera->setPosition(vTargetPosition);
-  vRayPos = getRayPlaneHitPosition(RAY_BOTTOM_RIGHT);
+  vRayPos = getRayPlaneHitPosition(RAY_BOTTOM_RIGHT, m_fVisionLevelOffset);
   vDelta = Ogre::Vector3(std::min<Ogre::Real>(m_vMaxCamPoint.x - vRayPos.x, 0), 0, std::min<Ogre::Real>(m_vMaxCamPoint.y - vRayPos.z, 0));
   vTargetPosition += vDelta;
 
@@ -132,6 +133,13 @@ void CAerialCameraPerspective::sendMessageToAll(const CMessage &message) {
       Ogre::Vector2 vSize(pack->getGlobalSize().x, pack->getGlobalSize().y);
       m_vMinCamPoint = -vSize / 2;
       m_vMaxCamPoint = vSize / 2;
+
+      m_fVisionLevelOffset = pack->getVisionLevelOffset();
+
+      if (switch_map_message.getSwitchMapType() != SMT_MOVE_CAMERA) {
+        // move camera to new point
+        updateCamera(1000);
+      }
     }
   }
 }

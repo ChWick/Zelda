@@ -45,6 +45,7 @@ protected:
 
   bool m_bSwitchingMap;
   bool m_bCameraInBounds;
+  Ogre::Real m_fVisionLevelOffset;
 public:
   CAerialCameraPerspective(Ogre::Camera *pCamera,
                            CWorldEntity *pTarget);

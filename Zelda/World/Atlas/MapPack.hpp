@@ -42,6 +42,7 @@ private:
 
   Ogre::Vector3 m_vGlobalPosition;
   Ogre::Vector2 m_vGlobalSize;
+  Ogre::Real    m_fVisionLevelOffset;
 
   XMLResources::CManager mLanguageManager;
 public:
@@ -58,6 +59,7 @@ public:
 
   const Ogre::Vector3 &getGlobalPosition() const {return m_vGlobalPosition;}
   const Ogre::Vector2 &getGlobalSize() const {return m_vGlobalSize;}
+  const Ogre::Real &getVisionLevelOffset() const {return m_fVisionLevelOffset;}
 
   const std::string &getSceneFile() const {return m_sSceneFile;}
   const XMLResources::CManager &getLanguageManager() const {return mLanguageManager;}

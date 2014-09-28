@@ -98,6 +98,7 @@ void CMapPack::parseXMLFile() {
   XMLElement *pMapElem = doc.FirstChildElement();
   m_vGlobalPosition = Ogre::StringConverter::parseVector3(Attribute(pMapElem, "global_position"));
   m_vGlobalSize = Ogre::StringConverter::parseVector2(Attribute(pMapElem, "global_size"));
+  m_fVisionLevelOffset = RealAttribute(pMapElem, "vision_level_offset", 0.f);
 
   for (XMLElement *pElem = pMapElem->FirstChildElement(); pElem; pElem = pElem->NextSiblingElement()) {
     if (strcmp(pElem->Value(), "region") == 0) {
