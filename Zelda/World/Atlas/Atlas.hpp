@@ -27,6 +27,7 @@
 
 class CMap;
 class CAerialCameraPerspective;
+class CEntrance;
 
 class CAtlas : public CWorldEntity, public CPauseListener, public CFaderCallback {
 private:
@@ -39,6 +40,7 @@ private:
   bool m_bSwitchingMaps;              //!< Is the map currently switch from current to next map
   ESwitchMapTypes m_eSwitchMapType;   //!< Type of the map switch
   std::string m_sNextMap;             //!< Next map after fading
+  std::string m_sNextMapEntrance;     //!< Entrance in new map after fading
   bool m_bPlayerTargetReached;
 
   CFader mEllipticFader;
@@ -62,6 +64,9 @@ protected:
 
   virtual void fadeInCallback();
   virtual void fadeOutCallback();
+
+private:
+  CEntrance *getNextEntrancePtr() const;
 };
 
 #endif // _ATLAS_HPP_

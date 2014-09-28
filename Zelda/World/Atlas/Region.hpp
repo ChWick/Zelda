@@ -30,6 +30,10 @@ public:
   CRegion(CWorldEntity *pParent, const tinyxml2::XMLElement *pElem);
   ~CRegion();
 
+  const Ogre::Vector3 &getPosition() const {return m_Info.position;}
+  const Ogre::Vector3 &getSize() const {return m_Info.size;}
+
+
   void exit();
 
   void start();

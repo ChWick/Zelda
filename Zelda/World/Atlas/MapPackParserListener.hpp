@@ -28,6 +28,7 @@ class CMapPackParserListener {
 public:
   virtual void parsePlayer(const tinyxml2::XMLElement *) {}
   virtual void parseRegion(const tinyxml2::XMLElement *pElem) {}
+  virtual void parseEntrance(const tinyxml2::XMLElement *pElem) {}
   virtual void parseSceneEntity(const tinyxml2::XMLElement *) {}
   virtual void parseNewEntity(const tinyxml2::XMLElement *) {}
 };

@@ -117,14 +117,27 @@ void CAerialCameraPerspective::sendMessageToAll(const CMessage &message) {
   if (message.getType() == MSG_SWITCH_MAP) {
     const CMessageSwitchMap &switch_map_message(dynamic_cast<const CMessageSwitchMap&>(message));
     if (switch_map_message.getStatus() == CMessageSwitchMap::SWITCHING) {
-      m_bSwitchingMap = true;
+      if (switch_map_message.getSwitchMapType() == SMT_MOVE_CAMERA) {
+        m_bSwitchingMap = true;
 
-      const CMapPackPtr nextPack = switch_map_message.getToMap()->getMapPack();
-      const CMapPackPtr currPack = switch_map_message.getFromMap()->getMapPack();
+        const CMapPackPtr nextPack = switch_map_message.getToMap()->getMapPack();
+        const CMapPackPtr currPack = switch_map_message.getFromMap()->getMapPack();
 
-      Ogre::Vector3 vMapPositionOffset = currPack->getGlobalPosition() - nextPack->getGlobalPosition();
+        Ogre::Vector3 vMapPositionOffset = currPack->getGlobalPosition() - nextPack->getGlobalPosition();
 
-      m_pCamera->setPosition(m_pCamera->getPosition() + vMapPositionOffset);
+        m_pCamera->setPosition(m_pCamera->getPosition() + vMapPositionOffset);
+      }
+      else {
+        const CMapPackPtr pack = switch_map_message.getFromMap()->getMapPack();
+        Ogre::Vector2 vSize(pack->getGlobalSize().x, pack->getGlobalSize().y);
+        m_vMinCamPoint = -vSize / 2;
+        m_vMaxCamPoint = vSize / 2;
+
+        m_fVisionLevelOffset = pack->getVisionLevelOffset();
+
+        // move camera to new point
+        updateCamera(1000);
+      }
     }
     else if (switch_map_message.getStatus() == CMessageSwitchMap::FINISHED) {
       m_bSwitchingMap = false;

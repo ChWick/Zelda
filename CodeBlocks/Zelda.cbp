@@ -212,6 +212,8 @@
 		<Unit filename="../Zelda/TextConverter.hpp" />
 		<Unit filename="../Zelda/World/Atlas/Atlas.cpp" />
 		<Unit filename="../Zelda/World/Atlas/Atlas.hpp" />
+		<Unit filename="../Zelda/World/Atlas/Entrance.cpp" />
+		<Unit filename="../Zelda/World/Atlas/Entrance.hpp" />
 		<Unit filename="../Zelda/World/Atlas/Map.cpp" />
 		<Unit filename="../Zelda/World/Atlas/Map.hpp" />
 		<Unit filename="../Zelda/World/Atlas/MapPack.cpp" />

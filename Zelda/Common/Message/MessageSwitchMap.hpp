@@ -51,6 +51,7 @@ protected:
   const std::string m_sMap;
   ESwitchMapStatus m_eStatus;
   ESwitchMapTypes m_eSwitchMapType;
+  const std::string m_sTargetEntrance;
 
   const CMap *m_pFromMap;
   const CMap *m_pToMap;
@@ -60,11 +61,13 @@ public:
                     ESwitchMapStatus eStatus,
                     ESwitchMapTypes eSwitchMapType,
                     const CMap *pFromMap,
-                    const CMap *pToMap);
+                    const CMap *pToMap,
+                    const std::string &sTargetEntrance = std::string());
 
   const std::string &getMap() const {return m_sMap;}
   const ESwitchMapStatus getStatus() const {return m_eStatus;}
   const ESwitchMapTypes getSwitchMapType() const {return m_eSwitchMapType;}
+  const std::string &getTargetEntrance() const {return m_sTargetEntrance;}
   const CMap *getFromMap() const {return m_pFromMap;}
   const CMap *getToMap() const {return m_pToMap;}
 };

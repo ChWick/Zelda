@@ -104,6 +104,9 @@ void CMapPack::parseXMLFile() {
     if (strcmp(pElem->Value(), "region") == 0) {
       if (m_pListener) {m_pListener->parseRegion(pElem);}
     }
+    else if (strcmp(pElem->Value(), "entrance") == 0) {
+      if (m_pListener) {m_pListener->parseEntrance(pElem);}
+    }
     else if (strcmp(pElem->Value(), "player") == 0) {
       if (m_pListener) {m_pListener->parsePlayer(pElem);}
     }

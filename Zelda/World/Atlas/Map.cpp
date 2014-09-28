@@ -27,6 +27,7 @@
 #include <OgreAnimationState.h>
 #include <OgreMeshManager.h>
 #include "Region.hpp"
+#include "Entrance.hpp"
 #include "../GlobalCollisionShapesTypes.hpp"
 #include "../Objects/Object.hpp"
 #include "BulletCollision/CollisionShapes/btSphereShape.h"
@@ -362,6 +363,10 @@ void CMap::parsePlayer(const tinyxml2::XMLElement *pElem) {
 
 void CMap::parseRegion(const tinyxml2::XMLElement *pElem) {
   new CRegion(this, pElem);
+}
+
+void CMap::parseEntrance(const tinyxml2::XMLElement *pElem) {
+  new CEntrance(this, pElem);
 }
 
 void CMap::parseSceneEntity(const tinyxml2::XMLElement *pElem) {

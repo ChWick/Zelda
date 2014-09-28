@@ -73,7 +73,7 @@ void CPersonController::updateCharacter(const Ogre::Real deltaTime) {
 	  Ogre::Vector3 vTranslateDirection = position - playerPos;
 	  Ogre::Real fTranslateDistance = vTranslateDirection.normalise();
 	  Ogre::Real fDesiredDistance = 20 * deltaTime * m_fMoveSpeed / WALK_SPEED * fTranslateDistance;
-	  
+
 	  mBodyNode->translate(vTranslateDirection * std::min<Ogre::Real>(fTranslateDistance, fDesiredDistance));
 		//mBodyNode->setPosition(position);
 
@@ -95,7 +95,7 @@ void CPersonController::updateCharacter(const Ogre::Real deltaTime) {
 
 	if (m_uiCurrentMoveState == MS_NORMAL || m_uiCurrentMoveState == MS_MOVE_TO_POINT
         || m_uiCurrentMoveState == MS_MOVE_AROUND_TARGET || m_uiCurrentMoveState == MS_AIMING) {
-    
+
     mGoalDirection = Vector3::ZERO;   // we will calculate this
 		Ogre::Vector3 vLookDirection;
 		bool bMove = true;
@@ -116,7 +116,7 @@ void CPersonController::updateCharacter(const Ogre::Real deltaTime) {
 			if (abs(viewAngle.valueRadians()) < getMaxTargetLookAngle()) {
 				// target reached if bMove == false
 				if (bMove == false) {
-                    targetReached();
+          targetReached();
 				}
 			}
 
@@ -213,7 +213,7 @@ void CPersonController::updateCharacter(const Ogre::Real deltaTime) {
     }
     else {
       mGoalDirection = mBodyNode->getOrientation().zAxis();
-      
+
       move(false);
     }
   }

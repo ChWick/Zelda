@@ -36,6 +36,7 @@ CMessageSwitchMap::CMessageSwitchMap(const tinyxml2::XMLElement *pElem)
     m_sMap(Attribute(pElem, "map")),
     m_eStatus(INJECT),
     m_eSwitchMapType(SWITCH_MAP_TYPES_ID_MAP.parseString(Attribute(pElem, "switch_map_type"))),
+    m_sTargetEntrance(Attribute(pElem, "target_entrance", "")),
     m_pFromMap(nullptr),
     m_pToMap(nullptr) {
 }
@@ -44,11 +45,13 @@ CMessageSwitchMap::CMessageSwitchMap(const std::string &sMap,
                     ESwitchMapStatus eStatus,
                     ESwitchMapTypes eSwitchMapType,
                     const CMap *pFromMap,
-                    const CMap *pToMap)
+                    const CMap *pToMap,
+                    const std::string &sTargetEntrance)
   : CMessage(MSG_SWITCH_MAP),
     m_sMap(sMap),
     m_eStatus(eStatus),
     m_eSwitchMapType(eSwitchMapType),
+    m_sTargetEntrance(sTargetEntrance),
     m_pFromMap(pFromMap),
     m_pToMap(pToMap) {
 }

@@ -9,4 +9,11 @@
     </event>
   </region>
   <region id="right_margin" position="1.6 0 0" size="0.01 1 1.6" shape="box"/>
+
+  <entrance id="house_entrance" player_direction="0 0 1" player_relative_position="0 -0.1 0" position="-0.4 0.3 0.2" size="0.05 0.1 0.01" shape="box">   
+    <event repeat="infinite">
+      <emitter type="collision" id="player"/>
+      <action type="message" message_type="switch_map" map="inner_house_link" switch_map_type="fade_elliptic" target_entrance="house_entrance"/>
+    </event>
+  </entrance>
 </map>
