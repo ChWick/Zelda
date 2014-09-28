@@ -25,6 +25,7 @@ public:
   };
 
 private:
+  const Ogre::String mType;
   Ogre::Real m_fProgress;                                                   //!< Progress of fading [0,1]
   Ogre::Real m_fCurrentDuration;
   Ogre::Real m_fTotalDuration;
@@ -38,6 +39,8 @@ public:
 
   bool isFading() const {return m_eFadeOperation != FADE_NONE;}
   void setVisible(bool bShow) {if (bShow){m_pOverlay->show();} else {m_pOverlay->hide();}}
+
+  void setFadeCenter(const Ogre::Vector2 &vCenter);
 
   void startFadeIn(Ogre::Real fDuration) {
     if (fDuration < 0) fDuration = -fDuration;

@@ -7,6 +7,7 @@ const Ogre::String CFader::ALPHA_FADER("AlphaFade");
 
 CFader::CFader(const Ogre::String &overlay, CFaderCallback *pCallback)
     :
+  mType(overlay),
   m_fProgress(0),
   m_fCurrentDuration(0),
   m_fTotalDuration(0),
@@ -15,4 +16,10 @@ CFader::CFader(const Ogre::String &overlay, CFaderCallback *pCallback)
   m_pOverlay = Ogre::OverlayManager::getSingleton().getByName(overlay);
   m_pOverlay->hide();
   m_PixelShaderParameters = m_pOverlay->get2DElementsIterator().getNext()->getMaterial()->getSupportedTechnique(0)->getPass(0)->getFragmentProgramParameters();
+}
+
+void CFader::setFadeCenter(const Ogre::Vector2 &vCenter) {
+  if (mType == ELLIPTIC_FADER) {
+    m_PixelShaderParameters->setNamedConstant("offset", vCenter);
+  }
 }

@@ -8,7 +8,7 @@ void main() {
   vec2 position = out_uv0;
   float col = 1.0;
   float x = oVPos.x + offset.x;
-  float y = oVPos.y + offset.y;
+  float y = oVPos.y - offset.y;
   
   float a = 3.0 * (1.0 - progress);
   float b = 2.0 * (1.0 - progress);

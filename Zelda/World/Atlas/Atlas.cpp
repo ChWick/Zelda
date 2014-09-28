@@ -178,6 +178,8 @@ void CAtlas::handleMessage(const CMessage &message) {
       }
       else if (m_eSwitchMapType == SMT_FADE_ELLIPTIC) {
         mEllipticFader.startFadeOut(1);
+        Ogre::Vector3 vScreenPos(m_pWorldCamera->getProjectionMatrix() * m_pWorldCamera->getViewMatrix() * m_pPlayer->getCenter());
+        mEllipticFader.setFadeCenter(Ogre::Vector2(vScreenPos.x, vScreenPos.y));
       }
 
     }
@@ -231,6 +233,7 @@ void CAtlas::fadeOutCallback() {
 
     if (m_eSwitchMapType == SMT_FADE_ELLIPTIC) {
       mEllipticFader.startFadeIn(1);
+      mEllipticFader.setFadeCenter(Ogre::Vector2::ZERO);
     }
     else {
       mAlphaFader.startFadeIn(1);
