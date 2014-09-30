@@ -43,7 +43,7 @@ void CTextConverter::convert(CEGUI::String &text) {
       toReplace = "unset button";
     }
     else {
-      toReplace = mCurrentMap->getMapPack()->getLanguageManager().getCEGUIString(id.c_str());
+      toReplace = mCurrentMap->getMapPack()->getLanguageManager().getCEGUIString(id);
     }
 
     text = text.replace(replaceStart, replaceEnd - replaceStart + 1, toReplace);

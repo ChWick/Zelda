@@ -22,6 +22,8 @@
 
 #include <OgreSingleton.h>
 #include <list>
+#include <mutex>
+#include <memory>
 #include "Message.hpp"
 
 class CMessageInjector;
@@ -29,21 +31,31 @@ class CMessageInjector;
 class CMessageHandler
   : public Ogre::Singleton<CMessageHandler> {
 private:
+  std::mutex mMutex;
+  std::mutex mInjectorMutex;
   struct SMessageEntry {
     bool bAutoDelete;
     const CMessage *pMessage;
+
+    ~SMessageEntry() {
+      if (bAutoDelete) {
+        delete pMessage;
+      }
+    }
   };
 
   std::list<CMessageInjector*> m_lInjectors;
-  std::list<SMessageEntry> m_lMessages;
+  std::list<CMessageInjector*> m_lInjectorsToAdd;
+  std::list<CMessageInjector*> m_lInjectorsToRemove;
+  std::list<std::unique_ptr<SMessageEntry> > m_lMessages;
 public:
   static CMessageHandler &getSingleton();
   static CMessageHandler *getSingletonPtr();
 
   void process();
 
-  void addInjector(CMessageInjector *pInjector) {m_lInjectors.push_back(pInjector);}
-  void removeInjector(CMessageInjector *pInjector) {m_lInjectors.remove(pInjector);}
+  void addInjector(CMessageInjector *pInjector) {mInjectorMutex.lock(); m_lInjectorsToAdd.push_back(pInjector); mInjectorMutex.unlock();}
+  void removeInjector(CMessageInjector *pInjector) {mInjectorMutex.lock(); m_lInjectorsToRemove.push_back(pInjector); mInjectorMutex.unlock();}
 
   void addMessage(const CMessage *m, bool bAutoDelete = true);
 };

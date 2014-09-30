@@ -19,6 +19,7 @@
 
 #include "Manager.hpp"
 #include "../FileManager/FileManager.hpp"
+#include "../Log.hpp"
 
 namespace XMLResources {
   std::string CManager::LANGUAGE_CODE;
@@ -61,22 +62,23 @@ namespace XMLResources {
     }
   }
 
-  const std::string &CManager::getString(const std::string &id, bool searchGlobal) const {
+  const std::string &CManager::getString(const CEGUI::String &id, bool searchGlobal) const {
     if (m_lStringResources.count(id) != 1) {
       if (searchGlobal && this != &GLOBAL) {
         return GLOBAL.getString(id, false);
       }
-      throw Ogre::Exception(0, "String resource with id '" + id + "' was not found", __FILE__);
+      throw Ogre::Exception(0, ("String resource with id '" + id + "' was not found").c_str(), __FILE__);
     }
     return m_lStringResources.at(id);
   }
 
-  const CEGUI::String CManager::getCEGUIString(const std::string &id, bool searchGlobal) const {
+  const CEGUI::String CManager::getCEGUIString(const CEGUI::String &id, bool searchGlobal) const {
+    LOGI("%s", id.c_str());
     if (m_lStringResources.count(id) != 1) {
       if (searchGlobal && this != &GLOBAL) {
         return GLOBAL.getCEGUIString(id, false);
       }
-      throw Ogre::Exception(0, "String resource with id '" + id + "' was not found", __FILE__);
+      throw Ogre::Exception(0, ("String resource with id '" + id + "' was not found").c_str(), __FILE__);
     }
     return reinterpret_cast<const CEGUI::utf8*>(m_lStringResources.at(id).c_str());
   }

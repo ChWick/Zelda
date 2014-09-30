@@ -21,6 +21,7 @@
 #include "MessageInjector.hpp"
 #include "Message.hpp"
 #include "../Log.hpp"
+#include "../Util/Assert.hpp"
 
 template<> CMessageHandler *Ogre::Singleton<CMessageHandler>::msSingleton = 0;
 
@@ -28,26 +29,41 @@ CMessageHandler *CMessageHandler::getSingletonPtr() {
   return msSingleton;
 }
 CMessageHandler &CMessageHandler::getSingleton() {
-  assert(msSingleton);
+  ASSERT(msSingleton);
   return *msSingleton;
 }
 void CMessageHandler::process() {
-  while (m_lMessages.size() > 0) {
+  mInjectorMutex.lock();
+  m_lInjectors.splice(m_lInjectors.end(), m_lInjectorsToAdd);
+
+  while (m_lInjectorsToRemove.size() > 0) {
+    m_lInjectors.remove(m_lInjectorsToRemove.front());
+    m_lInjectorsToRemove.pop_front();
+  }
+
+  ASSERT(m_lInjectorsToAdd.size() == 0);
+  ASSERT(m_lInjectorsToRemove.size() == 0);
+
+  mInjectorMutex.unlock();
+
+  mMutex.lock();
+  std::list<std::unique_ptr<SMessageEntry> > l;
+  l.splice(l.end(), m_lMessages);
+  mMutex.unlock();
+
+  while (l.size() > 0) {
     for (auto pInjector : m_lInjectors) {
-      pInjector->sendMessageToAll(*m_lMessages.front().pMessage);
+      pInjector->sendMessageToAll(*l.front()->pMessage);
     }
 
-    if (m_lMessages.front().bAutoDelete) {
-      delete m_lMessages.front().pMessage;
-    }
-    m_lMessages.pop_front();
+    l.pop_front();
   }
 }
 void CMessageHandler::addMessage(const CMessage *m, bool bAutoDelete) {
-  SMessageEntry ent = {
-    bAutoDelete,
-    m
-  };
-  m_lMessages.push_back(ent);
+  mMutex.lock();
+  m_lMessages.push_back(std::unique_ptr<SMessageEntry>(new SMessageEntry()));
+  m_lMessages.back()->bAutoDelete = bAutoDelete;
+  m_lMessages.back()->pMessage = m;
+  mMutex.unlock();
 }
 

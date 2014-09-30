@@ -34,7 +34,7 @@ namespace XMLResources {
     static std::string LANGUAGE_CODE;
   private:
 
-    std::map<std::string, std::string> m_lStringResources;
+    std::map<CEGUI::String, std::string> m_lStringResources;
     const std::string m_sResourceGroup;
     const std::string m_sPrefix;
   public:
@@ -48,8 +48,9 @@ namespace XMLResources {
       }
     }
 
-    const std::string &getString(const std::string &id, bool searchGlobal = true) const;
-    const CEGUI::String getCEGUIString(const std::string &id, bool searchGlobal = true) const;
+    const std::string &getString(const CEGUI::String &id, bool searchGlobal = true) const;
+    const CEGUI::String getCEGUIString(const CEGUI::String &id, bool searchGlobal = true) const;
+
     void loadLanguage() {
       parse(m_sPrefix + "values/strings.xml");
       if (LANGUAGE_CODE.length() > 0) {
