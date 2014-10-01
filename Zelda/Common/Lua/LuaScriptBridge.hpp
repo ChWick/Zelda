@@ -30,4 +30,16 @@ int log(lua_State *l);
 //! c function call by lua to access messages
 int message(lua_State *l);
 
+//! c function call by lua to write a int data to game memory
+int writeIntToMemory(lua_State *l);
+
+//! c function call by lua to read a int data to game memory
+int readIntFromMemory(lua_State *l);
+
+//! c function call by lua to write a Ogre::Real data to game memory
+int writeRealToMemory(lua_State *l);
+
+//! c function call by lua to read a Ogre::Real data to game memory
+int readRealFromMemory(lua_State *l);
+
 #endif // _LUA_SCRIPT_BRIDGE_HPP_

@@ -189,6 +189,8 @@
 		<Unit filename="../Zelda/Common/Util/DeleteSceneNode.cpp" />
 		<Unit filename="../Zelda/Common/Util/DeleteSceneNode.hpp" />
 		<Unit filename="../Zelda/Common/Util/EnumIdMap.hpp" />
+		<Unit filename="../Zelda/Common/Util/GameMemory.cpp" />
+		<Unit filename="../Zelda/Common/Util/GameMemory.hpp" />
 		<Unit filename="../Zelda/Common/Util/Sleep.cpp" />
 		<Unit filename="../Zelda/Common/Util/Sleep.hpp" />
 		<Unit filename="../Zelda/Common/Util/XMLHelper.cpp" />
@@ -232,7 +234,11 @@
 		<Unit filename="../Zelda/World/Character/CharacterControllerPhysicsListener.hpp" />
 		<Unit filename="../Zelda/World/Character/CharacterController_Physics.cpp" />
 		<Unit filename="../Zelda/World/Character/CharacterController_Physics.hpp" />
+		<Unit filename="../Zelda/World/Character/CharacterCreator.cpp" />
+		<Unit filename="../Zelda/World/Character/CharacterCreator.hpp" />
 		<Unit filename="../Zelda/World/Character/FriendOrEnemyStates.hpp" />
+		<Unit filename="../Zelda/World/Character/LinksFather.cpp" />
+		<Unit filename="../Zelda/World/Character/LinksFather.hpp" />
 		<Unit filename="../Zelda/World/Character/Person.cpp" />
 		<Unit filename="../Zelda/World/Character/Person.hpp" />
 		<Unit filename="../Zelda/World/Character/PersonController.cpp" />
@@ -283,6 +289,8 @@
 		<Unit filename="../Zelda/World/Objects/Object.hpp" />
 		<Unit filename="../Zelda/World/Objects/ObjectTypes.cpp" />
 		<Unit filename="../Zelda/World/Objects/ObjectTypes.hpp" />
+		<Unit filename="../Zelda/World/UserImplementations/UserLuaScriptBridge.cpp" />
+		<Unit filename="../Zelda/World/UserImplementations/UserLuaScriptBridge.hpp" />
 		<Unit filename="../Zelda/World/World.cpp" />
 		<Unit filename="../Zelda/World/World.hpp" />
 		<Unit filename="../Zelda/World/WorldEntity.cpp" />

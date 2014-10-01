@@ -34,6 +34,7 @@
 #include "PauseManager/PauseManager.hpp"
 #include "Lua/LuaScriptManager.hpp"
 #include MESSAGE_CREATOR_HEADER
+#include "Util/GameMemory.hpp"
 
 #if OGRE_PLATFORM == OGRE_PLATFORM_ANDROID
 #include "Android/Android.hpp"
@@ -88,6 +89,7 @@ CGame::~CGame(void) {
   if (CInputListenerManager::getSingletonPtr()) {delete CInputListenerManager::getSingletonPtr();}
   if (CPauseManager::getSingletonPtr()) {delete CPauseManager::getSingletonPtr();}
   if (MESSAGE_CREATOR::getSingletonPtr()) {delete MESSAGE_CREATOR::getSingletonPtr();}
+  if (CGameMemory::getSingletonPtr()) {delete CGameMemory::getSingletonPtr();}
 
   if (CMessageHandler::getSingletonPtr()) {
     delete CMessageHandler::getSingletonPtr();
@@ -547,6 +549,8 @@ void CGame::createScene() {
 
   Ogre::LogManager::getSingletonPtr()->logMessage("*** Initializing singleton classes ***");
   //-------------------------------------------------------------------------------------
+  LOGI("    GameMemory");
+  new CGameMemory();
   Ogre::LogManager::getSingletonPtr()->logMessage("    EntityManager ");
   new CEntityManager();
   Ogre::LogManager::getSingletonPtr()->logMessage("    MessageManager ");
