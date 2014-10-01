@@ -54,8 +54,8 @@ public:
 
   void process();
 
-  void addInjector(CMessageInjector *pInjector) {mInjectorMutex.lock(); m_lInjectorsToAdd.push_back(pInjector); mInjectorMutex.unlock();}
-  void removeInjector(CMessageInjector *pInjector) {mInjectorMutex.lock(); m_lInjectorsToRemove.push_back(pInjector); mInjectorMutex.unlock();}
+  void addInjector(CMessageInjector *pInjector);
+  void removeInjector(CMessageInjector *pInjector);
 
   void addMessage(const CMessage *m, bool bAutoDelete = true);
 };

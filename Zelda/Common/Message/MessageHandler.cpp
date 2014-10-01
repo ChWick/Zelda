@@ -34,12 +34,13 @@ CMessageHandler &CMessageHandler::getSingleton() {
 }
 void CMessageHandler::process() {
   mInjectorMutex.lock();
-  m_lInjectors.splice(m_lInjectors.end(), m_lInjectorsToAdd);
-
   while (m_lInjectorsToRemove.size() > 0) {
     m_lInjectors.remove(m_lInjectorsToRemove.front());
     m_lInjectorsToRemove.pop_front();
   }
+
+  m_lInjectors.splice(m_lInjectors.end(), m_lInjectorsToAdd);
+
 
   ASSERT(m_lInjectorsToAdd.size() == 0);
   ASSERT(m_lInjectorsToRemove.size() == 0);
@@ -59,6 +60,21 @@ void CMessageHandler::process() {
     l.pop_front();
   }
 }
+
+void CMessageHandler::addInjector(CMessageInjector *pInjector) {
+  mInjectorMutex.lock();
+  m_lInjectorsToAdd.push_back(pInjector);
+  mInjectorMutex.unlock();
+  LOGI("Injector added");
+}
+
+void CMessageHandler::removeInjector(CMessageInjector *pInjector) {
+  mInjectorMutex.lock();
+  m_lInjectorsToRemove.push_back(pInjector);
+  mInjectorMutex.unlock();
+  LOGI("Injector removed");
+}
+
 void CMessageHandler::addMessage(const CMessage *m, bool bAutoDelete) {
   mMutex.lock();
   m_lMessages.push_back(std::unique_ptr<SMessageEntry>(new SMessageEntry()));
