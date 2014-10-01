@@ -69,6 +69,7 @@ CAtlas::CAtlas(CEntity *pParent, Ogre::SceneNode *pRootSceneNode)
 
   LOGV(" - Creating initial map");
   m_pCurrentMap = new CMap(this, CMapPackPtr(new CMapPack(CFileManager::getResourcePath("maps/Atlases/LightWorld/"), "inner_house_link")), m_pSceneNode, m_pPlayer);
+  //m_pCurrentMap = new CMap(this, CMapPackPtr(new CMapPack(CFileManager::getResourcePath("maps/Atlases/LightWorld/"), "link_house_left")), m_pSceneNode, m_pPlayer);
   m_pPlayer->enterMap(m_pCurrentMap, Ogre::Vector3(0, 2, 0));
   m_pCurrentMap->start();
 
@@ -193,17 +194,18 @@ void CAtlas::handleMessage(const CMessage &message) {
     const CMessageTargetReached &message_target_reached(dynamic_cast<const CMessageTargetReached &>(message));
     if (message_target_reached.getEntity() == m_pPlayer) {
       if (m_bSwitchingMaps) {
+        CMap *pMap;
         if (m_eSwitchMapType != SMT_MOVE_CAMERA) {
           m_bSwitchingMaps = false;
-          m_pCurrentMap->start();
+          pMap = m_pCurrentMap;
         }
         else {
-          m_pNextMap->start();
+          pMap = m_pNextMap;
         }
         m_bPlayerTargetReached = true;
 
-
-        CMessageHandler::getSingleton().addMessage(new CMessageSwitchMap(m_pCurrentMap->getMapPack()->getName(), CMessageSwitchMap::FINISHED, m_eSwitchMapType, m_pCurrentMap, nullptr, m_sNextMapEntrance));
+        pMap->start();
+        CMessageHandler::getSingleton().addMessage(new CMessageSwitchMap(m_pCurrentMap->getMapPack()->getName(), CMessageSwitchMap::FINISHED, m_eSwitchMapType, pMap, nullptr, m_sNextMapEntrance));
       }
     }
   }
