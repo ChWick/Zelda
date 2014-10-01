@@ -40,8 +40,8 @@
 #include "../../Common/DotSceneLoader/UserData.hpp"
 #include "../../Common/Util/XMLHelper.hpp"
 
-#include "../Character/SimpleEnemy.hpp"
-#include "../Character/StandingPerson.hpp"
+#include "../Character/CharacterCreator.hpp"
+
 
 using namespace XMLHelper;
 
@@ -378,21 +378,10 @@ void CMap::parseSceneEntity(const tinyxml2::XMLElement *pElem) {
 }
 
 void CMap::parseNewEntity(const tinyxml2::XMLElement *pElem) {
-  std::string sEntityType(Attribute(pElem, "entity_type"));
+  CWorldEntity *pNewEnt = CCharacterCreator::createCharacter(pElem, this, this, m_pPlayer);
+  if (pNewEnt) {return;}
 
-  Ogre::Real rotation(RealAttribute(pElem, "rotation",0));
-  Ogre::Quaternion qOrientation(Ogre::Degree(rotation), Ogre::Vector3::UNIT_Y);
-  if (sEntityType == "simple_enemy") {
-    CSimpleEnemy *pEnemy = new CSimpleEnemy(pElem, this, this);
-    pEnemy->enterMap(this, Ogre::StringConverter::parseVector3(Attribute(pElem, "position")));
-    pEnemy->setPlayer(m_pPlayer);
-    pEnemy->setOrientation(qOrientation);
-  }
-  else if (sEntityType == "standing_person") {
-    CStandingPerson *pPerson = new CStandingPerson(pElem, this, this);
-    pPerson->enterMap(this, Ogre::StringConverter::parseVector3(Attribute(pElem, "position")));
-    pPerson->setOrientation(qOrientation);
-  }
+  throw Ogre::Exception(0, "New entity could not be created.", __FILE__);
 }
 
 // ############################################################################3

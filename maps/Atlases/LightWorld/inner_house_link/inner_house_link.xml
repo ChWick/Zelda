@@ -6,4 +6,11 @@
       <action type="message" message_type="switch_map" map="link_house" switch_map_type="fade_elliptic" target_entrance="house_entrance"/>
     </event>
   </entrance>
+
+  <new_entity entity_type="links_father" id="links_father" rotation="180" position="0.2 0 0.2" person_type="links_father">
+    <event repeat="infinite">
+      <emitter type="interaction" />
+      <action type="start_script" file="links_father_begin.lua"/>
+    </event>
+  </new_entity>
 </map>

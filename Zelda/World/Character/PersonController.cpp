@@ -20,6 +20,7 @@
 #include "PersonController.hpp"
 #include "Person.hpp"
 #include <BulletDynamics/Character/btCharacterControllerInterface.h>
+#include "../../Common/Log.hpp"
 #include "../../Common/Physics/BtOgreExtras.hpp"
 #include "../../Common/Util/DebugDrawer.hpp"
 #include "../../Common/Message/MessageHandler.hpp"
@@ -66,11 +67,12 @@ void CPersonController::updateCharacter(const Ogre::Real deltaTime) {
 
 	//Vector3 position(pos.x(), pos.y(), pos.z());
 	Vector3 position(BtOgre::Convert::toOgre(mCCPerson->getCollisionObject()->getWorldTransform().getOrigin()));
+  Ogre::Vector3 vTranslateDirection = position - playerPos;
+	Vector3 physicsFloorPosition(mCCPerson->getFloorPosition() + vTranslateDirection);
 
 
 	if (position != playerPos)
 	{
-	  Ogre::Vector3 vTranslateDirection = position - playerPos;
 	  Ogre::Real fTranslateDistance = vTranslateDirection.normalise();
 	  Ogre::Real fDesiredDistance = 20 * deltaTime * m_fMoveSpeed / WALK_SPEED * fTranslateDistance;
 
@@ -101,16 +103,22 @@ void CPersonController::updateCharacter(const Ogre::Real deltaTime) {
 		bool bMove = true;
 		if (m_uiCurrentMoveState == MS_MOVE_TO_POINT) {
 			// the goal direction will be obviously the direction in witch the target is
-			mGoalDirection = getTargetPosition() - mBodyNode->_getDerivedPosition();
+			mGoalDirection = getTargetPosition() - physicsFloorPosition;
+			//LOGI("Pos: %s distance %s", Ogre::StringConverter::toString(mGoalDirection).c_str(), Ogre::StringConverter::toString(physicsFloorPosition).c_str());
+			mGoalDirection.y = 0; // never move in y direction.
+			Ogre::Real distance(mGoalDirection.normalise());
+			Ogre::Real stepLength(posIncrementPerSecond * WALK_SPEED_SCALE);
 
-			//Ogre::LogManager::getSingleton().logMessage(Ogre::StringConverter::toString(mGoalDirection));
-			if (mGoalDirection.squaredLength() <= getTargetRadius() * getTargetRadius()) {
+			if (distance - stepLength <= 0) {
+        // we will move over target
+        bMove = false;
+			}
+			else if (distance <= getTargetRadius()) {
 				// we reached the correct distance (check for view angle is the next step)
 				bMove = false;
 			}
 			else {
-				// we will move, so normalise direction
-				mGoalDirection.normalise();
+        // move on
 			}
 			Ogre::Radian viewAngle(mGoalDirection.angleBetween(mBodyNode->_getDerivedOrientation().zAxis()));
 			if (abs(viewAngle.valueRadians()) < getMaxTargetLookAngle()) {
@@ -124,7 +132,7 @@ void CPersonController::updateCharacter(const Ogre::Real deltaTime) {
 		}
 		else if (m_uiCurrentMoveState == MS_AIMING) {
 			updateGoalDirection();
-            vLookDirection = getCameraDirection();
+      vLookDirection = getCameraDirection();
 		}
 		else {
       if (m_uiCurrentMoveState != MS_RUNNING) {
@@ -152,12 +160,9 @@ void CPersonController::updateCharacter(const Ogre::Real deltaTime) {
 
 
 			mBodyNode->yaw(Degree(yawToGoal));
-
-			mCCPhysics->setWalkDirection(BtOgre::Convert::toBullet(mGoalDirection * posIncrementPerSecond));
-			mCCPerson->setIsMoving(true);
 		}
 		else {
-            if (vLookDirection != Vector3::ZERO) {
+      if (vLookDirection != Vector3::ZERO) {
 				Quaternion toGoal = mBodyNode->getOrientation().zAxis().getRotationTo(vLookDirection);
 
 				// calculate how much the character has to turn to face goal direction
@@ -172,21 +177,21 @@ void CPersonController::updateCharacter(const Ogre::Real deltaTime) {
 
 
 				mBodyNode->yaw(Degree(yawToGoal));
-            }
-
-			if (mGoalDirection != Vector3::ZERO) {
-				if (bMove) {
-          move(true, posIncrementPerSecond, mGoalDirection);
-				}
-				else {
-					move(false);
-				}
-			}
-			else
-			{
-				move(false);
-			}
+      }
 		}
+
+    if (mGoalDirection != Vector3::ZERO) {
+      if (bMove) {
+        move(true, posIncrementPerSecond, mGoalDirection);
+      }
+      else {
+        move(false);
+      }
+    }
+    else
+    {
+      move(false);
+    }
 	}
 	else if (m_uiCurrentMoveState == MS_PUSHED_BACK) {
 		if (m_fTimer <= 0) {
@@ -305,7 +310,7 @@ void CPersonController::endRunning() {
 }
 
 void CPersonController::targetReached() {
-    changeMoveState(MS_NOT_MOVING); // reset our state
+    changeMoveState(MS_NORMAL); // reset our state
 
   CMessageHandler::getSingleton().addMessage(new CMessageTargetReached(mCCPerson));
 }

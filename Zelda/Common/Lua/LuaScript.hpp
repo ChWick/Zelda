@@ -41,8 +41,6 @@ public:
   void setStarted(bool b) {mStarted = b;}
 
 private:
-  void registerCFunctionsToLua();
-  void registerSingleCFunctionsToLua(lua_CFunction fn, const char *label);
 };
 
 

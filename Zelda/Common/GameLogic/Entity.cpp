@@ -25,6 +25,7 @@
 #include "../Message/Message.hpp"
 #include "../Message/MessageEntityStateChanged.hpp"
 #include "../Message/MessageHandler.hpp"
+#include "../Message/MessageTargetReached.hpp"
 #include "EntityManager.hpp"
 #include <OgreResourceGroupManager.h>
 
@@ -361,6 +362,12 @@ void CEntity::clearEvents() {
     delete m_lEvents.front();
     m_lEvents.pop_front();
   }
+}
+
+void CEntity::moveToTarget(const SPATIAL_VECTOR &vPosition, const Ogre::Quaternion &qRotation, const Ogre::Real fMaxDistanceDeviation, const Ogre::Radian fMaxAngleDeviation) {
+  setPosition(vPosition);
+  setOrientation(qRotation);
+  CMessageHandler::getSingleton().addMessage(new CMessageTargetReached(this));
 }
 
 void CEntity::changeState(EEntityStateTypes eState) {

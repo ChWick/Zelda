@@ -207,6 +207,12 @@ void CPerson::createHandObject(const Ogre::String &parentBone, EHands handPos, c
   m_pBodyEntity->attachObjectToBone(parentBone, m_pSceneNode->getCreator()->createEntity(meshName));
 }
 
+void CPerson::moveToTarget(const SPATIAL_VECTOR &vPosition, const Ogre::Quaternion &qRotation, const Ogre::Real fMaxDistanceDeviation, const Ogre::Radian fMaxAngleDeviation) {
+  CPersonController *pPC(dynamic_cast<CPersonController*>(m_pCharacterController));
+  ASSERT(pPC);
+  pPC->moveToTarget(vPosition, fMaxDistanceDeviation, fMaxAngleDeviation, false);
+}
+
 void CPerson::postUpdateAnimationsCallback(const Ogre::Real fTime) {
 
 }

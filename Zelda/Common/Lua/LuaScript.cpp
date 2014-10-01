@@ -3,7 +3,8 @@
 #include "../Util/Assert.hpp"
 #include "../Log.hpp"
 #include "LuaScriptManager.hpp"
-#include "LuaScriptBridge.hpp"
+#include "../Config/TypeDefines.hpp"
+#include LUA_SCRIPT_BRIDGE_HEADER
 
 CLuaScript::CLuaScript(Ogre::ResourceManager* creator, const Ogre::String &name,
                  Ogre::ResourceHandle handle, const Ogre::String &group, bool isManual,
@@ -70,7 +71,8 @@ void CLuaScript::loadImpl() {
     throw Ogre::Exception(status, "Error while loading lua script '" + script + "' from string.", __FILE__);
   }
 
-  registerCFunctionsToLua();
+  // register c functions
+  LUA_SCRIPT_BRIDGE_REGISTER_FUNCTION(mLuaState);
 
   mStarted = false;
 }
@@ -131,15 +133,4 @@ void CLuaScript::start() {
   }
   mThread = std::thread(startLuaScriptThread, mLuaState, this);
   //startLuaScriptThread(mLuaState, this);
-}
-
-void CLuaScript::registerCFunctionsToLua() {
-  registerSingleCFunctionsToLua(log, "log");
-  registerSingleCFunctionsToLua(message, "message");
-  registerSingleCFunctionsToLua(textMessage, "textMessage");
-}
-
-void CLuaScript::registerSingleCFunctionsToLua(lua_CFunction fn, const char *label) {
-  lua_pushcfunction(mLuaState, fn);
-  lua_setglobal(mLuaState, label);
 }
