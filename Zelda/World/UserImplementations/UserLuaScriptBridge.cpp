@@ -23,6 +23,7 @@ void userRegisterCFunctionsToLua(lua_State *l) {
   registerSingleCFunctionsToLua(l, entity, "entity");
   registerSingleCFunctionsToLua(l, textMessage, "textMessage");
   registerSingleCFunctionsToLua(l, moveTo, "moveTo");
+  registerSingleCFunctionsToLua(l, deleteEntity, "delete");
 }
 
 
@@ -58,11 +59,14 @@ int textMessage(lua_State *l) {
     }
     result->mMutex.unlock();
   }
+
   // still locked
   lua_pushnumber(l, result->mResult);
   result->mMutex.unlock();
   return 1; // 1 return value
 }
+
+
 
 namespace luaHelper {
   class CMoveToWait : public CMessageInjector {
@@ -125,3 +129,26 @@ int moveTo(lua_State *l) {
 
   return 0; // 0 return values
 }
+
+int deleteEntity(lua_State *l) {
+  LUA_BRIDGE_START;
+
+  LOGV("Lua call: deleteEntity");
+
+  if (lua_gettop(l) != 1) {
+    LOGW("Wrong argument count for moveTo call");
+    return -1;
+  }
+
+  const std::string id(lua_tostring(l, 1));
+  CEntity *pEntity = CGameStateManager::getSingleton().getChildRecursive(id);
+  if (!pEntity) {
+    LOGW("Entity '%s' was not found in entity tree.", id.c_str());
+    return 0;
+  }
+
+  pEntity->deleteLater();
+
+  return 0;
+}
+

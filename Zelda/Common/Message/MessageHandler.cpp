@@ -65,14 +65,12 @@ void CMessageHandler::addInjector(CMessageInjector *pInjector) {
   mInjectorMutex.lock();
   m_lInjectorsToAdd.push_back(pInjector);
   mInjectorMutex.unlock();
-  LOGI("Injector added");
 }
 
 void CMessageHandler::removeInjector(CMessageInjector *pInjector) {
   mInjectorMutex.lock();
   m_lInjectorsToRemove.push_back(pInjector);
   mInjectorMutex.unlock();
-  LOGI("Injector removed");
 }
 
 void CMessageHandler::addMessage(const CMessage *m, bool bAutoDelete) {

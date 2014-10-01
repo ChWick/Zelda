@@ -22,11 +22,13 @@
 
 #include <OgreSingleton.h>
 #include <list>
+#include <mutex>
 
 class CEntity;
 
 class CEntityManager : public Ogre::Singleton<CEntityManager> {
 private:
+  std::mutex mAddToListMutex;
   std::list<CEntity *> m_lEntitiesToDestroy;
 
 public:

@@ -42,14 +42,20 @@ void CEntityManager::deleteNow(CEntity *pEntity) {
 void CEntityManager::deleteLater(CEntity *pEntity) {
   if (pEntity->getState() != EST_DELETE) {
     // delete if not deleted
+    mAddToListMutex.lock();
     m_lEntitiesToDestroy.push_back(pEntity);
+    mAddToListMutex.unlock();
     pEntity->changeState(EST_DELETE);
   }
 }
 
 void CEntityManager::process() {
-  while (m_lEntitiesToDestroy.size() > 0) {
-    deleteNow(m_lEntitiesToDestroy.front());
-    m_lEntitiesToDestroy.pop_front();
+  std::list<CEntity *> l;
+  mAddToListMutex.lock();
+  l.splice(l.end(), m_lEntitiesToDestroy);
+  mAddToListMutex.unlock();
+
+  for (auto p : l) {
+    deleteNow(p);
   }
 }
