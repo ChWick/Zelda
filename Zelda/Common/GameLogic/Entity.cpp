@@ -18,9 +18,9 @@
  *****************************************************************************/
 
 #include "Entity.hpp"
-#include "Events/Event.hpp"
 #include "../Util/XMLHelper.hpp"
 #include "Events/Event.hpp"
+#include "Events/Emitter/Emitter.hpp"
 #include <OgreStringConverter.h>
 #include "../Message/Message.hpp"
 #include "../Message/MessageEntityStateChanged.hpp"
@@ -102,25 +102,38 @@ CEntity::~CEntity() {
   attachTo(NULL);
 }
 void CEntity::init() {
+  mEventAccessedMutex.lock();
   for (auto pEvent: m_lEvents) {
     pEvent->init();
   }
-  for (std::list<CEvent*>::iterator it = m_lEvents.begin(); it != m_lEvents.end();) {
-    /*if ((*it)->getEmitter()->getType() == EventEmitter::EMIT_ON_CREATE) {
-      (*it)->start();
-      delete (*it);
-      it = m_lEvents.erase(it);
-    }
-    else*/ {
-      it++;
-    }
-  }
+  mEventAccessedMutex.unlock();
 }
 void CEntity::exit() {
   for (auto pEvent: m_lEvents) {
     pEvent->exit();
   }
 }
+
+void CEntity::start() {
+  mEventAccessedMutex.lock();
+  for (std::list<CEvent*>::iterator it = m_lEvents.begin(); it != m_lEvents.end(); it++) {
+    bool bStart(false);
+    for (events::CEmitter *pEmit : (*it)->getEmitter()) {
+      if (pEmit->getType() == events::EMIT_ON_CREATE) {
+        bStart = true;
+        break;
+      }
+    }
+    if (bStart) {
+      (*it)->start();
+    }
+  }
+  mEventAccessedMutex.unlock();
+}
+
+void CEntity::stop() {
+}
+
 void CEntity::attachTo(CEntity *pParent) {
   if (m_pParent) {
     m_pParent->m_lChildren.remove(this);
@@ -249,9 +262,17 @@ void CEntity::destroyChildren() {
   }
 }
 
+void CEntity::addEvent(events::CEvent *pEvent) {
+  mEventAccessedMutex.lock();
+  m_lEvents.push_back(pEvent);
+  mEventAccessedMutex.unlock();
+}
+
 void CEntity::destroyEvent(CEvent *pEvent) {
   assert(pEvent);
+  mEventToDeleteAccessedMutex.lock();
   m_lEventsToDelete.push_back(pEvent);
+  mEventToDeleteAccessedMutex.unlock();
 }
 
 void CEntity::sendMessageToAll(const CMessage &message) {
@@ -267,9 +288,11 @@ void CEntity::update(Ogre::Real tpf) {
       pEnt->update(tpf);
     }
   }
+  mEventAccessedMutex.lock();
   for (auto &pEvt : m_lEvents) {
     pEvt->update(tpf);
   }
+  mEventAccessedMutex.unlock();
 }
 
 void CEntity::preRender(Ogre::Real tpf) {
@@ -306,16 +329,22 @@ bool CEntity::frameRenderingQueued(const Ogre::FrameEvent& evt) {
 }
 
 bool CEntity::frameStarted(const Ogre::FrameEvent& evt) {
+  mEventAccessedMutex.lock();
+  mEventToDeleteAccessedMutex.lock();
   while (m_lEventsToDelete.size() > 0) {
     m_lEvents.remove(m_lEventsToDelete.front());
     delete m_lEventsToDelete.front();
     m_lEventsToDelete.pop_front();
   }
+  mEventToDeleteAccessedMutex.unlock();
+
   for (auto &pEnt : m_lChildren) {
     if (!pEnt->m_bPauseUpdate) {
       pEnt->frameStarted(evt);
     }
   }
+
+  mEventAccessedMutex.unlock();
   return true;
 }
 
@@ -340,6 +369,7 @@ void CEntity::writeToXMLElement(tinyxml2::XMLElement *pElement, EOutputStyle eSt
   }
 
   // write events
+  std::lock_guard<std::mutex> lock(const_cast<CEntity*>(this)->mEventAccessedMutex);
   if (m_lEvents.size() > 0) {
     XMLDocument *pDoc = pElement->GetDocument();
     XMLElement *pEventsElement = pDoc->NewElement("events");
@@ -357,11 +387,17 @@ void CEntity::handleMessage(const CMessage &message) {
 
 
 void CEntity::clearEvents() {
+  mEventAccessedMutex.lock();
+  mEventToDeleteAccessedMutex.lock();
+
   m_lEventsToDelete.clear();
   while (m_lEvents.size() > 0) {
     delete m_lEvents.front();
     m_lEvents.pop_front();
   }
+
+  mEventAccessedMutex.unlock();
+  mEventToDeleteAccessedMutex.unlock();
 }
 
 void CEntity::moveToTarget(const SPATIAL_VECTOR &vPosition, const Ogre::Quaternion &qRotation, const Ogre::Real fMaxDistanceDeviation, const Ogre::Radian fMaxAngleDeviation) {
@@ -386,7 +422,6 @@ void CEntity::readEventsFromXMLElement(const tinyxml2::XMLElement *pElement, boo
   for (const XMLElement *pEventElement = pElement->FirstChildElement();
         pEventElement;
         pEventElement = pEventElement->NextSiblingElement()) {
-
-    m_lEvents.push_back(new CEvent(*this, pEventElement));
+    addEvent(new CEvent(*this, pEventElement));
   }
 }

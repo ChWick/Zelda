@@ -48,7 +48,7 @@ if (ANDROID)
   endif()
 
   file(WRITE "${NDKOUT}/default.properties" "target=${ANDROID_TARGET}")
-  file(WRITE "${NDKOUT}/jni/Application.mk" "APP_ABI := ${ANDROID_ABI}\nAPP_STL := gnustl_static ")
+  file(WRITE "${NDKOUT}/jni/Application.mk" "NDK_TOOLCHAIN_VERSION := 4.8\nAPP_ABI := ${ANDROID_ABI}\nAPP_STL := gnustl_static ")
   configure_file("${PROJECT_TEMPLATES_DIR}/AndroidManifest.xml.in" "${NDKOUT}/AndroidManifest.xml" @ONLY)
 
   configure_file("${PROJECT_TEMPLATES_DIR}/Android.mk.in" "${NDKOUT}/jni/Android.mk" @ONLY)

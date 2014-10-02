@@ -77,6 +77,7 @@ private:
   void translateStaticGeometry(Ogre::StaticGeometry *pSG, const Ogre::Vector3 &vVec);
 
   // CMapPackParserListener
+  void parseEvent(const tinyxml2::XMLElement *);
   void parsePlayer(const tinyxml2::XMLElement *);
   void parseRegion(const tinyxml2::XMLElement *pElem);
   void parseEntrance(const tinyxml2::XMLElement *pElem);

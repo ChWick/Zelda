@@ -103,7 +103,7 @@ LOCAL_CFLAGS 	+= -I@CMAKE_SOURCE_DIR@/
 LOCAL_CFLAGS 	+= -I@CMAKE_SOURCE_DIR@/dependencies/
 
 # additional flags
-LOCAL_CFLAGS 	+= -fexceptions -frtti -x c++ -D___ANDROID___ -DANDROID -DZZIP_OMIT_CONFIG_H -DINCLUDE_RTSHADER_SYSTEM=1
+LOCAL_CFLAGS 	+=  -pthread -fexceptions -frtti -x c++ -D___ANDROID___ -DANDROID -DZZIP_OMIT_CONFIG_H -DINCLUDE_RTSHADER_SYSTEM=1
 
 # we use the c++11 standard! 
 LOCAL_CFLAGS 	+= -std=c++11 

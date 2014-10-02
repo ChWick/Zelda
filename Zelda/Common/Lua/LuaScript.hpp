@@ -2,7 +2,9 @@
 #define _LUA_SCRIPT_HPP_
 
 #include <OgreResourceManager.h>
-#include <lua.hpp>
+extern "C"{
+  #include <lua.h>
+}
 #include <thread>
 #include <mutex>
 

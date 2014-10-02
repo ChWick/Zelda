@@ -1,6 +1,11 @@
 #ifndef _LUA_SCRIPT_BRIDGE_HPP_
+#define _LUA_SCRIPT_BRIDGE_HPP_
 
-#include <lua.hpp>
+extern "C"{
+  #include <lua.h>
+  #include <lualib.h>
+  #include <lauxlib.h>
+}
 
 // generate default variables and exit if script canceled
 #define LUA_BRIDGE_START                                                                      \

@@ -101,7 +101,10 @@ void CMapPack::parseXMLFile() {
   m_fVisionLevelOffset = RealAttribute(pMapElem, "vision_level_offset", 0.f);
 
   for (XMLElement *pElem = pMapElem->FirstChildElement(); pElem; pElem = pElem->NextSiblingElement()) {
-    if (strcmp(pElem->Value(), "region") == 0) {
+    if (strcmp(pElem->Value(), "event") == 0) {
+      if (m_pListener) {m_pListener->parseEvent(pElem);}
+    }
+    else if (strcmp(pElem->Value(), "region") == 0) {
       if (m_pListener) {m_pListener->parseRegion(pElem);}
     }
     else if (strcmp(pElem->Value(), "entrance") == 0) {
@@ -115,6 +118,9 @@ void CMapPack::parseXMLFile() {
     }
     else if (strcmp(pElem->Value(), "new_entity") == 0) {
       if (m_pListener) {m_pListener->parseNewEntity(pElem);}
+    }
+    else {
+      LOGW("Unknown entity in map pack '%s'", pElem->Value());
     }
   }
 }

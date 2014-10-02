@@ -46,7 +46,6 @@ class CMessage;
 //! Class for an arbitrary entity
 class CEntity : public CMessageInjector {
 protected:
-  std::mutex mMutex;                          //!< mutex of the entity, when data is changed/accessed
   std::string m_sID;                          //!< id of the entity
   std::string m_sResourceGroup;               //!< in which resource group to search for entities resources
   unsigned int m_uiType;                      //!< one can set a type
@@ -54,6 +53,10 @@ protected:
 
   bool m_bPauseRender;		                    //!< if true the entity and its children will not be rendered anymore
   bool m_bPauseUpdate;                        //!< if true the entity and its children will not be updated anymore
+private:
+  std::mutex mMutex;                          //!< mutex of the entity, when data is changed/accessed
+  std::mutex mEventAccessedMutex;             //!< mutex of the entity, if the events list is accessed
+  std::mutex mEventToDeleteAccessedMutex;     //!< mutex of the entity, if the events list is accessed
 
   CEntity *m_pParent;
   std::list<CEntity*> m_lChildren;
@@ -93,7 +96,7 @@ public:
   // events access
   std::list<events::CEvent*> &getEvents() {return m_lEvents;}
   const std::list<events::CEvent*> &getEvents() const {return m_lEvents;}
-  void addEvent(events::CEvent *pEvent) {m_lEvents.push_back(pEvent);}
+  void addEvent(events::CEvent *pEvent);
   void destroyEvent(events::CEvent *pEvent);
 
   // messages access
@@ -103,8 +106,8 @@ public:
   virtual void init();
   virtual void exit();
 
-  virtual void start() {}
-  virtual void stop() {}
+  virtual void start();
+  virtual void stop();
 
 
   virtual bool frameStarted(const Ogre::FrameEvent& evt);

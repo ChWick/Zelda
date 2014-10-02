@@ -26,6 +26,7 @@ namespace tinyxml2 {
 
 class CMapPackParserListener {
 public:
+  virtual void parseEvent(const tinyxml2::XMLElement *) {}
   virtual void parsePlayer(const tinyxml2::XMLElement *) {}
   virtual void parseRegion(const tinyxml2::XMLElement *pElem) {}
   virtual void parseEntrance(const tinyxml2::XMLElement *pElem) {}

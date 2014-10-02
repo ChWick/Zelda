@@ -1,6 +1,5 @@
 #include "LuaScriptBridge.hpp"
 #include "LuaScriptManager.hpp"
-#include <lua.hpp>
 #include "../Log.hpp"
 #include "../Message/MessageCreator.hpp"
 #include "../Message/MessageHandler.hpp"

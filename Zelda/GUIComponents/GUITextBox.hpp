@@ -20,6 +20,7 @@
 #ifndef _GUI_TEXT_BOX_HPP_
 #define _GUI_TEXT_BOX_HPP_
 
+#include <memory>
 #include "../Common/GUI/GUIOverlay.hpp"
 #include "../Common/Input/GameInputListener.hpp"
 #include "../Common/PauseManager/PauseCaller.hpp"

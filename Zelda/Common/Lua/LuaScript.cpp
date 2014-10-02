@@ -1,5 +1,4 @@
 #include "LuaScript.hpp"
-#include <lua.hpp>
 #include "../Util/Assert.hpp"
 #include "../Log.hpp"
 #include "LuaScriptManager.hpp"
@@ -85,10 +84,13 @@ void CLuaScript::unloadImpl() {
   if (mLuaState) {
     lua_State *buffer = mLuaState;
     mLuaState = nullptr;
-    mLuaStateMutex.unlock();
     if (mStarted) {
       mStarted = false;
+      mLuaStateMutex.unlock();
       mThread.join(); // w8 for finished
+    }
+    else {
+      mLuaStateMutex.unlock();
     }
     lua_close(buffer);
   }
@@ -111,8 +113,13 @@ void startLuaScriptThread(lua_State *pLuaState, CLuaScript *script) {
   ASSERT(lua_isfunction(pLuaState, -1));
   luaStateMutex.unlock();
 
-  if (lua_pcall(pLuaState, 0, 0, 0) != LUA_OK) {
-    LOGW("Lua call of 'start' failed");
+  try {
+    if (lua_pcall(pLuaState, 0, 0, 0) != LUA_OK) {
+      LOGW("Lua call of 'start' failed");
+    }
+  }
+  catch (...) {
+    LOGW("Exception during lua script.");
   }
 
   luaStateMutex.lock();

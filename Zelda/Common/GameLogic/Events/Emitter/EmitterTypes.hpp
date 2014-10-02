@@ -26,6 +26,7 @@ namespace events {
 
 
 enum EEmitterTypes {
+  EMIT_ON_CREATE,
   EMIT_ON_COLLISION,
   EMIT_ON_INTERACTION,
   EMIT_ON_RECEIVED_DAMAGE,

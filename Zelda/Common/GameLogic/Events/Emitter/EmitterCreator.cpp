@@ -33,6 +33,8 @@ namespace events {
     EEmitterTypes type(EMITTER_TYPES_MAP.parseString(Attribute(pElem, "type")));
 
     switch (type) {
+    case EMIT_ON_CREATE:
+      return new CEmitter(EMIT_ON_CREATE, owner);
     case EMIT_ON_COLLISION:
       return new CEmitOnCollision(pElem, owner);
     case EMIT_ON_INTERACTION:

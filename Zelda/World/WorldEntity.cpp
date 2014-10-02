@@ -150,7 +150,7 @@ CWorldEntity *CWorldEntity::getFromUserPointer(const btCollisionObject *pCO) {
 
 CWorldEntity::SInteractionResult CWorldEntity::interactOnCollision(const Ogre::Vector3 &vInteractDir, CWorldEntity *pSender) {
   using namespace events;
-  for (auto &pEvt : m_lEvents) {
+  for (auto &pEvt : getEvents()) {
     for (auto &pEmit : pEvt->getEmitter()) {
       if (pEmit->getType() == EMIT_ON_COLLISION) {
         CEmitOnCollision *pEON(dynamic_cast<CEmitOnCollision *>(pEmit));
@@ -166,7 +166,7 @@ CWorldEntity::SInteractionResult CWorldEntity::interactOnCollision(const Ogre::V
 
 CWorldEntity::SInteractionResult CWorldEntity::interactOnActivate(const Ogre::Vector3 &vInteractDir, CWorldEntity *pSender) {
   using namespace events;
-  for (auto &pEvt : m_lEvents) {
+  for (auto &pEvt : getEvents()) {
     for (auto &pEmit : pEvt->getEmitter()) {
       if (pEmit->getType() == EMIT_ON_INTERACTION) {
         pEvt->start();
@@ -179,7 +179,7 @@ CWorldEntity::SInteractionResult CWorldEntity::interactOnActivate(const Ogre::Ve
 
 void CWorldEntity::damageAccepted(const CDamage &damage) {
   using namespace events;
-  for (auto &pEvt : m_lEvents) {
+  for (auto &pEvt : getEvents()) {
     for (auto &pEmit : pEvt->getEmitter()) {
       if (pEmit->getType() == EMIT_ON_RECEIVED_DAMAGE) {
         CEmitOnReceivedDamage *pEORD(dynamic_cast<CEmitOnReceivedDamage *>(pEmit));

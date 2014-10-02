@@ -21,7 +21,9 @@ endif()
 
 include(toolchain/AddSdkPaths)
 
-if (APPLE)
+if (ANDROID)
+	find_package(Ogre)
+elseif (APPLE)
 	# On apple we use the framework for ogre, ois is included
 else()
 	# On other systems find Ogre

@@ -39,6 +39,7 @@
 #include "../../Common/Message/MessageEntityStateChanged.hpp"
 #include "../../Common/DotSceneLoader/UserData.hpp"
 #include "../../Common/Util/XMLHelper.hpp"
+#include "../../Common/GameLogic/Events/Event.hpp"
 
 #include "../Character/CharacterCreator.hpp"
 
@@ -146,12 +147,15 @@ CMap::CMap(CEntity *pAtlas, CMapPackPtr mapPack, Ogre::SceneNode *pParentSceneNo
     m_pSceneNode->getCreator()->destroyEntity(entpair.second);
   }
   m_mStaticEntitiesMap.clear();
+
+  init();
 }
 
 CMap::~CMap() {
 }
 
 void CMap::start() {
+  CEntity::start();
   sendCallToAll(&CEntity::start, false);
 }
 
@@ -310,7 +314,7 @@ void CMap::handleMessage(const CMessage &message) {
 void CMap::rebuildStaticGeometryChangedTiles() {
   m_pStaticGeometryChangedTiles->reset();
 
-  for (CEntity *pChild : m_lChildren) {
+  for (CEntity *pChild : getChildren()) {
     CObject *pObject(dynamic_cast<CObject*>(pChild));
     if (!pObject) {continue;}
 
@@ -356,6 +360,10 @@ void CMap::processCollisionCheck() {
 
 // ############################################################################3
 // MapPackParserListener
+
+void CMap::parseEvent(const tinyxml2::XMLElement *pElem) {
+  addEvent(new events::CEvent(*this, pElem));
+}
 
 void CMap::parsePlayer(const tinyxml2::XMLElement *pElem) {
   m_pPlayer->readEventsFromXMLElement(pElem, true);
