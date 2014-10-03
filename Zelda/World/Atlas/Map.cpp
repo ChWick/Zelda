@@ -40,6 +40,7 @@
 #include "../../Common/DotSceneLoader/UserData.hpp"
 #include "../../Common/Util/XMLHelper.hpp"
 #include "../../Common/GameLogic/Events/Event.hpp"
+#include "../../Common/Util/Sleep.hpp"
 
 #include "../Character/CharacterCreator.hpp"
 
@@ -52,6 +53,7 @@ CMap::CMap(CEntity *pAtlas, CMapPackPtr mapPack, Ogre::SceneNode *pParentSceneNo
   : CWorldEntity(mapPack->getName(), pAtlas, this, mapPack->getResourceGroup()),
     m_PhysicsManager(pParentSceneNode->getCreator()),
     m_MapPack(mapPack),
+    mFirstFrame(true),
     m_pPlayer(pPlayer),
     m_pFirstFlowerEntity(nullptr),
     m_pFlowerAnimationState(nullptr) {
@@ -263,6 +265,7 @@ void CMap::translateStaticGeometry(Ogre::StaticGeometry *pSG, const Ogre::Vector
 }
 
 void CMap::update(Ogre::Real tpf) {
+  if (mFirstFrame) {return;}
   CWorldEntity::update(tpf);
 
   if (m_pFlowerAnimationState) {
@@ -271,6 +274,8 @@ void CMap::update(Ogre::Real tpf) {
 }
 
 bool CMap::frameStarted(const Ogre::FrameEvent& evt) {
+  if (mFirstFrame) {return true;}
+
   if (m_bPauseUpdate) {return true;}
   m_PhysicsManager.update(evt.timeSinceLastFrame);
   processCollisionCheck();
@@ -278,6 +283,7 @@ bool CMap::frameStarted(const Ogre::FrameEvent& evt) {
 }
 
 bool CMap::frameEnded(const Ogre::FrameEvent& evt) {
+  if (mFirstFrame) {mFirstFrame = false; return true;}
   return CWorldEntity::frameEnded(evt);
 }
 
