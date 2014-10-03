@@ -1,0 +1,18 @@
+#version 100
+
+precision mediump int;
+precision mediump float;
+
+attribute vec2 uv0;
+attribute vec4 vertex;
+
+varying vec2 out_uv0;
+varying vec3 oVPos;
+
+void main()                    
+{
+	out_uv0 = uv0;
+
+	gl_Position = vertex;
+	oVPos	    = gl_Position.xyz;
+}
