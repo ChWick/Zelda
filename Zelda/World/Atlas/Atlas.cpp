@@ -35,6 +35,8 @@
 
 CAtlas::CAtlas(CEntity *pParent, Ogre::SceneNode *pRootSceneNode)
   : CWorldEntity("atlas", pParent, nullptr),
+    mFirstFrame(false),
+    mFirstFrameUpdated(false),
     m_pCurrentMap(nullptr),
     m_pNextMap(nullptr),
     m_pPlayer(nullptr),
@@ -69,6 +71,7 @@ CAtlas::CAtlas(CEntity *pParent, Ogre::SceneNode *pRootSceneNode)
 
   LOGV(" - Creating initial map");
   m_pCurrentMap = new CMap(this, CMapPackPtr(new CMapPack(CFileManager::getResourcePath("maps/Atlases/LightWorld/"), "inner_house_link")), m_pSceneNode, m_pPlayer);
+  mFirstFrame = true;
   //m_pCurrentMap = new CMap(this, CMapPackPtr(new CMapPack(CFileManager::getResourcePath("maps/Atlases/LightWorld/"), "link_house_left")), m_pSceneNode, m_pPlayer);
   m_pPlayer->enterMap(m_pCurrentMap, Ogre::Vector3(0, 2, 0));
   m_pCurrentMap->start();
@@ -83,6 +86,8 @@ CAtlas::~CAtlas() {
 }
 
 void CAtlas::update(Ogre::Real tpf) {
+  if (mFirstFrame) {return;}
+
   mEllipticFader.fade(tpf);
   if (mEllipticFader.isFading()) {
     Ogre::Vector3 vScreenPos(m_pWorldCamera->getProjectionMatrix() * m_pWorldCamera->getViewMatrix() * m_pPlayer->getCenter());
@@ -105,26 +110,42 @@ void CAtlas::update(Ogre::Real tpf) {
 }
 
 void CAtlas::renderDebug(Ogre::Real tpf) {
+  if (mFirstFrame) {return;}
+
   m_pCameraPerspective->renderDebug(tpf);
   CWorldEntity::renderDebug(tpf);
 }
 
 void CAtlas::preRender(Ogre::Real tpf) {
+  if (mFirstFrame) {return;}
+
   m_pCameraPerspective->updateCamera(tpf);
   CWorldEntity::preRender(tpf);
 }
 
 bool CAtlas::frameRenderingQueued(const Ogre::FrameEvent& evt) {
+  if (mFirstFrame) {return true;}
   //if (m_bSwitchingMaps) {return true;}
   return CWorldEntity::frameRenderingQueued(evt);
 }
 
 bool CAtlas::frameStarted(const Ogre::FrameEvent& evt) {
+  if (mFirstFrame) {
+    if (mFirstFrameUpdated) {
+      mFirstFrameUpdated = false;
+      mFirstFrame = false;
+    }
+    else {
+      mFirstFrameUpdated = true;
+      return true;
+    }
+  }
   //if (m_bSwitchingMaps) {return true;}
   return CWorldEntity::frameStarted(evt);
 }
 
 bool CAtlas::frameEnded(const Ogre::FrameEvent& evt) {
+  if (mFirstFrame) {return true;}
   //if (m_bSwitchingMaps) {return true;}
   return CWorldEntity::frameEnded(evt);
 }
@@ -147,6 +168,7 @@ void CAtlas::handleMessage(const CMessage &message) {
 
         // create next map
         m_pNextMap = new CMap(this, CMapPackPtr(new CMapPack(CFileManager::getResourcePath("maps/Atlases/LightWorld/"), switch_map_message.getMap())), m_pSceneNode, m_pPlayer);
+        mFirstFrame = true;
 
         CMapPackPtr nextPack = m_pNextMap->getMapPack();
         CMapPackPtr currPack = m_pCurrentMap->getMapPack();
@@ -231,6 +253,7 @@ void CAtlas::fadeOutCallback() {
 
     // create next = current map
     m_pCurrentMap = new CMap(this, CMapPackPtr(new CMapPack(CFileManager::getResourcePath("maps/Atlases/LightWorld/"), m_sNextMap)), m_pSceneNode, m_pPlayer);
+    mFirstFrame = true;
     CMapPackPtr currPack = m_pCurrentMap->getMapPack();
 
     CEntrance *pEntrance = getNextEntrancePtr();

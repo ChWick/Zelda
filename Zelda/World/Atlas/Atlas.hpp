@@ -37,6 +37,8 @@ private:
   Ogre::Camera *m_pWorldCamera;
   CAerialCameraPerspective *m_pCameraPerspective;
 
+  bool mFirstFrame;                                             //!< First frame after loading is not updated, since delta t can be enormous
+  bool mFirstFrameUpdated;
   bool m_bSwitchingMaps;              //!< Is the map currently switch from current to next map
   ESwitchMapTypes m_eSwitchMapType;   //!< Type of the map switch
   std::string m_sNextMap;             //!< Next map after fading

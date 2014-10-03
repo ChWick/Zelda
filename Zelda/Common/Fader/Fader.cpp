@@ -23,3 +23,31 @@ void CFader::setFadeCenter(const Ogre::Vector2 &vCenter) {
     m_PixelShaderParameters->setNamedConstant("offset", vCenter);
   }
 }
+
+void CFader::fade(Ogre::Real tpf) {
+    if (m_eFadeOperation != FADE_NONE) {
+
+      if (m_eFadeOperation == FADE_IN) {
+        if (m_fProgress < 0.0) {
+          m_pOverlay->hide();
+          m_eFadeOperation = FADE_NONE;
+          if (m_pFaderCallback) {
+            m_pFaderCallback->fadeInCallback();
+          }
+        }
+        m_fCurrentDuration -= tpf;
+        m_fProgress = m_fCurrentDuration / m_fTotalDuration;
+      }
+      else if (m_eFadeOperation == FADE_OUT) {
+        if (m_fProgress > 1.0) {
+          m_eFadeOperation = FADE_NONE;
+          if (m_pFaderCallback) {
+            m_pFaderCallback->fadeOutCallback();
+          }
+        }
+        m_fCurrentDuration += tpf;
+        m_fProgress = m_fCurrentDuration / m_fTotalDuration;
+      }
+    }
+    m_PixelShaderParameters->setNamedConstant("progress", std::min<Ogre::Real>(1, std::max<Ogre::Real>(0, m_fProgress)));
+  }

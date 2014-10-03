@@ -39,7 +39,6 @@ private:
   CPhysicsManager m_PhysicsManager;
   CMapPackPtr m_MapPack;
   Ogre::DotSceneLoader m_SceneLoader;
-  bool mFirstFrame;                                             //!< First frame after loading is not updated, since delta t can be enormous
   CWorldEntity *m_pPlayer;
   Ogre::StaticGeometry *m_pStaticGeometry;
   Ogre::StaticGeometry *m_pStaticGeometryChangedTiles;          //!< Here are the tiles added that can be remved (bush in place)

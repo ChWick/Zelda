@@ -61,33 +61,7 @@ public:
     m_pOverlay->show();
   }
 
-  void fade(Ogre::Real tpf) {
-    if (m_eFadeOperation != FADE_NONE) {
-
-      if (m_eFadeOperation == FADE_IN) {
-	m_fCurrentDuration -= tpf;
-	m_fProgress = m_fCurrentDuration / m_fTotalDuration;
-	if (m_fProgress < 0.0) {
-	  m_pOverlay->hide();
-	  m_eFadeOperation = FADE_NONE;
-	  if (m_pFaderCallback) {
-	    m_pFaderCallback->fadeInCallback();
-	  }
-	}
-      }
-      else if (m_eFadeOperation == FADE_OUT) {
-	m_fCurrentDuration += tpf;
-	m_fProgress = m_fCurrentDuration / m_fTotalDuration;
-	if (m_fProgress > 1.0) {
-	  m_eFadeOperation = FADE_NONE;
-	  if (m_pFaderCallback) {
-	    m_pFaderCallback->fadeOutCallback();
-	  }
-	}
-      }
-    }
-    m_PixelShaderParameters->setNamedConstant("progress", m_fProgress);
-  }
+  void fade(Ogre::Real tpf);
 };
 
 #endif // _FADER_HPP_
