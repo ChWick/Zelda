@@ -114,8 +114,6 @@ CMap::CMap(CEntity *pAtlas, CMapPackPtr mapPack, Ogre::SceneNode *pParentSceneNo
                               m_pSceneNode,
                               m_MapPack->getName() + Ogre::StringConverter::toString(MAP_COUNTER++));
 
-  msleep(2000);
-
   m_MapPack->parse();
 
 
