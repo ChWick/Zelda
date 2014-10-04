@@ -54,9 +54,9 @@ protected:
   bool m_bPauseRender;		                    //!< if true the entity and its children will not be rendered anymore
   bool m_bPauseUpdate;                        //!< if true the entity and its children will not be updated anymore
 private:
-  std::mutex mMutex;                          //!< mutex of the entity, when data is changed/accessed
-  std::mutex mEventAccessedMutex;             //!< mutex of the entity, if the events list is accessed
-  std::mutex mEventToDeleteAccessedMutex;     //!< mutex of the entity, if the events list is accessed
+  mutable std::mutex mEntityMutex;                    //!< mutex of the entity, when data is changed/accessed
+  mutable std::mutex mEventAccessedMutex;             //!< mutex of the entity, if the events list is accessed
+  mutable std::mutex mEventToDeleteAccessedMutex;     //!< mutex of the entity, if the events list is accessed
 
   CEntity *m_pParent;
   std::list<CEntity*> m_lChildren;
@@ -128,7 +128,7 @@ public:
   // =============
 
   // general
-  std::mutex &getMutex() {return mMutex;}
+  std::mutex &getEntityMutex() {return mEntityMutex;}
 
   const std::string &getID() const {return m_sID;}
   std::string &getID() {return m_sID;}

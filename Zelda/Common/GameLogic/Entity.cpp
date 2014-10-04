@@ -146,15 +146,18 @@ void CEntity::attachTo(CEntity *pParent) {
 }
 
 CEntity *CEntity::getRoot() {
+  std::lock_guard<std::mutex> lock(mEntityMutex);
   if (!m_pParent) {return this;}
   return m_pParent->getRoot();
 }
 const CEntity *CEntity::getRoot() const {
+  std::lock_guard<std::mutex> lock(mEntityMutex);
   if (!m_pParent) {return this;}
   return m_pParent->getRoot();
 }
 
 CEntity *CEntity::getParent(const std::string &sID) {
+  std::lock_guard<std::mutex> lock(mEntityMutex);
   if (!m_pParent) {return NULL;}
   if (m_pParent->m_sID == sID) {
     return m_pParent;
@@ -163,6 +166,7 @@ CEntity *CEntity::getParent(const std::string &sID) {
 }
 
 const CEntity *CEntity::getParent(const std::string &sID) const {
+  std::lock_guard<std::mutex> lock(mEntityMutex);
   if (!m_pParent) {return NULL;}
   if (m_pParent->m_sID == sID) {
     return m_pParent;
@@ -171,6 +175,7 @@ const CEntity *CEntity::getParent(const std::string &sID) const {
 }
 
 CEntity *CEntity::getChild(const std::string &sID) {
+  std::lock_guard<std::mutex> lock(mEntityMutex);
   for (auto *pChild : m_lChildren) {
     if (pChild->m_sID == sID) {
       return pChild;
@@ -179,6 +184,7 @@ CEntity *CEntity::getChild(const std::string &sID) {
   return NULL;
 }
 CEntity *CEntity::getChildRecursive(const std::string &sID) {
+  std::lock_guard<std::mutex> lock(mEntityMutex);
   for (auto *pChild : m_lChildren) {
     if (pChild->m_sID == sID) {
       return pChild;
@@ -193,6 +199,7 @@ CEntity *CEntity::getChildRecursive(const std::string &sID) {
   return NULL;
 }
 const CEntity *CEntity::getChild(const std::string &sID) const {
+  std::lock_guard<std::mutex> lock(mEntityMutex);
   for (auto *pChild : m_lChildren) {
     if (pChild->m_sID == sID) {
       return pChild;
@@ -201,6 +208,7 @@ const CEntity *CEntity::getChild(const std::string &sID) const {
   return NULL;
 }
 const CEntity *CEntity::getChildRecursive(const std::string &sID) const {
+  std::lock_guard<std::mutex> lock(mEntityMutex);
   for (auto *pChild : m_lChildren) {
     if (pChild->m_sID == sID) {
       return pChild;
@@ -369,7 +377,7 @@ void CEntity::writeToXMLElement(tinyxml2::XMLElement *pElement, EOutputStyle eSt
   }
 
   // write events
-  std::lock_guard<std::mutex> lock(const_cast<CEntity*>(this)->mEventAccessedMutex);
+  std::lock_guard<std::mutex> lock(mEventAccessedMutex);
   if (m_lEvents.size() > 0) {
     XMLDocument *pDoc = pElement->GetDocument();
     XMLElement *pEventsElement = pDoc->NewElement("events");
