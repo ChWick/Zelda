@@ -10,7 +10,7 @@ template <typename T>
 class CGameMemoryData {
 private:
   std::map<std::string, T> mData;
-  std::mutex mDataAccessMutex;
+  mutable std::mutex mDataAccessMutex;
 
 public:
   const T &getData(const std::string &id, const T &defaultValue) {

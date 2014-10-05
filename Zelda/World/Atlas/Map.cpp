@@ -311,6 +311,19 @@ void CMap::handleMessage(const CMessage &message) {
   }
 }
 
+void CMap::updatePause(int iPauseType, bool bPause) {
+  if (iPauseType & PAUSE_MAP_UPDATE) {
+    m_bPauseUpdate = bPause;
+  }
+  if (iPauseType & PAUSE_MAP_RENDER) {
+    m_bPauseRender = bPause;
+    m_pStaticGeometry->setVisible(!bPause);
+    m_pStaticGeometryFixedTiles->setVisible(!bPause);
+    m_pStaticGeometryChangedTiles->setVisible(!bPause);
+    m_pSceneNode->setVisible(!bPause);
+  }
+}
+
 void CMap::rebuildStaticGeometryChangedTiles() {
   m_pStaticGeometryChangedTiles->reset();
 

@@ -22,6 +22,7 @@
 
 #include "../WorldEntity.hpp"
 #include "../../Common/PauseManager/PauseListener.hpp"
+#include "../../Common/PauseManager/PauseCaller.hpp"
 #include "../../Common/Fader/Fader.hpp"
 #include "../../Common/Message/MessageSwitchMap.hpp"
 
@@ -29,7 +30,10 @@ class CMap;
 class CAerialCameraPerspective;
 class CEntrance;
 
-class CAtlas : public CWorldEntity, public CPauseListener, public CFaderCallback {
+class CAtlas : public CWorldEntity,
+               public CPauseListener,
+               protected CPauseCaller,
+               public CFaderCallback {
 private:
   CMap *m_pCurrentMap;
   CMap *m_pNextMap;

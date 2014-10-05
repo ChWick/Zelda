@@ -16,7 +16,7 @@ class CLuaScript : public Ogre::Resource
 {
 private:
   std::thread mThread;
-  std::mutex mLuaStateMutex;
+  mutable std::mutex mLuaStateMutex;
   lua_State *mLuaState;
   bool mStarted;
 protected:

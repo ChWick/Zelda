@@ -73,14 +73,14 @@ namespace luaHelper {
   private:
     CEntity *mEntity;
     bool mReached;
-    std::mutex mMutex;
+    mutable std::mutex mMutex;
   public:
     CMoveToWait(CEntity *pEnt)
       : mEntity(pEnt),
         mReached(false) {
     }
 
-    bool hasReached() {mMutex.lock(); bool bBuf(mReached); mMutex.unlock(); return bBuf;}
+    bool hasReached() const {std::lock_guard<std::mutex> lock(mMutex); return mReached;}
   protected:
     void sendMessageToAll(const CMessage &m) {
       if (m.getType() == MSG_TARGET_REACHED) {

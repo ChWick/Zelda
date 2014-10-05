@@ -31,8 +31,8 @@ class CMessageInjector;
 class CMessageHandler
   : public Ogre::Singleton<CMessageHandler> {
 private:
-  std::mutex mMutex;
-  std::mutex mInjectorMutex;
+  mutable std::mutex mMutex;
+  mutable std::mutex mInjectorMutex;
   struct SMessageEntry {
     bool bAutoDelete;
     const CMessage *pMessage;

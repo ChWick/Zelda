@@ -28,7 +28,7 @@ class CEntity;
 
 class CEntityManager : public Ogre::Singleton<CEntityManager> {
 private:
-  std::mutex mAddToListMutex;
+  mutable std::mutex mAddToListMutex;
   std::list<CEntity *> m_lEntitiesToDestroy;
 
 public:

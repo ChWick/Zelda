@@ -21,6 +21,7 @@
 #define _MAP_HPP_
 
 #include "../WorldEntity.hpp"
+#include "../../Common/PauseManager/PauseListener.hpp"
 #include "../../Common/Physics/PhysicsManager.hpp"
 #include "MapPack.hpp"
 #include "../../Common/DotSceneLoader/DotSceneLoader.hpp"
@@ -34,7 +35,8 @@
 
 class CMap : public CWorldEntity,
              private CMapPackParserListener,
-             private CDotSceneLoaderCallback {
+             private CDotSceneLoaderCallback,
+             public CPauseListener {
 private:
   CPhysicsManager m_PhysicsManager;
   CMapPackPtr m_MapPack;
@@ -72,6 +74,7 @@ public:
 
 private:
   void handleMessage(const CMessage &message);
+  void updatePause(int iPauseType, bool bPause);
   void rebuildStaticGeometryChangedTiles();
   void processCollisionCheck();
   void translateStaticGeometry(Ogre::StaticGeometry *pSG, const Ogre::Vector3 &vVec);

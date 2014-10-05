@@ -204,10 +204,12 @@ void CAtlas::handleMessage(const CMessage &message) {
         CMessageHandler::getSingleton().addMessage(new CMessageSwitchMap(m_pNextMap->getMapPack()->getName(), CMessageSwitchMap::SWITCHING, m_eSwitchMapType, m_pCurrentMap, m_pNextMap, m_sNextMapEntrance));
       }
       else if (m_eSwitchMapType == SMT_FADE_ALPHA) {
+        pause(PAUSE_PLAYER_UPDATE | PAUSE_MAP_UPDATE);
         mAlphaFader.startFadeOut(1);
       }
       else if (m_eSwitchMapType == SMT_FADE_ELLIPTIC) {
         mEllipticFader.startFadeOut(1);
+        pause(PAUSE_PLAYER_UPDATE | PAUSE_MAP_UPDATE);
       }
 
     }
@@ -225,6 +227,7 @@ void CAtlas::handleMessage(const CMessage &message) {
           pMap = m_pNextMap;
         }
         m_bPlayerTargetReached = true;
+        unpause(PAUSE_ALL);
 
         pMap->start();
         CMessageHandler::getSingleton().addMessage(new CMessageSwitchMap(m_pCurrentMap->getMapPack()->getName(), CMessageSwitchMap::FINISHED, m_eSwitchMapType, pMap, nullptr, m_sNextMapEntrance));
@@ -240,6 +243,9 @@ void CAtlas::updatePause(int iPauseType, bool bPause) {
   }
   if (iPauseType & PAUSE_ATLAS_UPDATE) {
     m_bPauseUpdate = bPause;
+  }
+  if (iPauseType & PAUSE_PLAYER_UPDATE) {
+    m_pPlayer->setPauseUpdate(bPause);
   }
 }
 
@@ -263,6 +269,7 @@ void CAtlas::fadeOutCallback() {
     m_pPlayer->enterMap(m_pCurrentMap, vPlayerPos + pEntrance->getPlayerDirection() * 0.2);
     m_pPlayer->setPosition(vPlayerPos);
     m_bPlayerTargetReached = false;
+    unpause(PAUSE_ALL);
 
     CMessageHandler::getSingleton().addMessage(new CMessageSwitchMap(m_pCurrentMap->getMapPack()->getName(), CMessageSwitchMap::SWITCHING, m_eSwitchMapType, m_pCurrentMap, nullptr, m_sNextMapEntrance));
 

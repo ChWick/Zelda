@@ -26,7 +26,7 @@ CGUITextBox::CGUITextBox(const std::string &id,
     mDisplayedRows(0),
     mStatus(NONE) {
 
-  pause(PAUSE_ALL_WORLD_UPDATE);
+  pause(PAUSE_MAP_UPDATE | PAUSE_PLAYER_UPDATE);
 
   mTextWindow = m_pRoot->createChild("OgreTray/StaticText", "text_window");
   mCompleteText = unparsedText;
