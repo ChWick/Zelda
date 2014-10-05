@@ -756,10 +756,10 @@ bool CGame::keyPressed( const OIS::KeyEvent &arg )
     }
   else
 #endif // DEBUG_SHOW_OGRE_TRAY
-  if (arg.key == OIS::KC_SYSRQ)   // take a screenshot
-    {
-      mWindow->writeContentsToTimestampedFile("screenshot", ".jpg");
-    }
+  if (arg.key == OIS::KC_F12) {
+    // take a screenshot
+    mWindow->writeContentsToTimestampedFile("screenshot", ".jpg");
+  }
   else if (arg.key == OIS::KC_R) {
     createResources();
   }

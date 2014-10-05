@@ -27,6 +27,8 @@
 #include "../../GUIComponents/GUITextBox.hpp"
 #include "../Messages/UserMessageTypes.hpp"
 #include "../Messages/MessageShowText.hpp"
+#include "GlobalBuildDefines.hpp"
+
 
 CWorldGUI::CWorldGUI(CEntity *pParentEntity)
   : CGUIOverlay("world_gui", pParentEntity, CGUIManager::getSingleton().getRoot(),
@@ -39,10 +41,13 @@ CWorldGUI::CWorldGUI(CEntity *pParentEntity)
   new CWorldGUIItemViewer(this, m_pRoot);
 
   m_pHUD = new CHUD(this, m_pRoot);
+
+#if ENABLE_INPUT_TOUCH == 1
   new CGUIDirectionInput(this, m_pRoot, m_pRoot->getPixelSize().d_width * 0.2);
   new CWorldGUISimpleTouchButton("interact", this, m_pRoot, STB_INTERACT, m_pRoot->getPixelSize().d_width * 0.14);
   new CWorldGUISimpleTouchButton("run", this, m_pRoot, STB_RUN, m_pRoot->getPixelSize().d_width * 0.14);
   new CWorldGUISimpleTouchButton("sword", this, m_pRoot, STB_SWORD, m_pRoot->getPixelSize().d_width * 0.14);
+#endif
 }
 
 CWorldGUI::~CWorldGUI() {
