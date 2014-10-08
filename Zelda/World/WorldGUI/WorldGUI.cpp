@@ -28,6 +28,7 @@
 #include "../Messages/UserMessageTypes.hpp"
 #include "../Messages/MessageShowText.hpp"
 #include "GlobalBuildDefines.hpp"
+#include "../../Common/Log.hpp"
 
 
 CWorldGUI::CWorldGUI(CEntity *pParentEntity)
@@ -58,6 +59,7 @@ void CWorldGUI::handleMessage(const CMessage &message) {
   if (message.getType() == MSG_SHOW_TEXT) {
     const CMessageShowText &msg_show_text(dynamic_cast<const CMessageShowText&>(message));
     if (msg_show_text.getStatus() == CMessageShowText::REQUEST) {
+      LOGV("Creating MessageBox in CWorldGUI");
       new CGUITextBox("text_box", this, m_pRoot, msg_show_text.getLanguageString(), msg_show_text.getResult());
     }
   }

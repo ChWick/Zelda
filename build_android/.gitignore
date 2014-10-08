@@ -13,3 +13,4 @@ obj
 AndroidManifest.xml
 systemlibs
 lint.xml
+gen

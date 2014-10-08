@@ -49,12 +49,16 @@ int textMessage(lua_State *l) {
   XMLDocument doc;
   doc.Parse(lua_tostring(l, 1));
 
+  LOGV("Lua: Creating text message");
   CMessageHandler::getSingleton().addMessage(CMessageCreator::getSingleton().createMessage(doc.FirstChildElement(), Ogre::Any(result)));
+
+  LOGV("Lua: Waiting for closing of message box");
 
   while (true) {
     LUA_WAIT(50);
     result->mMutex.lock();
     if (result->mResult != CGUITextBox::RESULT_NONE) {
+      LOGV("Lua: Message box closed");
       break;
     }
     result->mMutex.unlock();
@@ -63,6 +67,7 @@ int textMessage(lua_State *l) {
   // still locked
   lua_pushnumber(l, result->mResult);
   result->mMutex.unlock();
+  LOGV("Lua: finished");
   return 1; // 1 return value
 }
 
