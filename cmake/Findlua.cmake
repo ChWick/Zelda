@@ -4,7 +4,7 @@
 include(FindPackageHandleStandardArgs)
 
 find_path(LUA_H_PATH NAMES lua.h PATH_SUFFIXES lua lua5.2 PATHS ${LUA_SDK_ROOT}/include)
-find_library(LUA_LIB NAMES liblua lib lua5.2 PATHS ${LUA_SDK_ROOT}/lib)
+find_library(LUA_LIB NAMES liblua lua lua5.2 PATHS ${LUA_SDK_ROOT}/lib)
 find_library(LUA_LIB_DBG NAMES liblua_d lua5.2 PATHS ${LUA_SDK_ROOT}/lib)
 
 mark_as_advanced(LUA_H_PATH LUA_LIB LUA_LIB_DBG)
