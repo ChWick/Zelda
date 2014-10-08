@@ -1,4 +1,5 @@
 #include "GUITextBox.hpp"
+#include "../Common/Log.hpp"
 #include "../Common/Input/GameInputCommand.hpp"
 #include "../TextConverter.hpp"
 #include "../Common/Util/Assert.hpp"
@@ -135,6 +136,8 @@ bool CGUITextBox::lineFull() {
 }
 
 void CGUITextBox::onResume() {
+  LOGV("Resuming text");
+
   if (mStatus == QUESTION) {
     deleteLater();
     mResult->mMutex.lock();
@@ -154,6 +157,8 @@ void CGUITextBox::onResume() {
   mCurrentLineSize = 0;
   mRowsWritten = 0;
   mCursorShown = false;
+
+  LOGV("Resuming text end");
 }
 
 void CGUITextBox::receiveInputCommand(const CGameInputCommand &cmd) {

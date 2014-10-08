@@ -26,6 +26,7 @@ CTextConverter::~CTextConverter() {
 }
 
 void CTextConverter::convert(CEGUI::String &text) {
+  LOGI("Converting text");
   ASSERT(mCurrentMap);
 
   int replaceStart = 0;
@@ -43,13 +44,16 @@ void CTextConverter::convert(CEGUI::String &text) {
       toReplace = "unset button";
     }
     else {
+      ASSERT(mCurrentMap->getMapPack());
+      LOGV("Requesting text");
       toReplace = mCurrentMap->getMapPack()->getLanguageManager().getCEGUIString(id);
+      LOGV("Got text");
     }
 
     text = text.replace(replaceStart, replaceEnd - replaceStart + 1, toReplace);
   }
 
-  //
+  LOGI("Converting text finished");
 }
 
 void CTextConverter::sendMessageToAll(const CMessage &msg) {

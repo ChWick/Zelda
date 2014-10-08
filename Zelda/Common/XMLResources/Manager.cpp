@@ -63,6 +63,7 @@ namespace XMLResources {
   }
 
   const std::string &CManager::getString(const CEGUI::String &id, bool searchGlobal) const {
+    LOGV("Getting XMLResource string '%s'", id.c_str());
     if (m_lStringResources.count(id) != 1) {
       if (searchGlobal && this != &GLOBAL) {
         return GLOBAL.getString(id, false);
@@ -73,7 +74,7 @@ namespace XMLResources {
   }
 
   const CEGUI::String CManager::getCEGUIString(const CEGUI::String &id, bool searchGlobal) const {
-    LOGI("%s", id.c_str());
+    LOGV("Getting XMLResource CEGUI string '%s'", id.c_str());
     if (m_lStringResources.count(id) != 1) {
       if (searchGlobal && this != &GLOBAL) {
         return GLOBAL.getCEGUIString(id, false);
