@@ -18,8 +18,7 @@ CTextConverter *CTextConverter::getSingletonPtr() {
   return msSingleton;
 }
 
-CTextConverter::CTextConverter()
-  : mCurrentMap(nullptr) {
+CTextConverter::CTextConverter() {
 }
 
 CTextConverter::~CTextConverter() {
@@ -27,7 +26,7 @@ CTextConverter::~CTextConverter() {
 
 void CTextConverter::convert(CEGUI::String &text) {
   LOGI("Converting text");
-  ASSERT(mCurrentMap);
+  ASSERT(mCurrentMapPack);
 
   int replaceStart = 0;
   while ((replaceStart = text.find("${")) != CEGUI::String::npos) {
@@ -44,9 +43,8 @@ void CTextConverter::convert(CEGUI::String &text) {
       toReplace = "unset button";
     }
     else {
-      ASSERT(mCurrentMap->getMapPack());
       LOGV("Requesting text");
-      toReplace = mCurrentMap->getMapPack()->getLanguageManager().getCEGUIString(id);
+      toReplace = mCurrentMapPack->getLanguageManager().getCEGUIString(id);
       LOGV("Got text");
     }
 
@@ -60,7 +58,7 @@ void CTextConverter::sendMessageToAll(const CMessage &msg) {
   if (msg.getType() == MSG_SWITCH_MAP) {
     const CMessageSwitchMap &msg_switch_map(dynamic_cast<const CMessageSwitchMap &>(msg));
     if (msg_switch_map.getStatus() == CMessageSwitchMap::FINISHED) {
-      mCurrentMap = msg_switch_map.getFromMap();
+      mCurrentMapPack = msg_switch_map.getFromMap()->getMapPack();
     }
   }
 }

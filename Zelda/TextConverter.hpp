@@ -4,12 +4,13 @@
 #include <OgreSingleton.h>
 #include "Common/Message/MessageInjector.hpp"
 #include <CEGUI/String.h>
+#include "World/Atlas/MapPack.hpp"
 
 class CMap;
 
 class CTextConverter : public Ogre::Singleton<CTextConverter>, public CMessageInjector {
 protected:
-  const CMap *mCurrentMap;
+  CMapPackPtrConst mCurrentMapPack;
 public:
   CTextConverter();
   virtual ~CTextConverter();
