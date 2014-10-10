@@ -30,6 +30,7 @@
 #include "Entrance.hpp"
 #include "../GlobalCollisionShapesTypes.hpp"
 #include "../Objects/Object.hpp"
+#include "../Objects/Chest.hpp"
 #include "BulletCollision/CollisionShapes/btSphereShape.h"
 #include <BulletCollision/CollisionShapes/btCapsuleShape.h>
 #include <BulletCollision/CollisionShapes/btCylinderShape.h>
@@ -431,6 +432,12 @@ void CMap::postEntityAdded(Ogre::Entity *pEntity, Ogre::SceneNode *pParent, btRi
     else {
       pEntity->shareSkeletonInstanceWith(m_pFirstFlowerEntity);
     }
+  }
+  else if (pEntity->getMesh()->getName() == "small_chest_bottom.mesh") {
+    CChest *pChest = new CChest(pEntity->getName(), this, this, CChest::SMALL_CHEST);
+    pChest->setPosition(pParent->_getDerivedPosition());
+    pChest->init();
+    pChest->start();
   }
 }
 
