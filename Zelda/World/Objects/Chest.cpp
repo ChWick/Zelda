@@ -5,7 +5,8 @@
 
 CChest::CChest(const std::string &sID, CWorldEntity *pParent, CMap *pMap, EChestType chestType)
   : CWorldEntity(sID, pParent, pMap, pParent->getResourceGroup()),
-    mChestType(chestType) {
+    mChestType(chestType),
+    mStatus(STATUS_CLOSED) {
   m_pSceneNode = pParent->getSceneNode()->createChildSceneNode(sID);
   mLidSceneNode = m_pSceneNode->createChildSceneNode(sID + "_lid");
   switch (mChestType) {
@@ -28,5 +29,19 @@ void CChest::start() {
 }
 
 void CChest::update(Ogre::Real tpf) {
-  mLidSceneNode->pitch(Ogre::Radian(-tpf));
+  if (mStatus == STATUS_OPENING) {
+    mLidSceneNode->pitch(Ogre::Radian(-tpf));
+    if (mLidSceneNode->getOrientation().getPitch().valueDegrees() < -90) {
+      mStatus = STATUS_OPENED;
+    }
+  }
+}
+
+CWorldEntity::SInteractionResult CChest::interactOnActivate(const Ogre::Vector3 &vInteractDir, CWorldEntity *pSender) {
+  open();
+  return CWorldEntity::interactOnActivate(vInteractDir, pSender);
+}
+
+void CChest::open() {
+  mStatus = STATUS_OPENING;
 }

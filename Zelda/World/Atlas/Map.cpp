@@ -19,6 +19,7 @@
 
 #include "Map.hpp"
 #include "../../Common/Physics/BtOgrePG.hpp"
+#include "../../Common/Physics/PhysicsMasks.hpp"
 #include "../../Common/Util/DeleteSceneNode.hpp"
 #include <OgreSceneManager.h>
 #include <OgreSceneNode.h>
@@ -436,8 +437,11 @@ void CMap::postEntityAdded(Ogre::Entity *pEntity, Ogre::SceneNode *pParent, btRi
   else if (pEntity->getMesh()->getName() == "small_chest_bottom.mesh") {
     CChest *pChest = new CChest(pEntity->getName(), this, this, CChest::SMALL_CHEST);
     pChest->setPosition(pParent->_getDerivedPosition());
+    pChest->setThisAsCollisionObjectsUserPointer(pRigidBody);
     pChest->init();
     pChest->start();
+    m_PhysicsManager.getWorld()->removeRigidBody(pRigidBody);
+    m_PhysicsManager.getWorld()->addRigidBody(pRigidBody, COL_INTERACTIVE, MASK_INTERACIVE_OBJECT_COLLIDES_WITH);
   }
 }
 

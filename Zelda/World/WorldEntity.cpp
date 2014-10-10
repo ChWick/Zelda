@@ -124,6 +124,11 @@ void CWorldEntity::setOrientation(const Ogre::Quaternion &quat) {
 Ogre::SceneNode *CWorldEntity::getSceneNode() const {
   return m_pSceneNode;
 }
+
+void CWorldEntity::setCollisionObject(btCollisionObject *pCollisionObject) {
+  m_pCollisionObject = pCollisionObject;
+}
+
 btCollisionObject *CWorldEntity::getCollisionObject() const {
   return m_pCollisionObject;
 }
@@ -134,17 +139,21 @@ void CWorldEntity::update(Ogre::Real tpf) {
 }
 
 void CWorldEntity::setThisAsCollisionObjectsUserPointer() {
-  assert(m_pCollisionObject);
-  m_pCollisionObject->setUserPointer(this);
+  setThisAsCollisionObjectsUserPointer(m_pCollisionObject);
+}
+
+void CWorldEntity::setThisAsCollisionObjectsUserPointer(btCollisionObject *pCollisionObject) {
+  ASSERT(pCollisionObject);
+  pCollisionObject->setUserPointer(this);
 }
 
 CWorldEntity *CWorldEntity::getFromUserPointer(btCollisionObject *pCO) {
-  assert(pCO);
+  ASSERT(pCO);
   return static_cast<CWorldEntity*>(pCO->getUserPointer());
 }
 
 CWorldEntity *CWorldEntity::getFromUserPointer(const btCollisionObject *pCO) {
-  assert(pCO);
+  ASSERT(pCO);
   return static_cast<CWorldEntity*>(pCO->getUserPointer());
 }
 

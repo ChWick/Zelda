@@ -59,6 +59,7 @@ public:
 
   virtual Ogre::SceneNode *getSceneNode() const;
   virtual btCollisionObject *getCollisionObject() const;
+  virtual void setCollisionObject(btCollisionObject *pCollisionObject);
   virtual CMap *getMap() const {return m_pMap;}
   virtual void enterMap(CMap *pMap, const Ogre::Vector3 &vPosition);
 
@@ -66,6 +67,7 @@ public:
 
 
   void setThisAsCollisionObjectsUserPointer();
+  void setThisAsCollisionObjectsUserPointer(btCollisionObject *pCollsionObject);
   static CWorldEntity *getFromUserPointer(btCollisionObject *pCO);
   static CWorldEntity *getFromUserPointer(const btCollisionObject *pCO);
 

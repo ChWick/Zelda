@@ -285,6 +285,8 @@
 		<Unit filename="../Zelda/World/Messages/UserMessageCreator.hpp" />
 		<Unit filename="../Zelda/World/Messages/UserMessageTypes.cpp" />
 		<Unit filename="../Zelda/World/Messages/UserMessageTypes.hpp" />
+		<Unit filename="../Zelda/World/Objects/Chest.cpp" />
+		<Unit filename="../Zelda/World/Objects/Chest.hpp" />
 		<Unit filename="../Zelda/World/Objects/Object.cpp" />
 		<Unit filename="../Zelda/World/Objects/Object.hpp" />
 		<Unit filename="../Zelda/World/Objects/ObjectTypes.cpp" />
