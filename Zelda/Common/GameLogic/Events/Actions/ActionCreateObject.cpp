@@ -48,7 +48,9 @@ void CActionCreateObject::start() {
   else if (m_sLocation == "local"){
     CMap *pMap = worldEnt.getMap();
     CObject *pObject = new CObject(worldEnt.getID() + "created", dynamic_cast<CWorldEntity*>(worldEnt.getParent()), pMap, m_eObjectType);
+    pObject->init();
     pObject->setPosition(worldEnt.getPosition());
+    pObject->start();
   }
   else {
     LOGW("Location '%s' is unknown.", m_sLocation.c_str());

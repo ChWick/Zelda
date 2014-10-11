@@ -1,5 +1,9 @@
 #include "Chest.hpp"
 #include "Object.hpp"
+#include "../../Common/Message/MessageHandler.hpp"
+#include "../../Common/Message/MessagePlayerPickupItem.hpp"
+#include "../Messages/MessageShowText.hpp"
+#include "../Messages/UserMessageTypes.hpp"
 #include <OgreSceneNode.h>
 #include <OgreSceneManager.h>
 #include <OgreEntity.h>
@@ -52,10 +56,16 @@ void CChest::update(Ogre::Real tpf) {
       if (mTimer > INNER_OBJECT_TIME_TO_LIFT + INNER_OBJECT_TIME_TO_SET_IN_LIFT) {
         tpf = tpf - (mTimer - INNER_OBJECT_TIME_TO_LIFT - INNER_OBJECT_TIME_TO_SET_IN_LIFT);
         mLifting = false;
+        onLifted();
       }
       mInnerObject->translate(Ogre::Vector3(0, tpf / INNER_OBJECT_TIME_TO_LIFT * INNER_OBJECT_LIFT_HEIGHT, 0));
     }
   }
+}
+
+void CChest::pauseUpdate(Ogre::Real tpf) {
+  update(tpf);
+  CWorldEntity::pauseUpdate(tpf);
 }
 
 CWorldEntity::SInteractionResult CChest::interactOnActivate(const Ogre::Vector3 &vInteractDir, CWorldEntity *pSender) {
@@ -69,14 +79,41 @@ CWorldEntity::SInteractionResult CChest::interactOnActivate(const Ogre::Vector3 
   return CWorldEntity::interactOnActivate(vInteractDir, pSender);
 }
 
+void CChest::handleMessage(const CMessage &message) {
+  if (message.getType() == MSG_SHOW_TEXT) {
+    const CMessageShowText &msg_st(dynamic_cast<const CMessageShowText&>(message));
+    if (msg_st.getStatus() == CMessageShowText::FINISHED) {
+      onFinished();
+    }
+  }
+}
+
 void CChest::open() {
+  pause(PAUSE_ALL_ATLAS_UPDATE);
   mStatus = STATUS_OPENING;
   createInnerObject(OBJECT_RED_RUPEE);
 }
 
+void CChest::onLifted() {
+  if (mTextMessage.size() > 0) {
+    CMessageHandler::getSingleton().addMessage(new CMessageShowText(mTextMessage));
+  }
+  else {
+    onFinished();
+  }
+}
+
+void CChest::onFinished() {
+  unpause(PAUSE_ALL);
+  mInnerObject->deleteLater();
+  CMessageHandler::getSingleton().addMessage(new CMessagePlayerPickupItem(m_uiType));
+}
+
 void CChest::createInnerObject(EObjectTypes eType) {
+  mInnerObjectType = eType;
   mLifting = true;
   mInnerObject = new CObject(getID() + "_inner_object", this, m_pMap, eType);
+  // dont init CObject, since we handle location
   switch (mChestType) {
   case SMALL_CHEST:
     mInnerObject->translate(Ogre::Vector3(0, -0.03, 0.045) * 0.5);

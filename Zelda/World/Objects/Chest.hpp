@@ -3,8 +3,10 @@
 
 #include "../WorldEntity.hpp"
 #include "ObjectTypes.hpp"
+#include "../../Common/PauseManager/PauseCaller.hpp"
 
-class CChest : public CWorldEntity {
+class CChest : public CWorldEntity,
+               public CPauseCaller {
 public:
   enum EChestType {
     SMALL_CHEST,
@@ -25,20 +27,25 @@ private:
   EStatus mStatus;
   bool mLifting;
   CWorldEntity *mInnerObject;
+  EObjectTypes mInnerObjectType;
+  std::string mTextMessage;
   Ogre::Real mTimer;
 public:
   CChest(const std::string &sID, CWorldEntity *pParent, CMap *pMap, EChestType chestType);
 
   void start();
-
   void update(Ogre::Real);
+  void pauseUpdate(Ogre::Real);
 
   void createInnerObject(EObjectTypes eType);
 private:
 
   SInteractionResult interactOnActivate(const Ogre::Vector3 &vInteractDir, CWorldEntity *pSender);
+  void handleMessage(const CMessage &message);
 
   void open();
+  void onLifted();
+  void onFinished();
 };
 
 #endif // _CHEST_HPP_

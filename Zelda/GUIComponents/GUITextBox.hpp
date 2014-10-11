@@ -64,7 +64,7 @@ public:
               CEntity *pParentEntity,
               CEGUI::Window *pParentWindow,
               const CEGUI::String &unparsedText,
-              std::shared_ptr<CGUITextBox::SResult> result);
+              std::shared_ptr<CGUITextBox::SResult> result = std::shared_ptr<SResult>(new SResult()));
 
   ~CGUITextBox();
 

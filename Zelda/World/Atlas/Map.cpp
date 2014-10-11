@@ -122,8 +122,6 @@ CMap::CMap(CEntity *pAtlas, CMapPackPtr mapPack, Ogre::SceneNode *pParentSceneNo
   //CreateCube(btVector3(0, 10, 0.2), 1);
   //CreateCube(btVector3(0, 200, 0.3), 100);
 
-  //new CObject(m_MapPack->getName() + "rupee", this, this, OBJECT_GREEN_BUSH);
-
   /*btCollisionShape *pBox = new btBoxShape(btVector3(10, 0.1, 10));
   btRigidBody *pRB = new btRigidBody(0, new btDefaultMotionState(), pBox);
   m_pCollisionObject = pRB;
@@ -459,7 +457,7 @@ CDotSceneLoaderCallback::EResults CMap::preEntityAdded(tinyxml2::XMLElement *XML
   EObjectTypes objectType(OBJECT_TYPE_ID_MAP.getFromMeshFileName(XMLNode->Attribute("meshFile")));
   if (objectType != OBJECT_COUNT && OBJECT_TYPE_ID_MAP.toData(objectType).bUserHandle) {
     pEntity = new CObject(userData.getStringUserData("name"), this, this, objectType, pParent);
-    pEntity->start();
+    pEntity->init();
 
     pEntity->setPosition(pParent->getPosition());
     pEntity->getSceneNode()->setInitialState();

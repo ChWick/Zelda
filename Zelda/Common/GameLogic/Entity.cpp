@@ -295,12 +295,21 @@ void CEntity::update(Ogre::Real tpf) {
     if (!pEnt->m_bPauseUpdate) {
       pEnt->update(tpf);
     }
+    else {
+      pEnt->pauseUpdate(tpf);
+    }
   }
   mEventAccessedMutex.lock();
   for (auto &pEvt : m_lEvents) {
     pEvt->update(tpf);
   }
   mEventAccessedMutex.unlock();
+}
+
+void CEntity::pauseUpdate(Ogre::Real tpf) {
+  for (auto &pEnt : m_lChildren) {
+    pEnt->pauseUpdate(tpf);
+  }
 }
 
 void CEntity::preRender(Ogre::Real tpf) {

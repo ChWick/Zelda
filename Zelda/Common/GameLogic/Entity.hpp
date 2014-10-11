@@ -112,6 +112,7 @@ public:
 
   virtual bool frameStarted(const Ogre::FrameEvent& evt);
   virtual void update(Ogre::Real tpf);
+  virtual void pauseUpdate(Ogre::Real tpf);
   virtual void preRender(Ogre::Real tpf);
   virtual void render(Ogre::Real tpf);
   virtual void renderDebug(Ogre::Real tpf);

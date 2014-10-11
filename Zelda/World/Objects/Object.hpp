@@ -29,7 +29,7 @@ protected:
 public:
    CObject(const std::string &id, CWorldEntity *pParent, CMap *pMap, EObjectTypes eObjectType, Ogre::SceneNode *pSceneNode = nullptr);
 
-  void start();
+  void init();
 
   virtual void enterMap(CMap *pMap, const Ogre::Vector3 &vPosition);
 

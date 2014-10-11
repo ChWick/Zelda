@@ -42,8 +42,8 @@ protected:
   const EStatus mStatus;
   std::shared_ptr<CGUITextBox::SResult> mResult;
 public:
-  CMessageShowText(const std::string &sLanguageString, std::shared_ptr<CGUITextBox::SResult> result, EStatus status = REQUEST);
-  CMessageShowText(const tinyxml2::XMLElement *pElem, std::shared_ptr<CGUITextBox::SResult> result);
+  CMessageShowText(const std::string &sLanguageString, std::shared_ptr<CGUITextBox::SResult> result = std::shared_ptr<CGUITextBox::SResult>(new CGUITextBox::SResult()), EStatus status = REQUEST);
+  CMessageShowText(const tinyxml2::XMLElement *pElem, std::shared_ptr<CGUITextBox::SResult> result = std::shared_ptr<CGUITextBox::SResult>(new CGUITextBox::SResult()));
 
   const std::string &getLanguageString() const {return m_sLanguageString;}
   std::shared_ptr<CGUITextBox::SResult> getResult() const {return mResult;}

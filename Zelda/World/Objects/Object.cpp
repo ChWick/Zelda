@@ -68,7 +68,7 @@ CObject::CObject(const std::string &id, CWorldEntity *pParent, CMap *pMap, EObje
   }
 }
 
-void CObject::start() {
+void CObject::init() {
   createPhysics();
 
   switch (m_uiType) {
@@ -294,6 +294,7 @@ CObject::EReceiveDamageResult CObject::hit(const CDamage &dmg) {
 
 void CObject::createInnerObject(EObjectTypes eType) {
   CObject *pObject = new CObject(m_sID + "_inner" + Ogre::StringConverter::toString(OBJECT_INNER_OBJECT_ID_NUMBER_COUNTER++), m_pMap, m_pMap, eType);
+  pObject->start();
   btRigidBody *pRB = btRigidBody::upcast(pObject->getCollisionObject());
   switch (m_uiType) {
   case OBJECT_GREEN_TREE:
