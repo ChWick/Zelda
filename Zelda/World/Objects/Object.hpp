@@ -29,9 +29,10 @@ protected:
 public:
    CObject(const std::string &id, CWorldEntity *pParent, CMap *pMap, EObjectTypes eObjectType, Ogre::SceneNode *pSceneNode = nullptr);
 
+  void start();
 
   virtual void enterMap(CMap *pMap, const Ogre::Vector3 &vPosition);
-  
+
   void createInnerObject(EObjectTypes eType);
 
 protected:
@@ -47,7 +48,7 @@ protected:
   virtual EReceiveDamageResult hit(const CDamage &dmg);
 
 
-  
+
 	virtual void killedCallback();
 };
 

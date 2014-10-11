@@ -1,12 +1,20 @@
 #include "Chest.hpp"
+#include "Object.hpp"
 #include <OgreSceneNode.h>
 #include <OgreSceneManager.h>
 #include <OgreEntity.h>
 
+const Ogre::Real CChest::INNER_OBJECT_LIFT_HEIGHT(0.15);
+const Ogre::Real CChest::INNER_OBJECT_TIME_TO_LIFT(2);
+const Ogre::Real CChest::INNER_OBJECT_TIME_TO_SET_IN_LIFT(1);
+
 CChest::CChest(const std::string &sID, CWorldEntity *pParent, CMap *pMap, EChestType chestType)
   : CWorldEntity(sID, pParent, pMap, pParent->getResourceGroup()),
     mChestType(chestType),
-    mStatus(STATUS_CLOSED) {
+    mStatus(STATUS_CLOSED),
+    mInnerObject(nullptr),
+    mLifting(false),
+    mTimer(0) {
   m_pSceneNode = pParent->getSceneNode()->createChildSceneNode(sID);
   mLidSceneNode = m_pSceneNode->createChildSceneNode(sID + "_lid");
   switch (mChestType) {
@@ -30,18 +38,50 @@ void CChest::start() {
 
 void CChest::update(Ogre::Real tpf) {
   if (mStatus == STATUS_OPENING) {
+    // rotate lid
     mLidSceneNode->pitch(Ogre::Radian(-tpf));
     if (mLidSceneNode->getOrientation().getPitch().valueDegrees() < -90) {
       mStatus = STATUS_OPENED;
     }
   }
+
+  // lift inner object
+  if (mLifting) {
+    mTimer += tpf;
+    if (mTimer > INNER_OBJECT_TIME_TO_SET_IN_LIFT) {
+      if (mTimer > INNER_OBJECT_TIME_TO_LIFT + INNER_OBJECT_TIME_TO_SET_IN_LIFT) {
+        tpf = tpf - (mTimer - INNER_OBJECT_TIME_TO_LIFT - INNER_OBJECT_TIME_TO_SET_IN_LIFT);
+        mLifting = false;
+      }
+      mInnerObject->translate(Ogre::Vector3(0, tpf / INNER_OBJECT_TIME_TO_LIFT * INNER_OBJECT_LIFT_HEIGHT, 0));
+    }
+  }
 }
 
 CWorldEntity::SInteractionResult CChest::interactOnActivate(const Ogre::Vector3 &vInteractDir, CWorldEntity *pSender) {
-  open();
+  if (mStatus != STATUS_CLOSED) {
+    return CWorldEntity::IR_NONE;
+  }
+  if (abs(vInteractDir.angleBetween(-getOrientation().zAxis()).valueDegrees()) < 5) {
+    // player has to be in front of the chest
+    open();
+  }
   return CWorldEntity::interactOnActivate(vInteractDir, pSender);
 }
 
 void CChest::open() {
   mStatus = STATUS_OPENING;
+  createInnerObject(OBJECT_RED_RUPEE);
+}
+
+void CChest::createInnerObject(EObjectTypes eType) {
+  mLifting = true;
+  mInnerObject = new CObject(getID() + "_inner_object", this, m_pMap, eType);
+  switch (mChestType) {
+  case SMALL_CHEST:
+    mInnerObject->translate(Ogre::Vector3(0, -0.03, 0.045) * 0.5);
+    break;
+  case BIG_CHEST:
+    break;
+  }
 }

@@ -50,7 +50,7 @@ CObject::CObject(const std::string &id, CWorldEntity *pParent, CMap *pMap, EObje
   else {
     m_pSceneNode = pParent->getSceneNode()->createChildSceneNode(id);
   }
-  
+
   Ogre::SceneManager *pSceneManager = m_pSceneNode->getCreator();
 
   Ogre::Entity *pEntity(nullptr);
@@ -66,7 +66,9 @@ CObject::CObject(const std::string &id, CWorldEntity *pParent, CMap *pMap, EObje
     m_pSceneNode->attachObject(pEntity);
     pEntity->setCastShadows(false);
   }
+}
 
+void CObject::start() {
   createPhysics();
 
   switch (m_uiType) {
@@ -79,7 +81,6 @@ CObject::CObject(const std::string &id, CWorldEntity *pParent, CMap *pMap, EObje
   default:
     break;
   }
-
 }
 
 void CObject::destroyPhysics() {
