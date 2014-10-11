@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-	  package="org.@LOWERCASE_PROJECT_NAME@"
+	  package="@PROJECT_PACKAGE_NAME@"
 	  android:versionCode="@PROJECT_VERSION_CODE@"
 	  android:versionName="@PROJECT_VERSION_NAME@" 
 	  android:installLocation="auto">
@@ -32,11 +32,10 @@
       </intent-filter>
     </activity>
     <!-- Activity required to show ad overlays. -->
-    <activity
-        android:name="com.google.android.gms.ads.AdActivity"
-        android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"/>
+    @PROJECT_ADDS_ACTIVITY@
 
-   @PROJECT_AMAZON_GAME_CIRCLE_ACTIVITY@
+    <!-- Activity used amazon game circle, activity definition -->
+    @PROJECT_AMAZON_GAME_CIRCLE_ACTIVITY@
 
   </application>
 

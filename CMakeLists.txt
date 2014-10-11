@@ -3,6 +3,8 @@ cmake_minimum_required(VERSION 2.8)
 # set project name
 project(Zelda)
 string (TOLOWER ${CMAKE_PROJECT_NAME} LOWERCASE_PROJECT_NAME)
+set (PROJECT_LOWERCASE_DEVELOPER_NAME "cwdev")
+set (PROJECT_PACKAGE_NAME "org.@PROJECT_LOWERCASE_DEVELOPER_NAME@.@LOWERCASE_PROJECT_NAME@")
 set (GAME_DIR "Zelda")
 
 # set version

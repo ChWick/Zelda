@@ -167,7 +167,7 @@ public class NativeActivity extends android.app.NativeActivity {
 	
 	public void setLoadText(String text) {
 		if (mLoadDialog == null) {return;}
-		TextView tv = (TextView)mLoadDialog.findViewById(R.id.mencus_load_text);
+		TextView tv = (TextView)mLoadDialog.findViewById(R.id.zelda_load_text);
 		if (tv == null) {return;}
 		tv.setText(text);
 	}

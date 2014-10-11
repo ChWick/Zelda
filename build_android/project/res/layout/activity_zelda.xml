@@ -10,7 +10,7 @@
 	
 	<ImageView
 	    android:id="@+id/background_image"
-	    android:contentDescription=""
+	    android:contentDescription="@string/loading_description"
 	    android:layout_width="wrap_content"
 	    android:layout_height="match_parent"
 	    android:src="@drawable/ic_launcher"
@@ -24,7 +24,7 @@
         android:textColor="#FFFFAA"
         android:gravity="center"
         android:background="#AA000066"
-		android:id="@+id/mencus_load_text"/>
+	android:id="@+id/zelda_load_text"/>
 </RelativeLayout>
 
 
