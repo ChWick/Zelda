@@ -419,7 +419,10 @@ void CMap::physicsShapeCreated(btCollisionShape *pShape, const std::string &sMes
 void CMap::worldPhysicsAdded(btRigidBody *pRigidBody) {
   ASSERT(pRigidBody);
 
-  pRigidBody->setUserPointer(dynamic_cast<CWorldEntity*>(this));
+  // if user pointer is already set, then collision/interaction is handled in a special way, e.g. chest
+  if (pRigidBody->getUserPointer() == nullptr) {
+    setThisAsCollisionObjectsUserPointer(pRigidBody);
+  }
 }
 
 void CMap::postEntityAdded(Ogre::Entity *pEntity, Ogre::SceneNode *pParent, btRigidBody *pRigidBody, const CUserData &userData) {
