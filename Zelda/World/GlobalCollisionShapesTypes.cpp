@@ -27,6 +27,7 @@ CGlobalCollisionShapesTypesIdMap::CGlobalCollisionShapesTypesIdMap() {
   m_Map[GCST_STONE_PILE] = "stone_pile";
   m_Map[GCST_TREE] = "tree";
   m_Map[GCST_FALLING_OBJECT_SPHERE] = "falling_object_sphere";
+  m_Map[GCST_SMALL_CHEST_TOP] = "small_chest_top";
 }
 
 CGlobalCollisionShapesTypesIdMap GLOBAL_COLLISION_SHAPES_TYPES_ID_MAP;

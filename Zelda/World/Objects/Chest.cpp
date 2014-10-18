@@ -1,7 +1,14 @@
 #include "Chest.hpp"
 #include "Object.hpp"
+#include "../Atlas/Map.hpp"
+#include "../GlobalCollisionShapesTypes.hpp"
+#include "../../Common/Physics/PhysicsManager.hpp"
+#include "../../Common/Physics/PhysicsMasks.hpp"
+#include "../../Common/Physics/BtOgreExtras.hpp"
+#include "../../Common/Physics/BtOgrePG.hpp"
 #include "../../Common/Message/MessageHandler.hpp"
 #include "../../Common/Message/MessagePlayerPickupItem.hpp"
+#include "../../Common/Util/Assert.hpp"
 #include "../Messages/MessageShowText.hpp"
 #include "../Messages/UserMessageTypes.hpp"
 #include <OgreSceneNode.h>
@@ -15,19 +22,32 @@ const Ogre::Real CChest::INNER_OBJECT_TIME_TO_SET_IN_LIFT(1);
 CChest::CChest(const std::string &sID, CWorldEntity *pParent, CMap *pMap, EChestType chestType)
   : CWorldEntity(sID, pParent, pMap, pParent->getResourceGroup()),
     mChestType(chestType),
+    mPhysicsOffset(Ogre::Vector3::ZERO),
     mStatus(STATUS_CLOSED),
     mInnerObject(nullptr),
     mLifting(false),
     mTimer(0) {
   m_pSceneNode = pParent->getSceneNode()->createChildSceneNode(sID);
   mLidSceneNode = m_pSceneNode->createChildSceneNode(sID + "_lid");
+  CPhysicsCollisionObject *pCO(nullptr);
   switch (mChestType) {
   case SMALL_CHEST:
     mLidSceneNode->attachObject(m_pSceneNode->getCreator()->createEntity("small_chest_top.mesh"));
+    pCO = &m_pMap->getPhysicsManager()->getCollisionShape(GLOBAL_COLLISION_SHAPES_TYPES_ID_MAP.toString(GCST_SMALL_CHEST_TOP));
     break;
   case BIG_CHEST:
     break;
   }
+  ASSERT(pCO);
+  mPhysicsOffset = pCO->getOffset();
+  btRigidBody::btRigidBodyConstructionInfo info();
+  btRigidBody *pRB = new btRigidBody(0,
+                                     new btDefaultMotionState(),
+                                     pCO->getShape(),
+                                     BtOgre::Convert::toBullet(mLidSceneNode->_getDerivedPosition()));
+  m_pCollisionObject = pRB;
+  setThisAsCollisionObjectsUserPointer(m_pCollisionObject);
+  m_pMap->getPhysicsManager()->getWorld()->addRigidBody(pRB, COL_INTERACTIVE, MASK_INTERACIVE_OBJECT_COLLIDES_WITH);
 }
 
 void CChest::start() {
@@ -38,6 +58,7 @@ void CChest::start() {
   case BIG_CHEST:
     break;
   }
+  m_pCollisionObject->getWorldTransform().setOrigin(BtOgre::Convert::toBullet(mLidSceneNode->_getDerivedPosition()));
 }
 
 void CChest::update(Ogre::Real tpf) {
@@ -61,6 +82,8 @@ void CChest::update(Ogre::Real tpf) {
       mInnerObject->translate(Ogre::Vector3(0, tpf / INNER_OBJECT_TIME_TO_LIFT * INNER_OBJECT_LIFT_HEIGHT, 0));
     }
   }
+  m_pCollisionObject->getWorldTransform().setOrigin(BtOgre::Convert::toBullet(mLidSceneNode->convertLocalToWorldPosition(mPhysicsOffset)));
+  m_pCollisionObject->getWorldTransform().setRotation(BtOgre::Convert::toBullet(mLidSceneNode->_getDerivedOrientation()));
 }
 
 void CChest::pauseUpdate(Ogre::Real tpf) {

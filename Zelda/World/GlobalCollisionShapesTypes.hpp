@@ -29,6 +29,7 @@ enum EGlobalCollisionShapesTypes {
   GCST_STONE_PILE,
   GCST_TREE,
   GCST_FALLING_OBJECT_SPHERE,
+  GCST_SMALL_CHEST_TOP,
 
   GCST_COUNT,
 };
