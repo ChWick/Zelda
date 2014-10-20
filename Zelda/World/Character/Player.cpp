@@ -33,6 +33,9 @@
 #include <OgreSkeleton.h>
 #include <OgreSkeletonInstance.h>
 #include "../../Common/Log.hpp"
+#include "../Items/PlayerItem.hpp"
+#include "../Messages/MessageItem.hpp"
+#include "../Messages/UserMessageTypes.hpp"
 
 
 #define TURN_SCALE 4
@@ -50,6 +53,7 @@ CPlayer::CPlayer(CEntity *pParent, const Ogre::Camera* pCamera, Ogre::SceneManag
 CPlayer::~CPlayer() {
 }
 void CPlayer::destroy() {
+  mCurrentItem.reset();
   CPerson::destroy();
 }
 CCharacterController *CPlayer::createCharacterController() {
@@ -289,4 +293,15 @@ void CPlayer::postStepForwardAndStrafe() {
     DebugDrawer::getSingleton().drawLine(vPos, vPos + vDir * 0.08, Ogre::ColourValue::Blue);
     createDamage(Ogre::Ray(vPos, vDir * 0.08), CDamage(DMG_SWORD, m_pSceneNode->getOrientation().zAxis()));
   }
+}
+
+void CPlayer::handleMessage(const CMessage &message) {
+  if (message.getType() == MSG_ITEM) {
+    const CMessageItem &msg_item(dynamic_cast<const CMessageItem&>(message));
+    if (msg_item.getItemMessageType() == CMessageItem::IM_SELECTION_CHANGED) {
+      mCurrentItem = std::shared_ptr<CPlayerItem>(new CPlayerItem(*this, PERSON_LEFT_HANDLE, msg_item.getItemVariantType()));
+    }
+  }
+
+  CPerson::handleMessage(message);
 }

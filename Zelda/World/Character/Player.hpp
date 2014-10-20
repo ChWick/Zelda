@@ -24,6 +24,7 @@
 #include <OgrePrerequisites.h>
 
 class CMap;
+class CPlayerItem;
 
 using namespace Ogre;
 
@@ -34,6 +35,8 @@ private:
   CWorldEntity *m_pLiftedEntity;
 
 	RibbonTrail* mSwordTrail;
+
+	std::shared_ptr<CPlayerItem> mCurrentItem;
 public:
 
 	CPlayer(CEntity *pParent, const Ogre::Camera *pCamera, Ogre::SceneManager *pPlayerSceneManager);
@@ -59,6 +62,9 @@ protected:
   void postStepForwardAndStrafe();
 
 	virtual CCharacterController *createCharacterController();
+
+private:
+  void handleMessage(const CMessage &message);
 };
 
 #endif // _PLAYER_HPP_
