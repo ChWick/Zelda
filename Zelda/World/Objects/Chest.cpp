@@ -4,9 +4,11 @@
 #include "../../Common/Message/MessagePlayerPickupItem.hpp"
 #include "../Messages/MessageShowText.hpp"
 #include "../Messages/UserMessageTypes.hpp"
+#include "../../Common/XMLResources/Manager.hpp"
 #include <OgreSceneNode.h>
 #include <OgreSceneManager.h>
 #include <OgreEntity.h>
+#include "../../TextConverter.hpp"
 
 const Ogre::Real CChest::INNER_OBJECT_LIFT_HEIGHT(0.15);
 const Ogre::Real CChest::INNER_OBJECT_TIME_TO_LIFT(2);
@@ -112,6 +114,13 @@ void CChest::onFinished() {
 void CChest::createInnerObject(EObjectTypes eType) {
   mInnerObjectType = eType;
   mLifting = true;
+  if (XMLResources::GLOBAL.hasString(OBJECT_TYPE_ID_MAP.toData(eType).sID)) {
+    mTextMessage = "${" + OBJECT_TYPE_ID_MAP.toData(eType).sID + "}";
+  }
+  else {
+    mTextMessage = "";
+    LOGV("%s", ("No item text for chest object " + OBJECT_TYPE_ID_MAP.toData(eType).sID).c_str());
+  }
   mInnerObject = new CObject(getID() + "_inner_object", this, m_pMap, eType);
   // dont init CObject, since we handle location
   switch (mChestType) {

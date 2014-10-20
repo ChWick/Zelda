@@ -48,6 +48,7 @@ namespace XMLResources {
       }
     }
 
+    bool hasString(const CEGUI::String &id, bool searchGlobal = true) const;
     const std::string &getString(const CEGUI::String &id, bool searchGlobal = true) const;
     const CEGUI::String getCEGUIString(const CEGUI::String &id, bool searchGlobal = true) const;
 

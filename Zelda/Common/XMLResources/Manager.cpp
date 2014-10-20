@@ -62,6 +62,18 @@ namespace XMLResources {
     }
   }
 
+  bool CManager::hasString(const CEGUI::String &id, bool searchGlobal) const {
+    if (m_lStringResources.count(id) != 1) {
+      if (searchGlobal && this != &GLOBAL) {
+        return GLOBAL.hasString(id, false);
+      }
+      else {
+        return false;
+      }
+    }
+   return true;
+  }
+
   const std::string &CManager::getString(const CEGUI::String &id, bool searchGlobal) const {
     LOGV("Getting XMLResource string '%s'", id.c_str());
     if (m_lStringResources.count(id) != 1) {
