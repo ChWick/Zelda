@@ -23,6 +23,7 @@ private:
   static const Ogre::Real INNER_OBJECT_TIME_TO_SET_IN_LIFT;
 
   Ogre::SceneNode *mLidSceneNode;
+  Ogre::Vector3 mPhysicsOffset;
   const EChestType mChestType;
   EStatus mStatus;
   bool mLifting;

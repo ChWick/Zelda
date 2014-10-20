@@ -17,6 +17,7 @@
  * Zelda. If not, see http://www.gnu.org/licenses/.
  *****************************************************************************/
 
+#include "../../Common/Game.hpp"
 #include "Atlas.hpp"
 #include "Map.hpp"
 #include <OgreSceneNode.h>
@@ -29,7 +30,6 @@
 #include "../Character/Player.hpp"
 #include <OgreViewport.h>
 #include <OgreSceneManager.h>
-#include "../../Common/Game.hpp"
 #include "../../Common/Util/Assert.hpp"
 #include "Entrance.hpp"
 

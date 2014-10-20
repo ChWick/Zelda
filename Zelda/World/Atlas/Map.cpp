@@ -84,6 +84,8 @@ CMap::CMap(CEntity *pAtlas, CMapPackPtr mapPack, Ogre::SceneNode *pParentSceneNo
                                      CPhysicsCollisionObject(new btCylinderShape(btVector3(0.173, 0.2, 0.173)), Ogre::Vector3::NEGATIVE_UNIT_Y * 0.2));
   m_PhysicsManager.addCollisionShape(GLOBAL_COLLISION_SHAPES_TYPES_ID_MAP.toString(GCST_FALLING_OBJECT_SPHERE),
                                      CPhysicsCollisionObject(new btSphereShape(0.02), Ogre::Vector3::NEGATIVE_UNIT_Y * 0));
+  m_PhysicsManager.addCollisionShape(GLOBAL_COLLISION_SHAPES_TYPES_ID_MAP.toString(GCST_SMALL_CHEST_TOP),
+                                     CPhysicsCollisionObject(new btCylinderShapeX(btVector3(0.04, 0.025, 0.025)), Ogre::Vector3(0, 0.020, 0.025)));
 
 
   // Create global entites

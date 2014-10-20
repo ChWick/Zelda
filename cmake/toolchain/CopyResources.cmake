@@ -1,3 +1,4 @@
+
 if (NOT RESOURCES_OUTPUT_DIR) 
   message(fatal_error "RESOURCES_OUTPUT_DIR was not set")
 endif()
@@ -21,6 +22,7 @@ if (APPLE)
 
 		file(GLOB files "${RESOURCES_ROOT_DIR}/${directory}${file}")
 		foreach(single_file ${files})
+			message("copy ${single_file} in POST_BUILD")
 			add_custom_command(TARGET Game POST_BUILD
 				COMMAND ditto ${single_file} ${RESOURCES_OUTPUT_DIR}/${directory}/
 				)
