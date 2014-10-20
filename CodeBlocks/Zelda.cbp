@@ -277,6 +277,8 @@
 		<Unit filename="../Zelda/World/Items/ItemStatus.hpp" />
 		<Unit filename="../Zelda/World/Items/ItemTypes.cpp" />
 		<Unit filename="../Zelda/World/Items/ItemTypes.hpp" />
+		<Unit filename="../Zelda/World/Items/PlayerItem.cpp" />
+		<Unit filename="../Zelda/World/Items/PlayerItem.hpp" />
 		<Unit filename="../Zelda/World/Messages/MessageItem.cpp" />
 		<Unit filename="../Zelda/World/Messages/MessageItem.hpp" />
 		<Unit filename="../Zelda/World/Messages/MessageShowText.cpp" />

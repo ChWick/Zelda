@@ -29,3 +29,7 @@ void CPlayerItem::hide() {
 CDamage CPlayerItem::createDamage() {
   return CDamage(DMG_ALL, mPlayer.getOrientation().zAxis(), HP_FULL_HEART, 0);
 }
+
+Ogre::Vector3 CPlayerItem::getDamagePosition() {
+  return Ogre::Vector3::ZERO;
+}
