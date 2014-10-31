@@ -50,12 +50,20 @@ CPlayer::CPlayer(CEntity *pParent, const Ogre::Camera* pCamera, Ogre::SceneManag
     m_pPlayerSceneManager(pPlayerSceneManager),
     m_pLiftedEntity(nullptr) {
 }
+
 CPlayer::~CPlayer() {
 }
+
+void CPlayer::exit() {
+  mCurrentItem.reset();
+  CPerson::exit();
+}
+
 void CPlayer::destroy() {
   mCurrentItem.reset();
   CPerson::destroy();
 }
+
 CCharacterController *CPlayer::createCharacterController() {
 	return new CPlayerController(m_pPlayerSceneManager, m_pCamera, this);
 }

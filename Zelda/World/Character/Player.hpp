@@ -42,6 +42,7 @@ public:
 	CPlayer(CEntity *pParent, const Ogre::Camera *pCamera, Ogre::SceneManager *pPlayerSceneManager);
 	virtual ~CPlayer();
 	void destroy();
+	virtual void exit();
 	void update(Ogre::Real tpf);
   void renderDebug(Ogre::Real tpf);
 	void startup(const Ogre::Vector3 &playerPos, const Ogre::Vector3 &playerLookDirection, const Ogre::Real cameraYaw, const Ogre::Real cameraPitch);
