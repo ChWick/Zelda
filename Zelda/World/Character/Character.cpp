@@ -24,6 +24,7 @@
 #include "../../Common/Physics/BtOgreExtras.hpp"
 #include <BulletDynamics/Character/btCharacterControllerInterface.h>
 #include <OgreAnimationState.h>
+#include "../Items/PlayerItem.hpp"
 
 // map will be set on enter map, in construction, m_pMap is nullptr
 CCharacter::CCharacter(const std::string &sID, CEntity *pParent, CMap *pMap, const EFriendOrEnemyStates foe, unsigned int uiAnimationCount)
@@ -61,6 +62,7 @@ CCharacter::CCharacter(const tinyxml2::XMLElement *pElem, CEntity *pParent, CMap
 CCharacter::~CCharacter() {
 }
 void CCharacter::exit() {
+  mCurrentItem.reset();
   CWorldEntity::exit();
   destroyPhysics();
 }
@@ -263,5 +265,9 @@ short CCharacter::getCollisionGroup() {
     case FOE_FRIENDLY:
         return COL_CHARACTER_P;;
     }
+}
+
+void CCharacter::changeItem(const std::string &bone, EItemVariantTypes item) {
+  mCurrentItem = std::shared_ptr<CCharacterItem>(new CCharacterItem(*this, bone, item));
 }
 

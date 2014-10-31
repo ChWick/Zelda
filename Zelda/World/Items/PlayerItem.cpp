@@ -4,32 +4,32 @@
 #include <OgreEntity.h>
 #include <OgreSceneManager.h>
 #include <OgreSceneNode.h>
-#include "../Character/Player.hpp"
+#include "../Character/Character.hpp"
 
-CPlayerItem::CPlayerItem(CPlayer &player, const std::string &boneToAttach, EItemVariantTypes type)
-  : mPlayer(player),
+CCharacterItem::CCharacterItem(CCharacter &character, const std::string &boneToAttach, EItemVariantTypes type)
+  : mCharacter(character),
     mVariantType(type) {
-  mAttachedMesh = player.getSceneNode()->getCreator()->createEntity(ITEM_VARIANT_DATA_MAP.toData(type).sBasicMeshName);
-  player.getBodyEntity()->attachObjectToBone(boneToAttach, mAttachedMesh, Ogre::Quaternion(Ogre::Degree(90), Ogre::Vector3::UNIT_X));
+  mAttachedMesh = mCharacter.getSceneNode()->getCreator()->createEntity(ITEM_VARIANT_DATA_MAP.toData(type).sBasicMeshName);
+  mCharacter.getBodyEntity()->attachObjectToBone(boneToAttach, mAttachedMesh, Ogre::Quaternion(Ogre::Degree(90), Ogre::Vector3::UNIT_X));
 }
 
-CPlayerItem::~CPlayerItem() {
-  mPlayer.getBodyEntity()->detachObjectFromBone(mAttachedMesh);
-  mPlayer.getSceneNode()->getCreator()->destroyEntity(mAttachedMesh);
+CCharacterItem::~CCharacterItem() {
+  mCharacter.getBodyEntity()->detachObjectFromBone(mAttachedMesh);
+  mCharacter.getSceneNode()->getCreator()->destroyEntity(mAttachedMesh);
 }
 
-void CPlayerItem::show() {
+void CCharacterItem::show() {
   mAttachedMesh->setVisible(true);
 }
 
-void CPlayerItem::hide() {
+void CCharacterItem::hide() {
   mAttachedMesh->setVisible(false);
 }
 
-CDamage CPlayerItem::createDamage() {
-  return CDamage(DMG_ALL, mPlayer.getOrientation().zAxis(), HP_FULL_HEART, 0);
+CDamage CCharacterItem::createDamage() {
+  return CDamage(DMG_ALL, mCharacter.getOrientation().zAxis(), HP_FULL_HEART, 0);
 }
 
-Ogre::Vector3 CPlayerItem::getDamagePosition() {
+Ogre::Vector3 CCharacterItem::getDamagePosition() {
   return Ogre::Vector3::ZERO;
 }

@@ -24,10 +24,12 @@
 #include <LinearMath/btAlignedObjectArray.h>
 #include "FriendOrEnemyStates.hpp"
 #include "CharacterControllerPhysicsListener.hpp"
+#include "../Items/ItemTypes.hpp"
 
 class btRigidBody;
 class CMap;
 class CCharacterController;
+class CCharacterItem;
 
 class btCollisionShape;
 class btCharacterControllerInterface;
@@ -98,7 +100,8 @@ protected:
 
 	Ogre::Real m_fTimer;																//!< Animation timer (how long is the current animation running)
 	Ogre::Real m_fAnimSpeed;														//!< Animation speed
-
+private:
+	std::shared_ptr<CCharacterItem> mCurrentItem;
 public:
 
 	// getter & setter
@@ -163,6 +166,8 @@ protected:
 
   virtual bool isReadyForNewAction();
 	void fadeAnimations(const Ogre::Real deltaTime);
+
+	void changeItem(const std::string &bone, EItemVariantTypes item);
 };
 
 #endif // _CHARACTER_H_

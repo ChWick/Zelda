@@ -54,16 +54,6 @@ CPlayer::CPlayer(CEntity *pParent, const Ogre::Camera* pCamera, Ogre::SceneManag
 CPlayer::~CPlayer() {
 }
 
-void CPlayer::exit() {
-  mCurrentItem.reset();
-  CPerson::exit();
-}
-
-void CPlayer::destroy() {
-  mCurrentItem.reset();
-  CPerson::destroy();
-}
-
 CCharacterController *CPlayer::createCharacterController() {
 	return new CPlayerController(m_pPlayerSceneManager, m_pCamera, this);
 }
@@ -307,7 +297,7 @@ void CPlayer::handleMessage(const CMessage &message) {
   if (message.getType() == MSG_ITEM) {
     const CMessageItem &msg_item(dynamic_cast<const CMessageItem&>(message));
     if (msg_item.getItemMessageType() == CMessageItem::IM_SELECTION_CHANGED) {
-      mCurrentItem = std::shared_ptr<CPlayerItem>(new CPlayerItem(*this, PERSON_LEFT_HANDLE, msg_item.getItemVariantType()));
+      changeItem(PERSON_LEFT_HANDLE, msg_item.getItemVariantType());
     }
   }
 

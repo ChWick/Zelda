@@ -5,16 +5,16 @@
 #include <OgrePrerequisites.h>
 #include "../Damage.hpp"
 
-class CPlayer;
+class CCharacter;
 
-class CPlayerItem {
+class CCharacterItem {
 protected:
-  CPlayer &mPlayer;
+  CCharacter &mCharacter;
   const EItemVariantTypes mVariantType;
   Ogre::Entity *mAttachedMesh;
 public:
-  CPlayerItem(CPlayer &player, const std::string &boneToAttach, EItemVariantTypes type);
-  ~CPlayerItem();
+  CCharacterItem(CCharacter &character, const std::string &boneToAttach, EItemVariantTypes type);
+  ~CCharacterItem();
 
   void show();
   void hide();

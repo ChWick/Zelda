@@ -75,6 +75,12 @@ CPerson::CPerson(const tinyxml2::XMLElement *pElem, CEntity *pParent, CMap *pMap
 
 CPerson::~CPerson() {
 }
+
+void CPerson::exit() {
+	removeBlinkingMaterials();
+  CCharacter::exit();
+}
+
 CCharacterController *CPerson::createCharacterController() {
 	return new CPersonController(this);
 }
@@ -84,10 +90,6 @@ const Ogre::Vector3 CPerson::getFloorPosition() const {
   return m_pSceneNode->getPosition() - Ogre::Vector3(0, PERSON_FLOOR_OFFSET, 0);
 }
 
-void CPerson::destroy() {
-	removeBlinkingMaterials();
-	CCharacter::destroy();
-}
 void CPerson::createPhysics() {
     using namespace Ogre;
 
@@ -253,12 +255,15 @@ void CPerson::createBlinkingMaterials() {
   m_pMaterial = Ogre::MaterialManager::getSingleton().getByName(m_PersonData.sMaterialName)->clone(m_sID + "mat_" + m_PersonData.sMaterialName);
   m_pBodyEntity->setMaterial(m_pMaterial);
 }
+
 void CPerson::removeBlinkingMaterials() {
 	Ogre::MaterialManager::getSingleton().remove(m_pMaterial->getName());
 }
+
 void CPerson::startBeingInvulnerableCallback() {
 	m_pMaterial->getSupportedTechnique(0)->getPass(0)->getFragmentProgramParameters()->setNamedConstant("blinking_intensity", 1.f);
 }
+
 void CPerson::endBeingInvulnerableCallback() {
 	m_pMaterial->getSupportedTechnique(0)->getPass(0)->getFragmentProgramParameters()->setNamedConstant("blinking_intensity", 0.f);
 }

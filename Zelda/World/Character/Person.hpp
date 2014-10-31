@@ -57,7 +57,7 @@ public:
 	CPerson(const tinyxml2::XMLElement *pElem, CEntity *pParent, CMap *pMap, unsigned int uiAnimationCount);
 	virtual ~CPerson();
 
-	virtual void destroy();
+	virtual void exit();
 
   virtual bool frameEnded(const Ogre::FrameEvent& evt);
 
