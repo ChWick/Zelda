@@ -41,7 +41,7 @@ void CItemVariantDataMap::init() {
   m_Map[ITEM_VARIANT_BOMBOSMEDALLION] = {"BombosMedallion", 1, "link_sword.mesh"};
   m_Map[ITEM_VARIANT_ETHERMEDALLION] = {"EtherMedallion", 1, "link_sword.mesh"};
   m_Map[ITEM_VARIANT_QUAKEMEDALLION] = {"QuakeMedallion", 1, "link_sword.mesh"};
-  m_Map[ITEM_VARIANT_LAMP] = {"Lamp", 1, "link_sword.mesh"};
+  m_Map[ITEM_VARIANT_LAMP] = {"Lamp", 1, "lamp.mesh"};
   m_Map[ITEM_VARIANT_HAMMER] = {"Hammer", 1, "link_sword.mesh"};
   m_Map[ITEM_VARIANT_SHOVEL] = {"Shovel", 1, "link_sword.mesh"};
   m_Map[ITEM_VARIANT_OCARINA] = {"Ocarina", 1, "link_sword.mesh"};

@@ -1,0 +1,39 @@
+# lamp
+material lamp_metall
+{
+    receive_shadows off
+
+    technique
+    {
+        pass
+        {
+            specular    1 1 1 1 50
+
+            texture_unit
+            {
+                texture lamp.png
+            }
+        }
+    }
+}
+
+material lamp_glass
+{
+    receive_shadows off
+
+    technique
+    {
+        pass
+        {
+            lighting off
+            scene_blend alpha_blend
+            depth_write off
+
+            texture_unit
+            {
+                texture lamp.png
+                alpha_op_ex source1 src_manual src_texture 0.2 
+            }
+        }
+    }
+}

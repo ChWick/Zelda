@@ -54,8 +54,11 @@ def makeGameZip() :
 	copyAllOfType(zipf, '../packs/game/textures/*', 'textures')
 	copyAllOfType(zipf, '../packs/game/materials/*.material', 'materials')
 	copyAllOfType(zipf, '../packs/game/programs/*', 'programs')
-        copyAllOfType(zipf, '../packs/game/overlays/*', 'overlays')
+	copyAllOfType(zipf, '../packs/game/overlays/*', 'overlays')
 	
+	# items
+	copyAllOfType(zipf, '../models/items/lamp/*.mesh', 'meshes')
+	copyAllOfType(zipf, '../models/items/lamp/*.png', 'textures')
 
 	copyAllOfType(zipf, '../models/link/*.mesh', 'meshes')
 	copyAllOfType(zipf, '../models/link/*.skeleton', 'skeletons')
@@ -64,7 +67,7 @@ def makeGameZip() :
 	copyAllOfType(zipf, '../models/soldier/*.skeleton', 'skeletons')
 	copyAllOfType(zipf, '../models/soldier/soldier_*.png', 'textures')
 	copyAllOfType(zipf, '../models/Objects/rupee/*.mesh', 'meshes')
-        copyAllOfType(zipf, '../maps/chest/*.mesh','meshes')
+	copyAllOfType(zipf, '../maps/chest/*.mesh','meshes')
 	zipf.write('../models/test/Cylinder.mesh', 'meshes/Cylinder.mesh', zipfile.ZIP_DEFLATED)
 
 	zipf.close()

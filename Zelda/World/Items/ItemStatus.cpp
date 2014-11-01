@@ -36,6 +36,7 @@ CItemStatusStorage::CItemStatusStorage() {
   m_Storage[ITEM_SLOT_BOMB].vItems.push_back(ITEM_VARIANT_BOMB);
   m_Storage[ITEM_SLOT_BOTTLE].vItems.push_back(ITEM_VARIANT_BOTTLE_BEE);
   m_Storage[ITEM_SLOT_BOTTLE].vItems.push_back(ITEM_VARIANT_BOTTLE_EMPTY);
+  m_Storage[ITEM_SLOT_LAMP].vItems.push_back(ITEM_VARIANT_LAMP);
 }
 
 void CItemStatusStorage::load() {

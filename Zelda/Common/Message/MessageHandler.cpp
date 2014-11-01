@@ -47,8 +47,8 @@ void CMessageHandler::process() {
 
   mInjectorMutex.unlock();
 
-  mMutex.lock();
   std::list<std::unique_ptr<SMessageEntry> > l;
+  mMutex.lock();
   l.splice(l.end(), m_lMessages);
   mMutex.unlock();
 
@@ -59,6 +59,7 @@ void CMessageHandler::process() {
 
     l.pop_front();
   }
+  return;
 }
 
 void CMessageHandler::addInjector(CMessageInjector *pInjector) {
