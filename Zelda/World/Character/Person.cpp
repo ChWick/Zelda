@@ -272,6 +272,5 @@ void CPerson::endBeingInvulnerableCallback() {
 void CPerson::attack(unsigned int uiTool) {
   if (isReadyForNewAction()) {
     animAttack();
-    dynamic_cast<CPersonController*>(m_pCharacterController)->stun(m_Anims[ANIM_SLICE_HORIZONTAL]->getLength());
   }
 }

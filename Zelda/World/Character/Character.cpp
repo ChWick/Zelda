@@ -35,12 +35,11 @@ CCharacter::CCharacter(const std::string &sID, CEntity *pParent, CMap *pMap, con
     m_eFriendOrEnemy(foe),
     m_pCharacterController(nullptr)
 {
-  mCCPhysics = NULL;
-  m_bMoving = false;
-  m_fYaw = 0;
   m_Anims.resize(m_uiAnimationCount);
   m_FadingStates.resize(m_uiAnimationCount);
   m_uiAnimID = m_uiAnimationCount;
+
+  constructor_impl();
 }
 
 CCharacter::CCharacter(const tinyxml2::XMLElement *pElem, CEntity *pParent, CMap *pMap, const EFriendOrEnemyStates foe, unsigned int uiAnimationCount)
@@ -51,12 +50,26 @@ CCharacter::CCharacter(const tinyxml2::XMLElement *pElem, CEntity *pParent, CMap
     m_eFriendOrEnemy(foe),
     m_pCharacterController(nullptr) {
 
-  mCCPhysics = NULL;
-  m_bMoving = false;
-  m_fYaw = 0;
   m_Anims.resize(m_uiAnimationCount);
   m_FadingStates.resize(m_uiAnimationCount);
   m_uiAnimID = m_uiAnimationCount;
+
+  constructor_impl();
+}
+
+
+void CCharacter::constructor_impl() {
+  mCCPhysics = NULL;
+  m_bMoving = false;
+  m_fYaw = 0;
+
+  mAnimationProperty.resize(m_uiAnimationCount);
+  for (SAnimationProperty &prop : mAnimationProperty) {
+    prop.allowMoving = false;
+  }
+
+  if (ANIM_WALK < m_uiAnimationCount) {mAnimationProperty[ANIM_WALK].allowMoving = true;}
+  if (ANIM_RUN < m_uiAnimationCount) {mAnimationProperty[ANIM_RUN].allowMoving = true;}
 }
 
 CCharacter::~CCharacter() {
@@ -267,7 +280,17 @@ short CCharacter::getCollisionGroup() {
     }
 }
 
+void CCharacter::useCurrentItem() {
+  useItem(mCurrentItem->getItemVariantType());
+}
+
 void CCharacter::changeItem(const std::string &bone, EItemVariantTypes item) {
   mCurrentItem = std::shared_ptr<CCharacterItem>(new CCharacterItem(*this, bone, item));
+}
+
+void CCharacter::useItem(EItemVariantTypes item) {
+  if (isReadyForNewAction()) {
+    animAttack();
+  }
 }
 

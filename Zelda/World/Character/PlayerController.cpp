@@ -73,6 +73,9 @@ void CPlayerController::receiveInputCommand(const CGameInputCommand &cmd) {
       endRunning();
     }
     break;
+  case GIC_TOOL:
+    mCCPerson->useCurrentItem();
+    break;
   default:
     break;
 	}

@@ -36,6 +36,10 @@ class btCharacterControllerInterface;
 
 #define ANIM_FADE_SPEED 7.5f   // animation crossfade speed in % of full weight per second
 
+struct SAnimationProperty {
+	bool allowMoving;
+};
+
 //! Klasse f&uuml;r einen animierten Charater mit Standardanimationen
 /*!
 Elternklassen f&uur: Charakter kann zerst&ouml;rt werden, Charakter kann Schaden verursachen.
@@ -102,6 +106,7 @@ protected:
 	Ogre::Real m_fAnimSpeed;														//!< Animation speed
 private:
 	std::shared_ptr<CCharacterItem> mCurrentItem;
+	std::vector<SAnimationProperty> mAnimationProperty;
 public:
 
 	// getter & setter
@@ -111,6 +116,8 @@ public:
 	const EFriendOrEnemyStates getFriendOrEnemyState() const {return m_eFriendOrEnemy;}
   const Ogre::vector<Ogre::AnimationState*>::type &getAnimations() const {return m_Anims;}
   unsigned int getCurrentAnimationID() const {return m_uiAnimID;}
+	const std::vector<SAnimationProperty> &getAnimationProperties() const {return mAnimationProperty;}
+	const SAnimationProperty &getCurrentAnimationProperty() const {return mAnimationProperty[m_uiAnimID];}
 
 	// reimplemented
 	void setPosition(const Ogre::Vector3 &vPos);
@@ -137,6 +144,8 @@ public:
 	virtual void animAttack();
 	virtual void animAttackEnd();
 
+	void useCurrentItem();
+
 	void setIsMoving(bool isMoving);
 
 	virtual void destroy();
@@ -156,6 +165,7 @@ protected:
 	virtual void preAnimationUpdateCallback(const Ogre::Real fTime) {}
 	virtual void updateAnimationsCallback(const Ogre::Real fTime);
 	virtual void postUpdateAnimationsCallback(const Ogre::Real fTime) {}
+	virtual void useItem(EItemVariantTypes item);
 	virtual CCharacterController *createCharacterController() = 0;
 	void updateAnimations(const Ogre::Real fTime);
 
@@ -168,6 +178,9 @@ protected:
 	void fadeAnimations(const Ogre::Real deltaTime);
 
 	void changeItem(const std::string &bone, EItemVariantTypes item);
+
+private:
+	void constructor_impl();
 };
 
 #endif // _CHARACTER_H_

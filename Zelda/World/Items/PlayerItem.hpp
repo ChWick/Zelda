@@ -16,6 +16,8 @@ public:
   CCharacterItem(CCharacter &character, const std::string &boneToAttach, EItemVariantTypes type);
   ~CCharacterItem();
 
+  EItemVariantTypes getItemVariantType() const {return mVariantType;}
+
   void show();
   void hide();
 

@@ -281,6 +281,11 @@ void CPersonController::changeMoveState(unsigned int uiNewMoveState, const Ogre:
 }
 
 void CPersonController::move(bool bMove, Ogre::Real fSpeed, const Ogre::Vector3 &vDir) {
+  const SAnimationProperty &prop(mCCPerson->getCurrentAnimationProperty());
+  if (!prop.allowMoving) {
+    bMove = false;
+  }
+
   if (bMove) {
 		mCCPhysics->setWalkDirection(BtOgre::Convert::toBullet(vDir * fSpeed * WALK_SPEED_SCALE));
     mCCPhysics->setSubSteps(std::max<int>(ceil(fSpeed / WALK_SPEED), 1));
