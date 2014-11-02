@@ -40,7 +40,8 @@ public:
   std::mutex &getLuaStateMutex() {return mLuaStateMutex;}
   lua_State *getLuaState() {return mLuaState;}
 
-  void setStarted(bool b) {mStarted = b;}
+  void setStarted(bool b) {std::lock_guard<std::mutex> l(mLuaStateMutex); mStarted = b;}
+  bool isStarted() const {std::lock_guard<std::mutex> l(mLuaStateMutex); return mStarted;}
 
 private:
 };

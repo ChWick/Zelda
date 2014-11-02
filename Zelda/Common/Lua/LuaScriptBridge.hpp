@@ -12,15 +12,13 @@ extern "C"{
   CLuaScriptPtr luaScript(CLuaScriptManager::getSingleton().getByLuaState(l));                \
   std::mutex &luaStateMutex(luaScript->getLuaStateMutex());                                   \
   {                                                                                           \
-    std::lock_guard<std::mutex> lock(luaStateMutex);                                          \
-    if (luaScript->getLuaState() == nullptr) {return -1;}                                     \
+    if (!luaScript->isStarted()) {return -1;}                                     \
   }
 
 #define LUA_WAIT(t)                                                                           \
   msleep(t);                                                                                  \
   {                                                                                           \
-    std::lock_guard<std::mutex> lock(luaStateMutex);                                          \
-    if (luaScript->getLuaState() == nullptr) {return -1;}                                     \
+    if (!luaScript->isStarted()) {return -1;}                                     \
   }
 
 

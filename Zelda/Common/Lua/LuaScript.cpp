@@ -83,7 +83,6 @@ void CLuaScript::unloadImpl() {
   mLuaStateMutex.lock();
   if (mLuaState) {
     lua_State *buffer = mLuaState;
-    mLuaState = nullptr;
     if (mStarted) {
       mStarted = false;
       mLuaStateMutex.unlock();
@@ -97,7 +96,7 @@ void CLuaScript::unloadImpl() {
   else {
     mLuaStateMutex.unlock();
   }
-
+  mLuaState = nullptr;  // at end set state to zero, since script will run to end and check maybe if script exists
 }
 
 size_t CLuaScript::calculateSize() const {
@@ -106,8 +105,8 @@ size_t CLuaScript::calculateSize() const {
 
 void startLuaScriptThread(lua_State *pLuaState, CLuaScript *script) {
   std::mutex &luaStateMutex(script->getLuaStateMutex());
-  luaStateMutex.lock();
   script->setStarted(true);
+  luaStateMutex.lock();
   lua_getglobal(pLuaState, "start");
   //ASSERT(lua_gettop(mLuaState) == 0); // no arguments passed
   ASSERT(lua_isfunction(pLuaState, -1));
@@ -122,9 +121,7 @@ void startLuaScriptThread(lua_State *pLuaState, CLuaScript *script) {
     LOGW("Exception during lua script.");
   }
 
-  luaStateMutex.lock();
   script->setStarted(false);
-  luaStateMutex.unlock();
 }
 
 void CLuaScript::start() {
