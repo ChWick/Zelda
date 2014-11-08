@@ -113,8 +113,12 @@ else()
   set(RESOURCES_USING_APK "")
 endif()
 
+# release
 configure_file("${PROJECT_TEMPLATES_DIR}/plugins.cfg.in" "${EXECUTABLE_OUTPUT_PATH}/plugins.cfg" @ONLY)
 configure_file("${PROJECT_TEMPLATES_DIR}/resources.cfg.in" "${EXECUTABLE_OUTPUT_PATH}/resources.cfg" @ONLY)
+# debug
+configure_file("${PROJECT_TEMPLATES_DIR}/plugins.cfg.in" "${EXECUTABLE_OUTPUT_PATH}/plugins_d.cfg" @ONLY)
+configure_file("${PROJECT_TEMPLATES_DIR}/resources.cfg.in" "${EXECUTABLE_OUTPUT_PATH}/resources_d.cfg" @ONLY)
 
 
 # create project file properties

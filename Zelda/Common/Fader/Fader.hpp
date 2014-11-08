@@ -1,11 +1,13 @@
 #ifndef _FADER_HPP_
 #define _FADER_HPP_
 
+#include <OgrePrerequisites.h>
 
-#include <OgreOverlay.h>
 #if OGRE_VERSION >= ((1 << 16) | (9 << 8) | 0)
 #include <OgreOverlaySystem.h>
 #endif
+
+#include <OgreOverlay.h>
 
 class CFaderCallback {
 public:
