@@ -74,7 +74,9 @@ void CPlayerController::receiveInputCommand(const CGameInputCommand &cmd) {
     }
     break;
   case GIC_TOOL:
-    mCCPerson->useCurrentItem();
+    if (cmd.getState() == GIS_PRESSED) {
+        mCCPerson->useCurrentItem();
+    }
     break;
   default:
     break;

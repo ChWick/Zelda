@@ -270,11 +270,15 @@ void CCharacter::animAttackEnd() {
 
 void CCharacter::animUseToolStart() {
   setAnimation(ANIM_USE_ITEM);
+  mCurrentItem->show();
+  mCurrentWeapon->hide();
   m_fTimer = 0;
 }
 
 void CCharacter::animUseToolEnd() {
   setAnimation(ANIM_IDLE);
+  mCurrentItem->hide();
+  mCurrentWeapon->show();
   m_fTimer = 0;
 }
 
@@ -312,6 +316,12 @@ void CCharacter::useCurrentItem() {
 
 void CCharacter::changeItem(const std::string &bone, EItemVariantTypes item) {
   mCurrentItem = std::shared_ptr<CCharacterItem>(new CCharacterItem(*this, bone, item));
+  mCurrentItem->hide();
+}
+
+void CCharacter::changeWeapon(const std::string &bone, EItemVariantTypes item) {
+  mCurrentWeapon = std::shared_ptr<CCharacterItem>(new CCharacterItem(*this, bone, item));
+  mCurrentWeapon->show();
 }
 
 void CCharacter::useItem(EItemVariantTypes item) {
@@ -319,4 +329,16 @@ void CCharacter::useItem(EItemVariantTypes item) {
     animUseToolStart();
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
 

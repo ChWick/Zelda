@@ -206,7 +206,8 @@ void CPerson::initBody(Ogre::SceneNode *pParentSceneNode) {
 }
 
 void CPerson::createHandObject(const Ogre::String &parentBone, EHands handPos, const Ogre::String &meshName) {
-  m_pBodyEntity->attachObjectToBone(parentBone, m_pSceneNode->getCreator()->createEntity(meshName));
+  //m_pBodyEntity->attachObjectToBone(parentBone, m_pSceneNode->getCreator()->createEntity(meshName));
+  changeWeapon(parentBone, ITEM_VARIANT_SWORD_SIMPLE);
 }
 
 void CPerson::moveToTarget(const SPATIAL_VECTOR &vPosition, const Ogre::Quaternion &qRotation, const Ogre::Real fMaxDistanceDeviation, const Ogre::Radian fMaxAngleDeviation) {

@@ -10,7 +10,7 @@ CCharacterItem::CCharacterItem(CCharacter &character, const std::string &boneToA
   : mCharacter(character),
     mVariantType(type) {
   mAttachedMesh = mCharacter.getSceneNode()->getCreator()->createEntity(ITEM_VARIANT_DATA_MAP.toData(type).sBasicMeshName);
-  mCharacter.getBodyEntity()->attachObjectToBone(boneToAttach, mAttachedMesh, Ogre::Quaternion(Ogre::Degree(90), Ogre::Vector3::UNIT_X));
+  mCharacter.getBodyEntity()->attachObjectToBone(boneToAttach, mAttachedMesh, Ogre::Quaternion(Ogre::Degree(0), Ogre::Vector3::UNIT_X));
 }
 
 CCharacterItem::~CCharacterItem() {

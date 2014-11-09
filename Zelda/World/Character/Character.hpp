@@ -107,6 +107,7 @@ protected:
   Ogre::Real m_fAnimSpeed;														//!< Animation speed
 private:
   std::shared_ptr<CCharacterItem> mCurrentItem;
+  std::shared_ptr<CCharacterItem> mCurrentWeapon;
   std::vector<SAnimationProperty> mAnimationProperty;
 public:
 
@@ -181,6 +182,7 @@ protected:
   void fadeAnimations(const Ogre::Real deltaTime);
 
   void changeItem(const std::string &bone, EItemVariantTypes item);
+  void changeWeapon(const std::string &bone, EItemVariantTypes item);
 
 private:
   void constructor_impl();
