@@ -176,6 +176,16 @@ void CCharacter::updateAnimations(Ogre::Real fTime) {
 }
 
 void CCharacter::updateAnimationsCallback(const Ogre::Real fTime) {
+  if (m_uiAnimID == ANIM_SLICE_HORIZONTAL) {
+    if (m_fTimer >= m_Anims[ANIM_SLICE_HORIZONTAL]->getLength()) {
+      animAttackEnd();
+    }
+  }
+  else if (m_uiAnimID == ANIM_USE_ITEM) {
+    if (m_fTimer >= m_Anims[ANIM_USE_ITEM]->getLength()) {
+      animUseToolEnd();
+    }
+  }
 }
 
 void CCharacter::setAnimation(unsigned int id, bool reset) {
@@ -245,19 +255,32 @@ void CCharacter::animJumpLoop()
 {
 	//setAnimation(ANIM_JUMP_LOOP, true);
 }
-void CCharacter::animJumpEnd()
-{
-	//setAnimation(ANIM_JUMP_END, true);
-	m_fTimer = 0;
+void CCharacter::animJumpEnd() {
+  setAnimation(ANIM_IDLE);
+  m_fTimer = 0;
 }
 void CCharacter::animAttack() {
   setAnimation(ANIM_SLICE_HORIZONTAL, true);
   m_fTimer = 0;
 }
 void CCharacter::animAttackEnd() {
+  setAnimation(ANIM_IDLE);
+  m_fTimer = 0;
 }
+
+void CCharacter::animUseToolStart() {
+  setAnimation(ANIM_USE_ITEM);
+  m_fTimer = 0;
+}
+
+void CCharacter::animUseToolEnd() {
+  setAnimation(ANIM_IDLE);
+  m_fTimer = 0;
+}
+
+
 void CCharacter::setIsMoving(bool isMoving) {
-	m_bMoving = isMoving;
+  m_bMoving = isMoving;
 }
 
 bool CCharacter::isReadyForNewAction() {
@@ -278,7 +301,7 @@ short CCharacter::getCollisionGroup() {
     case FOE_ENEMY:
         return COL_CHARACTER_N;
     case FOE_FRIENDLY:
-        return COL_CHARACTER_P;;
+        return COL_CHARACTER_P;
     }
     throw Ogre::Exception(0, "Unknown collision mask", __FUNCTION__);
 }
@@ -293,7 +316,7 @@ void CCharacter::changeItem(const std::string &bone, EItemVariantTypes item) {
 
 void CCharacter::useItem(EItemVariantTypes item) {
   if (isReadyForNewAction()) {
-    animAttack();
+    animUseToolStart();
   }
 }
 

@@ -361,7 +361,11 @@ void CMap::processCollisionCheck() {
 				// Contact of 2 objects
         CWorldEntity *pWE_A(CWorldEntity::getFromUserPointer(obA));
         CWorldEntity *pWE_B(CWorldEntity::getFromUserPointer(obB));
+
         btVector3 vDistance(pt.m_positionWorldOnA - pt.m_positionWorldOnB);
+        if (vDistance.fuzzyZero()) {
+            continue;
+        }
         vDistance.normalize();
         if (pWE_A && pWE_B) {
           pWE_A->interactOnCollision(BtOgre::Convert::toOgre(vDistance), pWE_B);

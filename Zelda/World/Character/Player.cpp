@@ -96,6 +96,7 @@ void CPlayer::setupAnimations() {
 	animNames[ANIM_IDLE] = "Idle";
 	animNames[ANIM_RUN] = "RunPegasus";
 	animNames[ANIM_SLICE_HORIZONTAL] = "SwordAttack";
+	animNames[ANIM_USE_ITEM] = "SwordAttack";
 	animNames[ANIM_WALK] = "Walk";
 	/*animNames[ANIM_HANDS_CLOSED] = "HandsClosed";
 	animNames[ANIM_HANDS_RELAXED] = "HandsRelaxed";
@@ -143,37 +144,38 @@ void CPlayer::setupAnimations() {
 }
 
 void CPlayer::startup(const Ogre::Vector3 &playerPosition, const Ogre::Vector3 &playerLookDirection, const Ogre::Real cameraYaw, const Ogre::Real cameraPitch) {
-	m_pSceneNode->setPosition(playerPosition + Ogre::Vector3::UNIT_Y * PERSON_HEIGHT);
-	m_pSceneNode->lookAt(playerLookDirection, Ogre::Node::TS_LOCAL);
+  m_pSceneNode->setPosition(playerPosition + Ogre::Vector3::UNIT_Y * PERSON_HEIGHT);
+  m_pSceneNode->lookAt(playerLookDirection, Ogre::Node::TS_LOCAL);
 
-	m_pCollisionObject->setWorldTransform(btTransform(BtOgre::Convert::toBullet(m_pSceneNode->getOrientation()), BtOgre::Convert::toBullet(m_pSceneNode->getPosition())));
+  m_pCollisionObject->setWorldTransform(btTransform(BtOgre::Convert::toBullet(m_pSceneNode->getOrientation()), BtOgre::Convert::toBullet(m_pSceneNode->getPosition())));
 
-	//m_pCameraController->setCameraPosition(cameraYaw, cameraPitch);
+  //m_pCameraController->setCameraPosition(cameraYaw, cameraPitch);
 }
+
 void CPlayer::interact() {
-	if (m_pLiftedEntity) {
+  if (m_pLiftedEntity) {
     throwLifted();
     return;
   }
 
   // start outside player capsule
-	Ogre::Vector3 startPos(getFloorPosition() + Ogre::Vector3::UNIT_Y * PERSON_HEIGHT * 0.4 + getOrientation().zAxis() * PERSON_RADIUS * 1.1f);
-	Ogre::Vector3 endPos(startPos + getOrientation().zAxis() * PERSON_RADIUS * 1.5f);
+  Ogre::Vector3 startPos(getFloorPosition() + Ogre::Vector3::UNIT_Y * PERSON_HEIGHT * 0.4 + getOrientation().zAxis() * PERSON_RADIUS * 1.1f);
+  Ogre::Vector3 endPos(startPos + getOrientation().zAxis() * PERSON_RADIUS * 1.5f);
 
-	// try to interact with the world. So detect an object to interact with
-	btCollisionWorld::ClosestRayResultCallback rayCallback(BtOgre::Convert::toBullet(startPos), BtOgre::Convert::toBullet(endPos));
-	rayCallback.m_collisionFilterGroup = COL_CHARACTER_P;
-	rayCallback.m_collisionFilterMask = MASK_PLAYER_P_COLLIDES_WITH;
-	m_pMap->getPhysicsManager()->getWorld()->rayTest(BtOgre::Convert::toBullet(startPos), BtOgre::Convert::toBullet(endPos), rayCallback);
-	if (rayCallback.hasHit()) {
+  // try to interact with the world. So detect an object to interact with
+  btCollisionWorld::ClosestRayResultCallback rayCallback(BtOgre::Convert::toBullet(startPos), BtOgre::Convert::toBullet(endPos));
+  rayCallback.m_collisionFilterGroup = COL_CHARACTER_P;
+  rayCallback.m_collisionFilterMask = MASK_PLAYER_P_COLLIDES_WITH;
+  m_pMap->getPhysicsManager()->getWorld()->rayTest(BtOgre::Convert::toBullet(startPos), BtOgre::Convert::toBullet(endPos), rayCallback);
+  if (rayCallback.hasHit()) {
     CWorldEntity *pWE = CWorldEntity::getFromUserPointer(rayCallback.m_collisionObject);
     if (pWE) {
       SInteractionResult res(pWE->interactOnActivate(getOrientation().zAxis(), this));
-			if (res.eResult == IR_LIFT) {
-        lift(pWE);
-			}
-		}
-	}
+      if (res.eResult == IR_LIFT) {
+	lift(pWE);
+      }
+    }
+  }
 }
 
 void CPlayer::update(Ogre::Real tpf) {
@@ -196,9 +198,6 @@ void CPlayer::updateLiftedObject(const Ogre::Real fTime) {
 }
 
 void CPlayer::updateAnimationsCallback(const Ogre::Real fTime) {
-  if (m_uiAnimID == ANIM_SLICE_HORIZONTAL && m_fTimer >= m_Anims[ANIM_SLICE_HORIZONTAL]->getLength()) {
-    setAnimation(ANIM_IDLE);
-  }
   /*if (m_uiAnimID == ANIM_JUMP_END && m_Anims[ANIM_JUMP_END]->hasEnded()) {
     if (!m_bMoving) {
       setAnimation(ANIM_IDLE);
