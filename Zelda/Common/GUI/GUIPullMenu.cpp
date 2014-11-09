@@ -78,6 +78,8 @@ CGUIPullMenu::CGUIPullMenu(const std::string &id,
 
     m_pDragWindow->setSize(USize(UDim(0, m_fSize), UDim(1, 0)));
     break;
+  default:
+    break;
   }
 
 #ifdef INPUT_TOUCH
@@ -195,6 +197,27 @@ void CGUIPullMenu::update(Ogre::Real tpf) {
     }
     m_pDragWindow->setPosition(UVector2(UDim(0, m_pDragButton->getPosition().d_x.d_offset + m_pDragButton->getSize().d_width.d_offset), UDim(0, 0)));
     break;
+  default:
+    break;
+  }
+}
+
+void CGUIPullMenu::open() {
+  m_eDragState = DS_OPENING;
+  onPullStarted();
+}
+
+void CGUIPullMenu::close() {
+  m_eDragState = DS_CLOSING;
+  onPullStarted();
+}
+
+void CGUIPullMenu::toggle() {
+  if (m_eDragState == DS_OPEN || m_eDragState == DS_OPENING) {
+    close();
+  }
+  else {
+    open();
   }
 }
 
@@ -215,6 +238,8 @@ void CGUIPullMenu::translateDragButton(float fDelta) {
   case PMD_LEFT:
     m_pDragButton->setPosition(m_pDragButton->getPosition() +
             UVector2(UDim(0, fDelta), UDim(0, 0)));
+    break;
+  default:
     break;
   }
 }

@@ -65,7 +65,7 @@ bool CGameInputManager::keyPressed( const OIS::KeyEvent &arg ) {
   else if (arg.key == OIS::KC_X) {
     injectCommand(CGameInputCommand(GIC_RUN, 1));
   }
-  else if (arg.key == OIS::KC_APPS) {
+  else if (arg.key == OIS::KC_APPS || arg.key == OIS::KC_RMENU) {
     injectCommand(CGameInputCommand(GIC_SHOW_MENU, 1));
   }
   else if (arg.key == OIS::KC_ESCAPE) {

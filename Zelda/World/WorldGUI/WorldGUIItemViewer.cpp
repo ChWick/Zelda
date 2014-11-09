@@ -1,5 +1,6 @@
 #include "WorldGUIItemViewer.hpp"
 #include "WorldGUIItemSelector.hpp"
+#include "../../Common/Input/GameInputCommand.hpp"
 
 using namespace CEGUI;
 
@@ -19,6 +20,12 @@ CWorldGUIItemViewer::CWorldGUIItemViewer(CEntity *pParentEntity, CEGUI::Window *
   pEquipmentWindow->setText("EQUIPMENT");
   pEquipmentWindow->setPosition(UVector2(UDim(0.667, 5), UDim(0.667, 5)));
   pEquipmentWindow->setSize(USize(UDim(0.333, -5), UDim(0.333, -5)));
+}
+
+void CWorldGUIItemViewer::receiveInputCommand(const CGameInputCommand &cmd) {
+  if (cmd.getType() == GIC_SHOW_MENU && cmd.getState() == GIS_PRESSED) {
+    toggle();
+  }
 }
 
 void CWorldGUIItemViewer::onPullStarted() {

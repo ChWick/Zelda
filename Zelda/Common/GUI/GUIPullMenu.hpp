@@ -74,6 +74,10 @@ public:
 
   CEGUI::Window *getDragWindow() const {return m_pDragWindow;}
   EDragState getDragState() const {return m_eDragState;}
+
+  void open();
+  void close();
+  void toggle();
 protected:
   virtual void onPullStarted() {}
   virtual void onOpened() {}
