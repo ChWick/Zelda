@@ -28,12 +28,12 @@
 
 // map will be set on enter map, in construction, m_pMap is nullptr
 CCharacter::CCharacter(const std::string &sID, CEntity *pParent, CMap *pMap, const EFriendOrEnemyStates foe, unsigned int uiAnimationCount)
-	: CWorldEntity(sID, pParent, pMap),
-	  m_uiAnimationCount(uiAnimationCount),
-		m_fTimer(0),
-		m_fAnimSpeed(1),
+  : CWorldEntity(sID, pParent, pMap),
     m_eFriendOrEnemy(foe),
-    m_pCharacterController(nullptr)
+    m_pCharacterController(nullptr),
+    m_uiAnimationCount(uiAnimationCount),
+    m_fTimer(0),
+    m_fAnimSpeed(1)
 {
   m_Anims.resize(m_uiAnimationCount);
   m_FadingStates.resize(m_uiAnimationCount);
@@ -44,11 +44,11 @@ CCharacter::CCharacter(const std::string &sID, CEntity *pParent, CMap *pMap, con
 
 CCharacter::CCharacter(const tinyxml2::XMLElement *pElem, CEntity *pParent, CMap *pMap, const EFriendOrEnemyStates foe, unsigned int uiAnimationCount)
   : CWorldEntity(pParent, pMap, pElem),
+    m_eFriendOrEnemy(foe),
+    m_pCharacterController(nullptr),
     m_uiAnimationCount(uiAnimationCount),
     m_fTimer(0),
-    m_fAnimSpeed(1),
-    m_eFriendOrEnemy(foe),
-    m_pCharacterController(nullptr) {
+    m_fAnimSpeed(1) {
 
   m_Anims.resize(m_uiAnimationCount);
   m_FadingStates.resize(m_uiAnimationCount);
@@ -70,6 +70,7 @@ void CCharacter::constructor_impl() {
 
   if (ANIM_WALK < m_uiAnimationCount) {mAnimationProperty[ANIM_WALK].allowMoving = true;}
   if (ANIM_RUN < m_uiAnimationCount) {mAnimationProperty[ANIM_RUN].allowMoving = true;}
+  if (ANIM_IDLE < m_uiAnimationCount) {mAnimationProperty[ANIM_IDLE].allowMoving = true;}
 }
 
 CCharacter::~CCharacter() {
@@ -270,6 +271,7 @@ short CCharacter::getCollisionMask() {
     case FOE_FRIENDLY:
         return MASK_PLAYER_P_COLLIDES_WITH;
     }
+    throw Ogre::Exception(0, "Unknown collision mask", __FUNCTION__);
 }
 short CCharacter::getCollisionGroup() {
     switch (m_eFriendOrEnemy) {
@@ -278,6 +280,7 @@ short CCharacter::getCollisionGroup() {
     case FOE_FRIENDLY:
         return COL_CHARACTER_P;;
     }
+    throw Ogre::Exception(0, "Unknown collision mask", __FUNCTION__);
 }
 
 void CCharacter::useCurrentItem() {
