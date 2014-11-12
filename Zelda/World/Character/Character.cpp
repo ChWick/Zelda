@@ -77,6 +77,7 @@ CCharacter::~CCharacter() {
 }
 void CCharacter::exit() {
   mCurrentItem.reset();
+  mCurrentWeapon.reset();
   CWorldEntity::exit();
   destroyPhysics();
 }
