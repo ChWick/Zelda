@@ -84,3 +84,7 @@ material inner_house
 	}
 		   
 }
+
+material VaseSide : inner_house
+{
+}
