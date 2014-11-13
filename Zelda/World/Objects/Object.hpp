@@ -26,6 +26,7 @@
 class CObject : public CWorldEntity {
 protected:
   const SObjectTypeData &m_ObjectTypeData;
+  EObjectTypes mInnerObjectType;
 public:
    CObject(const std::string &id, CWorldEntity *pParent, CMap *pMap, EObjectTypes eObjectType, Ogre::SceneNode *pSceneNode = nullptr);
 
@@ -33,6 +34,7 @@ public:
 
   virtual void enterMap(CMap *pMap, const Ogre::Vector3 &vPosition);
 
+  void setInnerObject(EObjectTypes eType);
   void createInnerObject(EObjectTypes eType);
 
 protected:
@@ -49,7 +51,7 @@ protected:
 
 
 
-	virtual void killedCallback();
+  virtual void killedCallback();
 };
 
 #endif // _OBJECT_HPP_

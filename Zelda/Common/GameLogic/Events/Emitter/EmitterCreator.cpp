@@ -25,6 +25,7 @@
 #include "EmitOnCollision.hpp"
 #include "EmitOnInteraction.hpp"
 #include "EmitOnReceivedDamage.hpp"
+#include "EmitOnStatusChange.hpp"
 
 using namespace XMLHelper;
 
@@ -41,6 +42,8 @@ namespace events {
       return new CEmitOnInteraction(pElem, owner);
     case EMIT_ON_RECEIVED_DAMAGE:
       return new CEmitOnReceivedDamage(pElem, owner);
+    case EMIT_ON_STATUS_CHANGE:
+      return new CEmitOnStatusChange(pElem, owner);
     }
 
     throw Ogre::Exception(0, "New emitter type not added in createEmitter", __FILE__);

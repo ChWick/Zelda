@@ -462,7 +462,9 @@ CDotSceneLoaderCallback::EResults CMap::preEntityAdded(tinyxml2::XMLElement *XML
 
   EObjectTypes objectType(OBJECT_TYPE_ID_MAP.getFromMeshFileName(XMLNode->Attribute("meshFile")));
   if (objectType != OBJECT_COUNT && OBJECT_TYPE_ID_MAP.toData(objectType).bUserHandle) {
-    pEntity = new CObject(userData.getStringUserData("name"), this, this, objectType, pParent);
+    CObject *pObject = new CObject(userData.getStringUserData("name"), this, this, objectType, pParent);
+    pObject->setInnerObject(OBJECT_TYPE_ID_MAP.getFromID(userData.getStringUserData("inner_object")));
+    pEntity = pObject;
     pEntity->init();
 
     pEntity->setPosition(pParent->getPosition());

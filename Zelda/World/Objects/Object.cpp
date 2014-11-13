@@ -30,6 +30,7 @@
 #include "../Atlas/Map.hpp"
 #include "../../Common/Util/Assert.hpp"
 #include "../../Common/GameLogic/Events/Emitter/EmitOnCollision.hpp"
+#include "../../Common/GameLogic/Events/Emitter/EmitOnStatusChange.hpp"
 #include "../../Common/GameLogic/Events/Actions/ActionDeleteObject.hpp"
 #include "../../Common/GameLogic/Events/Actions/ActionMessage.hpp"
 #include "../../Common/GameLogic/Events/Event.hpp"
@@ -75,6 +76,7 @@ void CObject::init() {
   case OBJECT_GREEN_RUPEE:
   case OBJECT_BLUE_RUPEE:
   case OBJECT_RED_RUPEE:
+  case OBJECT_HEART:
     makePickable();
     break;
 
@@ -138,6 +140,7 @@ void CObject::createPhysics() {
   case OBJECT_GREEN_RUPEE:
   case OBJECT_BLUE_RUPEE:
   case OBJECT_RED_RUPEE:
+  case OBJECT_HEART:
     pRigidBody->setAngularVelocity(btVector3(0, 2, 0));
     pRigidBody->setAngularFactor(btVector3(0, 1, 0));
     pRigidBody->setLinearFactor(btVector3(1.0f, 1.0f, 1.0f) * 1);
@@ -232,6 +235,16 @@ void CObject::changeState(EEntityStateTypes eState) {
     }
   break;
   }
+
+  // create inner object
+  switch (m_uiType) {
+  case OBJECT_VASE:
+    if (eState == EST_DELETE) {
+      createInnerObject(mInnerObjectType);
+    }
+    break;
+  }
+
   CWorldEntity::changeState(eState);
 }
 
@@ -297,8 +310,13 @@ CObject::EReceiveDamageResult CObject::hit(const CDamage &dmg) {
   }
 }
 
+void CObject::setInnerObject(EObjectTypes eType) {
+  mInnerObjectType = eType;
+}
+
 void CObject::createInnerObject(EObjectTypes eType) {
   CObject *pObject = new CObject(m_sID + "_inner" + Ogre::StringConverter::toString(OBJECT_INNER_OBJECT_ID_NUMBER_COUNTER++), m_pMap, m_pMap, eType);
+  pObject->init();
   pObject->start();
   btRigidBody *pRB = btRigidBody::upcast(pObject->getCollisionObject());
   switch (m_uiType) {
@@ -308,6 +326,8 @@ void CObject::createInnerObject(EObjectTypes eType) {
     break;
 
   default:
+    pObject->setPosition(getPosition());
+    pRB->setLinearVelocity(btVector3(0, 0.5, 0));
     break;
   }
 }

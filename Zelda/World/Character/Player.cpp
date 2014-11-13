@@ -27,6 +27,7 @@
 #include "../../Common/Physics/BtOgreExtras.hpp"
 #include "../../Common/Util/Assert.hpp"
 #include "../../Common/GameLogic/Events/Event.hpp"
+#include "../../Common/Message/MessagePlayerPickupItem.hpp"
 #include "PersonTypes.hpp"
 #include <OgreEntity.h>
 #include <OgreBone.h>
@@ -36,6 +37,7 @@
 #include "../Items/PlayerItem.hpp"
 #include "../Messages/MessageItem.hpp"
 #include "../Messages/UserMessageTypes.hpp"
+#include "../Objects/ObjectTypes.hpp"
 
 
 #define TURN_SCALE 4
@@ -297,6 +299,12 @@ void CPlayer::handleMessage(const CMessage &message) {
     const CMessageItem &msg_item(dynamic_cast<const CMessageItem&>(message));
     if (msg_item.getItemMessageType() == CMessageItem::IM_SELECTION_CHANGED) {
       changeItem(PERSON_LEFT_HANDLE, msg_item.getItemVariantType());
+    }
+  }
+  else if (message.getType() == MSG_PLAYER_PICKUP_ITEM) {
+    const CMessagePlayerPickupItem &msg_pui(dynamic_cast<const CMessagePlayerPickupItem&>(message));
+    if (msg_pui.getItemType() == OBJECT_HEART) {
+      changeHP(HP_ONE_HEART);
     }
   }
 
