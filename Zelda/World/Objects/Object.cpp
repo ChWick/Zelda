@@ -153,6 +153,7 @@ void CObject::createPhysics() {
   case OBJECT_GREEN_BUSH:
   case OBJECT_LIGHT_STONE:
   case OBJECT_LIGHT_STONE_PILE:
+  case OBJECT_VASE:
     if (m_eState == EST_LIFTED) {
       group = COL_DAMAGE_P;
       mask = MASK_DAMAGE_P_COLLIDES_WITH;
@@ -206,6 +207,7 @@ void CObject::changeState(EEntityStateTypes eState) {
   switch (m_uiType) {
   case OBJECT_GREEN_BUSH:
   case OBJECT_LIGHT_STONE:
+  case OBJECT_VASE:
     if (eState == EST_LIFTED) {
       btRigidBody *pRB = btRigidBody::upcast(this->getCollisionObject());
       ASSERT(pRB);
@@ -242,6 +244,7 @@ CObject::SInteractionResult CObject::interactOnCollision(const Ogre::Vector3 &vI
     break;
   case OBJECT_GREEN_BUSH:
   case OBJECT_LIGHT_STONE:
+  case OBJECT_VASE:
     if (m_eState == EST_THROWN) {
       pSender->hit(CDamage(DMG_WORLD, BtOgre::Convert::toOgre(btRigidBody::upcast(this->getCollisionObject())->getLinearVelocity()).normalisedCopy(), HP_ONE_HEART));
       deleteLater();
@@ -258,6 +261,8 @@ CObject::SInteractionResult CObject::interactOnActivate(const Ogre::Vector3 &vIn
   switch (m_uiType) {
   case OBJECT_GREEN_BUSH:
   case OBJECT_LIGHT_STONE:
+  case OBJECT_VASE:
+
     return SInteractionResult(IR_LIFT);
   default:
     break;

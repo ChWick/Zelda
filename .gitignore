@@ -58,3 +58,8 @@ CMakeCache.txt
 CPackConfig.cmake
 CPackSourceConfig.cmake
 *cotire.cmake
+/maps/vase/inner_house.png
+/maps/vase/inner_house_link.scene
+/maps/vase/vase.scene
+/models/Objects/heart/Heart.material
+/models/Objects/heart/global.png

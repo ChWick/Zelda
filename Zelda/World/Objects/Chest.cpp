@@ -116,7 +116,7 @@ void CChest::handleMessage(const CMessage &message) {
 void CChest::open() {
   pause(PAUSE_ALL_ATLAS_UPDATE);
   mStatus = STATUS_OPENING;
-  createInnerObject(OBJECT_RED_RUPEE);
+  createInnerObject(OBJECT_HEART);
 }
 
 void CChest::onLifted() {

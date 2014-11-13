@@ -1,4 +1,4 @@
-material chest {
+material global {
     technique
     {
         pass
@@ -11,4 +11,7 @@ material chest {
             }
         }
     }
+}
+
+material chest : global {
 }

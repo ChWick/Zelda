@@ -77,11 +77,14 @@ CObjectTypeIdMap::CObjectTypeIdMap() {
   m_Map[OBJECT_LIGHT_STONE] = SObjectTypeData(true, false, "light_stone", "light_stone", "soil", DMG_NONE, TT_GREEN_SOIL_STONE_SHADOW, TT_GREEN_SOIL, GCST_PICKABLE_OBJECT_SPHERE);
   m_Map[OBJECT_LIGHT_STONE_PILE] = SObjectTypeData(true, false, "lw_light_stone_pile", "lw_light_stone_pile", "soil", DMG_WORLD | DMG_RUN, TT_GREEN_SOIL_STONE_PILE_SHADOW, TT_GREEN_SOIL, GCST_STONE_PILE);
 
+  m_Map[OBJECT_VASE] = SObjectTypeData(true, false, "vase", "vase", "VaseSide", DMG_WORLD, GCST_PICKABLE_OBJECT_SPHERE);
+
   m_Map[OBJECT_GREEN_TREE] = SObjectTypeData(true, true, "green_tree", "green_tree", "soil", DMG_RUN, GCST_TREE);
   
   m_Map[OBJECT_GREEN_RUPEE] = SObjectTypeData(true, false, "rupee_green", "rupee", "Rupee/Green", DMG_NONE, GCST_FALLING_OBJECT_SPHERE);
   m_Map[OBJECT_BLUE_RUPEE] = SObjectTypeData(true, false, "rupee_blue", "rupee", "Rupee/Blue", DMG_NONE, GCST_FALLING_OBJECT_SPHERE);
   m_Map[OBJECT_RED_RUPEE] = SObjectTypeData(true, false, "rupee_red", "rupee", "Rupee/Red", DMG_NONE, GCST_FALLING_OBJECT_SPHERE);
+  m_Map[OBJECT_HEART] = SObjectTypeData(true, false, "heart", "heart", "global", DMG_NONE, GCST_FALLING_OBJECT_SPHERE);
 }
 
 EObjectTypes CObjectTypeIdMap::getFromID(const std::string &id) const {
