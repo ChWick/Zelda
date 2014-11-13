@@ -41,7 +41,8 @@ unsigned int OBJECT_INNER_OBJECT_ID_NUMBER_COUNTER = 0;
 
 CObject::CObject(const std::string &id, CWorldEntity *pParent, CMap *pMap, EObjectTypes eObjectType, Ogre::SceneNode *pSceneNode)
   : CWorldEntity(id, pParent, pMap),
-    m_ObjectTypeData(OBJECT_TYPE_ID_MAP.toData(eObjectType)) {
+    m_ObjectTypeData(OBJECT_TYPE_ID_MAP.toData(eObjectType)),
+    mInnerObjectType(OBJECT_COUNT) {
 
   setType(eObjectType);
 
@@ -315,6 +316,8 @@ void CObject::setInnerObject(EObjectTypes eType) {
 }
 
 void CObject::createInnerObject(EObjectTypes eType) {
+  if (eType == OBJECT_COUNT) {return;} // no inner object specified
+
   CObject *pObject = new CObject(m_sID + "_inner" + Ogre::StringConverter::toString(OBJECT_INNER_OBJECT_ID_NUMBER_COUNTER++), m_pMap, m_pMap, eType);
   pObject->init();
   pObject->start();
