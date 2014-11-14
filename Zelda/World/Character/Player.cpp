@@ -38,6 +38,7 @@
 #include "../Messages/MessageItem.hpp"
 #include "../Messages/UserMessageTypes.hpp"
 #include "../Objects/ObjectTypes.hpp"
+#include "../UserImplementations/EntityPropertyIds.hpp"
 
 
 #define TURN_SCALE 4
@@ -47,10 +48,11 @@ Ogre::Real g_fCurrentSpeedScale = 1;
 const Ogre::Real PLAYER_ENEMY_NOTIFY_RADIUS_SQR = 100.f; // already squared!
 
 CPlayer::CPlayer(CEntity *pParent, const Ogre::Camera* pCamera, Ogre::SceneManager *pPlayerSceneManager)
-	: CPerson("player", pParent, nullptr, PERSON_DATA_ID_MAP.toData(PERSON_LINK)),
-		m_pCamera(pCamera),
+  : CPerson("player", pParent, nullptr, PERSON_DATA_ID_MAP.toData(PERSON_LINK)),
+    m_pCamera(pCamera),
     m_pPlayerSceneManager(pPlayerSceneManager),
-    m_pLiftedEntity(nullptr) {
+    m_pLiftedEntity(nullptr),
+    mRupeeCount(*this, ENTITY_PROPERTY_RUPEE, 0, 999, -1) {
 }
 
 CPlayer::~CPlayer() {
@@ -305,6 +307,15 @@ void CPlayer::handleMessage(const CMessage &message) {
     const CMessagePlayerPickupItem &msg_pui(dynamic_cast<const CMessagePlayerPickupItem&>(message));
     if (msg_pui.getItemType() == OBJECT_HEART) {
       changeHP(HP_ONE_HEART);
+    }
+    else if (msg_pui.getItemType() == OBJECT_RED_RUPEE) {
+      mRupeeCount.addData(10);
+    }
+    else if (msg_pui.getItemType() == OBJECT_BLUE_RUPEE) {
+      mRupeeCount.addData(5);
+    }
+    else if (msg_pui.getItemType() == OBJECT_GREEN_RUPEE) {
+      mRupeeCount.addData(1);
     }
   }
 

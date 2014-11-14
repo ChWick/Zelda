@@ -20,13 +20,15 @@
 #include "HUD.hpp"
 #include "../../GUIComponents/GUIHeartsDisplay.hpp"
 #include "../../GUIComponents/GUICounter.hpp"
-#include "../../Common/Message/MessagePlayerPickupItem.hpp"
+#include "../../Common/Message/MessageEntityDataChanged.hpp"
 #include "../../Common/Message/MessageHitpointsChanged.hpp"
 #include "../Messages/MessageItem.hpp"
 #include "../Messages/UserMessageTypes.hpp"
 #include "../HitableInterface.hpp"
 #include "../WorldEntity.hpp"
 #include "../Items/ItemData.hpp"
+#include "../UserImplementations/EntityPropertyIds.hpp"
+#include "../../Common/GameLogic/EntityProperty.hpp"
 
 using namespace CEGUI;
 
@@ -52,10 +54,7 @@ CHUD::CHUD(CEntity *pParentEntity, CEGUI::Window *pParentWindow)
 }
 
 void CHUD::handleMessage(const CMessage &message) {
-  if (message.getType() == MSG_PLAYER_PICKUP_ITEM) {
-    m_pRupeeCounter->addCount(10);
-  }
-  else if (message.getType() == MSG_HITPOINTS_CHANGED) {
+  if (message.getType() == MSG_HITPOINTS_CHANGED) {
     const CMessageHitpointsChanged &msg_hp_change(dynamic_cast<const CMessageHitpointsChanged&>(message));
     if (dynamic_cast<const CWorldEntity *>(&msg_hp_change.getHitableInterface()) && dynamic_cast<const CWorldEntity&>(msg_hp_change.getHitableInterface()).getID() == "player") {
       m_pHeartsDisplay->changeMaximalHitpoints(msg_hp_change.getHitableInterface().getMaxHP());
@@ -66,6 +65,13 @@ void CHUD::handleMessage(const CMessage &message) {
     const CMessageItem &msg_item(dynamic_cast<const CMessageItem&>(message));
     if (msg_item.getItemMessageType() == CMessageItem::IM_SELECTION_CHANGED) {
       m_pCurrentItemDisplay->setProperty("Image", "hud/" + ITEM_VARIANT_DATA_MAP.toData(msg_item.getItemVariantType()).sImagesetName);
+    }
+  }
+  else if (message.getType() == MSG_ENTITY_DATA_CHANGED) {
+    const CMessageEntityDataChanged &msg_edc(dynamic_cast<const CMessageEntityDataChanged &>(message));
+    int propertyId(msg_edc.getProperty().getID());
+    if (propertyId == ENTITY_PROPERTY_RUPEE) {
+      m_pRupeeCounter->addCount(dynamic_cast<const CEntityIntProperty&>(msg_edc.getProperty()).getData());
     }
   }
 }

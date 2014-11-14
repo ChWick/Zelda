@@ -21,6 +21,7 @@
 #define _PLAYER_HPP_
 
 #include "Person.hpp"
+#include "../../Common/GameLogic/EntityProperty.hpp"
 #include <OgrePrerequisites.h>
 
 class CMap;
@@ -29,36 +30,39 @@ using namespace Ogre;
 
 class CPlayer : public CPerson {
 private:
-	const Ogre::Camera *m_pCamera;
-	Ogre::SceneManager *m_pPlayerSceneManager;
+  const Ogre::Camera *m_pCamera;
+  Ogre::SceneManager *m_pPlayerSceneManager;
   CWorldEntity *m_pLiftedEntity;
+  
+  RibbonTrail* mSwordTrail;
 
-	RibbonTrail* mSwordTrail;
+  // properties, that notyfy world when updated
+  CEntityBoundedIntProperty mRupeeCount;
 public:
 
-	CPlayer(CEntity *pParent, const Ogre::Camera *pCamera, Ogre::SceneManager *pPlayerSceneManager);
-	virtual ~CPlayer();
-	void update(Ogre::Real tpf);
+  CPlayer(CEntity *pParent, const Ogre::Camera *pCamera, Ogre::SceneManager *pPlayerSceneManager);
+  virtual ~CPlayer();
+  void update(Ogre::Real tpf);
   void renderDebug(Ogre::Real tpf);
-	void startup(const Ogre::Vector3 &playerPos, const Ogre::Vector3 &playerLookDirection, const Ogre::Real cameraYaw, const Ogre::Real cameraPitch);
+  void startup(const Ogre::Vector3 &playerPos, const Ogre::Vector3 &playerLookDirection, const Ogre::Real cameraYaw, const Ogre::Real cameraPitch);
 protected:
   void enterMap(CMap *pMap, const Ogre::Vector3 &vInitPosition);
-	void setupInternal();
+  void setupInternal();
   void setupAnimations();
   EReceiveDamageResult receiveDamage(const CDamage &dmg);
-	void setupBody(SceneManager* sceneMgr);
-	void setupCamera(Camera* cam);
-	void preUpdateBoundsCallback(const Ogre::Real fTime);
-	void updateWalkAnimation();
-	void updateLiftedObject(const Ogre::Real fTime);
+  void setupBody(SceneManager* sceneMgr);
+  void setupCamera(Camera* cam);
+  void preUpdateBoundsCallback(const Ogre::Real fTime);
+  void updateWalkAnimation();
+  void updateLiftedObject(const Ogre::Real fTime);
   void updateAnimationsCallback(const Ogre::Real fTime);
   void interact();
   void lift(CWorldEntity *pObjectToLift);
   void throwLifted();
   void postStepForwardAndStrafe();
-
-	virtual CCharacterController *createCharacterController();
-
+  
+  virtual CCharacterController *createCharacterController();
+  
 private:
   void handleMessage(const CMessage &message);
 };
