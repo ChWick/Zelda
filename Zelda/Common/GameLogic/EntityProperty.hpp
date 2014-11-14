@@ -66,7 +66,9 @@ public:
 				 const Data min,
 				 const Data max,
 				 const Data initialValue)
-    : CEntityPropertyTemplate<Data, Type>(parent, id, initialValue) {
+    : CEntityPropertyTemplate<Data, Type>(parent, id, initialValue),
+      mMin(min),
+      mMax(max) {
   }
 
   virtual void setData(const Data &data) {
