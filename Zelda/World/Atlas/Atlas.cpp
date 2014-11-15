@@ -68,17 +68,31 @@ CAtlas::CAtlas(CEntity *pParent, Ogre::SceneNode *pRootSceneNode)
                           m_pWorldCamera,
                           CGame::getSingleton().getSceneManager());
 
-  //m_pCameraPerspective = new CAerialCameraPerspective(m_pWorldCamera, (Ogre::SceneNode*)m_pAtlas->getChildren().front()->getSceneNode()->getChild(0));
-  m_pCameraPerspective = new CAerialCameraPerspective(m_pWorldCamera, m_pPlayer);
+  /*  m_pCameraPerspective
+      = new CAerialCameraPerspective(m_pWorldCamera,
+                                     (Ogre::SceneNode*)m_pAtlas
+                                     ->getChildren().front()->getSceneNode()->getChild(0)); */
+
+  m_pCameraPerspective = new CAerialCameraPerspective(m_pWorldCamera,
+                                                      m_pPlayer);
 
   LOGV(" - Creating initial map");
-  m_pCurrentMap = new CMap(this, CMapPackPtr(new CMapPack(CFileManager::getResourcePath("maps/Atlases/LightWorld/"), "inner_house_link")), m_pSceneNode, m_pPlayer);
+  m_pCurrentMap
+      = new CMap(this,
+                 CMapPackPtr(new CMapPack(
+                     CFileManager::getResourcePath("maps/Atlases/LightWorld/"),
+                     "inner_house_link")), m_pSceneNode, m_pPlayer);
   mFirstFrame = true;
-  //m_pCurrentMap = new CMap(this, CMapPackPtr(new CMapPack(CFileManager::getResourcePath("maps/Atlases/LightWorld/"), "link_house_left")), m_pSceneNode, m_pPlayer);
+
   m_pPlayer->enterMap(m_pCurrentMap, Ogre::Vector3(0, 2, 0));
   m_pCurrentMap->start();
 
-  CMessageHandler::getSingleton().addMessage(new CMessageSwitchMap(m_pCurrentMap->getMapPack()->getName(), CMessageSwitchMap::FINISHED, m_eSwitchMapType, m_pCurrentMap, nullptr));
+  CMessageHandler::getSingleton().addMessage(
+      new CMessageSwitchMap(m_pCurrentMap->getMapPack()->getName(),
+                            CMessageSwitchMap::FINISHED,
+                            m_eSwitchMapType,
+                            m_pCurrentMap,
+                            nullptr));
 
   mEllipticFader.startFadeIn(1);
 
@@ -94,7 +108,9 @@ void CAtlas::update(Ogre::Real tpf) {
 
   mEllipticFader.fade(tpf);
   if (mEllipticFader.isFading()) {
-    Ogre::Vector3 vScreenPos(m_pWorldCamera->getProjectionMatrix() * m_pWorldCamera->getViewMatrix() * m_pPlayer->getCenter());
+    Ogre::Vector3 vScreenPos(m_pWorldCamera->getProjectionMatrix()
+                             * m_pWorldCamera->getViewMatrix()
+                             * m_pPlayer->getCenter());
     mEllipticFader.setFadeCenter(Ogre::Vector2(vScreenPos.x, vScreenPos.y));
   }
   mAlphaFader.fade(tpf);
@@ -129,7 +145,7 @@ void CAtlas::preRender(Ogre::Real tpf) {
 
 bool CAtlas::frameRenderingQueued(const Ogre::FrameEvent& evt) {
   if (mFirstFrame) {return true;}
-  //if (m_bSwitchingMaps) {return true;}
+  // if (m_bSwitchingMaps) {return true;}
   return CWorldEntity::frameRenderingQueued(evt);
 }
 
@@ -144,20 +160,21 @@ bool CAtlas::frameStarted(const Ogre::FrameEvent& evt) {
       return true;
     }
   }
-  //if (m_bSwitchingMaps) {return true;}
+  // if (m_bSwitchingMaps) {return true;}
   return CWorldEntity::frameStarted(evt);
 }
 
 bool CAtlas::frameEnded(const Ogre::FrameEvent& evt) {
   if (mFirstFrame) {return true;}
-  //if (m_bSwitchingMaps) {return true;}
+  // if (m_bSwitchingMaps) {return true;}
   return CWorldEntity::frameEnded(evt);
 }
 
 void CAtlas::handleMessage(const CMessage &message) {
   if (message.getType() == MSG_SWITCH_MAP) {
     if (m_bSwitchingMaps) {return;}
-    const CMessageSwitchMap &switch_map_message(dynamic_cast<const CMessageSwitchMap&>(message));
+    const CMessageSwitchMap &switch_map_message(
+        dynamic_cast<const CMessageSwitchMap&>(message));
     if (switch_map_message.getStatus() == CMessageSwitchMap::INJECT) {
       LOGI("Atlas: changing map to '%s'", switch_map_message.getMap().c_str());
       // get new switch type
@@ -171,28 +188,41 @@ void CAtlas::handleMessage(const CMessage &message) {
         Ogre::Vector3 vPlayerPos, vPlayerMoveToPos;
 
         // create next map
-        m_pNextMap = new CMap(this, CMapPackPtr(new CMapPack(CFileManager::getResourcePath("maps/Atlases/LightWorld/"), switch_map_message.getMap())), m_pSceneNode, m_pPlayer);
+        m_pNextMap
+            = new CMap(this,
+                       CMapPackPtr(new CMapPack(
+                           CFileManager::getResourcePath(
+                               "maps/Atlases/LightWorld/"),
+                           switch_map_message.getMap())),
+                       m_pSceneNode,
+                       m_pPlayer);
         mFirstFrame = true;
 
         CMapPackPtr nextPack = m_pNextMap->getMapPack();
         CMapPackPtr currPack = m_pCurrentMap->getMapPack();
 
-        Ogre::Vector3 vMapPositionOffset = currPack->getGlobalPosition() - nextPack->getGlobalPosition();
+        Ogre::Vector3 vMapPositionOffset
+            = currPack->getGlobalPosition() - nextPack->getGlobalPosition();
         m_pCurrentMap->moveMap(vMapPositionOffset);
 
 
         // determine direction
         Ogre::Vector3 vDirection(Ogre::Vector3::ZERO);
-        if (abs(nextPack->getGlobalPosition().x + nextPack->getGlobalSize().x - currPack->getGlobalPosition().x) < 0.01) {
+        if (abs(nextPack->getGlobalPosition().x
+                + nextPack->getGlobalSize().x
+                - currPack->getGlobalPosition().x) < 0.01) {
           vDirection.x = -1;
-        }
-        else if (abs(nextPack->getGlobalPosition().z + nextPack->getGlobalSize().y - currPack->getGlobalPosition().z) < 0.01) {
+        } else if (abs(nextPack->getGlobalPosition().z
+                       + nextPack->getGlobalSize().y
+                       - currPack->getGlobalPosition().z) < 0.01) {
           vDirection.z = -1;
-        }
-        else  if (abs(currPack->getGlobalPosition().x + currPack->getGlobalSize().x - nextPack->getGlobalPosition().x) < 0.01) {
+        } else if (abs(currPack->getGlobalPosition().x
+                       + currPack->getGlobalSize().x
+                       - nextPack->getGlobalPosition().x) < 0.01) {
           vDirection.x = 1;
-        }
-        else if (abs(currPack->getGlobalPosition().z + currPack->getGlobalSize().y - nextPack->getGlobalPosition().z) < 0.01) {
+        } else if (abs(currPack->getGlobalPosition().z
+                       + currPack->getGlobalSize().y
+                       - nextPack->getGlobalPosition().z) < 0.01) {
           vDirection.z = 1;
         }
 
@@ -205,36 +235,44 @@ void CAtlas::handleMessage(const CMessage &message) {
         m_pPlayer->setPosition(vPlayerPos);
         m_bPlayerTargetReached = false;
 
-        CMessageHandler::getSingleton().addMessage(new CMessageSwitchMap(m_pNextMap->getMapPack()->getName(), CMessageSwitchMap::SWITCHING, m_eSwitchMapType, m_pCurrentMap, m_pNextMap, m_sNextMapEntrance));
-      }
-      else if (m_eSwitchMapType == SMT_FADE_ALPHA) {
+        CMessageHandler::getSingleton().addMessage(
+            new CMessageSwitchMap(m_pNextMap->getMapPack()->getName(),
+                                  CMessageSwitchMap::SWITCHING,
+                                  m_eSwitchMapType,
+                                  m_pCurrentMap,
+                                  m_pNextMap,
+                                  m_sNextMapEntrance));
+      } else if (m_eSwitchMapType == SMT_FADE_ALPHA) {
         pause(PAUSE_PLAYER_UPDATE | PAUSE_MAP_UPDATE);
         mAlphaFader.startFadeOut(1);
-      }
-      else if (m_eSwitchMapType == SMT_FADE_ELLIPTIC) {
+      }  else if (m_eSwitchMapType == SMT_FADE_ELLIPTIC) {
         mEllipticFader.startFadeOut(1);
         pause(PAUSE_PLAYER_UPDATE | PAUSE_MAP_UPDATE);
       }
-
     }
-  }
-  else if (message.getType() == MSG_TARGET_REACHED) {
-    const CMessageTargetReached &message_target_reached(dynamic_cast<const CMessageTargetReached &>(message));
+  } else if (message.getType() == MSG_TARGET_REACHED) {
+    const CMessageTargetReached &message_target_reached(
+        dynamic_cast<const CMessageTargetReached &>(message));
     if (message_target_reached.getEntity() == m_pPlayer) {
       if (m_bSwitchingMaps) {
         CMap *pMap;
         if (m_eSwitchMapType != SMT_MOVE_CAMERA) {
           m_bSwitchingMaps = false;
           pMap = m_pCurrentMap;
-        }
-        else {
+        } else {
           pMap = m_pNextMap;
         }
         m_bPlayerTargetReached = true;
         unpause(PAUSE_ALL);
 
         pMap->start();
-        CMessageHandler::getSingleton().addMessage(new CMessageSwitchMap(m_pCurrentMap->getMapPack()->getName(), CMessageSwitchMap::FINISHED, m_eSwitchMapType, pMap, nullptr, m_sNextMapEntrance));
+        CMessageHandler::getSingleton().addMessage(
+            new CMessageSwitchMap(m_pCurrentMap->getMapPack()->getName(),
+                                  CMessageSwitchMap::FINISHED,
+                                  m_eSwitchMapType,
+                                  pMap,
+                                  nullptr,
+                                  m_sNextMapEntrance));
       }
     }
   }
@@ -257,31 +295,44 @@ void CAtlas::fadeInCallback() {
 }
 
 void CAtlas::fadeOutCallback() {
-  if (m_eSwitchMapType == SMT_FADE_ALPHA || m_eSwitchMapType == SMT_FADE_ELLIPTIC) {
+  if (m_eSwitchMapType == SMT_FADE_ALPHA
+      || m_eSwitchMapType == SMT_FADE_ELLIPTIC) {
     // delete old map
     m_pCurrentMap->deleteNow();
 
     // create next = current map
-    m_pCurrentMap = new CMap(this, CMapPackPtr(new CMapPack(CFileManager::getResourcePath("maps/Atlases/LightWorld/"), m_sNextMap)), m_pSceneNode, m_pPlayer);
+    m_pCurrentMap
+        = new CMap(this, CMapPackPtr(
+            new CMapPack(
+                CFileManager::getResourcePath("maps/Atlases/LightWorld/"),
+                m_sNextMap)), m_pSceneNode, m_pPlayer);
     mFirstFrame = true;
     CMapPackPtr currPack = m_pCurrentMap->getMapPack();
 
     CEntrance *pEntrance = getNextEntrancePtr();
 
-    Ogre::Vector3 vPlayerPos = pEntrance->getPlayerAbsolutePosition() + m_pPlayer->getPosition() - m_pPlayer->getFloorPosition();
+    Ogre::Vector3 vPlayerPos
+        = pEntrance->getPlayerAbsolutePosition()
+        + m_pPlayer->getPosition() - m_pPlayer->getFloorPosition();
 
-    m_pPlayer->enterMap(m_pCurrentMap, vPlayerPos + pEntrance->getPlayerDirection() * 0.2);
+    m_pPlayer->enterMap(m_pCurrentMap,
+                        vPlayerPos + pEntrance->getPlayerDirection() * 0.2);
     m_pPlayer->setPosition(vPlayerPos);
     m_bPlayerTargetReached = false;
     unpause(PAUSE_ALL);
 
-    CMessageHandler::getSingleton().addMessage(new CMessageSwitchMap(m_pCurrentMap->getMapPack()->getName(), CMessageSwitchMap::SWITCHING, m_eSwitchMapType, m_pCurrentMap, nullptr, m_sNextMapEntrance));
+    CMessageHandler::getSingleton().addMessage(
+        new CMessageSwitchMap(m_pCurrentMap->getMapPack()->getName(),
+                              CMessageSwitchMap::SWITCHING,
+                              m_eSwitchMapType,
+                              m_pCurrentMap,
+                              nullptr,
+                              m_sNextMapEntrance));
 
     if (m_eSwitchMapType == SMT_FADE_ELLIPTIC) {
       mEllipticFader.startFadeIn(1);
       mEllipticFader.setFadeCenter(Ogre::Vector2::ZERO);
-    }
-    else {
+    } else {
       mAlphaFader.startFadeIn(1);
     }
   }
