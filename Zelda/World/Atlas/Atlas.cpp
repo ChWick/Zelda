@@ -297,8 +297,8 @@ void CAtlas::fadeInCallback() {
 void CAtlas::fadeOutCallback() {
   if (m_eSwitchMapType == SMT_FADE_ALPHA
       || m_eSwitchMapType == SMT_FADE_ELLIPTIC) {
-    // delete old map
-    m_pCurrentMap->deleteNow();
+    // backup old map, delete at end, since objects may be transfered
+    CMap *oldMap = m_pCurrentMap;
 
     // create next = current map
     m_pCurrentMap
@@ -328,6 +328,10 @@ void CAtlas::fadeOutCallback() {
                               m_pCurrentMap,
                               nullptr,
                               m_sNextMapEntrance));
+
+
+    // delete the old map
+    oldMap->deleteNow();
 
     if (m_eSwitchMapType == SMT_FADE_ELLIPTIC) {
       mEllipticFader.startFadeIn(1);
