@@ -445,6 +445,7 @@ void CMap::postEntityAdded(Ogre::Entity *pEntity, Ogre::SceneNode *pParent, btRi
     CChest *pChest = new CChest(pEntity->getName(), this, this, CChest::SMALL_CHEST);
     pChest->setPosition(pParent->_getDerivedPosition());
     pChest->setThisAsCollisionObjectsUserPointer(pRigidBody);
+    pChest->setInnerObject(OBJECT_TYPE_ID_MAP.getFromID(userData.getStringUserData("inner_object")));
     pChest->init();
     pChest->start();
     m_PhysicsManager.getWorld()->removeRigidBody(pRigidBody);

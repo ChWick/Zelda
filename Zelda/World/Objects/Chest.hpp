@@ -38,6 +38,7 @@ public:
   void update(Ogre::Real);
   void pauseUpdate(Ogre::Real);
 
+  void setInnerObject(EObjectTypes eType) {mInnerObjectType = eType;}
   void createInnerObject(EObjectTypes eType);
 private:
 

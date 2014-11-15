@@ -23,11 +23,12 @@ const Ogre::Real CChest::INNER_OBJECT_TIME_TO_SET_IN_LIFT(1);
 
 CChest::CChest(const std::string &sID, CWorldEntity *pParent, CMap *pMap, EChestType chestType)
   : CWorldEntity(sID, pParent, pMap, pParent->getResourceGroup()),
-    mChestType(chestType),
     mPhysicsOffset(Ogre::Vector3::ZERO),
+    mChestType(chestType),
     mStatus(STATUS_CLOSED),
-    mInnerObject(nullptr),
     mLifting(false),
+    mInnerObject(nullptr),
+    mInnerObjectType(OBJECT_COUNT),
     mTimer(0) {
   m_pSceneNode = pParent->getSceneNode()->createChildSceneNode(sID);
   mLidSceneNode = m_pSceneNode->createChildSceneNode(sID + "_lid");
@@ -116,7 +117,7 @@ void CChest::handleMessage(const CMessage &message) {
 void CChest::open() {
   pause(PAUSE_ALL_ATLAS_UPDATE);
   mStatus = STATUS_OPENING;
-  createInnerObject(OBJECT_HEART);
+  createInnerObject(mInnerObjectType);
 }
 
 void CChest::onLifted() {
@@ -131,11 +132,13 @@ void CChest::onLifted() {
 void CChest::onFinished() {
   unpause(PAUSE_ALL);
   mInnerObject->deleteLater();
-  CMessageHandler::getSingleton().addMessage(new CMessagePlayerPickupItem(m_uiType));
+  CMessageHandler::getSingleton().addMessage(new CMessagePlayerPickupItem(mInnerObjectType));
 }
 
 void CChest::createInnerObject(EObjectTypes eType) {
-  mInnerObjectType = eType;
+  if (eType == OBJECT_COUNT) {
+    return; // no object inside
+  }
   mLifting = true;
   if (XMLResources::GLOBAL.hasString(OBJECT_TYPE_ID_MAP.toData(eType).sID)) {
     mTextMessage = "${" + OBJECT_TYPE_ID_MAP.toData(eType).sID + "}";

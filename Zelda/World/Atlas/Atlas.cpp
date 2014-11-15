@@ -45,7 +45,6 @@ CAtlas::CAtlas(CEntity *pParent, Ogre::SceneNode *pRootSceneNode)
     m_bPlayerTargetReached(false),
     mEllipticFader(CFader::ELLIPTIC_FADER, this),
     mAlphaFader(CFader::ALPHA_FADER, this) {
-
   LOGV("Creating the Atlas");
   m_pSceneNode = pRootSceneNode->createChildSceneNode("Atlas");
 
@@ -54,17 +53,20 @@ CAtlas::CAtlas(CEntity *pParent, Ogre::SceneNode *pRootSceneNode)
   m_pWorldCamera->setNearClipDistance(0.001f);
   m_pWorldCamera->setFarClipDistance(1000.0f);
   // default position
-  m_pWorldCamera->setPosition(Ogre::Vector3(0,1,1));
-  m_pWorldCamera->lookAt(Ogre::Vector3(0,0,0));
-  //m_pWorldCamera->setProjectionType(Ogre::PT_ORTHOGRAPHIC);
+  m_pWorldCamera->setPosition(Ogre::Vector3(0, 1, 1));
+  m_pWorldCamera->lookAt(Ogre::Vector3(0, 0, 0));
+  // m_pWorldCamera->setProjectionType(Ogre::PT_ORTHOGRAPHIC);
 
   Ogre::Viewport *vp = CGame::getSingleton().getMainViewPort();
-  m_pWorldCamera->setAspectRatio(Ogre::Real(vp->getActualWidth()) / Ogre::Real(vp->getActualHeight()));
+  m_pWorldCamera->setAspectRatio(
+      Ogre::Real(vp->getActualWidth()) / Ogre::Real(vp->getActualHeight()));
   vp->setCamera(m_pWorldCamera);
   m_pWorldCamera->setOrthoWindowWidth(1.6);
 
   LOGV(" - Creating Player");
-  m_pPlayer = new CPlayer(this, m_pWorldCamera, CGame::getSingleton().getSceneManager());
+  m_pPlayer = new CPlayer(this,
+                          m_pWorldCamera,
+                          CGame::getSingleton().getSceneManager());
 
   //m_pCameraPerspective = new CAerialCameraPerspective(m_pWorldCamera, (Ogre::SceneNode*)m_pAtlas->getChildren().front()->getSceneNode()->getChild(0));
   m_pCameraPerspective = new CAerialCameraPerspective(m_pWorldCamera, m_pPlayer);
@@ -79,6 +81,8 @@ CAtlas::CAtlas(CEntity *pParent, Ogre::SceneNode *pRootSceneNode)
   CMessageHandler::getSingleton().addMessage(new CMessageSwitchMap(m_pCurrentMap->getMapPack()->getName(), CMessageSwitchMap::FINISHED, m_eSwitchMapType, m_pCurrentMap, nullptr));
 
   mEllipticFader.startFadeIn(1);
+
+  dynamic_cast<CPlayer*>(m_pPlayer)->loadSaveFile();
 }
 CAtlas::~CAtlas() {
   delete m_pCameraPerspective;

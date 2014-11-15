@@ -45,9 +45,11 @@
 #define MAX_SPEED_SCALE 5
 
 Ogre::Real g_fCurrentSpeedScale = 1;
-const Ogre::Real PLAYER_ENEMY_NOTIFY_RADIUS_SQR = 100.f; // already squared!
+const Ogre::Real PLAYER_ENEMY_NOTIFY_RADIUS_SQR = 100.f;  // already squared
 
-CPlayer::CPlayer(CEntity *pParent, const Ogre::Camera* pCamera, Ogre::SceneManager *pPlayerSceneManager)
+CPlayer::CPlayer(CEntity *pParent,
+                 const Ogre::Camera* pCamera,
+                 Ogre::SceneManager *pPlayerSceneManager)
   : CPerson("player", pParent, nullptr, PERSON_DATA_ID_MAP.toData(PERSON_LINK)),
     m_pCamera(pCamera),
     m_pPlayerSceneManager(pPlayerSceneManager),
@@ -59,18 +61,12 @@ CPlayer::~CPlayer() {
 }
 
 CCharacterController *CPlayer::createCharacterController() {
-	return new CPlayerController(m_pPlayerSceneManager, m_pCamera, this);
+  return new CPlayerController(m_pPlayerSceneManager, m_pCamera, this);
 }
 void CPlayer::setupInternal()  {
-	// create hair and hat
-	//m_pBodyEntity->attachObjectToBone("Hair", sceneMgr->createEntity("LinkHair", "LinkHair.mesh"));
-	//m_pBodyEntity->attachObjectToBone("Hair", sceneMgr->createEntity("LinkHat", "LinkHat.mesh"));
-
-	// create swords and attach to sheath
-	Ogre::LogManager::getSingleton().logMessage("Creating swords");
-	//createTool(CPlayerTool::TOOL_SWORD, false);
-	//createShield(CShield::ST_SIMPLE_SHIELD, false);
-	createHandObject(PERSON_LEFT_HANDLE, RIGHT_HAND, "link_sword.mesh");
+  // create swords and attach to sheath
+  Ogre::LogManager::getSingleton().logMessage("Creating swords");
+  createHandObject(PERSON_LEFT_HANDLE, RIGHT_HAND, "link_sword.mesh");
 
 
 	/*LogManager::getSingleton().logMessage("Creating the chains");
@@ -96,64 +92,74 @@ void CPlayer::setupInternal()  {
 }
 
 void CPlayer::setupAnimations() {
-	Ogre::StringVector animNames(ANIM_COUNT);
-	animNames[ANIM_IDLE] = "Idle";
-	animNames[ANIM_RUN] = "RunPegasus";
-	animNames[ANIM_SLICE_HORIZONTAL] = "SwordAttack";
-	animNames[ANIM_USE_ITEM] = "SwordAttack";
-	animNames[ANIM_WALK] = "Walk";
-	/*animNames[ANIM_HANDS_CLOSED] = "HandsClosed";
-	animNames[ANIM_HANDS_RELAXED] = "HandsRelaxed";
-	animNames[ANIM_SLICE_HORIZONTAL] = "SliceHorizontal";
-	animNames[ANIM_BOW_SHOT] = "BowShot";
-	animNames[ANIM_JUMP_START] = "JumpStart";
-	animNames[ANIM_JUMP_LOOP] = "JumpLoop";
-	animNames[ANIM_JUMP_END] = "JumpEnd";*/
+  Ogre::StringVector animNames(ANIM_COUNT);
+  animNames[ANIM_IDLE] = "Idle";
+  animNames[ANIM_RUN] = "RunPegasus";
+  animNames[ANIM_SLICE_HORIZONTAL] = "SwordAttack";
+  animNames[ANIM_USE_ITEM] = "SwordAttack";
+  animNames[ANIM_WALK] = "Walk";
+  /*animNames[ANIM_HANDS_CLOSED] = "HandsClosed";
+    animNames[ANIM_HANDS_RELAXED] = "HandsRelaxed";
+    animNames[ANIM_SLICE_HORIZONTAL] = "SliceHorizontal";
+    animNames[ANIM_BOW_SHOT] = "BowShot";
+    animNames[ANIM_JUMP_START] = "JumpStart";
+    animNames[ANIM_JUMP_LOOP] = "JumpLoop";
+    animNames[ANIM_JUMP_END] = "JumpEnd";*/
 
-	// this is very important due to the nature of the exported animations
-    m_pBodyEntity->getSkeleton()->setBlendMode(Ogre::ANIMBLEND_CUMULATIVE);
+  // this is very important due to the nature of the exported animations
+  m_pBodyEntity->getSkeleton()->setBlendMode(Ogre::ANIMBLEND_CUMULATIVE);
 
-    // populate our animation list
-    for (unsigned int i = 0; i < m_uiAnimationCount; i++) {
-        m_Anims[i] = m_pBodyEntity->getAnimationState(animNames[i]);
-        m_Anims[i]->setLoop(true);
-        m_FadingStates[i] = FADE_NONE;
-        m_Anims[i]->setEnabled(false);
-        m_Anims[i]->setWeight(0);
-    }
+  // populate our animation list
+  for (unsigned int i = 0; i < m_uiAnimationCount; i++) {
+    m_Anims[i] = m_pBodyEntity->getAnimationState(animNames[i]);
+    m_Anims[i]->setLoop(true);
+    m_FadingStates[i] = FADE_NONE;
+    m_Anims[i]->setEnabled(false);
+    m_Anims[i]->setWeight(0);
+  }
 
-    //m_Anims[ANIM_HANDS_CLOSED]->setWeight(1);
-    //m_Anims[ANIM_HANDS_RELAXED]->setWeight(1);
+  // m_Anims[ANIM_HANDS_CLOSED]->setWeight(1);
+  // m_Anims[ANIM_HANDS_RELAXED]->setWeight(1);
 
-    //m_Anims[ANIM_JUMP_END]->setLoop(false);
-    //m_Anims[ANIM_JUMP_START]->setLoop(false);
-
-
-	// relax the hands since we're not holding anything
-	//m_Anims[ANIM_HANDS_RELAXED]->setEnabled(true);
+  // m_Anims[ANIM_JUMP_END]->setLoop(false);
+  // m_Anims[ANIM_JUMP_START]->setLoop(false);
 
 
-    // start off in the idle state (top and bottom together)
-    setAnimation(ANIM_IDLE);
+  // relax the hands since we're not holding anything
+  // m_Anims[ANIM_HANDS_RELAXED]->setEnabled(true);
 
-    // we will manually set the direction of the tool in the left hand
-    Ogre::Bone *pLHandleBone = m_pBodyEntity->getSkeleton()->getBone(PERSON_LEFT_HANDLE);
-    pLHandleBone->setManuallyControlled(true);
-    int numAnimations = m_pBodyEntity->getSkeleton()->getNumAnimations();
-    for(int i=0;i<numAnimations;i++){
-        // remonveall possible tracks of the bone in the animations
-       Ogre::Animation * anim = m_pBodyEntity->getSkeleton()->getAnimation(i);
-       anim->destroyNodeTrack(pLHandleBone->getHandle());
-    }
+
+  // start off in the idle state (top and bottom together)
+  setAnimation(ANIM_IDLE);
+
+  // we will manually set the direction of the tool in the left hand
+  Ogre::Bone *pLHandleBone
+      = m_pBodyEntity->getSkeleton()->getBone(PERSON_LEFT_HANDLE);
+  pLHandleBone->setManuallyControlled(true);
+  int numAnimations = m_pBodyEntity->getSkeleton()->getNumAnimations();
+  for (int i = 0; i < numAnimations; i++) {
+    // remonveall possible tracks of the bone in the animations
+    Ogre::Animation * anim = m_pBodyEntity->getSkeleton()->getAnimation(i);
+    anim->destroyNodeTrack(pLHandleBone->getHandle());
+  }
 }
 
-void CPlayer::startup(const Ogre::Vector3 &playerPosition, const Ogre::Vector3 &playerLookDirection, const Ogre::Real cameraYaw, const Ogre::Real cameraPitch) {
-  m_pSceneNode->setPosition(playerPosition + Ogre::Vector3::UNIT_Y * PERSON_HEIGHT);
+void CPlayer::startup(const Ogre::Vector3 &playerPosition,
+                      const Ogre::Vector3 &playerLookDirection,
+                      const Ogre::Real cameraYaw,
+                      const Ogre::Real cameraPitch) {
+  m_pSceneNode->setPosition(playerPosition
+                            + Ogre::Vector3::UNIT_Y * PERSON_HEIGHT);
   m_pSceneNode->lookAt(playerLookDirection, Ogre::Node::TS_LOCAL);
 
-  m_pCollisionObject->setWorldTransform(btTransform(BtOgre::Convert::toBullet(m_pSceneNode->getOrientation()), BtOgre::Convert::toBullet(m_pSceneNode->getPosition())));
+  m_pCollisionObject
+      ->setWorldTransform(btTransform(
+          BtOgre::Convert::toBullet(m_pSceneNode->getOrientation()),
+          BtOgre::Convert::toBullet(m_pSceneNode->getPosition())));
+}
 
-  //m_pCameraController->setCameraPosition(cameraYaw, cameraPitch);
+void CPlayer::loadSaveFile() {
+  mRupeeCount.setData(0);  // Will be set later
 }
 
 void CPlayer::interact() {
@@ -163,31 +169,42 @@ void CPlayer::interact() {
   }
 
   // start outside player capsule
-  Ogre::Vector3 startPos(getFloorPosition() + Ogre::Vector3::UNIT_Y * PERSON_HEIGHT * 0.4 + getOrientation().zAxis() * PERSON_RADIUS * 1.1f);
-  Ogre::Vector3 endPos(startPos + getOrientation().zAxis() * PERSON_RADIUS * 1.5f);
+  Ogre::Vector3 startPos(getFloorPosition()
+                         + Ogre::Vector3::UNIT_Y * PERSON_HEIGHT * 0.4
+                         + getOrientation().zAxis() * PERSON_RADIUS * 1.1f);
+  Ogre::Vector3 endPos(startPos
+                       + getOrientation().zAxis() * PERSON_RADIUS * 1.5f);
 
   // try to interact with the world. So detect an object to interact with
-  btCollisionWorld::ClosestRayResultCallback rayCallback(BtOgre::Convert::toBullet(startPos), BtOgre::Convert::toBullet(endPos));
+  btCollisionWorld::ClosestRayResultCallback rayCallback(
+      BtOgre::Convert::toBullet(startPos), BtOgre::Convert::toBullet(endPos));
   rayCallback.m_collisionFilterGroup = COL_CHARACTER_P;
   rayCallback.m_collisionFilterMask = MASK_PLAYER_P_COLLIDES_WITH;
-  m_pMap->getPhysicsManager()->getWorld()->rayTest(BtOgre::Convert::toBullet(startPos), BtOgre::Convert::toBullet(endPos), rayCallback);
+  m_pMap->getPhysicsManager()->getWorld()->rayTest(
+      BtOgre::Convert::toBullet(startPos),
+      BtOgre::Convert::toBullet(endPos), rayCallback);
+
   if (rayCallback.hasHit()) {
-    CWorldEntity *pWE = CWorldEntity::getFromUserPointer(rayCallback.m_collisionObject);
+    CWorldEntity *pWE
+        = CWorldEntity::getFromUserPointer(rayCallback.m_collisionObject);
     if (pWE) {
-      SInteractionResult res(pWE->interactOnActivate(getOrientation().zAxis(), this));
+      SInteractionResult res(pWE->interactOnActivate(getOrientation().zAxis(),
+                                                     this));
       if (res.eResult == IR_LIFT) {
-	lift(pWE);
+        lift(pWE);
       }
     }
   }
 }
 
 void CPlayer::update(Ogre::Real tpf) {
-	CPerson::update(tpf);
+  CPerson::update(tpf);
 
-  for (CWorldEntity *pWE : dynamic_cast<CharacterControllerPhysics*>(mCCPhysics)->getCollidingWorldEntities()) {
-  	// check for collisions, to pickup
-  	pWE->interactOnCollision(this->getPosition() - pWE->getPosition(), this);
+  for (CWorldEntity *pWE :
+           dynamic_cast<CharacterControllerPhysics*>(mCCPhysics)
+           ->getCollidingWorldEntities()) {
+    // check for collisions, to pickup
+    pWE->interactOnCollision(this->getPosition() - pWE->getPosition(), this);
     this->interactOnCollision(pWE->getPosition() - this->getPosition(), pWE);
   }
 
@@ -197,8 +214,9 @@ void CPlayer::update(Ogre::Real tpf) {
 void CPlayer::updateLiftedObject(const Ogre::Real fTime) {
   if (!m_pLiftedEntity) {return;}
 
-  m_pLiftedEntity->setPosition(getPosition() + Ogre::Vector3::UNIT_Y * (PERSON_HEIGHT - PERSON_FLOOR_OFFSET));
-
+  m_pLiftedEntity->setPosition(
+      getPosition()
+      + Ogre::Vector3::UNIT_Y * (PERSON_HEIGHT - PERSON_FLOOR_OFFSET));
 }
 
 void CPlayer::updateAnimationsCallback(const Ogre::Real fTime) {
@@ -213,18 +231,19 @@ void CPlayer::updateAnimationsCallback(const Ogre::Real fTime) {
   else if (m_uiAnimID == ANIM_JUMP_START && m_Anims[ANIM_JUMP_START]->hasEnded()) {
     setAnimation(ANIM_JUMP_LOOP);
   }*/
-  if (dynamic_cast<CPersonController*>(m_pCharacterController)->getMoveState() == CPersonController::MS_RUNNING) {
+  if (dynamic_cast<CPersonController*>(m_pCharacterController)->getMoveState()
+      == CPersonController::MS_RUNNING) {
     if (m_uiAnimID != ANIM_RUN) {
       setAnimation(ANIM_RUN);
     }
-  }
-  else if (m_bMoving) {
-    if (m_uiAnimID == ANIM_IDLE || m_uiAnimID == ANIM_NONE || m_uiAnimID == ANIM_RUN) {
+  } else if (m_bMoving) {
+    if (m_uiAnimID == ANIM_IDLE || m_uiAnimID == ANIM_NONE
+        || m_uiAnimID == ANIM_RUN) {
       setAnimation(ANIM_WALK);
     }
-  }
-  else if (!m_bMoving) {
-    if (m_uiAnimID == ANIM_WALK || m_uiAnimID == ANIM_NONE || m_uiAnimID == ANIM_RUN) {
+  } else if (!m_bMoving) {
+    if (m_uiAnimID == ANIM_WALK || m_uiAnimID == ANIM_NONE
+        || m_uiAnimID == ANIM_RUN) {
       setAnimation(ANIM_IDLE);
     }
   }
@@ -236,13 +255,15 @@ void CPlayer::renderDebug(Ogre::Real tpf) {
   CPerson::renderDebug(tpf);
 
   // draw interaction
-	Ogre::Vector3 startPos(getFloorPosition() + Ogre::Vector3::UNIT_Y * PERSON_HEIGHT * 0.4);
-	Ogre::Vector3 endPos(startPos + getOrientation().zAxis() * PERSON_RADIUS * 2.5f);
-	DebugDrawer::getSingleton().drawLine(startPos, endPos, Ogre::ColourValue::Red);
+  Ogre::Vector3 startPos(getFloorPosition()
+                         + Ogre::Vector3::UNIT_Y * PERSON_HEIGHT * 0.4);
+  Ogre::Vector3 endPos(startPos
+                       + getOrientation().zAxis() * PERSON_RADIUS * 2.5f);
+  DebugDrawer::getSingleton().drawLine(startPos, endPos,
+                                       Ogre::ColourValue::Red);
 }
 
 void CPlayer::preUpdateBoundsCallback(const Ogre::Real deltaTime) {
-	// check if player is in war mode (swords drawn), then im enemy is near change view
 }
 
 /*void CPlayer::objectChangedMap(CObject *pBefore, CObject *pAfter) {
@@ -274,25 +295,36 @@ void CPlayer::throwLifted() {
 
   btRigidBody *pRB = btRigidBody::upcast(m_pLiftedEntity->getCollisionObject());
   ASSERT(pRB);
-  pRB->setLinearVelocity(BtOgre::Convert::toBullet(getOrientation() * Ogre::Vector3(0, 0.5, 1)));
+  pRB->setLinearVelocity(BtOgre::Convert::toBullet(
+      getOrientation() * Ogre::Vector3(0, 0.5, 1)));
 
   m_pLiftedEntity = nullptr;
 }
 
 CPlayer::EReceiveDamageResult CPlayer::receiveDamage(const CDamage &dmg) {
   this->makeInvulnerable(1);
-  dynamic_cast<CPersonController*>(m_pCharacterController)->changeMoveState(CPersonController::MS_PUSHED_BACK, dmg.getDamageDirection(), 0.2, 0.4);
+  dynamic_cast<CPersonController*>(m_pCharacterController)
+      ->changeMoveState(CPersonController::MS_PUSHED_BACK,
+                        dmg.getDamageDirection(), 0.2, 0.4);
   return RDR_ACCEPTED;
 }
 
 void CPlayer::postStepForwardAndStrafe() {
-  CPersonController *pPersonController = dynamic_cast<CPersonController*>(m_pCharacterController);
+  CPersonController *pPersonController(
+      dynamic_cast<CPersonController*>(m_pCharacterController));
   if (pPersonController->getMoveState() == CPersonController::MS_RUNNING) {
-    const Ogre::Vector3 vDir = m_pSceneNode->getOrientation().zAxis();//m_pBodyEntity->getParentNode()->convertLocalToWorldOrientation(m_pBodyEntity->getSkeleton()->getBone(PERSON_LEFT_HANDLE)->_getDerivedOrientation()).yAxis();
-    const Ogre::Vector3 vPos = BtOgre::Convert::toOgre(m_pCollisionObject->getWorldTransform().getOrigin()) + Ogre::Vector3::UNIT_Y * (PERSON_HEIGHT * 0.15 - PERSON_PHYSICS_OFFSET);/* - m_pBodyEntity->getParentNode()->getPosition() + m_pBodyEntity->getParentNode()->convertLocalToWorldPosition(m_pBodyEntity->getSkeleton()->getBone(PERSON_LEFT_HANDLE)->_getDerivedPosition())*/;
+    const Ogre::Vector3 vDir = m_pSceneNode->getOrientation().zAxis();
+    const Ogre::Vector3 vPos =
+        BtOgre::Convert::toOgre(
+            m_pCollisionObject->getWorldTransform().getOrigin())
+        + Ogre::Vector3::UNIT_Y
+        * (PERSON_HEIGHT * 0.15 - PERSON_PHYSICS_OFFSET);
 
-    DebugDrawer::getSingleton().drawLine(vPos, vPos + vDir * 0.08, Ogre::ColourValue::Blue);
-    createDamage(Ogre::Ray(vPos, vDir * 0.08), CDamage(DMG_SWORD, m_pSceneNode->getOrientation().zAxis()));
+    DebugDrawer::getSingleton().drawLine(vPos,
+                                         vPos + vDir * 0.08,
+                                         Ogre::ColourValue::Blue);
+    createDamage(Ogre::Ray(vPos, vDir * 0.08),
+                 CDamage(DMG_SWORD, m_pSceneNode->getOrientation().zAxis()));
   }
 }
 
@@ -302,19 +334,16 @@ void CPlayer::handleMessage(const CMessage &message) {
     if (msg_item.getItemMessageType() == CMessageItem::IM_SELECTION_CHANGED) {
       changeItem(PERSON_LEFT_HANDLE, msg_item.getItemVariantType());
     }
-  }
-  else if (message.getType() == MSG_PLAYER_PICKUP_ITEM) {
-    const CMessagePlayerPickupItem &msg_pui(dynamic_cast<const CMessagePlayerPickupItem&>(message));
+  } else if (message.getType() == MSG_PLAYER_PICKUP_ITEM) {
+    const CMessagePlayerPickupItem &msg_pui(
+        dynamic_cast<const CMessagePlayerPickupItem&>(message));
     if (msg_pui.getItemType() == OBJECT_HEART) {
       changeHP(HP_ONE_HEART);
-    }
-    else if (msg_pui.getItemType() == OBJECT_RED_RUPEE) {
+    } else if (msg_pui.getItemType() == OBJECT_RED_RUPEE) {
       mRupeeCount.addData(10);
-    }
-    else if (msg_pui.getItemType() == OBJECT_BLUE_RUPEE) {
+    } else if (msg_pui.getItemType() == OBJECT_BLUE_RUPEE) {
       mRupeeCount.addData(5);
-    }
-    else if (msg_pui.getItemType() == OBJECT_GREEN_RUPEE) {
+    } else if (msg_pui.getItemType() == OBJECT_GREEN_RUPEE) {
       mRupeeCount.addData(1);
     }
   }

@@ -35,7 +35,7 @@ public:
   virtual void enterMap(CMap *pMap, const Ogre::Vector3 &vPosition);
 
   void setInnerObject(EObjectTypes eType);
-  void createInnerObject(EObjectTypes eType);
+  virtual void createInnerObject(EObjectTypes eType);
 
 protected:
   void destroyPhysics();
