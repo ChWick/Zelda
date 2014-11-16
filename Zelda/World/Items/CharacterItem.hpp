@@ -37,7 +37,8 @@ protected:
 public:
   CCharacterItem(CCharacter *character, const std::string &boneToAttach, EItemVariantTypes type);
   ~CCharacterItem();
-
+  
+  void startDamage();
   void updateDamage(Ogre::Real tpf);
 
   EItemVariantTypes getItemVariantType() const {return mVariantType;}

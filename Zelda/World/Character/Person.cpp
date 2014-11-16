@@ -20,7 +20,6 @@
 #include "Person.hpp"
 #include "PersonController.hpp"
 #include "../Atlas/Map.hpp"
-//#include "BlinkingMaterialManager.h"
 #include "../../Common/Util/DebugDrawer.hpp"
 #include "CharacterController_Physics.hpp"
 #include <OgreStringVector.h>
@@ -36,6 +35,7 @@
 #include "PersonTypes.hpp"
 #include "../../Common/Log.hpp"
 #include "../../Common/Util/XMLHelper.hpp"
+#include "../Items/CharacterItem.hpp"
 
 using namespace XMLHelper;
 
@@ -217,21 +217,23 @@ void CPerson::moveToTarget(const SPATIAL_VECTOR &vPosition, const Ogre::Quaterni
 }
 
 void CPerson::postUpdateAnimationsCallback(const Ogre::Real fTime) {
-
 }
 void CPerson::updateAnimationsCallback(const Ogre::Real fTime) {
     CCharacter::updateAnimationsCallback(fTime);
 
   if (m_uiAnimID == ANIM_SLICE_HORIZONTAL) {
-    Ogre::Real fAnimPart = m_fTimer / m_Anims[ANIM_SLICE_HORIZONTAL]->getLength();
+    Ogre::Real fAnimPart = m_fTimer
+        / m_Anims[ANIM_SLICE_HORIZONTAL]->getLength();
     if (fAnimPart > 0.8) {
+    } else if (fAnimPart > 0.4) {
+      getCurrentWeapon()->updateDamage(fTime);
     }
-    else if (fAnimPart > 0.4) {
-      const Ogre::Vector3 vDir = m_pBodyEntity->getParentNode()->convertLocalToWorldOrientation(m_pBodyEntity->getSkeleton()->getBone(PERSON_LEFT_HANDLE)->_getDerivedOrientation()).yAxis();
-      const Ogre::Vector3 vPos = m_pBodyEntity->getParentNode()->convertLocalToWorldPosition(m_pBodyEntity->getSkeleton()->getBone(PERSON_LEFT_HANDLE)->_getDerivedPosition());
-
-      DebugDrawer::getSingleton().drawLine(vPos, vPos + vDir * 0.08, Ogre::ColourValue::Blue);
-      createDamage(Ogre::Ray(vPos, vDir * 0.08), CDamage(DMG_SWORD, m_pSceneNode->getOrientation().zAxis()));
+  } else if (m_uiAnimID == ANIM_USE_ITEM) {
+    Ogre::Real fAnimPart = m_fTimer
+        / m_Anims[ANIM_USE_ITEM]->getLength();
+    if (fAnimPart > 0.8) {
+    } else if (fAnimPart > 0.4) {
+      getCurrentItem()->updateDamage(fTime);
     }
   }
 }

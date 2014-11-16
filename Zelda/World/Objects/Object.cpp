@@ -325,8 +325,7 @@ CObject::SInteractionResult CObject::interactOnActivate(
 }
 
 CObject::EReceiveDamageResult CObject::receiveDamage(const CDamage &dmg) {
-  if ((m_ObjectTypeData.eDamageSourceMask & dmg.getDamageType())
-      == dmg.getDamageType()) {
+  if (m_ObjectTypeData.eDamageSourceMask & dmg.getDamageType()) {
     CWorldEntity::receiveDamage(dmg);
     return RDR_ACCEPTED;
   }

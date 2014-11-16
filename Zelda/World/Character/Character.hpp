@@ -136,7 +136,7 @@ public:
   virtual void exit();
   void enterMap(CMap *pMap, const Ogre::Vector3 &vInitPosition);
 
-  void createDamage(const Ogre::Ray &ray, const CDamage &dmg) const;
+  bool createDamage(const Ogre::Ray &ray, const CDamage &dmg) const;
 
   void animRunStart();
   void animRunEnd();
@@ -147,6 +147,9 @@ public:
   virtual void animAttackEnd();
   void animUseToolStart();
   void animUseToolEnd();
+
+  std::shared_ptr<CCharacterItem> getCurrentItem() {return mCurrentItem;}
+  std::shared_ptr<CCharacterItem> getCurrentWeapon() {return mCurrentWeapon;}
 
   void useCurrentItem();
 

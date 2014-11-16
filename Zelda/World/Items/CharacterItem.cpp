@@ -30,6 +30,7 @@
 #include "../Atlas/Map.hpp"
 #include "../../Common/Physics/BtOgrePG.hpp"
 #include "../../Common/Physics/PhysicsMasks.hpp"
+#include "../../Common/Util/DebugDrawer.hpp"
 
 CCharacterItem::CCharacterItem(CCharacter *character,
                                const std::string &boneToAttach,
@@ -55,16 +56,25 @@ CCharacterItem::~CCharacterItem() {
   mCharacter->getSceneNode()->getCreator()->destroyEntity(mAttachedMesh);
 }
 
+void CCharacterItem::startDamage() {
+  const Ogre::Vector3 vDir(
+      body->getParentNode()->convertLocalToWorldOrientation(
+          body->getSkeleton()->getBone(mBoneToAttach)
+          ->_getDerivedOrientation()).yAxis() * 0.08);
+  const Ogre::Vector3 vPos(
+      body->getParentNode()->convertLocalToWorldPosition(
+          body->getSkeleton()->getBone(mBoneToAttach)
+          ->_getDerivedPosition()));
+  mOldDamageStartPos = vDir + vPos;
+}
+
 void CCharacterItem::updateDamage(Ogre::Real tpf) {
-  // we make a spherical test first, that lists all hit objects
-  // afterwards we check if the hitpoint is in a defined spatial angle
-  // these objects will receive damage
   CMap *pMap = mCharacter->getMap();
   CPhysicsManager *physicsManager = pMap->getPhysicsManager();
   btCollisionWorld *collisionWorld = physicsManager->getWorld();
 
-  btTransform from;
-  btTransform to;
+  btTransform from(btTransform::getIdentity());
+  btTransform to(btTransform::getIdentity());
 
   Ogre::Entity *body(mCharacter->getBodyEntity());
 
@@ -76,31 +86,19 @@ void CCharacterItem::updateDamage(Ogre::Real tpf) {
       body->getParentNode()->convertLocalToWorldPosition(
           body->getSkeleton()->getBone(mBoneToAttach)
           ->_getDerivedPosition()));
+  mOldDamageStartPos = vDir + vPos;
 
-  btTriangleShape shape(
-      BtOgre::Convert::toBullet(vPos),
-      BtOgre::Convert::toBullet(vPos + vDir),
-      BtOgre::Convert::toBullet(mOldDamageStartPos));
-
-  mOldDamageStartPos = vPos + vDir;
-
-  btCollisionWorld::ClosestConvexResultCallback convexCallback(
-      btVector3(0, 0, 0),
-      btVector3(0, 0, 0));
-
-
-  collisionWorld->convexSweepTest(&shape,
-                                  from,
-                                  to,
-                                  convexCallback);
-
-  if (convexCallback.hasHit()) {
-    CWorldEntity *pWE = CWorldEntity::getFromUserPointer(
-        convexCallback.m_hitCollisionObject);
-    if (pWE) {
-      pWE->hit(createDamage());
-    }
+  if (mCharacter->createDamage(Ogre::Ray(vPos, vDir),
+                               createDamage()) == false) {
+    // no hit, check for low framerates
+    mCharacter->createDamage(Ogre::Ray(vPos + vDir,
+                                       mOldDamageStartPos), createDamage());
   }
+
+  DebugDrawer::getSingleton().drawLine(vPos, vPos + vDir,
+                                       Ogre::ColourValue::Red);
+  DebugDrawer::getSingleton().drawLine(vPos, mOldDamageStartPos,
+                                       Ogre::ColourValue::Red);
 }
 
 void CCharacterItem::show() {
