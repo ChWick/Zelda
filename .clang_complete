@@ -1,0 +1,6 @@
+-std=c++11
+-I/usr/local/include
+-I/usr/local/include/OGRE
+-I/usr/local/include/cegui-0
+-I/usr/include
+-I/usr/include/bullet
