@@ -17,8 +17,8 @@
  * Zelda. If not, see http://www.gnu.org/licenses/.
  *****************************************************************************/
 
-#ifndef _PLAYER_ITEM_HPP_
-#define _PLAYER_ITEM_HPP_
+#ifndef _CHARACTER_ITEM_HPP_
+#define _CHARACTER_ITEM_HPP_
 
 #include "ItemTypes.hpp"
 #include <OgrePrerequisites.h>
@@ -28,12 +28,17 @@ class CCharacter;
 
 class CCharacterItem {
 protected:
-  CCharacter &mCharacter;
+  CCharacter *mCharacter;
   const EItemVariantTypes mVariantType;
   Ogre::Entity *mAttachedMesh;
+  const std::string mBoneToAttach;
+
+  Ogre::Vector3 mOldDamageStartPos;
 public:
-  CCharacterItem(CCharacter &character, const std::string &boneToAttach, EItemVariantTypes type);
+  CCharacterItem(CCharacter *character, const std::string &boneToAttach, EItemVariantTypes type);
   ~CCharacterItem();
+
+  void updateDamage(Ogre::Real tpf);
 
   EItemVariantTypes getItemVariantType() const {return mVariantType;}
 
@@ -44,4 +49,4 @@ public:
   virtual Ogre::Vector3 getDamagePosition();
 };
 
-#endif // _PLAYER_ITEM_HPP_
+#endif // _CHARACTER_ITEM_HPP_

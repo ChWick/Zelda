@@ -24,7 +24,7 @@
 #include "../../Common/Physics/BtOgreExtras.hpp"
 #include <BulletDynamics/Character/btCharacterControllerInterface.h>
 #include <OgreAnimationState.h>
-#include "../Items/PlayerItem.hpp"
+#include "../Items/CharacterItem.hpp"
 
 // map will be set on enter map, in construction, m_pMap is nullptr
 CCharacter::CCharacter(const std::string &sID, CEntity *pParent, CMap *pMap, const EFriendOrEnemyStates foe, unsigned int uiAnimationCount)
@@ -316,12 +316,12 @@ void CCharacter::useCurrentItem() {
 }
 
 void CCharacter::changeItem(const std::string &bone, EItemVariantTypes item) {
-  mCurrentItem = std::shared_ptr<CCharacterItem>(new CCharacterItem(*this, bone, item));
+  mCurrentItem = std::shared_ptr<CCharacterItem>(new CCharacterItem(this, bone, item));
   mCurrentItem->hide();
 }
 
 void CCharacter::changeWeapon(const std::string &bone, EItemVariantTypes item) {
-  mCurrentWeapon = std::shared_ptr<CCharacterItem>(new CCharacterItem(*this, bone, item));
+  mCurrentWeapon = std::shared_ptr<CCharacterItem>(new CCharacterItem(this, bone, item));
   mCurrentWeapon->show();
 }
 

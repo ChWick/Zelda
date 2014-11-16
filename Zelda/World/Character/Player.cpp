@@ -34,7 +34,7 @@
 #include <OgreSkeleton.h>
 #include <OgreSkeletonInstance.h>
 #include "../../Common/Log.hpp"
-#include "../Items/PlayerItem.hpp"
+#include "../Items/CharacterItem.hpp"
 #include "../Messages/MessageItem.hpp"
 #include "../Messages/UserMessageTypes.hpp"
 #include "../Objects/ObjectTypes.hpp"
