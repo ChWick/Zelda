@@ -18,23 +18,26 @@
  *****************************************************************************/
 
 #include "Character.hpp"
+#include <BulletDynamics/Character/btCharacterControllerInterface.h>
 #include "CharacterController.hpp"
 #include "../Atlas/Map.hpp"
 #include "../../Common/Physics/PhysicsMasks.hpp"
 #include "../../Common/Physics/BtOgreExtras.hpp"
-#include <BulletDynamics/Character/btCharacterControllerInterface.h>
 #include <OgreAnimationState.h>
 #include "../Items/CharacterItem.hpp"
 
 // map will be set on enter map, in construction, m_pMap is nullptr
-CCharacter::CCharacter(const std::string &sID, CEntity *pParent, CMap *pMap, const EFriendOrEnemyStates foe, unsigned int uiAnimationCount)
+CCharacter::CCharacter(const std::string &sID,
+                       CEntity *pParent,
+                       CMap *pMap,
+                       const EFriendOrEnemyStates foe,
+                       unsigned int uiAnimationCount)
   : CWorldEntity(sID, pParent, pMap),
     m_eFriendOrEnemy(foe),
     m_pCharacterController(nullptr),
     m_uiAnimationCount(uiAnimationCount),
     m_fTimer(0),
-    m_fAnimSpeed(1)
-{
+    m_fAnimSpeed(1) {
   m_Anims.resize(m_uiAnimationCount);
   m_FadingStates.resize(m_uiAnimationCount);
   m_uiAnimID = m_uiAnimationCount;
@@ -42,14 +45,17 @@ CCharacter::CCharacter(const std::string &sID, CEntity *pParent, CMap *pMap, con
   constructor_impl();
 }
 
-CCharacter::CCharacter(const tinyxml2::XMLElement *pElem, CEntity *pParent, CMap *pMap, const EFriendOrEnemyStates foe, unsigned int uiAnimationCount)
+CCharacter::CCharacter(const tinyxml2::XMLElement *pElem,
+                       CEntity *pParent,
+                       CMap *pMap,
+                       const EFriendOrEnemyStates foe,
+                       unsigned int uiAnimationCount)
   : CWorldEntity(pParent, pMap, pElem),
     m_eFriendOrEnemy(foe),
     m_pCharacterController(nullptr),
     m_uiAnimationCount(uiAnimationCount),
     m_fTimer(0),
     m_fAnimSpeed(1) {
-
   m_Anims.resize(m_uiAnimationCount);
   m_FadingStates.resize(m_uiAnimationCount);
   m_uiAnimID = m_uiAnimationCount;
@@ -268,6 +274,7 @@ void CCharacter::animJumpEnd() {
 }
 void CCharacter::animAttack() {
   setAnimation(ANIM_SLICE_HORIZONTAL, true);
+  mCurrentWeapon->startDamage();
   m_fTimer = 0;
 }
 void CCharacter::animAttackEnd() {
@@ -278,6 +285,7 @@ void CCharacter::animAttackEnd() {
 void CCharacter::animUseToolStart() {
   setAnimation(ANIM_USE_ITEM);
   mCurrentItem->show();
+  mCurrentItem->startDamage();
   mCurrentWeapon->hide();
   m_fTimer = 0;
 }

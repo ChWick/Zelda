@@ -57,6 +57,7 @@ CCharacterItem::~CCharacterItem() {
 }
 
 void CCharacterItem::startDamage() {
+  Ogre::Entity *body(mCharacter->getBodyEntity());
   const Ogre::Vector3 vDir(
       body->getParentNode()->convertLocalToWorldOrientation(
           body->getSkeleton()->getBone(mBoneToAttach)
@@ -69,10 +70,6 @@ void CCharacterItem::startDamage() {
 }
 
 void CCharacterItem::updateDamage(Ogre::Real tpf) {
-  CMap *pMap = mCharacter->getMap();
-  CPhysicsManager *physicsManager = pMap->getPhysicsManager();
-  btCollisionWorld *collisionWorld = physicsManager->getWorld();
-
   btTransform from(btTransform::getIdentity());
   btTransform to(btTransform::getIdentity());
 
