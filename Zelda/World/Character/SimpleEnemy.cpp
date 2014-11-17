@@ -18,6 +18,7 @@
  *****************************************************************************/
 
 #include "SimpleEnemy.hpp"
+#include <string>
 #include "SimpleEnemyController.hpp"
 #include "../Atlas/Map.hpp"
 #include "../Damage.hpp"
@@ -29,42 +30,32 @@
 #include "../../Common/Util/DebugDrawer.hpp"
 #include "CharacterController_Physics.hpp"
 
-CSimpleEnemy::CSimpleEnemy(const std::string &sID, CEntity *pParent, CMap *pMap)
-	: CPerson(sID, pParent, pMap, PERSON_DATA_ID_MAP.toData(PERSON_SOLDIER_GREEN_SWORD), SE_ANIM_COUNT) {
+CSimpleEnemy::CSimpleEnemy(const std::string &sID,
+                           CEntity *pParent,
+                           CMap *pMap)
+    : CPerson(sID,
+              pParent,
+              pMap,
+              PERSON_DATA_ID_MAP.toData(PERSON_SOLDIER_GREEN_SWORD),
+              SE_ANIM_COUNT) {
 }
 
-CSimpleEnemy::CSimpleEnemy(const tinyxml2::XMLElement *pElem, CEntity *pParent, CMap *pMap)
+CSimpleEnemy::CSimpleEnemy(const tinyxml2::XMLElement *pElem,
+                           CEntity *pParent,
+                           CMap *pMap)
   : CPerson(pElem, pParent, pMap, SE_ANIM_COUNT) {
 }
 void CSimpleEnemy::setupInternal() {
-	/*switch (m_eEnemyType) {
-	case ET_GREEN_SWORD:
-		createTool(CPlayerTool::TOOL_SWORD, true);
-		createShield(CShield::ST_SIMPLE_SHIELD, true);
-		setCurAndMaxHP(HP_ONE_HEART);
-		m_bSwordsDrawn = true;
-		break;
-    case ET_BLOCKER:
-		createTool(CPlayerTool::TOOL_SWORD, true);
-		createShield(CShield::ST_SIMPLE_SHIELD, true);
-		m_bSwordsDrawn = true;
-		animStartBlock();
-		setCurAndMaxHP(HP_INFINITY);
-		dynamic_cast<CSimpleEnemyController*>(m_pCharacterController)->stun();
-		m_uiTakeDamageFlags = CDamage::DMG_NONE;
-		break;
-	}*/
-
-	createHandObject(PERSON_RIGHT_HANDLE, RIGHT_HAND, "soldier_sword.mesh");
-	createHandObject(PERSON_LEFT_HANDLE, LEFT_HAND, "soldier_shield.mesh");
+  createHandObject(PERSON_RIGHT_HANDLE, RIGHT_HAND, "soldier_sword.mesh");
+  createHandObject(PERSON_LEFT_HANDLE, LEFT_HAND, "soldier_shield.mesh");
 }
 
 void CSimpleEnemy::setupAnimations() {
   Ogre::StringVector animNames(SE_ANIM_COUNT);
-	animNames[SE_ANIM_SCOUT] = "Scout";
-	animNames[SE_ANIM_WALK] = "Walk";
+  animNames[SE_ANIM_SCOUT] = "Scout";
+  animNames[SE_ANIM_WALK] = "Walk";
 
-	// this is very important due to the nature of the exported animations
+  // this is very important due to the nature of the exported animations
   m_pBodyEntity->getSkeleton()->setBlendMode(Ogre::ANIMBLEND_CUMULATIVE);
 
   // populate our animation list
@@ -82,46 +73,66 @@ void CSimpleEnemy::setupAnimations() {
 }
 
 CCharacterController *CSimpleEnemy::createCharacterController() {
-	return new CSimpleEnemyController(this);
+  return new CSimpleEnemyController(this);
 }
 
-CSimpleEnemy::EReceiveDamageResult CSimpleEnemy::receiveDamage(const CDamage &dmg) {
+CSimpleEnemy::EReceiveDamageResult CSimpleEnemy::receiveDamage(
+    const CDamage &dmg) {
   this->makeInvulnerable(1);
-  dynamic_cast<CSimpleEnemyController*>(m_pCharacterController)->changeMoveState(CSimpleEnemyController::MS_PUSHED_BACK, dmg.getDamageDirection(), 0.2, 0.8);
+  dynamic_cast<CSimpleEnemyController*>(m_pCharacterController)
+      ->changeMoveState(CSimpleEnemyController::MS_PUSHED_BACK,
+                        dmg.getDamageDirection(), 0.2, 0.8);
   return RDR_ACCEPTED;
 }
 
 void CSimpleEnemy::killedCallback() {
-	deleteLater();
-	//InnerObjectGenerator::createInnerObject(*m_pCurrentMap, getPosition(), InnerObjectGenerator::IOLT_DEFAULT);
+  deleteLater();
+  // InnerObjectGenerator::createInnerObject(*m_pCurrentMap,
+  // getPosition(), InnerObjectGenerator::IOLT_DEFAULT);
 }
 
 void CSimpleEnemy::setPlayer(CWorldEntity *pPlayer) {
-	dynamic_cast<CSimpleEnemyController*>(m_pCharacterController)->setPlayer(pPlayer);
+  dynamic_cast<CSimpleEnemyController*>(m_pCharacterController)
+      ->setPlayer(pPlayer);
 }
 
 void CSimpleEnemy::updateAnimationsCallback(const Ogre::Real fTime) {
-  for (CWorldEntity *pEnt : dynamic_cast<CharacterControllerPhysics*>(mCCPhysics)->getCollidingWorldEntities()) {
-    if (dynamic_cast<CCharacter*>(pEnt) && dynamic_cast<CCharacter*>(pEnt)->getFriendOrEnemyState() == FOE_FRIENDLY) {
+  for (CWorldEntity *pEnt
+           : dynamic_cast<CharacterControllerPhysics*>(mCCPhysics)
+           ->getCollidingWorldEntities()) {
+    if (dynamic_cast<CCharacter*>(pEnt)
+        && dynamic_cast<CCharacter*>(pEnt)->getFriendOrEnemyState()
+        == FOE_FRIENDLY) {
       pEnt->hit(CDamage(DMG_SWORD, m_pSceneNode->getOrientation().zAxis()));
     }
   }
 
-  CSimpleEnemyController::EKIState eKIState = dynamic_cast<CSimpleEnemyController*>(m_pCharacterController)->getCurrentKIState();
-  if (eKIState == CSimpleEnemyController::KI_PATROLING || eKIState == CSimpleEnemyController::KI_WALK_TO_PLAYER) {
+  CSimpleEnemyController::EKIState eKIState
+      = dynamic_cast<CSimpleEnemyController*>(m_pCharacterController)
+      ->getCurrentKIState();
+  if (eKIState == CSimpleEnemyController::KI_PATROLING
+      || eKIState == CSimpleEnemyController::KI_WALK_TO_PLAYER) {
     if (m_uiAnimID != SE_ANIM_WALK) {
       setAnimation(SE_ANIM_WALK, true);
     }
-  }
-  else if (eKIState == CSimpleEnemyController::KI_SCOUTING) {
+  } else if (eKIState == CSimpleEnemyController::KI_SCOUTING) {
     if (m_uiAnimID != SE_ANIM_SCOUT) {
       setAnimation(SE_ANIM_SCOUT, true);
     }
   }
 
-  const Ogre::Vector3 vDir = m_pBodyEntity->getParentNode()->convertLocalToWorldOrientation(m_pBodyEntity->getSkeleton()->getBone(PERSON_RIGHT_HANDLE)->_getDerivedOrientation()).yAxis();
-  const Ogre::Vector3 vPos = m_pBodyEntity->getParentNode()->convertLocalToWorldPosition(m_pBodyEntity->getSkeleton()->getBone(PERSON_RIGHT_HANDLE)->_getDerivedPosition());
+  const Ogre::Vector3 vDir = m_pBodyEntity->getParentNode()
+      ->convertLocalToWorldOrientation(
+          m_pBodyEntity->getSkeleton()->getBone(PERSON_RIGHT_HANDLE)
+          ->_getDerivedOrientation()).yAxis();
+  const Ogre::Vector3 vPos = m_pBodyEntity->getParentNode()
+      ->convertLocalToWorldPosition(
+          m_pBodyEntity->getSkeleton()->getBone(PERSON_RIGHT_HANDLE)
+          ->_getDerivedPosition());
 
-  DebugDrawer::getSingleton().drawLine(vPos, vPos + vDir * 0.1, Ogre::ColourValue::Blue);
-  createDamage(Ogre::Ray(vPos, vDir * 0.1), CDamage(DMG_SWORD, m_pSceneNode->getOrientation().zAxis()));
+  DebugDrawer::getSingleton().drawLine(vPos,
+                                       vPos + vDir * 0.1,
+                                       Ogre::ColourValue::Blue);
+  createDamage(Ogre::Ray(vPos, vDir * 0.1),
+               CDamage(DMG_SWORD, m_pSceneNode->getOrientation().zAxis()));
 }
