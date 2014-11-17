@@ -47,5 +47,4 @@ void CItemSlotIdMap::init() {
 }
 
 void CItemVariantIdMap::init() {
-
 }

@@ -40,7 +40,7 @@ CCharacterItem::CCharacterItem(CCharacter *character,
     mBoneToAttach(boneToAttach) {
   ASSERT(character);
   ASSERT(boneToAttach.size() > 0);
-
+  
   mAttachedMesh = mCharacter->getSceneNode()
       ->getCreator()->createEntity(
           ITEM_VARIANT_DATA_MAP.toData(type).sBasicMeshName);

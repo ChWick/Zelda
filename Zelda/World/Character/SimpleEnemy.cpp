@@ -29,6 +29,7 @@
 #include <OgreSceneNode.h>
 #include "../../Common/Util/DebugDrawer.hpp"
 #include "CharacterController_Physics.hpp"
+#include "../Items/CharacterItem.hpp"
 
 CSimpleEnemy::CSimpleEnemy(const std::string &sID,
                            CEntity *pParent,
@@ -46,8 +47,11 @@ CSimpleEnemy::CSimpleEnemy(const tinyxml2::XMLElement *pElem,
   : CPerson(pElem, pParent, pMap, SE_ANIM_COUNT) {
 }
 void CSimpleEnemy::setupInternal() {
-  createHandObject(PERSON_RIGHT_HANDLE, RIGHT_HAND, "soldier_sword.mesh");
-  createHandObject(PERSON_LEFT_HANDLE, LEFT_HAND, "soldier_shield.mesh");
+  // createHandObject(PERSON_RIGHT_HANDLE, RIGHT_HAND, "soldier_sword.mesh");
+  changeWeapon(PERSON_RIGHT_HANDLE, ITEM_VARIANT_ENEMY_SWORD_SIMPLE);
+  // createHandObject(PERSON_LEFT_HANDLE, LEFT_HAND, "soldier_shield.mesh");
+
+  getCurrentWeapon()->startDamage();
 }
 
 void CSimpleEnemy::setupAnimations() {
@@ -121,7 +125,7 @@ void CSimpleEnemy::updateAnimationsCallback(const Ogre::Real fTime) {
     }
   }
 
-  const Ogre::Vector3 vDir = m_pBodyEntity->getParentNode()
+  /*  const Ogre::Vector3 vDir = m_pBodyEntity->getParentNode()
       ->convertLocalToWorldOrientation(
           m_pBodyEntity->getSkeleton()->getBone(PERSON_RIGHT_HANDLE)
           ->_getDerivedOrientation()).yAxis();
@@ -134,5 +138,6 @@ void CSimpleEnemy::updateAnimationsCallback(const Ogre::Real fTime) {
                                        vPos + vDir * 0.1,
                                        Ogre::ColourValue::Blue);
   createDamage(Ogre::Ray(vPos, vDir * 0.1),
-               CDamage(DMG_SWORD, m_pSceneNode->getOrientation().zAxis()));
+  CDamage(DMG_SWORD, m_pSceneNode->getOrientation().zAxis()));*/
+  getCurrentWeapon()->updateDamage(fTime);
 }
