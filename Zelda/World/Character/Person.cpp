@@ -255,26 +255,30 @@ bool CPerson::frameEnded(const Ogre::FrameEvent& evt) {
 }
 
 void CPerson::createBlinkingMaterials() {
-	assert(m_pBodyEntity);
-  m_pMaterial = Ogre::MaterialManager::getSingleton().getByName(m_PersonData.sMaterialName)->clone(m_sID + "mat_" + m_PersonData.sMaterialName);
+  ASSERT(m_pBodyEntity);
+  m_pMaterial = Ogre::MaterialManager::getSingleton()
+      .getByName(m_PersonData.sMaterialName)
+      ->clone(m_sID + "mat_" + m_PersonData.sMaterialName);
   m_pBodyEntity->setMaterial(m_pMaterial);
 }
 
 void CPerson::removeBlinkingMaterials() {
-	Ogre::MaterialManager::getSingleton().remove(m_pMaterial->getName());
+  Ogre::MaterialManager::getSingleton().remove(m_pMaterial->getName());
 }
 
 void CPerson::startBeingInvulnerableCallback() {
-	m_pMaterial->getSupportedTechnique(0)->getPass(0)->getFragmentProgramParameters()->setNamedConstant("blinking_intensity", 1.f);
+  m_pMaterial->getSupportedTechnique(0)->getPass(0)
+      ->getFragmentProgramParameters()
+      ->setNamedConstant("blinking_intensity", 1.f);
 }
 
 void CPerson::endBeingInvulnerableCallback() {
-	m_pMaterial->getSupportedTechnique(0)->getPass(0)->getFragmentProgramParameters()->setNamedConstant("blinking_intensity", 0.f);
+  m_pMaterial->getSupportedTechnique(0)->getPass(0)
+      ->getFragmentProgramParameters()
+      ->setNamedConstant("blinking_intensity", 0.f);
 }
 
-
-void CPerson::attack(unsigned int uiTool) {
-  if (isReadyForNewAction()) {
-    animAttack();
-  }
+void CPerson::myDamageBlocked(const CDamage &damage,
+                              CHitableInterface *hitInterface) {
+  dynamic_cast<CPersonController*>(m_pCharacterController)->stun();
 }

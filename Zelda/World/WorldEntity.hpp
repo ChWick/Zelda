@@ -23,10 +23,14 @@
 #include "InteractionInterface.hpp"
 #include "../Common/GameLogic/Entity.hpp"
 #include "HitableInterface.hpp"
+#include "AttackerInterface.hpp"
 
 class CMap;
 
-class CWorldEntity : public CEntity, public CHitableInterface, public CInteractionInterface {
+class CWorldEntity : public CEntity,
+                     public CHitableInterface,
+                     public CAttackerInterface,
+                     public CInteractionInterface {
 protected:
   Ogre::SceneNode *m_pSceneNode;
 	btCollisionObject *m_pCollisionObject;

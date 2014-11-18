@@ -25,25 +25,29 @@
 #include "../Common/Config/TypeDefines.hpp"
 #include SPATIAL_VECTOR_HEADER
 
+class CAttackerInterface;
+
 class CDamage {
 public:
 private:
-	const EDamageType m_eDamageType;
-	const Hitpoints m_hpDamageValue;		//!< Schaden in Prozent an Herzen (100 = 1 Herz, 50 = 1/2 Herz)
-	const SPATIAL_VECTOR m_vDamageDirection;
-	const float m_fKnockOutTime;			//!< Time how long the target will be stunned
+  CAttackerInterface *mAttacker;  //!< Attacker, origin of the damage 
+  const EDamageType m_eDamageType;
+  const Hitpoints m_hpDamageValue;		//!< Schaden in Prozent an Herzen (100 = 1 Herz, 50 = 1/2 Herz)
+  const SPATIAL_VECTOR m_vDamageDirection;
+  const float m_fKnockOutTime;			//!< Time how long the target will be stunned
+  
+ public:
+  CDamage(CAttackerInterface *attacker, EDamageType eDmgType);
+  CDamage(CAttackerInterface *attacker, EDamageType eDmgType, const SPATIAL_VECTOR &vDirection);
+  CDamage(CAttackerInterface *attacker, EDamageType eDmgType, const SPATIAL_VECTOR &vDirection, const float fKnockOutTime);
+  CDamage(CAttackerInterface *attacker, EDamageType eDmgType, const SPATIAL_VECTOR &vDirection, const Hitpoints hpDamageValue);
+  CDamage(CAttackerInterface *attacker, EDamageType eDmgType, const SPATIAL_VECTOR &vDirection, const Hitpoints hpDamageValue, const float fKnockOutTime);
 
-public:
-	CDamage(EDamageType eDmgType);
-	CDamage(EDamageType eDmgType, const SPATIAL_VECTOR &vDirection);
-	CDamage(EDamageType eDmgType, const SPATIAL_VECTOR &vDirection, const float fKnockOutTime);
-	CDamage(EDamageType eDmgType, const SPATIAL_VECTOR &vDirection, const Hitpoints hpDamageValue);
-	CDamage(EDamageType eDmgType, const SPATIAL_VECTOR &vDirection, const Hitpoints hpDamageValue, const float fKnockOutTime);
-
-	const SPATIAL_VECTOR &getDamageDirection() const {return m_vDamageDirection;}
-	const Hitpoints getDamageValue() const {return m_hpDamageValue;}
-	const EDamageType getDamageType() const {return m_eDamageType;}
-	const float getKnockOutTime() const {return m_fKnockOutTime;}
+  CAttackerInterface *getAttacker() const {return mAttacker;}
+  const SPATIAL_VECTOR &getDamageDirection() const {return m_vDamageDirection;}
+  const Hitpoints getDamageValue() const {return m_hpDamageValue;}
+  const EDamageType getDamageType() const {return m_eDamageType;}
+  const float getKnockOutTime() const {return m_fKnockOutTime;}
 };
 
 #endif // _DAMAGE_HPP_

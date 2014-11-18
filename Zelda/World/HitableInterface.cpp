@@ -86,10 +86,12 @@ void CHitableInterface::changeHP(Hitpoints uiHP) {
   }
 }
 
-CHitableInterface::EReceiveDamageResult CHitableInterface::hit(const CDamage &damage) {
+CHitableInterface::EReceiveDamageResult CHitableInterface::hit(
+    const CDamage &damage) {
   if (m_bInvulnerable) {return RDR_IGNORED;}
   bool bWasInvunerable = m_bInvulnerable;
   EReceiveDamageResult r = receiveDamage(damage);
+
   switch (r) {
   case RDR_ACCEPTED:
     if (!bWasInvunerable) {
@@ -98,6 +100,7 @@ CHitableInterface::EReceiveDamageResult CHitableInterface::hit(const CDamage &da
     damageAccepted(damage);
     break;
   case RDR_BLOCKED:
+    std::cout << "hitblock" << std::endl;
     damageBlocked(damage);
     break;
   case RDR_IGNORED:
@@ -112,9 +115,11 @@ CHitableInterface::EReceiveDamageResult CHitableInterface::hit(const CDamage &da
 }
 
 void CHitableInterface::maxHitpointsChangedCallback() {
-  CMessageHandler::getSingleton().addMessage(new CMessageHitpointsChanged(*this));
+  CMessageHandler::getSingleton().addMessage(
+      new CMessageHitpointsChanged(*this));
 }
 
 void CHitableInterface::hitpointsChangedCallback() {
-  CMessageHandler::getSingleton().addMessage(new CMessageHitpointsChanged(*this));
+  CMessageHandler::getSingleton().addMessage(
+      new CMessageHitpointsChanged(*this));
 }

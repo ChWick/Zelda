@@ -324,7 +324,8 @@ void CPlayer::postStepForwardAndStrafe() {
                                          vPos + vDir * 0.08,
                                          Ogre::ColourValue::Blue);
     createDamage(Ogre::Ray(vPos, vDir * 0.08),
-                 CDamage(DMG_SWORD, m_pSceneNode->getOrientation().zAxis()));
+                 CDamage(this, DMG_SWORD,
+                         m_pSceneNode->getOrientation().zAxis()));
   }
 }
 

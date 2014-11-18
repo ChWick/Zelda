@@ -37,12 +37,23 @@
 CCharacterItem::CCharacterItem(CCharacter *character,
                                const std::string &boneToAttach,
                                EItemVariantTypes type)
-  : mCharacter(character),
-    mVariantType(type),
-    mBoneToAttach(boneToAttach),
-    mBlockPhysics(nullptr) {
+: CWorldEntity(character->getID() + "item_at_" + boneToAttach,
+               character,
+               character->getMap()),
+  mCharacter(character),
+  mVariantType(type),
+  mBoneToAttach(boneToAttach),
+  mBlockPhysics(nullptr) {
   ASSERT(character);
   ASSERT(boneToAttach.size() > 0);
+
+  if (mCharacter->getFriendOrEnemyState() == FOE_FRIENDLY) {
+    mBlockPhysicsMask = MASK_SHIELD_P_COLLIDES_WITH;
+    mBlockPhysicsGroup = COL_SHIELD_P;
+  } else {
+    mBlockPhysicsMask = MASK_SHIELD_N_COLLIDES_WITH;
+    mBlockPhysicsGroup = COL_SHIELD_N;
+  }
 
   mAttachedMesh = mCharacter->getSceneNode()
       ->getCreator()->createEntity(
@@ -78,6 +89,7 @@ void CCharacterItem::update(Ogre::Real tpf) {
         btTransform(BtOgre::Convert::toBullet(rotation),
                     BtOgre::Convert::toBullet(position)));
   }
+  CWorldEntity::update(tpf);
 }
 
 void CCharacterItem::enterNewMap(CMap *oldMap, CMap *newMap) {
@@ -95,7 +107,11 @@ void CCharacterItem::createPhysics(CMap *map) {
                                   shape);
   CPhysicsManager *physicsManager = map->getPhysicsManager();
 
-  physicsManager->secureAddRigidBody(mBlockPhysics, 0, 0);
+  physicsManager->secureAddRigidBody(mBlockPhysics,
+                                     mBlockPhysicsGroup,
+                                     mBlockPhysicsMask);
+
+  this->setThisAsCollisionObjectsUserPointer(mBlockPhysics);
 }
 
 void CCharacterItem::destroyPhysics(CMap *map) {
@@ -153,14 +169,20 @@ void CCharacterItem::updateDamage(Ogre::Real tpf) {
 
 void CCharacterItem::show() {
   mAttachedMesh->setVisible(true);
+  setPauseRender(false);
+  setPauseUpdate(false);
 
   CPhysicsManager *physicsManager
       = mCharacter->getMap()->getPhysicsManager();
-  physicsManager->secureAddRigidBody(mBlockPhysics, 0, 0);
+  physicsManager->secureAddRigidBody(mBlockPhysics,
+                                     mBlockPhysicsGroup,
+                                     mBlockPhysicsMask);
 }
 
 void CCharacterItem::hide() {
   mAttachedMesh->setVisible(false);
+  setPauseRender(true);
+  setPauseUpdate(true);
 
   CPhysicsManager *physicsManager
       = mCharacter->getMap()->getPhysicsManager();
@@ -168,10 +190,17 @@ void CCharacterItem::hide() {
 }
 
 CDamage CCharacterItem::createDamage() {
-  return CDamage(DMG_ALL, mCharacter->getOrientation().zAxis(),
+  return CDamage(mCharacter,
+                 DMG_ALL, mCharacter->getOrientation().zAxis(),
                  HP_FULL_HEART, 0);
 }
 
 Ogre::Vector3 CCharacterItem::getDamagePosition() {
   return Ogre::Vector3::ZERO;
+}
+
+
+CCharacterItem::EReceiveDamageResult CCharacterItem::hit(
+    const CDamage &damage) {
+  return RDR_BLOCKED;
 }

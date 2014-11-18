@@ -136,7 +136,7 @@ public:
   virtual void exit();
   void enterMap(CMap *pMap, const Ogre::Vector3 &vInitPosition);
 
-  bool createDamage(const Ogre::Ray &ray, const CDamage &dmg) const;
+  bool createDamage(const Ogre::Ray &ray, const CDamage &dmg);
 
   void animRunStart();
   void animRunEnd();
@@ -152,6 +152,7 @@ public:
   std::shared_ptr<CCharacterItem> getCurrentWeapon() {return mCurrentWeapon;}
 
   void useCurrentItem();
+  void useCurrentWeapon();
 
   void setIsMoving(bool isMoving);
 
@@ -164,9 +165,6 @@ protected:
   virtual void destroyPhysics() = 0;
   virtual void initBody(Ogre::SceneNode *pParentSceneNode) = 0;
   virtual void setupAnimations() = 0;
-
-
-  virtual void attack(const Ogre::Real fTime) {}
 protected:
   virtual void preUpdateBoundsCallback(const Ogre::Real fTime) {}
   virtual void preAnimationUpdateCallback(const Ogre::Real fTime) {}

@@ -62,7 +62,7 @@ public:
   virtual bool frameEnded(const Ogre::FrameEvent& evt);
 
 
-  void attack(unsigned int uiTool);
+  //void attack(unsigned int uiTool);
 
   virtual bool collidesWith(const std::string &sEntityID) const;
   virtual void interact() {}
@@ -92,6 +92,9 @@ protected:
 	friend class CShield;
 protected:
 	void createHandObject(const Ogre::String &parentBone, EHands handPos, const Ogre::String &meshName);
+
+  
+  virtual void myDamageBlocked(const CDamage &damage, CHitableInterface *hitInterface);
 };
 
 #endif

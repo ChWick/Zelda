@@ -20,18 +20,42 @@
 #include "Damage.hpp"
 
 
-CDamage::CDamage(EDamageType eDmgType)
-	: m_eDamageType(eDmgType), m_hpDamageValue(DAMAGE_DATA_MAP.toData(eDmgType).defaultDamage), m_vDamageDirection(SPATIAL_VECTOR::ZERO), m_fKnockOutTime(0) {
+CDamage::CDamage(CAttackerInterface *attacker, EDamageType eDmgType)
+    : mAttacker(attacker),
+      m_eDamageType(eDmgType),
+      m_hpDamageValue(DAMAGE_DATA_MAP.toData(eDmgType).defaultDamage),
+      m_vDamageDirection(SPATIAL_VECTOR::ZERO), m_fKnockOutTime(0) {
 }
-CDamage::CDamage(EDamageType eDmgType, const SPATIAL_VECTOR &vDirection)
-	: m_eDamageType(eDmgType), m_hpDamageValue(DAMAGE_DATA_MAP.toData(eDmgType).defaultDamage), m_vDamageDirection(vDirection), m_fKnockOutTime(0) {
+CDamage::CDamage(CAttackerInterface *attacker,
+                 EDamageType eDmgType, const SPATIAL_VECTOR &vDirection)
+    : mAttacker(attacker),
+      m_eDamageType(eDmgType),
+      m_hpDamageValue(DAMAGE_DATA_MAP.toData(eDmgType).defaultDamage),
+      m_vDamageDirection(vDirection), m_fKnockOutTime(0) {
 }
-CDamage::CDamage(EDamageType eDmgType, const SPATIAL_VECTOR &vDirection, const float fKnockOutTime)
-	: m_eDamageType(eDmgType), m_hpDamageValue(DAMAGE_DATA_MAP.toData(eDmgType).defaultDamage), m_vDamageDirection(vDirection), m_fKnockOutTime(fKnockOutTime) {
+CDamage::CDamage(CAttackerInterface *attacker, EDamageType eDmgType,
+                 const SPATIAL_VECTOR &vDirection, const float fKnockOutTime)
+    : mAttacker(attacker),
+      m_eDamageType(eDmgType),
+      m_hpDamageValue(DAMAGE_DATA_MAP.toData(eDmgType).defaultDamage),
+      m_vDamageDirection(vDirection), m_fKnockOutTime(fKnockOutTime) {
 }
-CDamage::CDamage(EDamageType eDmgType, const SPATIAL_VECTOR &vDirection, const Hitpoints hpDamageValue)
-	: m_eDamageType(eDmgType), m_hpDamageValue(hpDamageValue), m_vDamageDirection(vDirection), m_fKnockOutTime(0) {
+CDamage::CDamage(CAttackerInterface *attacker, EDamageType eDmgType,
+                 const SPATIAL_VECTOR &vDirection,
+                 const Hitpoints hpDamageValue)
+    : mAttacker(attacker),
+      m_eDamageType(eDmgType),
+      m_hpDamageValue(hpDamageValue),
+      m_vDamageDirection(vDirection), m_fKnockOutTime(0) {
 }
-CDamage::CDamage(EDamageType eDmgType, const SPATIAL_VECTOR &vDirection, const Hitpoints hpDamageValue, float fKnockOutTime)
-	: m_eDamageType(eDmgType), m_hpDamageValue(hpDamageValue), m_vDamageDirection(vDirection), m_fKnockOutTime(fKnockOutTime) {
+CDamage::CDamage(CAttackerInterface *attacker,
+                 EDamageType eDmgType,
+                 const SPATIAL_VECTOR &vDirection,
+                 const Hitpoints hpDamageValue,
+                 float fKnockOutTime)
+    : mAttacker(attacker),
+      m_eDamageType(eDmgType),
+      m_hpDamageValue(hpDamageValue),
+      m_vDamageDirection(vDirection),
+      m_fKnockOutTime(fKnockOutTime) {
 }

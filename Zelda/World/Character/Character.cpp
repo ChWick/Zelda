@@ -25,6 +25,7 @@
 #include "../../Common/Physics/BtOgreExtras.hpp"
 #include <OgreAnimationState.h>
 #include "../Items/CharacterItem.hpp"
+#include "../../Common/Util/Assert.hpp"
 
 // map will be set on enter map, in construction, m_pMap is nullptr
 CCharacter::CCharacter(const std::string &sID,
@@ -94,9 +95,21 @@ void CCharacter::enterMap(CMap *pMap, const Ogre::Vector3 &vInitPosition) {
   // destroy old physics
   destroyPhysics();
 
-  // delete tools, will be recreated
-  mCurrentWeapon.reset();
-  mCurrentItem.reset();
+  // delete tools, will be recreated, but store their current state
+  EItemVariantTypes currentWeaponType = ITEM_VARIANT_COUNT;
+  std::string weaponBone;
+  if (mCurrentWeapon) {
+    currentWeaponType = mCurrentWeapon->getItemVariantType();
+    weaponBone = mCurrentWeapon->getBoneToAttach();
+    mCurrentWeapon.reset();
+  }
+  EItemVariantTypes currentItemType = ITEM_VARIANT_COUNT;
+  std::string itemBone;
+  if (mCurrentItem) {
+    currentItemType = mCurrentItem->getItemVariantType();
+    itemBone = mCurrentItem->getBoneToAttach();
+    mCurrentItem.reset();
+  }
 
   m_pMap = pMap;
 
@@ -119,9 +132,16 @@ void CCharacter::enterMap(CMap *pMap, const Ogre::Vector3 &vInitPosition) {
     setPosition(vInitPosition);
     m_pCharacterController->start();
   }
+
+  if (currentWeaponType != ITEM_VARIANT_COUNT) {
+    changeWeapon(weaponBone, currentWeaponType);
+  }
+  if (currentItemType != ITEM_VARIANT_COUNT) {
+    changeItem(itemBone, currentItemType);
+  }
 }
 
-bool CCharacter::createDamage(const Ogre::Ray &ray, const CDamage &dmg) const {
+bool CCharacter::createDamage(const Ogre::Ray &ray, const CDamage &dmg) {
   // try to interact with the world. So detect an object to interact with
   btCollisionWorld::ClosestRayResultCallback rayCallback(
       BtOgre::Convert::toBullet(ray.getOrigin()),
@@ -140,7 +160,9 @@ bool CCharacter::createDamage(const Ogre::Ray &ray, const CDamage &dmg) const {
     CWorldEntity *pWE
         = CWorldEntity::getFromUserPointer(rayCallback.m_collisionObject);
     if (pWE) {
-      pWE->hit(dmg);
+      EReceiveDamageResult res = attack(dmg, pWE);
+      if (res == RDR_BLOCKED) {
+      }
       return true;
     }
   }
@@ -178,9 +200,7 @@ void CCharacter::update(Ogre::Real fTime) {
   preAnimationUpdateCallback(fTime);
   updateAnimations(fTime);
 
-  // update item/weapn
-  if (mCurrentWeapon) {mCurrentWeapon->update(fTime);}
-  if (mCurrentItem) {mCurrentItem->update(fTime);}
+  // update item/weapon
 }
 
 void CCharacter::updateAnimations(Ogre::Real fTime) {
@@ -338,7 +358,15 @@ short CCharacter::getCollisionGroup() {
 }
 
 void CCharacter::useCurrentItem() {
+  ASSERT(mCurrentItem);
   useItem(mCurrentItem->getItemVariantType());
+}
+
+void CCharacter::useCurrentWeapon() {
+  ASSERT(mCurrentWeapon);
+  if (isReadyForNewAction()) {
+    animAttack();
+  }
 }
 
 void CCharacter::changeItem(const std::string &bone, EItemVariantTypes item) {

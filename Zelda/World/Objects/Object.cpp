@@ -293,7 +293,8 @@ CObject::SInteractionResult CObject::interactOnCollision(
   case OBJECT_LIGHT_STONE:
   case OBJECT_VASE:
     if (m_eState == EST_THROWN) {
-      pSender->hit(CDamage(DMG_WORLD,
+      pSender->hit(CDamage(this,
+                           DMG_WORLD,
                            BtOgre::Convert::toOgre(
                                btRigidBody::upcast(this->getCollisionObject())
                                ->getLinearVelocity()).normalisedCopy(),
