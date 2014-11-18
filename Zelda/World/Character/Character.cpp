@@ -177,6 +177,10 @@ void CCharacter::update(Ogre::Real fTime) {
   preUpdateBoundsCallback(fTime);
   preAnimationUpdateCallback(fTime);
   updateAnimations(fTime);
+
+  // update item/weapn
+  if (mCurrentWeapon) {mCurrentWeapon->update(fTime);}
+  if (mCurrentItem) {mCurrentItem->update(fTime);}
 }
 
 void CCharacter::updateAnimations(Ogre::Real fTime) {

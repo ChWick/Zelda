@@ -137,6 +137,25 @@ btBroadphaseInterface *CPhysicsManager::getBroadphase()
 {
     return mBroadphaseInterface;
 }
+
+
+bool CPhysicsManager::hasRigidBody(btRigidBody *body) {
+  return m_pPhyWorld->getCollisionObjectArray().findLinearSearch(body)
+      != m_pPhyWorld->getCollisionObjectArray().size();
+}
+
+void CPhysicsManager::secureAddRigidBody(btRigidBody *body,
+                                         uint16_t group,
+                                         uint16_t mask) {
+  if (hasRigidBody(body)) {return;}
+  m_pPhyWorld->addRigidBody(body, group, mask);
+}
+
+void CPhysicsManager::secureRemoveRigidBody(btRigidBody *body) {
+  if (!hasRigidBody(body)) {return;}
+  m_pPhyWorld->removeRigidBody(body);
+}
+
 void CPhysicsManager::update(Ogre::Real tpf) {
 	// handle Messages
 	while (m_Messages.size() > 0) {

@@ -95,7 +95,7 @@ void CCharacterItem::createPhysics(CMap *map) {
                                   shape);
   CPhysicsManager *physicsManager = map->getPhysicsManager();
 
-  physicsManager->getWorld()->addRigidBody(mBlockPhysics);
+  physicsManager->secureAddRigidBody(mBlockPhysics, 0, 0);
 }
 
 void CCharacterItem::destroyPhysics(CMap *map) {
@@ -105,7 +105,7 @@ void CCharacterItem::destroyPhysics(CMap *map) {
 
   delete mBlockPhysics->getMotionState();
   delete mBlockPhysics->getCollisionShape();
-  physicsManager->getWorld()->removeRigidBody(mBlockPhysics);
+  physicsManager->secureRemoveRigidBody(mBlockPhysics);
   delete mBlockPhysics;
 }
 
@@ -153,10 +153,18 @@ void CCharacterItem::updateDamage(Ogre::Real tpf) {
 
 void CCharacterItem::show() {
   mAttachedMesh->setVisible(true);
+
+  CPhysicsManager *physicsManager
+      = mCharacter->getMap()->getPhysicsManager();
+  physicsManager->secureAddRigidBody(mBlockPhysics, 0, 0);
 }
 
 void CCharacterItem::hide() {
   mAttachedMesh->setVisible(false);
+
+  CPhysicsManager *physicsManager
+      = mCharacter->getMap()->getPhysicsManager();
+  physicsManager->secureRemoveRigidBody(mBlockPhysics);
 }
 
 CDamage CCharacterItem::createDamage() {
