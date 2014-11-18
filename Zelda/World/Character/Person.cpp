@@ -94,6 +94,7 @@ void CPerson::createPhysics() {
     using namespace Ogre;
 
     assert(m_pSceneNode);
+    ASSERT(!mCCPhysics);
 
     btTransform startTransform;
     startTransform.setIdentity();

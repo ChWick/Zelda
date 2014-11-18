@@ -18,7 +18,9 @@
  *****************************************************************************/
 
 #include "CharacterItem.hpp"
-#include <BulletCollision/CollisionShapes/btTriangleShape.h>
+#include <BulletCollision/CollisionShapes/btBoxShape.h>
+#include <BulletCollision/CollisionShapes/btCollisionShape.h>
+#include <BulletDynamics/Dynamics/btRigidBody.h>
 #include <string>
 #include "ItemData.hpp"
 #include <OgreBone.h>
@@ -37,10 +39,11 @@ CCharacterItem::CCharacterItem(CCharacter *character,
                                EItemVariantTypes type)
   : mCharacter(character),
     mVariantType(type),
-    mBoneToAttach(boneToAttach) {
+    mBoneToAttach(boneToAttach),
+    mBlockPhysics(nullptr) {
   ASSERT(character);
   ASSERT(boneToAttach.size() > 0);
-  
+
   mAttachedMesh = mCharacter->getSceneNode()
       ->getCreator()->createEntity(
           ITEM_VARIANT_DATA_MAP.toData(type).sBasicMeshName);
@@ -49,11 +52,61 @@ CCharacterItem::CCharacterItem(CCharacter *character,
                            mAttachedMesh,
                            Ogre::Quaternion(Ogre::Degree(0),
                                             Ogre::Vector3::UNIT_X));
+  createPhysics(mCharacter->getMap());
 }
 
 CCharacterItem::~CCharacterItem() {
+  ASSERT(mCharacter);
+  destroyPhysics(mCharacter->getMap());
   mCharacter->getBodyEntity()->detachObjectFromBone(mAttachedMesh);
   mCharacter->getSceneNode()->getCreator()->destroyEntity(mAttachedMesh);
+}
+
+void CCharacterItem::update(Ogre::Real tpf) {
+  if (mBlockPhysics) {
+    // update physics
+    Ogre::Entity *body(mCharacter->getBodyEntity());
+    const Ogre::Vector3 position(
+        body->getParentNode()->convertLocalToWorldPosition(
+            body->getSkeleton()->getBone(mBoneToAttach)
+            ->_getDerivedPosition()));
+    const Ogre::Quaternion rotation(
+        body->getParentNode()->convertLocalToWorldOrientation(
+            body->getSkeleton()->getBone(mBoneToAttach)
+            ->_getDerivedOrientation()));
+    mBlockPhysics->setWorldTransform(
+        btTransform(BtOgre::Convert::toBullet(rotation),
+                    BtOgre::Convert::toBullet(position)));
+  }
+}
+
+void CCharacterItem::enterNewMap(CMap *oldMap, CMap *newMap) {
+  destroyPhysics(oldMap);
+  createPhysics(newMap);
+}
+
+
+void CCharacterItem::createPhysics(CMap *map) {
+  destroyPhysics(map);  // check, that deleted, e.g. when switching
+
+  btCollisionShape *shape = new btBoxShape(btVector3(0.1, 0.1, 0.1));
+  mBlockPhysics = new btRigidBody(0,
+                                  new btDefaultMotionState(),
+                                  shape);
+  CPhysicsManager *physicsManager = map->getPhysicsManager();
+
+  physicsManager->getWorld()->addRigidBody(mBlockPhysics);
+}
+
+void CCharacterItem::destroyPhysics(CMap *map) {
+  if (!mBlockPhysics) {return;}  // not created
+
+  CPhysicsManager *physicsManager = map->getPhysicsManager();
+
+  delete mBlockPhysics->getMotionState();
+  delete mBlockPhysics->getCollisionShape();
+  physicsManager->getWorld()->removeRigidBody(mBlockPhysics);
+  delete mBlockPhysics;
 }
 
 void CCharacterItem::startDamage() {

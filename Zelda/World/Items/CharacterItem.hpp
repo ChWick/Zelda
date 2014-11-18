@@ -25,6 +25,8 @@
 #include "../Damage.hpp"
 
 class CCharacter;
+class btRigidBody;
+class CMap;
 
 class CCharacterItem {
 protected:
@@ -33,10 +35,15 @@ protected:
   Ogre::Entity *mAttachedMesh;
   const std::string mBoneToAttach;
 
+  btRigidBody *mBlockPhysics;
+
   Ogre::Vector3 mOldDamageStartPos;
 public:
   CCharacterItem(CCharacter *character, const std::string &boneToAttach, EItemVariantTypes type);
   ~CCharacterItem();
+
+  void enterNewMap(CMap *oldMap, CMap *newMap);
+  void update(Ogre::Real tpf);
   
   void startDamage();
   void updateDamage(Ogre::Real tpf);
@@ -48,6 +55,10 @@ public:
 
   virtual CDamage createDamage();
   virtual Ogre::Vector3 getDamagePosition();
+
+ private:
+  void createPhysics(CMap *map);
+  void destroyPhysics(CMap *map);
 };
 
 #endif // _CHARACTER_ITEM_HPP_

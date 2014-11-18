@@ -91,6 +91,13 @@ void CCharacter::enterMap(CMap *pMap, const Ogre::Vector3 &vInitPosition) {
   // switch map only, if map an scene node are existing
   bool bSwitchMapOnly = m_pMap && m_pSceneNode;
 
+  // destroy old physics
+  destroyPhysics();
+
+  // delete tools, will be recreated
+  mCurrentWeapon.reset();
+  mCurrentItem.reset();
+
   m_pMap = pMap;
 
   if (!bSwitchMapOnly) {
@@ -98,19 +105,20 @@ void CCharacter::enterMap(CMap *pMap, const Ogre::Vector3 &vInitPosition) {
     initBody(m_pMap->getParent()->getSceneNode());
     setupAnimations();
   }
-	createPhysics();
-	if (m_pCharacterController) {delete m_pCharacterController;}
+  createPhysics();
+  if (m_pCharacterController) {delete m_pCharacterController;}
   m_pCharacterController = createCharacterController();
-	//setupAnimations();
-	setupInternal();
+  setupInternal();
 
-	if (bSwitchMapOnly) {
-    m_pCharacterController->moveToTarget(vInitPosition, 0.02f, Ogre::Degree(5), false, 5.f);
-	}
-	else {
+  if (bSwitchMapOnly) {
+    m_pCharacterController->moveToTarget(vInitPosition,
+                                         0.02f, Ogre::Degree(5),
+                                         false,
+                                         5.f);
+  } else {
     setPosition(vInitPosition);
     m_pCharacterController->start();
-	}
+  }
 }
 
 bool CCharacter::createDamage(const Ogre::Ray &ray, const CDamage &dmg) const {
