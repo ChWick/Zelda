@@ -187,6 +187,13 @@ protected:
 
 private:
   void constructor_impl();
+
+ protected:
+  template <class T>
+  T *getCharacterController() {return dynamic_cast<T*>(m_pCharacterController);}
+  
+  template <class T>
+  const T *getCharacterController() const {return dynamic_cast<const T*>(m_pCharacterController);}
 };
 
 #endif // _CHARACTER_H_

@@ -91,9 +91,6 @@ protected:
 
 	friend class CShield;
 protected:
-	void createHandObject(const Ogre::String &parentBone, EHands handPos, const Ogre::String &meshName);
-
-  
   virtual void myDamageBlocked(const CDamage &damage, CHitableInterface *hitInterface);
 };
 

@@ -66,7 +66,7 @@ CCharacterController *CPlayer::createCharacterController() {
 void CPlayer::setupInternal()  {
   // create swords and attach to sheath
   Ogre::LogManager::getSingleton().logMessage("Creating swords");
-  createHandObject(PERSON_LEFT_HANDLE, RIGHT_HAND, "link_sword.mesh");
+  // createHandObject(PERSON_LEFT_HANDLE, RIGHT_HAND, "link_sword.mesh");
 
 
 	/*LogManager::getSingleton().logMessage("Creating the chains");
