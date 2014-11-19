@@ -27,17 +27,18 @@ extern "C"{
 }
 
 // generate default variables and exit if script canceled
-#define LUA_BRIDGE_START                                                                      \
-  CLuaScriptPtr luaScript(CLuaScriptManager::getSingleton().getByLuaState(l));                \
-  std::mutex &luaStateMutex(luaScript->getLuaStateMutex());                                   \
+#define LUA_BRIDGE_START(returnValues)                                           \
+  int numberOfReturnValues = (returnValues);                                     \
+  CLuaScriptPtr luaScript(CLuaScriptManager::getSingleton().getByLuaState(l));   \
+  std::mutex &luaStateMutex(luaScript->getLuaStateMutex());                      \
   {                                                                                           \
-    if (!luaScript->isStarted()) {return -1;}                                     \
+    if (!luaScript->isStarted()) {return numberOfReturnValues;}                                     \
   }
 
 #define LUA_WAIT(t)                                                                           \
   msleep(t);                                                                                  \
   {                                                                                           \
-    if (!luaScript->isStarted()) {return -1;}                                     \
+    if (!luaScript->isStarted()) {return numberOfReturnValues;}                                     \
   }
 
 

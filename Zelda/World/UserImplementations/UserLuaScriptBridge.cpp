@@ -27,6 +27,7 @@
 #include "../../Common/Message/MessageHandler.hpp"
 #include "../../Common/Message/MessageInjector.hpp"
 #include "../../Common/GameLogic/GameStateManager.hpp"
+#include "../../Common/GameLogic/GameLogicGarbageCollector.hpp"
 
 #include "../../GUIComponents/GUITextBox.hpp"
 
@@ -47,19 +48,19 @@ void userRegisterCFunctionsToLua(lua_State *l) {
 
 
 int entity(lua_State *l) {
-  LUA_BRIDGE_START;
+  LUA_BRIDGE_START(0);
 
-  return 1;
+  return numberOfReturnValues;
 }
 
 int textMessage(lua_State *l) {
-  LUA_BRIDGE_START;
+  LUA_BRIDGE_START(1);
 
   LOGV("Lua call: textMessage");
 
   if (lua_gettop(l) != 1) {
     LOGW("Wrong argument count for textMessage call");
-    return -1;
+    return numberOfReturnValues;
   }
 
   std::shared_ptr<CGUITextBox::SResult> result(new CGUITextBox::SResult);
@@ -121,17 +122,18 @@ namespace luaHelper {
 
 
 int moveTo(lua_State *l) {
-  LUA_BRIDGE_START;
+  LUA_BRIDGE_START(0);
 
   LOGV("Lua call: textMessage");
 
   if (lua_gettop(l) < 2) {
     LOGW("Less argument count for moveTo call");
-    return -1;
+    return 0;
   }
 
   const std::string id(lua_tostring(l, 1));
-  const Ogre::Vector3 position(Ogre::StringConverter::parseVector3(lua_tostring(l, 2)));
+  const Ogre::Vector3 position(
+      Ogre::StringConverter::parseVector3(lua_tostring(l, 2)));
 
   CEntity *pEntity = CGameStateManager::getSingleton().getChildRecursive(id);
   if (!pEntity) {
@@ -139,14 +141,16 @@ int moveTo(lua_State *l) {
     return 0;
   }
 
-  luaHelper::CMoveToWait waiter(pEntity);
+  std::shared_ptr<luaHelper::CMoveToWait> waiter(
+      new luaHelper::CMoveToWait(pEntity));
+  CGameLogicGarbageCollector::getSingleton().addShared(waiter);
 
   pEntity->moveToTarget(position);
 
 
   while (true) {
     LUA_WAIT(50);
-    if (waiter.hasReached()) {
+    if (waiter->hasReached()) {
       break;
     }
   }
@@ -155,13 +159,13 @@ int moveTo(lua_State *l) {
 }
 
 int deleteEntity(lua_State *l) {
-  LUA_BRIDGE_START;
+  LUA_BRIDGE_START(0);
 
   LOGV("Lua call: deleteEntity");
 
   if (lua_gettop(l) != 1) {
     LOGW("Wrong argument count for moveTo call");
-    return -1;
+    return 0;
   }
 
   const std::string id(lua_tostring(l, 1));

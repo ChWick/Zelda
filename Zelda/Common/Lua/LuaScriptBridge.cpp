@@ -47,13 +47,13 @@ void registerSingleCFunctionsToLua(lua_State *l, lua_CFunction fn, const char *l
 }
 
 int log(lua_State *l) {
-  LUA_BRIDGE_START;
+  LUA_BRIDGE_START(0);
 
   LOGV("Lua call: log");
 
   if (lua_gettop(l) != 1) {
     LOGW("Wrong argument count for log call");
-    return -1;
+    return 0;
   }
 
   LOGI("Lua log: %s", lua_tostring(l, 1));
@@ -62,13 +62,13 @@ int log(lua_State *l) {
 }
 
 int message(lua_State *l) {
-  LUA_BRIDGE_START;
+  LUA_BRIDGE_START(0);
 
   LOGV("Lua call: message");
 
   if (lua_gettop(l) != 1) {
     LOGW("Wrong argument count for log call");
-    return -1;
+    return 0;
   }
 
   XMLDocument doc;
@@ -80,11 +80,11 @@ int message(lua_State *l) {
     LUA_WAIT(10);
   }
 
-  return 1;
+  return 0;
 }
 
 int writeIntToMemory(lua_State *l) {
-  LUA_BRIDGE_START;
+  LUA_BRIDGE_START(0);
   ASSERT(lua_gettop(l) == 2);
 
   std::string id = lua_tostring(l, 1);
@@ -96,7 +96,7 @@ int writeIntToMemory(lua_State *l) {
 }
 
 int readIntFromMemory(lua_State *l) {
-  LUA_BRIDGE_START;
+  LUA_BRIDGE_START(1);
   ASSERT(lua_gettop(l) >= 1);
 
   std::string id = lua_tostring(l, 1);
@@ -111,7 +111,7 @@ int readIntFromMemory(lua_State *l) {
 }
 
 int writeRealToMemory(lua_State *l) {
-  LUA_BRIDGE_START;
+  LUA_BRIDGE_START(0);
   ASSERT(lua_gettop(l) == 2);
 
   std::string id = lua_tostring(l, 1);
@@ -123,7 +123,7 @@ int writeRealToMemory(lua_State *l) {
 }
 
 int readRealFromMemory(lua_State *l) {
-  LUA_BRIDGE_START;
+  LUA_BRIDGE_START(1);
   ASSERT(lua_gettop(l) >= 1);
 
   std::string id = lua_tostring(l, 1);

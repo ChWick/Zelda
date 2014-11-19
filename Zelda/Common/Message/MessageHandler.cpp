@@ -53,8 +53,9 @@ void CMessageHandler::process() {
   mMutex.unlock();
 
   while (l.size() > 0) {
+    const CMessage *pMessage = l.front()->pMessage;
     for (auto pInjector : m_lInjectors) {
-      pInjector->sendMessageToAll(*l.front()->pMessage);
+      pInjector->sendMessageToAll(*pMessage);
     }
 
     l.pop_front();

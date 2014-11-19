@@ -28,6 +28,7 @@
 #include "Message/MessageHandler.hpp"
 #include "GameLogic/GameStateManager.hpp"
 #include "GameLogic/EntityManager.hpp"
+#include "GameLogic/GameLogicGarbageCollector.hpp"
 #include "Util/DebugDrawer.hpp"
 #include "Message/MessageDebug.hpp"
 #include "Log.hpp"
@@ -35,6 +36,7 @@
 #include "Lua/LuaScriptManager.hpp"
 #include MESSAGE_CREATOR_HEADER
 #include "Util/GameMemory.hpp"
+
 
 #if OGRE_PLATFORM == OGRE_PLATFORM_ANDROID
 #include "Android/Android.hpp"
@@ -55,7 +57,7 @@ CGame &CGame::getSingleton() {
   return *msSingleton;
 }
 
-//-------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------
 CGame::CGame(void)
   :
     m_pGameStateManager(NULL),
@@ -90,6 +92,7 @@ CGame::~CGame(void) {
   if (CPauseManager::getSingletonPtr()) {delete CPauseManager::getSingletonPtr();}
   if (MESSAGE_CREATOR::getSingletonPtr()) {delete MESSAGE_CREATOR::getSingletonPtr();}
   if (CGameMemory::getSingletonPtr()) {delete CGameMemory::getSingletonPtr();}
+  if (CGameLogicGarbageCollector::getSingletonPtr()) {delete CGameLogicGarbageCollector::getSingletonPtr();}
 
   if (CMessageHandler::getSingletonPtr()) {
     delete CMessageHandler::getSingletonPtr();
@@ -567,6 +570,8 @@ void CGame::createScene() {
   postGUIManagerInitialised();
   Ogre::LogManager::getSingletonPtr()->logMessage("    DebugDrawer ");
   new DebugDrawer(mSceneMgr, 0.7f);
+  LOGI("    GameLogicGarbageCollector");
+  new CGameLogicGarbageCollector();
 
   initSingletons();
 
@@ -624,6 +629,8 @@ bool CGame::frameStarted(const Ogre::FrameEvent& evt) {
 
   // process messages
   CMessageHandler::getSingleton().process();
+  CEntityManager::getSingleton().process();
+  CGameLogicGarbageCollector::getSingleton().process();
 
   // update pause
   CPauseManager::getSingleton().update();
