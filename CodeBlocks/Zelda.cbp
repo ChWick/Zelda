@@ -67,6 +67,8 @@
 		<Unit filename="../Zelda/Common/DotSceneLoader/DotSceneLoaderCallback.hpp" />
 		<Unit filename="../Zelda/Common/DotSceneLoader/UserData.cpp" />
 		<Unit filename="../Zelda/Common/DotSceneLoader/UserData.hpp" />
+		<Unit filename="../Zelda/Common/Fader/AlphaFader.hpp" />
+		<Unit filename="../Zelda/Common/Fader/EllipticFader.hpp" />
 		<Unit filename="../Zelda/Common/Fader/Fader.cpp" />
 		<Unit filename="../Zelda/Common/Fader/Fader.hpp" />
 		<Unit filename="../Zelda/Common/FileManager/FileManager.cpp" />
@@ -88,6 +90,8 @@
 		<Unit filename="../Zelda/Common/GameLogic/Entity.hpp" />
 		<Unit filename="../Zelda/Common/GameLogic/EntityManager.cpp" />
 		<Unit filename="../Zelda/Common/GameLogic/EntityManager.hpp" />
+		<Unit filename="../Zelda/Common/GameLogic/EntityProperty.cpp" />
+		<Unit filename="../Zelda/Common/GameLogic/EntityProperty.hpp" />
 		<Unit filename="../Zelda/Common/GameLogic/EntityStates.cpp" />
 		<Unit filename="../Zelda/Common/GameLogic/EntityStates.hpp" />
 		<Unit filename="../Zelda/Common/GameLogic/Events/Actions/Action.cpp" />
@@ -110,6 +114,8 @@
 		<Unit filename="../Zelda/Common/GameLogic/Events/Emitter/EmitOnInteraction.hpp" />
 		<Unit filename="../Zelda/Common/GameLogic/Events/Emitter/EmitOnReceivedDamage.cpp" />
 		<Unit filename="../Zelda/Common/GameLogic/Events/Emitter/EmitOnReceivedDamage.hpp" />
+		<Unit filename="../Zelda/Common/GameLogic/Events/Emitter/EmitOnStatusChange.cpp" />
+		<Unit filename="../Zelda/Common/GameLogic/Events/Emitter/EmitOnStatusChange.hpp" />
 		<Unit filename="../Zelda/Common/GameLogic/Events/Emitter/Emitter.cpp" />
 		<Unit filename="../Zelda/Common/GameLogic/Events/Emitter/Emitter.hpp" />
 		<Unit filename="../Zelda/Common/GameLogic/Events/Emitter/EmitterCreator.cpp" />
@@ -149,6 +155,7 @@
 		<Unit filename="../Zelda/Common/Message/MessageCreator.hpp" />
 		<Unit filename="../Zelda/Common/Message/MessageDebug.cpp" />
 		<Unit filename="../Zelda/Common/Message/MessageDebug.hpp" />
+		<Unit filename="../Zelda/Common/Message/MessageEntityDataChanged.hpp" />
 		<Unit filename="../Zelda/Common/Message/MessageEntityStateChanged.cpp" />
 		<Unit filename="../Zelda/Common/Message/MessageEntityStateChanged.hpp" />
 		<Unit filename="../Zelda/Common/Message/MessageHandler.cpp" />
@@ -226,6 +233,8 @@
 		<Unit filename="../Zelda/World/Atlas/RegionInfo.hpp" />
 		<Unit filename="../Zelda/World/Atlas/TileTypes.cpp" />
 		<Unit filename="../Zelda/World/Atlas/TileTypes.hpp" />
+		<Unit filename="../Zelda/World/AttackerInterface.cpp" />
+		<Unit filename="../Zelda/World/AttackerInterface.hpp" />
 		<Unit filename="../Zelda/World/Camera/AerialCameraPerspective.cpp" />
 		<Unit filename="../Zelda/World/Camera/AerialCameraPerspective.hpp" />
 		<Unit filename="../Zelda/World/Character/Character.cpp" />
@@ -271,14 +280,14 @@
 		<Unit filename="../Zelda/World/HitableInterface.hpp" />
 		<Unit filename="../Zelda/World/Hitpoints.hpp" />
 		<Unit filename="../Zelda/World/InteractionInterface.hpp" />
+		<Unit filename="../Zelda/World/Items/CharacterItem.cpp" />
+		<Unit filename="../Zelda/World/Items/CharacterItem.hpp" />
 		<Unit filename="../Zelda/World/Items/ItemData.cpp" />
 		<Unit filename="../Zelda/World/Items/ItemData.hpp" />
 		<Unit filename="../Zelda/World/Items/ItemStatus.cpp" />
 		<Unit filename="../Zelda/World/Items/ItemStatus.hpp" />
 		<Unit filename="../Zelda/World/Items/ItemTypes.cpp" />
 		<Unit filename="../Zelda/World/Items/ItemTypes.hpp" />
-		<Unit filename="../Zelda/World/Items/PlayerItem.cpp" />
-		<Unit filename="../Zelda/World/Items/PlayerItem.hpp" />
 		<Unit filename="../Zelda/World/Messages/MessageItem.cpp" />
 		<Unit filename="../Zelda/World/Messages/MessageItem.hpp" />
 		<Unit filename="../Zelda/World/Messages/MessageShowText.cpp" />
@@ -293,6 +302,7 @@
 		<Unit filename="../Zelda/World/Objects/Object.hpp" />
 		<Unit filename="../Zelda/World/Objects/ObjectTypes.cpp" />
 		<Unit filename="../Zelda/World/Objects/ObjectTypes.hpp" />
+		<Unit filename="../Zelda/World/UserImplementations/EntityPropertyIds.hpp" />
 		<Unit filename="../Zelda/World/UserImplementations/UserLuaScriptBridge.cpp" />
 		<Unit filename="../Zelda/World/UserImplementations/UserLuaScriptBridge.hpp" />
 		<Unit filename="../Zelda/World/World.cpp" />
@@ -327,7 +337,7 @@
 				<lib name="CEGUI-0-OGRE" />
 				<lib name="OIS" />
 				<lib name="OGRE-Overlay" />
-				<lib name="lua" />
+				<lib name="lua5.2" />
 			</lib_finder>
 			<DoxyBlocks>
 				<comment_style block="0" line="0" />
