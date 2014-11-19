@@ -31,6 +31,8 @@
 #include <CEGUI/RendererModules/Ogre/Renderer.h>
 #include "../GameLogic/Entity.hpp"
 
+class CGUIDebugPullMenu;
+
 class CGUIManager :
   public CInputListener,
   public Ogre::Singleton<CGUIManager>,
@@ -65,6 +67,8 @@ private:
   CEGUI::ResourceProvider* m_pCEGuiResourceProvider;
 
   CEGUI::Window *m_pRoot;
+
+  CGUIDebugPullMenu *m_pDebugPullMenu;
 
   bool m_bRenderPause;
 

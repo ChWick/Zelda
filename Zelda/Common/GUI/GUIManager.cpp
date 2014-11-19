@@ -96,7 +96,7 @@ CGUIManager::CGUIManager(Ogre::SceneManager *pSceneManager, Ogre::RenderTarget &
 
 
   pTrayMgr->userUpdateLoadBar("Creating gui components", 0.2);
-  new CGUIDebugPullMenu(this, guiRoot, CGUIPullMenu::PMD_RIGHT);
+  m_pDebugPullMenu = new CGUIDebugPullMenu(this, guiRoot, CGUIPullMenu::PMD_RIGHT);
 
   pTrayMgr->userUpdateLoadBar("done...", 0.2);
 
@@ -175,6 +175,9 @@ bool CGUIManager::keyPressed( const OIS::KeyEvent &arg ) {
       sys.getDefaultGUIContext().injectMouseButtonDown(CEGUI::LeftButton);
     }
     break;
+    case OIS::KC_HOME:
+      m_pDebugPullMenu->toggle();
+      break;
   default:
     break;
   }

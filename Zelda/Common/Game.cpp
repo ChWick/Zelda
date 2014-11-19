@@ -36,6 +36,7 @@
 #include "Lua/LuaScriptManager.hpp"
 #include MESSAGE_CREATOR_HEADER
 #include "Util/GameMemory.hpp"
+#include "Util/Sleep.hpp"
 
 
 #if OGRE_PLATFORM == OGRE_PLATFORM_ANDROID
@@ -662,6 +663,11 @@ bool CGame::frameEnded(const Ogre::FrameEvent& evt) {
 
 
   m_pGameStateManager->frameEnded(evt);
+
+  // limit framerate
+  Ogre::Real ttW = 1000.0 / 30.f - 1000.0 * evt.timeSinceLastFrame; 
+  if (ttW > 0) msleep(ttW);
+  
   return true;
 }
 
