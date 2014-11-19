@@ -67,6 +67,7 @@ void CPlayer::setupInternal()  {
   // create swords and attach to sheath
   Ogre::LogManager::getSingleton().logMessage("Creating swords");
   // createHandObject(PERSON_LEFT_HANDLE, RIGHT_HAND, "link_sword.mesh");
+  changeWeapon(PERSON_LEFT_HANDLE, ITEM_VARIANT_SWORD_SIMPLE);
 
 
 	/*LogManager::getSingleton().logMessage("Creating the chains");

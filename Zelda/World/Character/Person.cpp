@@ -224,9 +224,6 @@ void CPerson::initBody(Ogre::SceneNode *pParentSceneNode) {
     m_pBodyEntity->setCastShadows(true);
     pModelSN->attachObject(m_pBodyEntity);
 
-    m_pSceneNode->setUserAny(Ogre::Any(dynamic_cast<CCharacter*>(this)));
-    m_pBodyEntity->setUserAny(Ogre::Any(dynamic_cast<CCharacter*>(this)));
-
     createBlinkingMaterials();
 }
 
@@ -306,5 +303,8 @@ void CPerson::endBeingInvulnerableCallback() {
 
 void CPerson::myDamageBlocked(const CDamage &damage,
                               CHitableInterface *hitInterface) {
-  dynamic_cast<CPersonController*>(m_pCharacterController)->stun();
+  getCharacterController<CPersonController>()->changeMoveState(
+      CPersonController::MS_PUSHED_BACK,
+      -damage.getDamageDirection() * 0.2f,
+      0.25f);
 }

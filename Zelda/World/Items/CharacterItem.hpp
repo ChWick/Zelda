@@ -39,6 +39,7 @@ protected:
   btRigidBody *mBlockPhysics;
   uint16_t mBlockPhysicsGroup;
   uint16_t mBlockPhysicsMask;
+  Ogre::Vector3 mPhysicsOffset;
 
   Ogre::Vector3 mOldDamageStartPos;
 public:

@@ -87,7 +87,8 @@ void CCharacterItem::update(Ogre::Real tpf) {
             ->_getDerivedOrientation()));
     mBlockPhysics->setWorldTransform(
         btTransform(BtOgre::Convert::toBullet(rotation),
-                    BtOgre::Convert::toBullet(position)));
+                    BtOgre::Convert::toBullet(position
+                                              + rotation * mPhysicsOffset)));
   }
   CWorldEntity::update(tpf);
 }
@@ -101,7 +102,14 @@ void CCharacterItem::enterNewMap(CMap *oldMap, CMap *newMap) {
 void CCharacterItem::createPhysics(CMap *map) {
   destroyPhysics(map);  // check, that deleted, e.g. when switching
 
-  btCollisionShape *shape = new btBoxShape(btVector3(0.1, 0.1, 0.1));
+  btCollisionShape *shape = nullptr;
+  mPhysicsOffset = Ogre::Vector3::ZERO;
+  switch (this->mVariantType) {
+    default:
+      shape = new btBoxShape(btVector3(0.01f, 0.06f, 0.01f));
+      mPhysicsOffset = Ogre::Vector3(0, 0.03f, 0);
+      break;
+  }
   mBlockPhysics = new btRigidBody(0,
                                   new btDefaultMotionState(),
                                   shape);
