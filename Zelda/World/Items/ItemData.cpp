@@ -47,40 +47,6 @@ void CItemSlotDataMap::init() {
 }
 
 void CItemVariantDataMap::init() {
-  m_Map[ITEM_VARIANT_NORMAL_BOW] = {"Bow", 1, "link_sword.mesh"};
-  m_Map[ITEM_VARIANT_SILVER_BOW] = {"Bow", 2, "link_sword.mesh"};
-  m_Map[ITEM_VARIANT_NORMAL_BOOMERANG] = {"Boomerang", 1, "link_sword.mesh"};
-  m_Map[ITEM_VARIANT_MAGIC_BOOMERANG] = {"Boomerang", 2, "link_sword.mesh"};
-  m_Map[ITEM_VARIANT_HOOKSHOT] = {"Hookshot", 1, "link_sword.mesh"};
-  m_Map[ITEM_VARIANT_BOMB] = {"Bomb", 1, "link_sword.mesh"};
-  m_Map[ITEM_VARIANT_MAGICPOWDER] = {"MagicPowder", 2, "link_sword.mesh"};
-  m_Map[ITEM_VARIANT_MUSHROOM] = {"Mushroom", 1, "link_sword.mesh"};
-  m_Map[ITEM_VARIANT_FIREROD] = {"FireRod", 1, "link_sword.mesh"};
-  m_Map[ITEM_VARIANT_ICEROD] = {"IceRod", 1, "link_sword.mesh"};
-  m_Map[ITEM_VARIANT_BOMBOSMEDALLION] = {"BombosMedallion", 1, "link_sword.mesh"};
-  m_Map[ITEM_VARIANT_ETHERMEDALLION] = {"EtherMedallion", 1, "link_sword.mesh"};
-  m_Map[ITEM_VARIANT_QUAKEMEDALLION] = {"QuakeMedallion", 1, "link_sword.mesh"};
-  m_Map[ITEM_VARIANT_LAMP] = {"Lamp", 1, "lamp.mesh"};
-  m_Map[ITEM_VARIANT_HAMMER] = {"Hammer", 1, "link_sword.mesh"};
-  m_Map[ITEM_VARIANT_SHOVEL] = {"Shovel", 1, "link_sword.mesh"};
-  m_Map[ITEM_VARIANT_OCARINA] = {"Ocarina", 1, "link_sword.mesh"};
-  m_Map[ITEM_VARIANT_NET] = {"Net", 1, "link_sword.mesh"};
-  m_Map[ITEM_VARIANT_BOOK] = {"Book", 1, "link_sword.mesh"};
-  m_Map[ITEM_VARIANT_BOTTLE_BEE] = {"Bottle", 1, "link_sword.mesh"};
-  m_Map[ITEM_VARIANT_BOTTLE_BLUE] = {"Bottle", 1, "link_sword.mesh"};
-  m_Map[ITEM_VARIANT_BOTTLE_EMPTY] = {"Bottle", 1, "link_sword.mesh"};
-  m_Map[ITEM_VARIANT_BOTTLE_FAIRY] = {"Bottle", 1, "link_sword.mesh"};
-  m_Map[ITEM_VARIANT_BOTTLE_GREEN] = {"Bottle", 1, "link_sword.mesh"};
-  m_Map[ITEM_VARIANT_BOTTLE_RED] = {"Bottle", 1, "link_sword.mesh"};
-  m_Map[ITEM_VARIANT_CANEOFSOMARIA] = {"CaneOfSomaria", 1, "link_sword.mesh"};
-  m_Map[ITEM_VARIANT_CANEOFBYRNA] = {"CaneOfByrna", 1, "link_sword.mesh"};
-  m_Map[ITEM_VARIANT_CLOAK] = {"Cloak", 1, "link_sword.mesh"};
-  m_Map[ITEM_VARIANT_MIRROR] = {"Mirror", 1, "link_sword.mesh"};
-  m_Map[ITEM_VARIANT_SWORD_SIMPLE] = {"SwordSimple", 1, "link_sword.mesh"};
-  m_Map[ITEM_VARIANT_SWORD_MASTER] = {"SwordMaster", 2, "link_sword.mesh"};
-  m_Map[ITEM_VARIANT_SWORD_BRONZE] = {"SwordBronze", 3, "link_sword.mesh"};
-  m_Map[ITEM_VARIANT_SWORD_GOLDEN] = {"SwordGolden", 4, "link_sword.mesh"};
-
-  // Enemy variants
-  m_Map[ITEM_VARIANT_ENEMY_SWORD_SIMPLE] = {"EnemySwordSimple", 1, "soldier_sword.mesh"};
+  // this is set in world
+  // loaded by WorldDataLoader and ItemDataLoader.
 }

@@ -17,15 +17,23 @@
  * Zelda. If not, see http://www.gnu.org/licenses/.
  *****************************************************************************/
 
-#ifndef _WORLD_DATA_LOADER_HPP_
-#define _WORLD_DATA_LOADER_HPP_
+#include "ItemDataLoader.hpp"
+#include <string>
+#include "../../Common/Util/XMLHelper.hpp"
+#include "ItemData.hpp"
+#include "ItemTypes.hpp"
 
-#include "../Common/Util/XMLLoader.hpp"
+using XMLHelper::Attribute;
+using XMLHelper::IntAttribute;
 
-class CWorldDataLoader
-    : public CXMLLoader {
- public:
-  CWorldDataLoader();
-};
 
-#endif // _WORLD_DATA_LOADER_HPP_
+void CItemDataLoader::readGroupElement(const tinyxml2::XMLElement *e) {
+  SItemVariantData data;
+  const std::string id = Attribute(e, "id");
+  data.sImagesetName = Attribute(e, "imageset_name");
+  data.ucItemQuality = IntAttribute(e, "item_quality", 1);
+  data.sBasicMeshName = Attribute(e, "basic_mesh_name");
+
+  ITEM_VARIANT_DATA_MAP.setData(ITEM_VARIANT_ID_MAP.parseString(id),
+                              data);
+}

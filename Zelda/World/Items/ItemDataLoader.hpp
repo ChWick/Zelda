@@ -17,15 +17,15 @@
  * Zelda. If not, see http://www.gnu.org/licenses/.
  *****************************************************************************/
 
-#ifndef _WORLD_DATA_LOADER_HPP_
-#define _WORLD_DATA_LOADER_HPP_
+#ifndef ITEMDATALOADER_HPP
+#define ITEMDATALOADER_HPP
 
-#include "../Common/Util/XMLLoader.hpp"
 
-class CWorldDataLoader
-    : public CXMLLoader {
+#include "../../Common/Util/XMLLoader.hpp"
+
+class CItemDataLoader : public CXMLLoaderGroup {
  public:
-  CWorldDataLoader();
+  virtual void readGroupElement(const tinyxml2::XMLElement *e);
 };
 
-#endif // _WORLD_DATA_LOADER_HPP_
+#endif // ITEMDATALOADER_HPP

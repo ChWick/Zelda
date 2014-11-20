@@ -40,6 +40,10 @@ public:
 class CItemVariantDataMap : public CEnumIdMap<EItemVariantTypes, SItemVariantData> {
 public:
   void init();
+
+  void setData(EItemVariantTypes type, const SItemVariantData &data) {
+    m_Map[type] = data;
+  }
 };
 
 extern CItemSlotDataMap ITEM_SLOT_DATA_MAP;
