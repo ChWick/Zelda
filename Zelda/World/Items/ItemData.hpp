@@ -20,7 +20,11 @@
 #ifndef _ITEM_DATA_HPP_
 #define _ITEM_DATA_HPP_
 
+#include <OgreVector3.h>
 #include "ItemTypes.hpp"
+#include "../DamageTypes.hpp"
+#include "../Hitpoints.hpp"
+
 
 struct SItemSlotData {
   std::vector<EItemVariantTypes> vItemVariants;
@@ -30,6 +34,13 @@ struct SItemVariantData {
   std::string sImagesetName;
   unsigned char ucItemQuality;            //!< if this item has a variation of another, this gives the quality, to determine the best (higher number is better), if there are same quality but more often (potion), the player can decide witch to chose
   std::string sBasicMeshName;             //!< name of the basic mesh, additional effect are handled separately
+
+  EDamageType eDamageType;                //!< Type of the damage the item deals 
+  uint32_t uiDamage;                      //!< Amount of damage the item deals
+
+  Ogre::Vector3 vBlockPhysicsSize;        //!< Size of a block shape for physics (no physics used when |size| == 0
+  Ogre::Vector3 vBlockPhysicsOffset;      //!< Offset of the block shape
+      
 };
 
 class CItemSlotDataMap : public CEnumIdMap<EItemSlotTypes, SItemSlotData> {

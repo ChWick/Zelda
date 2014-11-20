@@ -84,6 +84,8 @@
       imageset_name="Lamp"
       item_quality="1"
       basic_mesh_name="lamp.mesh"
+      damage_type="fire"
+      damage_value="50"
       />
   <item
       id="hammer"
@@ -180,12 +182,18 @@
       imageset_name="SwordSimple"
       item_quality="1"
       basic_mesh_name="link_sword.mesh"
+      damage_type="sword"
+      damage_value="50"
+      block_physics_size="0.01 0.04 0.01"
+      block_physics_offset="0 0.02 0"
       />
   <item
       id="sword_master"
       imageset_name="SwordMaster"
       item_quality="2"
       basic_mesh_name="link_sword.mesh"
+      damage_type="sword"
+      damage_value="100"
       />
   <item
       id="sword_bronze"
@@ -204,5 +212,9 @@
       imageset_name="EnemySwordSimple"
       item_quality="1"
       basic_mesh_name="soldier_sword.mesh"
+      damage_type="sword"
+      damage_value="50"
+      block_physics_size="0.01 0.04 0.01"
+      block_physics_offset="0 0.02 0"
       />
 </world_data>

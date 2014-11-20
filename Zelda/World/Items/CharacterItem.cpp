@@ -100,16 +100,18 @@ void CCharacterItem::enterNewMap(CMap *oldMap, CMap *newMap) {
 
 
 void CCharacterItem::createPhysics(CMap *map) {
+  if (ITEM_VARIANT_DATA_MAP.toData(mVariantType)
+      .vBlockPhysicsSize.isZeroLength()) {
+    return;
+  }
+
   destroyPhysics(map);  // check, that deleted, e.g. when switching
 
   btCollisionShape *shape = nullptr;
-  mPhysicsOffset = Ogre::Vector3::ZERO;
-  switch (this->mVariantType) {
-    default:
-      shape = new btBoxShape(btVector3(0.01f, 0.06f, 0.01f));
-      mPhysicsOffset = Ogre::Vector3(0, 0.03f, 0);
-      break;
-  }
+  mPhysicsOffset
+      = ITEM_VARIANT_DATA_MAP.toData(mVariantType).vBlockPhysicsOffset;
+  shape = new btBoxShape(BtOgre::Convert::toBullet(
+      ITEM_VARIANT_DATA_MAP.toData(mVariantType).vBlockPhysicsSize));
   mBlockPhysics = new btRigidBody(0,
                                   new btDefaultMotionState(),
                                   shape);
@@ -180,11 +182,13 @@ void CCharacterItem::show() {
   setPauseRender(false);
   setPauseUpdate(false);
 
-  CPhysicsManager *physicsManager
-      = mCharacter->getMap()->getPhysicsManager();
-  physicsManager->secureAddRigidBody(mBlockPhysics,
-                                     mBlockPhysicsGroup,
-                                     mBlockPhysicsMask);
+  if (mBlockPhysics) {
+    CPhysicsManager *physicsManager
+        = mCharacter->getMap()->getPhysicsManager();
+    physicsManager->secureAddRigidBody(mBlockPhysics,
+                                       mBlockPhysicsGroup,
+                                       mBlockPhysicsMask);
+  }
 }
 
 void CCharacterItem::hide() {
@@ -192,15 +196,19 @@ void CCharacterItem::hide() {
   setPauseRender(true);
   setPauseUpdate(true);
 
-  CPhysicsManager *physicsManager
-      = mCharacter->getMap()->getPhysicsManager();
-  physicsManager->secureRemoveRigidBody(mBlockPhysics);
+  if (mBlockPhysics) {
+    CPhysicsManager *physicsManager
+        = mCharacter->getMap()->getPhysicsManager();
+    physicsManager->secureRemoveRigidBody(mBlockPhysics);
+  }
 }
 
 CDamage CCharacterItem::createDamage() {
   return CDamage(mCharacter,
-                 DMG_ALL, mCharacter->getOrientation().zAxis(),
-                 HP_FULL_HEART, 0);
+                 ITEM_VARIANT_DATA_MAP.toData(mVariantType).eDamageType,
+                 mCharacter->getOrientation().zAxis(),
+                 ITEM_VARIANT_DATA_MAP.toData(mVariantType).uiDamage,
+                 0);
 }
 
 Ogre::Vector3 CCharacterItem::getDamagePosition() {

@@ -22,9 +22,11 @@
 #include "../../Common/Util/XMLHelper.hpp"
 #include "ItemData.hpp"
 #include "ItemTypes.hpp"
+#include <OgreStringConverter.h>
 
 using XMLHelper::Attribute;
 using XMLHelper::IntAttribute;
+using XMLHelper::EnumAttribute;
 
 
 void CItemDataLoader::readGroupElement(const tinyxml2::XMLElement *e) {
@@ -33,6 +35,13 @@ void CItemDataLoader::readGroupElement(const tinyxml2::XMLElement *e) {
   data.sImagesetName = Attribute(e, "imageset_name");
   data.ucItemQuality = IntAttribute(e, "item_quality", 1);
   data.sBasicMeshName = Attribute(e, "basic_mesh_name");
+  data.eDamageType = EnumAttribute<EDamageType>(e, "damage_type", DMG_NONE);
+  data.uiDamage = IntAttribute(e, "damage_value", HP_NONE);
+
+  data.vBlockPhysicsSize = Ogre::StringConverter::parseVector3(
+      Attribute(e, "block_physics_size", ""));
+  data.vBlockPhysicsOffset = Ogre::StringConverter::parseVector3(
+      Attribute(e, "block_physics_offset", ""));
 
   ITEM_VARIANT_DATA_MAP.setData(ITEM_VARIANT_ID_MAP.parseString(id),
                               data);
