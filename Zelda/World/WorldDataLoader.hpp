@@ -17,24 +17,19 @@
  * Zelda. If not, see http://www.gnu.org/licenses/.
  *****************************************************************************/
 
-#ifndef _XML_LOADER_HPP_
-#define _XML_LOADER_HPP_
+#ifndef _WORLD_DATA_LOADER_HPP_
+#define _WORLD_DATA_LOADER_HPP_
 
-#include <string>
-#include <map>
-#include "XMLLoaderGroup.hpp"
+#include "../Common/Util/XMLLoader.hpp"
 
-class CXMLLoader : public CXMLLoaderGroup {
- private:
-  const std::string mDatafile;
-  const std::string mResourceGroup;
+class CWorldDataLoader
+    : public CXMLLoader {
  public:
-  CXMLLoader(const std::string &datafile,
-             const std::string &resourceGroup);
-
-  void load();
-
- private:
+  CWorldDataLoader();
 };
 
-#endif // _XML_LOADER_HPP_
+class CItemDataLoader : public CXMLLoaderGroup {
+ public:
+  virtual void readGroupElement(const tinyxml2::XMLElement *e);
+};
+#endif // _WORLD_DATA_LOADER_HPP_

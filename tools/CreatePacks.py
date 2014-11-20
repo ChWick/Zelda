@@ -72,6 +72,9 @@ def makeGameZip() :
         copyAllOfType(zipf, '../maps/vase/*.mesh', 'meshes')
 	zipf.write('../models/test/Cylinder.mesh', 'meshes/Cylinder.mesh', zipfile.ZIP_DEFLATED)
 
+        # copy config files
+        copyAllOfType(zipf, '../packs/game/config/*', 'config')
+
 	zipf.close()
 
 def makeSdkTrays() :

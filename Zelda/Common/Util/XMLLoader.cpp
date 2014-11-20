@@ -26,13 +26,17 @@
 using tinyxml2::XMLDocument;
 using tinyxml2::XMLElement;
 
-CXMLLoader::CXMLLoader(const std::string &datafile)
-    : mDatafile(datafile) {
+CXMLLoader::CXMLLoader(const std::string &datafile,
+             const std::string &resourceGroup)
+    : mDatafile(datafile),
+      mResourceGroup(resourceGroup) {
 }
 
 void CXMLLoader::load() {
   Ogre::DataStreamPtr stream
-      = Ogre::ResourceGroupManager::getSingleton().openResource(mDatafile);
+      = Ogre::ResourceGroupManager::getSingleton().openResource(mDatafile,
+                                                                mResourceGroup,
+                                                                false);
   if (stream.isNull()) {
     throw Ogre::Exception(Ogre::Exception::ERR_FILE_NOT_FOUND,
                           "File not found: " + mDatafile,

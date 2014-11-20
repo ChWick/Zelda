@@ -26,7 +26,7 @@
 using tinyxml2::XMLElement;
 
 void CXMLLoaderGroup::registerGroup(const std::string &groupName,
-                                        CXMLLoaderGroup *group) {
+                                    std::shared_ptr<CXMLLoaderGroup> group) {
   mGroups[groupName] = group;
 }
 

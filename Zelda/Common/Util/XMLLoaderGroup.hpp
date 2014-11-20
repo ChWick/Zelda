@@ -22,6 +22,7 @@
 
 #include <map>
 #include <string>
+#include <memory>
 
 namespace tinyxml2 {
 class XMLElement;
@@ -29,9 +30,10 @@ class XMLElement;
 
 class CXMLLoaderGroup {
  private:
-  std::map<const std::string, CXMLLoaderGroup*> mGroups;
+  std::map<const std::string, std::shared_ptr<CXMLLoaderGroup> > mGroups;
  public:
-  void registerGroup(const std::string &groupName, CXMLLoaderGroup *group);
+  void registerGroup(const std::string &groupName,
+                     std::shared_ptr<CXMLLoaderGroup> group);
 
  protected:
   virtual void readGroupElement(const tinyxml2::XMLElement *e);

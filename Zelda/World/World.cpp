@@ -31,12 +31,14 @@ CWorld::CWorld()
     m_pWorldGUI(nullptr),
     m_fWaderSideWaveMaterialNextImageIn(0),
     m_iWaterSideWaveMaterialCurrentImage(0) {
-
-    Ogre::MaterialManager::getSingleton().setVerbose(true);
+  Ogre::MaterialManager::getSingleton().setVerbose(true);
 
   LOGV("Creating World");
 
   Ogre::ResourceGroupManager::getSingleton().initialiseResourceGroup("World");
+
+  LOGV("Loading world data");
+  mDataLoader.load();
 
   // create the player
   LOGV("Loading item status storage");
@@ -44,13 +46,15 @@ CWorld::CWorld()
 
   // create the atlas
   LOGV("Creating the atlas");
-  m_pAtlas = new CAtlas(this, CGame::getSingleton().getSceneManager()->getRootSceneNode());
+  m_pAtlas = new CAtlas(this,
+                        CGame::getSingleton().getSceneManager()->getRootSceneNode());
 
   LOGV("Creating the world gui");
   m_pWorldGUI = new CWorldGUI(this);
 
   // safe water_side_wave material top adjust image in vertex program
-  m_pWaterSideWaveMaterial = Ogre::MaterialManager::getSingleton().getByName("water_side_wave");
+  m_pWaterSideWaveMaterial
+      = Ogre::MaterialManager::getSingleton().getByName("water_side_wave");
   m_pWaterSideWaveMaterial->load();
 }
 

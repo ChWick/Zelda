@@ -27,6 +27,7 @@
 #  include <Carbon/Carbon.h>
 #endif
 #include <OgreMaterial.h>
+#include "WorldDataLoader.hpp"
 
 class CAtlas;
 class CWorldGUI;
@@ -40,6 +41,7 @@ private:
   Ogre::MaterialPtr m_pWaterSideWaveMaterial;
   Ogre::Real m_fWaderSideWaveMaterialNextImageIn;
   int m_iWaterSideWaveMaterialCurrentImage;
+  CWorldDataLoader mDataLoader;
 public:
   CWorld();
   ~CWorld();
