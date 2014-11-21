@@ -159,12 +159,12 @@ void CChest::createInnerObject(EObjectTypes eType) {
     return; // no object inside
   }
   mLifting = true;
-  if (XMLResources::GLOBAL.hasString(OBJECT_TYPE_ID_MAP.toData(eType).sID)) {
-    mTextMessage = "${" + OBJECT_TYPE_ID_MAP.toData(eType).sID + "}";
+  if (XMLResources::GLOBAL.hasString(OBJECT_TYPE_ID_MAP.toString(eType))) {
+    mTextMessage = "${" + OBJECT_TYPE_ID_MAP.toString(eType) + "}";
   }
   else {
     mTextMessage = "";
-    LOGV("%s", ("No item text for chest object " + OBJECT_TYPE_ID_MAP.toData(eType).sID).c_str());
+    LOGV("%s", ("No item text for chest object " + OBJECT_TYPE_ID_MAP.toString(eType)).c_str());
   }
   mInnerObject = new CObject(getID() + "_inner_object", this, m_pMap, eType);
   // dont init CObject, since we handle location

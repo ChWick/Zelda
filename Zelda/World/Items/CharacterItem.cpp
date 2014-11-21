@@ -140,7 +140,8 @@ void CCharacterItem::startDamage() {
   const Ogre::Vector3 vDir(
       body->getParentNode()->convertLocalToWorldOrientation(
           body->getSkeleton()->getBone(mBoneToAttach)
-          ->_getDerivedOrientation()).yAxis() * 0.08);
+          ->_getDerivedOrientation()).yAxis()
+      * ITEM_VARIANT_DATA_MAP.toData(mVariantType).fLength);
   const Ogre::Vector3 vPos(
       body->getParentNode()->convertLocalToWorldPosition(
           body->getSkeleton()->getBone(mBoneToAttach)

@@ -40,6 +40,8 @@ struct SItemVariantData {
 
   Ogre::Vector3 vBlockPhysicsSize;        //!< Size of a block shape for physics (no physics used when |size| == 0
   Ogre::Vector3 vBlockPhysicsOffset;      //!< Offset of the block shape
+
+  Ogre::Real fLength;                     //!< Length of the item 
       
 };
 

@@ -41,9 +41,10 @@ enum EObjectTypes {
 };
 
 struct SObjectTypeData {
+  EObjectTypes eObjectType;
+  
   bool bUserHandle;
-  bool bPermanetStatic;
-  std::string sID;
+  bool bPermanentStatic;
   std::string sMeshName;
   std::string sMaterialName;
 
@@ -67,15 +68,20 @@ struct SObjectTypeData {
   SObjectTypeData &operator=(const SObjectTypeData&) = default;
 };
 
-class CObjectTypeIdMap : public CEnumIdMap<EObjectTypes, SObjectTypeData> {
+class CObjectTypeIdMap : public CEnumIdMap<EObjectTypes> {
 public:
   CObjectTypeIdMap();
+};
 
-  EObjectTypes getFromID(const std::string &id) const;
+class CObjectDataMap : public CEnumIdMap<EObjectTypes, SObjectTypeData> {
+ public:
+  CObjectDataMap();
+
   EObjectTypes getFromMeshName(const std::string &mesh) const;
   EObjectTypes getFromMeshFileName(const std::string &mesh) const;
 };
 
 extern CObjectTypeIdMap OBJECT_TYPE_ID_MAP;
+extern CObjectDataMap OBJECT_DATA_MAP;
 
 #endif // _OBJECT_TYPES_HPP_

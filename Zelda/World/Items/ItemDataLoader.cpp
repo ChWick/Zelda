@@ -26,8 +26,7 @@
 
 using XMLHelper::Attribute;
 using XMLHelper::IntAttribute;
-using XMLHelper::EnumAttribute;
-
+using XMLHelper::RealAttribute;
 
 void CItemDataLoader::readGroupElement(const tinyxml2::XMLElement *e) {
   SItemVariantData data;
@@ -35,7 +34,8 @@ void CItemDataLoader::readGroupElement(const tinyxml2::XMLElement *e) {
   data.sImagesetName = Attribute(e, "imageset_name");
   data.ucItemQuality = IntAttribute(e, "item_quality", 1);
   data.sBasicMeshName = Attribute(e, "basic_mesh_name");
-  data.eDamageType = EnumAttribute<EDamageType>(e, "damage_type", DMG_NONE);
+  data.eDamageType = static_cast<EDamageType>(DAMAGE_TYPE_ID_MAP.parseString(
+      Attribute(e, "damage_type", "none")));
   data.uiDamage = IntAttribute(e, "damage_value", HP_NONE);
 
   data.vBlockPhysicsSize = Ogre::StringConverter::parseVector3(
@@ -43,6 +43,8 @@ void CItemDataLoader::readGroupElement(const tinyxml2::XMLElement *e) {
   data.vBlockPhysicsOffset = Ogre::StringConverter::parseVector3(
       Attribute(e, "block_physics_offset", ""));
 
+  data.fLength = RealAttribute(e, "length", 0);
+
   ITEM_VARIANT_DATA_MAP.setData(ITEM_VARIANT_ID_MAP.parseString(id),
-                              data);
+                                data);
 }

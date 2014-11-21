@@ -52,5 +52,9 @@ public:
     throw Ogre::Exception(0, "'" + str + "' could not be parsed.", __FILE__);
   }
   const DATA &toString(T t) const {return m_Map.at(t);}
+
+  void setData(const T &t, const DATA &data) {
+    m_Map[t] = data;
+  }
 };
 #endif // _ENUM_ID_MAP_HPP_

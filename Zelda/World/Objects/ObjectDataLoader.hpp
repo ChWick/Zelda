@@ -17,43 +17,15 @@
  * Zelda. If not, see http://www.gnu.org/licenses/.
  *****************************************************************************/
 
-#ifndef TILE_TYPES_HPP
-#define TILE_TYPES_HPP
+#ifndef OBJECTDATALOADER_HPP
+#define OBJECTDATALOADER_HPP
 
-#include "../../Common/Util/EnumIdMap.hpp"
 
-enum ETileTypes {
-  TT_GREEN_SOIL_BUSH_SHADOW = 0,
-  TT_GREEN_SOIL_STONE_SHADOW,
-  TT_GREEN_SOIL_STONE_PILE_SHADOW,
+#include "../../Common/Util/XMLLoader.hpp"
 
-  TT_GREEN_SOIL,
-  TT_GREEN_SOIL_GRASS_BL_BR,
-  TT_GREEN_SOIL_GRASS_TL_TR,
-  TT_GREEN_SOIL_GRASS_BL_BR_TL_TR,
-  TT_GREEN_SOIL_GRASS_BR_BL_TR,
-  TT_GREEN_SOIL_GRASS_BR_TL_TR,
-
-  TT_GREEN_BUSH_TRUNK,
-
-  TT_COUNT,
-};
-
-struct ETileData {
-  std::string sMeshName;
-};
-
-class CTileTypeIdMap : public CEnumIdMap<ETileTypes> {
+class CObjectDataLoader : public CXMLLoaderGroup {
  public:
-  CTileTypeIdMap();
+  virtual void readGroupElement(const tinyxml2::XMLElement *e);
 };
 
-class CTileDataMap : public CEnumIdMap<ETileTypes, ETileData> {
- public:
-  CTileDataMap();
-};
-
-extern CTileTypeIdMap TILE_TYPE_ID_MAP;
-extern CTileDataMap TILE_DATA_MAP;
-
-#endif // TILE_TYPES_HPP
+#endif // OBJECTDATALOADER_HPP

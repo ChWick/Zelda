@@ -186,6 +186,7 @@
       damage_value="50"
       block_physics_size="0.01 0.04 0.01"
       block_physics_offset="0 0.02 0"
+      length="0.08"
       />
   <item
       id="sword_master"
@@ -216,5 +217,108 @@
       damage_value="50"
       block_physics_size="0.01 0.04 0.01"
       block_physics_offset="0 0.02 0"
+      />
+
+  <!-- Objects -->
+  <!-- 
+       Properties
+       ==========
+       user_handle (bool = true):                this object will be created by user, not by dot scene loader
+       permanent_static (bool = false):          this object is permanent static, thus can be added to StaticGeometry
+       type (string):                            type of the object
+       mesh_name (string):                       name of the mesh
+       material_name (string = BLANK):           material to use (e.g. rupees have same mesh, different material
+       damage_source_mask (DamageType = none):   from which damage will this object receive damage
+       normal_tile (TileType = none):            floor tile if the object is in place
+       removed_tile (TileType = none):           tile if object got removed (e.g. lifted)
+       collision_shape (CollisionShape = pickable_object_sphere):        physics collision shape id
+       physics_shape_scale (Ogre::Vector3 = 1):  scale of the physics shape
+  -->
+  <object
+      type = "green_bush"
+      user_handle = "true"
+      permanent_static = "false"
+      mesh_name = "GreenBush"
+      material_name = "soil"
+      damage_source_mask = "sword"
+      normal_tile = "green_soil_bush_shadow"
+      removed_tile = "green_soil_grass_bl_br_tl_tr"
+      collision_shape = "pickable_object_sphere"
+      />
+  <object
+      type = "light_stone"
+      user_handle = "true"
+      permanent_static = "false"
+      mesh_name = "light_stone"
+      material_name = "soil"
+      damage_source_mask = "none"
+      normal_tile = "green_soil_stone_shadow"
+      removed_tile = "green_soil"
+      collision_shape = "pickable_object_sphere"
+      />
+  <object
+      type = "light_stone_pile"
+      user_handle = "true"
+      permanent_static = "false"
+      mesh_name = "lw_light_stone_pile"
+      material_name = "soil"
+      damage_source_mask = "world run"
+      normal_tile = "green_soil_stone_pile_shadow"
+      removed_tile = "green_soil"
+      collision_shape = "stone_pile"
+      />
+  <object
+      type = "vase"
+      user_handle = "true"
+      permanent_static = "false"
+      mesh_name = "vase"
+      material_name = "VaseSide"
+      damage_source_mask = "world"
+      collision_shape = "pickable_object_sphere"
+      />
+  <object
+      type = "green_tree"
+      user_handle = "true"
+      permanent_static = "true"
+      mesh_name = "green_tree"
+      material_name = "soil"
+      damage_source_mask = "run"
+      collision_shape = "tree"
+      />
+  <object
+      type = "rupee_green"
+      user_handle = "true"
+      permanent_static = "false"
+      mesh_name = "rupee"
+      material_name = "Rupee/Green"
+      damage_source_mask = "none"
+      collision_shape = "falling_object_sphere"
+      />
+  <object
+      type = "rupee_blue"
+      user_handle = "true"
+      permanent_static = "false"
+      mesh_name = "rupee"
+      material_name = "Rupee/Blue"
+      damage_source_mask = "none"
+      collision_shape = "falling_object_sphere"
+      />
+  <object
+      type = "rupee_red"
+      user_handle = "true"
+      permanent_static = "false"
+      mesh_name = "rupee"
+      material_name = "Rupee/Red"
+      damage_source_mask = "none"
+      collision_shape = "falling_object_sphere"
+      />
+  <object
+      type = "heart"
+      user_handle = "true"
+      permanent_static = "false"
+      mesh_name = "heart"
+      material_name = "global"
+      damage_source_mask = "none"
+      collision_shape = "falling_object_sphere"
       />
 </world_data>

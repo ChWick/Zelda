@@ -243,7 +243,7 @@ CWorldGUIItemSelectorMultipleSelect::CWorldGUIItemSelectorMultipleSelect(const s
   m_pRoot->setPosition(vCenter + UVector2(UDim(0, fSize / 3), UDim(0, fSize / 3)));
   m_pRoot->setAlwaysOnTop(true);
 
-  for (int i = 0; i < m_vItems.size(); i++) {
+  for (size_t i = 0; i < m_vItems.size(); i++) {
     createButton(i);
   }
 
@@ -255,7 +255,7 @@ CWorldGUIItemSelectorMultipleSelect::~CWorldGUIItemSelectorMultipleSelect() {
 }
 
 void CWorldGUIItemSelectorMultipleSelect::selectNextRight() {
-  if (m_iSelectedItem + 1 >= m_vItems.size()) {return;}
+  if (m_iSelectedItem + 1 >= static_cast<int>(m_vItems.size())) {return;}
   m_iSelectedItem++;
 
   dynamic_cast<ToggleButton*>(m_pRoot->getChild(PropertyHelper<int>::toString(m_iSelectedItem)))->setSelected(true);

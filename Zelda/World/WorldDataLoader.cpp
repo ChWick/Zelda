@@ -19,10 +19,13 @@
 
 #include "WorldDataLoader.hpp"
 #include "Items/ItemDataLoader.hpp"
+#include "Objects/ObjectDataLoader.hpp"
 #include "../Common/tinyxml2/tinyxml2.hpp"
 
 CWorldDataLoader::CWorldDataLoader()
     : CXMLLoader("world_data.xml", "World") {
   registerGroup("item",
                 std::shared_ptr<CXMLLoaderGroup>(new CItemDataLoader()));
+  registerGroup("object",
+                std::shared_ptr<CXMLLoaderGroup>(new CObjectDataLoader()));
 }

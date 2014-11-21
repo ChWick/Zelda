@@ -48,7 +48,7 @@ CObject::CObject(const std::string &id,
                  EObjectTypes eObjectType,
                  Ogre::SceneNode *pSceneNode)
   : CWorldEntity(id, pParent, pMap),
-    m_ObjectTypeData(OBJECT_TYPE_ID_MAP.toData(eObjectType)),
+    m_ObjectTypeData(OBJECT_DATA_MAP.toData(eObjectType)),
     mInnerObjectType(OBJECT_COUNT) {
   setType(eObjectType);
 
@@ -63,7 +63,7 @@ CObject::CObject(const std::string &id,
   Ogre::Entity *pEntity(nullptr);
 
   // create entity
-  if (m_ObjectTypeData.bPermanetStatic) {
+  if (m_ObjectTypeData.bPermanentStatic) {
     m_pMap->addStaticEntity(m_ObjectTypeData.sMeshName + ".mesh",
                             m_pSceneNode->getPosition(),
                             m_pSceneNode->getOrientation());
@@ -113,7 +113,7 @@ void CObject::createPhysics() {
   btCollisionShape *pCollisionShape(nullptr);
   btVector3 vCollisionShapeOffset;
   btVector3 vInertia;
-  float fMass = m_ObjectTypeData.bPermanetStatic ? 0 : 0.1;
+  float fMass = m_ObjectTypeData.bPermanentStatic ? 0 : 0.1;
 
   if (m_ObjectTypeData.eCollisionShape != GCST_COUNT) {
     const CPhysicsCollisionObject &pco
@@ -130,7 +130,7 @@ void CObject::createPhysics() {
 
   pCollisionShape->calculateLocalInertia(fMass, vInertia);
   btMotionState *pMotionState(nullptr);
-  if (m_ObjectTypeData.bPermanetStatic) {
+  if (m_ObjectTypeData.bPermanentStatic) {
     pMotionState = new btDefaultMotionState(
         btTransform(btQuaternion::getIdentity(), vCollisionShapeOffset));
   } else {

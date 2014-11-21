@@ -19,8 +19,24 @@
 
 #include "TileTypes.hpp"
 
+CTileTypeIdMap TILE_TYPE_ID_MAP;
+CTileDataMap TILE_DATA_MAP;
 
 CTileTypeIdMap::CTileTypeIdMap() {
+  m_Map[TT_GREEN_SOIL_BUSH_SHADOW] = "green_soil_bush_shadow";
+  m_Map[TT_GREEN_SOIL_STONE_SHADOW] = "green_soil_stone_shadow";
+  m_Map[TT_GREEN_SOIL_STONE_PILE_SHADOW] = "green_soil_stone_pile_shadow";
+  m_Map[TT_GREEN_SOIL] = "green_soil";
+  m_Map[TT_GREEN_SOIL_GRASS_BL_BR] = "green_soil_grass_bl_br";
+  m_Map[TT_GREEN_SOIL_GRASS_TL_TR] = "green_soil_grass_tl_tr";
+  m_Map[TT_GREEN_SOIL_GRASS_BL_BR_TL_TR] = "green_soil_grass_bl_br_tl_tr";
+  m_Map[TT_GREEN_SOIL_GRASS_BR_BL_TR] = "green_soil_grass_br_bl_tr";
+  m_Map[TT_GREEN_SOIL_GRASS_BR_TL_TR] = "green_soil_grass_br_tl_tr";
+
+  m_Map[TT_COUNT] = "none";
+}
+
+CTileDataMap::CTileDataMap() {
   m_Map[TT_GREEN_SOIL_BUSH_SHADOW] = {"soil_green_bush.mesh"};
   m_Map[TT_GREEN_SOIL_STONE_SHADOW] = {"soil_green_stone.mesh"};
   m_Map[TT_GREEN_SOIL_STONE_PILE_SHADOW] = {"soil_green_stone_pile_shadow.mesh"};
@@ -35,4 +51,3 @@ CTileTypeIdMap::CTileTypeIdMap() {
   m_Map[TT_GREEN_BUSH_TRUNK] = {"green_bush_trunk.mesh"};
 }
 
-CTileTypeIdMap TILE_TYPE_ID_MAP;

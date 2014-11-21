@@ -90,7 +90,7 @@ CMap::CMap(CEntity *pAtlas, CMapPackPtr mapPack, Ogre::SceneNode *pParentSceneNo
 
   // Create global entites
   for (int i = 0; i < TT_COUNT; i++) {
-    m_apTileEntities[i] = pParentSceneNode->getCreator()->createEntity(TILE_TYPE_ID_MAP.toData(static_cast<ETileTypes>(i)).sMeshName);
+    m_apTileEntities[i] = pParentSceneNode->getCreator()->createEntity(TILE_DATA_MAP.toData(static_cast<ETileTypes>(i)).sMeshName);
   }
 
   m_pSceneNode = pParentSceneNode->createChildSceneNode(m_MapPack->getName() + "_RootNode");
@@ -292,7 +292,8 @@ void CMap::handleMessage(const CMessage &message) {
     if (mesc.getOldState() == EST_NORMAL) {
       // only change request if object was in normal state before
 
-      const SObjectTypeData &data(OBJECT_TYPE_ID_MAP.toData(static_cast<EObjectTypes>(pObject->getType())));
+      const SObjectTypeData &data(OBJECT_DATA_MAP.toData(
+          static_cast<EObjectTypes>(pObject->getType())));
       if (data.eRemovedTile == TT_COUNT) {
         return;
       }
@@ -334,7 +335,8 @@ void CMap::rebuildStaticGeometryChangedTiles() {
     if (!pObject) {continue;}
 
     if (pObject->getState() == EST_NORMAL) {
-      const SObjectTypeData &data(OBJECT_TYPE_ID_MAP.toData(static_cast<EObjectTypes>(pObject->getType())));
+      const SObjectTypeData &data(OBJECT_DATA_MAP.toData(
+          static_cast<EObjectTypes>(pObject->getType())));
       if (data.eNormalTile != TT_COUNT) {
         m_pStaticGeometryChangedTiles->addEntity(m_apTileEntities[data.eNormalTile], pObject->getSceneNode()->getInitialPosition());
       }
@@ -414,9 +416,9 @@ void CMap::parseNewEntity(const tinyxml2::XMLElement *pElem) {
 // ############################################################################3
 // CDotSceneLoaderCallback
 void CMap::physicsShapeCreated(btCollisionShape *pShape, const std::string &sMeshName) {
-  EObjectTypes objectType(OBJECT_TYPE_ID_MAP.getFromMeshName(sMeshName));
+  EObjectTypes objectType(OBJECT_DATA_MAP.getFromMeshName(sMeshName));
   if (objectType != OBJECT_COUNT) {
-    pShape->setLocalScaling(pShape->getLocalScaling() * OBJECT_TYPE_ID_MAP.toData(objectType).vPhysicsShapeScale);
+    pShape->setLocalScaling(pShape->getLocalScaling() * OBJECT_DATA_MAP.toData(objectType).vPhysicsShapeScale);
   }
 }
 
@@ -445,7 +447,7 @@ void CMap::postEntityAdded(Ogre::Entity *pEntity, Ogre::SceneNode *pParent, btRi
     CChest *pChest = new CChest(pEntity->getName(), this, this, CChest::SMALL_CHEST);
     pChest->setPosition(pParent->_getDerivedPosition());
     pChest->setThisAsCollisionObjectsUserPointer(pRigidBody);
-    pChest->setInnerObject(OBJECT_TYPE_ID_MAP.getFromID(userData.getStringUserData("inner_object")));
+    pChest->setInnerObject(OBJECT_TYPE_ID_MAP.parseString(userData.getStringUserData("inner_object")));
     pChest->init();
     pChest->start();
     m_PhysicsManager.getWorld()->removeRigidBody(pRigidBody);
@@ -461,10 +463,13 @@ void CMap::staticObjectAdded(Ogre::Entity *pEntity, Ogre::SceneNode *pParent) {
 CDotSceneLoaderCallback::EResults CMap::preEntityAdded(tinyxml2::XMLElement *XMLNode, Ogre::SceneNode *pParent, CUserData &userData) {
   CWorldEntity *pEntity(nullptr);
 
-  EObjectTypes objectType(OBJECT_TYPE_ID_MAP.getFromMeshFileName(XMLNode->Attribute("meshFile")));
-  if (objectType != OBJECT_COUNT && OBJECT_TYPE_ID_MAP.toData(objectType).bUserHandle) {
+  EObjectTypes objectType(OBJECT_DATA_MAP.getFromMeshFileName(XMLNode->Attribute("meshFile")));
+  if (objectType != OBJECT_COUNT && OBJECT_DATA_MAP.toData(objectType).bUserHandle) {
     CObject *pObject = new CObject(userData.getStringUserData("name"), this, this, objectType, pParent);
-    pObject->setInnerObject(OBJECT_TYPE_ID_MAP.getFromID(userData.getStringUserData("inner_object")));
+    std::string innerObject(userData.getStringUserData("inner_object"));
+    if (!innerObject.empty()) {
+      pObject->setInnerObject(OBJECT_TYPE_ID_MAP.parseString(innerObject));
+    }
     pEntity = pObject;
     pEntity->init();
 
