@@ -28,7 +28,7 @@ std::vector<EItemVariantTypes> SItemStatus::getBestItem() const {
   std::vector<EItemVariantTypes> items;
   int ucQuality = -1;
 
-  for (int i = 0; i < vItems.size(); i++) {
+  for (size_t i = 0; i < vItems.size(); i++) {
     const SItemVariantData &data(ITEM_VARIANT_DATA_MAP.toData(vItems[i]));
     if (ucQuality == data.ucItemQuality) {
       items.push_back(vItems[i]);
@@ -46,7 +46,7 @@ std::vector<EItemVariantTypes> SItemStatus::getBestItem() const {
 CItemStatusStorage::CItemStatusStorage() {
   // initialize empty storage
   m_Storage.resize(ITEM_SLOT_COUNT);
-  for (int i = 0; i < m_Storage.size(); i++) {
+  for (size_t i = 0; i < m_Storage.size(); i++) {
     m_Storage[i].eItemPlace = static_cast<EItemSlotTypes>(i);
   }
 
