@@ -318,7 +318,7 @@
       permanent_static = "false"
       mesh_name = "heart"
       material_name = "global"
-      damage_source_mask = "none"
+      damage_source_mask = "sword"
       collision_shape = "falling_object_sphere"
       />
 </world_data>

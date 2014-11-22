@@ -54,7 +54,7 @@ CCharacterItem::CCharacterItem(CCharacter *character,
     mBlockPhysicsMask = MASK_SHIELD_N_COLLIDES_WITH;
     mBlockPhysicsGroup = COL_SHIELD_N;
   }
-
+  
   mAttachedMesh = mCharacter->getSceneNode()
       ->getCreator()->createEntity(
           ITEM_VARIANT_DATA_MAP.toData(type).sBasicMeshName);
@@ -121,7 +121,7 @@ void CCharacterItem::createPhysics(CMap *map) {
                                      mBlockPhysicsGroup,
                                      mBlockPhysicsMask);
 
-  this->setThisAsCollisionObjectsUserPointer(mBlockPhysics);
+  mCharacter->setThisAsCollisionObjectsUserPointer(mBlockPhysics);
 }
 
 void CCharacterItem::destroyPhysics(CMap *map) {

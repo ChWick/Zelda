@@ -28,6 +28,7 @@
 #include "../../Common/Util/Assert.hpp"
 #include "../../Common/GameLogic/Events/Event.hpp"
 #include "../../Common/Message/MessagePlayerPickupItem.hpp"
+#include "../../Common/Message/MessageEntityStateChanged.hpp"
 #include "PersonTypes.hpp"
 #include <OgreEntity.h>
 #include <OgreBone.h>
@@ -347,6 +348,15 @@ void CPlayer::handleMessage(const CMessage &message) {
       mRupeeCount.addData(5);
     } else if (msg_pui.getItemType() == OBJECT_GREEN_RUPEE) {
       mRupeeCount.addData(1);
+    }
+  } else if (message.getType() == MSG_ENTITY_STATE_CHANGED) {
+    const CMessageEntityStateChanged &msg_esc(
+        dynamic_cast<const CMessageEntityStateChanged&>(message));
+    if (m_pLiftedEntity && &msg_esc.getEntity() == m_pLiftedEntity) {
+      if (msg_esc.getNewState() == EST_DELETE) {
+        // entity was deleted, reset it
+        m_pLiftedEntity = nullptr;
+      }
     }
   }
 

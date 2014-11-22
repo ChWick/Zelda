@@ -37,6 +37,7 @@
 #include "../../Common/GameLogic/Events/Actions/ActionMessage.hpp"
 #include "../../Common/GameLogic/Events/Event.hpp"
 #include "../../Common/Message/MessagePlayerPickupItem.hpp"
+#include "../../Common/Message/MessageHandler.hpp"
 #include "../Damage.hpp"
 
 
@@ -110,6 +111,11 @@ void CObject::destroyPhysics() {
 void CObject::createPhysics() {
   ASSERT(!m_pCollisionObject);
 
+  btVector3 initPosition = BtOgre::Convert::toBullet(
+      m_pSceneNode->getPosition());
+  btQuaternion initRotation = BtOgre::Convert::toBullet(
+      m_pSceneNode->getOrientation());
+
   btCollisionShape *pCollisionShape(nullptr);
   btVector3 vCollisionShapeOffset;
   btVector3 vInertia;
@@ -132,12 +138,13 @@ void CObject::createPhysics() {
   btMotionState *pMotionState(nullptr);
   if (m_ObjectTypeData.bPermanentStatic) {
     pMotionState = new btDefaultMotionState(
+        btTransform(initRotation, initPosition),
         btTransform(btQuaternion::getIdentity(), vCollisionShapeOffset));
   } else {
     pMotionState
         = new BtOgre::RigidBodyState(m_pSceneNode,
-                                     btTransform(btQuaternion::getIdentity(),
-                                                 btVector3(0, 0, 0)),
+                                     btTransform(initRotation,
+                                                 initPosition),
                                      btTransform(btQuaternion::getIdentity(),
                                                  vCollisionShapeOffset));
   }
@@ -316,7 +323,6 @@ CObject::SInteractionResult CObject::interactOnActivate(
   case OBJECT_GREEN_BUSH:
   case OBJECT_LIGHT_STONE:
   case OBJECT_VASE:
-
     return SInteractionResult(IR_LIFT);
   default:
     break;
@@ -340,15 +346,23 @@ CObject::EReceiveDamageResult CObject::hit(const CDamage &dmg) {
     return r;
   }
 
-  // tree accepts damage, but always blocks it
 
   switch (m_uiType) {
   case OBJECT_LIGHT_STONE_PILE:
   case OBJECT_GREEN_TREE:
+    // Tree and piles accept damage, but always blocks it
     return RDR_BLOCKED;
+  case OBJECT_HEART:
+    // pickup item
+    deleteLater();
+    CMessageHandler::getSingleton().addMessage(
+        new CMessagePlayerPickupItem(m_uiType));
+    break;
   default:
-    return r;
+    break;
   }
+
+  return r;
 }
 
 void CObject::setInnerObject(EObjectTypes eType) {
@@ -358,6 +372,18 @@ void CObject::setInnerObject(EObjectTypes eType) {
 void CObject::createInnerObject(EObjectTypes eType) {
   if (eType == OBJECT_COUNT) {return;}   // no inner object specified
 
+  Ogre::Vector3 initPosition = getPosition();
+  btVector3 initLinearVelocity = btVector3(0, 0.5, 0);
+  switch (m_uiType) {
+  case OBJECT_GREEN_TREE:
+    initPosition = getPosition() + Ogre::Vector3(0.1, 0.35, 0);
+    initLinearVelocity = btVector3(0.5, 0.5, 0);
+    break;
+
+  default:
+    break;
+  }
+
   CObject *pObject
       = new CObject(m_sID + "_inner"
                     + Ogre::StringConverter::toString(
@@ -365,20 +391,12 @@ void CObject::createInnerObject(EObjectTypes eType) {
                     m_pMap,
                     m_pMap,
                     eType);
+  // set initial position
+  pObject->setPosition(initPosition);
   pObject->init();
   pObject->start();
   btRigidBody *pRB = btRigidBody::upcast(pObject->getCollisionObject());
-  switch (m_uiType) {
-  case OBJECT_GREEN_TREE:
-    pObject->setPosition(getPosition() + Ogre::Vector3(0.1, 0.35, 0));
-    pRB->setLinearVelocity(btVector3(0.5, 0.5, 0));
-    break;
-
-  default:
-    pObject->setPosition(getPosition());
-    pRB->setLinearVelocity(btVector3(0, 0.5, 0));
-    break;
-  }
+  pRB->setLinearVelocity(initLinearVelocity);
 }
 
 void CObject::killedCallback() {

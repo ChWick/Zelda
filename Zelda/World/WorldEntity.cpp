@@ -79,15 +79,23 @@ const SPATIAL_VECTOR &CWorldEntity::getPosition() const {
 }
 void CWorldEntity::setPosition(const SPATIAL_VECTOR &vPos) {
   if (m_pCollisionObject) {
-    if (btRigidBody::upcast(m_pCollisionObject) && dynamic_cast<BtOgre::RigidBodyState*>(btRigidBody::upcast(m_pCollisionObject)->getMotionState())) {
-      BtOgre::RigidBodyState *pRBS = dynamic_cast<BtOgre::RigidBodyState*>(btRigidBody::upcast(m_pCollisionObject)->getMotionState());
-      m_pCollisionObject->getWorldTransform().setOrigin(pRBS->getOffset().inverse() * BtOgre::Convert::toBullet(vPos));
+    if (btRigidBody::upcast(m_pCollisionObject)
+        && dynamic_cast<BtOgre::RigidBodyState*>(
+            btRigidBody::upcast(m_pCollisionObject)->getMotionState())) {
+      BtOgre::RigidBodyState *pRBS = dynamic_cast<BtOgre::RigidBodyState*>(
+          btRigidBody::upcast(m_pCollisionObject)->getMotionState());
+
+      m_pCollisionObject->getWorldTransform().setOrigin(
+          pRBS->getOffset().inverse() * BtOgre::Convert::toBullet(vPos));
+      pRBS->setWorldTransform(m_pCollisionObject->getWorldTransform());
+    } else {
+      m_pCollisionObject->getWorldTransform().setOrigin(
+          BtOgre::Convert::toBullet(vPos));
+      m_pSceneNode->setPosition(vPos);
     }
-    else {
-      m_pCollisionObject->getWorldTransform().setOrigin(BtOgre::Convert::toBullet(vPos));
-    }
+  } else {
+    m_pSceneNode->setPosition(vPos);
   }
-  m_pSceneNode->setPosition(vPos);
 }
 void CWorldEntity::translate(const SPATIAL_VECTOR &vOffset) {
   m_pSceneNode->translate(vOffset);
