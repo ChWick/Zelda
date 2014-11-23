@@ -68,7 +68,7 @@ void CPlayer::setupInternal()  {
   // create swords and attach to sheath
   Ogre::LogManager::getSingleton().logMessage("Creating swords");
   // createHandObject(PERSON_LEFT_HANDLE, RIGHT_HAND, "link_sword.mesh");
-  changeWeapon(PERSON_LEFT_HANDLE, ITEM_VARIANT_SWORD_SIMPLE);
+  changeItem(CIS_WEAPON, PERSON_LEFT_HANDLE, ITEM_VARIANT_SWORD_SIMPLE);
 
 
 	/*LogManager::getSingleton().logMessage("Creating the chains");
@@ -335,7 +335,7 @@ void CPlayer::handleMessage(const CMessage &message) {
   if (message.getType() == MSG_ITEM) {
     const CMessageItem &msg_item(dynamic_cast<const CMessageItem&>(message));
     if (msg_item.getItemMessageType() == CMessageItem::IM_SELECTION_CHANGED) {
-      changeItem(PERSON_LEFT_HANDLE, msg_item.getItemVariantType());
+      changeItem(CIS_TOOL, PERSON_LEFT_HANDLE, msg_item.getItemVariantType());
     }
   } else if (message.getType() == MSG_PLAYER_PICKUP_ITEM) {
     const CMessagePlayerPickupItem &msg_pui(

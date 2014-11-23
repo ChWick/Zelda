@@ -85,6 +85,14 @@ public:
     FADE_IN = 1,
     FADE_OUT = 2,
   };
+
+  enum ECharacterItemSlots {
+    CIS_WEAPON = 0,
+    CIS_SHIELD,
+    CIS_TOOL,
+    
+    CIS_COUNT,
+  };
 protected:
   const EFriendOrEnemyStates m_eFriendOrEnemy;	//!< Is this character a friend or an enemy?
 
@@ -106,8 +114,7 @@ protected:
   Ogre::Real m_fTimer;																//!< Animation timer (how long is the current animation running)
   Ogre::Real m_fAnimSpeed;														//!< Animation speed
 private:
-  std::shared_ptr<CCharacterItem> mCurrentItem;
-  std::shared_ptr<CCharacterItem> mCurrentWeapon;
+  std::shared_ptr<CCharacterItem> mCurrentItems[CIS_COUNT];
   std::vector<SAnimationProperty> mAnimationProperty;
 public:
 
@@ -148,8 +155,7 @@ public:
   void animUseToolStart();
   void animUseToolEnd();
 
-  std::shared_ptr<CCharacterItem> getCurrentItem() {return mCurrentItem;}
-  std::shared_ptr<CCharacterItem> getCurrentWeapon() {return mCurrentWeapon;}
+  std::shared_ptr<CCharacterItem> getCurrentItem(ECharacterItemSlots slot) {return mCurrentItems[slot];}
 
   void useCurrentItem();
   void useCurrentWeapon();
@@ -182,8 +188,7 @@ protected:
   virtual bool isReadyForNewAction();
   void fadeAnimations(const Ogre::Real deltaTime);
 
-  void changeItem(const std::string &bone, EItemVariantTypes item);
-  void changeWeapon(const std::string &bone, EItemVariantTypes item);
+  void changeItem(ECharacterItemSlots slot, const std::string &bone, EItemVariantTypes item);
 
 private:
   void constructor_impl();

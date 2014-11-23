@@ -247,14 +247,14 @@ void CPerson::updateAnimationsCallback(const Ogre::Real fTime) {
         / m_Anims[ANIM_SLICE_HORIZONTAL]->getLength();
     if (fAnimPart > 0.8) {
     } else if (fAnimPart > 0.4) {
-      getCurrentWeapon()->updateDamage(fTime);
+      getCurrentItem(CIS_WEAPON)->updateDamage(fTime);
     }
   } else if (m_uiAnimID == ANIM_USE_ITEM) {
     Ogre::Real fAnimPart = m_fTimer
         / m_Anims[ANIM_USE_ITEM]->getLength();
     if (fAnimPart > 0.8) {
     } else if (fAnimPart > 0.4) {
-      getCurrentItem()->updateDamage(fTime);
+      getCurrentItem(CIS_TOOL)->updateDamage(fTime);
     }
   }
 }

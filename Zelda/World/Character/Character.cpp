@@ -19,6 +19,7 @@
 
 #include "Character.hpp"
 #include <BulletDynamics/Character/btCharacterControllerInterface.h>
+#include <string>
 #include "CharacterController.hpp"
 #include "../Atlas/Map.hpp"
 #include "../../Common/Physics/PhysicsMasks.hpp"
@@ -83,8 +84,9 @@ void CCharacter::constructor_impl() {
 CCharacter::~CCharacter() {
 }
 void CCharacter::exit() {
-  mCurrentItem.reset();
-  mCurrentWeapon.reset();
+  for (int i = 0; i < CIS_COUNT; i++) {
+    mCurrentItems[i].reset();
+  }
   CWorldEntity::exit();
   destroyPhysics();
 }
@@ -96,19 +98,15 @@ void CCharacter::enterMap(CMap *pMap, const Ogre::Vector3 &vInitPosition) {
   destroyPhysics();
 
   // delete tools, will be recreated, but store their current state
-  EItemVariantTypes currentWeaponType = ITEM_VARIANT_COUNT;
-  std::string weaponBone;
-  if (mCurrentWeapon) {
-    currentWeaponType = mCurrentWeapon->getItemVariantType();
-    weaponBone = mCurrentWeapon->getBoneToAttach();
-    mCurrentWeapon.reset();
-  }
-  EItemVariantTypes currentItemType = ITEM_VARIANT_COUNT;
-  std::string itemBone;
-  if (mCurrentItem) {
-    currentItemType = mCurrentItem->getItemVariantType();
-    itemBone = mCurrentItem->getBoneToAttach();
-    mCurrentItem.reset();
+  EItemVariantTypes currentItemType[CIS_COUNT];
+  std::string weaponBone[CIS_COUNT];
+  for (int i = 0; i < CIS_COUNT; i++) {
+    currentItemType[i] = ITEM_VARIANT_COUNT;
+    if (mCurrentItems[i]) {
+      currentItemType[i] = mCurrentItems[i]->getItemVariantType();
+      weaponBone[i] = mCurrentItems[i]->getBoneToAttach();
+      mCurrentItems[i].reset();
+    }
   }
 
   m_pMap = pMap;
@@ -133,11 +131,11 @@ void CCharacter::enterMap(CMap *pMap, const Ogre::Vector3 &vInitPosition) {
     m_pCharacterController->start();
   }
 
-  if (currentWeaponType != ITEM_VARIANT_COUNT) {
-    changeWeapon(weaponBone, currentWeaponType);
-  }
-  if (currentItemType != ITEM_VARIANT_COUNT) {
-    changeItem(itemBone, currentItemType);
+  for (int i = 0; i < CIS_COUNT; i++) {
+    if (currentItemType[i] != ITEM_VARIANT_COUNT) {
+      changeItem(static_cast<ECharacterItemSlots>(i),
+                 weaponBone[i], currentItemType[i]);
+    }
   }
 }
 
@@ -170,20 +168,20 @@ bool CCharacter::createDamage(const Ogre::Ray &ray, const CDamage &dmg) {
 }
 
 void CCharacter::destroy() {
-	destroyPhysics();
-	//destroySceneNode(m_pSceneNode);
-	m_pBodyEntity = NULL;
-	if (m_pCharacterController) {
-		delete m_pCharacterController;
-	}
+  destroyPhysics();
+  // destroySceneNode(m_pSceneNode);
+  m_pBodyEntity = NULL;
+  if (m_pCharacterController) {
+    delete m_pCharacterController;
+  }
 }
 
 void CCharacter::setPosition(const Ogre::Vector3 &vPos) {
   if (mCCPhysics) {
     mCCPhysics->warp(BtOgre::Convert::toBullet(vPos));
-    m_pSceneNode->setPosition(BtOgre::Convert::toOgre(m_pCollisionObject->getWorldTransform().getOrigin()));
-  }
-  else {
+    m_pSceneNode->setPosition(BtOgre::Convert::toOgre(
+        m_pCollisionObject->getWorldTransform().getOrigin()));
+  } else {
     m_pCharacterController->setPosition(vPos);
   }
 }
@@ -212,7 +210,9 @@ void CCharacter::updateAnimations(Ogre::Real fTime) {
   updateAnimationsCallback(fTime);
 
   // increment the current animation times
-  if (m_uiAnimID != ANIM_NONE) m_Anims[m_uiAnimID]->addTime(fTime * m_fAnimSpeed);
+  if (m_uiAnimID != ANIM_NONE) {
+    m_Anims[m_uiAnimID]->addTime(fTime * m_fAnimSpeed);
+  }
 
   // apply smooth transitioning between our animations
   fadeAnimations(fTime);
@@ -242,42 +242,37 @@ void CCharacter::setAnimation(unsigned int id, bool reset) {
 
   m_uiAnimID = id;
 
-  if (id != m_uiAnimationCount)
-  {
+  if (id != m_uiAnimationCount) {
     // if we have a new animation, enable it and fade it in
     m_Anims[id]->setEnabled(true);
-    //m_Anims[id]->setWeight(0);
+    // m_Anims[id]->setWeight(0);
     m_FadingStates[m_uiAnimID] = FADE_IN;
     if (reset) m_Anims[id]->setTimePosition(0);
   }
 }
 
-void CCharacter::fadeAnimations(const Ogre::Real deltaTime)
-{
-    for (unsigned int i = 0; i < m_uiAnimationCount; i++)
-    {
-        if (m_FadingStates[i] == FADE_NONE) {
-            continue;
-        }
-        else if (m_FadingStates[i] == FADE_IN)
-        {
-            // slowly fade this animation in until it has full weight
-            Ogre::Real newWeight = m_Anims[i]->getWeight() + deltaTime * ANIM_FADE_SPEED;
-            m_Anims[i]->setWeight(Ogre::Math::Clamp<Ogre::Real>(newWeight, 0, 1));
-            if (newWeight >= 1) m_FadingStates[i] = FADE_NONE;
-        }
-        else if (m_FadingStates[i] == FADE_OUT)
-        {
-            // slowly fade this animation out until it has no weight, and then disable it
-            Ogre::Real newWeight = m_Anims[i]->getWeight() - deltaTime * ANIM_FADE_SPEED;
-            m_Anims[i]->setWeight(Ogre::Math::Clamp<Ogre::Real>(newWeight, 0, 1));
-            if (newWeight <= 0)
-            {
-                m_Anims[i]->setEnabled(false);
-                m_FadingStates[i] = FADE_NONE;
-            }
-        }
+void CCharacter::fadeAnimations(const Ogre::Real deltaTime) {
+  for (unsigned int i = 0; i < m_uiAnimationCount; i++) {
+    if (m_FadingStates[i] == FADE_NONE) {
+      continue;
+    } else if (m_FadingStates[i] == FADE_IN) {
+      // slowly fade this animation in until it has full weight
+      Ogre::Real newWeight = m_Anims[i]->getWeight()
+          + deltaTime * ANIM_FADE_SPEED;
+      m_Anims[i]->setWeight(Ogre::Math::Clamp<Ogre::Real>(newWeight, 0, 1));
+      if (newWeight >= 1) m_FadingStates[i] = FADE_NONE;
+    } else if (m_FadingStates[i] == FADE_OUT) {
+      // slowly fade this animation out until it has no weight,
+      // and then disable it
+      Ogre::Real newWeight = m_Anims[i]->getWeight()
+          - deltaTime * ANIM_FADE_SPEED;
+      m_Anims[i]->setWeight(Ogre::Math::Clamp<Ogre::Real>(newWeight, 0, 1));
+      if (newWeight <= 0) {
+        m_Anims[i]->setEnabled(false);
+        m_FadingStates[i] = FADE_NONE;
+      }
     }
+  }
 }
 
 void CCharacter::animRunStart()
@@ -306,7 +301,7 @@ void CCharacter::animJumpEnd() {
 }
 void CCharacter::animAttack() {
   setAnimation(ANIM_SLICE_HORIZONTAL, true);
-  mCurrentWeapon->startDamage();
+  mCurrentItems[CIS_WEAPON]->startDamage();
   m_fTimer = 0;
 }
 void CCharacter::animAttackEnd() {
@@ -316,16 +311,16 @@ void CCharacter::animAttackEnd() {
 
 void CCharacter::animUseToolStart() {
   setAnimation(ANIM_USE_ITEM);
-  mCurrentItem->show();
-  mCurrentItem->startDamage();
-  mCurrentWeapon->hide();
+  mCurrentItems[CIS_TOOL]->show();
+  mCurrentItems[CIS_TOOL]->startDamage();
+  mCurrentItems[CIS_WEAPON]->hide();
   m_fTimer = 0;
 }
 
 void CCharacter::animUseToolEnd() {
   setAnimation(ANIM_IDLE);
-  mCurrentItem->hide();
-  mCurrentWeapon->show();
+  mCurrentItems[CIS_TOOL]->hide();
+  mCurrentItems[CIS_WEAPON]->show();
   m_fTimer = 0;
 }
 
@@ -358,25 +353,30 @@ short CCharacter::getCollisionGroup() {
 }
 
 void CCharacter::useCurrentItem() {
-  ASSERT(mCurrentItem);
-  useItem(mCurrentItem->getItemVariantType());
+  ASSERT(mCurrentItems[CIS_TOOL]);
+  useItem(mCurrentItems[CIS_TOOL]->getItemVariantType());
 }
 
 void CCharacter::useCurrentWeapon() {
-  ASSERT(mCurrentWeapon);
+  ASSERT(mCurrentItems[CIS_TOOL]);
   if (isReadyForNewAction()) {
     animAttack();
   }
 }
 
-void CCharacter::changeItem(const std::string &bone, EItemVariantTypes item) {
-  mCurrentItem = std::shared_ptr<CCharacterItem>(new CCharacterItem(this, bone, item));
-  mCurrentItem->hide();
-}
-
-void CCharacter::changeWeapon(const std::string &bone, EItemVariantTypes item) {
-  mCurrentWeapon = std::shared_ptr<CCharacterItem>(new CCharacterItem(this, bone, item));
-  mCurrentWeapon->show();
+void CCharacter::changeItem(ECharacterItemSlots slot,
+                            const std::string &bone,
+                            EItemVariantTypes item) {
+  mCurrentItems[slot] = std::shared_ptr<CCharacterItem>(
+      new CCharacterItem(this, bone, item));
+  switch (slot) {
+    case CIS_TOOL:
+      mCurrentItems[slot]->hide();
+      break;
+    default:
+      mCurrentItems[slot]->show();
+      break;
+  }
 }
 
 void CCharacter::useItem(EItemVariantTypes item) {

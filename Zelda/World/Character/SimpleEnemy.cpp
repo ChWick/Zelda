@@ -47,11 +47,12 @@ CSimpleEnemy::CSimpleEnemy(const tinyxml2::XMLElement *pElem,
   : CPerson(pElem, pParent, pMap, SE_ANIM_COUNT) {
 }
 void CSimpleEnemy::setupInternal() {
-  // createHandObject(PERSON_RIGHT_HANDLE, RIGHT_HAND, "soldier_sword.mesh");
-  changeWeapon(PERSON_RIGHT_HANDLE, ITEM_VARIANT_ENEMY_SWORD_SIMPLE);
-  // createHandObject(PERSON_LEFT_HANDLE, LEFT_HAND, "soldier_shield.mesh");
+  changeItem(CIS_WEAPON,
+             PERSON_RIGHT_HANDLE, ITEM_VARIANT_ENEMY_SWORD_SIMPLE);
+  changeItem(CIS_SHIELD,
+             PERSON_LEFT_HANDLE, ITEM_VARIANT_ENEMY_SHIELD_SIMPLE);
 
-  getCurrentWeapon()->startDamage();
+  getCurrentItem(CIS_WEAPON)->startDamage();
 }
 
 void CSimpleEnemy::setupAnimations() {
@@ -141,5 +142,5 @@ void CSimpleEnemy::updateAnimationsCallback(const Ogre::Real fTime) {
                                        Ogre::ColourValue::Blue);
   createDamage(Ogre::Ray(vPos, vDir * 0.1),
   CDamage(DMG_SWORD, m_pSceneNode->getOrientation().zAxis()));*/
-  getCurrentWeapon()->updateDamage(fTime);
+  getCurrentItem(CIS_WEAPON)->updateDamage(fTime);
 }

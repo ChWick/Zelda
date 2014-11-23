@@ -31,7 +31,7 @@ using XMLHelper::RealAttribute;
 void CItemDataLoader::readGroupElement(const tinyxml2::XMLElement *e) {
   SItemVariantData data;
   const std::string id = Attribute(e, "id");
-  data.sImagesetName = Attribute(e, "imageset_name");
+  data.sImagesetName = Attribute(e, "imageset_name", "");
   data.ucItemQuality = IntAttribute(e, "item_quality", 1);
   data.sBasicMeshName = Attribute(e, "basic_mesh_name");
   data.eDamageType = static_cast<EDamageType>(DAMAGE_TYPE_ID_MAP.parseString(

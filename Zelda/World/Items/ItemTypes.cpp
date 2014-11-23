@@ -92,6 +92,11 @@ void CItemVariantIdMap::init() {
   m_Map[ITEM_VARIANT_SWORD_BRONZE] = "sword_bronze";
   m_Map[ITEM_VARIANT_SWORD_GOLDEN] = "sword_golden";
 
+  m_Map[ITEM_VARIANT_SHIELD_SIMPLE] = "shield_simple";
+  m_Map[ITEM_VARIANT_SHIELD_RED] = "shield_red";
+  m_Map[ITEM_VARIANT_SHIELD_MIRROR] = "shield_mirror";
+
   // Enemy variants
   m_Map[ITEM_VARIANT_ENEMY_SWORD_SIMPLE] = "enemy_sword_simple";
+  m_Map[ITEM_VARIANT_ENEMY_SHIELD_SIMPLE] = "enemy_shield_simple";
 }

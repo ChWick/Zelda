@@ -218,6 +218,12 @@
       block_physics_size="0.01 0.04 0.01"
       block_physics_offset="0 0.02 0"
       />
+  <item
+      id="enemy_shield_simple"
+      basic_mesh_name="soldier_shield.mesh"
+      block_physics_size="0.02 0.001 0.02"
+      block_physics_offset="0 0 0"
+      />
 
   <!-- Objects -->
   <!-- 
