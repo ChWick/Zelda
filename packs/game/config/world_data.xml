@@ -259,7 +259,7 @@
       material_name = "soil"
       damage_source_mask = "none"
       normal_tile = "green_soil_stone_shadow"
-      removed_tile = "green_soil"
+      removed_tile = "green_soil_stone_lifted"
       collision_shape = "pickable_object_sphere"
       />
   <object

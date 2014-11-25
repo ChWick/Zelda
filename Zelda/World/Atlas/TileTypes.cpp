@@ -33,6 +33,8 @@ CTileTypeIdMap::CTileTypeIdMap() {
   m_Map[TT_GREEN_SOIL_GRASS_BR_BL_TR] = "green_soil_grass_br_bl_tr";
   m_Map[TT_GREEN_SOIL_GRASS_BR_TL_TR] = "green_soil_grass_br_tl_tr";
 
+  m_Map[TT_GREEN_SOIL_STONE_LIFTED] = "green_soil_stone_lifted";
+
   m_Map[TT_COUNT] = "none";
 }
 
@@ -49,5 +51,6 @@ CTileDataMap::CTileDataMap() {
   m_Map[TT_GREEN_SOIL_GRASS_BR_TL_TR] = {"soil_green_bush_br_tl_tr.mesh"};
   
   m_Map[TT_GREEN_BUSH_TRUNK] = {"green_bush_trunk.mesh"};
+  m_Map[TT_GREEN_SOIL_STONE_LIFTED] = {"green_bush_trunk.mesh"};
 }
 
