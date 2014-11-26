@@ -26,16 +26,21 @@
 #include <LinearMath/btVector3.h>
 
 enum EObjectTypes {
+  // objects on map
   OBJECT_GREEN_BUSH,
   OBJECT_LIGHT_STONE,
   OBJECT_LIGHT_STONE_PILE,
   OBJECT_VASE,
 
+  // pickable objects
   OBJECT_GREEN_TREE,
   OBJECT_GREEN_RUPEE,
   OBJECT_BLUE_RUPEE,
   OBJECT_RED_RUPEE,
   OBJECT_HEART,
+
+  // tools that can occur in chests/store
+  OBJECT_TOOL_LAMP,
 
   OBJECT_COUNT,
 };
@@ -55,15 +60,6 @@ struct SObjectTypeData {
 
   EGlobalCollisionShapesTypes eCollisionShape;
   btVector3 vPhysicsShapeScale;
-
-
-  SObjectTypeData() {}
-  SObjectTypeData(SObjectTypeData &&) = default;
-  SObjectTypeData(bool userHandle, bool isStatic, const std::string &id, const std::string &meshName, const std::string &materialName, unsigned int damageSourceMask);
-  SObjectTypeData(bool userHandle, bool isStatic, const std::string &id, const std::string &meshName, const std::string &materialName, unsigned int damageSourceMask, const btVector3 &physicsShapeScale);
-  SObjectTypeData(bool userHandle, bool isStatic, const std::string &id, const std::string &meshName, const std::string &materialName, unsigned int damageSourceMask, EGlobalCollisionShapesTypes collisionShape);
-
-  SObjectTypeData(bool userHandle, bool isStatic, const std::string &id, const std::string &meshName, const std::string &materialName, unsigned int damageSourceMask, ETileTypes normalTile, ETileTypes removedTile, EGlobalCollisionShapesTypes collisionShape);
 
   SObjectTypeData &operator=(const SObjectTypeData&) = default;
 };

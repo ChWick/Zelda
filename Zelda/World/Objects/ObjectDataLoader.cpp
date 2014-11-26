@@ -46,7 +46,7 @@ void CObjectDataLoader::readGroupElement(const tinyxml2::XMLElement *e) {
   data.eRemovedTile = TILE_TYPE_ID_MAP.parseString(
       Attribute(e, "removed_tile", "none"));
   data.eCollisionShape = GLOBAL_COLLISION_SHAPES_TYPES_ID_MAP.parseString(
-      Attribute(e, "collision_shape", "pickable_object_shape"));
+      Attribute(e, "collision_shape", "none"));
   data.vPhysicsShapeScale = BtOgre::Convert::toBullet(
       Ogre::StringConverter::parseVector3(
           Attribute(e, "physics_shape_scale", "1 1 1")));

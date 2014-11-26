@@ -86,7 +86,9 @@ void CWorldEntity::setPosition(const SPATIAL_VECTOR &vPos) {
           btRigidBody::upcast(m_pCollisionObject)->getMotionState());
 
       m_pCollisionObject->getWorldTransform().setOrigin(
-          pRBS->getOffset().inverse() * BtOgre::Convert::toBullet(vPos));
+          pRBS->getCenterOfMassOffset().inverse()
+          * BtOgre::Convert::toBullet(vPos)
+          - pRBS->getLocalTransform().getOrigin());
       pRBS->setWorldTransform(m_pCollisionObject->getWorldTransform());
     } else {
       m_pCollisionObject->getWorldTransform().setOrigin(

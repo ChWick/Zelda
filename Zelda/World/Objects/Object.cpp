@@ -74,7 +74,10 @@ CObject::CObject(const std::string &id,
     pEntity = pSceneManager->createEntity(id + "ent",
                                           m_ObjectTypeData.sMeshName + ".mesh",
                                           "World");
-    pEntity->setMaterialName(m_ObjectTypeData.sMaterialName);
+    if (m_ObjectTypeData.sMaterialName.size() > 0) {
+      pEntity->setMaterialName(m_ObjectTypeData.sMaterialName);
+    }
+
     m_pSceneNode->attachObject(pEntity);
     pEntity->setCastShadows(false);
   }
@@ -84,15 +87,15 @@ void CObject::init() {
   createPhysics();
 
   switch (m_uiType) {
-  case OBJECT_GREEN_RUPEE:
-  case OBJECT_BLUE_RUPEE:
-  case OBJECT_RED_RUPEE:
-  case OBJECT_HEART:
-    makePickable();
-    break;
-
-  default:
-    break;
+    case OBJECT_GREEN_RUPEE:
+    case OBJECT_BLUE_RUPEE:
+    case OBJECT_RED_RUPEE:
+    case OBJECT_HEART:
+    case OBJECT_TOOL_LAMP:
+      makePickable();
+      break;
+    default:
+      break;
   }
 }
 
@@ -112,11 +115,6 @@ void CObject::destroyPhysics() {
 void CObject::createPhysics() {
   ASSERT(!m_pCollisionObject);
 
-  btVector3 initPosition = BtOgre::Convert::toBullet(
-      m_pSceneNode->getPosition());
-  btQuaternion initRotation = BtOgre::Convert::toBullet(
-      m_pSceneNode->getOrientation());
-
   btCollisionShape *pCollisionShape(nullptr);
   btVector3 vCollisionShapeOffset;
   btVector3 vInertia;
@@ -132,22 +130,40 @@ void CObject::createPhysics() {
   } else {
     // Handle shape by user
   }
+  //m_pSceneNode->translate(BtOgre::Convert::toOgre(vCollisionShapeOffset));
+
+  btVector3 initPosition = BtOgre::Convert::toBullet(
+      m_pSceneNode->getPosition());
+  btQuaternion initRotation = BtOgre::Convert::toBullet(
+      m_pSceneNode->getOrientation());
+
+  // initPosition += vCollisionShapeOffset;
+
 
   ASSERT(pCollisionShape);
 
   pCollisionShape->calculateLocalInertia(fMass, vInertia);
+  
   btMotionState *pMotionState(nullptr);
   if (m_ObjectTypeData.bPermanentStatic) {
     pMotionState = new btDefaultMotionState(
         btTransform(initRotation, initPosition),
         btTransform(btQuaternion::getIdentity(), vCollisionShapeOffset));
   } else {
+    btQuaternion rotationOffset(btQuaternion::getIdentity());
+    btVector3 objectCenter(0, 1, 0);
+    rotationOffset =
+        BtOgre::Convert::toBullet(
+            Ogre::Quaternion(Ogre::Degree(45), Ogre::Vector3::UNIT_Z));
     pMotionState
         = new BtOgre::RigidBodyState(m_pSceneNode,
                                      btTransform(initRotation,
                                                  initPosition),
                                      btTransform(btQuaternion::getIdentity(),
-                                                 vCollisionShapeOffset));
+                                                 vCollisionShapeOffset
+                                                 -objectCenter),
+                                     btTransform(rotationOffset,
+                                                 objectCenter));
   }
   btRigidBody *pRigidBody = new btRigidBody(fMass,
                                             pMotionState,
@@ -164,38 +180,45 @@ void CObject::createPhysics() {
 
   // post creation
   switch (m_uiType) {
-  case OBJECT_GREEN_RUPEE:
-  case OBJECT_BLUE_RUPEE:
-  case OBJECT_RED_RUPEE:
-  case OBJECT_HEART:
-    pRigidBody->setAngularVelocity(btVector3(0, 2, 0));
-    pRigidBody->setAngularFactor(btVector3(0, 1, 0));
-    pRigidBody->setLinearFactor(btVector3(1.0f, 1.0f, 1.0f) * 1);
-    pRigidBody->setLinearVelocity(btVector3(0, 1.0f, 0));
-    pRigidBody->setDamping(0.9, 0);
-    pRigidBody->setRestitution(0.6);
-    pRigidBody->setFriction(0.1);
-    group = COL_DAMAGE_N;
-    mask |= MASK_DAMAGE_N_COLLIDES_WITH;
-    pRigidBody->setCcdMotionThreshold(0.1);
-    pRigidBody->setCcdSweptSphereRadius(0.02f);
-    break;
-  case OBJECT_GREEN_BUSH:
-  case OBJECT_LIGHT_STONE:
-  case OBJECT_LIGHT_STONE_PILE:
-  case OBJECT_VASE:
-    if (m_eState == EST_LIFTED) {
-      group = COL_DAMAGE_P;
-      mask = MASK_DAMAGE_P_COLLIDES_WITH;
-    }
-    pRigidBody->setLinearFactor(btVector3(0, 0, 0));
-    pRigidBody->setAngularFactor(0);
-    break;
-  default:
-    break;
+    case OBJECT_GREEN_RUPEE:
+    case OBJECT_BLUE_RUPEE:
+    case OBJECT_RED_RUPEE:
+    case OBJECT_HEART:
+      pRigidBody->setAngularVelocity(btVector3(0, 2, 0));
+      pRigidBody->setAngularFactor(btVector3(0, 1, 0));
+      pRigidBody->setLinearFactor(btVector3(1.0f, 1.0f, 1.0f) * 1);
+      pRigidBody->setLinearVelocity(btVector3(0, 1.0f, 0));
+      pRigidBody->setDamping(0.9, 0);
+      pRigidBody->setRestitution(0.6);
+      pRigidBody->setFriction(0.1);
+      group = COL_DAMAGE_N;
+      mask |= MASK_DAMAGE_N_COLLIDES_WITH;
+      pRigidBody->setCcdMotionThreshold(0.1);
+      pRigidBody->setCcdSweptSphereRadius(0.02f);
+      break;
+    case OBJECT_GREEN_BUSH:
+    case OBJECT_LIGHT_STONE:
+    case OBJECT_LIGHT_STONE_PILE:
+    case OBJECT_VASE:
+      if (m_eState == EST_LIFTED) {
+        group = COL_DAMAGE_P;
+        mask = MASK_DAMAGE_P_COLLIDES_WITH;
+      }
+      pRigidBody->setLinearFactor(btVector3(0, 0, 0));
+      pRigidBody->setAngularFactor(0);
+      break;
+    case OBJECT_TOOL_LAMP:
+      group = COL_DAMAGE_N;
+      mask |= MASK_DAMAGE_N_COLLIDES_WITH;
+      pRigidBody->setLinearFactor(btVector3(0, 0, 0));
+      pRigidBody->setAngularVelocity(btVector3(0, 2, 0));
+      pRigidBody->setAngularFactor(btVector3(0, 1, 0));
+      break;
+    default:
+      break;
   }
 
-  m_pCollisionObject->getWorldTransform().getOrigin() -= vCollisionShapeOffset;
+  // m_pCollisionObject->getWorldTransform().getOrigin() -= vCollisionShapeOffset;
 
 
   m_pMap->getPhysicsManager()->getWorld()->addRigidBody(pRigidBody,
@@ -285,7 +308,7 @@ void CObject::changeState(EEntityStateTypes eState) {
       break;
     case OBJECT_GREEN_BUSH:
     case OBJECT_LIGHT_STONE:
-      if (eState == EST_LIFTED) {
+      if (m_eState == EST_NORMAL) {
         createInnerObject(mInnerObjectGenerator.drawRandomObject());
       }
       break;
@@ -384,11 +407,13 @@ void CObject::createInnerObject(EObjectTypes eType) {
   Ogre::Vector3 initPosition = getPosition();
   btVector3 initLinearVelocity = btVector3(0, 0.5, 0);
   switch (m_uiType) {
-  case OBJECT_GREEN_TREE:
-    initPosition = getPosition() + Ogre::Vector3(0.1, 0.35, 0);
-    initLinearVelocity = btVector3(0.5, 0.5, 0);
-    break;
-
+    case OBJECT_GREEN_TREE:
+      initPosition = getPosition() + Ogre::Vector3(0.1, 0.35, 0);
+      initLinearVelocity = btVector3(0.5, 0.5, 0);
+      break;
+    case OBJECT_LIGHT_STONE:
+      initPosition = getPosition() + Ogre::Vector3(0, 0.05, 0);
+      initLinearVelocity = btVector3(0, 0, 0);
   default:
     break;
   }

@@ -895,7 +895,7 @@ void DotSceneLoader::processEntity(XMLElement *XMLNode, SceneNode *pParent, CUse
                                                  BtOgre::Convert::toBullet(pParent->getOrientation()),
                                                  BtOgre::Convert::toBullet(pParent->getScale() * (pParent->getOrientation() * centerOffset) + pParent->getPosition())));
               if (dynamic_cast<BtOgre::RigidBodyState*>(ms)) {
-                  dynamic_cast<BtOgre::RigidBodyState*>(ms)->setOffset(btTransform(btQuaternion::getIdentity(), BtOgre::Convert::toBullet(-centerOffset)));
+                  dynamic_cast<BtOgre::RigidBodyState*>(ms)->setCenterOfMassOffset(btTransform(btQuaternion::getIdentity(), BtOgre::Convert::toBullet(-centerOffset)));
               }
 
               short colGroup = COL_STATIC;

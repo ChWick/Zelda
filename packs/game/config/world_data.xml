@@ -327,6 +327,13 @@
       damage_source_mask = "sword"
       collision_shape = "falling_object_sphere"
       />
+  <object
+      type = "tool_lamp"
+      user_handle = "true"
+      permanent_static = "false"
+      mesh_name = "lamp"
+      collision_shape = "falling_object_sphere"
+      />
   <!-- Tiles -->
   <!-- Properties:
        ===========
@@ -369,7 +376,10 @@
        objectType (string)           the object type to generate
   -->
   <default_inner_object id="green_bush">
-    <data probability="0.5" objectType="heart"/>
+    <data probability="0.5" objectType="tool_lamp"/>
     <data probability="0.5" objectType="rupee_green"/>
+  </default_inner_object>
+  <default_inner_object id="light_stone">
+    <data probability="1" objectType="tool_lamp"/>
   </default_inner_object>
 </world_data>
