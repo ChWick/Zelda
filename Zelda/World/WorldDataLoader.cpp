@@ -20,6 +20,7 @@
 #include "WorldDataLoader.hpp"
 #include "Items/ItemDataLoader.hpp"
 #include "Objects/ObjectDataLoader.hpp"
+#include "Atlas/TileDataLoader.hpp"
 #include "../Common/tinyxml2/tinyxml2.hpp"
 
 CWorldDataLoader::CWorldDataLoader()
@@ -28,4 +29,6 @@ CWorldDataLoader::CWorldDataLoader()
                 std::shared_ptr<CXMLLoaderGroup>(new CItemDataLoader()));
   registerGroup("object",
                 std::shared_ptr<CXMLLoaderGroup>(new CObjectDataLoader()));
+  registerGroup("tile",
+                std::shared_ptr<CXMLLoaderGroup>(new CTileDataLoader()));
 }

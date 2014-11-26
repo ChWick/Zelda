@@ -17,37 +17,15 @@
  * Zelda. If not, see http://www.gnu.org/licenses/.
  *****************************************************************************/
 
-#ifndef TILE_TYPES_HPP
-#define TILE_TYPES_HPP
+#ifndef TILEDATALOADER_HPP
+#define TILEDATALOADER_HPP
 
-#include "../../Common/Util/EnumIdMap.hpp"
 
-enum ETileTypes {
-  TT_GREEN_SOIL = 0,
-  TT_GREEN_SOIL_BUSH_SHADOW,
-  TT_GREEN_SOIL_BUSH_LIFTED,
-  TT_GREEN_SOIL_STONE_SHADOW,
-  TT_GREEN_SOIL_STONE_LIFTED,
-  TT_GREEN_SOIL_STONE_PILE_SHADOW,
+#include "../../Common/Util/XMLLoader.hpp"
 
-  TT_COUNT,
-};
-
-struct ETileData {
-  std::string sMeshName;
-};
-
-class CTileTypeIdMap : public CEnumIdMap<ETileTypes> {
+class CTileDataLoader : public CXMLLoaderGroup {
  public:
-  CTileTypeIdMap();
+  virtual void readGroupElement(const tinyxml2::XMLElement *e);
 };
 
-class CTileDataMap : public CEnumIdMap<ETileTypes, ETileData> {
- public:
-  CTileDataMap();
-};
-
-extern CTileTypeIdMap TILE_TYPE_ID_MAP;
-extern CTileDataMap TILE_DATA_MAP;
-
-#endif // TILE_TYPES_HPP
+#endif // TILEDATALOADER_HPP

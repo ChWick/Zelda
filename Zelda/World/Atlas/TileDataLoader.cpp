@@ -17,37 +17,20 @@
  * Zelda. If not, see http://www.gnu.org/licenses/.
  *****************************************************************************/
 
-#ifndef TILE_TYPES_HPP
-#define TILE_TYPES_HPP
+#include "TileDataLoader.hpp"
+#include <string>
+#include "../../Common/Util/XMLHelper.hpp"
+#include "TileTypes.hpp"
+#include <OgreStringConverter.h>
 
-#include "../../Common/Util/EnumIdMap.hpp"
+using XMLHelper::Attribute;
+using XMLHelper::IntAttribute;
+using XMLHelper::RealAttribute;
 
-enum ETileTypes {
-  TT_GREEN_SOIL = 0,
-  TT_GREEN_SOIL_BUSH_SHADOW,
-  TT_GREEN_SOIL_BUSH_LIFTED,
-  TT_GREEN_SOIL_STONE_SHADOW,
-  TT_GREEN_SOIL_STONE_LIFTED,
-  TT_GREEN_SOIL_STONE_PILE_SHADOW,
+void CTileDataLoader::readGroupElement(const tinyxml2::XMLElement *e) {
+  ETileData data;
+  const std::string id = Attribute(e, "id");
+  data.sMeshName = Attribute(e, "mesh_name");
 
-  TT_COUNT,
-};
-
-struct ETileData {
-  std::string sMeshName;
-};
-
-class CTileTypeIdMap : public CEnumIdMap<ETileTypes> {
- public:
-  CTileTypeIdMap();
-};
-
-class CTileDataMap : public CEnumIdMap<ETileTypes, ETileData> {
- public:
-  CTileDataMap();
-};
-
-extern CTileTypeIdMap TILE_TYPE_ID_MAP;
-extern CTileDataMap TILE_DATA_MAP;
-
-#endif // TILE_TYPES_HPP
+  TILE_DATA_MAP.setData(TILE_TYPE_ID_MAP.parseString(id), data);
+}

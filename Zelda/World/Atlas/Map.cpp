@@ -301,13 +301,8 @@ void CMap::handleMessage(const CMessage &message) {
       m_pStaticGeometryFixedTiles->destroy();
       rebuildStaticGeometryChangedTiles();
 
-      if (pObject->getType() == OBJECT_GREEN_BUSH) {
-        m_pStaticGeometryFixedTiles->addEntity(m_apTileEntities[TT_GREEN_SOIL + std::rand() % (TT_GREEN_SOIL_GRASS_BR_TL_TR - TT_GREEN_SOIL + 1)], pObject->getSceneNode()->getInitialPosition());
-        m_pStaticGeometryFixedTiles->addEntity(m_apTileEntities[TT_GREEN_BUSH_TRUNK], pObject->getSceneNode()->getInitialPosition());
-      }
-      else {
-        m_pStaticGeometryFixedTiles->addEntity(m_apTileEntities[data.eRemovedTile], pObject->getSceneNode()->getInitialPosition());
-      }
+      
+      m_pStaticGeometryFixedTiles->addEntity(m_apTileEntities[data.eRemovedTile], pObject->getSceneNode()->getInitialPosition());
 
       m_pStaticGeometryFixedTiles->build();
     }

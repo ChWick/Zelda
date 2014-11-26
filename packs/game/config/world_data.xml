@@ -248,7 +248,7 @@
       material_name = "soil"
       damage_source_mask = "sword"
       normal_tile = "green_soil_bush_shadow"
-      removed_tile = "green_soil_grass_bl_br_tl_tr"
+      removed_tile = "green_soil_bush_lifted"
       collision_shape = "pickable_object_sphere"
       />
   <object
@@ -326,5 +326,36 @@
       material_name = "global"
       damage_source_mask = "sword"
       collision_shape = "falling_object_sphere"
+      />
+  <!-- Tiles -->
+  <!-- Properties:
+       ===========
+
+       id (string)             Id of the file (see ETileTypes, and CTileTypesIdMap)
+       mesh_name (string)      The corresponding mesh
+       -->
+  <tile
+      id="green_soil"
+      mesh_name="soil_green.mesh"
+      />
+  <tile
+      id="green_soil_bush_shadow"
+      mesh_name="soil_green_bush.mesh"
+      />
+  <tile
+      id="green_soil_bush_lifted"
+      mesh_name="soil_green_bush_lifted.mesh"
+      />
+  <tile
+      id="green_soil_stone_shadow"
+      mesh_name="soil_green_stone.mesh"
+      />
+  <tile
+      id="green_soil_stone_lifted"
+      mesh_name="soil_green_stone_lifted.mesh"
+      />
+  <tile
+      id="green_soil_stone_pile_shadow"
+      mesh_name="soil_green_stone_pile_shadow.mesh"
       />
 </world_data>
