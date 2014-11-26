@@ -37,7 +37,7 @@ struct ETileData {
   std::string sMeshName;
 };
 
-class CTileTypeIdMap : public CEnumIdMap<ETileTypes> {
+class CTileTypeIdMap : public CStringEnumIdMap<ETileTypes> {
  public:
   CTileTypeIdMap();
 };

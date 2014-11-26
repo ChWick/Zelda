@@ -31,7 +31,7 @@ enum ERepeatTypes {
   REPEAT_TIMED,
 };
 
-class CRepeatTypesMap : public CEnumIdMap<ERepeatTypes> {
+class CRepeatTypesMap : public CStringEnumIdMap<ERepeatTypes> {
 public:
   CRepeatTypesMap();
 };

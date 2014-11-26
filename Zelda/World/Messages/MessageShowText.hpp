@@ -33,7 +33,7 @@ public:
     FINISHED_RESULT_REPEAT, //!< when a text box has closed with a question result: repeat
     FINISHED_RESULT_CONTINUE, //!< when a text box has closed with a question result: continue
   };
-  class CStatusIDMap : public CEnumIdMap<EStatus> {
+  class CStatusIDMap : public CStringEnumIdMap<EStatus> {
   public:
     CStatusIDMap();
   };

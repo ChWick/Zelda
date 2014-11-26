@@ -44,7 +44,7 @@ struct SPersonData {
   Hitpoints hitpoints;
 };
 
-class CPersonTypeIdMap : public CEnumIdMap<EPersonTypes> {
+class CPersonTypeIdMap : public CStringEnumIdMap<EPersonTypes> {
 public:
   void init();
 };

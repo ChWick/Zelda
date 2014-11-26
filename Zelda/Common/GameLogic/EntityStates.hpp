@@ -29,7 +29,7 @@ enum EEntityStateTypes {
   EST_DELETE,
 };
 
-class CEntityStateIdMap : public CEnumIdMap<EEntityStateTypes> {
+class CEntityStateIdMap : public CStringEnumIdMap<EEntityStateTypes> {
 public:
   CEntityStateIdMap();
 };

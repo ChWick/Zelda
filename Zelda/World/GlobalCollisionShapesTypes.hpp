@@ -34,7 +34,7 @@ enum EGlobalCollisionShapesTypes {
   GCST_COUNT,
 };
 
-class CGlobalCollisionShapesTypesIdMap : public CEnumIdMap<EGlobalCollisionShapesTypes> {
+class CGlobalCollisionShapesTypesIdMap : public CStringEnumIdMap<EGlobalCollisionShapesTypes> {
 public:
   CGlobalCollisionShapesTypesIdMap();
 };

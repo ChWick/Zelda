@@ -34,7 +34,7 @@ enum EMessageTypes {
   MSG_USER,
 };
 
-class CMessageTypesMap : public CEnumIdMap<unsigned int> {
+class CMessageTypesMap : public CStringEnumIdMap<unsigned int> {
 public:
   CMessageTypesMap();
 };

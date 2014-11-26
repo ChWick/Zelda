@@ -37,7 +37,7 @@ enum EDamageType {
   DMG_ALL     = 511,                  //!< Flag for take/block all damage types
 };
 
-class CDamageTypeIdMap : public CEnumIdMap<unsigned int> {
+class CDamageTypeIdMap : public CStringEnumIdMap<unsigned int> {
 public:
   CDamageTypeIdMap();
   //! parse a string

@@ -68,7 +68,7 @@ struct SObjectTypeData {
   SObjectTypeData &operator=(const SObjectTypeData&) = default;
 };
 
-class CObjectTypeIdMap : public CEnumIdMap<EObjectTypes> {
+class CObjectTypeIdMap : public CStringEnumIdMap<EObjectTypes> {
 public:
   CObjectTypeIdMap();
 };

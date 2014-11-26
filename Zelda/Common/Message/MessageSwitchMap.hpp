@@ -30,7 +30,7 @@ enum ESwitchMapTypes {
   SMT_FADE_ALPHA,
 };
 
-class CSwitchMapTypes : public CEnumIdMap<ESwitchMapTypes> {
+class CSwitchMapTypes : public CStringEnumIdMap<ESwitchMapTypes> {
 public:
   CSwitchMapTypes();
 };

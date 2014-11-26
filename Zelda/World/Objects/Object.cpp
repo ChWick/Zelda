@@ -50,7 +50,8 @@ CObject::CObject(const std::string &id,
                  Ogre::SceneNode *pSceneNode)
   : CWorldEntity(id, pParent, pMap),
     m_ObjectTypeData(OBJECT_DATA_MAP.toData(eObjectType)),
-    mInnerObjectType(OBJECT_COUNT) {
+    mInnerObjectGenerator(InnerObject::DEFAULT_GENERATOR_DATA_MAP
+                          .toData(eObjectType)) {
   setType(eObjectType);
 
   if (pSceneNode) {
@@ -277,11 +278,19 @@ void CObject::changeState(EEntityStateTypes eState) {
 
   // create inner object
   switch (m_uiType) {
-  case OBJECT_VASE:
-    if (eState == EST_DELETE) {
-      createInnerObject(mInnerObjectType);
-    }
-    break;
+    case OBJECT_VASE:
+      if (eState == EST_DELETE) {
+        createInnerObject(mInnerObjectGenerator.drawRandomObject());
+      }
+      break;
+    case OBJECT_GREEN_BUSH:
+    case OBJECT_LIGHT_STONE:
+      if (eState == EST_LIFTED) {
+        createInnerObject(mInnerObjectGenerator.drawRandomObject());
+      }
+      break;
+    default:
+      break;
   }
 
   CWorldEntity::changeState(eState);
@@ -366,7 +375,7 @@ CObject::EReceiveDamageResult CObject::hit(const CDamage &dmg) {
 }
 
 void CObject::setInnerObject(EObjectTypes eType) {
-  mInnerObjectType = eType;
+  mInnerObjectGenerator.setObject(eType);
 }
 
 void CObject::createInnerObject(EObjectTypes eType) {

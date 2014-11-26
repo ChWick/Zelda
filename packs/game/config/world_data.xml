@@ -358,4 +358,18 @@
       id="green_soil_stone_pile_shadow"
       mesh_name="soil_green_stone_pile_shadow.mesh"
       />
+  <!-- default inner objects -->
+  <!-- Properties:
+       ===========
+
+       id (string)                   the object id to belong to
+
+       child element <data> with attributes
+       probability (float)           probability for the object
+       objectType (string)           the object type to generate
+  -->
+  <default_inner_object id="green_bush">
+    <data probability="0.5" objectType="heart"/>
+    <data probability="0.5" objectType="rupee_green"/>
+  </default_inner_object>
 </world_data>

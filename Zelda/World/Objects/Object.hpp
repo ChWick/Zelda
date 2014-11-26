@@ -21,12 +21,13 @@
 #define _OBJECT_HPP_
 
 #include "ObjectTypes.hpp"
+#include "InnerObjectGenerator.hpp"
 #include "../WorldEntity.hpp"
 
 class CObject : public CWorldEntity {
 protected:
   const SObjectTypeData &m_ObjectTypeData;
-  EObjectTypes mInnerObjectType;
+  InnerObject::CGenerator mInnerObjectGenerator;
 public:
    CObject(const std::string &id, CWorldEntity *pParent, CMap *pMap, EObjectTypes eObjectType, Ogre::SceneNode *pSceneNode = nullptr);
 

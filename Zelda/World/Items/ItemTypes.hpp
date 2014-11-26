@@ -106,12 +106,12 @@ enum EItemVariantTypes {
   ITEM_VARIANT_COUNT
 };
 
-class CItemSlotIdMap : public CEnumIdMap<EItemSlotTypes> {
+class CItemSlotIdMap : public CStringEnumIdMap<EItemSlotTypes> {
 public:
   void init();
 };
 
-class CItemVariantIdMap : public CEnumIdMap<EItemVariantTypes> {
+class CItemVariantIdMap : public CStringEnumIdMap<EItemVariantTypes> {
 public:
   void init();
 };

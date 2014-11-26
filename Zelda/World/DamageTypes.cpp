@@ -41,7 +41,7 @@ unsigned int CDamageTypeIdMap::parseString(const std::string &str) const {
   istringstream stream(str);
   string token;
   while (getline(stream, token, ' ')) {
-    uiDmg |= CEnumIdMap<unsigned int>::parseString(token);
+    uiDmg |= CStringEnumIdMap<unsigned int>::parseString(token);
   }
 
   return uiDmg;
