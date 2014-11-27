@@ -39,4 +39,7 @@
   <string name="Lost hitpoints">Lost hitpoints</string>
   <string name="Used manapoints">Used manapoints</string>
   <string name="Killed enemies">Killed enemies</string>
+
+  <!-- default tool pickup strings -->
+  <string name="tool_lamp">You found the lamp</string>
 </resources>

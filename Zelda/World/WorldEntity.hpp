@@ -58,8 +58,9 @@ public:
   virtual const SPATIAL_VECTOR &getScale() const;
   virtual void setScale(const SPATIAL_VECTOR &vScale);
 
-	virtual const Ogre::Quaternion &getOrientation() const;
-	virtual void setOrientation(const Ogre::Quaternion &quat);
+  virtual const Ogre::Quaternion &getOrientation() const;
+  virtual void setOrientation(const Ogre::Quaternion &quat);
+  virtual void rotate(const Ogre::Quaternion &quat);
 
   virtual Ogre::SceneNode *getSceneNode() const;
   virtual btCollisionObject *getCollisionObject() const;

@@ -1,510 +1,523 @@
-<scene previous_export_time="1416005210.914481" formatVersion="1.0.1" export_time="1416008183.749377" exported_by="christoph" >
+<scene export_time="1417117844.3195925" exported_by="christoph" formatVersion="1.0.1" previous_export_time="1416005210.914481" >
   <nodes >
     <node name="Vase.002" >
-      <position y="0.000000" x="-0.470000" z="-0.320000" />
-      <rotation qw="1.000000" qy="0.000000" qz="-0.000000" qx="0.000000" />
-      <scale y="1.000000" x="1.000000" z="1.000000" />
-      <user_data type="str" value="heart" name="inner_object" />
+      <position x="-0.470000" y="0.000000" z="-0.320000" />
+      <rotation qz="-0.000000" qx="0.000000" qy="0.000000" qw="1.000000" />
+      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <user_data name="inner_object" type="str" value="heart" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity ghost="False" friction_y="1.0" damping_trans="0.03999999910593033" name="vase" velocity_max="0.0" velocity_min="0.0" lock_rot_z="False" lock_rot_x="False" lock_trans_y="False" lock_rot_y="False" friction_z="1.0" collisionPrim="sphere" lock_trans_x="False" inertia_tensor="0.4000000059604645" lock_trans_z="False" damping_rot="0.10000000149011612" meshFile="vase.mesh" anisotropic_friction="False" mass_radius="1.0" mass="1.0" physics_type="STATIC" friction_x="1.0" actor="False" >
-        <user_data type="str" value="vase" name="type" />
+      <entity ghost="False" name="vase" mass_radius="1.0" collisionPrim="sphere" physics_type="STATIC" friction_z="1.0" friction_x="1.0" friction_y="1.0" lock_trans_x="False" lock_rot_z="False" lock_rot_y="False" lock_rot_x="False" velocity_min="0.0" actor="False" mass="1.0" inertia_tensor="0.4000000059604645" velocity_max="0.0" lock_trans_y="False" damping_rot="0.10000000149011612" meshFile="vase.mesh" lock_trans_z="False" damping_trans="0.03999999910593033" anisotropic_friction="False" >
+        <user_data name="type" type="str" value="vase" />
       </entity>
     </node>
     <node name="Vase.001" >
-      <position y="0.000000" x="-0.470000" z="-0.220000" />
-      <rotation qw="1.000000" qy="0.000000" qz="-0.000000" qx="0.000000" />
-      <scale y="1.000000" x="1.000000" z="1.000000" />
-      <user_data type="str" value="heart" name="inner_object" />
+      <position x="-0.470000" y="0.000000" z="-0.220000" />
+      <rotation qz="-0.000000" qx="0.000000" qy="0.000000" qw="1.000000" />
+      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <user_data name="inner_object" type="str" value="heart" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity ghost="False" friction_y="1.0" damping_trans="0.03999999910593033" name="vase" velocity_max="0.0" velocity_min="0.0" lock_rot_z="False" lock_rot_x="False" lock_trans_y="False" lock_rot_y="False" friction_z="1.0" collisionPrim="sphere" lock_trans_x="False" inertia_tensor="0.4000000059604645" lock_trans_z="False" damping_rot="0.10000000149011612" meshFile="vase.mesh" anisotropic_friction="False" mass_radius="1.0" mass="1.0" physics_type="STATIC" friction_x="1.0" actor="False" >
-        <user_data type="str" value="vase" name="type" />
+      <entity ghost="False" name="vase" mass_radius="1.0" collisionPrim="sphere" physics_type="STATIC" friction_z="1.0" friction_x="1.0" friction_y="1.0" lock_trans_x="False" lock_rot_z="False" lock_rot_y="False" lock_rot_x="False" velocity_min="0.0" actor="False" mass="1.0" inertia_tensor="0.4000000059604645" velocity_max="0.0" lock_trans_y="False" damping_rot="0.10000000149011612" meshFile="vase.mesh" lock_trans_z="False" damping_trans="0.03999999910593033" anisotropic_friction="False" >
+        <user_data name="type" type="str" value="vase" />
       </entity>
     </node>
     <node name="table_leg.007" >
-      <position y="0.030000" x="-0.330000" z="0.205000" />
-      <rotation qw="1.000000" qy="0.000000" qz="-0.000000" qx="0.000000" />
-      <scale y="1.000000" x="1.000000" z="1.000000" />
+      <position x="-0.330000" y="0.030000" z="0.205000" />
+      <rotation qz="-0.000000" qx="0.000000" qy="0.000000" qw="1.000000" />
+      <scale x="1.000000" y="1.000000" z="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity ghost="False" friction_y="1.0" damping_trans="0.03999999910593033" name="inner_house_table_leg" velocity_max="0.0" velocity_min="0.0" lock_rot_z="False" lock_rot_x="False" lock_trans_y="False" lock_rot_y="False" friction_z="1.0" collisionPrim="cylinder" lock_trans_x="False" inertia_tensor="0.4000000059604645" lock_trans_z="False" damping_rot="0.10000000149011612" meshFile="inner_house_table_leg.mesh" anisotropic_friction="False" mass_radius="1.0" mass="1.0" physics_type="STATIC" friction_x="1.0" actor="False" />
+      <entity ghost="False" name="inner_house_table_leg" mass_radius="1.0" collisionPrim="cylinder" physics_type="STATIC" friction_z="1.0" friction_x="1.0" friction_y="1.0" lock_trans_x="False" lock_rot_z="False" lock_rot_y="False" lock_rot_x="False" velocity_min="0.0" actor="False" mass="1.0" inertia_tensor="0.4000000059604645" velocity_max="0.0" lock_trans_y="False" damping_rot="0.10000000149011612" meshFile="inner_house_table_leg.mesh" lock_trans_z="False" damping_trans="0.03999999910593033" anisotropic_friction="False" />
     </node>
     <node name="table_leg.006" >
-      <position y="0.030000" x="-0.330000" z="0.095000" />
-      <rotation qw="1.000000" qy="0.000000" qz="-0.000000" qx="0.000000" />
-      <scale y="1.000000" x="1.000000" z="1.000000" />
+      <position x="-0.330000" y="0.030000" z="0.095000" />
+      <rotation qz="-0.000000" qx="0.000000" qy="0.000000" qw="1.000000" />
+      <scale x="1.000000" y="1.000000" z="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity ghost="False" friction_y="1.0" damping_trans="0.03999999910593033" name="inner_house_table_leg" velocity_max="0.0" velocity_min="0.0" lock_rot_z="False" lock_rot_x="False" lock_trans_y="False" lock_rot_y="False" friction_z="1.0" collisionPrim="cylinder" lock_trans_x="False" inertia_tensor="0.4000000059604645" lock_trans_z="False" damping_rot="0.10000000149011612" meshFile="inner_house_table_leg.mesh" anisotropic_friction="False" mass_radius="1.0" mass="1.0" physics_type="STATIC" friction_x="1.0" actor="False" />
+      <entity ghost="False" name="inner_house_table_leg" mass_radius="1.0" collisionPrim="cylinder" physics_type="STATIC" friction_z="1.0" friction_x="1.0" friction_y="1.0" lock_trans_x="False" lock_rot_z="False" lock_rot_y="False" lock_rot_x="False" velocity_min="0.0" actor="False" mass="1.0" inertia_tensor="0.4000000059604645" velocity_max="0.0" lock_trans_y="False" damping_rot="0.10000000149011612" meshFile="inner_house_table_leg.mesh" lock_trans_z="False" damping_trans="0.03999999910593033" anisotropic_friction="False" />
     </node>
     <node name="table_leg.005" >
-      <position y="0.030000" x="-0.170000" z="0.095000" />
-      <rotation qw="1.000000" qy="0.000000" qz="-0.000000" qx="0.000000" />
-      <scale y="1.000000" x="1.000000" z="1.000000" />
+      <position x="-0.170000" y="0.030000" z="0.095000" />
+      <rotation qz="-0.000000" qx="0.000000" qy="0.000000" qw="1.000000" />
+      <scale x="1.000000" y="1.000000" z="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity ghost="False" friction_y="1.0" damping_trans="0.03999999910593033" name="inner_house_table_leg" velocity_max="0.0" velocity_min="0.0" lock_rot_z="False" lock_rot_x="False" lock_trans_y="False" lock_rot_y="False" friction_z="1.0" collisionPrim="cylinder" lock_trans_x="False" inertia_tensor="0.4000000059604645" lock_trans_z="False" damping_rot="0.10000000149011612" meshFile="inner_house_table_leg.mesh" anisotropic_friction="False" mass_radius="1.0" mass="1.0" physics_type="STATIC" friction_x="1.0" actor="False" />
+      <entity ghost="False" name="inner_house_table_leg" mass_radius="1.0" collisionPrim="cylinder" physics_type="STATIC" friction_z="1.0" friction_x="1.0" friction_y="1.0" lock_trans_x="False" lock_rot_z="False" lock_rot_y="False" lock_rot_x="False" velocity_min="0.0" actor="False" mass="1.0" inertia_tensor="0.4000000059604645" velocity_max="0.0" lock_trans_y="False" damping_rot="0.10000000149011612" meshFile="inner_house_table_leg.mesh" lock_trans_z="False" damping_trans="0.03999999910593033" anisotropic_friction="False" />
     </node>
     <node name="table_leg.004" >
-      <position y="0.030000" x="-0.170000" z="0.205000" />
-      <rotation qw="1.000000" qy="0.000000" qz="-0.000000" qx="0.000000" />
-      <scale y="1.000000" x="1.000000" z="1.000000" />
+      <position x="-0.170000" y="0.030000" z="0.205000" />
+      <rotation qz="-0.000000" qx="0.000000" qy="0.000000" qw="1.000000" />
+      <scale x="1.000000" y="1.000000" z="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity ghost="False" friction_y="1.0" damping_trans="0.03999999910593033" name="inner_house_table_leg" velocity_max="0.0" velocity_min="0.0" lock_rot_z="False" lock_rot_x="False" lock_trans_y="False" lock_rot_y="False" friction_z="1.0" collisionPrim="cylinder" lock_trans_x="False" inertia_tensor="0.4000000059604645" lock_trans_z="False" damping_rot="0.10000000149011612" meshFile="inner_house_table_leg.mesh" anisotropic_friction="False" mass_radius="1.0" mass="1.0" physics_type="STATIC" friction_x="1.0" actor="False" />
+      <entity ghost="False" name="inner_house_table_leg" mass_radius="1.0" collisionPrim="cylinder" physics_type="STATIC" friction_z="1.0" friction_x="1.0" friction_y="1.0" lock_trans_x="False" lock_rot_z="False" lock_rot_y="False" lock_rot_x="False" velocity_min="0.0" actor="False" mass="1.0" inertia_tensor="0.4000000059604645" velocity_max="0.0" lock_trans_y="False" damping_rot="0.10000000149011612" meshFile="inner_house_table_leg.mesh" lock_trans_z="False" damping_trans="0.03999999910593033" anisotropic_friction="False" />
     </node>
     <node name="table_leg.003" >
-      <position y="0.030000" x="0.430000" z="0.030000" />
-      <rotation qw="1.000000" qy="0.000000" qz="-0.000000" qx="0.000000" />
-      <scale y="1.000000" x="1.000000" z="1.000000" />
+      <position x="0.430000" y="0.030000" z="0.030000" />
+      <rotation qz="-0.000000" qx="0.000000" qy="0.000000" qw="1.000000" />
+      <scale x="1.000000" y="1.000000" z="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity ghost="False" friction_y="1.0" damping_trans="0.03999999910593033" name="inner_house_table_leg" velocity_max="0.0" velocity_min="0.0" lock_rot_z="False" lock_rot_x="False" lock_trans_y="False" lock_rot_y="False" friction_z="1.0" collisionPrim="cylinder" lock_trans_x="False" inertia_tensor="0.4000000059604645" lock_trans_z="False" damping_rot="0.10000000149011612" meshFile="inner_house_table_leg.mesh" anisotropic_friction="False" mass_radius="1.0" mass="1.0" physics_type="STATIC" friction_x="1.0" actor="False" />
+      <entity ghost="False" name="inner_house_table_leg" mass_radius="1.0" collisionPrim="cylinder" physics_type="STATIC" friction_z="1.0" friction_x="1.0" friction_y="1.0" lock_trans_x="False" lock_rot_z="False" lock_rot_y="False" lock_rot_x="False" velocity_min="0.0" actor="False" mass="1.0" inertia_tensor="0.4000000059604645" velocity_max="0.0" lock_trans_y="False" damping_rot="0.10000000149011612" meshFile="inner_house_table_leg.mesh" lock_trans_z="False" damping_trans="0.03999999910593033" anisotropic_friction="False" />
     </node>
     <node name="table_leg.002" >
-      <position y="0.030000" x="0.430000" z="-0.130000" />
-      <rotation qw="1.000000" qy="0.000000" qz="-0.000000" qx="0.000000" />
-      <scale y="1.000000" x="1.000000" z="1.000000" />
+      <position x="0.430000" y="0.030000" z="-0.130000" />
+      <rotation qz="-0.000000" qx="0.000000" qy="0.000000" qw="1.000000" />
+      <scale x="1.000000" y="1.000000" z="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity ghost="False" friction_y="1.0" damping_trans="0.03999999910593033" name="inner_house_table_leg" velocity_max="0.0" velocity_min="0.0" lock_rot_z="False" lock_rot_x="False" lock_trans_y="False" lock_rot_y="False" friction_z="1.0" collisionPrim="cylinder" lock_trans_x="False" inertia_tensor="0.4000000059604645" lock_trans_z="False" damping_rot="0.10000000149011612" meshFile="inner_house_table_leg.mesh" anisotropic_friction="False" mass_radius="1.0" mass="1.0" physics_type="STATIC" friction_x="1.0" actor="False" />
+      <entity ghost="False" name="inner_house_table_leg" mass_radius="1.0" collisionPrim="cylinder" physics_type="STATIC" friction_z="1.0" friction_x="1.0" friction_y="1.0" lock_trans_x="False" lock_rot_z="False" lock_rot_y="False" lock_rot_x="False" velocity_min="0.0" actor="False" mass="1.0" inertia_tensor="0.4000000059604645" velocity_max="0.0" lock_trans_y="False" damping_rot="0.10000000149011612" meshFile="inner_house_table_leg.mesh" lock_trans_z="False" damping_trans="0.03999999910593033" anisotropic_friction="False" />
     </node>
     <node name="table_leg.001" >
-      <position y="0.030000" x="0.170000" z="-0.130000" />
-      <rotation qw="1.000000" qy="0.000000" qz="-0.000000" qx="0.000000" />
-      <scale y="1.000000" x="1.000000" z="1.000000" />
+      <position x="0.170000" y="0.030000" z="-0.130000" />
+      <rotation qz="-0.000000" qx="0.000000" qy="0.000000" qw="1.000000" />
+      <scale x="1.000000" y="1.000000" z="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity ghost="False" friction_y="1.0" damping_trans="0.03999999910593033" name="inner_house_table_leg" velocity_max="0.0" velocity_min="0.0" lock_rot_z="False" lock_rot_x="False" lock_trans_y="False" lock_rot_y="False" friction_z="1.0" collisionPrim="cylinder" lock_trans_x="False" inertia_tensor="0.4000000059604645" lock_trans_z="False" damping_rot="0.10000000149011612" meshFile="inner_house_table_leg.mesh" anisotropic_friction="False" mass_radius="1.0" mass="1.0" physics_type="STATIC" friction_x="1.0" actor="False" />
+      <entity ghost="False" name="inner_house_table_leg" mass_radius="1.0" collisionPrim="cylinder" physics_type="STATIC" friction_z="1.0" friction_x="1.0" friction_y="1.0" lock_trans_x="False" lock_rot_z="False" lock_rot_y="False" lock_rot_x="False" velocity_min="0.0" actor="False" mass="1.0" inertia_tensor="0.4000000059604645" velocity_max="0.0" lock_trans_y="False" damping_rot="0.10000000149011612" meshFile="inner_house_table_leg.mesh" lock_trans_z="False" damping_trans="0.03999999910593033" anisotropic_friction="False" />
     </node>
     <node name="inner_house_link" >
-      <position y="0.000000" x="0.000000" z="-0.000000" />
-      <rotation qw="1.000000" qy="0.000000" qz="-0.000000" qx="0.000000" />
-      <scale y="1.000000" x="1.000000" z="1.000000" />
+      <position x="0.000000" y="0.000000" z="-0.000000" />
+      <rotation qz="-0.000000" qx="0.000000" qy="0.000000" qw="1.000000" />
+      <scale x="1.000000" y="1.000000" z="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity ghost="False" friction_y="1.0" damping_trans="0.03999999910593033" name="inner_house_link" velocity_max="0.0" velocity_min="0.0" lock_rot_z="False" lock_rot_x="False" meshFile="inner_house_link.mesh" damping_rot="0.10000000149011612" friction_z="1.0" lock_trans_x="False" inertia_tensor="0.4000000059604645" lock_trans_z="False" lock_trans_y="False" lock_rot_y="False" anisotropic_friction="False" mass_radius="1.0" mass="1.0" physics_type="NO_COLLISION" friction_x="1.0" actor="False" />
+      <entity ghost="False" name="inner_house_link" mass_radius="1.0" physics_type="NO_COLLISION" friction_z="1.0" damping_rot="0.10000000149011612" friction_y="1.0" lock_trans_x="False" lock_rot_z="False" lock_rot_y="False" lock_rot_x="False" velocity_min="0.0" actor="False" mass="1.0" inertia_tensor="0.4000000059604645" friction_x="1.0" velocity_max="0.0" lock_trans_y="False" meshFile="inner_house_link.mesh" lock_trans_z="False" damping_trans="0.03999999910593033" anisotropic_friction="False" />
     </node>
     <node name="physics_floor" >
-      <position y="-0.100000" x="0.000000" z="-0.000000" />
-      <rotation qw="1.000000" qy="0.000000" qz="-0.000000" qx="0.000000" />
-      <scale y="1.000000" x="1.000000" z="1.000000" />
+      <position x="0.000000" y="-0.100000" z="-0.000000" />
+      <rotation qz="-0.000000" qx="0.000000" qy="0.000000" qw="1.000000" />
+      <scale x="1.000000" y="1.000000" z="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity ghost="True" friction_y="1.0" damping_trans="0.03999999910593033" name="physics_floor" velocity_max="0.0" velocity_min="0.0" lock_rot_z="False" lock_rot_x="False" lock_trans_y="False" lock_rot_y="False" friction_z="1.0" collisionPrim="box" lock_trans_x="False" inertia_tensor="0.4000000059604645" lock_trans_z="False" damping_rot="0.10000000149011612" meshFile="physics_floor.mesh" anisotropic_friction="False" mass_radius="1.0" mass="1.0" physics_type="STATIC" friction_x="1.0" actor="False" />
+      <entity ghost="True" name="physics_floor" mass_radius="1.0" collisionPrim="box" physics_type="STATIC" friction_z="1.0" friction_x="1.0" friction_y="1.0" lock_trans_x="False" lock_rot_z="False" lock_rot_y="False" lock_rot_x="False" velocity_min="0.0" actor="False" mass="1.0" inertia_tensor="0.4000000059604645" velocity_max="0.0" lock_trans_y="False" damping_rot="0.10000000149011612" meshFile="physics_floor.mesh" lock_trans_z="False" damping_trans="0.03999999910593033" anisotropic_friction="False" />
     </node>
     <node name="physics_wall" >
-      <position y="0.000000" x="-0.000000" z="-0.000000" />
-      <rotation qw="1.000000" qy="0.000000" qz="-0.000000" qx="0.000000" />
-      <scale y="0.379500" x="0.531300" z="0.379500" />
+      <position x="-0.000000" y="0.000000" z="-0.000000" />
+      <rotation qz="-0.000000" qx="0.000000" qy="0.000000" qw="1.000000" />
+      <scale x="0.531300" y="0.379500" z="0.379500" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity ghost="True" friction_y="1.0" damping_trans="0.03999999910593033" name="physics_wall" velocity_max="0.0" velocity_min="0.0" lock_rot_z="False" lock_rot_x="False" lock_trans_y="False" lock_rot_y="False" friction_z="1.0" collisionPrim="triangle_mesh" lock_trans_x="False" inertia_tensor="0.4000000059604645" lock_trans_z="False" damping_rot="0.10000000149011612" meshFile="physics_wall.mesh" anisotropic_friction="False" mass_radius="1.0" mass="1.0" physics_type="STATIC" friction_x="1.0" actor="False" />
+      <entity ghost="True" name="physics_wall" mass_radius="1.0" collisionPrim="triangle_mesh" physics_type="STATIC" friction_z="1.0" friction_x="1.0" friction_y="1.0" lock_trans_x="False" lock_rot_z="False" lock_rot_y="False" lock_rot_x="False" velocity_min="0.0" actor="False" mass="1.0" inertia_tensor="0.4000000059604645" velocity_max="0.0" lock_trans_y="False" damping_rot="0.10000000149011612" meshFile="physics_wall.mesh" lock_trans_z="False" damping_trans="0.03999999910593033" anisotropic_friction="False" />
     </node>
     <node name="inner_house_chimney" >
-      <position y="0.000000" x="0.300000" z="-0.350000" />
-      <rotation qw="1.000000" qy="0.000000" qz="-0.000000" qx="0.000000" />
-      <scale y="1.000000" x="1.000000" z="1.000000" />
+      <position x="0.300000" y="0.000000" z="-0.350000" />
+      <rotation qz="-0.000000" qx="0.000000" qy="0.000000" qw="1.000000" />
+      <scale x="1.000000" y="1.000000" z="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity ghost="False" friction_y="1.0" damping_trans="0.03999999910593033" name="inner_house_chimney" velocity_max="0.0" velocity_min="0.0" lock_rot_z="False" lock_rot_x="False" lock_trans_y="False" lock_rot_y="False" friction_z="1.0" collisionPrim="box" lock_trans_x="False" inertia_tensor="0.4000000059604645" lock_trans_z="False" damping_rot="0.10000000149011612" meshFile="inner_house_chimney.mesh" anisotropic_friction="False" mass_radius="1.0" mass="1.0" physics_type="STATIC" friction_x="1.0" actor="False" />
+      <entity ghost="False" name="inner_house_chimney" mass_radius="1.0" collisionPrim="box" physics_type="STATIC" friction_z="1.0" friction_x="1.0" friction_y="1.0" lock_trans_x="False" lock_rot_z="False" lock_rot_y="False" lock_rot_x="False" velocity_min="0.0" actor="False" mass="1.0" inertia_tensor="0.4000000059604645" velocity_max="0.0" lock_trans_y="False" damping_rot="0.10000000149011612" meshFile="inner_house_chimney.mesh" lock_trans_z="False" damping_trans="0.03999999910593033" anisotropic_friction="False" />
     </node>
     <node name="plate.007" >
-      <position y="0.064000" x="0.060000" z="-0.360000" />
-      <rotation qw="1.000000" qy="0.000000" qz="-0.000000" qx="0.000000" />
-      <scale y="1.000000" x="1.000000" z="1.000000" />
+      <position x="0.060000" y="0.064000" z="-0.360000" />
+      <rotation qz="-0.000000" qx="0.000000" qy="0.000000" qw="1.000000" />
+      <scale x="1.000000" y="1.000000" z="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity ghost="False" friction_y="1.0" damping_trans="0.03999999910593033" name="inner_house_plate" velocity_max="0.0" velocity_min="0.0" lock_rot_z="False" lock_rot_x="False" meshFile="inner_house_plate.mesh" damping_rot="0.10000000149011612" friction_z="1.0" lock_trans_x="False" inertia_tensor="0.4000000059604645" lock_trans_z="False" lock_trans_y="False" lock_rot_y="False" anisotropic_friction="False" mass_radius="1.0" mass="1.0" physics_type="NO_COLLISION" friction_x="1.0" actor="False" />
+      <entity ghost="False" name="inner_house_plate" mass_radius="1.0" physics_type="NO_COLLISION" friction_z="1.0" damping_rot="0.10000000149011612" friction_y="1.0" lock_trans_x="False" lock_rot_z="False" lock_rot_y="False" lock_rot_x="False" velocity_min="0.0" actor="False" mass="1.0" inertia_tensor="0.4000000059604645" friction_x="1.0" velocity_max="0.0" lock_trans_y="False" meshFile="inner_house_plate.mesh" lock_trans_z="False" damping_trans="0.03999999910593033" anisotropic_friction="False" />
     </node>
     <node name="plate.006" >
-      <position y="0.061000" x="0.060000" z="-0.360000" />
-      <rotation qw="1.000000" qy="0.000000" qz="-0.000000" qx="0.000000" />
-      <scale y="1.000000" x="1.000000" z="1.000000" />
+      <position x="0.060000" y="0.061000" z="-0.360000" />
+      <rotation qz="-0.000000" qx="0.000000" qy="0.000000" qw="1.000000" />
+      <scale x="1.000000" y="1.000000" z="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity ghost="False" friction_y="1.0" damping_trans="0.03999999910593033" name="inner_house_plate" velocity_max="0.0" velocity_min="0.0" lock_rot_z="False" lock_rot_x="False" meshFile="inner_house_plate.mesh" damping_rot="0.10000000149011612" friction_z="1.0" lock_trans_x="False" inertia_tensor="0.4000000059604645" lock_trans_z="False" lock_trans_y="False" lock_rot_y="False" anisotropic_friction="False" mass_radius="1.0" mass="1.0" physics_type="NO_COLLISION" friction_x="1.0" actor="False" />
+      <entity ghost="False" name="inner_house_plate" mass_radius="1.0" physics_type="NO_COLLISION" friction_z="1.0" damping_rot="0.10000000149011612" friction_y="1.0" lock_trans_x="False" lock_rot_z="False" lock_rot_y="False" lock_rot_x="False" velocity_min="0.0" actor="False" mass="1.0" inertia_tensor="0.4000000059604645" friction_x="1.0" velocity_max="0.0" lock_trans_y="False" meshFile="inner_house_plate.mesh" lock_trans_z="False" damping_trans="0.03999999910593033" anisotropic_friction="False" />
     </node>
     <node name="flask.005" >
-      <position y="0.090000" x="-0.050000" z="-0.360000" />
-      <rotation qw="1.000000" qy="0.000000" qz="-0.000000" qx="0.000000" />
-      <scale y="1.000000" x="1.000000" z="1.000000" />
+      <position x="-0.050000" y="0.090000" z="-0.360000" />
+      <rotation qz="-0.000000" qx="0.000000" qy="0.000000" qw="1.000000" />
+      <scale x="1.000000" y="1.000000" z="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity ghost="False" friction_y="1.0" damping_trans="0.03999999910593033" name="inner_house_flask" velocity_max="0.0" velocity_min="0.0" lock_rot_z="False" lock_rot_x="False" meshFile="inner_house_flask.mesh" damping_rot="0.10000000149011612" friction_z="1.0" lock_trans_x="False" inertia_tensor="0.4000000059604645" lock_trans_z="False" lock_trans_y="False" lock_rot_y="False" anisotropic_friction="False" mass_radius="1.0" mass="1.0" physics_type="NO_COLLISION" friction_x="1.0" actor="False" />
+      <entity ghost="False" name="inner_house_flask" mass_radius="1.0" physics_type="NO_COLLISION" friction_z="1.0" damping_rot="0.10000000149011612" friction_y="1.0" lock_trans_x="False" lock_rot_z="False" lock_rot_y="False" lock_rot_x="False" velocity_min="0.0" actor="False" mass="1.0" inertia_tensor="0.4000000059604645" friction_x="1.0" velocity_max="0.0" lock_trans_y="False" meshFile="inner_house_flask.mesh" lock_trans_z="False" damping_trans="0.03999999910593033" anisotropic_friction="False" />
     </node>
     <node name="flask.004" >
-      <position y="0.090000" x="-0.030000" z="-0.360000" />
-      <rotation qw="1.000000" qy="0.000000" qz="-0.000000" qx="0.000000" />
-      <scale y="1.000000" x="1.000000" z="1.000000" />
+      <position x="-0.030000" y="0.090000" z="-0.360000" />
+      <rotation qz="-0.000000" qx="0.000000" qy="0.000000" qw="1.000000" />
+      <scale x="1.000000" y="1.000000" z="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity ghost="False" friction_y="1.0" damping_trans="0.03999999910593033" name="inner_house_flask" velocity_max="0.0" velocity_min="0.0" lock_rot_z="False" lock_rot_x="False" meshFile="inner_house_flask.mesh" damping_rot="0.10000000149011612" friction_z="1.0" lock_trans_x="False" inertia_tensor="0.4000000059604645" lock_trans_z="False" lock_trans_y="False" lock_rot_y="False" anisotropic_friction="False" mass_radius="1.0" mass="1.0" physics_type="NO_COLLISION" friction_x="1.0" actor="False" />
+      <entity ghost="False" name="inner_house_flask" mass_radius="1.0" physics_type="NO_COLLISION" friction_z="1.0" damping_rot="0.10000000149011612" friction_y="1.0" lock_trans_x="False" lock_rot_z="False" lock_rot_y="False" lock_rot_x="False" velocity_min="0.0" actor="False" mass="1.0" inertia_tensor="0.4000000059604645" friction_x="1.0" velocity_max="0.0" lock_trans_y="False" meshFile="inner_house_flask.mesh" lock_trans_z="False" damping_trans="0.03999999910593033" anisotropic_friction="False" />
     </node>
     <node name="plate.005" >
-      <position y="0.058000" x="0.060000" z="-0.360000" />
-      <rotation qw="1.000000" qy="0.000000" qz="-0.000000" qx="0.000000" />
-      <scale y="1.000000" x="1.000000" z="1.000000" />
+      <position x="0.060000" y="0.058000" z="-0.360000" />
+      <rotation qz="-0.000000" qx="0.000000" qy="0.000000" qw="1.000000" />
+      <scale x="1.000000" y="1.000000" z="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity ghost="False" friction_y="1.0" damping_trans="0.03999999910593033" name="inner_house_plate" velocity_max="0.0" velocity_min="0.0" lock_rot_z="False" lock_rot_x="False" meshFile="inner_house_plate.mesh" damping_rot="0.10000000149011612" friction_z="1.0" lock_trans_x="False" inertia_tensor="0.4000000059604645" lock_trans_z="False" lock_trans_y="False" lock_rot_y="False" anisotropic_friction="False" mass_radius="1.0" mass="1.0" physics_type="NO_COLLISION" friction_x="1.0" actor="False" />
+      <entity ghost="False" name="inner_house_plate" mass_radius="1.0" physics_type="NO_COLLISION" friction_z="1.0" damping_rot="0.10000000149011612" friction_y="1.0" lock_trans_x="False" lock_rot_z="False" lock_rot_y="False" lock_rot_x="False" velocity_min="0.0" actor="False" mass="1.0" inertia_tensor="0.4000000059604645" friction_x="1.0" velocity_max="0.0" lock_trans_y="False" meshFile="inner_house_plate.mesh" lock_trans_z="False" damping_trans="0.03999999910593033" anisotropic_friction="False" />
     </node>
     <node name="plate.004" >
-      <position y="0.055000" x="0.060000" z="-0.360000" />
-      <rotation qw="1.000000" qy="0.000000" qz="-0.000000" qx="0.000000" />
-      <scale y="1.000000" x="1.000000" z="1.000000" />
+      <position x="0.060000" y="0.055000" z="-0.360000" />
+      <rotation qz="-0.000000" qx="0.000000" qy="0.000000" qw="1.000000" />
+      <scale x="1.000000" y="1.000000" z="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity ghost="False" friction_y="1.0" damping_trans="0.03999999910593033" name="inner_house_plate" velocity_max="0.0" velocity_min="0.0" lock_rot_z="False" lock_rot_x="False" meshFile="inner_house_plate.mesh" damping_rot="0.10000000149011612" friction_z="1.0" lock_trans_x="False" inertia_tensor="0.4000000059604645" lock_trans_z="False" lock_trans_y="False" lock_rot_y="False" anisotropic_friction="False" mass_radius="1.0" mass="1.0" physics_type="NO_COLLISION" friction_x="1.0" actor="False" />
+      <entity ghost="False" name="inner_house_plate" mass_radius="1.0" physics_type="NO_COLLISION" friction_z="1.0" damping_rot="0.10000000149011612" friction_y="1.0" lock_trans_x="False" lock_rot_z="False" lock_rot_y="False" lock_rot_x="False" velocity_min="0.0" actor="False" mass="1.0" inertia_tensor="0.4000000059604645" friction_x="1.0" velocity_max="0.0" lock_trans_y="False" meshFile="inner_house_plate.mesh" lock_trans_z="False" damping_trans="0.03999999910593033" anisotropic_friction="False" />
     </node>
     <node name="plate.003" >
-      <position y="0.105000" x="-0.060000" z="-0.360000" />
-      <rotation qw="1.000000" qy="0.000000" qz="-0.000000" qx="0.000000" />
-      <scale y="1.000000" x="1.000000" z="1.000000" />
+      <position x="-0.060000" y="0.105000" z="-0.360000" />
+      <rotation qz="-0.000000" qx="0.000000" qy="0.000000" qw="1.000000" />
+      <scale x="1.000000" y="1.000000" z="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity ghost="False" friction_y="1.0" damping_trans="0.03999999910593033" name="inner_house_plate" velocity_max="0.0" velocity_min="0.0" lock_rot_z="False" lock_rot_x="False" meshFile="inner_house_plate.mesh" damping_rot="0.10000000149011612" friction_z="1.0" lock_trans_x="False" inertia_tensor="0.4000000059604645" lock_trans_z="False" lock_trans_y="False" lock_rot_y="False" anisotropic_friction="False" mass_radius="1.0" mass="1.0" physics_type="NO_COLLISION" friction_x="1.0" actor="False" />
+      <entity ghost="False" name="inner_house_plate" mass_radius="1.0" physics_type="NO_COLLISION" friction_z="1.0" damping_rot="0.10000000149011612" friction_y="1.0" lock_trans_x="False" lock_rot_z="False" lock_rot_y="False" lock_rot_x="False" velocity_min="0.0" actor="False" mass="1.0" inertia_tensor="0.4000000059604645" friction_x="1.0" velocity_max="0.0" lock_trans_y="False" meshFile="inner_house_plate.mesh" lock_trans_z="False" damping_trans="0.03999999910593033" anisotropic_friction="False" />
     </node>
     <node name="plate.002" >
-      <position y="0.105000" x="0.060000" z="-0.360000" />
-      <rotation qw="1.000000" qy="0.000000" qz="-0.000000" qx="0.000000" />
-      <scale y="1.000000" x="1.000000" z="1.000000" />
+      <position x="0.060000" y="0.105000" z="-0.360000" />
+      <rotation qz="-0.000000" qx="0.000000" qy="0.000000" qw="1.000000" />
+      <scale x="1.000000" y="1.000000" z="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity ghost="False" friction_y="1.0" damping_trans="0.03999999910593033" name="inner_house_plate" velocity_max="0.0" velocity_min="0.0" lock_rot_z="False" lock_rot_x="False" meshFile="inner_house_plate.mesh" damping_rot="0.10000000149011612" friction_z="1.0" lock_trans_x="False" inertia_tensor="0.4000000059604645" lock_trans_z="False" lock_trans_y="False" lock_rot_y="False" anisotropic_friction="False" mass_radius="1.0" mass="1.0" physics_type="NO_COLLISION" friction_x="1.0" actor="False" />
+      <entity ghost="False" name="inner_house_plate" mass_radius="1.0" physics_type="NO_COLLISION" friction_z="1.0" damping_rot="0.10000000149011612" friction_y="1.0" lock_trans_x="False" lock_rot_z="False" lock_rot_y="False" lock_rot_x="False" velocity_min="0.0" actor="False" mass="1.0" inertia_tensor="0.4000000059604645" friction_x="1.0" velocity_max="0.0" lock_trans_y="False" meshFile="inner_house_plate.mesh" lock_trans_z="False" damping_trans="0.03999999910593033" anisotropic_friction="False" />
     </node>
     <node name="plate.001" >
-      <position y="0.105000" x="0.020000" z="-0.360000" />
-      <rotation qw="1.000000" qy="0.000000" qz="-0.000000" qx="0.000000" />
-      <scale y="1.000000" x="1.000000" z="1.000000" />
+      <position x="0.020000" y="0.105000" z="-0.360000" />
+      <rotation qz="-0.000000" qx="0.000000" qy="0.000000" qw="1.000000" />
+      <scale x="1.000000" y="1.000000" z="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity ghost="False" friction_y="1.0" damping_trans="0.03999999910593033" name="inner_house_plate" velocity_max="0.0" velocity_min="0.0" lock_rot_z="False" lock_rot_x="False" meshFile="inner_house_plate.mesh" damping_rot="0.10000000149011612" friction_z="1.0" lock_trans_x="False" inertia_tensor="0.4000000059604645" lock_trans_z="False" lock_trans_y="False" lock_rot_y="False" anisotropic_friction="False" mass_radius="1.0" mass="1.0" physics_type="NO_COLLISION" friction_x="1.0" actor="False" />
+      <entity ghost="False" name="inner_house_plate" mass_radius="1.0" physics_type="NO_COLLISION" friction_z="1.0" damping_rot="0.10000000149011612" friction_y="1.0" lock_trans_x="False" lock_rot_z="False" lock_rot_y="False" lock_rot_x="False" velocity_min="0.0" actor="False" mass="1.0" inertia_tensor="0.4000000059604645" friction_x="1.0" velocity_max="0.0" lock_trans_y="False" meshFile="inner_house_plate.mesh" lock_trans_z="False" damping_trans="0.03999999910593033" anisotropic_friction="False" />
     </node>
     <node name="plate" >
-      <position y="0.105000" x="-0.020000" z="-0.360000" />
-      <rotation qw="1.000000" qy="0.000000" qz="-0.000000" qx="0.000000" />
-      <scale y="1.000000" x="1.000000" z="1.000000" />
+      <position x="-0.020000" y="0.105000" z="-0.360000" />
+      <rotation qz="-0.000000" qx="0.000000" qy="0.000000" qw="1.000000" />
+      <scale x="1.000000" y="1.000000" z="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity ghost="False" friction_y="1.0" damping_trans="0.03999999910593033" name="inner_house_plate" velocity_max="0.0" velocity_min="0.0" lock_rot_z="False" lock_rot_x="False" meshFile="inner_house_plate.mesh" damping_rot="0.10000000149011612" friction_z="1.0" lock_trans_x="False" inertia_tensor="0.4000000059604645" lock_trans_z="False" lock_trans_y="False" lock_rot_y="False" anisotropic_friction="False" mass_radius="1.0" mass="1.0" physics_type="NO_COLLISION" friction_x="1.0" actor="False" />
+      <entity ghost="False" name="inner_house_plate" mass_radius="1.0" physics_type="NO_COLLISION" friction_z="1.0" damping_rot="0.10000000149011612" friction_y="1.0" lock_trans_x="False" lock_rot_z="False" lock_rot_y="False" lock_rot_x="False" velocity_min="0.0" actor="False" mass="1.0" inertia_tensor="0.4000000059604645" friction_x="1.0" velocity_max="0.0" lock_trans_y="False" meshFile="inner_house_plate.mesh" lock_trans_z="False" damping_trans="0.03999999910593033" anisotropic_friction="False" />
     </node>
     <node name="candlestand.001" >
-      <position y="0.155000" x="-0.080000" z="-0.360000" />
-      <rotation qw="1.000000" qy="0.000000" qz="-0.000000" qx="0.000000" />
-      <scale y="1.000000" x="1.000000" z="1.000000" />
+      <position x="-0.080000" y="0.155000" z="-0.360000" />
+      <rotation qz="-0.000000" qx="0.000000" qy="0.000000" qw="1.000000" />
+      <scale x="1.000000" y="1.000000" z="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity ghost="False" friction_y="1.0" damping_trans="0.03999999910593033" name="inner_house_candlestand" velocity_max="0.0" velocity_min="0.0" lock_rot_z="False" lock_rot_x="False" meshFile="inner_house_candlestand.mesh" damping_rot="0.10000000149011612" friction_z="1.0" lock_trans_x="False" inertia_tensor="0.4000000059604645" lock_trans_z="False" lock_trans_y="False" lock_rot_y="False" anisotropic_friction="False" mass_radius="1.0" mass="1.0" physics_type="NO_COLLISION" friction_x="1.0" actor="False" />
+      <entity ghost="False" name="inner_house_candlestand" mass_radius="1.0" physics_type="NO_COLLISION" friction_z="1.0" damping_rot="0.10000000149011612" friction_y="1.0" lock_trans_x="False" lock_rot_z="False" lock_rot_y="False" lock_rot_x="False" velocity_min="0.0" actor="False" mass="1.0" inertia_tensor="0.4000000059604645" friction_x="1.0" velocity_max="0.0" lock_trans_y="False" meshFile="inner_house_candlestand.mesh" lock_trans_z="False" damping_trans="0.03999999910593033" anisotropic_friction="False" />
     </node>
     <node name="candlestand" >
-      <position y="0.155000" x="0.080000" z="-0.360000" />
-      <rotation qw="1.000000" qy="0.000000" qz="-0.000000" qx="0.000000" />
-      <scale y="1.000000" x="1.000000" z="1.000000" />
+      <position x="0.080000" y="0.155000" z="-0.360000" />
+      <rotation qz="-0.000000" qx="0.000000" qy="0.000000" qw="1.000000" />
+      <scale x="1.000000" y="1.000000" z="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity ghost="False" friction_y="1.0" damping_trans="0.03999999910593033" name="inner_house_candlestand" velocity_max="0.0" velocity_min="0.0" lock_rot_z="False" lock_rot_x="False" meshFile="inner_house_candlestand.mesh" damping_rot="0.10000000149011612" friction_z="1.0" lock_trans_x="False" inertia_tensor="0.4000000059604645" lock_trans_z="False" lock_trans_y="False" lock_rot_y="False" anisotropic_friction="False" mass_radius="1.0" mass="1.0" physics_type="NO_COLLISION" friction_x="1.0" actor="False" />
+      <entity ghost="False" name="inner_house_candlestand" mass_radius="1.0" physics_type="NO_COLLISION" friction_z="1.0" damping_rot="0.10000000149011612" friction_y="1.0" lock_trans_x="False" lock_rot_z="False" lock_rot_y="False" lock_rot_x="False" velocity_min="0.0" actor="False" mass="1.0" inertia_tensor="0.4000000059604645" friction_x="1.0" velocity_max="0.0" lock_trans_y="False" meshFile="inner_house_candlestand.mesh" lock_trans_z="False" damping_trans="0.03999999910593033" anisotropic_friction="False" />
     </node>
     <node name="flask.003" >
-      <position y="0.190000" x="-0.050000" z="-0.360000" />
-      <rotation qw="1.000000" qy="0.000000" qz="-0.000000" qx="0.000000" />
-      <scale y="1.000000" x="1.000000" z="1.000000" />
+      <position x="-0.050000" y="0.190000" z="-0.360000" />
+      <rotation qz="-0.000000" qx="0.000000" qy="0.000000" qw="1.000000" />
+      <scale x="1.000000" y="1.000000" z="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity ghost="False" friction_y="1.0" damping_trans="0.03999999910593033" name="inner_house_flask" velocity_max="0.0" velocity_min="0.0" lock_rot_z="False" lock_rot_x="False" meshFile="inner_house_flask.mesh" damping_rot="0.10000000149011612" friction_z="1.0" lock_trans_x="False" inertia_tensor="0.4000000059604645" lock_trans_z="False" lock_trans_y="False" lock_rot_y="False" anisotropic_friction="False" mass_radius="1.0" mass="1.0" physics_type="NO_COLLISION" friction_x="1.0" actor="False" />
+      <entity ghost="False" name="inner_house_flask" mass_radius="1.0" physics_type="NO_COLLISION" friction_z="1.0" damping_rot="0.10000000149011612" friction_y="1.0" lock_trans_x="False" lock_rot_z="False" lock_rot_y="False" lock_rot_x="False" velocity_min="0.0" actor="False" mass="1.0" inertia_tensor="0.4000000059604645" friction_x="1.0" velocity_max="0.0" lock_trans_y="False" meshFile="inner_house_flask.mesh" lock_trans_z="False" damping_trans="0.03999999910593033" anisotropic_friction="False" />
     </node>
     <node name="flask.002" >
-      <position y="0.190000" x="0.050000" z="-0.360000" />
-      <rotation qw="1.000000" qy="0.000000" qz="-0.000000" qx="0.000000" />
-      <scale y="1.000000" x="1.000000" z="1.000000" />
+      <position x="0.050000" y="0.190000" z="-0.360000" />
+      <rotation qz="-0.000000" qx="0.000000" qy="0.000000" qw="1.000000" />
+      <scale x="1.000000" y="1.000000" z="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity ghost="False" friction_y="1.0" damping_trans="0.03999999910593033" name="inner_house_flask" velocity_max="0.0" velocity_min="0.0" lock_rot_z="False" lock_rot_x="False" meshFile="inner_house_flask.mesh" damping_rot="0.10000000149011612" friction_z="1.0" lock_trans_x="False" inertia_tensor="0.4000000059604645" lock_trans_z="False" lock_trans_y="False" lock_rot_y="False" anisotropic_friction="False" mass_radius="1.0" mass="1.0" physics_type="NO_COLLISION" friction_x="1.0" actor="False" />
+      <entity ghost="False" name="inner_house_flask" mass_radius="1.0" physics_type="NO_COLLISION" friction_z="1.0" damping_rot="0.10000000149011612" friction_y="1.0" lock_trans_x="False" lock_rot_z="False" lock_rot_y="False" lock_rot_x="False" velocity_min="0.0" actor="False" mass="1.0" inertia_tensor="0.4000000059604645" friction_x="1.0" velocity_max="0.0" lock_trans_y="False" meshFile="inner_house_flask.mesh" lock_trans_z="False" damping_trans="0.03999999910593033" anisotropic_friction="False" />
     </node>
     <node name="flask.001" >
-      <position y="0.190000" x="0.010000" z="-0.360000" />
-      <rotation qw="1.000000" qy="0.000000" qz="-0.000000" qx="0.000000" />
-      <scale y="1.000000" x="1.000000" z="1.000000" />
+      <position x="0.010000" y="0.190000" z="-0.360000" />
+      <rotation qz="-0.000000" qx="0.000000" qy="0.000000" qw="1.000000" />
+      <scale x="1.000000" y="1.000000" z="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity ghost="False" friction_y="1.0" damping_trans="0.03999999910593033" name="inner_house_flask" velocity_max="0.0" velocity_min="0.0" lock_rot_z="False" lock_rot_x="False" meshFile="inner_house_flask.mesh" damping_rot="0.10000000149011612" friction_z="1.0" lock_trans_x="False" inertia_tensor="0.4000000059604645" lock_trans_z="False" lock_trans_y="False" lock_rot_y="False" anisotropic_friction="False" mass_radius="1.0" mass="1.0" physics_type="NO_COLLISION" friction_x="1.0" actor="False" />
+      <entity ghost="False" name="inner_house_flask" mass_radius="1.0" physics_type="NO_COLLISION" friction_z="1.0" damping_rot="0.10000000149011612" friction_y="1.0" lock_trans_x="False" lock_rot_z="False" lock_rot_y="False" lock_rot_x="False" velocity_min="0.0" actor="False" mass="1.0" inertia_tensor="0.4000000059604645" friction_x="1.0" velocity_max="0.0" lock_trans_y="False" meshFile="inner_house_flask.mesh" lock_trans_z="False" damping_trans="0.03999999910593033" anisotropic_friction="False" />
     </node>
     <node name="flask" >
-      <position y="0.190000" x="-0.010000" z="-0.360000" />
-      <rotation qw="1.000000" qy="0.000000" qz="-0.000000" qx="0.000000" />
-      <scale y="1.000000" x="1.000000" z="1.000000" />
+      <position x="-0.010000" y="0.190000" z="-0.360000" />
+      <rotation qz="-0.000000" qx="0.000000" qy="0.000000" qw="1.000000" />
+      <scale x="1.000000" y="1.000000" z="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity ghost="False" friction_y="1.0" damping_trans="0.03999999910593033" name="inner_house_flask" velocity_max="0.0" velocity_min="0.0" lock_rot_z="False" lock_rot_x="False" meshFile="inner_house_flask.mesh" damping_rot="0.10000000149011612" friction_z="1.0" lock_trans_x="False" inertia_tensor="0.4000000059604645" lock_trans_z="False" lock_trans_y="False" lock_rot_y="False" anisotropic_friction="False" mass_radius="1.0" mass="1.0" physics_type="NO_COLLISION" friction_x="1.0" actor="False" />
+      <entity ghost="False" name="inner_house_flask" mass_radius="1.0" physics_type="NO_COLLISION" friction_z="1.0" damping_rot="0.10000000149011612" friction_y="1.0" lock_trans_x="False" lock_rot_z="False" lock_rot_y="False" lock_rot_x="False" velocity_min="0.0" actor="False" mass="1.0" inertia_tensor="0.4000000059604645" friction_x="1.0" velocity_max="0.0" lock_trans_y="False" meshFile="inner_house_flask.mesh" lock_trans_z="False" damping_trans="0.03999999910593033" anisotropic_friction="False" />
     </node>
     <node name="shelf.002" >
-      <position y="0.150000" x="0.000000" z="-0.360000" />
-      <rotation qw="1.000000" qy="0.000000" qz="-0.000000" qx="0.000000" />
-      <scale y="1.000000" x="1.000000" z="1.000000" />
+      <position x="0.000000" y="0.150000" z="-0.360000" />
+      <rotation qz="-0.000000" qx="0.000000" qy="0.000000" qw="1.000000" />
+      <scale x="1.000000" y="1.000000" z="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity ghost="False" friction_y="1.0" damping_trans="0.03999999910593033" name="inner_house_shelf" velocity_max="0.0" velocity_min="0.0" lock_rot_z="False" lock_rot_x="False" lock_trans_y="False" lock_rot_y="False" friction_z="1.0" collisionPrim="box" lock_trans_x="False" inertia_tensor="0.4000000059604645" lock_trans_z="False" damping_rot="0.10000000149011612" meshFile="inner_house_shelf.mesh" anisotropic_friction="False" mass_radius="1.0" mass="1.0" physics_type="STATIC" friction_x="1.0" actor="False" />
+      <entity ghost="False" name="inner_house_shelf" mass_radius="1.0" collisionPrim="box" physics_type="STATIC" friction_z="1.0" friction_x="1.0" friction_y="1.0" lock_trans_x="False" lock_rot_z="False" lock_rot_y="False" lock_rot_x="False" velocity_min="0.0" actor="False" mass="1.0" inertia_tensor="0.4000000059604645" velocity_max="0.0" lock_trans_y="False" damping_rot="0.10000000149011612" meshFile="inner_house_shelf.mesh" lock_trans_z="False" damping_trans="0.03999999910593033" anisotropic_friction="False" />
     </node>
     <node name="shelf.001" >
-      <position y="0.100000" x="0.000000" z="-0.360000" />
-      <rotation qw="1.000000" qy="0.000000" qz="-0.000000" qx="0.000000" />
-      <scale y="1.000000" x="1.000000" z="1.000000" />
+      <position x="0.000000" y="0.100000" z="-0.360000" />
+      <rotation qz="-0.000000" qx="0.000000" qy="0.000000" qw="1.000000" />
+      <scale x="1.000000" y="1.000000" z="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity ghost="False" friction_y="1.0" damping_trans="0.03999999910593033" name="inner_house_shelf" velocity_max="0.0" velocity_min="0.0" lock_rot_z="False" lock_rot_x="False" lock_trans_y="False" lock_rot_y="False" friction_z="1.0" collisionPrim="box" lock_trans_x="False" inertia_tensor="0.4000000059604645" lock_trans_z="False" damping_rot="0.10000000149011612" meshFile="inner_house_shelf.mesh" anisotropic_friction="False" mass_radius="1.0" mass="1.0" physics_type="STATIC" friction_x="1.0" actor="False" />
+      <entity ghost="False" name="inner_house_shelf" mass_radius="1.0" collisionPrim="box" physics_type="STATIC" friction_z="1.0" friction_x="1.0" friction_y="1.0" lock_trans_x="False" lock_rot_z="False" lock_rot_y="False" lock_rot_x="False" velocity_min="0.0" actor="False" mass="1.0" inertia_tensor="0.4000000059604645" velocity_max="0.0" lock_trans_y="False" damping_rot="0.10000000149011612" meshFile="inner_house_shelf.mesh" lock_trans_z="False" damping_trans="0.03999999910593033" anisotropic_friction="False" />
     </node>
     <node name="shelf" >
-      <position y="0.050000" x="0.000000" z="-0.360000" />
-      <rotation qw="1.000000" qy="0.000000" qz="-0.000000" qx="0.000000" />
-      <scale y="1.000000" x="1.000000" z="1.000000" />
+      <position x="0.000000" y="0.050000" z="-0.360000" />
+      <rotation qz="-0.000000" qx="0.000000" qy="0.000000" qw="1.000000" />
+      <scale x="1.000000" y="1.000000" z="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity ghost="False" friction_y="1.0" damping_trans="0.03999999910593033" name="inner_house_shelf" velocity_max="0.0" velocity_min="0.0" lock_rot_z="False" lock_rot_x="False" lock_trans_y="False" lock_rot_y="False" friction_z="1.0" collisionPrim="box" lock_trans_x="False" inertia_tensor="0.4000000059604645" lock_trans_z="False" damping_rot="0.10000000149011612" meshFile="inner_house_shelf.mesh" anisotropic_friction="False" mass_radius="1.0" mass="1.0" physics_type="STATIC" friction_x="1.0" actor="False" />
+      <entity ghost="False" name="inner_house_shelf" mass_radius="1.0" collisionPrim="box" physics_type="STATIC" friction_z="1.0" friction_x="1.0" friction_y="1.0" lock_trans_x="False" lock_rot_z="False" lock_rot_y="False" lock_rot_x="False" velocity_min="0.0" actor="False" mass="1.0" inertia_tensor="0.4000000059604645" velocity_max="0.0" lock_trans_y="False" damping_rot="0.10000000149011612" meshFile="inner_house_shelf.mesh" lock_trans_z="False" damping_trans="0.03999999910593033" anisotropic_friction="False" />
     </node>
     <node name="bed" >
-      <position y="0.000000" x="-0.310000" z="-0.230000" />
-      <rotation qw="1.000000" qy="0.000000" qz="-0.000000" qx="0.000000" />
-      <scale y="1.000000" x="1.000000" z="1.000000" />
+      <position x="-0.310000" y="0.000000" z="-0.230000" />
+      <rotation qz="-0.000000" qx="0.000000" qy="0.000000" qw="1.000000" />
+      <scale x="1.000000" y="1.000000" z="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity ghost="False" friction_y="1.0" damping_trans="0.03999999910593033" name="inner_house_bed" velocity_max="0.0" velocity_min="0.0" lock_rot_z="False" lock_rot_x="False" lock_trans_y="False" lock_rot_y="False" friction_z="1.0" collisionPrim="triangle_mesh" lock_trans_x="False" inertia_tensor="0.4000000059604645" lock_trans_z="False" damping_rot="0.10000000149011612" meshFile="inner_house_bed.mesh" anisotropic_friction="False" mass_radius="1.0" mass="1.0" physics_type="STATIC" friction_x="1.0" actor="False" />
+      <entity ghost="False" name="inner_house_bed" mass_radius="1.0" collisionPrim="triangle_mesh" physics_type="STATIC" friction_z="1.0" friction_x="1.0" friction_y="1.0" lock_trans_x="False" lock_rot_z="False" lock_rot_y="False" lock_rot_x="False" velocity_min="0.0" actor="False" mass="1.0" inertia_tensor="0.4000000059604645" velocity_max="0.0" lock_trans_y="False" damping_rot="0.10000000149011612" meshFile="inner_house_bed.mesh" lock_trans_z="False" damping_trans="0.03999999910593033" anisotropic_friction="False" />
     </node>
     <node name="inner_house_entrance" >
-      <position y="0.000000" x="-0.000000" z="0.370000" />
-      <rotation qw="-0.000000" qy="1.000000" qz="-0.000000" qx="0.000000" />
-      <scale y="1.000000" x="1.000000" z="1.000000" />
+      <position x="-0.000000" y="0.000000" z="0.370000" />
+      <rotation qz="-0.000000" qx="0.000000" qy="1.000000" qw="-0.000000" />
+      <scale x="1.000000" y="1.000000" z="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity ghost="False" friction_y="1.0" damping_trans="0.03999999910593033" name="inner_house_entrance" velocity_max="0.0" velocity_min="0.0" lock_rot_z="False" lock_rot_x="False" lock_trans_y="False" lock_rot_y="False" friction_z="1.0" collisionPrim="triangle_mesh" lock_trans_x="False" inertia_tensor="0.4000000059604645" lock_trans_z="False" damping_rot="0.10000000149011612" meshFile="inner_house_entrance.mesh" anisotropic_friction="False" mass_radius="1.0" mass="1.0" physics_type="STATIC" friction_x="1.0" actor="False" />
+      <entity ghost="False" name="inner_house_entrance" mass_radius="1.0" collisionPrim="triangle_mesh" physics_type="STATIC" friction_z="1.0" friction_x="1.0" friction_y="1.0" lock_trans_x="False" lock_rot_z="False" lock_rot_y="False" lock_rot_x="False" velocity_min="0.0" actor="False" mass="1.0" inertia_tensor="0.4000000059604645" velocity_max="0.0" lock_trans_y="False" damping_rot="0.10000000149011612" meshFile="inner_house_entrance.mesh" lock_trans_z="False" damping_trans="0.03999999910593033" anisotropic_friction="False" />
     </node>
     <node name="table_leg" >
-      <position y="0.030000" x="0.170000" z="0.030000" />
-      <rotation qw="1.000000" qy="0.000000" qz="-0.000000" qx="0.000000" />
-      <scale y="1.000000" x="1.000000" z="1.000000" />
+      <position x="0.170000" y="0.030000" z="0.030000" />
+      <rotation qz="-0.000000" qx="0.000000" qy="0.000000" qw="1.000000" />
+      <scale x="1.000000" y="1.000000" z="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity ghost="False" friction_y="1.0" damping_trans="0.03999999910593033" name="inner_house_table_leg" velocity_max="0.0" velocity_min="0.0" lock_rot_z="False" lock_rot_x="False" lock_trans_y="False" lock_rot_y="False" friction_z="1.0" collisionPrim="cylinder" lock_trans_x="False" inertia_tensor="0.4000000059604645" lock_trans_z="False" damping_rot="0.10000000149011612" meshFile="inner_house_table_leg.mesh" anisotropic_friction="False" mass_radius="1.0" mass="1.0" physics_type="STATIC" friction_x="1.0" actor="False" />
+      <entity ghost="False" name="inner_house_table_leg" mass_radius="1.0" collisionPrim="cylinder" physics_type="STATIC" friction_z="1.0" friction_x="1.0" friction_y="1.0" lock_trans_x="False" lock_rot_z="False" lock_rot_y="False" lock_rot_x="False" velocity_min="0.0" actor="False" mass="1.0" inertia_tensor="0.4000000059604645" velocity_max="0.0" lock_trans_y="False" damping_rot="0.10000000149011612" meshFile="inner_house_table_leg.mesh" lock_trans_z="False" damping_trans="0.03999999910593033" anisotropic_friction="False" />
     </node>
     <node name="small_table" >
-      <position y="0.000000" x="-0.250000" z="0.150000" />
-      <rotation qw="1.000000" qy="0.000000" qz="-0.000000" qx="0.000000" />
-      <scale y="1.000000" x="1.000000" z="1.000000" />
+      <position x="-0.250000" y="0.000000" z="0.150000" />
+      <rotation qz="-0.000000" qx="0.000000" qy="0.000000" qw="1.000000" />
+      <scale x="1.000000" y="1.000000" z="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity ghost="False" friction_y="1.0" damping_trans="0.03999999910593033" name="inner_house_small_table" velocity_max="0.0" velocity_min="0.0" lock_rot_z="False" lock_rot_x="False" lock_trans_y="False" lock_rot_y="False" friction_z="1.0" collisionPrim="box" lock_trans_x="False" inertia_tensor="0.4000000059604645" lock_trans_z="False" damping_rot="0.10000000149011612" meshFile="inner_house_small_table.mesh" anisotropic_friction="False" mass_radius="1.0" mass="1.0" physics_type="STATIC" friction_x="1.0" actor="False" />
+      <entity ghost="False" name="inner_house_small_table" mass_radius="1.0" collisionPrim="box" physics_type="STATIC" friction_z="1.0" friction_x="1.0" friction_y="1.0" lock_trans_x="False" lock_rot_z="False" lock_rot_y="False" lock_rot_x="False" velocity_min="0.0" actor="False" mass="1.0" inertia_tensor="0.4000000059604645" velocity_max="0.0" lock_trans_y="False" damping_rot="0.10000000149011612" meshFile="inner_house_small_table.mesh" lock_trans_z="False" damping_trans="0.03999999910593033" anisotropic_friction="False" />
     </node>
     <node name="big_table" >
-      <position y="0.000000" x="0.300000" z="-0.050000" />
-      <rotation qw="1.000000" qy="0.000000" qz="-0.000000" qx="0.000000" />
-      <scale y="1.000000" x="1.000000" z="1.000000" />
+      <position x="0.300000" y="0.000000" z="-0.050000" />
+      <rotation qz="-0.000000" qx="0.000000" qy="0.000000" qw="1.000000" />
+      <scale x="1.000000" y="1.000000" z="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity ghost="False" friction_y="1.0" damping_trans="0.03999999910593033" name="inner_house_big_table" velocity_max="0.0" velocity_min="0.0" lock_rot_z="False" lock_rot_x="False" lock_trans_y="False" lock_rot_y="False" friction_z="1.0" collisionPrim="box" lock_trans_x="False" inertia_tensor="0.4000000059604645" lock_trans_z="False" damping_rot="0.10000000149011612" meshFile="inner_house_big_table.mesh" anisotropic_friction="False" mass_radius="1.0" mass="1.0" physics_type="STATIC" friction_x="1.0" actor="False" />
+      <entity ghost="False" name="inner_house_big_table" mass_radius="1.0" collisionPrim="box" physics_type="STATIC" friction_z="1.0" friction_x="1.0" friction_y="1.0" lock_trans_x="False" lock_rot_z="False" lock_rot_y="False" lock_rot_x="False" velocity_min="0.0" actor="False" mass="1.0" inertia_tensor="0.4000000059604645" velocity_max="0.0" lock_trans_y="False" damping_rot="0.10000000149011612" meshFile="inner_house_big_table.mesh" lock_trans_z="False" damping_trans="0.03999999910593033" anisotropic_friction="False" />
     </node>
     <node name="simple_single_char.001" >
-      <position y="0.000000" x="0.300000" z="-0.200000" />
-      <rotation qw="1.000000" qy="0.000000" qz="-0.000000" qx="0.000000" />
-      <scale y="1.000000" x="1.000000" z="1.000000" />
+      <position x="0.300000" y="0.000000" z="-0.200000" />
+      <rotation qz="-0.000000" qx="0.000000" qy="0.000000" qw="1.000000" />
+      <scale x="1.000000" y="1.000000" z="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity ghost="False" friction_y="1.0" damping_trans="0.03999999910593033" name="inner_house_simple_single_chair" velocity_max="0.0" velocity_min="0.0" lock_rot_z="False" lock_rot_x="False" lock_trans_y="False" lock_rot_y="False" friction_z="1.0" collisionPrim="box" lock_trans_x="False" inertia_tensor="0.4000000059604645" lock_trans_z="False" damping_rot="0.10000000149011612" meshFile="inner_house_simple_single_chair.mesh" anisotropic_friction="False" mass_radius="1.0" mass="1.0" physics_type="STATIC" friction_x="1.0" actor="False" />
+      <entity ghost="False" name="inner_house_simple_single_chair" mass_radius="1.0" collisionPrim="box" physics_type="STATIC" friction_z="1.0" friction_x="1.0" friction_y="1.0" lock_trans_x="False" lock_rot_z="False" lock_rot_y="False" lock_rot_x="False" velocity_min="0.0" actor="False" mass="1.0" inertia_tensor="0.4000000059604645" velocity_max="0.0" lock_trans_y="False" damping_rot="0.10000000149011612" meshFile="inner_house_simple_single_chair.mesh" lock_trans_z="False" damping_trans="0.03999999910593033" anisotropic_friction="False" />
     </node>
     <node name="simple_single_char" >
-      <position y="0.000000" x="0.300000" z="0.100000" />
-      <rotation qw="1.000000" qy="0.000000" qz="-0.000000" qx="0.000000" />
-      <scale y="1.000000" x="1.000000" z="1.000000" />
+      <position x="0.300000" y="0.000000" z="0.100000" />
+      <rotation qz="-0.000000" qx="0.000000" qy="0.000000" qw="1.000000" />
+      <scale x="1.000000" y="1.000000" z="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity ghost="False" friction_y="1.0" damping_trans="0.03999999910593033" name="inner_house_simple_single_chair" velocity_max="0.0" velocity_min="0.0" lock_rot_z="False" lock_rot_x="False" lock_trans_y="False" lock_rot_y="False" friction_z="1.0" collisionPrim="box" lock_trans_x="False" inertia_tensor="0.4000000059604645" lock_trans_z="False" damping_rot="0.10000000149011612" meshFile="inner_house_simple_single_chair.mesh" anisotropic_friction="False" mass_radius="1.0" mass="1.0" physics_type="STATIC" friction_x="1.0" actor="False" />
+      <entity ghost="False" name="inner_house_simple_single_chair" mass_radius="1.0" collisionPrim="box" physics_type="STATIC" friction_z="1.0" friction_x="1.0" friction_y="1.0" lock_trans_x="False" lock_rot_z="False" lock_rot_y="False" lock_rot_x="False" velocity_min="0.0" actor="False" mass="1.0" inertia_tensor="0.4000000059604645" velocity_max="0.0" lock_trans_y="False" damping_rot="0.10000000149011612" meshFile="inner_house_simple_single_chair.mesh" lock_trans_z="False" damping_trans="0.03999999910593033" anisotropic_friction="False" />
     </node>
     <node name="house_inner_window.003" >
-      <position y="0.070000" x="-0.255000" z="0.370000" />
-      <rotation qw="-0.000000" qy="1.000000" qz="0.000000" qx="-0.000000" />
-      <scale y="1.000000" x="1.000000" z="1.000000" />
+      <position x="-0.255000" y="0.070000" z="0.370000" />
+      <rotation qz="0.000000" qx="-0.000000" qy="1.000000" qw="-0.000000" />
+      <scale x="1.000000" y="1.000000" z="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity ghost="False" friction_y="1.0" damping_trans="0.03999999910593033" name="inner_house_window" velocity_max="0.0" velocity_min="0.0" lock_rot_z="False" lock_rot_x="False" lock_trans_y="False" lock_rot_y="False" friction_z="1.0" collisionPrim="convex_hull" lock_trans_x="False" inertia_tensor="0.4000000059604645" lock_trans_z="False" damping_rot="0.10000000149011612" meshFile="inner_house_window.mesh" anisotropic_friction="False" mass_radius="1.0" mass="1.0" physics_type="STATIC" friction_x="1.0" actor="False" />
+      <entity ghost="False" name="inner_house_window" mass_radius="1.0" collisionPrim="convex_hull" physics_type="STATIC" friction_z="1.0" friction_x="1.0" friction_y="1.0" lock_trans_x="False" lock_rot_z="False" lock_rot_y="False" lock_rot_x="False" velocity_min="0.0" actor="False" mass="1.0" inertia_tensor="0.4000000059604645" velocity_max="0.0" lock_trans_y="False" damping_rot="0.10000000149011612" meshFile="inner_house_window.mesh" lock_trans_z="False" damping_trans="0.03999999910593033" anisotropic_friction="False" />
     </node>
     <node name="house_inner_window.002" >
-      <position y="0.070000" x="0.265000" z="0.370000" />
-      <rotation qw="-0.000000" qy="1.000000" qz="0.000000" qx="-0.000000" />
-      <scale y="1.000000" x="1.000000" z="1.000000" />
+      <position x="0.265000" y="0.070000" z="0.370000" />
+      <rotation qz="0.000000" qx="-0.000000" qy="1.000000" qw="-0.000000" />
+      <scale x="1.000000" y="1.000000" z="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity ghost="False" friction_y="1.0" damping_trans="0.03999999910593033" name="inner_house_window" velocity_max="0.0" velocity_min="0.0" lock_rot_z="False" lock_rot_x="False" lock_trans_y="False" lock_rot_y="False" friction_z="1.0" collisionPrim="convex_hull" lock_trans_x="False" inertia_tensor="0.4000000059604645" lock_trans_z="False" damping_rot="0.10000000149011612" meshFile="inner_house_window.mesh" anisotropic_friction="False" mass_radius="1.0" mass="1.0" physics_type="STATIC" friction_x="1.0" actor="False" />
+      <entity ghost="False" name="inner_house_window" mass_radius="1.0" collisionPrim="convex_hull" physics_type="STATIC" friction_z="1.0" friction_x="1.0" friction_y="1.0" lock_trans_x="False" lock_rot_z="False" lock_rot_y="False" lock_rot_x="False" velocity_min="0.0" actor="False" mass="1.0" inertia_tensor="0.4000000059604645" velocity_max="0.0" lock_trans_y="False" damping_rot="0.10000000149011612" meshFile="inner_house_window.mesh" lock_trans_z="False" damping_trans="0.03999999910593033" anisotropic_friction="False" />
     </node>
     <node name="house_inner_window.001" >
-      <position y="0.070000" x="0.525000" z="-0.000000" />
-      <rotation qw="0.707107" qy="-0.707107" qz="-0.000000" qx="-0.000000" />
-      <scale y="1.000000" x="1.000000" z="1.000000" />
+      <position x="0.525000" y="0.070000" z="-0.000000" />
+      <rotation qz="-0.000000" qx="-0.000000" qy="-0.707107" qw="0.707107" />
+      <scale x="1.000000" y="1.000000" z="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity ghost="False" friction_y="1.0" damping_trans="0.03999999910593033" name="inner_house_window" velocity_max="0.0" velocity_min="0.0" lock_rot_z="False" lock_rot_x="False" lock_trans_y="False" lock_rot_y="False" friction_z="1.0" collisionPrim="convex_hull" lock_trans_x="False" inertia_tensor="0.4000000059604645" lock_trans_z="False" damping_rot="0.10000000149011612" meshFile="inner_house_window.mesh" anisotropic_friction="False" mass_radius="1.0" mass="1.0" physics_type="STATIC" friction_x="1.0" actor="False" />
+      <entity ghost="False" name="inner_house_window" mass_radius="1.0" collisionPrim="convex_hull" physics_type="STATIC" friction_z="1.0" friction_x="1.0" friction_y="1.0" lock_trans_x="False" lock_rot_z="False" lock_rot_y="False" lock_rot_x="False" velocity_min="0.0" actor="False" mass="1.0" inertia_tensor="0.4000000059604645" velocity_max="0.0" lock_trans_y="False" damping_rot="0.10000000149011612" meshFile="inner_house_window.mesh" lock_trans_z="False" damping_trans="0.03999999910593033" anisotropic_friction="False" />
     </node>
     <node name="house_inner_window" >
-      <position y="0.070000" x="-0.525000" z="-0.000000" />
-      <rotation qw="0.707107" qy="0.707107" qz="-0.000000" qx="-0.000000" />
-      <scale y="1.000000" x="1.000000" z="1.000000" />
+      <position x="-0.525000" y="0.070000" z="-0.000000" />
+      <rotation qz="-0.000000" qx="-0.000000" qy="0.707107" qw="0.707107" />
+      <scale x="1.000000" y="1.000000" z="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity ghost="False" friction_y="1.0" damping_trans="0.03999999910593033" name="inner_house_window" velocity_max="0.0" velocity_min="0.0" lock_rot_z="False" lock_rot_x="False" lock_trans_y="False" lock_rot_y="False" friction_z="1.0" collisionPrim="convex_hull" lock_trans_x="False" inertia_tensor="0.4000000059604645" lock_trans_z="False" damping_rot="0.10000000149011612" meshFile="inner_house_window.mesh" anisotropic_friction="False" mass_radius="1.0" mass="1.0" physics_type="STATIC" friction_x="1.0" actor="False" />
+      <entity ghost="False" name="inner_house_window" mass_radius="1.0" collisionPrim="convex_hull" physics_type="STATIC" friction_z="1.0" friction_x="1.0" friction_y="1.0" lock_trans_x="False" lock_rot_z="False" lock_rot_y="False" lock_rot_x="False" velocity_min="0.0" actor="False" mass="1.0" inertia_tensor="0.4000000059604645" velocity_max="0.0" lock_trans_y="False" damping_rot="0.10000000149011612" meshFile="inner_house_window.mesh" lock_trans_z="False" damping_trans="0.03999999910593033" anisotropic_friction="False" />
     </node>
     <node name="vase_plate.002" >
-      <position y="0.000000" x="-0.470000" z="-0.120000" />
-      <rotation qw="1.000000" qy="0.000000" qz="-0.000000" qx="0.000000" />
-      <scale y="1.000000" x="1.000000" z="1.000000" />
+      <position x="-0.470000" y="0.000000" z="-0.120000" />
+      <rotation qz="-0.000000" qx="0.000000" qy="0.000000" qw="1.000000" />
+      <scale x="1.000000" y="1.000000" z="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity ghost="False" friction_y="1.0" damping_trans="0.03999999910593033" name="vase_plate" velocity_max="0.0" velocity_min="0.0" lock_rot_z="False" lock_rot_x="False" lock_trans_y="False" lock_rot_y="False" friction_z="1.0" collisionPrim="convex_hull" lock_trans_x="False" inertia_tensor="0.4000000059604645" lock_trans_z="False" damping_rot="0.10000000149011612" meshFile="vase_plate.mesh" anisotropic_friction="False" mass_radius="1.0" mass="1.0" physics_type="STATIC" friction_x="1.0" actor="False" />
+      <entity ghost="False" name="vase_plate" mass_radius="1.0" collisionPrim="convex_hull" physics_type="STATIC" friction_z="1.0" friction_x="1.0" friction_y="1.0" lock_trans_x="False" lock_rot_z="False" lock_rot_y="False" lock_rot_x="False" velocity_min="0.0" actor="False" mass="1.0" inertia_tensor="0.4000000059604645" velocity_max="0.0" lock_trans_y="False" damping_rot="0.10000000149011612" meshFile="vase_plate.mesh" lock_trans_z="False" damping_trans="0.03999999910593033" anisotropic_friction="False" />
     </node>
     <node name="vase_plate.001" >
-      <position y="0.000000" x="-0.470000" z="-0.220000" />
-      <rotation qw="1.000000" qy="0.000000" qz="-0.000000" qx="0.000000" />
-      <scale y="1.000000" x="1.000000" z="1.000000" />
+      <position x="-0.470000" y="0.000000" z="-0.220000" />
+      <rotation qz="-0.000000" qx="0.000000" qy="0.000000" qw="1.000000" />
+      <scale x="1.000000" y="1.000000" z="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity ghost="False" friction_y="1.0" damping_trans="0.03999999910593033" name="vase_plate" velocity_max="0.0" velocity_min="0.0" lock_rot_z="False" lock_rot_x="False" lock_trans_y="False" lock_rot_y="False" friction_z="1.0" collisionPrim="convex_hull" lock_trans_x="False" inertia_tensor="0.4000000059604645" lock_trans_z="False" damping_rot="0.10000000149011612" meshFile="vase_plate.mesh" anisotropic_friction="False" mass_radius="1.0" mass="1.0" physics_type="STATIC" friction_x="1.0" actor="False" />
+      <entity ghost="False" name="vase_plate" mass_radius="1.0" collisionPrim="convex_hull" physics_type="STATIC" friction_z="1.0" friction_x="1.0" friction_y="1.0" lock_trans_x="False" lock_rot_z="False" lock_rot_y="False" lock_rot_x="False" velocity_min="0.0" actor="False" mass="1.0" inertia_tensor="0.4000000059604645" velocity_max="0.0" lock_trans_y="False" damping_rot="0.10000000149011612" meshFile="vase_plate.mesh" lock_trans_z="False" damping_trans="0.03999999910593033" anisotropic_friction="False" />
     </node>
     <node name="vase_plate" >
-      <position y="0.000000" x="-0.470000" z="-0.320000" />
-      <rotation qw="1.000000" qy="0.000000" qz="-0.000000" qx="0.000000" />
-      <scale y="1.000000" x="1.000000" z="1.000000" />
+      <position x="-0.470000" y="0.000000" z="-0.320000" />
+      <rotation qz="-0.000000" qx="0.000000" qy="0.000000" qw="1.000000" />
+      <scale x="1.000000" y="1.000000" z="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity ghost="False" friction_y="1.0" damping_trans="0.03999999910593033" name="vase_plate" velocity_max="0.0" velocity_min="0.0" lock_rot_z="False" lock_rot_x="False" lock_trans_y="False" lock_rot_y="False" friction_z="1.0" collisionPrim="convex_hull" lock_trans_x="False" inertia_tensor="0.4000000059604645" lock_trans_z="False" damping_rot="0.10000000149011612" meshFile="vase_plate.mesh" anisotropic_friction="False" mass_radius="1.0" mass="1.0" physics_type="STATIC" friction_x="1.0" actor="False" />
+      <entity ghost="False" name="vase_plate" mass_radius="1.0" collisionPrim="convex_hull" physics_type="STATIC" friction_z="1.0" friction_x="1.0" friction_y="1.0" lock_trans_x="False" lock_rot_z="False" lock_rot_y="False" lock_rot_x="False" velocity_min="0.0" actor="False" mass="1.0" inertia_tensor="0.4000000059604645" velocity_max="0.0" lock_trans_y="False" damping_rot="0.10000000149011612" meshFile="vase_plate.mesh" lock_trans_z="False" damping_trans="0.03999999910593033" anisotropic_friction="False" />
     </node>
     <node name="vision_plane" >
-      <position y="0.200000" x="0.000000" z="-0.000000" />
-      <rotation qw="1.000000" qy="0.000000" qz="-0.000000" qx="0.000000" />
-      <scale y="1.000000" x="1.000000" z="1.000000" />
+      <position x="0.000000" y="0.200000" z="-0.000000" />
+      <rotation qz="-0.000000" qx="0.000000" qy="0.000000" qw="1.000000" />
+      <scale x="1.000000" y="1.000000" z="1.000000" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity ghost="False" friction_y="1.0" damping_trans="0.03999999910593033" name="vision_plane" velocity_max="0.0" velocity_min="0.0" lock_rot_z="False" lock_rot_x="False" meshFile="vision_plane.mesh" damping_rot="0.10000000149011612" friction_z="1.0" lock_trans_x="False" inertia_tensor="0.4000000059604645" lock_trans_z="False" lock_trans_y="False" lock_rot_y="False" anisotropic_friction="False" mass_radius="1.0" mass="1.0" physics_type="NO_COLLISION" friction_x="1.0" actor="False" />
+      <entity ghost="False" name="vision_plane" mass_radius="1.0" physics_type="NO_COLLISION" friction_z="1.0" damping_rot="0.10000000149011612" friction_y="1.0" lock_trans_x="False" lock_rot_z="False" lock_rot_y="False" lock_rot_x="False" velocity_min="0.0" actor="False" mass="1.0" inertia_tensor="0.4000000059604645" friction_x="1.0" velocity_max="0.0" lock_trans_y="False" meshFile="vision_plane.mesh" lock_trans_z="False" damping_trans="0.03999999910593033" anisotropic_friction="False" />
     </node>
     <node name="lamp_chest" >
-      <position y="0.000000" x="0.470000" z="0.210000" />
-      <rotation qw="1.000000" qy="0.000000" qz="-0.000000" qx="0.000000" />
-      <scale y="1.000000" x="1.000000" z="1.000000" />
-      <user_data type="str" value="rupee_blue" name="inner_object" />
+      <position x="0.470000" y="0.000000" z="0.210000" />
+      <rotation qz="-0.000000" qx="0.000000" qy="0.000000" qw="1.000000" />
+      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <user_data name="inner_object" type="str" value="tool_lamp" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity ghost="False" friction_y="1.0" damping_trans="0.03999999910593033" name="small_chest_bottom" velocity_max="0.0" velocity_min="0.0" lock_rot_z="False" lock_rot_x="False" lock_trans_y="False" lock_rot_y="False" friction_z="1.0" collisionPrim="triangle_mesh" lock_trans_x="False" inertia_tensor="0.4000000059604645" lock_trans_z="False" damping_rot="0.10000000149011612" meshFile="small_chest_bottom.mesh" anisotropic_friction="False" mass_radius="1.0" mass="1.0" physics_type="STATIC" friction_x="1.0" actor="False" />
+      <entity ghost="False" name="small_chest_bottom" mass_radius="1.0" collisionPrim="triangle_mesh" physics_type="STATIC" friction_z="1.0" friction_x="1.0" friction_y="1.0" lock_trans_x="False" lock_rot_z="False" lock_rot_y="False" lock_rot_x="False" velocity_min="0.0" actor="False" mass="1.0" inertia_tensor="0.4000000059604645" velocity_max="0.0" lock_trans_y="False" damping_rot="0.10000000149011612" meshFile="small_chest_bottom.mesh" lock_trans_z="False" damping_trans="0.03999999910593033" anisotropic_friction="False" />
     </node>
     <node name="Vase" >
-      <position y="0.000000" x="-0.470000" z="-0.120000" />
-      <rotation qw="1.000000" qy="0.000000" qz="-0.000000" qx="0.000000" />
-      <scale y="1.000000" x="1.000000" z="1.000000" />
-      <user_data type="str" value="heart" name="inner_object" />
+      <position x="-0.470000" y="0.000000" z="-0.120000" />
+      <rotation qz="-0.000000" qx="0.000000" qy="0.000000" qw="1.000000" />
+      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <user_data name="inner_object" type="str" value="heart" />
       <game >
         <sensors />
         <actuators />
       </game>
-      <entity ghost="False" friction_y="1.0" damping_trans="0.03999999910593033" name="vase" velocity_max="0.0" velocity_min="0.0" lock_rot_z="False" lock_rot_x="False" lock_trans_y="False" lock_rot_y="False" friction_z="1.0" collisionPrim="sphere" lock_trans_x="False" inertia_tensor="0.4000000059604645" lock_trans_z="False" damping_rot="0.10000000149011612" meshFile="vase.mesh" anisotropic_friction="False" mass_radius="1.0" mass="1.0" physics_type="STATIC" friction_x="1.0" actor="False" >
-        <user_data type="str" value="vase" name="type" />
+      <entity ghost="False" name="vase" mass_radius="1.0" collisionPrim="sphere" physics_type="STATIC" friction_z="1.0" friction_x="1.0" friction_y="1.0" lock_trans_x="False" lock_rot_z="False" lock_rot_y="False" lock_rot_x="False" velocity_min="0.0" actor="False" mass="1.0" inertia_tensor="0.4000000059604645" velocity_max="0.0" lock_trans_y="False" damping_rot="0.10000000149011612" meshFile="vase.mesh" lock_trans_z="False" damping_trans="0.03999999910593033" anisotropic_friction="False" >
+        <user_data name="type" type="str" value="vase" />
       </entity>
     </node>
   </nodes>
-  <externals />
+  <externals >
+    <item type="material" >
+      <file name="/home/christoph/Documents/Projects/Zelda/maps/Atlases/LightWorld/inner_house_link/VaseSide.material" />
+    </item>
+    <item type="material" >
+      <file name="/home/christoph/Documents/Projects/Zelda/maps/Atlases/LightWorld/inner_house_link/inner_house.material" />
+    </item>
+    <item type="material" >
+      <file name="/home/christoph/Documents/Projects/Zelda/maps/Atlases/LightWorld/inner_house_link/Physics_Only.material" />
+    </item>
+    <item type="material" >
+      <file name="/home/christoph/Documents/Projects/Zelda/maps/Atlases/LightWorld/inner_house_link/chest.material" />
+    </item>
+  </externals>
   <environment >
-    <colourBackground g="0.05087608844041824" b="0.05087608844041824" r="0.05087608844041824" />
-    <colourAmbient g="0.0" b="0.0" r="0.0" />
-    <colourDiffuse g="0.05087608844041824" b="0.05087608844041824" r="0.05087608844041824" />
+    <colourAmbient r="0.0" b="0.0" g="0.0" />
+    <colourBackground r="0.05087608844041824" b="0.05087608844041824" g="0.05087608844041824" />
+    <colourDiffuse r="0.05087608844041824" b="0.05087608844041824" g="0.05087608844041824" />
   </environment>
 </scene>

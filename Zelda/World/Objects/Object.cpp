@@ -151,19 +151,12 @@ void CObject::createPhysics() {
         btTransform(btQuaternion::getIdentity(), vCollisionShapeOffset));
   } else {
     btQuaternion rotationOffset(btQuaternion::getIdentity());
-    btVector3 objectCenter(0, 1, 0);
-    rotationOffset =
-        BtOgre::Convert::toBullet(
-            Ogre::Quaternion(Ogre::Degree(45), Ogre::Vector3::UNIT_Z));
     pMotionState
         = new BtOgre::RigidBodyState(m_pSceneNode,
                                      btTransform(initRotation,
                                                  initPosition),
                                      btTransform(btQuaternion::getIdentity(),
-                                                 vCollisionShapeOffset
-                                                 -objectCenter),
-                                     btTransform(rotationOffset,
-                                                 objectCenter));
+                                                 vCollisionShapeOffset));
   }
   btRigidBody *pRigidBody = new btRigidBody(fMass,
                                             pMotionState,

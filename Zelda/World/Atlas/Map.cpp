@@ -287,7 +287,7 @@ bool CMap::frameEnded(const Ogre::FrameEvent& evt) {
 void CMap::handleMessage(const CMessage &message) {
   if (message.getType() == MSG_ENTITY_STATE_CHANGED) {
     const CMessageEntityStateChanged &mesc(dynamic_cast<const CMessageEntityStateChanged&>(message));
-    CObject *pObject(dynamic_cast<CObject*>(&mesc.getEntity()));
+    CObject *pObject(dynamic_cast<CObject*>(mesc.getEntity()));
     if (!pObject) {return;}
     if (mesc.getOldState() == EST_NORMAL) {
       // only change request if object was in normal state before

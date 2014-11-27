@@ -127,8 +127,13 @@ void CWorldEntity::setScale(const SPATIAL_VECTOR &vScale) {
 const Ogre::Quaternion &CWorldEntity::getOrientation() const {
   return m_pSceneNode->getOrientation();
 }
+
 void CWorldEntity::setOrientation(const Ogre::Quaternion &quat) {
   m_pSceneNode->setOrientation(quat);
+}
+
+void CWorldEntity::rotate(const Ogre::Quaternion &quat) {
+  m_pSceneNode->rotate(quat);
 }
 
 Ogre::SceneNode *CWorldEntity::getSceneNode() const {

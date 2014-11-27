@@ -424,7 +424,7 @@ void CEntity::moveToTarget(const SPATIAL_VECTOR &vPosition, const Ogre::Quaterni
 }
 
 void CEntity::changeState(EEntityStateTypes eState) {
-  CMessageHandler::getSingleton().addMessage(new CMessageEntityStateChanged(m_eState, eState, *this));
+  CMessageHandler::getSingleton().addMessage(new CMessageEntityStateChanged(m_eState, eState, this));
 
   m_eState = eState;
 }

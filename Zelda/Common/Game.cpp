@@ -631,7 +631,6 @@ bool CGame::frameStarted(const Ogre::FrameEvent& evt) {
   // process messages
   CMessageHandler::getSingleton().process();
   CEntityManager::getSingleton().process();
-  CGameLogicGarbageCollector::getSingleton().process();
 
   // update pause
   CPauseManager::getSingleton().update();
@@ -653,6 +652,8 @@ bool CGame::frameStarted(const Ogre::FrameEvent& evt) {
 
 
   // process events again exactly before rendering
+  // twice to be secure no message left.
+  CMessageHandler::getSingleton().process();
   CMessageHandler::getSingleton().process();
   CEntityManager::getSingleton().process();
 
