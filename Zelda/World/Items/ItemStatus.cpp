@@ -18,12 +18,13 @@
  *****************************************************************************/
 
 #include "ItemStatus.hpp"
+#include <vector>
 #include "ItemData.hpp"
 #include "../Messages/MessageItem.hpp"
 #include "../../Common/Message/MessageHandler.hpp"
 
 std::vector<EItemVariantTypes> SItemStatus::getBestItem() const {
-  if (vItems.size() == 0) {return vItems;} // no items available yet
+  if (vItems.size() == 0) {return vItems;}  // no items available yet
 
   std::vector<EItemVariantTypes> items;
   int ucQuality = -1;
@@ -32,8 +33,7 @@ std::vector<EItemVariantTypes> SItemStatus::getBestItem() const {
     const SItemVariantData &data(ITEM_VARIANT_DATA_MAP.toData(vItems[i]));
     if (ucQuality == data.ucItemQuality) {
       items.push_back(vItems[i]);
-    }
-    else if (ucQuality < data.ucItemQuality) {
+    } else if (ucQuality < data.ucItemQuality) {
       ucQuality = data.ucItemQuality;
       items.clear();
       items.push_back(vItems[i]);
@@ -55,9 +55,12 @@ CItemStatusStorage::CItemStatusStorage() {
   m_Storage[ITEM_SLOT_BOMB].vItems.push_back(ITEM_VARIANT_BOMB);
   m_Storage[ITEM_SLOT_BOTTLE].vItems.push_back(ITEM_VARIANT_BOTTLE_BEE);
   m_Storage[ITEM_SLOT_BOTTLE].vItems.push_back(ITEM_VARIANT_BOTTLE_EMPTY);
-  m_Storage[ITEM_SLOT_LAMP].vItems.push_back(ITEM_VARIANT_LAMP);
 }
 
 void CItemStatusStorage::load() {
-  CMessageHandler::getSingleton().addMessage(new CMessageItem(CMessageItem::IM_STATUS_LOADED, this));
+  CMessageHandler::getSingleton().addMessage(
+      new CMessageItem(CMessageItem::IM_STATUS_LOADED, this));
+}
+
+void CItemStatusStorage::pickupItem(EItemVariantTypes eItemVariantType) {
 }

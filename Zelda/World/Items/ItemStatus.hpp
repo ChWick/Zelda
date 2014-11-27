@@ -39,6 +39,7 @@ public:
   void load();
 
   const SItemStatus &getStatus(EItemSlotTypes eItemType) const {return m_Storage.at(eItemType);}
+  void pickupItem(EItemVariantTypes eItemVariantType);
 };
 
 #endif // _ITEM_STATUS_HPP_

@@ -340,14 +340,22 @@ void CPlayer::handleMessage(const CMessage &message) {
   } else if (message.getType() == MSG_PLAYER_PICKUP_ITEM) {
     const CMessagePlayerPickupItem &msg_pui(
         dynamic_cast<const CMessagePlayerPickupItem&>(message));
-    if (msg_pui.getItemType() == OBJECT_HEART) {
-      changeHP(HP_ONE_HEART);
-    } else if (msg_pui.getItemType() == OBJECT_RED_RUPEE) {
-      mRupeeCount.addData(10);
-    } else if (msg_pui.getItemType() == OBJECT_BLUE_RUPEE) {
-      mRupeeCount.addData(5);
-    } else if (msg_pui.getItemType() == OBJECT_GREEN_RUPEE) {
-      mRupeeCount.addData(1);
+    switch (msg_pui.getItemType()) {
+      case OBJECT_HEART:
+        changeHP(HP_ONE_HEART);
+        break;
+      case OBJECT_RED_RUPEE:
+        mRupeeCount.addData(10);
+        break;
+      case OBJECT_BLUE_RUPEE:
+        mRupeeCount.addData(5);
+        break;
+      case OBJECT_GREEN_RUPEE:
+        mRupeeCount.addData(1);
+        break;
+      case OBJECT_TOOL_LAMP:
+        //m_ItemStatusStorage->
+        break;
     }
   } else if (message.getType() == MSG_ENTITY_STATE_CHANGED) {
     const CMessageEntityStateChanged &msg_esc(
