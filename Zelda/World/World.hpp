@@ -52,6 +52,8 @@ public:
   bool frameRenderingQueued(const Ogre::FrameEvent& evt);
 
 private:
+
+  void handleMessage(const CMessage &message);
 };
 
 #endif // _WORLD_HPP_

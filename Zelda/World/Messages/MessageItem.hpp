@@ -38,9 +38,10 @@ protected:
   const EItemVariantTypes m_eItemVariantType;
   const CItemStatusStorage *m_pItemStatusStorage;
 public:
-  CMessageItem(const EItemMessageTypes eItemMessageType, const EItemVariantTypes eItemVariantType);
-  CMessageItem(const EItemMessageTypes eItemMessageType, const EItemSlotTypes eItemSlotType);
-  CMessageItem(const EItemMessageTypes eItemMessageType, CItemStatusStorage const * const pItemStatusStorage);
+  CMessageItem(const EItemMessageTypes eItemMessageType,
+               CItemStatusStorage const * const pItemStatusStorage,
+               const EItemSlotTypes eItemSlotType = ITEM_SLOT_COUNT,
+               const EItemVariantTypes eItemVariantType = ITEM_VARIANT_COUNT);
 
   EItemMessageTypes getItemMessageType() const {return m_eItemMessageType;}
   EItemSlotTypes getItemSlotType() const {return m_eItemSlotType;}

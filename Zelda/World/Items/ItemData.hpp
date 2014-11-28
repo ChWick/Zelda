@@ -48,6 +48,8 @@ struct SItemVariantData {
 class CItemSlotDataMap : public CEnumIdMap<EItemSlotTypes, SItemSlotData> {
 public:
   void init();
+
+  EItemSlotTypes getFromItemVariant(EItemVariantTypes variantType) const;
 };
 
 class CItemVariantDataMap : public CEnumIdMap<EItemVariantTypes, SItemVariantData> {

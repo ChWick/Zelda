@@ -46,6 +46,17 @@ void CItemSlotDataMap::init() {
   m_Map[ITEM_SLOT_MIRROR] = {{ITEM_VARIANT_MIRROR}};
 }
 
+EItemSlotTypes CItemSlotDataMap::getFromItemVariant(
+    EItemVariantTypes variantType) const {
+  for (auto &data : m_Map) {
+    auto &v(data.second.vItemVariants);
+    if (std::find(v.begin(), v.end(), variantType) != v.end()) {
+      return data.first;
+    }
+  }
+  return ITEM_SLOT_COUNT;
+}
+
 void CItemVariantDataMap::init() {
   // this is set in world
   // loaded by WorldDataLoader and ItemDataLoader.

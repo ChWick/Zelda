@@ -25,6 +25,9 @@
 #include <OgreMaterialManager.h>
 #include "../Common/Log.hpp"
 #include "WorldGUI/WorldGUI.hpp"
+#include "Messages/MessageItem.hpp"
+#include "../Common/Message/MessagePlayerPickupItem.hpp"
+#include "Objects/ObjectTypes.hpp"
 
 CWorld::CWorld()
   : CGameState(GST_WORLD),
@@ -86,4 +89,18 @@ bool CWorld::frameRenderingQueued(const Ogre::FrameEvent& evt) {
   return CGameState::frameRenderingQueued(evt);
 }
 
+void CWorld::handleMessage(const CMessage &message) {
+  if (message.getType() == MSG_PLAYER_PICKUP_ITEM) {
+    const CMessagePlayerPickupItem &msg_pui(
+        dynamic_cast<const CMessagePlayerPickupItem&>(message));
+    switch (msg_pui.getItemType()) {
+      case OBJECT_TOOL_LAMP:
+        m_ItemStatusStorage.pickupItem(ITEM_VARIANT_LAMP);
+        break;
+      default:
+        // normal objects are handled directly in CPlayer
+        break;
+    }
+  }
+}
 

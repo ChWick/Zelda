@@ -353,8 +353,8 @@ void CPlayer::handleMessage(const CMessage &message) {
       case OBJECT_GREEN_RUPEE:
         mRupeeCount.addData(1);
         break;
-      case OBJECT_TOOL_LAMP:
-        //m_ItemStatusStorage->
+      default:
+        // object tools are handled in CWorld
         break;
     }
   } else if (message.getType() == MSG_ENTITY_STATE_CHANGED) {

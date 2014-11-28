@@ -63,4 +63,13 @@ void CItemStatusStorage::load() {
 }
 
 void CItemStatusStorage::pickupItem(EItemVariantTypes eItemVariantType) {
+  EItemSlotTypes slot = ITEM_SLOT_DATA_MAP.getFromItemVariant(eItemVariantType);
+  ASSERT(slot != ITEM_SLOT_COUNT);
+  m_Storage[slot].vItems.push_back(eItemVariantType);
+
+  CMessageHandler::getSingleton().addMessage(
+      new CMessageItem(CMessageItem::IM_STATUS_CHANGED,
+                       this,
+                       slot,
+                       eItemVariantType));
 }
