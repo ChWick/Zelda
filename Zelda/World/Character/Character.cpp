@@ -300,6 +300,7 @@ void CCharacter::animJumpEnd() {
   m_fTimer = 0;
 }
 void CCharacter::animAttack() {
+  if (!isReadyForNewAction()) {return;}
   setAnimation(ANIM_SLICE_HORIZONTAL, true);
   mCurrentItems[CIS_WEAPON]->startDamage();
   m_fTimer = 0;
@@ -310,7 +311,8 @@ void CCharacter::animAttackEnd() {
 }
 
 void CCharacter::animUseToolStart() {
-  setAnimation(ANIM_USE_ITEM);
+  if (!isReadyForNewAction()) {return;}
+  setAnimation(ANIM_USE_ITEM, true);
   mCurrentItems[CIS_TOOL]->show();
   mCurrentItems[CIS_TOOL]->startDamage();
   mCurrentItems[CIS_WEAPON]->hide();

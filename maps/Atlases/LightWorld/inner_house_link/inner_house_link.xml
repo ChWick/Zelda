@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map scene="inner_house_link.scene" global_position="0 0 0" global_size="1.4 1.0" vision_level_offset="0.2" >
+  <event repeat="none">
+    <emitter type="create" />
+    <action type="start_script" file="initialize.lua" />
+    </event>
   <entrance id="house_entrance" player_direction="0 0 -1" player_relative_position="0 0 0" position="0 0 0.50" size="1.6 1 0.01" shape="box">
     <event repeat="infinite">
       <emitter type="collision" id="player"/>

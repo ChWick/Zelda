@@ -34,7 +34,7 @@ class CCharacterItem;
 class btCollisionShape;
 class btCharacterControllerInterface;
 
-#define ANIM_FADE_SPEED 7.5f   // animation crossfade speed in % of full weight per second
+#define ANIM_FADE_SPEED 10.f   // animation crossfade speed of full weight per second
 
 struct SAnimationProperty {
   bool allowMoving;

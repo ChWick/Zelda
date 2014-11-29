@@ -376,8 +376,8 @@
        objectType (string)           the object type to generate
   -->
   <default_inner_object id="green_bush">
-    <data probability="0.5" objectType="tool_lamp"/>
-    <data probability="0.5" objectType="rupee_green"/>
+    <data probability="0.05" objectType="heart"/>
+    <data probability="0.2" objectType="rupee_green"/>
   </default_inner_object>
   <default_inner_object id="light_stone">
     <data probability="1" objectType="tool_lamp"/>

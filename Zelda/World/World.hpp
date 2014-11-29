@@ -46,6 +46,10 @@ public:
   CWorld();
   ~CWorld();
 
+  const CItemStatusStorage &getItemStatusStorage() const {
+    return m_ItemStatusStorage;
+  }
+
   void update(Ogre::Real tpf);
   void preRender(Ogre::Real tpf);
   void renderDebug(Ogre::Real tpf);

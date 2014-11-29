@@ -19,6 +19,7 @@
 
 #include "UserLuaScriptBridge.hpp"
 #include <OgreStringConverter.h>
+#include <string>
 #include "../../Common/Lua/LuaScriptManager.hpp"
 #include "../../Common/Log.hpp"
 #include "../../Common/tinyxml2/tinyxml2.hpp"
@@ -27,23 +28,31 @@
 #include "../../Common/Message/MessageHandler.hpp"
 #include "../../Common/Message/MessageInjector.hpp"
 #include "../../Common/GameLogic/GameStateManager.hpp"
+#include "../../Common/GameLogic/GameStateTypes.hpp"
 #include "../../Common/GameLogic/GameLogicGarbageCollector.hpp"
 
 #include "../../GUIComponents/GUITextBox.hpp"
 
 #include "../../Common/Message/MessageTargetReached.hpp"
 #include "../WorldEntity.hpp"
+#include "../World.hpp"
+#include "../Items/ItemTypes.hpp"
+#include "../Objects/Object.hpp"
+#include "../Objects/Chest.hpp"
 
-using namespace tinyxml2;
+using tinyxml2::XMLElement;
+using tinyxml2::XMLDocument;
 
 void userRegisterCFunctionsToLua(lua_State *l) {
-  registerCFunctionsToLua(l); // original c bindings
+  registerCFunctionsToLua(l);  // original c bindings
 
   // user c bindings
   registerSingleCFunctionsToLua(l, entity, "entity");
   registerSingleCFunctionsToLua(l, textMessage, "textMessage");
   registerSingleCFunctionsToLua(l, moveTo, "moveTo");
   registerSingleCFunctionsToLua(l, deleteEntity, "delete");
+  registerSingleCFunctionsToLua(l, hasItem, "hasItem");
+  registerSingleCFunctionsToLua(l, setInnerObject, "setInnerObject");
 }
 
 
@@ -155,7 +164,7 @@ int moveTo(lua_State *l) {
     }
   }
 
-  return 0; // 0 return values
+  return 0;  // 0 return values
 }
 
 int deleteEntity(lua_State *l) {
@@ -180,3 +189,52 @@ int deleteEntity(lua_State *l) {
   return 0;
 }
 
+int hasItem(lua_State *l) {
+  LUA_BRIDGE_START(1);
+
+  LOGV("Lua call: hasItem");
+
+  if (lua_gettop(l) != 1) {
+    LOGW("Wrong argument count for hasItem call");
+    return 1;
+  }
+  CWorld *pWorld = dynamic_cast<CWorld*>(
+      CGameStateManager::getSingleton().getChildRecursive(
+          GAME_STATE_ID_MAP.toString(GST_WORLD)));
+  ASSERT(pWorld);
+
+  const std::string item(lua_tostring(l, 1));
+  pWorld->getItemStatusStorage().hasItem(
+      ITEM_VARIANT_ID_MAP.parseString(item));
+}
+
+int setInnerObject(lua_State *l) {
+  LUA_BRIDGE_START(0);
+
+  LOGV("Lua call: setInnerObject");
+
+  if (lua_gettop(l) != 2) {
+    LOGW("Wrong argument count for setInnerObject call");
+    return 0;
+  }
+
+  const std::string id(lua_tostring(l, 1));
+  const std::string innerObject(lua_tostring(l, 2));
+
+  CEntity *pEntity = CGameStateManager::getSingleton().getChildRecursive(id);
+  if (!pEntity) {
+    LOGW("Entity '%s' was not found in entity tree.", id.c_str());
+    return 0;
+  }
+
+  EObjectTypes innerObjectType(
+      OBJECT_TYPE_ID_MAP.parseString(innerObject));
+
+  if (CObject *object = dynamic_cast<CObject *>(pEntity)) {
+    object->setInnerObject(innerObjectType);
+  } else if (CChest *chest  = dynamic_cast<CChest *>(pEntity)) {
+    chest->setInnerObject(innerObjectType);
+  } else {
+    LOGW("Entity '%s' is not a CObject or a CChest", id.c_str());
+  }
+}

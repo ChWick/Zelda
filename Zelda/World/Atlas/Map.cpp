@@ -439,7 +439,7 @@ void CMap::postEntityAdded(Ogre::Entity *pEntity, Ogre::SceneNode *pParent, btRi
     }
   }
   else if (pEntity->getMesh()->getName() == "small_chest_bottom.mesh") {
-    CChest *pChest = new CChest(pEntity->getName(), this, this, CChest::SMALL_CHEST);
+    CChest *pChest = new CChest(userData.getStringUserData("name"), this, this, CChest::SMALL_CHEST);
     pChest->setPosition(pParent->_getDerivedPosition());
     pChest->setThisAsCollisionObjectsUserPointer(pRigidBody);
     pChest->setInnerObject(OBJECT_TYPE_ID_MAP.parseString(userData.getStringUserData("inner_object")));

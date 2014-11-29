@@ -36,4 +36,10 @@ int moveTo(lua_State *l);
 //! c function call by lua to delete an entity
 int deleteEntity(lua_State *l);
 
+//! c function call to check if the player has a item
+int hasItem(lua_State *l);
+
+//! c function to set the inner object of an object or chest
+int setInnerObject(lua_State *l);
+
 #endif // _USER_LUA_SCRIPT_BRIDGE_HPP_

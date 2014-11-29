@@ -73,3 +73,11 @@ void CItemStatusStorage::pickupItem(EItemVariantTypes eItemVariantType) {
                        slot,
                        eItemVariantType));
 }
+
+bool CItemStatusStorage::hasItem(EItemVariantTypes eItemVariantType) const {
+  ASSERT(eItemVariantType != ITEM_VARIANT_COUNT);
+  EItemSlotTypes slot = ITEM_SLOT_DATA_MAP.getFromItemVariant(eItemVariantType);
+  ASSERT(slot != ITEM_SLOT_COUNT);
+  auto &v(m_Storage[slot].vItems);
+  return std::find(v.begin(), v.end(), eItemVariantType) != v.end();
+}
