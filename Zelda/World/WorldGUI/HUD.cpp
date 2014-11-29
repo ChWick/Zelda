@@ -71,7 +71,7 @@ void CHUD::handleMessage(const CMessage &message) {
     const CMessageEntityDataChanged &msg_edc(dynamic_cast<const CMessageEntityDataChanged &>(message));
     int propertyId(msg_edc.getProperty().getID());
     if (propertyId == ENTITY_PROPERTY_RUPEE) {
-      m_pRupeeCounter->addCount(dynamic_cast<const CEntityIntProperty&>(msg_edc.getProperty()).getData());
+      m_pRupeeCounter->setDesiredCount(dynamic_cast<const CEntityIntProperty&>(msg_edc.getProperty()).getData());
     }
   }
 }
