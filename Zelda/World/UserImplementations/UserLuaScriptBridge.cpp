@@ -204,8 +204,12 @@ int hasItem(lua_State *l) {
   ASSERT(pWorld);
 
   const std::string item(lua_tostring(l, 1));
-  pWorld->getItemStatusStorage().hasItem(
+  bool has = pWorld->getItemStatusStorage().hasItem(
       ITEM_VARIANT_ID_MAP.parseString(item));
+
+
+  lua_pushboolean(l, has);
+  return 1;
 }
 
 int setInnerObject(lua_State *l) {
