@@ -1,0 +1,8 @@
+Debug
+Release
+*.mk
+*.txt
+*.workspace
+Makefile
+.codelite
+.clang

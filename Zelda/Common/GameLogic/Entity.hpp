@@ -25,7 +25,7 @@
 #include "../Message/MessageInjector.hpp"
 #include <string>
 #include <list>
-#include "../tinyxml2/tinyxml2.h"
+#include "../tinyxml2/tinyxml2.hpp"
 #include "OutputStyle.hpp"
 #include "EntityStates.hpp"
 #include <OgreResourceGroupManager.h>

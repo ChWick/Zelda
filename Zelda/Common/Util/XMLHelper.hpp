@@ -20,7 +20,7 @@
 #ifndef _XML_HELPER_HPP_
 #define _XML_HELPER_HPP_
 
-#include "../tinyxml2/tinyxml2.h"
+#include "../tinyxml2/tinyxml2.hpp"
 #include "Assert.hpp"
 #include <string>
 #include <OgreString.h>
