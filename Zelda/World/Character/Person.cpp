@@ -31,6 +31,7 @@
 #include <OgreSkeletonInstance.h>
 #include <OgreSceneNode.h>
 #include <OgreSceneManager.h>
+#include <OgreSubMesh.h>
 #include "../../Common/Physics/PhysicsMasks.hpp"
 #include "../GlobalCollisionShapesTypes.hpp"
 #include "PersonTypes.hpp"
@@ -279,9 +280,18 @@ bool CPerson::frameEnded(const Ogre::FrameEvent& evt) {
 
 void CPerson::createBlinkingMaterials() {
   ASSERT(m_pBodyEntity);
-  m_pMaterial = Ogre::MaterialManager::getSingleton()
-      .getByName(m_PersonData.sMaterialName)
-      ->clone(m_sID + "mat_" + m_PersonData.sMaterialName);
+  if (m_PersonData.sMaterialName.size() > 0) {
+    m_pMaterial = Ogre::MaterialManager::getSingleton()
+        .getByName(m_PersonData.sMaterialName)
+        ->clone(m_sID + "mat_" + m_PersonData.sMaterialName);
+  } else {
+    ASSERT(m_pBodyEntity->getMesh()->getNumSubMeshes() == 1);
+    Ogre::String materialName
+        = m_pBodyEntity->getMesh()->getSubMesh(0)->getMaterialName();
+    m_pMaterial = Ogre::MaterialManager::getSingleton()
+        .getByName(materialName)
+        ->clone(m_sID + "mat_" + materialName);
+  }
   m_pBodyEntity->setMaterial(m_pMaterial);
 }
 

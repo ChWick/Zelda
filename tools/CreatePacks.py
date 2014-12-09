@@ -3,6 +3,42 @@ import zipfile
 import glob
 import ntpath
 
+class File :
+    def __init__(self, filename, outputdir) :
+        self.filename = filename
+        self.outputdir = outputdir
+
+    def addToZip(self, zipf, srcdir) :
+        zipf.write(os.path.join(srcdir,
+                                self.filename),
+                   os.path.join(self.outputdir,
+                                self.filename),
+                   zipfile.ZIP_DEFLATED)
+
+class FilePack :
+    files = []
+
+    def __init__(self, srcdir) :
+        self.srcdir = srcdir
+
+    def addFile(self, file) :
+        self.files.append(file)
+
+    def addToZip(self, zipf) :
+        for file in self.files :
+            file.addToZip(zipf, self.srcdir)
+
+class ModelPack :
+    filepacks = []
+
+    def addPack(self, pack) :
+        self.filepacks.append(pack)
+
+    def addToZip(self, zipf) :
+        for pack in self.filepacks :
+            pack.addToZip(zipf)
+    
+
 def zipdir(path, zip):
     for root, dirs, files in os.walk(path):
         for file in files:
@@ -86,7 +122,7 @@ def makeSdkTrays() :
 
 	zipf.close()
 
-def makeMapPack(name, world, files, includeHouse=False) :
+def makeMapPack(name, world, files, includeHouse=False, modelPacks=[]) :
 	print 'Creating map pack for', name, ' in ', world
 
 	worldPath = os.path.join('../maps/Atlases', world)
@@ -105,6 +141,11 @@ def makeMapPack(name, world, files, includeHouse=False) :
 
 	for file in files :
 		zipf.write(os.path.join(dataPath, file), file, zipfile.ZIP_DEFLATED)
+
+        # model packs
+        for modelPack in modelPacks :
+            modelPack.addToZip(zipf)
+
         # copy scripts
         copyAllOfType(zipf, os.path.join(dataPath, 'scripts/*'), 'scripts')
         copyAllOfType(zipf, os.path.join(dataPath, 'language/*'), 'language', True)
@@ -115,6 +156,18 @@ def makeMapPack(name, world, files, includeHouse=False) :
 os.chdir(os.path.dirname(os.path.realpath(__file__)))
 
 if __name__ == '__main__':
+    # define model packs
+
+    # links father
+    linksFather = ModelPack()
+    pack = FilePack("../models/links_father")
+    pack.addFile(File("links_father.mesh", "meshes"))
+    pack.addFile(File("links_father.skeleton", "skeletons"))
+    pack.addFile(File("link_father_body.png", "textures"))
+    pack.addFile(File("link_father.material", "materials"))
+    linksFather.addPack(pack)
+
+
     makeLightWorldZip()
     makeGameZip()
     makeSdkTrays()
@@ -123,5 +176,5 @@ if __name__ == '__main__':
 
     makeMapPack('link_house', lightWorld, ['physics_border_top.mesh', 'physics_floor.mesh', 'physics_floor_top.mesh', 'wall_bot_right.mesh', 'wall_bot.mesh', 'wall_to_water.mesh', 'house_red_roof.mesh', 'house_roof_border.mesh', 'house_wall.mesh', 'water.mesh'], includeHouse=True)
     makeMapPack('link_house_left', lightWorld, ['physics_floor.mesh', 'physics_floor_top.mesh', 'physics_floor_top_wall.mesh', 'physics_wall_bot.mesh'])
-    makeMapPack('inner_house_link', lightWorld, ['physics_floor.mesh', 'physics_wall.mesh', 'vision_plane.mesh'])
+    makeMapPack('inner_house_link', lightWorld, ['physics_floor.mesh', 'physics_wall.mesh', 'vision_plane.mesh'], modelPacks=[linksFather])
 
