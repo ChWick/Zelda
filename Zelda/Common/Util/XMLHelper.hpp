@@ -67,6 +67,13 @@ namespace XMLHelper {
 				 const Ogre::Vector2 &vDefault = Ogre::Vector2::ZERO,
 				 bool bRequired = false);
 
+Ogre::Vector3 Vector3Attribute(const tinyxml2::XMLElement *pElem,
+                               const std::string &label,
+                               const Ogre::Vector3 &vDefault);
+
+Ogre::Vector3 Vector3Attribute(const tinyxml2::XMLElement *pElem,
+                               const std::string &label);
+
   template <class T>
   T EnumAttribute(const tinyxml2::XMLElement *pElem,
 		  const char *pLabel,
