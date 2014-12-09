@@ -285,7 +285,9 @@ int playAnimation(lua_State *l) {
     LOGW("Entity '%s' is not a CCharacter.", id.c_str());
   }
 
-  pCharacter->setAnimation(pCharacter->getAnimationIdFromString(animation));
+  // play animation from beginning
+  pCharacter->setAnimation(pCharacter->getAnimationIdFromString(animation),
+                           true);
 
   return 0;
 }
@@ -317,11 +319,25 @@ int waitForAnimationHasStopped(lua_State *l) {
 
   const Ogre::AnimationState *pState =
       pCharacter->getAnimation(pCharacter->getAnimationIdFromString(animation));
-
-  while (true) {
-    LUA_WAIT(50);
-    if (pState->hasEnded()) {
-      break;
+  if (pState->getLoop()) {
+    // looping animation
+    Ogre::Real lastTimePosition = 0;
+    while (true) {
+      LUA_WAIT(50);
+      Ogre::Real newTimePosition = pState->getTimePosition();
+      if (newTimePosition < lastTimePosition) {
+        // we made a loop, so we ended the animation
+        break;
+      }
+      lastTimePosition = newTimePosition;
+    }
+  } else {
+    // non looping animation
+    while (true) {
+      LUA_WAIT(50);
+      if (pState->hasEnded()) {
+        break;
+      }
     }
   }
 
