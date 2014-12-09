@@ -113,6 +113,11 @@ public:
   void startRunning();
   void endRunning();
 
+  // character listener
+  void requestingJumpSpeed(float *horizontal, float *vertical);
+  void jumpStart();
+  void jumpEnd();
+
 protected:
 
   void move(bool bMoving, Ogre::Real fSpeed = 0, const Ogre::Vector3 &vDir = Ogre::Vector3::ZERO);

@@ -234,8 +234,7 @@ void CCharacter::updateAnimationsCallback(const Ogre::Real fTime) {
 }
 
 void CCharacter::setAnimation(unsigned int id, bool reset) {
-  if (m_uiAnimID < m_uiAnimationCount)
-  {
+  if (m_uiAnimID < m_uiAnimationCount) {
     // if we have an old animation, fade it out
     m_FadingStates[m_uiAnimID] = FADE_OUT;
   }
@@ -249,6 +248,27 @@ void CCharacter::setAnimation(unsigned int id, bool reset) {
     m_FadingStates[m_uiAnimID] = FADE_IN;
     if (reset) m_Anims[id]->setTimePosition(0);
   }
+}
+
+
+const Ogre::AnimationState *CCharacter::getAnimation(unsigned int id) const {
+  return m_Anims[id];
+}
+
+unsigned int CCharacter::getAnimationIdFromString(const std::string &id) const {
+  if (id == "idle") {
+    return ANIM_IDLE;
+  } else if (id == "walk") {
+    return ANIM_WALK;
+  } else if (id == "slice_horizontal") {
+    return ANIM_SLICE_HORIZONTAL;
+  } else if (id == "use_item") {
+    return ANIM_USE_ITEM;
+  } else if (id == "run") {
+    return ANIM_RUN;
+  }
+  LOGW("Animation id '%s' is unknown.", id.c_str());
+  return ANIM_COUNT;
 }
 
 void CCharacter::fadeAnimations(const Ogre::Real deltaTime) {

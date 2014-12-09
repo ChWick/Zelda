@@ -17,7 +17,7 @@
       <action type="message" message_type="switch_map" map="inner_house_link" switch_map_type="fade_elliptic" target_entrance="house_entrance"/>
     </event>
   </entrance>
-
+  <!-- 
   <new_entity entity_type="standing_person" id="block_1" rotation="180" position="-0.225 1 1.6" person_type="soldier_green_sword">
     <event repeat="infinite">
       <emitter type="interaction" />
@@ -31,4 +31,5 @@
       <action type="start_script" file="instructions.lua"/>
     </event>
   </new_entity>
+ -->
 </map>

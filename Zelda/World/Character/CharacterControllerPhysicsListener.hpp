@@ -23,6 +23,9 @@
 class CCharacterControllerPhysicsListener {
 public:
   virtual void postStepForwardAndStrafe() {}
+  virtual void requestingJumpSpeed(float *horizontal, float *vertical) {}
+  virtual void jumpStart() {}
+  virtual void jumpEnd() {}
 };
 
 #endif

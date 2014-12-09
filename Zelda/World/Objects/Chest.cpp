@@ -101,6 +101,10 @@ void CChest::update(Ogre::Real tpf) {
     mLidSceneNode->pitch(Ogre::Radian(-tpf));
     if (mLidSceneNode->getOrientation().getPitch().valueDegrees() < -90) {
       mStatus = STATUS_OPENED;
+      if (mInnerObject == nullptr) {
+        // there is no inner object, empty chest, continue
+        onFinished();
+      }
     }
   }
 
@@ -114,13 +118,13 @@ void CChest::update(Ogre::Real tpf) {
                      - INNER_OBJECT_TIME_TO_SET_IN_LIFT);
         mLifting = false;
         onLifted();
+      } else {
+        mInnerObject->translate(
+            Ogre::Vector3(0,
+                          tpf / INNER_OBJECT_TIME_TO_LIFT
+                          *  INNER_OBJECT_LIFT_HEIGHT,
+                          0));
       }
-
-      mInnerObject->translate(
-          Ogre::Vector3(0,
-                        tpf / INNER_OBJECT_TIME_TO_LIFT
-                        * INNER_OBJECT_LIFT_HEIGHT,
-                        0));
     }
   }
   m_pCollisionObject->getWorldTransform().setOrigin(
@@ -165,6 +169,7 @@ void CChest::open() {
 }
 
 void CChest::onLifted() {
+  mLifting = false;
   if (mTextMessage.size() > 0) {
     CMessageHandler::getSingleton().addMessage(
         new CMessageShowText(mTextMessage));
@@ -175,12 +180,18 @@ void CChest::onLifted() {
 
 void CChest::onFinished() {
   unpause(PAUSE_ALL);
-  mInnerObject->deleteLater();
-  CMessageHandler::getSingleton().addMessage(
+  if (mInnerObject) {
+    // if the chest has an inner object
+    mInnerObject->deleteLater();
+    CMessageHandler::getSingleton().addMessage(
       new CMessagePlayerPickupItem(mInnerObjectType));
+    mInnerObject = nullptr;
+  }
 }
 
 void CChest::createInnerObject(EObjectTypes eType) {
+  LOGV("Creating inner object for chest: '%s'",
+        OBJECT_TYPE_ID_MAP.toString(eType).c_str());
   if (eType == OBJECT_COUNT) {
     return;  // no object inside
   }

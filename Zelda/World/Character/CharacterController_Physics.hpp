@@ -41,155 +41,157 @@ class CWorldEntity;
 ///Interaction between btKinematicCharacterController and dynamic rigid bodies needs to be explicity implemented by the user.
 class CharacterControllerPhysics : public btCharacterControllerInterface
 {
-protected:
+ protected:
   CCharacterControllerPhysicsListener &m_Listener;
   int mSubSteps;
-	btScalar m_halfHeight;
+  btScalar mSpeedReference;
+  btScalar m_halfHeight;
 
-	btPairCachingGhostObject* m_ghostObject;
-	btConvexShape*	m_convexShape;//is also in m_ghostObject, but it needs to be convex, so we store it here to avoid upcast
+  btPairCachingGhostObject* m_ghostObject;
+  btConvexShape*	m_convexShape;//is also in m_ghostObject, but it needs to be convex, so we store it here to avoid upcast
 
-	btScalar m_verticalVelocity;
-	btScalar m_verticalOffset;
-	btScalar m_fallSpeed;
-	btScalar m_jumpSpeed;
+  btScalar m_verticalVelocity;
+  btScalar m_verticalOffset;
+  btScalar m_fallSpeed;
+  btScalar m_jumpSpeed;
   bool m_bRequestingJump; // is jump requested
   btScalar m_requestingJumpTime; // time to wait until jump sets in
-	btScalar m_maxJumpHeight;
-	btScalar m_maxSlopeRadians; // Slope angle that is set (used for returning the exact value)
-	btScalar m_maxSlopeCosine;  // Cosine equivalent of m_maxSlopeRadians (calculated once when set, for optimization)
-	btScalar m_gravity;
+  btScalar m_maxJumpHeight;
+  btScalar m_maxSlopeRadians; // Slope angle that is set (used for returning the exact value)
+  btScalar m_maxSlopeCosine;  // Cosine equivalent of m_maxSlopeRadians (calculated once when set, for optimization)
+  btScalar m_gravity;
 
-	btScalar m_turnAngle;
+  btScalar m_turnAngle;
 
-	btScalar m_stepHeight;
+  btScalar m_stepHeight;
 
-	btScalar	m_addedMargin;//@todo: remove this and fix the code
+  btScalar	m_addedMargin;//@todo: remove this and fix the code
 
-	///this is the desired walk direction, set by the user
-	btVector3	m_walkDirection;
-	btVector3	m_normalizedDirection;
+  ///this is the desired walk direction, set by the user
+  btVector3	m_walkDirection;
+  btVector3	m_normalizedDirection;
 
-	//some internal variables
-	btVector3 m_currentPosition;
-	btScalar  m_currentStepOffset;
-	btVector3 m_targetPosition;
+  //some internal variables
+  btVector3 m_currentPosition;
+  btScalar  m_currentStepOffset;
+  btVector3 m_targetPosition;
 
-	///keep track of the contact manifolds
-	btManifoldArray	m_manifoldArray;
+  ///keep track of the contact manifolds
+  btManifoldArray	m_manifoldArray;
 
-	bool m_touchingContact;
-	btVector3 m_touchingNormal;
+  bool m_touchingContact;
+  btVector3 m_touchingNormal;
 
   bool  m_bStuck;
-	bool  m_wasOnGround;
-	bool  m_wasJumping;
-	bool	m_useGhostObjectSweepTest;
-	bool	m_useWalkDirection;
-	btScalar	m_velocityTimeInterval;
-	int m_upAxis;
+  bool  m_wasOnGround;
+  bool  m_wasJumping;
+  bool mJumpingThroughBorder;
+  bool	m_useGhostObjectSweepTest;
+  bool	m_useWalkDirection;
+  btScalar	m_velocityTimeInterval;
+  int m_upAxis;
 
-	static btVector3* getUpAxisDirections();
-	bool  m_interpolateUp;
-	bool  full_drop;
-	bool  bounce_fix;
+  static btVector3* getUpAxisDirections();
+  bool  m_interpolateUp;
+  bool  full_drop;
+  bool  bounce_fix;
 
-	std::list<CWorldEntity *> m_lCollidingWorldEntities;
+  std::list<CWorldEntity *> m_lCollidingWorldEntities;
 
-	btVector3 computeReflectionDirection (const btVector3& direction, const btVector3& normal);
-	btVector3 parallelComponent (const btVector3& direction, const btVector3& normal);
-	btVector3 perpindicularComponent (const btVector3& direction, const btVector3& normal);
+  btVector3 computeReflectionDirection (const btVector3& direction, const btVector3& normal);
+  btVector3 parallelComponent (const btVector3& direction, const btVector3& normal);
+  btVector3 perpindicularComponent (const btVector3& direction, const btVector3& normal);
 
-	bool recoverFromPenetration ( btCollisionWorld* collisionWorld);
-	void stepUp (btCollisionWorld* collisionWorld);
-	void updateTargetPositionBasedOnCollision (const btVector3& hit_normal, btScalar tangentMag = btScalar(0.0), btScalar normalMag = btScalar(1.0));
-	void stepForwardAndStrafe (btCollisionWorld* collisionWorld, const btVector3& walkMove, btScalar dt);
-	void stepDown (btCollisionWorld* collisionWorld, btScalar dt);
-public:
+  bool recoverFromPenetration ( btCollisionWorld* collisionWorld);
+  void stepUp (btCollisionWorld* collisionWorld);
+  void updateTargetPositionBasedOnCollision (const btVector3& hit_normal, btScalar tangentMag = btScalar(0.0), btScalar normalMag = btScalar(1.0));
+  void stepForwardAndStrafe (btCollisionWorld* collisionWorld, const btVector3& walkMove, btScalar dt);
+  void stepDown (btCollisionWorld* collisionWorld, btScalar dt);
+ public:
 
-	BT_DECLARE_ALIGNED_ALLOCATOR();
+  BT_DECLARE_ALIGNED_ALLOCATOR();
 
-	CharacterControllerPhysics (CCharacterControllerPhysicsListener &listener, btPairCachingGhostObject* ghostObject,btConvexShape* convexShape,btScalar stepHeight, int upAxis = 1);
-	~CharacterControllerPhysics ();
+  CharacterControllerPhysics (CCharacterControllerPhysicsListener &listener, btPairCachingGhostObject* ghostObject,btConvexShape* convexShape,btScalar stepHeight, int upAxis = 1);
+  ~CharacterControllerPhysics ();
 
 
-	///btActionInterface interface
-	virtual void updateAction( btCollisionWorld* collisionWorld,btScalar deltaTime)
-	{
-		m_lCollidingWorldEntities.clear();
-		preStep ( collisionWorld);
-		playerStep (collisionWorld, deltaTime);
-	}
+  ///btActionInterface interface
+  virtual void updateAction( btCollisionWorld* collisionWorld,btScalar deltaTime)
+  {
+    m_lCollidingWorldEntities.clear();
+    preStep ( collisionWorld);
+    playerStep (collisionWorld, deltaTime);
+  }
 
-	void prepare() {
-		m_lCollidingWorldEntities.clear();
-	}
+  void prepare() {
+    m_lCollidingWorldEntities.clear();
+  }
 
-	///btActionInterface interface
-	void	debugDraw(btIDebugDraw* debugDrawer);
+  ///btActionInterface interface
+  void	debugDraw(btIDebugDraw* debugDrawer);
 
-	void setUpAxis (int axis)
-	{
-		if (axis < 0)
-			axis = 0;
-		if (axis > 2)
-			axis = 2;
-		m_upAxis = axis;
-	}
+  void setUpAxis (int axis)
+  {
+    if (axis < 0)
+      axis = 0;
+    if (axis > 2)
+      axis = 2;
+    m_upAxis = axis;
+  }
 
-  void setSubSteps(int i) {mSubSteps = i;}
-	/// This should probably be called setPositionIncrementPerSimulatorStep.
-	/// This is neither a direction nor a velocity, but the amount to
-	///	increment the position each simulation iteration, regardless
-	///	of dt.
-	/// This call will reset any velocity set by setVelocityForTimeInterval().
-	virtual void	setWalkDirection(const btVector3& walkDirection);
+  void setSubStepSpeedReference(btScalar speed) {mSpeedReference = speed;}
+  /// This should probably be called setPositionIncrementPerSimulatorStep.
+  /// This is neither a direction nor a velocity, but the amount to
+  ///	increment the position each simulation iteration, regardless
+  ///	of dt.
+  /// This call will reset any velocity set by setVelocityForTimeInterval().
+  virtual void	setWalkDirection(const btVector3& walkDirection);
 
-	/// Caller provides a velocity with which the character should move for
-	///	the given time period.  After the time period, velocity is reset
-	///	to zero.
-	/// This call will reset any walk direction set by setWalkDirection().
-	/// Negative time intervals will result in no motion.
-	virtual void setVelocityForTimeInterval(const btVector3& velocity,
-				btScalar timeInterval);
+  /// Caller provides a velocity with which the character should move for
+  ///	the given time period.  After the time period, velocity is reset
+  ///	to zero.
+  /// This call will reset any walk direction set by setWalkDirection().
+  /// Negative time intervals will result in no motion.
+  virtual void setVelocityForTimeInterval(const btVector3& velocity,
+                                          btScalar timeInterval);
 
-	void reset ( btCollisionWorld* collisionWorld );
-	void reset () {}
-	void warp (const btVector3& origin);
+  void reset ( btCollisionWorld* collisionWorld );
+  void reset () {}
+  void warp (const btVector3& origin);
 
-	void preStep (  btCollisionWorld* collisionWorld);
-	void playerStep ( btCollisionWorld* collisionWorld, btScalar dt);
+  void preStep (  btCollisionWorld* collisionWorld);
+  void playerStep ( btCollisionWorld* collisionWorld, btScalar dt);
 
-	void setFallSpeed (btScalar fallSpeed);
-	void setJumpSpeed (btScalar jumpSpeed);
-	void setMaxJumpHeight (btScalar maxJumpHeight);
-	bool canJump () const;
+  void setFallSpeed (btScalar fallSpeed);
+  void setJumpSpeed (btScalar jumpSpeed);
+  void setMaxJumpHeight (btScalar maxJumpHeight);
+  bool canJump () const;
 
   void jumpThroughBorderStart(btCollisionWorld* collisionWorld);
   void jumpThroughBorderEnd(btCollisionWorld* collisionWorld);
   void jump () {jump(false);}
-	void jump (bool bForce);
+  void jump (bool bForce);
 
-	void setGravity(btScalar gravity);
-	btScalar getGravity() const;
+  void setGravity(btScalar gravity);
+  btScalar getGravity() const;
 
-	/// The max slope determines the maximum angle that the controller can walk up.
-	/// The slope angle is measured in radians.
-	void setMaxSlope(btScalar slopeRadians);
-	btScalar getMaxSlope() const;
+  /// The max slope determines the maximum angle that the controller can walk up.
+  /// The slope angle is measured in radians.
+  void setMaxSlope(btScalar slopeRadians);
+  btScalar getMaxSlope() const;
 
-	btPairCachingGhostObject* getGhostObject();
-	void	setUseGhostSweepTest(bool useGhostObjectSweepTest)
-	{
-		m_useGhostObjectSweepTest = useGhostObjectSweepTest;
-	}
+  btPairCachingGhostObject* getGhostObject();
+  void	setUseGhostSweepTest(bool useGhostObjectSweepTest)
+  {
+    m_useGhostObjectSweepTest = useGhostObjectSweepTest;
+  }
 
-	bool onGround () const;
+  bool onGround () const;
   bool isStuck() const {return m_bStuck;}
-	void setUpInterpolate (bool value);
+  void setUpInterpolate (bool value);
 
 
-	const std::list<CWorldEntity *> &getCollidingWorldEntities() const {return m_lCollidingWorldEntities;}
+  const std::list<CWorldEntity *> &getCollidingWorldEntities() const {return m_lCollidingWorldEntities;}
 };
 
 

@@ -308,3 +308,16 @@ void CPerson::myDamageBlocked(const CDamage &damage,
       -damage.getDamageDirection() * 0.2f,
       0.25f);
 }
+
+void CPerson::requestingJumpSpeed(float *horizontal, float *vertical) {
+  getCharacterController<CPersonController>()
+      ->requestingJumpSpeed(horizontal, vertical);
+}
+
+void CPerson::jumpStart() {
+  getCharacterController<CPersonController>()->jumpStart();
+}
+
+void CPerson::jumpEnd() {
+  getCharacterController<CPersonController>()->jumpEnd();
+}

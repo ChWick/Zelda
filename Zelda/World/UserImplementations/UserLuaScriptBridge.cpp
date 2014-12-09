@@ -19,7 +19,9 @@
 
 #include "UserLuaScriptBridge.hpp"
 #include <OgreStringConverter.h>
+#include <OgreAnimationState.h>
 #include <string>
+
 #include "../../Common/Lua/LuaScriptManager.hpp"
 #include "../../Common/Log.hpp"
 #include "../../Common/tinyxml2/tinyxml2.hpp"
@@ -30,15 +32,16 @@
 #include "../../Common/GameLogic/GameStateManager.hpp"
 #include "../../Common/GameLogic/GameStateTypes.hpp"
 #include "../../Common/GameLogic/GameLogicGarbageCollector.hpp"
+#include "../../Common/Message/MessageTargetReached.hpp"
 
 #include "../../GUIComponents/GUITextBox.hpp"
 
-#include "../../Common/Message/MessageTargetReached.hpp"
 #include "../WorldEntity.hpp"
 #include "../World.hpp"
 #include "../Items/ItemTypes.hpp"
 #include "../Objects/Object.hpp"
 #include "../Objects/Chest.hpp"
+#include "../Character/Character.hpp"
 
 using tinyxml2::XMLElement;
 using tinyxml2::XMLDocument;
@@ -53,6 +56,9 @@ void userRegisterCFunctionsToLua(lua_State *l) {
   registerSingleCFunctionsToLua(l, deleteEntity, "delete");
   registerSingleCFunctionsToLua(l, hasItem, "hasItem");
   registerSingleCFunctionsToLua(l, setInnerObject, "setInnerObject");
+  registerSingleCFunctionsToLua(l, playAnimation, "playAnimation");
+  registerSingleCFunctionsToLua(l, waitForAnimationHasStopped,
+                                "waitForAnimationHasStopped");
 }
 
 
@@ -79,7 +85,9 @@ int textMessage(lua_State *l) {
   doc.Parse(lua_tostring(l, 1));
 
   LOGV("Lua: Creating text message");
-  CMessageHandler::getSingleton().addMessage(CMessageCreator::getSingleton().createMessage(doc.FirstChildElement(), Ogre::Any(result)));
+  CMessageHandler::getSingleton().addMessage(
+      CMessageCreator::getSingleton().createMessage(doc.FirstChildElement(),
+                                                    Ogre::Any(result)));
 
   LOGV("Lua: Waiting for closing of message box");
 
@@ -97,37 +105,44 @@ int textMessage(lua_State *l) {
   lua_pushnumber(l, result->mResult);
   result->mMutex.unlock();
   LOGV("Lua: finished");
-  return 1; // 1 return value
+  return 1;  // 1 return value
 }
 
 
 
 namespace luaHelper {
-  class CMoveToWait : public CMessageInjector {
-  private:
-    CEntity *mEntity;
-    bool mReached;
-    mutable std::mutex mMutex;
-  public:
-    CMoveToWait(CEntity *pEnt)
+class CMoveToWait : public CMessageInjector {
+ private:
+  CEntity *mEntity;
+  bool mReached;
+  mutable std::mutex mMutex;
+
+ public:
+  explicit CMoveToWait(CEntity *pEnt)
       : mEntity(pEnt),
         mReached(false) {
-    }
+  }
 
-    bool hasReached() const {std::lock_guard<std::mutex> lock(mMutex); return mReached;}
-  protected:
-    void sendMessageToAll(const CMessage &m) {
-      if (m.getType() == MSG_TARGET_REACHED) {
-        const CMessageTargetReached &mtr(dynamic_cast<const CMessageTargetReached&>(m));
-        if (mtr.getEntity() == mEntity) {
-          mMutex.lock();
-          mReached = true;
-          mMutex.unlock();
-        }
+  bool hasReached() const {
+    std::lock_guard<std::mutex> lock(mMutex);
+    return mReached;
+  }
+
+ protected:
+  void sendMessageToAll(const CMessage &m) {
+    if (m.getType() == MSG_TARGET_REACHED) {
+      const CMessageTargetReached &mtr(
+          dynamic_cast<const CMessageTargetReached&>(m));
+      if (mtr.getEntity() == mEntity) {
+        mMutex.lock();
+        mReached = true;
+        mMutex.unlock();
       }
     }
-  };
+  }
 };
+
+}  // namespace luaHelper
 
 
 int moveTo(lua_State *l) {
@@ -241,4 +256,74 @@ int setInnerObject(lua_State *l) {
   } else {
     LOGW("Entity '%s' is not a CObject or a CChest", id.c_str());
   }
+
+  return 0;
+}
+
+int playAnimation(lua_State *l) {
+  LUA_BRIDGE_START(0);
+
+  LOGV("Lua call: playAnimation");
+
+  if (lua_gettop(l) != 2) {
+    LOGW("'%d' is wrong argument count for playAnimations call",
+         lua_gettop(l));
+  }
+
+  const std::string id(lua_tostring(l, 1));
+  const std::string animation(lua_tostring(l, 2));
+
+  CEntity *pEntity = CGameStateManager::getSingleton().getChildRecursive(id);
+  if (!pEntity) {
+    LOGW("Entity '%s' was not found in entity tree.", id.c_str());
+    return 0;
+  }
+
+  // entity has to be a character in order to play animations
+  CCharacter *pCharacter(dynamic_cast<CCharacter*>(pEntity));
+  if (!pCharacter) {
+    LOGW("Entity '%s' is not a CCharacter.", id.c_str());
+  }
+
+  pCharacter->setAnimation(pCharacter->getAnimationIdFromString(animation));
+
+  return 0;
+}
+
+int waitForAnimationHasStopped(lua_State *l) {
+  LUA_BRIDGE_START(0);
+
+  LOGV("Lua call: playAnimation");
+
+  if (lua_gettop(l) != 2) {
+    LOGW("'%d' is wrong argument count for playAnimations call",
+         lua_gettop(l));
+  }
+
+  const std::string id(lua_tostring(l, 1));
+  const std::string animation(lua_tostring(l, 2));
+
+  CEntity *pEntity = CGameStateManager::getSingleton().getChildRecursive(id);
+  if (!pEntity) {
+    LOGW("Entity '%s' was not found in entity tree.", id.c_str());
+    return 0;
+  }
+
+  // entity has to be a character in order to play animations
+  CCharacter *pCharacter(dynamic_cast<CCharacter*>(pEntity));
+  if (!pCharacter) {
+    LOGW("Entity '%s' is not a CCharacter.", id.c_str());
+  }
+
+  const Ogre::AnimationState *pState =
+      pCharacter->getAnimation(pCharacter->getAnimationIdFromString(animation));
+
+  while (true) {
+    LUA_WAIT(50);
+    if (pState->hasEnded()) {
+      break;
+    }
+  }
+
+  return 0;  // 0 return values
 }

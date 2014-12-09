@@ -91,7 +91,12 @@ protected:
 
 	friend class CShield;
 protected:
-  virtual void myDamageBlocked(const CDamage &damage, CHitableInterface *hitInterface);
+  virtual void myDamageBlocked(const CDamage &damage,
+                               CHitableInterface *hitInterface);
+
+  virtual void requestingJumpSpeed(float *horizontal, float *vertical);
+  virtual void jumpStart();
+  virtual void jumpEnd();
 };
 
 #endif

@@ -19,10 +19,12 @@
 
 #include "CharacterController_Physics.hpp"
 #include <stdio.h>
+#include <algorithm>
 #include "../../Common/Physics/PhysicsManager.hpp"
 #include "../../Common/Physics/PhysicsMasks.hpp"
 #include "../WorldEntity.hpp"
 #include "../../Common/Util/Assert.hpp"
+#include "../../Common/Log.hpp"
 
 
 // static helper method
@@ -145,6 +147,7 @@ CharacterControllerPhysics::CharacterControllerPhysics(
     btConvexShape* convexShape,
     btScalar stepHeight, int upAxis)
     : m_Listener(listener) {
+  mSpeedReference = 1;
   mSubSteps = 1;
   m_upAxis = upAxis;
   m_addedMargin = 0;
@@ -161,6 +164,7 @@ CharacterControllerPhysics::CharacterControllerPhysics(
   m_gravity = CPhysicsManager::GRAVITY_FACTOR;  // gravity.
   m_fallSpeed = 5.5;  // Terminal velocity of a sky diver in m/s.
   m_jumpSpeed = 1.1;  // ?
+  mJumpingThroughBorder = false;
   m_bRequestingJump = false;
   m_requestingJumpTime = 0;
   m_wasOnGround = false;
@@ -369,6 +373,10 @@ void CharacterControllerPhysics::stepForwardAndStrafe(
     const btVector3& walkMove,
     btScalar dt) {
   m_lCollidingWorldEntities.clear();
+  /*printf("walkMove = %f, %f, %f\n",
+         walkMove[0],
+         walkMove[1],
+         walkMove[2]);*/
   /* printf("m_normalizedDirection=%f,%f,%f\n",
      m_normalizedDirection[0],m_normalizedDirection[1],m_normalizedDirection[2]);
   */
@@ -730,8 +738,8 @@ void CharacterControllerPhysics::preStep(btCollisionWorld* collisionWorld) {
 
 void CharacterControllerPhysics::playerStep(btCollisionWorld* collisionWorld,
                                             btScalar dt) {
-  /*	printf("playerStep(): ");
-  	printf("  dt = %f", dt); */
+  // printf("playerStep(): \n");
+  // printf("  dt = %f", dt);
 
   // quick check...
   if (!m_useWalkDirection && m_velocityTimeInterval <= 0.0) {
@@ -739,7 +747,7 @@ void CharacterControllerPhysics::playerStep(btCollisionWorld* collisionWorld,
     return;  // no motion
   }
 
-  m_wasOnGround = onGround();
+  m_wasOnGround = onGround();  // store old state
 
   // Update fall velocity.
   m_verticalVelocity -= m_gravity * dt;
@@ -752,21 +760,29 @@ void CharacterControllerPhysics::playerStep(btCollisionWorld* collisionWorld,
   }
   m_verticalOffset = m_verticalVelocity * dt;
 
+  // printf("v_vel: %f\n", m_verticalVelocity);
 
   btTransform xform;
-  xform = m_ghostObject->getWorldTransform();
 
-  //	printf("walkDirection(%f,%f,%f)\n",walkDirection[0],walkDirection[1],walkDirection[2]);
+  xform = m_ghostObject->getWorldTransform();
+  /*printf("walkDirection(%f,%f,%f)\n",
+         m_walkDirection[0],
+         m_walkDirection[1],
+         m_walkDirection[2]);*/
   //	printf("walkSpeed=%f\n",walkSpeed);
 
   stepUp(collisionWorld);
   if (m_useWalkDirection) {
-    m_walkDirection /= mSubSteps;
+    // calculate substeps
+    mSubSteps = std::max<int>(ceil(m_walkDirection.length() / mSpeedReference),
+                              1);
+    btVector3 usedWalkDirection = m_walkDirection / mSubSteps;
     for (int i = 0; i < mSubSteps; i++) {
-      stepForwardAndStrafe(collisionWorld, m_walkDirection, dt / mSubSteps);
+      stepForwardAndStrafe(collisionWorld, usedWalkDirection, dt / mSubSteps);
       m_Listener.postStepForwardAndStrafe();
     }
   } else {
+    ASSERT(false);  // this should not be called, no substep calcs
     // printf("  time: %f", m_velocityTimeInterval);
     // still have some time left for moving!
     btScalar dtMoving =
@@ -789,13 +805,20 @@ void CharacterControllerPhysics::playerStep(btCollisionWorld* collisionWorld,
   m_ghostObject->setWorldTransform(xform);
 
   // jumping on border
-  if (m_wasOnGround == false && onGround()) {
+  if (mJumpingThroughBorder && m_wasOnGround == false && onGround()) {
     jumpThroughBorderEnd(collisionWorld);
     m_bRequestingJump = false;
+    printf("jump end\n");
   }
-  if (m_bRequestingJump && m_requestingJumpTime <= 0) {
+  if (!mJumpingThroughBorder
+      && m_bRequestingJump
+      && m_requestingJumpTime <= 0) {
+    m_bRequestingJump = false;
     jumpThroughBorderStart(collisionWorld);
+    printf("jump start\n");
   }
+
+  printf("onGround %d\n", onGround());
 }
 
 void CharacterControllerPhysics::setFallSpeed(btScalar fallSpeed) {
@@ -816,25 +839,29 @@ bool CharacterControllerPhysics::canJump() const {
 
 void CharacterControllerPhysics::jumpThroughBorderStart(
     btCollisionWorld* collisionWorld) {
-  short int group =
+  if (mJumpingThroughBorder) {return;}
+  auto group =
       m_ghostObject->getBroadphaseHandle()->m_collisionFilterGroup;
-  short int mask =
+  auto mask =
       m_ghostObject->getBroadphaseHandle()->m_collisionFilterMask -
       (m_ghostObject->getBroadphaseHandle()->m_collisionFilterMask
        & COL_BORDER);
   collisionWorld->removeCollisionObject(m_ghostObject);
   collisionWorld->addCollisionObject(m_ghostObject, group, mask);
   jump();
+  mJumpingThroughBorder = true;
 }
 
 void CharacterControllerPhysics::jumpThroughBorderEnd(
     btCollisionWorld* collisionWorld) {
-  short int group =
+  if (!mJumpingThroughBorder) {return;}
+  auto group =
       m_ghostObject->getBroadphaseHandle()->m_collisionFilterGroup;
-  short int mask =
+  auto mask =
       m_ghostObject->getBroadphaseHandle()->m_collisionFilterMask | COL_BORDER;
   collisionWorld->removeCollisionObject(m_ghostObject);
   collisionWorld->addCollisionObject(m_ghostObject, group, mask);
+  mJumpingThroughBorder = false;
 }
 
 void CharacterControllerPhysics::jump(bool bForce) {
@@ -843,6 +870,11 @@ void CharacterControllerPhysics::jump(bool bForce) {
 
   m_verticalVelocity = m_jumpSpeed;
   m_wasJumping = true;
+
+  btScalar horizontal(m_walkDirection.length());
+  m_walkDirection /= horizontal;  // Normalize
+  m_Listener.requestingJumpSpeed(&horizontal, &m_verticalVelocity);
+  m_walkDirection *= horizontal;  // rescale
 
 #if 0
   currently no jumping.
@@ -874,7 +906,7 @@ btScalar CharacterControllerPhysics::getMaxSlope() const {
 }
 
 bool CharacterControllerPhysics::onGround() const {
-  return m_verticalVelocity == 0.0 && m_verticalOffset == 0.0;
+  return m_verticalVelocity == 0 && m_verticalOffset == 0;
 }
 
 

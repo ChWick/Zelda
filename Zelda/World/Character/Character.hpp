@@ -165,6 +165,11 @@ public:
   virtual void destroy();
 
   void update(Ogre::Real fTime);
+
+  
+  void setAnimation(unsigned int id, bool reset = false);
+  const Ogre::AnimationState *getAnimation(unsigned int id) const;
+  virtual unsigned int getAnimationIdFromString(const std::string &id) const;
 protected:
   virtual void setupInternal() {};
   virtual void createPhysics() = 0;
@@ -179,8 +184,6 @@ protected:
   virtual void useItem(EItemVariantTypes item);
   virtual CCharacterController *createCharacterController() = 0;
   void updateAnimations(const Ogre::Real fTime);
-
-  void setAnimation(unsigned int id, bool reset = false);
 
   virtual short getCollisionMask();
   virtual short getCollisionGroup();
