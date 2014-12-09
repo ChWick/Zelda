@@ -22,17 +22,20 @@
 #include <OgreBone.h>
 #include <OgreSkeletonInstance.h>
 #include <OgreSceneNode.h>
+#include "PersonController.hpp"
 
-CLinksFather::CLinksFather(const tinyxml2::XMLElement *pElem, CEntity *pParent, CMap *pMap)
-	: CPerson(pElem, pParent, pMap, LF_ANIM_COUNT) {
+CLinksFather::CLinksFather(const tinyxml2::XMLElement *pElem,
+                           CEntity *pParent,
+                           CMap *pMap)
+    : CPerson(pElem, pParent, pMap, LF_ANIM_COUNT) {
 }
 
 void CLinksFather::setupAnimations() {
   Ogre::StringVector animNames(LF_ANIM_COUNT);
-	animNames[LF_ANIM_SIT] = "Scout";
-	animNames[LF_ANIM_WALK] = "Walk";
+  animNames[LF_ANIM_SIT] = "Scout";
+  animNames[LF_ANIM_WALK] = "Walk";
 
-	// this is very important due to the nature of the exported animations
+  // this is very important due to the nature of the exported animations
   m_pBodyEntity->getSkeleton()->setBlendMode(Ogre::ANIMBLEND_CUMULATIVE);
 
   // populate our animation list
@@ -47,4 +50,11 @@ void CLinksFather::setupAnimations() {
 
   // start off in the idle state (top and bottom together)
   setAnimation(LF_ANIM_SIT);
+}
+
+CCharacterController *CLinksFather::createCharacterController() {
+  CPersonController *pc = dynamic_cast<CPersonController*>(
+      CPerson::createCharacterController());
+  pc->setWalkSpeed(0.1);
+  return pc;
 }

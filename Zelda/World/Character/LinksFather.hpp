@@ -27,15 +27,17 @@ public:
   enum ELinksFatherAnimations {
     LF_ANIM_SIT,
     LF_ANIM_WALK,
-
+    
     LF_ANIM_COUNT,
   };
-
-private:
-public:
-	CLinksFather(const tinyxml2::XMLElement *pElem, CEntity *pParent, CMap *pMap);
-
-private:
+  
+ private:
+ public:
+  CLinksFather(const tinyxml2::XMLElement *pElem, CEntity *pParent, CMap *pMap);
+  
+ private:
   void setupAnimations();
+  
+  virtual CCharacterController *createCharacterController();
 };
 #endif // _LINKS_FATHER_HPP_

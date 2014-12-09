@@ -198,10 +198,16 @@ private:
 
  protected:
   template <class T>
-  T *getCharacterController() {return dynamic_cast<T*>(m_pCharacterController);}
+  T *getCharacterController() {
+    ASSERT(m_pCharacterController);
+    return dynamic_cast<T*>(m_pCharacterController);
+  }
   
   template <class T>
-  const T *getCharacterController() const {return dynamic_cast<const T*>(m_pCharacterController);}
+  const T *getCharacterController() const {
+    ASSERT(m_pCharacterController);
+    return dynamic_cast<const T*>(m_pCharacterController);
+  }
 };
 
 #endif // _CHARACTER_H_
