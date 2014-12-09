@@ -239,7 +239,7 @@ void CPersonController::updateCharacter(const Ogre::Real deltaTime) {
   } else if (m_uiCurrentMoveState == MS_RUNNING) {
     mGoalDirection = mBodyNode->getOrientation().zAxis();
 
-    move(true, RUN_SPEED / WALK_SPEED * posIncrementPerSecond, mGoalDirection);
+    move(true, posIncrementPerSecond, mGoalDirection);
 
     if (mCCPhysics->isStuck()) {
       bool bOneDestroyed = false;
@@ -247,6 +247,7 @@ void CPersonController::updateCharacter(const Ogre::Real deltaTime) {
         if (this->mCCPerson->attack(CDamage(mCCPerson, DMG_RUN), pEnt)
             == CHitableInterface::RDR_ACCEPTED) {
           bOneDestroyed = true;
+          break;
         }
       }
 

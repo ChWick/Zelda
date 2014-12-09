@@ -109,8 +109,8 @@ class CPersonController : public CCharacterController {
 
   unsigned int getMoveState() const {return m_uiCurrentMoveState;}
 
-  void setWalkSpeed(Ogre::Real speed) {m_fRunSpeed = speed;}
-  void setRunSpeed(Ogre::Real speed) {m_fWalkSpeed = speed;}
+  void setWalkSpeed(Ogre::Real speed) {m_fWalkSpeed = speed;}
+  void setRunSpeed(Ogre::Real speed) {m_fRunSpeed = speed;}
 
   void stun(const Ogre::Real fTime = std::numeric_limits<Ogre::Real>::max());
   void moveToTarget(const Ogre::Vector3 &vPos, const Ogre::Real dRadius = 0.1f, const Ogre::Degree &maxDeviationLookDir = Ogre::Degree(5), bool bAddCharCOMHeight = true, const Ogre::Real fMaxDuraion = 10.0f);

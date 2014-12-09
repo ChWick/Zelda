@@ -22,6 +22,7 @@
 #include "Objects/ObjectDataLoader.hpp"
 #include "Objects/InnerObjectGenerator.hpp"
 #include "Atlas/TileDataLoader.hpp"
+#include "Character/PersonDataLoader.hpp"
 #include "../Common/tinyxml2/tinyxml2.hpp"
 
 CWorldDataLoader::CWorldDataLoader()
@@ -35,4 +36,6 @@ CWorldDataLoader::CWorldDataLoader()
                     new InnerObject::CDefaultGeneratorDataLoader()));
   registerGroup("tile",
                 std::shared_ptr<CXMLLoaderGroup>(new CTileDataLoader()));
+  registerGroup("person",
+                std::shared_ptr<CXMLLoaderGroup>(new CPersonDataLoader()));
 }

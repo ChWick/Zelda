@@ -17,13 +17,22 @@
  * Zelda. If not, see http://www.gnu.org/licenses/.
  *****************************************************************************/
 
-#ifndef _FRIEND_OR_ENEMY_STATES_HPP_
-#define _FRIEND_OR_ENEMY_STATES_HPP_
+#ifndef CHARACTERATTITUDE_HPP
+#define CHARACTERATTITUDE_HPP
 
-// states of friendlyness (e.g. for friendly fire)
-enum EFriendOrEnemyStates {
-  FOE_FRIENDLY,		//!< Friendly
-  FOE_ENEMY,			//!< a evil person, not the player... ganons folks
+#include "../../Common/Util/EnumIdMap.hpp"
+
+//! Attitude of a character
+enum ECharacterAttitude {
+  ATTITUDE_FRIENDLY,            //!< Friendly
+  ATTITUDE_ENEMY,               //!< a evil person, not the player... ganons folks
 };
 
-#endif
+class CCharacterAttitudeIdMap : public CStringEnumIdMap<ECharacterAttitude> {
+ public:
+  CCharacterAttitudeIdMap();
+};
+
+extern CCharacterAttitudeIdMap CHARACTER_ATTITUDE_ID_MAP;
+
+#endif  // CHARACTERATTITUDE_HPP

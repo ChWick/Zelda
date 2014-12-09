@@ -17,16 +17,11 @@
  * Zelda. If not, see http://www.gnu.org/licenses/.
  *****************************************************************************/
 
-#include "PersonTypes.hpp"
+#include "CharacterAttitude.hpp"
 
-CPersonTypeIdMap PERSON_TYPE_ID_MAP;
-CPersonDataIdMap PERSON_DATA_ID_MAP;
+CCharacterAttitudeIdMap CHARACTER_ATTITUDE_ID_MAP;
 
-
-void CPersonTypeIdMap::init() {
-  m_Map[PERSON_LINK] = "link";
-  m_Map[PERSON_LINKS_FATHER] = "links_father";
-  m_Map[PERSON_SOLDIER_BLOCK] = "soldier_block";
-  m_Map[PERSON_SOLDIER_BLUE] = "soldier_blue";
-  m_Map[PERSON_SOLDIER_GREEN_SWORD] = "soldier_green_sword";
+CCharacterAttitudeIdMap::CCharacterAttitudeIdMap() {
+  m_Map[ATTITUDE_ENEMY] = "enemy";
+  m_Map[ATTITUDE_FRIENDLY] = "friend";
 }

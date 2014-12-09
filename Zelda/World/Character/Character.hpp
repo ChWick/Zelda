@@ -22,7 +22,7 @@
 
 #include "../WorldEntity.hpp"
 #include <LinearMath/btAlignedObjectArray.h>
-#include "FriendOrEnemyStates.hpp"
+#include "CharacterAttitude.hpp"
 #include "CharacterControllerPhysicsListener.hpp"
 #include "../Items/ItemTypes.hpp"
 
@@ -94,7 +94,7 @@ public:
     CIS_COUNT,
   };
 protected:
-  const EFriendOrEnemyStates m_eFriendOrEnemy;	//!< Is this character a friend or an enemy?
+  const ECharacterAttitude mAttitude;	//!< Is this character a friend or an enemy?
 
   bool m_bMoving;
   Ogre::Entity *m_pBodyEntity;									//!< The entity of the body
@@ -122,7 +122,7 @@ public:
   Ogre::Entity *getBodyEntity() const {return m_pBodyEntity;}
   btCharacterControllerInterface *getKinematicCharacterController() const {return mCCPhysics;}
   CCharacterController *getCharacterController() const {return m_pCharacterController;}
-  const EFriendOrEnemyStates getFriendOrEnemyState() const {return m_eFriendOrEnemy;}
+  const ECharacterAttitude getAttitude() const {return mAttitude;}
   const Ogre::vector<Ogre::AnimationState*>::type &getAnimations() const {return m_Anims;}
   unsigned int getCurrentAnimationID() const {return m_uiAnimID;}
   const std::vector<SAnimationProperty> &getAnimationProperties() const {return mAnimationProperty;}
@@ -134,8 +134,16 @@ public:
 
 protected:
   // all values scaled in world units!
-  CCharacter(const std::string &sID, CEntity *pParent, CMap *pMap, const EFriendOrEnemyStates foe, unsigned int uiAnimationCount = ANIM_COUNT);
-  CCharacter(const tinyxml2::XMLElement *pElem, CEntity *pParent, CMap *pMap, const EFriendOrEnemyStates foe, unsigned int uiAnimationCount = ANIM_COUNT);
+  CCharacter(const std::string &sID,
+             CEntity *pParent,
+             CMap *pMap,
+             const ECharacterAttitude attitude,
+             unsigned int uiAnimationCount = ANIM_COUNT);
+  CCharacter(const tinyxml2::XMLElement *pElem,
+             CEntity *pParent,
+             CMap *pMap,
+             const ECharacterAttitude attitude,
+             unsigned int uiAnimationCount = ANIM_COUNT);
 
 public:
   virtual ~CCharacter();

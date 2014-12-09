@@ -47,14 +47,14 @@ CCharacterItem::CCharacterItem(CCharacter *character,
   ASSERT(character);
   ASSERT(boneToAttach.size() > 0);
 
-  if (mCharacter->getFriendOrEnemyState() == FOE_FRIENDLY) {
+  if (mCharacter->getAttitude() == ATTITUDE_FRIENDLY) {
     mBlockPhysicsMask = MASK_SHIELD_P_COLLIDES_WITH;
     mBlockPhysicsGroup = COL_SHIELD_P;
   } else {
     mBlockPhysicsMask = MASK_SHIELD_N_COLLIDES_WITH;
     mBlockPhysicsGroup = COL_SHIELD_N;
   }
-  
+
   mAttachedMesh = mCharacter->getSceneNode()
       ->getCreator()->createEntity(
           ITEM_VARIANT_DATA_MAP.toData(type).sBasicMeshName);
