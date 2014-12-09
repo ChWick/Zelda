@@ -148,7 +148,7 @@ class CMoveToWait : public CMessageInjector {
 int moveTo(lua_State *l) {
   LUA_BRIDGE_START(0);
 
-  LOGV("Lua call: textMessage");
+  LOGV("Lua call: moveTo");
 
   if (lua_gettop(l) < 2) {
     LOGW("Less argument count for moveTo call");
