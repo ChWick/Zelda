@@ -423,7 +423,7 @@
   <person
       id="soldier_green_sword"
       mesh_name="soldier"
-      material_name="soldier_freen"
+      material_name="soldier_green"
       attitude="enemy"
       hitpoints="1"
       />
