@@ -280,18 +280,27 @@ bool CPerson::frameEnded(const Ogre::FrameEvent& evt) {
 
 void CPerson::createBlinkingMaterials() {
   ASSERT(m_pBodyEntity);
-  if (m_PersonData.sMaterialName.size() > 0) {
-    m_pMaterial = Ogre::MaterialManager::getSingleton()
-        .getByName(m_PersonData.sMaterialName)
-        ->clone(m_sID + "mat_" + m_PersonData.sMaterialName);
-  } else {
+
+  // find name of material to clone it
+  Ogre::String materialName = m_PersonData.sMaterialName;
+  if (materialName.size() == 0) {
+    // use the applied material of the entity
     ASSERT(m_pBodyEntity->getMesh()->getNumSubMeshes() == 1);
-    Ogre::String materialName
-        = m_pBodyEntity->getMesh()->getSubMesh(0)->getMaterialName();
-    m_pMaterial = Ogre::MaterialManager::getSingleton()
-        .getByName(materialName)
-        ->clone(m_sID + "mat_" + materialName);
+    materialName = m_pBodyEntity->getMesh()->getSubMesh(0)->getMaterialName();
   }
+
+  // get the material
+  Ogre::MaterialPtr srcMat
+      = Ogre::MaterialManager::getSingleton().getByName(materialName);
+  if (srcMat.isNull()) {
+    // material does not exist, error!
+    throw Ogre::Exception(Ogre::Exception::ERR_ITEM_NOT_FOUND,
+                          "Material with name '"
+                          + materialName + "' not found",
+                          __FILE__);
+  }
+  // clone the material and apply it to the entity
+  m_pMaterial = srcMat->clone(m_sID + "mat_" + materialName);
   m_pBodyEntity->setMaterial(m_pMaterial);
 }
 
