@@ -25,6 +25,7 @@
 #include "CharacterAttitude.hpp"
 #include "CharacterControllerPhysicsListener.hpp"
 #include "../Items/ItemTypes.hpp"
+#include "CharacterData.hpp"
 
 class btRigidBody;
 class CMap;
@@ -36,8 +37,14 @@ class btCharacterControllerInterface;
 
 #define ANIM_FADE_SPEED 10.f   // animation crossfade speed of full weight per second
 
+//! Struct containing information for an animation
 struct SAnimationProperty {
-  bool allowMoving;
+  //! Pointer to the animation data
+  const SCharacterAnimationData *mAnimationData;
+  //! Pointer to the animation state
+  Ogre::AnimationState *mState;
+  //! fade state
+  uint8_t mFadeState;
 };
 
 //! Klasse f&uuml;r einen animierten Charater mit Standardanimationen
@@ -94,8 +101,6 @@ public:
     CIS_COUNT,
   };
 protected:
-  const ECharacterAttitude mAttitude;	//!< Is this character a friend or an enemy?
-
   bool m_bMoving;
   Ogre::Entity *m_pBodyEntity;									//!< The entity of the body
   btCharacterControllerInterface *mCCPhysics;		//!< The bullet character controller (Physics)
@@ -106,14 +111,17 @@ protected:
   Ogre::Real m_fYaw;
 
   // Animation data
-  const unsigned int m_uiAnimationCount;							//!< number of animations
-  Ogre::vector<Ogre::AnimationState*>::type m_Anims;	//!< master animation list
-  unsigned int m_uiAnimID;														//!< current animation
-  Ogre::vector<char>::type m_FadingStates;            //!< which animations are fading
+  //! number of animations
+  const unsigned int m_uiAnimationCount;
+  //!< master animation list (same as for mAnimationProperty)
+  Ogre::vector<Ogre::AnimationState*>::type m_Anims;
+  //! current animation
+  unsigned int m_uiAnimID;
 
   Ogre::Real m_fTimer;																//!< Animation timer (how long is the current animation running)
   Ogre::Real m_fAnimSpeed;														//!< Animation speed
 private:
+  const SCharacterData &mCharacterData;
   std::shared_ptr<CCharacterItem> mCurrentItems[CIS_COUNT];
   std::vector<SAnimationProperty> mAnimationProperty;
 public:
@@ -122,11 +130,14 @@ public:
   Ogre::Entity *getBodyEntity() const {return m_pBodyEntity;}
   btCharacterControllerInterface *getKinematicCharacterController() const {return mCCPhysics;}
   CCharacterController *getCharacterController() const {return m_pCharacterController;}
-  const ECharacterAttitude getAttitude() const {return mAttitude;}
+  const SCharacterData &getCharacterData() const {return mCharacterData;}
   const Ogre::vector<Ogre::AnimationState*>::type &getAnimations() const {return m_Anims;}
   unsigned int getCurrentAnimationID() const {return m_uiAnimID;}
   const std::vector<SAnimationProperty> &getAnimationProperties() const {return mAnimationProperty;}
-  const SAnimationProperty &getCurrentAnimationProperty() const {return mAnimationProperty[m_uiAnimID];}
+  const SAnimationProperty &getCurrentAnimationProperty() const {
+    ASSERT(m_uiAnimID < m_uiAnimationCount);
+    return mAnimationProperty[m_uiAnimID];
+  }
 
   // reimplemented
   void setPosition(const Ogre::Vector3 &vPos);
@@ -137,13 +148,11 @@ protected:
   CCharacter(const std::string &sID,
              CEntity *pParent,
              CMap *pMap,
-             const ECharacterAttitude attitude,
-             unsigned int uiAnimationCount = ANIM_COUNT);
+             const SCharacterData &characterData);
   CCharacter(const tinyxml2::XMLElement *pElem,
              CEntity *pParent,
              CMap *pMap,
-             const ECharacterAttitude attitude,
-             unsigned int uiAnimationCount = ANIM_COUNT);
+             const SCharacterData &characterData);
 
 public:
   virtual ~CCharacter();
@@ -174,8 +183,13 @@ public:
 
   void update(Ogre::Real fTime);
 
-  
-  void setAnimation(unsigned int id, bool reset = false);
+  //! Set the current animation of the character entity
+  /**
+   * \param id The id of the animation
+   * \param reset Play the animation from the beginning
+   * \param force Disable fading and show the animation imediately
+   */
+  void setAnimation(unsigned int id, bool reset = false, bool force = false);
   const Ogre::AnimationState *getAnimation(unsigned int id) const;
   virtual unsigned int getAnimationIdFromString(const std::string &id) const;
 protected:
@@ -183,7 +197,9 @@ protected:
   virtual void createPhysics() = 0;
   virtual void destroyPhysics() = 0;
   virtual void initBody(Ogre::SceneNode *pParentSceneNode) = 0;
-  virtual void setupAnimations() = 0;
+  void setupAnimations();
+  virtual void preSetupAnimations() {}
+  virtual void postSetupAnimations() {}
 protected:
   virtual void preUpdateBoundsCallback(const Ogre::Real fTime) {}
   virtual void preAnimationUpdateCallback(const Ogre::Real fTime) {}

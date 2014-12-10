@@ -34,11 +34,10 @@ public:
 
 private:
 public:
-	CStandingPerson(const tinyxml2::XMLElement *pElem, CEntity *pParent, CMap *pMap);
+  CStandingPerson(const tinyxml2::XMLElement *pElem, CEntity *pParent, CMap *pMap);
 
 protected:
-	void setupInternal();
-  void setupAnimations();
+  void setupInternal();
   EReceiveDamageResult receiveDamage(const CDamage &dmg);
 };
 

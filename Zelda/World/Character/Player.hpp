@@ -48,7 +48,7 @@ public:
 protected:
   void enterMap(CMap *pMap, const Ogre::Vector3 &vInitPosition);
   void setupInternal();
-  void setupAnimations();
+  void postSetupAnimations();
   EReceiveDamageResult receiveDamage(const CDamage &dmg);
   void setupBody(Ogre::SceneManager* sceneMgr);
   void setupCamera(Ogre::Camera* cam);

@@ -42,7 +42,6 @@ public:
 
 protected:
 	void setupInternal();
-  void setupAnimations();
 	virtual CCharacterController *createCharacterController();
   EReceiveDamageResult receiveDamage(const CDamage &dmg);
 	void killedCallback();

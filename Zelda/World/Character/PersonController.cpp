@@ -318,7 +318,7 @@ void CPersonController::move(bool bMove,
                              Ogre::Real fSpeed,
                              const Ogre::Vector3 &vDir) {
   const SAnimationProperty &prop(mCCPerson->getCurrentAnimationProperty());
-  if (!prop.allowMoving) {
+  if (!prop.mAnimationData->mAllowMoving) {
     bMove = false;
   }
 

@@ -401,30 +401,54 @@
       scale="1.5f"
       attitude="friend"
       hitpoints="3"
-      />
+      animations_count="5"
+      >
+    <animation name="Idle" id="0"/>
+    <animation name="Walk" id="1"/>
+    <animation name="SwordAttack" id="2"/>
+    <animation name="SwordAttack" id="3"/>
+    <animation name="RunPegasus" id="4"/>
+  </person>
   <person
       id="links_father"
       mesh_name="links_father"
       attitude="friend"
-      />
+      animations_count="3"
+      >
+    <animation name="Sit" id="0"/>
+    <animation name="StandUp" id="1"/>
+    <animation name="Walk" id="2"/>
+  </person>
   <person
       id="soldier_block"
       mesh_name="soldier"
       material_name="soldier_green"
       attitude="enemy"
-      />
+      animations_count="2"
+      >
+    <animation name="Scout" id="0"/>
+    <animation name="Walk" id="1"/>
+  </person>
   <person
       id="soldier_blue"
       mesh_name="soldier"
       material_name="soldier_blue"
       attitude="enemy"
       hitpoints="3"
-      />
+      animations_count="2"
+      >
+    <animation name="Scout" id="0"/>
+    <animation name="Walk" id="1"/>
+  </person>
   <person
       id="soldier_green_sword"
       mesh_name="soldier"
       material_name="soldier_green"
       attitude="enemy"
       hitpoints="1"
-      />
+      animations_count="2"
+      >
+    <animation name="Scout" id="0"/>
+    <animation name="Walk" id="1"/>
+  </person>
 </world_data>

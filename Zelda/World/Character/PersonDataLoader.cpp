@@ -29,17 +29,7 @@ using XMLHelper::RealAttribute;
 using XMLHelper::Vector3Attribute;
 
 void CPersonDataLoader::readGroupElement(const tinyxml2::XMLElement *e) {
-  SPersonData data;
-  const std::string id = Attribute(e, "id");
-  data.eType = PERSON_TYPE_ID_MAP.parseString(id);
-  data.sMeshName = Attribute(e, "mesh_name");
-  data.sMaterialName = Attribute(e, "material_name", "");
-  data.vScale = Vector3Attribute(e, "scale", Ogre::Vector3::UNIT_SCALE);
-  data.eAttitude = CHARACTER_ATTITUDE_ID_MAP.parseString(
-      Attribute(e, "attitude"));
-  data.hitpoints = HP_ONE_HEART * IntAttribute(e, "hitpoints",
-                                               HP_INFINITY / HP_ONE_HEART);
-
+  SPersonData data(e);
 
   PERSON_DATA_ID_MAP.setData(data.eType, data);
 }

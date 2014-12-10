@@ -37,14 +37,13 @@ CSimpleEnemy::CSimpleEnemy(const std::string &sID,
     : CPerson(sID,
               pParent,
               pMap,
-              PERSON_DATA_ID_MAP.toData(PERSON_SOLDIER_GREEN_SWORD),
-              SE_ANIM_COUNT) {
+              PERSON_DATA_ID_MAP.toData(PERSON_SOLDIER_GREEN_SWORD)) {
 }
 
 CSimpleEnemy::CSimpleEnemy(const tinyxml2::XMLElement *pElem,
                            CEntity *pParent,
                            CMap *pMap)
-  : CPerson(pElem, pParent, pMap, SE_ANIM_COUNT) {
+  : CPerson(pElem, pParent, pMap) {
 }
 void CSimpleEnemy::setupInternal() {
   changeItem(CIS_WEAPON,
@@ -53,28 +52,6 @@ void CSimpleEnemy::setupInternal() {
              PERSON_LEFT_HANDLE, ITEM_VARIANT_ENEMY_SHIELD_SIMPLE);
 
   getCurrentItem(CIS_WEAPON)->startDamage();
-}
-
-void CSimpleEnemy::setupAnimations() {
-  Ogre::StringVector animNames(SE_ANIM_COUNT);
-  animNames[SE_ANIM_SCOUT] = "Scout";
-  animNames[SE_ANIM_WALK] = "Walk";
-
-  // this is very important due to the nature of the exported animations
-  m_pBodyEntity->getSkeleton()->setBlendMode(Ogre::ANIMBLEND_CUMULATIVE);
-
-  // populate our animation list
-  for (unsigned int i = 0; i < m_uiAnimationCount; i++) {
-    m_Anims[i] = m_pBodyEntity->getAnimationState(animNames[i]);
-    m_Anims[i]->setLoop(true);
-    m_FadingStates[i] = FADE_NONE;
-    m_Anims[i]->setEnabled(false);
-    m_Anims[i]->setWeight(0);
-  }
-
-
-  // start off in the idle state (top and bottom together)
-  setAnimation(SE_ANIM_SCOUT);
 }
 
 CCharacterController *CSimpleEnemy::createCharacterController() {
@@ -106,7 +83,7 @@ void CSimpleEnemy::updateAnimationsCallback(const Ogre::Real fTime) {
            : dynamic_cast<CharacterControllerPhysics*>(mCCPhysics)
            ->getCollidingWorldEntities()) {
     if (dynamic_cast<CCharacter*>(pEnt)
-        && dynamic_cast<CCharacter*>(pEnt)->getAttitude()
+        && dynamic_cast<CCharacter*>(pEnt)->getCharacterData().mAttitude
         == ATTITUDE_FRIENDLY) {
       attack(CDamage(this,
                      DMG_SWORD,

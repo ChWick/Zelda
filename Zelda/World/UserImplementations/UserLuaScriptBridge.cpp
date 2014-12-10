@@ -265,13 +265,18 @@ int playAnimation(lua_State *l) {
 
   LOGV("Lua call: playAnimation");
 
-  if (lua_gettop(l) != 2) {
+  if (lua_gettop(l) < 1) {
     LOGW("'%d' is wrong argument count for playAnimations call",
          lua_gettop(l));
   }
 
   const std::string id(lua_tostring(l, 1));
   const std::string animation(lua_tostring(l, 2));
+  bool force = false;
+  if (lua_gettop(l) == 3) {
+    // we can read force
+    force = lua_toboolean(l, 3);
+  }
 
   CEntity *pEntity = CGameStateManager::getSingleton().getChildRecursive(id);
   if (!pEntity) {
@@ -287,7 +292,8 @@ int playAnimation(lua_State *l) {
 
   // play animation from beginning
   pCharacter->setAnimation(pCharacter->getAnimationIdFromString(animation),
-                           true);
+                           true,
+                           force);
 
   return 0;
 }

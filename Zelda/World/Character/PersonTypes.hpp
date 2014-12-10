@@ -22,7 +22,7 @@
 
 #include "../../Common/Util/EnumIdMap.hpp"
 #include <OgreVector3.h>
-#include "CharacterAttitude.hpp"
+#include "CharacterData.hpp"
 #include "../Hitpoints.hpp"
 
 enum EPersonTypes {
@@ -35,13 +35,18 @@ enum EPersonTypes {
   PERSON_SOLDIER_GREEN_SWORD
 };
 
-struct SPersonData {
+
+struct SPersonData : public SCharacterData {
   EPersonTypes eType;
   std::string sMeshName;
   std::string sMaterialName;
   Ogre::Vector3 vScale;
-  ECharacterAttitude eAttitude;
   Hitpoints hitpoints;
+
+  explicit SPersonData(const tinyxml2::XMLElement *e);
+  SPersonData();
+  
+  SPersonData &operator=(const SPersonData &) = default;
 };
 
 class CPersonTypeIdMap : public CStringEnumIdMap<EPersonTypes> {

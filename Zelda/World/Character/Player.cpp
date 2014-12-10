@@ -93,33 +93,7 @@ void CPlayer::setupInternal()  {
 	}*/
 }
 
-void CPlayer::setupAnimations() {
-  Ogre::StringVector animNames(ANIM_COUNT);
-  animNames[ANIM_IDLE] = "Idle";
-  animNames[ANIM_RUN] = "RunPegasus";
-  animNames[ANIM_SLICE_HORIZONTAL] = "SwordAttack";
-  animNames[ANIM_USE_ITEM] = "SwordAttack";
-  animNames[ANIM_WALK] = "Walk";
-  /*animNames[ANIM_HANDS_CLOSED] = "HandsClosed";
-    animNames[ANIM_HANDS_RELAXED] = "HandsRelaxed";
-    animNames[ANIM_SLICE_HORIZONTAL] = "SliceHorizontal";
-    animNames[ANIM_BOW_SHOT] = "BowShot";
-    animNames[ANIM_JUMP_START] = "JumpStart";
-    animNames[ANIM_JUMP_LOOP] = "JumpLoop";
-    animNames[ANIM_JUMP_END] = "JumpEnd";*/
-
-  // this is very important due to the nature of the exported animations
-  m_pBodyEntity->getSkeleton()->setBlendMode(Ogre::ANIMBLEND_CUMULATIVE);
-
-  // populate our animation list
-  for (unsigned int i = 0; i < m_uiAnimationCount; i++) {
-    m_Anims[i] = m_pBodyEntity->getAnimationState(animNames[i]);
-    m_Anims[i]->setLoop(true);
-    m_FadingStates[i] = FADE_NONE;
-    m_Anims[i]->setEnabled(false);
-    m_Anims[i]->setWeight(0);
-  }
-
+void CPlayer::postSetupAnimations() {
   // m_Anims[ANIM_HANDS_CLOSED]->setWeight(1);
   // m_Anims[ANIM_HANDS_RELAXED]->setWeight(1);
 
