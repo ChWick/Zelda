@@ -81,7 +81,7 @@ CAtlas::CAtlas(CEntity *pParent, Ogre::SceneNode *pRootSceneNode)
       = new CMap(this,
                  CMapPackPtr(new CMapPack(
                      CFileManager::getResourcePath("maps/Atlases/LightWorld/"),
-                     "inner_house_link")), m_pSceneNode, m_pPlayer);
+                     "link_house")), m_pSceneNode, m_pPlayer);
   mFirstFrame = true;
 
   m_pPlayer->enterMap(m_pCurrentMap, Ogre::Vector3(0, 2, 0));

@@ -153,7 +153,8 @@ void CCharacter::setupAnimations() {
     m_Anims[animProp.mAnimationData->mId] = animState;
   }
 
-  //setAnimation(0, true, true);
+  // select first animation
+  setAnimation(0, true, true);
 
   postSetupAnimations();
 }
