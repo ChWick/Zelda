@@ -45,6 +45,13 @@ class CMessage;
 
 //! Class for an arbitrary entity
 class CEntity : public CMessageInjector {
+ private:
+  //! Debug information: number of generated entiteis
+  static uint16_t mNumberOfInstances;
+ public:
+  //! get debug information: number of generated entities
+  static uint16_t getNumberOfInstances() {return mNumberOfInstances;}
+  
 protected:
   std::string m_sID;                          //!< id of the entity
   std::string m_sResourceGroup;               //!< in which resource group to search for entities resources

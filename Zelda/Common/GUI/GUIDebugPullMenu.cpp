@@ -18,8 +18,10 @@
  *****************************************************************************/
 
 #include "GUIDebugPullMenu.hpp"
+#include <OgreSkeletonManager.h>
 #include "../Message/MessageDebug.hpp"
 #include "../Message/MessageHandler.hpp"
+#include "../Log.hpp"
 #include "../Game.hpp"
 
 using namespace CEGUI;
@@ -49,6 +51,10 @@ CGUIDebugPullMenu::CGUIDebugPullMenu(CEntity *pParentEntity,
   createFrameStatsButton("worst_fps", "Worst FPS:", m_pWorstFps, 2);
   createFrameStatsButton("batches", "Batches:", m_pBatches, 4);
   createFrameStatsButton("triangles", "Triangles:", m_pTriangles, 3);
+
+  createLabel("Entities:", m_pEntites, fPos);
+  createLabel("Ogre::Entities", m_pOgreEntites, fPos);
+  createLabel("Ogre::Skeletons", m_pOgreSkeletons, fPos);
 }
 
 
@@ -60,6 +66,20 @@ CEGUI::Window *CGUIDebugPullMenu::createButton(const CEGUI::String &wnd, const C
   fPos += 35;
 
   return pButton;
+}
+
+CEGUI::Window *CGUIDebugPullMenu::createLabel(const CEGUI::String &name, CEGUI::Window *&pWindow, float &fPos) {
+  Window *pLabel = m_pContent->createChild("OgreTray/Label", name + "_label");
+  pLabel->setSize(USize(UDim(0.5, 0), UDim(0, 30)));
+  pLabel->setPosition(UVector2(UDim(0, 0), UDim(0, fPos)));
+  pLabel->setText(name);
+  pLabel->setProperty("HorzFormatting", "LeftAligned");
+
+  pWindow = m_pContent->createChild("OgreTray/Label", name);
+  pWindow->setSize(USize(UDim(0.5, 0), UDim(0, 30)));
+  pWindow->setPosition(UVector2(UDim(0.5, 0), UDim(0, fPos)));
+  pWindow->setProperty("HorzFormatting", "RightAligned");
+  fPos += 35;
 }
 
 CEGUI::Window *CGUIDebugPullMenu::createFrameStatsButton(const CEGUI::String &id, const CEGUI::String &sLabel, CEGUI::Window *&pWindow, int iIndex) {
@@ -93,11 +113,35 @@ void CGUIDebugPullMenu::update(Ogre::Real tpf) {
   CGUIPullMenu::update(tpf);
   if (getDragState() != DS_SLEEPING) {
     const Ogre::RenderTarget::FrameStats stats(CGame::getSingleton().getRenderWindow()->getStatistics());
+    Ogre::SceneManager *sceneMgr = CGame::getSingleton().getSceneManager();
+    
     m_pFrameStatsGroup->setText("FPS: " + PropertyHelper<int>::toString(stats.lastFPS));
     m_pAverageFps->setText(PropertyHelper<int>::toString(stats.avgFPS));
     m_pBestFps->setText(PropertyHelper<int>::toString(stats.bestFPS));
     m_pWorstFps->setText(PropertyHelper<int>::toString(stats.worstFPS));
     m_pBatches->setText(PropertyHelper<int>::toString(stats.batchCount));
     m_pTriangles->setText(PropertyHelper<int>::toString(stats.triangleCount));
+
+    m_pEntites->setText(PropertyHelper<int>::toString(CEntity::getNumberOfInstances()));
+
+    uint32_t count = 0;
+    for (auto i =
+             sceneMgr->getMovableObjectIterator("Entity");
+         i.hasMoreElements();
+         ) {
+      i.getNext();
+      count++;
+    }
+    m_pOgreEntites->setText(PropertyHelper<int>::toString(count));
+
+    count = 0;
+    for (auto i =
+             Ogre::SkeletonManager::getSingleton().getResourceIterator();
+         i.hasMoreElements();
+         ) {
+      i.getNext();
+      count++;
+    }
+    m_pOgreSkeletons->setText(PropertyHelper<int>::toString(count));
   }
 }

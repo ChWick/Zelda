@@ -32,6 +32,9 @@
 using namespace events;
 using namespace XMLHelper;
 
+// declaration and initialize with zero
+uint16_t CEntity::mNumberOfInstances(0);
+
 
 CEntity::CEntity(const std::string &sID, unsigned int uiType, CEntity *pParent, const std::string &sResourceGroup)
   : CMessageInjector(false),
@@ -42,6 +45,7 @@ CEntity::CEntity(const std::string &sID, unsigned int uiType, CEntity *pParent, 
     m_bPauseRender(false),
     m_bPauseUpdate(false),
     m_pParent(pParent) {
+  mNumberOfInstances++;
   attachTo(pParent);
 }
 
@@ -54,6 +58,7 @@ CEntity::CEntity(const std::string &sID, CEntity *pParent, const std::string &sR
     m_bPauseRender(false),
     m_bPauseUpdate(false),
     m_pParent(pParent) {
+  mNumberOfInstances++;
   attachTo(pParent);
 }
 CEntity::CEntity(const CEntity &src)
@@ -65,6 +70,7 @@ CEntity::CEntity(const CEntity &src)
     m_bPauseRender(src.m_bPauseRender),
     m_bPauseUpdate(src.m_bPauseUpdate),
     m_pParent(src.m_pParent) {
+  mNumberOfInstances++;
   attachTo(src.m_pParent);
   // not copying children so far
   // and for events
@@ -82,6 +88,7 @@ CEntity::CEntity(
     m_bPauseRender(BoolAttribute(pElem, "pause_render", false)),
     m_bPauseUpdate(BoolAttribute(pElem, "pause_update", false)),
     m_pParent(NULL) {
+  mNumberOfInstances++;
 
 
   readEventsFromXMLElement(pElem, false);
@@ -90,6 +97,7 @@ CEntity::CEntity(
   attachTo(pParent);
 }
 CEntity::~CEntity() {
+  mNumberOfInstances--;
   std::list<CEntity *> lClone(m_lChildren);
   m_lChildren.clear();
   while (lClone.size() > 0) {
