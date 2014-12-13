@@ -77,13 +77,20 @@ void CCharacter::constructor_impl() {
 
 CCharacter::~CCharacter() {
 }
+
 void CCharacter::exit() {
+  if (m_pCharacterController) {
+    delete m_pCharacterController;
+    m_pCharacterController = nullptr;
+  }
+
   for (int i = 0; i < CIS_COUNT; i++) {
     mCurrentItems[i].reset();
   }
   CWorldEntity::exit();
   destroyPhysics();
 }
+
 void CCharacter::enterMap(CMap *pMap, const Ogre::Vector3 &vInitPosition) {
   // switch map only, if map an scene node are existing
   bool bSwitchMapOnly = m_pMap && m_pSceneNode;

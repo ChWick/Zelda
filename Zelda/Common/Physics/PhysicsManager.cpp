@@ -72,8 +72,8 @@ btVector3 worldMax(1000,1000, 1000);
 #endif
 
 	m_pGhostPairCallback = new btGhostPairCallback();
-    //mBroadphase->getOverlappingPairCache()->setInternalGhostPairCallback(m_pGhostPairCallback);
-  sweepBP->getOverlappingPairCache()->setInternalGhostPairCallback(new btGhostPairCallback());
+  mBroadphaseInterface->getOverlappingPairCache()->setInternalGhostPairCallback(m_pGhostPairCallback);
+  //sweepBP->getOverlappingPairCache()->setInternalGhostPairCallback(new btGhostPairCallback());
     toggleDisplayDebugInfo();
 
   Ogre::LogManager::getSingleton().logMessage("PhysicsManager created.");

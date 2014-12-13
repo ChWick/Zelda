@@ -23,7 +23,10 @@
 CGlobalCollisionShapesTypesIdMap::CGlobalCollisionShapesTypesIdMap() {
   m_Map[GCST_PICKABLE_OBJECT_SPHERE] = "pickable_object_sphere";
   m_Map[GCST_PERSON_CAPSULE] = "person_capsule";
+  m_Map[GCST_HOUSE_ENTRANCE_TOP] = "house_entrance_top";
+  m_Map[GCST_HOUSE_ENTRANCE_SIDE] = "house_entrance_side";
   m_Map[GCST_HOUSE_ENTRANCE] = "house_entrance";
+  m_Map[GCST_STONE_PILE_SINGLE_STONE] = "stone_pile_single_stone";
   m_Map[GCST_STONE_PILE] = "stone_pile";
   m_Map[GCST_TREE] = "tree";
   m_Map[GCST_FALLING_OBJECT_SPHERE] = "falling_object_sphere";
