@@ -66,7 +66,7 @@ void android_main(struct android_app* state)
 int main(int argc, char *argv[])
 #endif
 {
-    
+
     // ----------------------------------------------------------------------------
     // This makes relative paths work in C++ in Xcode by changing directory to the Resources folder inside the .app bundle
 #ifdef __APPLE__
@@ -78,11 +78,11 @@ int main(int argc, char *argv[])
         // error!
     }
     CFRelease(resourcesURL);
-    
+
     chdir(path);
     std::cout << "Current Path: " << path << std::endl;
 #endif
-    
+
 #if OGRE_PLATFORM == OGRE_PLATFORM_APPLE_IOS
 	NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
 	int retVal = UIApplicationMain(argc, argv, @"UIApplication", @"AppDelegate");
@@ -90,13 +90,13 @@ int main(int argc, char *argv[])
 	return retVal;
 #elif (OGRE_PLATFORM == OGRE_PLATFORM_APPLE) && __LP64__
 	NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
-    
+
     mAppDelegate = [[AppDelegate alloc] init];
     [[NSApplication sharedApplication] setDelegate:mAppDelegate];
 	int retVal = NSApplicationMain(argc, (const char **) argv);
-    
+
 	[pool release];
-    
+
 	return retVal;
 #elif OGRE_PLATFORM == OGRE_PLATFORM_ANDROID
   OgreAndroidBridge::init(state);
@@ -184,7 +184,7 @@ int main(int argc, char *argv[])
       "Unknown Error" << std::endl << "at file: " << __FILE__ << std::endl;
 #    endif
   }
-  
+  app->closeApp();
   delete app;
 #  endif
 

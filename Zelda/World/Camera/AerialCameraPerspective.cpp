@@ -113,22 +113,21 @@ Ogre::Vector3 CAerialCameraPerspective::getRayPlaneHitPosition(int iRayIndex, Og
 
 
 
-void CAerialCameraPerspective::sendMessageToAll(const CMessage &message) {
-  if (message.getType() == MSG_SWITCH_MAP) {
-    const CMessageSwitchMap &switch_map_message(dynamic_cast<const CMessageSwitchMap&>(message));
-    if (switch_map_message.getStatus() == CMessageSwitchMap::SWITCHING) {
-      if (switch_map_message.getSwitchMapType() == SMT_MOVE_CAMERA) {
+void CAerialCameraPerspective::sendMessageToAll(const CMessagePtr message) {
+  if (message->getType() == MSG_SWITCH_MAP) {
+    auto switch_map_message(std::dynamic_pointer_cast<const CMessageSwitchMap>(message));
+    if (switch_map_message->getStatus() == CMessageSwitchMap::SWITCHING) {
+      if (switch_map_message->getSwitchMapType() == SMT_MOVE_CAMERA) {
         m_bSwitchingMap = true;
 
-        const CMapPackPtr nextPack = switch_map_message.getToMap()->getMapPack();
-        const CMapPackPtr currPack = switch_map_message.getFromMap()->getMapPack();
+        const CMapPackPtr nextPack = switch_map_message->getToMap()->getMapPack();
+        const CMapPackPtr currPack = switch_map_message->getFromMap()->getMapPack();
 
         Ogre::Vector3 vMapPositionOffset = currPack->getGlobalPosition() - nextPack->getGlobalPosition();
 
         m_pCamera->setPosition(m_pCamera->getPosition() + vMapPositionOffset);
-      }
-      else {
-        const CMapPackPtr pack = switch_map_message.getFromMap()->getMapPack();
+      } else {
+        const CMapPackPtr pack = switch_map_message->getFromMap()->getMapPack();
         Ogre::Vector2 vSize(pack->getGlobalSize().x, pack->getGlobalSize().y);
         m_vMinCamPoint = -vSize / 2;
         m_vMaxCamPoint = vSize / 2;
@@ -139,17 +138,17 @@ void CAerialCameraPerspective::sendMessageToAll(const CMessage &message) {
         updateCamera(1000);
       }
     }
-    else if (switch_map_message.getStatus() == CMessageSwitchMap::FINISHED) {
+    else if (switch_map_message->getStatus() == CMessageSwitchMap::FINISHED) {
       m_bSwitchingMap = false;
 
-      const CMapPackPtr pack = switch_map_message.getFromMap()->getMapPack();
+      const CMapPackPtr pack = switch_map_message->getFromMap()->getMapPack();
       Ogre::Vector2 vSize(pack->getGlobalSize().x, pack->getGlobalSize().y);
       m_vMinCamPoint = -vSize / 2;
       m_vMaxCamPoint = vSize / 2;
 
       m_fVisionLevelOffset = pack->getVisionLevelOffset();
 
-      if (switch_map_message.getSwitchMapType() != SMT_MOVE_CAMERA) {
+      if (switch_map_message->getSwitchMapType() != SMT_MOVE_CAMERA) {
         // move camera to new point
         updateCamera(1000);
       }

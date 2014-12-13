@@ -27,6 +27,7 @@ public:
   ~CZelda();
 protected:
   void initSingletons();
+  virtual void destroySingletons();
   void initEnumIdMaps();
   void chooseGameState();
 

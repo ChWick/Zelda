@@ -33,21 +33,11 @@ class CMessageHandler
 private:
   mutable std::mutex mMutex;
   mutable std::mutex mInjectorMutex;
-  struct SMessageEntry {
-    bool bAutoDelete;
-    const CMessage *pMessage;
-
-    ~SMessageEntry() {
-      if (bAutoDelete) {
-        delete pMessage;
-      }
-    }
-  };
 
   std::list<CMessageInjector*> m_lInjectors;
   std::list<CMessageInjector*> m_lInjectorsToAdd;
   std::list<CMessageInjector*> m_lInjectorsToRemove;
-  std::list<std::unique_ptr<SMessageEntry> > m_lMessages;
+  std::list<MessageEntryType> m_lMessages;
 public:
   static CMessageHandler &getSingleton();
   static CMessageHandler *getSingletonPtr();
@@ -57,7 +47,7 @@ public:
   void addInjector(CMessageInjector *pInjector);
   void removeInjector(CMessageInjector *pInjector);
 
-  void addMessage(const CMessage *m, bool bAutoDelete = true);
+  void addMessage(CMessagePtr m);
 };
 
 #endif

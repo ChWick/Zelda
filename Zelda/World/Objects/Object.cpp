@@ -83,6 +83,9 @@ CObject::CObject(const std::string &id,
   }
 }
 
+CObject::~CObject() {
+}
+
 void CObject::init() {
   createPhysics();
 
@@ -97,6 +100,10 @@ void CObject::init() {
     default:
       break;
   }
+}
+
+void CObject::exit() {
+  destroyPhysics();
 }
 
 void CObject::destroyPhysics() {
@@ -143,7 +150,7 @@ void CObject::createPhysics() {
   ASSERT(pCollisionShape);
 
   pCollisionShape->calculateLocalInertia(fMass, vInertia);
-  
+
   btMotionState *pMotionState(nullptr);
   if (m_ObjectTypeData.bPermanentStatic) {
     pMotionState = new btDefaultMotionState(
@@ -236,7 +243,7 @@ void CObject::makePickable() {
   pEvent->addAction(pDeleteThisAction);
 
   CAction *pMessageAction
-      = new CActionMessage(new CMessagePlayerPickupItem(m_uiType), *pEvent);
+      = new CActionMessage(std::make_shared<CMessagePlayerPickupItem>(m_uiType, __MSG_LOCATION__), *pEvent);
   pEvent->addAction(pMessageAction);
 
   addEvent(pEvent);
@@ -381,7 +388,7 @@ CObject::EReceiveDamageResult CObject::hit(const CDamage &dmg) {
     // pickup item
     deleteLater();
     CMessageHandler::getSingleton().addMessage(
-        new CMessagePlayerPickupItem(m_uiType));
+        std::make_shared<CMessagePlayerPickupItem>(m_uiType, __MSG_LOCATION__));
     break;
   default:
     break;

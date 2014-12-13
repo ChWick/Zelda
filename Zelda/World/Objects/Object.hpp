@@ -29,9 +29,11 @@ protected:
   const SObjectTypeData &m_ObjectTypeData;
   InnerObject::CGenerator mInnerObjectGenerator;
 public:
-   CObject(const std::string &id, CWorldEntity *pParent, CMap *pMap, EObjectTypes eObjectType, Ogre::SceneNode *pSceneNode = nullptr);
+  CObject(const std::string &id, CWorldEntity *pParent, CMap *pMap, EObjectTypes eObjectType, Ogre::SceneNode *pSceneNode = nullptr);
+  virtual ~CObject();
 
   void init();
+  void exit();
 
   virtual void enterMap(CMap *pMap, const Ogre::Vector3 &vPosition);
 

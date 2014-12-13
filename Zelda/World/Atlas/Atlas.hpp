@@ -65,7 +65,7 @@ public:
   bool frameEnded(const Ogre::FrameEvent& evt);
 
 protected:
-  void handleMessage(const CMessage &message);
+  void handleMessage(const CMessagePtr message);
   void updatePause(int iPauseType, bool bPause);
 
   virtual void fadeInCallback();

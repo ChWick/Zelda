@@ -30,11 +30,11 @@ protected:
 const CEntityProperty &mProperty;
 
 public:
-CMessageEntityDataChanged(const CEntityProperty &property)
-  : CMessage(MSG_ENTITY_DATA_CHANGED), 
-    mProperty(property) {
-}
-  
+  CMessageEntityDataChanged(const CEntityProperty &property, const std::string &creationFile)
+    : CMessage(MSG_ENTITY_DATA_CHANGED, creationFile),
+      mProperty(property) {
+  }
+
   const CEntityProperty &getProperty() const {return mProperty;}
 };
 

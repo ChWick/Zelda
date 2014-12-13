@@ -83,35 +83,6 @@ CGame::CGame(void)
 }
 //-------------------------------------------------------------------------------------
 CGame::~CGame(void) {
-  if (DebugDrawer::getSingletonPtr()) {delete DebugDrawer::getSingletonPtr();}
-  if (mTrayMgr) delete mTrayMgr;
-  if (mCameraMan) delete mCameraMan;
-  if (CGameStateManager::getSingletonPtr()) { CEntityManager::getSingleton().deleteNow(CGameStateManager::getSingletonPtr()); }
-  if (CGUIManager::getSingletonPtr()) {delete CGUIManager::getSingletonPtr();}
-  if (CGameInputManager::getSingletonPtr()) {delete CGameInputManager::getSingletonPtr();}
-  if (CInputListenerManager::getSingletonPtr()) {delete CInputListenerManager::getSingletonPtr();}
-  if (CPauseManager::getSingletonPtr()) {delete CPauseManager::getSingletonPtr();}
-  if (MESSAGE_CREATOR::getSingletonPtr()) {delete MESSAGE_CREATOR::getSingletonPtr();}
-  if (CGameMemory::getSingletonPtr()) {delete CGameMemory::getSingletonPtr();}
-  if (CGameLogicGarbageCollector::getSingletonPtr()) {delete CGameLogicGarbageCollector::getSingletonPtr();}
-
-  if (CMessageHandler::getSingletonPtr()) {
-    delete CMessageHandler::getSingletonPtr();
-  }
-  if (CEntityManager::getSingletonPtr()) {delete CEntityManager::getSingletonPtr();}
-
-  OGRE_DELETE_T(mFSLayer, FileSystemLayer, Ogre::MEMCATEGORY_GENERAL);
-  //Remove ourself as a Window listener
-  Ogre::WindowEventUtilities::removeWindowEventListener(mWindow, this);
-  windowClosed(mWindow);
-  if (mRoot) {
-#if OGRE_VERSION >= ((1 << 16) | (9 << 8) | 0)
-    if (mOverlaySystem) {OGRE_DELETE mOverlaySystem;}
-#endif
-    delete Ogre::ResourceGroupManager::getSingleton()._getResourceManager("LuaScript");
-
-    OGRE_DELETE mRoot;
-  }
 }
 void CGame::go() {
   initApp();
@@ -145,15 +116,43 @@ bool CGame::oneTimeConfig() {
   }
   return true;
 }
+
+void CGame::destroySingletons() {
+  if (DebugDrawer::getSingletonPtr()) {delete DebugDrawer::getSingletonPtr();}
+  if (mTrayMgr) {delete mTrayMgr; mTrayMgr = nullptr;}
+  if (mCameraMan) delete mCameraMan;
+  if (CGameStateManager::getSingletonPtr()) { CEntityManager::getSingleton().deleteNow(CGameStateManager::getSingletonPtr()); }
+  if (CGUIManager::getSingletonPtr()) {delete CGUIManager::getSingletonPtr();}
+  if (CGameInputManager::getSingletonPtr()) {delete CGameInputManager::getSingletonPtr();}
+  if (CInputListenerManager::getSingletonPtr()) {delete CInputListenerManager::getSingletonPtr();}
+  if (CPauseManager::getSingletonPtr()) {delete CPauseManager::getSingletonPtr();}
+  if (MESSAGE_CREATOR::getSingletonPtr()) {delete MESSAGE_CREATOR::getSingletonPtr();}
+  if (CGameMemory::getSingletonPtr()) {delete CGameMemory::getSingletonPtr();}
+  if (CGameLogicGarbageCollector::getSingletonPtr()) {delete CGameLogicGarbageCollector::getSingletonPtr();}
+
+  if (CMessageHandler::getSingletonPtr()) {
+    delete CMessageHandler::getSingletonPtr();
+  }
+  if (CEntityManager::getSingletonPtr()) {delete CEntityManager::getSingletonPtr();}
+}
+
 void CGame::closeApp() {
+  destroySingletons();
+  OGRE_DELETE_T(mFSLayer, FileSystemLayer, Ogre::MEMCATEGORY_GENERAL);
+
 #if OGRE_PLATFORM == OGRE_PLATFORM_ANDROID
     shutdown();
 #else
+    //Remove ourself as a Window listener
+    Ogre::WindowEventUtilities::removeWindowEventListener(mWindow, this);
+    windowClosed(mWindow);
+
     mRoot->saveConfig();
     shutdown();
     if (mRoot)
       {
     OGRE_DELETE mOverlaySystem;
+    delete Ogre::ResourceGroupManager::getSingleton()._getResourceManager("LuaScript");
     OGRE_DELETE mRoot;
   }
 #ifdef OGRE_STATIC_LIB
@@ -666,9 +665,9 @@ bool CGame::frameEnded(const Ogre::FrameEvent& evt) {
   m_pGameStateManager->frameEnded(evt);
 
   // limit framerate
-  Ogre::Real ttW = 1000.0 / 30.f - 1000.0 * evt.timeSinceLastFrame; 
+  Ogre::Real ttW = 1000.0 / 30.f - 1000.0 * evt.timeSinceLastFrame;
   if (ttW > 0) msleep(ttW);
-  
+
   return true;
 }
 
@@ -883,11 +882,11 @@ void CGame::windowClosed(Ogre::RenderWindow* rw)
 }
 
 // CMessageInjector
-void CGame::sendMessageToAll(const CMessage &message) {
-  if (message.getType() == MSG_DEBUG) {
-    const CMessageDebug &dbg_msg(dynamic_cast<const CMessageDebug &>(message));
-    if (dbg_msg.getDebugType() == CMessageDebug::DM_TOGGLE_DEBUG_DRAWER) {
-      m_bDebugDrawerEnabled = dbg_msg.isActive();
+void CGame::sendMessageToAll(const CMessagePtr message) {
+  if (message->getType() == MSG_DEBUG) {
+    auto dbg_msg(std::dynamic_pointer_cast<const CMessageDebug>(message));
+    if (dbg_msg->getDebugType() == CMessageDebug::DM_TOGGLE_DEBUG_DRAWER) {
+      m_bDebugDrawerEnabled = dbg_msg->isActive();
     }
   }
 }

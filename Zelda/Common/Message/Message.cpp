@@ -22,11 +22,18 @@
 
 using namespace XMLHelper;
 
-CMessage::CMessage(unsigned int type, const tinyxml2::XMLElement *pElement)
-  : m_Type(type) {
+CMessage::CMessage(unsigned int type,
+                   const tinyxml2::XMLElement *pElement,
+                   const std::string &creationFile)
+  : m_Type(type),
+    mCreationFile(creationFile) {
 }
-CMessage::CMessage(unsigned int type)
-  : m_Type(type) {
+
+CMessage::CMessage(unsigned int type,
+                   const std::string &creationFile)
+  : m_Type(type),
+    mCreationFile(creationFile) {
 }
+
 CMessage::~CMessage() {
 }

@@ -22,5 +22,5 @@
 #include "../Message/MessageEntityDataChanged.hpp"
 
 void CEntityProperty::dataChanged() {
-  CMessageHandler::getSingleton().addMessage(new CMessageEntityDataChanged(*this));
+  CMessageHandler::getSingleton().addMessage(std::make_shared<CMessageEntityDataChanged>(*this, __FILE__));
 }

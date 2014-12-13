@@ -30,11 +30,16 @@
 #include "TextConverter.hpp"
 
 CZelda::~CZelda() {
-  if (CTextConverter::getSingletonPtr()) {delete CTextConverter::getSingletonPtr();}
 }
 
 void CZelda::initSingletons() {
+  CGame::initSingletons();
   new CTextConverter();
+}
+
+void CZelda::destroySingletons() {
+  if (CTextConverter::getSingletonPtr()) {delete CTextConverter::getSingletonPtr();}
+  CGame::destroySingletons();
 }
 
 void CZelda::initEnumIdMaps() {

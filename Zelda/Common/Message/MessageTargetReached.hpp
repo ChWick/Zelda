@@ -30,7 +30,7 @@ protected:
   ENTITY *m_pEntity;
 
 public:
-  CMessageTargetReached(ENTITY *pEntity);
+  CMessageTargetReached(ENTITY *pEntity, const std::string &creationFile);
 
   ENTITY *getEntity() const {return m_pEntity;}
 };

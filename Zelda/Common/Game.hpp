@@ -68,6 +68,7 @@ public:
   CGame(void);
   virtual ~CGame(void);
 
+
   static CGame &getSingleton();
   static CGame *getSingletonPtr();
 
@@ -168,7 +169,7 @@ protected:
   virtual void windowClosed(Ogre::RenderWindow* rw);
 
   // MessageInjector
-  void sendMessageToAll(const CMessage &message);
+  void sendMessageToAll(const CMessagePtr message);
 private:
   void createRoot();
   void setup();
@@ -212,6 +213,7 @@ private:
 protected:
   // virtual function to setup user game
   virtual void initSingletons() {}
+  virtual void destroySingletons();
   virtual void initEnumIdMaps();
   virtual void chooseGameState() {}
   virtual void postGUIManagerInitialised() {}

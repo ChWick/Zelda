@@ -73,7 +73,7 @@ public:
   void addStaticEntity(const std::string &entity, const Ogre::Vector3 &vPosition, const Ogre::Quaternion &vRotation);
 
 private:
-  void handleMessage(const CMessage &message);
+  void handleMessage(const CMessagePtr message);
   void updatePause(int iPauseType, bool bPause);
   void rebuildStaticGeometryChangedTiles();
   void processCollisionCheck();

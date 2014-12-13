@@ -51,7 +51,7 @@ class CEntity : public CMessageInjector {
  public:
   //! get debug information: number of generated entities
   static uint16_t getNumberOfInstances() {return mNumberOfInstances;}
-  
+
 protected:
   std::string m_sID;                          //!< id of the entity
   std::string m_sResourceGroup;               //!< in which resource group to search for entities resources
@@ -107,7 +107,7 @@ public:
   void destroyEvent(events::CEvent *pEvent);
 
   // messages access
-  void sendMessageToAll(const CMessage &message);
+  void sendMessageToAll(const CMessagePtr message);
 
   // methods
   virtual void init();
@@ -182,7 +182,7 @@ public:
 
 protected:
 
-  virtual void handleMessage(const CMessage &message);
+  virtual void handleMessage(const CMessagePtr message);
 };
 
 

@@ -19,7 +19,7 @@
 
 #include "MessageTargetReached.hpp"
 
-CMessageTargetReached::CMessageTargetReached(ENTITY *pEntity)
-  : CMessage(MSG_TARGET_REACHED),
+CMessageTargetReached::CMessageTargetReached(ENTITY *pEntity, const std::string &creationFile)
+  : CMessage(MSG_TARGET_REACHED, creationFile),
     m_pEntity(pEntity){
 }

@@ -33,7 +33,7 @@ protected:
 
   CEntity *m_Entity;
 public:
-  CMessageEntityStateChanged(EEntityStateTypes eOldState, EEntityStateTypes eNewState, CEntity *entity);
+  CMessageEntityStateChanged(EEntityStateTypes eOldState, EEntityStateTypes eNewState, CEntity *entity, const std::string &creationFile);
 
   EEntityStateTypes getOldState() const {return m_eOldState;}
   EEntityStateTypes getNewState() const {return m_eNewState;}

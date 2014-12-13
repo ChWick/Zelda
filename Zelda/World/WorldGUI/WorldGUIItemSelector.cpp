@@ -92,7 +92,7 @@ bool CWorldGUIItemSelector::onSelectedItemChanged(const CEGUI::EventArgs &args) 
   ASSERT(items.size() > 0);
   if (items.size() == 1) {
     // just select the item
-    CMessageHandler::getSingleton().addMessage(new CMessageItem(CMessageItem::IM_SELECTION_CHANGED, nullptr, m_eCurrentItemSlot, items.front()));
+    CMessageHandler::getSingleton().addMessage(std::make_shared<CMessageItem>(__MSG_LOCATION__, CMessageItem::IM_SELECTION_CHANGED, nullptr, m_eCurrentItemSlot, items.front()));
   } else {
     // display a selection window
     m_pMultipleSelector = new CWorldGUIItemSelectorMultipleSelect(items, m_pRoot, wnd_args.window->getPosition(), wnd_args.window->getPixelSize().d_width);
@@ -124,22 +124,22 @@ bool CWorldGUIItemSelector::updateItemStatus(const SItemStatus &itemStatus) {
   return true;
 }
 
-void CWorldGUIItemSelector::handleMessage(const CMessage &message) {
-  if (message.getType() == MSG_ITEM) {
-    const CMessageItem &messageItem(dynamic_cast<const CMessageItem&>(message));
-    if (messageItem.getItemMessageType() == CMessageItem::IM_STATUS_LOADED) {
-      ASSERT(messageItem.getStatusStorage());
+void CWorldGUIItemSelector::handleMessage(const CMessagePtr message) {
+  if (message->getType() == MSG_ITEM) {
+    auto messageItem(std::dynamic_pointer_cast<const CMessageItem>(message));
+    if (messageItem->getItemMessageType() == CMessageItem::IM_STATUS_LOADED) {
+      ASSERT(messageItem->getStatusStorage());
 
       for (int i = 0; i < ITEM_SLOT_COUNT; i++) {
-        updateItemStatus(messageItem.getStatusStorage()->getStatus(static_cast<EItemSlotTypes>(i)));
+        updateItemStatus(messageItem->getStatusStorage()->getStatus(static_cast<EItemSlotTypes>(i)));
       }
 
       selectFirstAvailable();
-    } else if (messageItem.getItemMessageType() == CMessageItem::IM_SELECTION_CHANGED) {
+    } else if (messageItem->getItemMessageType() == CMessageItem::IM_SELECTION_CHANGED) {
       //dynamic_cast<ToggleButton*>(getWindowFromItem(messageItem))->setSelected(true);
-    } else if (messageItem.getItemMessageType() == CMessageItem::IM_STATUS_CHANGED) {
-      ASSERT(messageItem.getStatusStorage());
-      updateItemStatus(messageItem.getStatusStorage()->getStatus(messageItem.getItemSlotType()));
+    } else if (messageItem->getItemMessageType() == CMessageItem::IM_STATUS_CHANGED) {
+      ASSERT(messageItem->getStatusStorage());
+      updateItemStatus(messageItem->getStatusStorage()->getStatus(messageItem->getItemSlotType()));
     }
   }
 }
@@ -284,7 +284,8 @@ bool CWorldGUIItemSelectorMultipleSelect::onSelectedItemChanged(const CEGUI::Eve
 
   const EItemVariantTypes eItemVariant(*static_cast<EItemVariantTypes*>(wnd_args.window->getUserData()));
   CMessageHandler::getSingleton().addMessage(
-      new CMessageItem(CMessageItem::IM_SELECTION_CHANGED,
+      std::make_shared<CMessageItem>(__MSG_LOCATION__,
+                                     CMessageItem::IM_SELECTION_CHANGED,
                        nullptr,
                        ITEM_SLOT_DATA_MAP.getFromItemVariant(eItemVariant),
                        eItemVariant));

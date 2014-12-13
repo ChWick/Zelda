@@ -32,6 +32,6 @@ public:
   ~CWorldGUI();
 
 protected:
-  void handleMessage(const CMessage &message);
+  void handleMessage(const CMessagePtr message);
 };
 #endif // _WORLD_GUI_HPP_

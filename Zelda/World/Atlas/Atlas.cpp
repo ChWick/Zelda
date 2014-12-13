@@ -88,11 +88,12 @@ CAtlas::CAtlas(CEntity *pParent, Ogre::SceneNode *pRootSceneNode)
   m_pCurrentMap->start();
 
   CMessageHandler::getSingleton().addMessage(
-      new CMessageSwitchMap(m_pCurrentMap->getMapPack()->getName(),
-                            CMessageSwitchMap::FINISHED,
-                            m_eSwitchMapType,
-                            m_pCurrentMap,
-                            nullptr));
+      std::make_shared<CMessageSwitchMap>(__FILE__,
+                                          m_pCurrentMap->getMapPack()->getName(),
+                                          CMessageSwitchMap::FINISHED,
+                                          m_eSwitchMapType,
+                                          m_pCurrentMap,
+                                          nullptr));
 
   mEllipticFader.startFadeIn(1);
 
@@ -170,17 +171,17 @@ bool CAtlas::frameEnded(const Ogre::FrameEvent& evt) {
   return CWorldEntity::frameEnded(evt);
 }
 
-void CAtlas::handleMessage(const CMessage &message) {
-  if (message.getType() == MSG_SWITCH_MAP) {
+void CAtlas::handleMessage(const CMessagePtr message) {
+  if (message->getType() == MSG_SWITCH_MAP) {
     if (m_bSwitchingMaps) {return;}
-    const CMessageSwitchMap &switch_map_message(
-        dynamic_cast<const CMessageSwitchMap&>(message));
-    if (switch_map_message.getStatus() == CMessageSwitchMap::INJECT) {
-      LOGI("Atlas: changing map to '%s'", switch_map_message.getMap().c_str());
+    auto switch_map_message(
+        std::dynamic_pointer_cast<const CMessageSwitchMap>(message));
+    if (switch_map_message->getStatus() == CMessageSwitchMap::INJECT) {
+      LOGI("Atlas: changing map to '%s'", switch_map_message->getMap().c_str());
       // get new switch type
-      m_eSwitchMapType = switch_map_message.getSwitchMapType();
-      m_sNextMap = switch_map_message.getMap();
-      m_sNextMapEntrance = switch_map_message.getTargetEntrance();
+      m_eSwitchMapType = switch_map_message->getSwitchMapType();
+      m_sNextMap = switch_map_message->getMap();
+      m_sNextMapEntrance = switch_map_message->getTargetEntrance();
       m_bSwitchingMaps = true;
 
       if (m_eSwitchMapType == SMT_MOVE_CAMERA) {
@@ -193,7 +194,7 @@ void CAtlas::handleMessage(const CMessage &message) {
                        CMapPackPtr(new CMapPack(
                            CFileManager::getResourcePath(
                                "maps/Atlases/LightWorld/"),
-                           switch_map_message.getMap())),
+                           switch_map_message->getMap())),
                        m_pSceneNode,
                        m_pPlayer);
         mFirstFrame = true;
@@ -236,7 +237,8 @@ void CAtlas::handleMessage(const CMessage &message) {
         m_bPlayerTargetReached = false;
 
         CMessageHandler::getSingleton().addMessage(
-            new CMessageSwitchMap(m_pNextMap->getMapPack()->getName(),
+            std::make_shared<CMessageSwitchMap>(__FILE__,
+                                                m_pNextMap->getMapPack()->getName(),
                                   CMessageSwitchMap::SWITCHING,
                                   m_eSwitchMapType,
                                   m_pCurrentMap,
@@ -250,10 +252,10 @@ void CAtlas::handleMessage(const CMessage &message) {
         pause(PAUSE_PLAYER_UPDATE | PAUSE_MAP_UPDATE);
       }
     }
-  } else if (message.getType() == MSG_TARGET_REACHED) {
-    const CMessageTargetReached &message_target_reached(
-        dynamic_cast<const CMessageTargetReached &>(message));
-    if (message_target_reached.getEntity() == m_pPlayer) {
+  } else if (message->getType() == MSG_TARGET_REACHED) {
+    auto message_target_reached(
+        std::dynamic_pointer_cast<const CMessageTargetReached>(message));
+    if (message_target_reached->getEntity() == m_pPlayer) {
       if (m_bSwitchingMaps) {
         CMap *pMap;
         if (m_eSwitchMapType != SMT_MOVE_CAMERA) {
@@ -267,7 +269,8 @@ void CAtlas::handleMessage(const CMessage &message) {
 
         pMap->start();
         CMessageHandler::getSingleton().addMessage(
-            new CMessageSwitchMap(m_pCurrentMap->getMapPack()->getName(),
+            std::make_shared<CMessageSwitchMap>(__MSG_LOCATION__,
+                                                m_pCurrentMap->getMapPack()->getName(),
                                   CMessageSwitchMap::FINISHED,
                                   m_eSwitchMapType,
                                   pMap,
@@ -322,7 +325,8 @@ void CAtlas::fadeOutCallback() {
     unpause(PAUSE_ALL);
 
     CMessageHandler::getSingleton().addMessage(
-        new CMessageSwitchMap(m_pCurrentMap->getMapPack()->getName(),
+        std::make_shared<CMessageSwitchMap>(__FILE__,
+                                            m_pCurrentMap->getMapPack()->getName(),
                               CMessageSwitchMap::SWITCHING,
                               m_eSwitchMapType,
                               m_pCurrentMap,

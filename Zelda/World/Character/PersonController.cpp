@@ -363,7 +363,7 @@ void CPersonController::targetReached() {
   changeMoveState(MS_NORMAL);  // reset our state
 
   CMessageHandler::getSingleton().addMessage(
-      new CMessageTargetReached(mCCPerson));
+      std::make_shared<CMessageTargetReached>(mCCPerson, __MSG_LOCATION__));
 }
 
 void CPersonController::requestingJumpSpeed(float *horizontal,

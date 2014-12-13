@@ -305,16 +305,16 @@ void CPlayer::postStepForwardAndStrafe() {
   }
 }
 
-void CPlayer::handleMessage(const CMessage &message) {
-  if (message.getType() == MSG_ITEM) {
-    const CMessageItem &msg_item(dynamic_cast<const CMessageItem&>(message));
-    if (msg_item.getItemMessageType() == CMessageItem::IM_SELECTION_CHANGED) {
-      changeItem(CIS_TOOL, PERSON_LEFT_HANDLE, msg_item.getItemVariantType());
+void CPlayer::handleMessage(const CMessagePtr message) {
+  if (message->getType() == MSG_ITEM) {
+    auto msg_item(std::dynamic_pointer_cast<const CMessageItem>(message));
+    if (msg_item->getItemMessageType() == CMessageItem::IM_SELECTION_CHANGED) {
+      changeItem(CIS_TOOL, PERSON_LEFT_HANDLE, msg_item->getItemVariantType());
     }
-  } else if (message.getType() == MSG_PLAYER_PICKUP_ITEM) {
-    const CMessagePlayerPickupItem &msg_pui(
-        dynamic_cast<const CMessagePlayerPickupItem&>(message));
-    switch (msg_pui.getItemType()) {
+  } else if (message->getType() == MSG_PLAYER_PICKUP_ITEM) {
+    auto msg_pui(
+        std::dynamic_pointer_cast<const CMessagePlayerPickupItem>(message));
+    switch (msg_pui->getItemType()) {
       case OBJECT_HEART:
         changeHP(HP_ONE_HEART);
         break;
@@ -331,11 +331,11 @@ void CPlayer::handleMessage(const CMessage &message) {
         // object tools are handled in CWorld
         break;
     }
-  } else if (message.getType() == MSG_ENTITY_STATE_CHANGED) {
-    const CMessageEntityStateChanged &msg_esc(
-        dynamic_cast<const CMessageEntityStateChanged&>(message));
-    if (m_pLiftedEntity && msg_esc.getEntity() == m_pLiftedEntity) {
-      if (msg_esc.getNewState() == EST_DELETE) {
+  } else if (message->getType() == MSG_ENTITY_STATE_CHANGED) {
+    auto msg_esc(
+        std::dynamic_pointer_cast<const CMessageEntityStateChanged>(message));
+    if (m_pLiftedEntity && msg_esc->getEntity() == m_pLiftedEntity) {
+      if (msg_esc->getNewState() == EST_DELETE) {
         // entity was deleted, reset it
         m_pLiftedEntity = nullptr;
       }

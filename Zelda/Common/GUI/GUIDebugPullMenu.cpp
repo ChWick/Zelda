@@ -99,13 +99,13 @@ CEGUI::Window *CGUIDebugPullMenu::createFrameStatsButton(const CEGUI::String &id
 
 bool CGUIDebugPullMenu::onToggleDebugDrawer(const CEGUI::EventArgs &args) {
   ToggleButton *pTB = dynamic_cast<ToggleButton*>(dynamic_cast<const WindowEventArgs&>(args).window);
-  CMessageHandler::getSingleton().addMessage(new CMessageDebug(CMessageDebug::DM_TOGGLE_DEBUG_DRAWER, pTB->isSelected()));
+  CMessageHandler::getSingleton().addMessage(std::make_shared<CMessageDebug>(CMessageDebug::DM_TOGGLE_DEBUG_DRAWER, pTB->isSelected(), __FILE__));
   return true;
 }
 
 bool CGUIDebugPullMenu::onTogglePhysics(const CEGUI::EventArgs &args) {
   ToggleButton *pTB = dynamic_cast<ToggleButton*>(dynamic_cast<const WindowEventArgs&>(args).window);
-  CMessageHandler::getSingleton().addMessage(new CMessageDebug(CMessageDebug::DM_TOGGLE_PHYSICS, pTB->isSelected()));
+  CMessageHandler::getSingleton().addMessage(std::make_shared<CMessageDebug>(CMessageDebug::DM_TOGGLE_PHYSICS, pTB->isSelected(), __FILE__));
   return true;
 }
 
@@ -114,7 +114,7 @@ void CGUIDebugPullMenu::update(Ogre::Real tpf) {
   if (getDragState() != DS_SLEEPING) {
     const Ogre::RenderTarget::FrameStats stats(CGame::getSingleton().getRenderWindow()->getStatistics());
     Ogre::SceneManager *sceneMgr = CGame::getSingleton().getSceneManager();
-    
+
     m_pFrameStatsGroup->setText("FPS: " + PropertyHelper<int>::toString(stats.lastFPS));
     m_pAverageFps->setText(PropertyHelper<int>::toString(stats.avgFPS));
     m_pBestFps->setText(PropertyHelper<int>::toString(stats.bestFPS));

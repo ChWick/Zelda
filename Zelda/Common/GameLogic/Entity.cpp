@@ -291,7 +291,7 @@ void CEntity::destroyEvent(CEvent *pEvent) {
   mEventToDeleteAccessedMutex.unlock();
 }
 
-void CEntity::sendMessageToAll(const CMessage &message) {
+void CEntity::sendMessageToAll(const CMessagePtr message) {
   handleMessage(message);
   for (auto pChild : m_lChildren) {
     pChild->sendMessageToAll(message);
@@ -407,7 +407,8 @@ void CEntity::writeToXMLElement(tinyxml2::XMLElement *pElement, EOutputStyle eSt
     }
   }
 }
-void CEntity::handleMessage(const CMessage &message) {
+
+void CEntity::handleMessage(const CMessagePtr message) {
 }
 
 
@@ -428,11 +429,11 @@ void CEntity::clearEvents() {
 void CEntity::moveToTarget(const SPATIAL_VECTOR &vPosition, const Ogre::Quaternion &qRotation, const Ogre::Real fMaxDistanceDeviation, const Ogre::Radian fMaxAngleDeviation) {
   setPosition(vPosition);
   setOrientation(qRotation);
-  CMessageHandler::getSingleton().addMessage(new CMessageTargetReached(this));
+  CMessageHandler::getSingleton().addMessage(std::make_shared<CMessageTargetReached>(this, __FILE__));
 }
 
 void CEntity::changeState(EEntityStateTypes eState) {
-  CMessageHandler::getSingleton().addMessage(new CMessageEntityStateChanged(m_eState, eState, this));
+  CMessageHandler::getSingleton().addMessage(std::make_shared<CMessageEntityStateChanged>(m_eState, eState, this, __FILE__));
 
   m_eState = eState;
 }

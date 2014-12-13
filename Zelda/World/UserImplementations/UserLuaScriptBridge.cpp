@@ -87,6 +87,7 @@ int textMessage(lua_State *l) {
   LOGV("Lua: Creating text message");
   CMessageHandler::getSingleton().addMessage(
       CMessageCreator::getSingleton().createMessage(doc.FirstChildElement(),
+                                                    __MSG_LOCATION__,
                                                     Ogre::Any(result)));
 
   LOGV("Lua: Waiting for closing of message box");
@@ -129,11 +130,10 @@ class CMoveToWait : public CMessageInjector {
   }
 
  protected:
-  void sendMessageToAll(const CMessage &m) {
-    if (m.getType() == MSG_TARGET_REACHED) {
-      const CMessageTargetReached &mtr(
-          dynamic_cast<const CMessageTargetReached&>(m));
-      if (mtr.getEntity() == mEntity) {
+  void sendMessageToAll(const CMessagePtr m) {
+    if (m->getType() == MSG_TARGET_REACHED) {
+      auto mtr(std::dynamic_pointer_cast<const CMessageTargetReached>(m));
+      if (mtr->getEntity() == mEntity) {
         mMutex.lock();
         mReached = true;
         mMutex.unlock();

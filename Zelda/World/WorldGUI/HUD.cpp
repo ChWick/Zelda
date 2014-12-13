@@ -53,34 +53,34 @@ CHUD::CHUD(CEntity *pParentEntity, CEGUI::Window *pParentWindow)
   m_pArrowCounter = new CGUICounter("counter_arrow", this, m_pRoot, 4, "hud/Arrows", UVector2(UDim(0.4, 0), UDim(0.05, 0)));
 }
 
-void CHUD::handleMessage(const CMessage &message) {
-  if (message.getType() == MSG_HITPOINTS_CHANGED) {
-    const CMessageHitpointsChanged &msg_hp_change(
-        dynamic_cast<const CMessageHitpointsChanged&>(message));
+void CHUD::handleMessage(const CMessagePtr message) {
+  if (message->getType() == MSG_HITPOINTS_CHANGED) {
+    auto msg_hp_change(
+        std::dynamic_pointer_cast<const CMessageHitpointsChanged>(message));
     const CWorldEntity *pWE(dynamic_cast<const CWorldEntity *>(
-        &msg_hp_change.getHitableInterface()));
+        &msg_hp_change->getHitableInterface()));
     if (pWE && pWE->getID() == "player") {
       m_pHeartsDisplay->changeMaximalHitpoints(
-          msg_hp_change.getHitableInterface().getMaxHP());
+          msg_hp_change->getHitableInterface().getMaxHP());
       m_pHeartsDisplay->changeCurrentHitpoints(
-          msg_hp_change.getHitableInterface().getCurrentHP());
+          msg_hp_change->getHitableInterface().getCurrentHP());
     }
-  } else if (message.getType() == MSG_ITEM) {
-    const CMessageItem &msg_item(dynamic_cast<const CMessageItem&>(message));
-    if (msg_item.getItemMessageType() == CMessageItem::IM_SELECTION_CHANGED) {
+  } else if (message->getType() == MSG_ITEM) {
+    auto msg_item(std::dynamic_pointer_cast<const CMessageItem>(message));
+    if (msg_item->getItemMessageType() == CMessageItem::IM_SELECTION_CHANGED) {
       m_pCurrentItemDisplay->setProperty(
           "Image",
           "hud/" + ITEM_VARIANT_DATA_MAP.toData(
-              msg_item.getItemVariantType()).sImagesetName);
+              msg_item->getItemVariantType()).sImagesetName);
     }
-  } else if (message.getType() == MSG_ENTITY_DATA_CHANGED) {
-    const CMessageEntityDataChanged &msg_edc(
-        dynamic_cast<const CMessageEntityDataChanged &>(message));
-    int propertyId(msg_edc.getProperty().getID());
+  } else if (message->getType() == MSG_ENTITY_DATA_CHANGED) {
+    auto msg_edc(
+        std::dynamic_pointer_cast<const CMessageEntityDataChanged>(message));
+    int propertyId(msg_edc->getProperty().getID());
     if (propertyId == ENTITY_PROPERTY_RUPEE) {
       m_pRupeeCounter->setDesiredCount(
           dynamic_cast<const CEntityIntProperty&>(
-              msg_edc.getProperty()).getData());
+              msg_edc->getProperty()).getData());
     }
   }
 }

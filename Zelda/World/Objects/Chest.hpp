@@ -52,6 +52,7 @@ private:
   Ogre::Real mTimer;
 public:
   CChest(const std::string &sID, CWorldEntity *pParent, CMap *pMap, EChestType chestType);
+  ~CChest();
 
   void start();
   void update(Ogre::Real);
@@ -62,7 +63,7 @@ public:
 private:
 
   SInteractionResult interactOnActivate(const Ogre::Vector3 &vInteractDir, CWorldEntity *pSender);
-  void handleMessage(const CMessage &message);
+  void handleMessage(const CMessagePtr message);
 
   void open();
   void onLifted();

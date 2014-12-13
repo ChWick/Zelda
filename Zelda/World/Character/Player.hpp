@@ -31,7 +31,7 @@ private:
   const Ogre::Camera *m_pCamera;
   Ogre::SceneManager *m_pPlayerSceneManager;
   CWorldEntity *m_pLiftedEntity;
-  
+
   Ogre::RibbonTrail* mSwordTrail;
 
   // properties, that notyfy world when updated
@@ -40,7 +40,7 @@ public:
 
   CPlayer(CEntity *pParent, const Ogre::Camera *pCamera, Ogre::SceneManager *pPlayerSceneManager);
   virtual ~CPlayer();
-  
+
   void update(Ogre::Real tpf);
   void renderDebug(Ogre::Real tpf);
   void startup(const Ogre::Vector3 &playerPos, const Ogre::Vector3 &playerLookDirection, const Ogre::Real cameraYaw, const Ogre::Real cameraPitch);
@@ -60,11 +60,11 @@ protected:
   void lift(CWorldEntity *pObjectToLift);
   void throwLifted();
   void postStepForwardAndStrafe();
-  
+
   virtual CCharacterController *createCharacterController();
-  
+
 private:
-  void handleMessage(const CMessage &message);
+  void handleMessage(const CMessagePtr message);
 };
 
 #endif // _PLAYER_HPP_

@@ -74,7 +74,7 @@ int message(lua_State *l) {
   XMLDocument doc;
   doc.Parse(lua_tostring(l, 1));
 
-  CMessageHandler::getSingleton().addMessage(CMessageCreator::getSingleton().createMessage(doc.FirstChildElement()));
+  CMessageHandler::getSingleton().addMessage(CMessageCreator::getSingleton().createMessage(doc.FirstChildElement(), __FILE__));
 
   while (true) {
     LUA_WAIT(10);

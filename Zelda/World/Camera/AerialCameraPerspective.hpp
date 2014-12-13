@@ -58,7 +58,7 @@ public:
   bool isCameraInBounds() const {return m_bCameraInBounds;}
 
 private:
-  void sendMessageToAll(const CMessage &message);
+  void sendMessageToAll(const CMessagePtr message);
 
   Ogre::Vector3 getRayPlaneHitPosition(int iRayIndex, Ogre::Real fPlaneY = 0) const;
 };

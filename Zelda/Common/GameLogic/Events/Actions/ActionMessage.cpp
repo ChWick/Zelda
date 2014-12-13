@@ -28,22 +28,21 @@ namespace events {
 CActionMessage::CActionMessage(const tinyxml2::XMLElement *pElem, const CEvent &owner)
   : CAction(pElem, owner) {
 
-  m_pMessage = CMessageCreator::getSingleton().createMessage(pElem);
+  m_pMessage = CMessageCreator::getSingleton().createMessage(pElem, __FILE__);
 }
 
-CActionMessage::CActionMessage(CMessage *pMessage, const CEvent &owner)
+CActionMessage::CActionMessage(CMessagePtr message, const CEvent &owner)
   : CAction(ACTION_MESSAGE, owner),
-    m_pMessage(pMessage) {
+    m_pMessage(message) {
   ASSERT(m_pMessage);
 }
 
 CActionMessage::~CActionMessage() {
-  delete m_pMessage;
 }
 
 void CActionMessage::start() {
   // auto delete to false, since we delete the message on our own!
-  CMessageHandler::getSingleton().addMessage(m_pMessage, false);
+  CMessageHandler::getSingleton().addMessage(m_pMessage);
 }
 
 };

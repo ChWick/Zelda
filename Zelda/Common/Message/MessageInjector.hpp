@@ -20,14 +20,14 @@
 #ifndef _MESSAGE_INJECTOR_HPP_
 #define _MESSAGE_INJECTOR_HPP_
 
-class CMessage;
+#include "Message.hpp"
 
 class CMessageInjector {
 public:
   CMessageInjector(bool bAutoAddAsInjector = true);
   virtual ~CMessageInjector();
 
-  virtual void sendMessageToAll(const CMessage &message) = 0;
+  virtual void sendMessageToAll(const CMessagePtr m) = 0;
 };
 
 #endif

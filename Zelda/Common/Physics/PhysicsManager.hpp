@@ -165,7 +165,7 @@ class CPhysicsManager
 
 
 #if PHYSICS_MANAGER_DEBUG == 1
-  void sendMessageToAll(const CMessage &message);
+  void sendMessageToAll(const CMessagePtr message);
   bool keyPressed( const OIS::KeyEvent &arg ) {
     if (arg.key == OIS::KC_P) {
       toggleDisplayDebugInfo();
