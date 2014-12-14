@@ -1,3 +1,5 @@
+import * from "library.material"
+
 material link_head
 {
     receive_shadows off
@@ -14,29 +16,9 @@ material link_head
     }
 }
 
-material link_armor
+material link_armor : blinkableSingleTexuture
 {
-    receive_shadows off
-
-    technique
-    {
-        pass
-        {
-            specular    1 1 1 1 50
-
-            vertex_program_ref blinking_vs_gl_unified {
-            }
- 
-            fragment_program_ref blinking_ps_gl_unified {
-                param_named blinking_intensity float 0.0
-            }
-
-            texture_unit
-            {
-                texture link_armor.png
-            }
-        }
-    }
+    set_texture_alias DefaultTexture link_armor.png
 }
 
 material link_tools
