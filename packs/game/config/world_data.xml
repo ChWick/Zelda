@@ -382,4 +382,50 @@
   <default_inner_object id="light_stone">
     <data probability="1" objectType="tool_lamp"/>
   </default_inner_object>
+
+  <!-- persons -->
+  <!-- Peroperties:
+       ============
+
+       id (string)                       the person id
+       mesh_name (string)                the mesh to use
+       material_name (string = BLANK)    the material to use
+       scale (Ogre::Vector3 or Real)     scaling factor for the complete mesh
+       attitude (friend | enemy)         the attitude of the person relative to link
+       hitpoints (Hitpoints = infinity)  the hitpoints of the person (unit of hears)
+  -->
+  <person
+      id="link"
+      mesh_name="link"
+      material_name="link_armor"
+      scale="1.5f"
+      attitude="friend"
+      hitpoints="3"
+      />
+  <person
+      id="links_father"
+      mesh_name="soldier"
+      material_name="soldier_blue"
+      attitude="friend"
+      />
+  <person
+      id="soldier_block"
+      mesh_name="soldier"
+      material_name="soldier_green"
+      attitude="enemy"
+      />
+  <person
+      id="soldier_blue"
+      mesh_name="soldier"
+      material_name="soldier_blue"
+      attitude="enemy"
+      hitpoints="3"
+      />
+  <person
+      id="soldier_green_sword"
+      mesh_name="soldier"
+      material_name="soldier_green"
+      attitude="enemy"
+      hitpoints="1"
+      />
 </world_data>

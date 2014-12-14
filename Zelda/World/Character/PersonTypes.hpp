@@ -51,7 +51,6 @@ public:
 
 class CPersonDataIdMap : public CEnumIdMap<EPersonTypes, SPersonData> {
 public:
-void init();
 };
 
 extern CPersonTypeIdMap PERSON_TYPE_ID_MAP;

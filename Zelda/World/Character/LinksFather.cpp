@@ -55,6 +55,6 @@ void CLinksFather::setupAnimations() {
 CCharacterController *CLinksFather::createCharacterController() {
   CPersonController *pc = dynamic_cast<CPersonController*>(
       CPerson::createCharacterController());
-  pc->setWalkSpeed(0.1);
+  pc->setWalkSpeed(1);
   return pc;
 }
