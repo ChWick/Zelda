@@ -32,7 +32,7 @@ CLinksFather::CLinksFather(const tinyxml2::XMLElement *pElem,
 
 void CLinksFather::setupAnimations() {
   Ogre::StringVector animNames(LF_ANIM_COUNT);
-  animNames[LF_ANIM_SIT] = "Scout";
+  animNames[LF_ANIM_SIT] = "Sit";
   animNames[LF_ANIM_WALK] = "Walk";
 
   // this is very important due to the nature of the exported animations

@@ -404,8 +404,7 @@
       />
   <person
       id="links_father"
-      mesh_name="soldier"
-      material_name="soldier_blue"
+      mesh_name="links_father"
       attitude="friend"
       />
   <person

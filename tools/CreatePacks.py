@@ -3,6 +3,42 @@ import zipfile
 import glob
 import ntpath
 
+class File :
+    def __init__(self, filename, outputdir) :
+        self.filename = filename
+        self.outputdir = outputdir
+
+    def addToZip(self, zipf, srcdir) :
+        zipf.write(os.path.join(srcdir,
+                                self.filename),
+                   os.path.join(self.outputdir,
+                                self.filename),
+                   zipfile.ZIP_DEFLATED)
+
+class FilePack :
+    files = []
+
+    def __init__(self, srcdir) :
+        self.srcdir = srcdir
+
+    def addFile(self, file) :
+        self.files.append(file)
+
+    def addToZip(self, zipf) :
+        for file in self.files :
+            file.addToZip(zipf, self.srcdir)
+
+class ModelPack :
+    filepacks = []
+
+    def addPack(self, pack) :
+        self.filepacks.append(pack)
+
+    def addToZip(self, zipf) :
+        for pack in self.filepacks :
+            pack.addToZip(zipf)
+    
+
 def zipdir(path, zip):
     for root, dirs, files in os.walk(path):
         for file in files:
@@ -46,7 +82,7 @@ def makeLightWorldZip() :
 
 	zipf.close()
 
-def makeGameZip() :
+def makeGameZip(modelPacks=[]) :
 	print('Creating game.zip')
 
 	zipf = zipfile.ZipFile('../packs/game.zip', 'w');
@@ -75,6 +111,11 @@ def makeGameZip() :
         # copy config files
         copyAllOfType(zipf, '../packs/game/config/*', 'config')
 
+
+        # model packs
+        for modelPack in modelPacks :
+            modelPack.addToZip(zipf)
+
 	zipf.close()
 
 def makeSdkTrays() :
@@ -86,7 +127,7 @@ def makeSdkTrays() :
 
 	zipf.close()
 
-def makeMapPack(name, world, files, includeHouse=False) :
+def makeMapPack(name, world, files, includeHouse=False, modelPacks=[]) :
 	print 'Creating map pack for', name, ' in ', world
 
 	worldPath = os.path.join('../maps/Atlases', world)
@@ -105,6 +146,11 @@ def makeMapPack(name, world, files, includeHouse=False) :
 
 	for file in files :
 		zipf.write(os.path.join(dataPath, file), file, zipfile.ZIP_DEFLATED)
+
+        # model packs
+        for modelPack in modelPacks :
+            modelPack.addToZip(zipf)
+
         # copy scripts
         copyAllOfType(zipf, os.path.join(dataPath, 'scripts/*'), 'scripts')
         copyAllOfType(zipf, os.path.join(dataPath, 'language/*'), 'language', True)
@@ -115,8 +161,20 @@ def makeMapPack(name, world, files, includeHouse=False) :
 os.chdir(os.path.dirname(os.path.realpath(__file__)))
 
 if __name__ == '__main__':
+    # define model packs
+
+    # links father
+    linksFather = ModelPack()
+    pack = FilePack("../models/links_father")
+    pack.addFile(File("links_father.mesh", "meshes"))
+    pack.addFile(File("links_father.skeleton", "skeletons"))
+    pack.addFile(File("link_father_body.png", "textures"))
+    pack.addFile(File("link_father.material", "materials"))
+    linksFather.addPack(pack)
+
+
     makeLightWorldZip()
-    makeGameZip()
+    makeGameZip(modelPacks=[linksFather])
     makeSdkTrays()
 
     lightWorld = 'LightWorld'

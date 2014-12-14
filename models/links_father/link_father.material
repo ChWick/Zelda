@@ -1,0 +1,6 @@
+import * from "library.material"
+
+// link fathers material is extending the default single texture material
+material link_father : blinkableSingleTexuture {
+    set_texture_alias DefaultTexture link_father_body.png
+}

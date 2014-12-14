@@ -1,0 +1,33 @@
+<scene formatVersion="1.0.1" export_time="1418167598.8213243" exported_by="christoph" previous_export_time="1418167408.2471306" >
+  <nodes >
+    <node name="Armature" >
+      <position z="-0.000000" y="0.000000" x="0.000000" />
+      <rotation qw="1.000000" qz="-0.000000" qy="0.000000" qx="0.000000" />
+      <scale z="1.000000" y="1.000000" x="1.000000" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+    </node>
+    <node name="links_father" >
+      <position z="-0.000000" y="0.000000" x="0.000000" />
+      <rotation qw="1.000000" qz="-0.000000" qy="0.000000" qx="0.000000" />
+      <scale z="1.000000" y="1.000000" x="1.000000" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <entity ghost="False" meshFile="links_father.mesh" friction_z="1.0" friction_y="1.0" friction_x="1.0" physics_type="STATIC" inertia_tensor="0.4000000059604645" velocity_max="0.0" damping_trans="0.03999999910593033" lock_trans_z="False" damping_rot="0.10000000149011612" anisotropic_friction="False" actor="False" name="links_father" mass_radius="1.0" velocity_min="0.0" lock_rot_z="False" lock_rot_x="False" lock_rot_y="False" mass="1.0" lock_trans_y="False" lock_trans_x="False" />
+    </node>
+  </nodes>
+  <externals >
+    <item type="material" >
+      <file name="/home/christoph/Documents/Projects/Zelda/models/links_father/link_father.material" />
+    </item>
+  </externals>
+  <environment >
+    <colourDiffuse g="0.05087608844041824" r="0.05087608844041824" b="0.05087608844041824" />
+    <colourBackground g="0.05087608844041824" r="0.05087608844041824" b="0.05087608844041824" />
+    <colourAmbient g="0.0" r="0.0" b="0.0" />
+  </environment>
+</scene>
