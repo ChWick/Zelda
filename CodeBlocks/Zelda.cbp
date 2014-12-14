@@ -247,12 +247,16 @@
 		<Unit filename="../Zelda/World/Camera/AerialCameraPerspective.hpp" />
 		<Unit filename="../Zelda/World/Character/Character.cpp" />
 		<Unit filename="../Zelda/World/Character/Character.hpp" />
+		<Unit filename="../Zelda/World/Character/CharacterAttitude.cpp" />
+		<Unit filename="../Zelda/World/Character/CharacterAttitude.hpp" />
 		<Unit filename="../Zelda/World/Character/CharacterController.hpp" />
 		<Unit filename="../Zelda/World/Character/CharacterControllerPhysicsListener.hpp" />
 		<Unit filename="../Zelda/World/Character/CharacterController_Physics.cpp" />
 		<Unit filename="../Zelda/World/Character/CharacterController_Physics.hpp" />
 		<Unit filename="../Zelda/World/Character/CharacterCreator.cpp" />
 		<Unit filename="../Zelda/World/Character/CharacterCreator.hpp" />
+		<Unit filename="../Zelda/World/Character/CharacterData.cpp" />
+		<Unit filename="../Zelda/World/Character/CharacterData.hpp" />
 		<Unit filename="../Zelda/World/Character/FriendOrEnemyStates.hpp" />
 		<Unit filename="../Zelda/World/Character/LinksFather.cpp" />
 		<Unit filename="../Zelda/World/Character/LinksFather.hpp" />
@@ -260,6 +264,8 @@
 		<Unit filename="../Zelda/World/Character/Person.hpp" />
 		<Unit filename="../Zelda/World/Character/PersonController.cpp" />
 		<Unit filename="../Zelda/World/Character/PersonController.hpp" />
+		<Unit filename="../Zelda/World/Character/PersonDataLoader.cpp" />
+		<Unit filename="../Zelda/World/Character/PersonDataLoader.hpp" />
 		<Unit filename="../Zelda/World/Character/PersonTypes.cpp" />
 		<Unit filename="../Zelda/World/Character/PersonTypes.hpp" />
 		<Unit filename="../Zelda/World/Character/Player.cpp" />
@@ -353,7 +359,7 @@
 				<lib name="CEGUI-0-OGRE" />
 				<lib name="OIS" />
 				<lib name="OGRE-Overlay" />
-				<lib name="lua5.2" />
+				<lib name="lua" />
 			</lib_finder>
 			<DoxyBlocks>
 				<comment_style block="0" line="0" />

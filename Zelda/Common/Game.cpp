@@ -137,8 +137,7 @@ void CGame::destroySingletons() {
 }
 
 void CGame::closeApp() {
-  destroySingletons();
-  OGRE_DELETE_T(mFSLayer, FileSystemLayer, Ogre::MEMCATEGORY_GENERAL);
+
 
 #if OGRE_PLATFORM == OGRE_PLATFORM_ANDROID
     shutdown();
@@ -152,7 +151,6 @@ void CGame::closeApp() {
     if (mRoot)
       {
     OGRE_DELETE mOverlaySystem;
-    delete Ogre::ResourceGroupManager::getSingleton()._getResourceManager("LuaScript");
     OGRE_DELETE mRoot;
   }
 #ifdef OGRE_STATIC_LIB
@@ -342,20 +340,20 @@ void CGame::shutdown() {
   }
 #endif
 
-  if (mTrayMgr) {
-    delete mTrayMgr;
-    mTrayMgr = 0;
-  }
+  destroySingletons();
 
   if (mRoot->getRenderSystem() != NULL) destroyScene();
 
-    Ogre::WindowEventUtilities::removeWindowEventListener(mWindow, this);
   shutdownInput();
 
 #ifdef INCLUDE_RTSHADER_SYSTEM
   // Destroy the RT Shader System.
   destroyRTShaderSystem();
 #endif // INCLUDE_RTSHADER_SYSTEM
+
+  OGRE_DELETE_T(mFSLayer, FileSystemLayer, Ogre::MEMCATEGORY_GENERAL);
+
+  delete Ogre::ResourceGroupManager::getSingleton()._getResourceManager("LuaScript");
 }
 void CGame::shutdownInput() {
   // detach input devices
@@ -498,9 +496,6 @@ void CGame::createScene() {
   mTrayMgr->hideCursor();
 #endif
 
-  mRoot->addFrameListener(this);
-
-
 #ifdef INCLUDE_RTSHADER_SYSTEM
   // Initialize shader generator.
   // Must be before resource loading in order to allow parsing extended material attributes.
@@ -600,7 +595,6 @@ bool CGame::frameRenderingQueued(const Ogre::FrameEvent& evt) {
   if (!mWindow->isActive()) {
     return true;
   }
-
   mTrayMgr->frameRenderingQueued(evt);
 
   if (mCameraMan) {

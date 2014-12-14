@@ -104,6 +104,7 @@ void CObject::init() {
 
 void CObject::exit() {
   destroyPhysics();
+  CWorldEntity::exit();
 }
 
 void CObject::destroyPhysics() {

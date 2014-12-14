@@ -183,7 +183,7 @@ void CChest::onLifted() {
   mLifting = false;
   if (mTextMessage.size() > 0) {
     CMessageHandler::getSingleton().addMessage(
-        std::make_shared<CMessageShowText>(mTextMessage, __MSG_LOCATION__));
+        std::make_shared<CMessageShowText>(__MSG_LOCATION__, mTextMessage));
   } else {
     onFinished();
   }

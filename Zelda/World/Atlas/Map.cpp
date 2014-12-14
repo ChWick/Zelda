@@ -67,7 +67,8 @@ CMap::CMap(CEntity *pAtlas,
     m_MapPack(mapPack),
     m_pPlayer(pPlayer),
     m_pFirstFlowerEntity(nullptr),
-    m_pFlowerAnimationState(nullptr) {
+    m_pFlowerAnimationState(nullptr),
+    mForcePauseUpdate(false) {
   Ogre::LogManager::getSingleton().logMessage(
       "Construction of map '" + m_MapPack->getName() + "'");
 
@@ -251,6 +252,8 @@ void CMap::exit() {
   m_pStaticGeometry = nullptr;
 
   CWorldEntity::exit();
+
+  m_PhysicsManager.exit();
 }
 
 void CMap::CreateCube(const btVector3 &Position, btScalar Mass) {
@@ -318,6 +321,7 @@ void CMap::CreateCube(const btVector3 &Position, btScalar Mass) {
 
 void CMap::moveMap(const Ogre::Vector3 &offset) {
   m_bPauseUpdate = true;
+  mForcePauseUpdate = true;
   m_pSceneNode->translate(offset);
   // move static geometries
   translateStaticGeometry(m_pStaticGeometry, offset);
@@ -401,7 +405,7 @@ void CMap::handleMessage(const CMessagePtr message) {
 
 void CMap::updatePause(int iPauseType, bool bPause) {
   if (iPauseType & PAUSE_MAP_UPDATE) {
-    m_bPauseUpdate = bPause;
+    m_bPauseUpdate = bPause || mForcePauseUpdate;
   }
   if (iPauseType & PAUSE_MAP_RENDER) {
     m_bPauseRender = bPause;

@@ -55,8 +55,8 @@ void CZelda::initEnumIdMaps() {
 
 void CZelda::chooseGameState() {
   LOGV("choosing came state");
-  //new CMainMenu();
-  new CWorld();
+  new CMainMenu();
+  //new CWorld();
   //m_pGameStateManager->changeGameState(CGameStateManager::GS_MAIN_MENU);
 }
 

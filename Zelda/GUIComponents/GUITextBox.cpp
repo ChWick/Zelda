@@ -60,7 +60,7 @@ CGUITextBox::CGUITextBox(const std::string &id,
 
 CGUITextBox::~CGUITextBox() {
   unpause(PAUSE_ALL);
-  CMessageHandler::getSingleton().addMessage(std::make_shared<CMessageShowText>(__FILE__, "", mResult, CMessageShowText::FINISHED));
+  CMessageHandler::getSingleton().addMessage(std::make_shared<CMessageShowText>(__MSG_LOCATION__, "", mResult, CMessageShowText::FINISHED));
 }
 
 void CGUITextBox::update(Ogre::Real tpf) {
