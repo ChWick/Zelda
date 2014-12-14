@@ -18,6 +18,8 @@
  *****************************************************************************/
 
 #include "XMLHelper.hpp"
+#include <string>
+#include <vector>
 
 namespace XMLHelper {
 
@@ -100,6 +102,33 @@ namespace XMLHelper {
     return Ogre::Vector2(RealAttribute(pElem, (prefix + "x").c_str(), vDefault.x, bRequired),
 			 RealAttribute(pElem, (prefix + "y").c_str(), vDefault.y, bRequired));
   }
+
+Ogre::Vector3 Vector3Attribute(const tinyxml2::XMLElement *pElem,
+                               const std::string &label,
+                               const Ogre::Vector3 &vDefault) {
+  assert(pElem);
+
+  if (pElem->Attribute(label.c_str())) {
+    return Vector3Attribute(pElem, label);
+  }
+
+  return vDefault;
+}
+
+Ogre::Vector3 Vector3Attribute(const tinyxml2::XMLElement *pElem,
+                               const std::string &label) {
+  assert(pElem);
+  assert(pElem->Attribute(label.c_str()));
+  Ogre::String s(pElem->Attribute(label.c_str()));
+
+  Ogre::vector<Ogre::String>::type splitted(Ogre::StringUtil::split(s));
+
+  if (splitted.size() == 1) {
+    return Ogre::Vector3(Ogre::StringConverter::parseReal(s));
+  } else {
+    return Ogre::StringConverter::parseVector3(s);
+  }
+}
 
 
   void SetAttribute(tinyxml2::XMLElement *pElem,

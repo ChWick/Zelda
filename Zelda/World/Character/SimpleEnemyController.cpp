@@ -31,7 +31,7 @@ CSimpleEnemyController::CSimpleEnemyController(CPerson * ccPerson)
   : CPersonController(ccPerson), m_pPlayer(NULL) {
   changeMoveState(MS_USER_STATE);
 
-  m_fMoveSpeed = 3;
+  m_fWalkSpeed = 3;
 }
 void CSimpleEnemyController::start() {
   m_fTimeToNextAction = 2;

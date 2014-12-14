@@ -106,8 +106,8 @@ void CSimpleEnemy::updateAnimationsCallback(const Ogre::Real fTime) {
            : dynamic_cast<CharacterControllerPhysics*>(mCCPhysics)
            ->getCollidingWorldEntities()) {
     if (dynamic_cast<CCharacter*>(pEnt)
-        && dynamic_cast<CCharacter*>(pEnt)->getFriendOrEnemyState()
-        == FOE_FRIENDLY) {
+        && dynamic_cast<CCharacter*>(pEnt)->getAttitude()
+        == ATTITUDE_FRIENDLY) {
       attack(CDamage(this,
                      DMG_SWORD,
                      m_pSceneNode->getOrientation().zAxis()), pEnt);

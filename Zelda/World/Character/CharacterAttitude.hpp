@@ -17,27 +17,22 @@
  * Zelda. If not, see http://www.gnu.org/licenses/.
  *****************************************************************************/
 
-#ifndef _LINKS_FATHER_HPP_
-#define _LINKS_FATHER_HPP_
+#ifndef CHARACTERATTITUDE_HPP
+#define CHARACTERATTITUDE_HPP
 
-#include "Person.hpp"
+#include "../../Common/Util/EnumIdMap.hpp"
 
-class CLinksFather : public CPerson {
-public:
-  enum ELinksFatherAnimations {
-    LF_ANIM_SIT,
-    LF_ANIM_WALK,
-    
-    LF_ANIM_COUNT,
-  };
-  
- private:
- public:
-  CLinksFather(const tinyxml2::XMLElement *pElem, CEntity *pParent, CMap *pMap);
-  
- private:
-  void setupAnimations();
-  
-  virtual CCharacterController *createCharacterController();
+//! Attitude of a character
+enum ECharacterAttitude {
+  ATTITUDE_FRIENDLY,            //!< Friendly
+  ATTITUDE_ENEMY,               //!< a evil person, not the player... ganons folks
 };
-#endif // _LINKS_FATHER_HPP_
+
+class CCharacterAttitudeIdMap : public CStringEnumIdMap<ECharacterAttitude> {
+ public:
+  CCharacterAttitudeIdMap();
+};
+
+extern CCharacterAttitudeIdMap CHARACTER_ATTITUDE_ID_MAP;
+
+#endif  // CHARACTERATTITUDE_HPP

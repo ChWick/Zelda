@@ -32,10 +32,10 @@
 CCharacter::CCharacter(const std::string &sID,
                        CEntity *pParent,
                        CMap *pMap,
-                       const EFriendOrEnemyStates foe,
+                       const ECharacterAttitude attitude,
                        unsigned int uiAnimationCount)
   : CWorldEntity(sID, pParent, pMap),
-    m_eFriendOrEnemy(foe),
+    mAttitude(attitude),
     m_pCharacterController(nullptr),
     m_uiAnimationCount(uiAnimationCount),
     m_fTimer(0),
@@ -50,10 +50,10 @@ CCharacter::CCharacter(const std::string &sID,
 CCharacter::CCharacter(const tinyxml2::XMLElement *pElem,
                        CEntity *pParent,
                        CMap *pMap,
-                       const EFriendOrEnemyStates foe,
+                       const ECharacterAttitude attitude,
                        unsigned int uiAnimationCount)
   : CWorldEntity(pParent, pMap, pElem),
-    m_eFriendOrEnemy(foe),
+    mAttitude(attitude),
     m_pCharacterController(nullptr),
     m_uiAnimationCount(uiAnimationCount),
     m_fTimer(0),
@@ -144,7 +144,7 @@ bool CCharacter::createDamage(const Ogre::Ray &ray, const CDamage &dmg) {
   btCollisionWorld::ClosestRayResultCallback rayCallback(
       BtOgre::Convert::toBullet(ray.getOrigin()),
       BtOgre::Convert::toBullet(ray.getPoint(1)));
-  if (m_eFriendOrEnemy == FOE_FRIENDLY) {
+  if (mAttitude == ATTITUDE_FRIENDLY) {
     rayCallback.m_collisionFilterGroup = COL_DAMAGE_P;
     rayCallback.m_collisionFilterMask = MASK_DAMAGE_P_COLLIDES_WITH;
   } else {
@@ -356,19 +356,20 @@ bool CCharacter::isReadyForNewAction() {
 }
 
 short CCharacter::getCollisionMask() {
-    switch (m_eFriendOrEnemy) {
-    case FOE_ENEMY:
+    switch (mAttitude) {
+    case ATTITUDE_ENEMY:
         return MASK_PLAYER_N_COLLIDES_WITH;
-    case FOE_FRIENDLY:
+    case ATTITUDE_FRIENDLY:
         return MASK_PLAYER_P_COLLIDES_WITH;
     }
     throw Ogre::Exception(0, "Unknown collision mask", __FUNCTION__);
 }
+
 short CCharacter::getCollisionGroup() {
-    switch (m_eFriendOrEnemy) {
-    case FOE_ENEMY:
+    switch (mAttitude) {
+      case ATTITUDE_ENEMY:
         return COL_CHARACTER_N;
-    case FOE_FRIENDLY:
+      case ATTITUDE_FRIENDLY:
         return COL_CHARACTER_P;
     }
     throw Ogre::Exception(0, "Unknown collision mask", __FUNCTION__);

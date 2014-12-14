@@ -32,9 +32,9 @@ void CPersonTypeIdMap::init() {
 }
 
 void CPersonDataIdMap::init() {
-  m_Map[PERSON_LINK] = {PERSON_LINK, "link", "link_armor", Ogre::Vector3::UNIT_SCALE * 1.5f, FOE_FRIENDLY, HP_ONE_HEART * 3};
-  m_Map[PERSON_LINKS_FATHER] = {PERSON_LINKS_FATHER, "soldier", "soldier_blue", Ogre::Vector3::UNIT_SCALE, FOE_FRIENDLY, HP_INFINITY};
-  m_Map[PERSON_SOLDIER_BLOCK] = {PERSON_SOLDIER_BLOCK, "soldier", "soldier_green", Ogre::Vector3::UNIT_SCALE, FOE_FRIENDLY, HP_INFINITY};
-  m_Map[PERSON_SOLDIER_BLUE] = {PERSON_SOLDIER_BLUE, "soldier", "soldier_blue", Ogre::Vector3::UNIT_SCALE, FOE_ENEMY, HP_HALF_HEART * 3};
-  m_Map[PERSON_SOLDIER_GREEN_SWORD] = {PERSON_SOLDIER_GREEN_SWORD, "soldier", "soldier_green", Ogre::Vector3::UNIT_SCALE, FOE_ENEMY, HP_HALF_HEART * 2};
+  m_Map[PERSON_LINK] = {PERSON_LINK, "link", "link_armor", Ogre::Vector3::UNIT_SCALE * 1.5f, ATTITUDE_FRIENDLY, HP_ONE_HEART * 3};
+  m_Map[PERSON_LINKS_FATHER] = {PERSON_LINKS_FATHER, "soldier", "soldier_blue", Ogre::Vector3::UNIT_SCALE, ATTITUDE_FRIENDLY, HP_INFINITY};
+  m_Map[PERSON_SOLDIER_BLOCK] = {PERSON_SOLDIER_BLOCK, "soldier", "soldier_green", Ogre::Vector3::UNIT_SCALE, ATTITUDE_FRIENDLY, HP_INFINITY};
+  m_Map[PERSON_SOLDIER_BLUE] = {PERSON_SOLDIER_BLUE, "soldier", "soldier_blue", Ogre::Vector3::UNIT_SCALE, ATTITUDE_ENEMY, HP_HALF_HEART * 3};
+  m_Map[PERSON_SOLDIER_GREEN_SWORD] = {PERSON_SOLDIER_GREEN_SWORD, "soldier", "soldier_green", Ogre::Vector3::UNIT_SCALE, ATTITUDE_ENEMY, HP_HALF_HEART * 2};
 }

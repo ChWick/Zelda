@@ -18,24 +18,25 @@
  *****************************************************************************/
 
 #include "Map.hpp"
-#include "../../Common/Physics/BtOgrePG.hpp"
-#include "../../Common/Physics/PhysicsMasks.hpp"
-#include "../../Common/Util/DeleteSceneNode.hpp"
+#include <BulletCollision/CollisionShapes/btCapsuleShape.h>
+#include <BulletCollision/CollisionShapes/btCylinderShape.h>
+#include <BulletCollision/CollisionShapes/btBoxShape.h>
 #include <OgreSceneManager.h>
 #include <OgreSceneNode.h>
 #include <OgreEntity.h>
 #include <OgreLogManager.h>
 #include <OgreAnimationState.h>
 #include <OgreMeshManager.h>
+#include <string>
+#include "../../Common/Physics/BtOgrePG.hpp"
+#include "../../Common/Physics/PhysicsMasks.hpp"
+#include "../../Common/Util/DeleteSceneNode.hpp"
 #include "Region.hpp"
 #include "Entrance.hpp"
 #include "../GlobalCollisionShapesTypes.hpp"
 #include "../Objects/Object.hpp"
 #include "../Objects/Chest.hpp"
 #include "BulletCollision/CollisionShapes/btSphereShape.h"
-#include <BulletCollision/CollisionShapes/btCapsuleShape.h>
-#include <BulletCollision/CollisionShapes/btCylinderShape.h>
-#include <BulletCollision/CollisionShapes/btBoxShape.h>
 #include "../Character/Person.hpp"
 #include "../../Common/Util/Assert.hpp"
 #include "../../Common/Util/Sleep.hpp"
@@ -47,63 +48,117 @@
 #include "../Character/CharacterCreator.hpp"
 
 
-using namespace XMLHelper;
+using XMLHelper::Attribute;
+using XMLHelper::IntAttribute;
+using XMLHelper::RealAttribute;
 
-int MAP_COUNTER = 0; // Counter to make names unique if objects are switched between maps since renaming a scene node is not possible
+/**
+ * Counter to make names unique if objects are switched between
+ * maps since renaming a scene node is not possible
+ */
+int MAP_COUNTER = 0;
 
-CMap::CMap(CEntity *pAtlas, CMapPackPtr mapPack, Ogre::SceneNode *pParentSceneNode, CWorldEntity *pPlayer)
+CMap::CMap(CEntity *pAtlas,
+           CMapPackPtr mapPack,
+           Ogre::SceneNode *pParentSceneNode,
+           CWorldEntity *pPlayer)
   : CWorldEntity(mapPack->getName(), pAtlas, this, mapPack->getResourceGroup()),
     m_PhysicsManager(pParentSceneNode->getCreator()),
     m_MapPack(mapPack),
     m_pPlayer(pPlayer),
     m_pFirstFlowerEntity(nullptr),
     m_pFlowerAnimationState(nullptr) {
-
-  Ogre::LogManager::getSingleton().logMessage("Construction of map '" + m_MapPack->getName() + "'");
+  Ogre::LogManager::getSingleton().logMessage(
+      "Construction of map '" + m_MapPack->getName() + "'");
 
   // Create global collision shapes
-  m_PhysicsManager.addCollisionShape(GLOBAL_COLLISION_SHAPES_TYPES_ID_MAP.toString(GCST_PICKABLE_OBJECT_SPHERE),
-                                     CPhysicsCollisionObject(new btSphereShape(0.04), Ogre::Vector3::NEGATIVE_UNIT_Y * 0.03));
-  m_PhysicsManager.addCollisionShape(GLOBAL_COLLISION_SHAPES_TYPES_ID_MAP.toString(GCST_PERSON_CAPSULE),
-                                     CPhysicsCollisionObject(new btCapsuleShape(CPerson::PERSON_RADIUS, CPerson::PERSON_HEIGHT - 2 * CPerson::PERSON_RADIUS)));
+  m_PhysicsManager.addCollisionShape(
+      GLOBAL_COLLISION_SHAPES_TYPES_ID_MAP.toString(
+          GCST_PICKABLE_OBJECT_SPHERE),
+      CPhysicsCollisionObject(new btSphereShape(0.04),
+                              Ogre::Vector3::NEGATIVE_UNIT_Y * 0.03));
+  m_PhysicsManager.addCollisionShape(
+      GLOBAL_COLLISION_SHAPES_TYPES_ID_MAP.toString(GCST_PERSON_CAPSULE),
+      CPhysicsCollisionObject(
+          new btCapsuleShape(CPerson::PERSON_RADIUS,
+                             CPerson::PERSON_HEIGHT
+                             - 2 * CPerson::PERSON_RADIUS)));
   btCompoundShape *pHouseEntranceShape = new btCompoundShape();
-  pHouseEntranceShape->addChildShape(btTransform(btQuaternion::getIdentity(), btVector3(-0.069, 0.08, 0.02)), new btBoxShape(btVector3(0.01, 0.08, 0.02)));
-  pHouseEntranceShape->addChildShape(btTransform(btQuaternion::getIdentity(), btVector3(0.069, 0.08, 0.02)), new btBoxShape(btVector3(0.01, 0.08, 0.02)));
-  pHouseEntranceShape->addChildShape(btTransform(btQuaternion::getIdentity(), btVector3(0.0, 0.16, 0.02)), new btBoxShape(btVector3(0.07, 0.01, 0.02)));
-  m_PhysicsManager.addCollisionShape(GLOBAL_COLLISION_SHAPES_TYPES_ID_MAP.toString(GCST_HOUSE_ENTRANCE), CPhysicsCollisionObject(pHouseEntranceShape, Ogre::Vector3::ZERO));
+  pHouseEntranceShape->addChildShape(
+      btTransform(btQuaternion::getIdentity(),
+                  btVector3(-0.069, 0.08, 0.02)),
+      new btBoxShape(btVector3(0.01, 0.08, 0.02)));
+  pHouseEntranceShape->addChildShape(
+      btTransform(btQuaternion::getIdentity(),
+                  btVector3(0.069, 0.08, 0.02)),
+      new btBoxShape(btVector3(0.01, 0.08, 0.02)));
+  pHouseEntranceShape->addChildShape(
+      btTransform(btQuaternion::getIdentity(),
+                  btVector3(0.0, 0.16, 0.02)),
+      new btBoxShape(btVector3(0.07, 0.01, 0.02)));
+  m_PhysicsManager.addCollisionShape(
+      GLOBAL_COLLISION_SHAPES_TYPES_ID_MAP.toString(GCST_HOUSE_ENTRANCE),
+      CPhysicsCollisionObject(pHouseEntranceShape, Ogre::Vector3::ZERO));
 
   btCompoundShape *pStonePileShape = new btCompoundShape();
-  pStonePileShape->addChildShape(btTransform(btQuaternion::getIdentity(), btVector3(0.05, 0.025, 0.05)), new btSphereShape(0.04));
-  pStonePileShape->addChildShape(btTransform(btQuaternion::getIdentity(), btVector3(-0.05, 0.025, 0.05)), new btSphereShape(0.04));
-  pStonePileShape->addChildShape(btTransform(btQuaternion::getIdentity(), btVector3(0.05, 0.025, -0.05)), new btSphereShape(0.04));
-  pStonePileShape->addChildShape(btTransform(btQuaternion::getIdentity(), btVector3(-0.05, 0.025, -0.05)), new btSphereShape(0.04));
-  pStonePileShape->addChildShape(btTransform(btQuaternion::getIdentity(), btVector3(-0.0, 0.06, -0.0)), new btSphereShape(0.04));
-  m_PhysicsManager.addCollisionShape(GLOBAL_COLLISION_SHAPES_TYPES_ID_MAP.toString(GCST_STONE_PILE), CPhysicsCollisionObject(pStonePileShape, Ogre::Vector3::ZERO));
+  pStonePileShape->addChildShape(
+      btTransform(btQuaternion::getIdentity(), btVector3(0.05, 0.025, 0.05)),
+      new btSphereShape(0.04));
+  pStonePileShape->addChildShape(
+      btTransform(btQuaternion::getIdentity(), btVector3(-0.05, 0.025, 0.05)),
+      new btSphereShape(0.04));
+  pStonePileShape->addChildShape(
+      btTransform(btQuaternion::getIdentity(), btVector3(0.05, 0.025, -0.05)),
+      new btSphereShape(0.04));
+  pStonePileShape->addChildShape(
+      btTransform(btQuaternion::getIdentity(), btVector3(-0.05, 0.025, -0.05)),
+      new btSphereShape(0.04));
+  pStonePileShape->addChildShape(
+      btTransform(btQuaternion::getIdentity(), btVector3(-0.0, 0.06, -0.0)),
+      new btSphereShape(0.04));
+  m_PhysicsManager.addCollisionShape(
+      GLOBAL_COLLISION_SHAPES_TYPES_ID_MAP.toString(GCST_STONE_PILE),
+      CPhysicsCollisionObject(pStonePileShape, Ogre::Vector3::ZERO));
 
-  m_PhysicsManager.addCollisionShape(GLOBAL_COLLISION_SHAPES_TYPES_ID_MAP.toString(GCST_TREE),
-                                     CPhysicsCollisionObject(new btCylinderShape(btVector3(0.173, 0.2, 0.173)), Ogre::Vector3::NEGATIVE_UNIT_Y * 0.2));
-  m_PhysicsManager.addCollisionShape(GLOBAL_COLLISION_SHAPES_TYPES_ID_MAP.toString(GCST_FALLING_OBJECT_SPHERE),
-                                     CPhysicsCollisionObject(new btSphereShape(0.02), Ogre::Vector3::NEGATIVE_UNIT_Y * 0));
-  m_PhysicsManager.addCollisionShape(GLOBAL_COLLISION_SHAPES_TYPES_ID_MAP.toString(GCST_SMALL_CHEST_TOP),
-                                     CPhysicsCollisionObject(new btCylinderShapeX(btVector3(0.04, 0.025, 0.025)), Ogre::Vector3(0, 0.020  , 0.025)));
+  m_PhysicsManager.addCollisionShape(
+      GLOBAL_COLLISION_SHAPES_TYPES_ID_MAP.toString(GCST_TREE),
+      CPhysicsCollisionObject(
+          new btCylinderShape(btVector3(0.173, 0.2, 0.173)),
+          Ogre::Vector3::NEGATIVE_UNIT_Y * 0.2));
+  m_PhysicsManager.addCollisionShape(
+      GLOBAL_COLLISION_SHAPES_TYPES_ID_MAP.toString(GCST_FALLING_OBJECT_SPHERE),
+      CPhysicsCollisionObject(new btSphereShape(0.02),
+                              Ogre::Vector3::NEGATIVE_UNIT_Y * 0));
+  m_PhysicsManager.addCollisionShape(
+      GLOBAL_COLLISION_SHAPES_TYPES_ID_MAP.toString(GCST_SMALL_CHEST_TOP),
+      CPhysicsCollisionObject(
+          new btCylinderShapeX(btVector3(0.04, 0.025, 0.025)),
+          Ogre::Vector3(0, 0.020  , 0.025)));
 
 
   // Create global entites
   for (int i = 0; i < TT_COUNT; i++) {
-    m_apTileEntities[i] = pParentSceneNode->getCreator()->createEntity(TILE_DATA_MAP.toData(static_cast<ETileTypes>(i)).sMeshName);
+    m_apTileEntities[i] = pParentSceneNode->getCreator()->createEntity(
+        TILE_DATA_MAP.toData(static_cast<ETileTypes>(i)).sMeshName);
   }
 
-  m_pSceneNode = pParentSceneNode->createChildSceneNode(m_MapPack->getName() + "_RootNode");
+  m_pSceneNode = pParentSceneNode->createChildSceneNode(
+      m_MapPack->getName() + "_RootNode");
 
-  m_pStaticGeometry = pParentSceneNode->getCreator()->createStaticGeometry(m_MapPack->getName() + "_StaticGeometry");
+  m_pStaticGeometry = pParentSceneNode->getCreator()->createStaticGeometry(
+      m_MapPack->getName() + "_StaticGeometry");
   m_pStaticGeometry->setRegionDimensions(Ogre::Vector3(10, 10, 10));
   m_pStaticGeometry->setCastShadows(false);
 
-  m_pStaticGeometryChangedTiles = pParentSceneNode->getCreator()->createStaticGeometry(m_MapPack->getName() + "_StaticGeometryChangedTiles");
+  m_pStaticGeometryChangedTiles
+      = pParentSceneNode->getCreator()->createStaticGeometry(
+          m_MapPack->getName() + "_StaticGeometryChangedTiles");
   m_pStaticGeometryChangedTiles->setRegionDimensions(Ogre::Vector3(10, 10, 10));
   m_pStaticGeometryChangedTiles->setCastShadows(false);
 
-  m_pStaticGeometryFixedTiles = pParentSceneNode->getCreator()->createStaticGeometry(m_MapPack->getName() + "_StaticGeometryFixedTiles");
+  m_pStaticGeometryFixedTiles
+      = pParentSceneNode->getCreator()->createStaticGeometry(
+          m_MapPack->getName() + "_StaticGeometryFixedTiles");
   m_pStaticGeometryFixedTiles->setRegionDimensions(Ogre::Vector3(10, 10, 10));
   m_pStaticGeometryFixedTiles->setCastShadows(false);
 
@@ -116,13 +171,14 @@ CMap::CMap(CEntity *pAtlas, CMapPackPtr mapPack, Ogre::SceneNode *pParentSceneNo
                               m_pSceneNode->getCreator(),
                               &m_PhysicsManager,
                               m_pSceneNode,
-                              m_MapPack->getName() + Ogre::StringConverter::toString(MAP_COUNTER++));
+                              m_MapPack->getName()
+                              + Ogre::StringConverter::toString(MAP_COUNTER++));
 
   m_MapPack->parse();
 
 
-  //CreateCube(btVector3(0, 10, 0.2), 1);
-  //CreateCube(btVector3(0, 200, 0.3), 100);
+  // CreateCube(btVector3(0, 10, 0.2), 1);
+  // CreateCube(btVector3(0, 200, 0.3), 100);
 
   /*btCollisionShape *pBox = new btBoxShape(btVector3(10, 0.1, 10));
   btRigidBody *pRB = new btRigidBody(0, new btDefaultMotionState(), pBox);
@@ -140,7 +196,8 @@ CMap::CMap(CEntity *pAtlas, CMapPackPtr mapPack, Ogre::SceneNode *pParentSceneNo
   m_pStaticGeometry->build();
   rebuildStaticGeometryChangedTiles();
 
-  m_pWaterSideWaveMaterial = Ogre::MaterialManager::getSingleton().getByName("water_side_wave");
+  m_pWaterSideWaveMaterial
+      = Ogre::MaterialManager::getSingleton().getByName("water_side_wave");
   m_pWaterSideWaveMaterial->touch();
   m_pWaterSideWaveMaterial->load();
 
@@ -164,21 +221,22 @@ void CMap::start() {
 void CMap::exit() {
   if (!m_pSceneNode) {return;}
   m_SceneLoader.cleanup();
-  Ogre::LogManager::getSingleton().logMessage("Destruction of map '" + m_MapPack->getName() + "'");
+  LOGI("Destruction of map '%s'", m_MapPack->getName().c_str());
+
+  Ogre::SceneManager *sceneManager = m_pSceneNode->getCreator();
 
   for (int i = 0; i < TT_COUNT; i++) {
-    m_pSceneNode->getCreator()->destroyEntity(m_apTileEntities[i]);
+    sceneManager->destroyEntity(m_apTileEntities[i]);
   }
-  m_pSceneNode->getCreator()->destroyStaticGeometry(m_pStaticGeometry);
-  m_pSceneNode->getCreator()->destroyStaticGeometry(m_pStaticGeometryChangedTiles);
-  m_pSceneNode->getCreator()->destroyStaticGeometry(m_pStaticGeometryFixedTiles);
+  sceneManager->destroyStaticGeometry(m_pStaticGeometry);
+  sceneManager->destroyStaticGeometry(m_pStaticGeometryChangedTiles);
+  sceneManager->destroyStaticGeometry(m_pStaticGeometryFixedTiles);
   m_pStaticGeometry = nullptr;
 
   CWorldEntity::exit();
 }
 
-void CMap::CreateCube(const btVector3 &Position, btScalar Mass)
-{
+void CMap::CreateCube(const btVector3 &Position, btScalar Mass) {
     // empty ogre vectors for the cubes size and position
     Ogre::Vector3 size = Ogre::Vector3::ZERO;
     Ogre::Vector3 pos = Ogre::Vector3::ZERO;
@@ -195,9 +253,10 @@ void CMap::CreateCube(const btVector3 &Position, btScalar Mass)
   m_pSceneNode->getCreator()->createEntity(
         "Cylinder.mesh");
 
-    // This gets us the size of the bounding box but since the bounding box in Ogre
-    // is a little bigger than the object itself we will cut that down slightly to make the physics
-    // more accurate.
+    // This gets us the size of the bounding box but since
+    // the bounding box in Ogre is a little bigger than the
+    // object itself we will cut that down slightly to make
+    // the physics more accurate.
     Ogre::AxisAlignedBox boundingB = entity->getBoundingBox();
     size = boundingB.getSize()*0.95f;
 
@@ -213,26 +272,31 @@ void CMap::CreateCube(const btVector3 &Position, btScalar Mass)
     // Physics
     btTransform Transform;
     Transform.setIdentity();
-    Transform.setOrigin(Position);  // Set the position of the rigid body to match the sceneNode
+    // Set the position of the rigid body to match the sceneNode
+    Transform.setOrigin(Position);
 
     // Give it to the motion state
-    BtOgre::RigidBodyState *MotionState = new BtOgre::RigidBodyState(node, Transform);
+    BtOgre::RigidBodyState *MotionState
+        = new BtOgre::RigidBodyState(node, Transform);
 
-   // Being new myself I'm not sure why this happen but we give the rigid body half the size
-   // of our cube and tell it to create a BoxShape (cube)
-    btVector3 HalfExtents(size.x*0.5f,size.y*0.5f,size.z*0.5f);
+    // Being new myself I'm not sure why this happen but we give
+    // the rigid body half the size
+    // of our cube and tell it to create a BoxShape (cube)
+    btVector3 HalfExtents(size.x * 0.5f, size.y * 0.5f, size.z * 0.5f);
     btCollisionShape *Shape = new btCylinderShape(HalfExtents);
 
-    // Add Mass to the object so it is appropriately affected by other objects and gravity
+    // Add Mass to the object so it is appropriately affected by
+    // other objects and gravity
     // In this case we pass the mass into the function when we call it.
     btVector3 LocalInertia;
     Shape->calculateLocalInertia(Mass, LocalInertia);
 
     // Create the rigid body object
-    btRigidBody *RigidBody = new btRigidBody(Mass, MotionState, Shape, LocalInertia);
+    btRigidBody *RigidBodyState
+        = new btRigidBody(Mass, MotionState, Shape, LocalInertia);
 
     // Add it to the physics world
-    m_PhysicsManager.getWorld()->addRigidBody(RigidBody, 32, 1023);
+    m_PhysicsManager.getWorld()->addRigidBody(RigidBodyState, 32, 1023);
 }
 
 void CMap::moveMap(const Ogre::Vector3 &offset) {
@@ -244,18 +308,24 @@ void CMap::moveMap(const Ogre::Vector3 &offset) {
   translateStaticGeometry(m_pStaticGeometryFixedTiles, offset);
 }
 
-void CMap::addStaticEntity(const std::string &entity, const Ogre::Vector3 &vPosition, const Ogre::Quaternion &vRotation) {
+void CMap::addStaticEntity(const std::string &entity,
+                           const Ogre::Vector3 &vPosition,
+                           const Ogre::Quaternion &vRotation) {
   if (m_mStaticEntitiesMap.find(entity) == m_mStaticEntitiesMap.end()) {
-    m_mStaticEntitiesMap[entity] = m_pSceneNode->getCreator()->createEntity(entity);
+    m_mStaticEntitiesMap[entity]
+        = m_pSceneNode->getCreator()->createEntity(entity);
   }
 
-  m_pStaticGeometry->addEntity(m_mStaticEntitiesMap.at(entity), vPosition, vRotation);
+  m_pStaticGeometry->addEntity(m_mStaticEntitiesMap.at(entity),
+                               vPosition,
+                               vRotation);
 }
 
-void CMap::translateStaticGeometry(Ogre::StaticGeometry *pSG, const Ogre::Vector3 &vVec) {
+void CMap::translateStaticGeometry(Ogre::StaticGeometry *pSG,
+                                   const Ogre::Vector3 &vVec) {
   Ogre::StaticGeometry::RegionIterator regionIt = pSG->getRegionIterator();
-  while (regionIt.hasMoreElements() ) {
-    Ogre::StaticGeometry::Region * reg=regionIt.getNext();
+  while (regionIt.hasMoreElements()) {
+    Ogre::StaticGeometry::Region *reg = regionIt.getNext();
     Ogre::SceneNode* thisSceneNode = reg->getParentSceneNode();
     thisSceneNode->translate(vVec);
     thisSceneNode->_updateBounds();
@@ -286,7 +356,8 @@ bool CMap::frameEnded(const Ogre::FrameEvent& evt) {
 
 void CMap::handleMessage(const CMessage &message) {
   if (message.getType() == MSG_ENTITY_STATE_CHANGED) {
-    const CMessageEntityStateChanged &mesc(dynamic_cast<const CMessageEntityStateChanged&>(message));
+    const CMessageEntityStateChanged &mesc(
+        dynamic_cast<const CMessageEntityStateChanged&>(message));
     CObject *pObject(dynamic_cast<CObject*>(mesc.getEntity()));
     if (!pObject) {return;}
     if (mesc.getOldState() == EST_NORMAL) {
@@ -301,8 +372,10 @@ void CMap::handleMessage(const CMessage &message) {
       m_pStaticGeometryFixedTiles->destroy();
       rebuildStaticGeometryChangedTiles();
 
-      
-      m_pStaticGeometryFixedTiles->addEntity(m_apTileEntities[data.eRemovedTile], pObject->getSceneNode()->getInitialPosition());
+
+      m_pStaticGeometryFixedTiles->addEntity(
+          m_apTileEntities[data.eRemovedTile],
+          pObject->getSceneNode()->getInitialPosition());
 
       m_pStaticGeometryFixedTiles->build();
     }
@@ -333,7 +406,9 @@ void CMap::rebuildStaticGeometryChangedTiles() {
       const SObjectTypeData &data(OBJECT_DATA_MAP.toData(
           static_cast<EObjectTypes>(pObject->getType())));
       if (data.eNormalTile != TT_COUNT) {
-        m_pStaticGeometryChangedTiles->addEntity(m_apTileEntities[data.eNormalTile], pObject->getSceneNode()->getInitialPosition());
+        m_pStaticGeometryChangedTiles->addEntity(
+            m_apTileEntities[data.eNormalTile],
+            pObject->getSceneNode()->getInitialPosition());
       }
     }
   }
@@ -342,20 +417,22 @@ void CMap::rebuildStaticGeometryChangedTiles() {
 }
 
 void CMap::processCollisionCheck() {
-	int numManifolds = m_PhysicsManager.getWorld()->getDispatcher()->getNumManifolds();
-	for (int i=0;i<numManifolds;i++)
-	{
-		btPersistentManifold* contactManifold =  m_PhysicsManager.getWorld()->getDispatcher()->getManifoldByIndexInternal(i);
-		const btCollisionObject* obA = static_cast<const btCollisionObject*>(contactManifold->getBody0());
-		const btCollisionObject* obB = static_cast<const btCollisionObject*>(contactManifold->getBody1());
+  auto dispatcher = m_PhysicsManager.getWorld()->getDispatcher();
 
-		int numContacts = contactManifold->getNumContacts();
-		for (int j=0;j<numContacts;j++)
-		{
-			btManifoldPoint& pt = contactManifold->getContactPoint(j);
-			if (pt.getDistance()<0.f)
-			{
-				// Contact of 2 objects
+  int numManifolds = dispatcher->getNumManifolds();
+  for (int i = 0; i < numManifolds; i++) {
+    btPersistentManifold* contactManifold
+        = dispatcher->getManifoldByIndexInternal(i);
+    const btCollisionObject* obA =
+        static_cast<const btCollisionObject*>(contactManifold->getBody0());
+    const btCollisionObject* obB =
+        static_cast<const btCollisionObject*>(contactManifold->getBody1());
+
+    int numContacts = contactManifold->getNumContacts();
+    for (int j = 0; j < numContacts; j++) {
+      btManifoldPoint& pt = contactManifold->getContactPoint(j);
+      if (pt.getDistance() < 0.f) {
+        // Contact of 2 objects
         CWorldEntity *pWE_A(CWorldEntity::getFromUserPointer(obA));
         CWorldEntity *pWE_B(CWorldEntity::getFromUserPointer(obB));
 
@@ -365,13 +442,14 @@ void CMap::processCollisionCheck() {
         }
         vDistance.normalize();
         if (pWE_A && pWE_B) {
-          pWE_A->interactOnCollision(BtOgre::Convert::toOgre(vDistance), pWE_B);
-          pWE_B->interactOnCollision(-BtOgre::Convert::toOgre(vDistance), pWE_A);
+          pWE_A->interactOnCollision(BtOgre::Convert::toOgre(vDistance),
+                                     pWE_B);
+          pWE_B->interactOnCollision(-BtOgre::Convert::toOgre(vDistance),
+                                     pWE_A);
         }
-			}
-		}
-
-	}
+      }
+    }
+  }
 }
 
 // ############################################################################3
@@ -402,65 +480,83 @@ void CMap::parseSceneEntity(const tinyxml2::XMLElement *pElem) {
 }
 
 void CMap::parseNewEntity(const tinyxml2::XMLElement *pElem) {
-  CWorldEntity *pNewEnt = CCharacterCreator::createCharacter(pElem, this, this, m_pPlayer);
+  CWorldEntity *pNewEnt = CCharacterCreator::createCharacter(
+      pElem, this, this, m_pPlayer);
   if (pNewEnt) {return;}
 
   throw Ogre::Exception(0, "New entity could not be created.", __FILE__);
 }
 
-// ############################################################################3
+// ############################################################################
 // CDotSceneLoaderCallback
-void CMap::physicsShapeCreated(btCollisionShape *pShape, const std::string &sMeshName) {
+void CMap::physicsShapeCreated(btCollisionShape *pShape,
+                               const std::string &sMeshName) {
   EObjectTypes objectType(OBJECT_DATA_MAP.getFromMeshName(sMeshName));
   if (objectType != OBJECT_COUNT) {
-    pShape->setLocalScaling(pShape->getLocalScaling() * OBJECT_DATA_MAP.toData(objectType).vPhysicsShapeScale);
+    auto scale = OBJECT_DATA_MAP.toData(objectType).vPhysicsShapeScale;
+    pShape->setLocalScaling(pShape->getLocalScaling() * scale);
   }
 }
 
 void CMap::worldPhysicsAdded(btRigidBody *pRigidBody) {
   ASSERT(pRigidBody);
 
-  // if user pointer is already set, then collision/interaction is handled in a special way, e.g. chest
+  // if user pointer is already set, then collision/interaction
+  // is handled in a special way, e.g. chest
   if (pRigidBody->getUserPointer() == nullptr) {
     setThisAsCollisionObjectsUserPointer(pRigidBody);
   }
 }
 
-void CMap::postEntityAdded(Ogre::Entity *pEntity, Ogre::SceneNode *pParent, btRigidBody *pRigidBody, const CUserData &userData) {
+void CMap::postEntityAdded(Ogre::Entity *pEntity,
+                           Ogre::SceneNode *pParent,
+                           btRigidBody *pRigidBody,
+                           const CUserData &userData) {
   if (pEntity->getName().find("flower") != Ogre::String::npos) {
     if (!m_pFirstFlowerEntity) {
       m_pFirstFlowerEntity = pEntity;
       m_pFlowerAnimationState = pEntity->getAnimationState("Action");
       m_pFlowerAnimationState->setLoop(true);
       m_pFlowerAnimationState->setEnabled(true);
-    }
-    else {
+    } else {
       pEntity->shareSkeletonInstanceWith(m_pFirstFlowerEntity);
     }
-  }
-  else if (pEntity->getMesh()->getName() == "small_chest_bottom.mesh") {
-    CChest *pChest = new CChest(userData.getStringUserData("name"), this, this, CChest::SMALL_CHEST);
+  } else if (pEntity->getMesh()->getName() == "small_chest_bottom.mesh") {
+    CChest *pChest = new CChest(userData.getStringUserData("name"),
+                                this, this, CChest::SMALL_CHEST);
     pChest->setPosition(pParent->_getDerivedPosition());
     pChest->setThisAsCollisionObjectsUserPointer(pRigidBody);
-    pChest->setInnerObject(OBJECT_TYPE_ID_MAP.parseString(userData.getStringUserData("inner_object")));
+    pChest->setInnerObject(OBJECT_TYPE_ID_MAP.parseString(
+        userData.getStringUserData("inner_object")));
     pChest->init();
     pChest->start();
     m_PhysicsManager.getWorld()->removeRigidBody(pRigidBody);
-    m_PhysicsManager.getWorld()->addRigidBody(pRigidBody, COL_INTERACTIVE, MASK_INTERACIVE_OBJECT_COLLIDES_WITH);
+    m_PhysicsManager.getWorld()->addRigidBody(
+        pRigidBody,
+        COL_INTERACTIVE,
+        MASK_INTERACIVE_OBJECT_COLLIDES_WITH);
   }
 }
 
-void CMap::staticObjectAdded(Ogre::Entity *pEntity, Ogre::SceneNode *pParent) {
-  m_pStaticGeometry->addEntity(pEntity, pParent->getPosition(), pParent->getOrientation());
+void CMap::staticObjectAdded(Ogre::Entity *pEntity,
+                             Ogre::SceneNode *pParent) {
+  m_pStaticGeometry->addEntity(pEntity, pParent->getPosition(),
+                               pParent->getOrientation());
   destroySceneNode(pParent, true);
 }
 
-CDotSceneLoaderCallback::EResults CMap::preEntityAdded(tinyxml2::XMLElement *XMLNode, Ogre::SceneNode *pParent, CUserData &userData) {
+CDotSceneLoaderCallback::EResults CMap::preEntityAdded(
+    tinyxml2::XMLElement *XMLNode,
+    Ogre::SceneNode *pParent,
+    CUserData &userData) {
   CWorldEntity *pEntity(nullptr);
 
-  EObjectTypes objectType(OBJECT_DATA_MAP.getFromMeshFileName(XMLNode->Attribute("meshFile")));
-  if (objectType != OBJECT_COUNT && OBJECT_DATA_MAP.toData(objectType).bUserHandle) {
-    CObject *pObject = new CObject(userData.getStringUserData("name"), this, this, objectType, pParent);
+  EObjectTypes objectType(OBJECT_DATA_MAP.getFromMeshFileName(
+      XMLNode->Attribute("meshFile")));
+  if (objectType != OBJECT_COUNT
+      && OBJECT_DATA_MAP.toData(objectType).bUserHandle) {
+    CObject *pObject = new CObject(userData.getStringUserData("name"),
+                                   this, this, objectType, pParent);
     std::string innerObject(userData.getStringUserData("inner_object"));
     if (!innerObject.empty()) {
       pObject->setInnerObject(OBJECT_TYPE_ID_MAP.parseString(innerObject));

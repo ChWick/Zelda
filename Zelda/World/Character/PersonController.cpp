@@ -43,7 +43,9 @@ CPersonController::CPersonController(CPerson * ccPlayer) {
   mBodyNode = mCCPerson->getSceneNode();
 
   mJumped = false;
-  m_fMoveSpeed = WALK_SPEED;
+  m_fWalkSpeed = WALK_SPEED;
+  m_fRunSpeed = RUN_SPEED;
+  m_fCurrentMoveSpeed = m_fWalkSpeed;
   // mIsFalling = mCCPhysics->onGround();
   mWalkDirection = Ogre::Vector3::ZERO;
 
@@ -66,8 +68,12 @@ void CPersonController::updateCharacter(const Ogre::Real deltaTime) {
   using Ogre::Degree;
   using Ogre::Math;
 
+  // update the move speed
+  updateCurrentMoveSpeed();
+
+  // then we can calculate our move step
   m_fTimer -= deltaTime;
-  Real posIncrementPerSecond = m_fMoveSpeed;
+  Real posIncrementPerSecond = m_fCurrentMoveSpeed;
 
   Vector3 playerPos = mCCPerson->getPosition();
 
@@ -83,7 +89,7 @@ void CPersonController::updateCharacter(const Ogre::Real deltaTime) {
 
   if (position != playerPos) {
     Ogre::Real fTranslateDistance = vTranslateDirection.normalise();
-    Ogre::Real fDesiredDistance = 20 * deltaTime * m_fMoveSpeed
+    Ogre::Real fDesiredDistance = 20 * deltaTime * m_fCurrentMoveSpeed
         / WALK_SPEED * fTranslateDistance;
 
     mBodyNode->translate(vTranslateDirection * std::min<Ogre::Real>(
@@ -269,6 +275,17 @@ void CPersonController::updateCharacter(const Ogre::Real deltaTime) {
   }
 }
 
+void CPersonController::updateCurrentMoveSpeed() {
+  switch (m_uiCurrentMoveState) {
+    case MS_RUNNING:
+      m_fCurrentMoveSpeed = m_fRunSpeed;
+      break;
+    default:
+      m_fCurrentMoveSpeed = m_fWalkSpeed;
+      break;
+  }
+}
+
 void CPersonController::updateGoalDirection() {
 }
 
@@ -355,7 +372,7 @@ void CPersonController::requestingJumpSpeed(float *horizontal,
 
   switch (m_uiCurrentMoveState) {
     default:
-      *horizontal = m_fMoveSpeed * WALK_SPEED_SCALE;
+      *horizontal = m_fCurrentMoveSpeed * WALK_SPEED_SCALE;
       // vertical speed default, so dont change
       break;
   }
