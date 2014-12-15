@@ -21,6 +21,7 @@
 #define _CHARACTER_H_
 
 #include "../WorldEntity.hpp"
+#include "CharacterData.hpp"
 #include <LinearMath/btAlignedObjectArray.h>
 #include "CharacterAttitude.hpp"
 #include "CharacterControllerPhysicsListener.hpp"
@@ -94,6 +95,8 @@ public:
     CIS_COUNT,
   };
 protected:
+  //! Character data
+  const SCharacterData &mCharacterData;
   const ECharacterAttitude mAttitude;	//!< Is this character a friend or an enemy?
 
   bool m_bMoving;
@@ -137,13 +140,11 @@ protected:
   CCharacter(const std::string &sID,
              CEntity *pParent,
              CMap *pMap,
-             const ECharacterAttitude attitude,
-             unsigned int uiAnimationCount = ANIM_COUNT);
+             const SCharacterData &characterData);
   CCharacter(const tinyxml2::XMLElement *pElem,
              CEntity *pParent,
              CMap *pMap,
-             const ECharacterAttitude attitude,
-             unsigned int uiAnimationCount = ANIM_COUNT);
+             const SCharacterData &characterData);
 
 public:
   virtual ~CCharacter();

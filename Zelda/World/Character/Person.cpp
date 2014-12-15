@@ -60,8 +60,7 @@ CPerson::CPerson(const std::string &sID,
     : CCharacter(sID,
                  pParent,
                  pMap,
-                 personData.eAttitude,
-                 uiAnimationCount),
+                 personData),
       m_PersonData(personData) {
   m_degLeftHandleCurrentRotation = 0;
   m_degLeftHandleRotationSpeed = 0;
@@ -80,8 +79,7 @@ CPerson::CPerson(const tinyxml2::XMLElement *pElem,
                pMap,
                PERSON_DATA_ID_MAP.toData(
                    PERSON_TYPE_ID_MAP.parseString(
-                       Attribute(pElem, "person_type"))).eAttitude,
-               uiAnimationCount),
+                       Attribute(pElem, "person_type")))),
     m_PersonData(PERSON_DATA_ID_MAP.toData(
         PERSON_TYPE_ID_MAP.parseString(Attribute(pElem, "person_type")))) {
   m_degLeftHandleCurrentRotation = 0;

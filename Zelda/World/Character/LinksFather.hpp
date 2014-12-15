@@ -26,6 +26,7 @@ class CLinksFather : public CPerson {
 public:
   enum ELinksFatherAnimations {
     LF_ANIM_SIT,
+    LF_ANIM_STAND_UP,
     LF_ANIM_WALK,
     
     LF_ANIM_COUNT,

@@ -424,10 +424,10 @@
       mesh_name="soldier"
       material_name="soldier_green"
       attitude="enemy"
-      animations_count="2"
+      animations_count="1"
       >
     <animation name="Scout" id="0"/>
-    <animation name="Walk" id="1"/>
+    <!--animation name="Walk" id="1"/ -->
   </person>
   <person
       id="soldier_blue"

@@ -32,12 +32,12 @@
 CCharacter::CCharacter(const std::string &sID,
                        CEntity *pParent,
                        CMap *pMap,
-                       const ECharacterAttitude attitude,
-                       unsigned int uiAnimationCount)
+                       const SCharacterData &characterData)
   : CWorldEntity(sID, pParent, pMap),
-    mAttitude(attitude),
+    mCharacterData(characterData),
+    mAttitude(characterData.mAttitude),
     m_pCharacterController(nullptr),
-    m_uiAnimationCount(uiAnimationCount),
+    m_uiAnimationCount(characterData.mAnimations.size()),
     m_fTimer(0),
     m_fAnimSpeed(1) {
   m_Anims.resize(m_uiAnimationCount);
@@ -50,12 +50,12 @@ CCharacter::CCharacter(const std::string &sID,
 CCharacter::CCharacter(const tinyxml2::XMLElement *pElem,
                        CEntity *pParent,
                        CMap *pMap,
-                       const ECharacterAttitude attitude,
-                       unsigned int uiAnimationCount)
+                       const SCharacterData &characterData)
   : CWorldEntity(pParent, pMap, pElem),
-    mAttitude(attitude),
+    mCharacterData(characterData),
+    mAttitude(characterData.mAttitude),
     m_pCharacterController(nullptr),
-    m_uiAnimationCount(uiAnimationCount),
+    m_uiAnimationCount(characterData.mAnimations.size()),
     m_fTimer(0),
     m_fAnimSpeed(1) {
   m_Anims.resize(m_uiAnimationCount);
