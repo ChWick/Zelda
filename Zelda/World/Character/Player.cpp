@@ -115,7 +115,7 @@ void CPlayer::setupAnimations() {
   for (unsigned int i = 0; i < m_uiAnimationCount; i++) {
     m_Anims[i] = m_pBodyEntity->getAnimationState(animNames[i]);
     m_Anims[i]->setLoop(true);
-    m_FadingStates[i] = FADE_NONE;
+    mAnimationProperty[i].mFadeState = FADE_NONE;
     m_Anims[i]->setEnabled(false);
     m_Anims[i]->setWeight(0);
   }

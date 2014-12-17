@@ -405,8 +405,8 @@
       >
     <animation name="Idle" id="0"/>
     <animation name="Walk" id="1"/>
-    <animation name="SwordAttack" id="2"/>
-    <animation name="SwordAttack" id="3"/>
+    <animation name="SwordAttack" id="2" allow_moving="false"/>
+    <animation name="SwordAttack" id="3" allow_moving="false"/>
     <animation name="RunPegasus" id="4"/>
   </person>
   <person

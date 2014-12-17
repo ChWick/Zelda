@@ -37,8 +37,19 @@ class btCharacterControllerInterface;
 
 #define ANIM_FADE_SPEED 10.f   // animation crossfade speed of full weight per second
 
+enum EFadeState {
+  FADE_NONE = 0,
+  FADE_IN = 1,
+  FADE_OUT = 2,
+};
+
 struct SAnimationProperty {
-  bool allowMoving;
+  //! Pointer to the animation data
+  const SCharacterAnimationData *mAnimationData;
+  //! Pointer to the animation state
+  Ogre::AnimationState *mState;
+  //! fade state
+  EFadeState mFadeState;
 };
 
 //! Klasse f&uuml;r einen animierten Charater mit Standardanimationen
@@ -81,11 +92,6 @@ public:
   };
 
   static const unsigned int ANIM_NONE = ANIM_COUNT;						//!< ANIM_NONE definition: == m_uiAnimationCount
-  enum EFadeStade {
-    FADE_NONE = 0,
-    FADE_IN = 1,
-    FADE_OUT = 2,
-  };
 
   enum ECharacterItemSlots {
     CIS_WEAPON = 0,
@@ -112,11 +118,10 @@ protected:
   const unsigned int m_uiAnimationCount;							//!< number of animations
   Ogre::vector<Ogre::AnimationState*>::type m_Anims;	//!< master animation list
   unsigned int m_uiAnimID;														//!< current animation
-  Ogre::vector<char>::type m_FadingStates;            //!< which animations are fading
 
   Ogre::Real m_fTimer;																//!< Animation timer (how long is the current animation running)
   Ogre::Real m_fAnimSpeed;														//!< Animation speed
-private:
+protected:
   std::shared_ptr<CCharacterItem> mCurrentItems[CIS_COUNT];
   std::vector<SAnimationProperty> mAnimationProperty;
 public:

@@ -41,7 +41,6 @@ CCharacter::CCharacter(const std::string &sID,
     m_fTimer(0),
     m_fAnimSpeed(1) {
   m_Anims.resize(m_uiAnimationCount);
-  m_FadingStates.resize(m_uiAnimationCount);
   m_uiAnimID = m_uiAnimationCount;
 
   constructor_impl();
@@ -59,7 +58,6 @@ CCharacter::CCharacter(const tinyxml2::XMLElement *pElem,
     m_fTimer(0),
     m_fAnimSpeed(1) {
   m_Anims.resize(m_uiAnimationCount);
-  m_FadingStates.resize(m_uiAnimationCount);
   m_uiAnimID = m_uiAnimationCount;
 
   constructor_impl();
@@ -72,13 +70,9 @@ void CCharacter::constructor_impl() {
   m_fYaw = 0;
 
   mAnimationProperty.resize(m_uiAnimationCount);
-  for (SAnimationProperty &prop : mAnimationProperty) {
-    prop.allowMoving = false;
+  for (uint8_t i = 0; i < m_uiAnimationCount; ++i) {
+    mAnimationProperty[i].mAnimationData = &mCharacterData.mAnimations[i];
   }
-
-  if (ANIM_WALK < m_uiAnimationCount) {mAnimationProperty[ANIM_WALK].allowMoving = true;}
-  if (ANIM_RUN < m_uiAnimationCount) {mAnimationProperty[ANIM_RUN].allowMoving = true;}
-  if (ANIM_IDLE < m_uiAnimationCount) {mAnimationProperty[ANIM_IDLE].allowMoving = true;}
 }
 
 CCharacter::~CCharacter() {
@@ -236,7 +230,7 @@ void CCharacter::updateAnimationsCallback(const Ogre::Real fTime) {
 void CCharacter::setAnimation(unsigned int id, bool reset) {
   if (m_uiAnimID < m_uiAnimationCount) {
     // if we have an old animation, fade it out
-    m_FadingStates[m_uiAnimID] = FADE_OUT;
+    mAnimationProperty[m_uiAnimID].mFadeState = FADE_OUT;
   }
 
   m_uiAnimID = id;
@@ -245,7 +239,7 @@ void CCharacter::setAnimation(unsigned int id, bool reset) {
     // if we have a new animation, enable it and fade it in
     m_Anims[id]->setEnabled(true);
     // m_Anims[id]->setWeight(0);
-    m_FadingStates[m_uiAnimID] = FADE_IN;
+    mAnimationProperty[m_uiAnimID].mFadeState = FADE_IN;
     if (reset) m_Anims[id]->setTimePosition(0);
   }
 }
@@ -273,15 +267,15 @@ unsigned int CCharacter::getAnimationIdFromString(const std::string &id) const {
 
 void CCharacter::fadeAnimations(const Ogre::Real deltaTime) {
   for (unsigned int i = 0; i < m_uiAnimationCount; i++) {
-    if (m_FadingStates[i] == FADE_NONE) {
+    if (mAnimationProperty[i].mFadeState == FADE_NONE) {
       continue;
-    } else if (m_FadingStates[i] == FADE_IN) {
+    } else if (mAnimationProperty[i].mFadeState == FADE_IN) {
       // slowly fade this animation in until it has full weight
       Ogre::Real newWeight = m_Anims[i]->getWeight()
           + deltaTime * ANIM_FADE_SPEED;
       m_Anims[i]->setWeight(Ogre::Math::Clamp<Ogre::Real>(newWeight, 0, 1));
-      if (newWeight >= 1) m_FadingStates[i] = FADE_NONE;
-    } else if (m_FadingStates[i] == FADE_OUT) {
+      if (newWeight >= 1) mAnimationProperty[i].mFadeState = FADE_NONE;
+    } else if (mAnimationProperty[i].mFadeState == FADE_OUT) {
       // slowly fade this animation out until it has no weight,
       // and then disable it
       Ogre::Real newWeight = m_Anims[i]->getWeight()
@@ -289,7 +283,7 @@ void CCharacter::fadeAnimations(const Ogre::Real deltaTime) {
       m_Anims[i]->setWeight(Ogre::Math::Clamp<Ogre::Real>(newWeight, 0, 1));
       if (newWeight <= 0) {
         m_Anims[i]->setEnabled(false);
-        m_FadingStates[i] = FADE_NONE;
+        mAnimationProperty[i].mFadeState = FADE_NONE;
       }
     }
   }
