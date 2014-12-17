@@ -83,39 +83,57 @@ CMap::CMap(CEntity *pAtlas,
           new btCapsuleShape(CPerson::PERSON_RADIUS,
                              CPerson::PERSON_HEIGHT
                              - 2 * CPerson::PERSON_RADIUS)));
+
+  // house entrance
+  btBoxShape *pHouseEntranceTopShape = new btBoxShape(btVector3(0.07, 0.01, 0.02));
+  m_PhysicsManager.addCollisionShape(
+  GLOBAL_COLLISION_SHAPES_TYPES_ID_MAP.toString(GCST_HOUSE_ENTRANCE_TOP),
+  CPhysicsCollisionObject(pHouseEntranceTopShape));
+ 
+  btBoxShape *pHouseEntranceSideShape = new btBoxShape(btVector3(0.01, 0.08, 0.02));
+  m_PhysicsManager.addCollisionShape(
+      GLOBAL_COLLISION_SHAPES_TYPES_ID_MAP.toString(GCST_HOUSE_ENTRANCE_SIDE),
+      CPhysicsCollisionObject(pHouseEntranceSideShape));
+
   btCompoundShape *pHouseEntranceShape = new btCompoundShape();
   pHouseEntranceShape->addChildShape(
       btTransform(btQuaternion::getIdentity(),
                   btVector3(-0.069, 0.08, 0.02)),
-      new btBoxShape(btVector3(0.01, 0.08, 0.02)));
+      pHouseEntranceSideShape);
   pHouseEntranceShape->addChildShape(
       btTransform(btQuaternion::getIdentity(),
                   btVector3(0.069, 0.08, 0.02)),
-      new btBoxShape(btVector3(0.01, 0.08, 0.02)));
+      pHouseEntranceSideShape);
   pHouseEntranceShape->addChildShape(
       btTransform(btQuaternion::getIdentity(),
                   btVector3(0.0, 0.16, 0.02)),
-      new btBoxShape(btVector3(0.07, 0.01, 0.02)));
+      pHouseEntranceTopShape);
   m_PhysicsManager.addCollisionShape(
       GLOBAL_COLLISION_SHAPES_TYPES_ID_MAP.toString(GCST_HOUSE_ENTRANCE),
       CPhysicsCollisionObject(pHouseEntranceShape, Ogre::Vector3::ZERO));
 
+   // stone pile
+  btSphereShape *pPileSingleStoneShape = new btSphereShape(0.04);
+  m_PhysicsManager.addCollisionShape(
+      GLOBAL_COLLISION_SHAPES_TYPES_ID_MAP.toString(GCST_STONE_PILE_SINGLE_STONE),
+      CPhysicsCollisionObject(pPileSingleStoneShape));
+
   btCompoundShape *pStonePileShape = new btCompoundShape();
   pStonePileShape->addChildShape(
       btTransform(btQuaternion::getIdentity(), btVector3(0.05, 0.025, 0.05)),
-      new btSphereShape(0.04));
+      pPileSingleStoneShape);
   pStonePileShape->addChildShape(
       btTransform(btQuaternion::getIdentity(), btVector3(-0.05, 0.025, 0.05)),
-      new btSphereShape(0.04));
+      pPileSingleStoneShape);
   pStonePileShape->addChildShape(
       btTransform(btQuaternion::getIdentity(), btVector3(0.05, 0.025, -0.05)),
-      new btSphereShape(0.04));
+      pPileSingleStoneShape);
   pStonePileShape->addChildShape(
       btTransform(btQuaternion::getIdentity(), btVector3(-0.05, 0.025, -0.05)),
-      new btSphereShape(0.04));
+      pPileSingleStoneShape);
   pStonePileShape->addChildShape(
       btTransform(btQuaternion::getIdentity(), btVector3(-0.0, 0.06, -0.0)),
-      new btSphereShape(0.04));
+      pPileSingleStoneShape);
   m_PhysicsManager.addCollisionShape(
       GLOBAL_COLLISION_SHAPES_TYPES_ID_MAP.toString(GCST_STONE_PILE),
       CPhysicsCollisionObject(pStonePileShape, Ogre::Vector3::ZERO));

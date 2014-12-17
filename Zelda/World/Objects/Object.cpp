@@ -83,6 +83,9 @@ CObject::CObject(const std::string &id,
   }
 }
 
+CObject::~CObject() {
+}
+
 void CObject::init() {
   createPhysics();
 
@@ -97,6 +100,11 @@ void CObject::init() {
     default:
       break;
   }
+}
+
+void CObject::exit() {
+  destroyPhysics();
+  CWorldEntity::exit();
 }
 
 void CObject::destroyPhysics() {

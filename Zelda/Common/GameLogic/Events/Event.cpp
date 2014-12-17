@@ -63,6 +63,11 @@ CEvent::~CEvent() {
     delete pEmitter;
   }
   m_lEmitter.clear();
+
+  for (CAction *a : m_lActions) {
+    delete a;
+  }
+  m_lActions.clear();
 }
 void CEvent::init() {
 }

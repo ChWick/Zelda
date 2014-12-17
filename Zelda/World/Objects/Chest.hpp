@@ -52,6 +52,7 @@ private:
   Ogre::Real mTimer;
 public:
   CChest(const std::string &sID, CWorldEntity *pParent, CMap *pMap, EChestType chestType);
+  ~CChest();
 
   void start();
   void update(Ogre::Real);

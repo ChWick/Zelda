@@ -83,6 +83,18 @@ CChest::CChest(const std::string &sID,
                            MASK_INTERACIVE_OBJECT_COLLIDES_WITH);
 }
 
+CChest::~CChest() {
+  // dont destroy chest top!
+  if (m_pCollisionObject) {
+    btRigidBody *pRigidBody(btRigidBody::upcast(m_pCollisionObject));
+    m_pMap->getPhysicsManager()->getWorld()->removeRigidBody(pRigidBody);
+    // dont delete collision shape!
+    delete pRigidBody->getMotionState();
+    delete pRigidBody;
+    m_pCollisionObject = nullptr;
+  }
+}
+
 void CChest::start() {
   switch (mChestType) {
   case SMALL_CHEST:

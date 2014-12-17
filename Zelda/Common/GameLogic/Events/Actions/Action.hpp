@@ -27,20 +27,23 @@ namespace tinyxml2 {
 };
 
 namespace events {
-  class CEvent;
+class CEvent;
 
-  class CAction {
-  protected:
-    const EActionTypes m_Type;
-    const CEvent &m_Owner;
-
-    CAction(const tinyxml2::XMLElement *pElem, const CEvent &owner);
+class CAction {
+ protected:
+  const EActionTypes m_Type;
+  const CEvent &m_Owner;
+  
+  CAction(const tinyxml2::XMLElement *pElem, const CEvent &owner);
     CAction(const EActionTypes type, const CEvent &owner);
-    virtual ~CAction() {}
-
-  public:
-    virtual void start() {}
-    virtual void stop() {}
-  };
+  
+ public:
+  virtual ~CAction() {}
+  
+ public:
+  virtual void start() {}
+  virtual void stop() {}
 };
+
+};  // namespace events
 #endif // _ACTION_HPP_

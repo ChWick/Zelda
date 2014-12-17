@@ -184,7 +184,7 @@ public:
   void update(Ogre::Real fTime);
 
   
-  void setAnimation(unsigned int id, bool reset = false);
+  void setAnimation(unsigned int id, bool reset = false, bool force = false);
   const Ogre::AnimationState *getAnimation(unsigned int id) const;
   virtual unsigned int getAnimationIdFromString(const std::string &id) const;
 protected:
@@ -192,7 +192,9 @@ protected:
   virtual void createPhysics() = 0;
   virtual void destroyPhysics() = 0;
   virtual void initBody(Ogre::SceneNode *pParentSceneNode) = 0;
-  virtual void setupAnimations() = 0;
+  void setupAnimations();
+  virtual void preSetupAnimations() {}
+  virtual void postSetupAnimations() {}
 protected:
   virtual void preUpdateBoundsCallback(const Ogre::Real fTime) {}
   virtual void preAnimationUpdateCallback(const Ogre::Real fTime) {}

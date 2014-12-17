@@ -79,7 +79,9 @@ if (OGRE_FOUND)
       ${OGRE_LIB}
       ${OGRE_OVERLAY_LIB})
     if (OGRE_LIB_DBG)
-        set (OGRE_LIBRARIES_DBG ${OGRE_LIB_DBG})
+        set (OGRE_LIBRARIES
+	  ${OGRE_LIB_DBG}
+	  ${OGRE_OVERLAY_LIB})
 
     endif()
 else()

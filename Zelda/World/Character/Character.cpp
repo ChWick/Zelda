@@ -24,7 +24,9 @@
 #include "../Atlas/Map.hpp"
 #include "../../Common/Physics/PhysicsMasks.hpp"
 #include "../../Common/Physics/BtOgreExtras.hpp"
+#include <OgreEntity.h>
 #include <OgreAnimationState.h>
+#include <OgreSkeletonInstance.h>
 #include "../Items/CharacterItem.hpp"
 #include "../../Common/Util/Assert.hpp"
 
@@ -75,13 +77,45 @@ void CCharacter::constructor_impl() {
 
 CCharacter::~CCharacter() {
 }
+
+void CCharacter::setupAnimations() {
+  ASSERT(m_pBodyEntity);
+  // this is very important due to the nature of the exported animations
+  m_pBodyEntity->getSkeleton()->setBlendMode(Ogre::ANIMBLEND_CUMULATIVE);
+ 
+  preSetupAnimations();
+  for (SAnimationProperty &animProp : mAnimationProperty) {
+    ASSERT(animProp.mAnimationData);
+    Ogre::AnimationState *animState
+        = m_pBodyEntity->getAnimationState(animProp.mAnimationData->mName);
+    animProp.mState = animState;
+    animProp.mFadeState = FADE_NONE;
+ 
+    animState->setLoop(animProp.mAnimationData->mLoop);
+    animState->setEnabled(false);
+    animState->setWeight(0);
+ 
+    m_Anims[animProp.mAnimationData->mId] = animState;
+  }
+ 
+  setAnimation(0, true, true);
+
+  postSetupAnimations();
+}
+
 void CCharacter::exit() {
+  if (m_pCharacterController) {
+    delete m_pCharacterController;
+    m_pCharacterController = nullptr;
+  }
+  
   for (int i = 0; i < CIS_COUNT; i++) {
     mCurrentItems[i].reset();
   }
   CWorldEntity::exit();
   destroyPhysics();
 }
+
 void CCharacter::enterMap(CMap *pMap, const Ogre::Vector3 &vInitPosition) {
   // switch map only, if map an scene node are existing
   bool bSwitchMapOnly = m_pMap && m_pSceneNode;
@@ -225,20 +259,43 @@ void CCharacter::updateAnimationsCallback(const Ogre::Real fTime) {
   }
 }
 
-void CCharacter::setAnimation(unsigned int id, bool reset) {
-  if (m_uiAnimID < m_uiAnimationCount) {
-    // if we have an old animation, fade it out
-    mAnimationProperty[m_uiAnimID].mFadeState = FADE_OUT;
-  }
+void CCharacter::setAnimation(unsigned int id, bool reset, bool force) {
+  if (force) {
+    // no fading
+    for (unsigned int i = 0; i < m_uiAnimationCount; i++) {
+      mAnimationProperty[m_uiAnimID].mFadeState = FADE_OUT;
+      m_Anims[id]->setEnabled(false);
+      m_Anims[id]->setWeight(0);
+    }
 
-  m_uiAnimID = id;
+    // only show current
+    m_uiAnimID = id;
 
-  if (id != m_uiAnimationCount) {
-    // if we have a new animation, enable it and fade it in
-    m_Anims[id]->setEnabled(true);
-    // m_Anims[id]->setWeight(0);
-    mAnimationProperty[m_uiAnimID].mFadeState = FADE_IN;
-    if (reset) m_Anims[id]->setTimePosition(0);
+    if (id != m_uiAnimationCount) {
+      // if we have a new animation, enable it and fade it in
+      m_Anims[id]->setEnabled(true);
+      m_Anims[id]->setWeight(1);
+      mAnimationProperty[id].mFadeState = FADE_IN;
+      if (reset) m_Anims[id]->setTimePosition(0);
+    }
+  } else {
+    // fading
+
+    // disable all animations
+    if (m_uiAnimID < m_uiAnimationCount) {
+      // if we have an old animation, fade it out
+      mAnimationProperty[m_uiAnimID].mFadeState = FADE_OUT;
+    }
+
+    m_uiAnimID = id;
+
+    if (id != m_uiAnimationCount) {
+      // if we have a new animation, enable it and fade it in
+      m_Anims[id]->setEnabled(true);
+      // m_Anims[id]->setWeight(0);
+      mAnimationProperty[m_uiAnimID].mFadeState = FADE_IN;
+      if (reset) m_Anims[id]->setTimePosition(0);
+    }
   }
 }
 

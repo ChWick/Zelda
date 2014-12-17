@@ -60,6 +60,7 @@ void CWorldEntity::exit() {
       delete pRB->getMotionState();
     }
     // dont delete collision shape, since it is normally a global shape
+    delete m_pCollisionObject;
     m_pCollisionObject = nullptr;
   }
 
