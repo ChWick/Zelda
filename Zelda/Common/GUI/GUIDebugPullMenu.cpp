@@ -79,13 +79,13 @@ CEGUI::Window *CGUIDebugPullMenu::createFrameStatsButton(const CEGUI::String &id
 
 bool CGUIDebugPullMenu::onToggleDebugDrawer(const CEGUI::EventArgs &args) {
   ToggleButton *pTB = dynamic_cast<ToggleButton*>(dynamic_cast<const WindowEventArgs&>(args).window);
-  CMessageHandler::getSingleton().addMessage(new CMessageDebug(CMessageDebug::DM_TOGGLE_DEBUG_DRAWER, pTB->isSelected()));
+  CMessageHandler::getSingleton().addMessage(std::make_shared<CMessageDebug>(__MSG_LOCATION__, CMessageDebug::DM_TOGGLE_DEBUG_DRAWER, pTB->isSelected()));
   return true;
 }
 
 bool CGUIDebugPullMenu::onTogglePhysics(const CEGUI::EventArgs &args) {
   ToggleButton *pTB = dynamic_cast<ToggleButton*>(dynamic_cast<const WindowEventArgs&>(args).window);
-  CMessageHandler::getSingleton().addMessage(new CMessageDebug(CMessageDebug::DM_TOGGLE_PHYSICS, pTB->isSelected()));
+  CMessageHandler::getSingleton().addMessage(std::make_shared<CMessageDebug>(__MSG_LOCATION__, CMessageDebug::DM_TOGGLE_PHYSICS, pTB->isSelected()));
   return true;
 }
 

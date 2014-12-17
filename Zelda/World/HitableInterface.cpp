@@ -116,10 +116,10 @@ CHitableInterface::EReceiveDamageResult CHitableInterface::hit(
 
 void CHitableInterface::maxHitpointsChangedCallback() {
   CMessageHandler::getSingleton().addMessage(
-      new CMessageHitpointsChanged(*this));
+      std::make_shared<CMessageHitpointsChanged>(__MSG_LOCATION__, *this));
 }
 
 void CHitableInterface::hitpointsChangedCallback() {
   CMessageHandler::getSingleton().addMessage(
-      new CMessageHitpointsChanged(*this));
+      std::make_shared<CMessageHitpointsChanged>(__MSG_LOCATION__, *this));
 }

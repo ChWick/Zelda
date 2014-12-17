@@ -47,15 +47,15 @@ void CMessageHandler::process() {
 
   mInjectorMutex.unlock();
 
-  std::list<std::unique_ptr<SMessageEntry> > l;
+  std::list<CMessagePtr> l;
   mMutex.lock();
   l.splice(l.end(), m_lMessages);
   mMutex.unlock();
 
   while (l.size() > 0) {
-    const CMessage *pMessage = l.front()->pMessage;
+    CMessagePtr m = l.front();
     for (auto pInjector : m_lInjectors) {
-      pInjector->sendMessageToAll(*pMessage);
+      pInjector->sendMessageToAll(m);
     }
 
     l.pop_front();
@@ -75,11 +75,9 @@ void CMessageHandler::removeInjector(CMessageInjector *pInjector) {
   mInjectorMutex.unlock();
 }
 
-void CMessageHandler::addMessage(const CMessage *m, bool bAutoDelete) {
+void CMessageHandler::addMessage(CMessagePtr m) {
   mMutex.lock();
-  m_lMessages.push_back(std::unique_ptr<SMessageEntry>(new SMessageEntry()));
-  m_lMessages.back()->bAutoDelete = bAutoDelete;
-  m_lMessages.back()->pMessage = m;
+  m_lMessages.push_back(m);
   mMutex.unlock();
 }
 

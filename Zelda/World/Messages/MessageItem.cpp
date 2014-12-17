@@ -20,13 +20,14 @@
 #include "MessageItem.hpp"
 #include "UserMessageTypes.hpp"
 
-CMessageItem::CMessageItem(const EItemMessageTypes eItemMessageType,
+CMessageItem::CMessageItem(const std::string &creationFile,
+                           const EItemMessageTypes eItemMessageType,
                            CItemStatusStorage const * const pItemStatusStorage,
                            const EItemSlotTypes eItemSlotType,
                            const EItemVariantTypes eItemVariantType)
-  : CMessage(MSG_ITEM),
-    m_eItemMessageType(eItemMessageType),
-    m_eItemSlotType(eItemSlotType),
-    m_eItemVariantType(eItemVariantType),
-    m_pItemStatusStorage(pItemStatusStorage) {
+    : CMessage(creationFile, MSG_ITEM),
+      m_eItemMessageType(eItemMessageType),
+      m_eItemSlotType(eItemSlotType),
+      m_eItemVariantType(eItemVariantType),
+      m_pItemStatusStorage(pItemStatusStorage) {
 }

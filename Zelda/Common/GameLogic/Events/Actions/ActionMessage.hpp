@@ -21,16 +21,15 @@
 #define _ACTION_MESSAGE_HPP_
 
 #include "Action.hpp"
-
-class CMessage;
+#include "../../../Message/Message.hpp"
 
 namespace events {
   class CActionMessage : public CAction {
   protected:
-    CMessage *m_pMessage;
+    CMessagePtr m_pMessage;
   public:
     CActionMessage(const tinyxml2::XMLElement *pElem, const CEvent &owner);
-    CActionMessage(CMessage *pMessage, const CEvent &owner);
+    CActionMessage(CMessagePtr message, const CEvent &owner);
 
     ~CActionMessage();
 

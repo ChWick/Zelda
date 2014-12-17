@@ -56,8 +56,10 @@ protected:
   const CMap *m_pFromMap;
   const CMap *m_pToMap;
 public:
-  CMessageSwitchMap(const tinyxml2::XMLElement *pElem);
-  CMessageSwitchMap(const std::string &sMap,
+  CMessageSwitchMap(const std::string &creationFile,
+                    const tinyxml2::XMLElement *pElem);
+  CMessageSwitchMap(const std::string &creationFile,
+                    const std::string &sMap,
                     ESwitchMapStatus eStatus,
                     ESwitchMapTypes eSwitchMapType,
                     const CMap *pFromMap,

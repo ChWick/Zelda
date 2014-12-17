@@ -59,7 +59,7 @@ CItemStatusStorage::CItemStatusStorage() {
 
 void CItemStatusStorage::load() {
   CMessageHandler::getSingleton().addMessage(
-      new CMessageItem(CMessageItem::IM_STATUS_LOADED, this));
+      std::make_shared<CMessageItem>(__MSG_LOCATION__, CMessageItem::IM_STATUS_LOADED, this));
 }
 
 void CItemStatusStorage::pickupItem(EItemVariantTypes eItemVariantType) {
@@ -68,10 +68,12 @@ void CItemStatusStorage::pickupItem(EItemVariantTypes eItemVariantType) {
   m_Storage[slot].vItems.push_back(eItemVariantType);
 
   CMessageHandler::getSingleton().addMessage(
-      new CMessageItem(CMessageItem::IM_STATUS_CHANGED,
-                       this,
-                       slot,
-                       eItemVariantType));
+      std::make_shared<CMessageItem>(
+          __MSG_LOCATION__,
+          CMessageItem::IM_STATUS_CHANGED,
+          this,
+          slot,
+          eItemVariantType));
 }
 
 bool CItemStatusStorage::hasItem(EItemVariantTypes eItemVariantType) const {

@@ -244,7 +244,7 @@ void CObject::makePickable() {
   pEvent->addAction(pDeleteThisAction);
 
   CAction *pMessageAction
-      = new CActionMessage(new CMessagePlayerPickupItem(m_uiType), *pEvent);
+      = new CActionMessage(std::make_shared<CMessagePlayerPickupItem>(__MSG_LOCATION__, m_uiType), *pEvent);
   pEvent->addAction(pMessageAction);
 
   addEvent(pEvent);
@@ -389,7 +389,7 @@ CObject::EReceiveDamageResult CObject::hit(const CDamage &dmg) {
     // pickup item
     deleteLater();
     CMessageHandler::getSingleton().addMessage(
-        new CMessagePlayerPickupItem(m_uiType));
+        std::make_shared<CMessagePlayerPickupItem>(__MSG_LOCATION__, m_uiType));
     break;
   default:
     break;

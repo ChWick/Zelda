@@ -210,10 +210,10 @@ void CPhysicsManager::deleteLater(const btCollisionObject *pCO) {
 }
 
 #if PHYSICS_MANAGER_DEBUG == 1
-void CPhysicsManager::sendMessageToAll(const CMessage &message) {
-  if (message.getType() == MSG_DEBUG) {
-    const CMessageDebug &msg_dbg(dynamic_cast<const CMessageDebug &>(message));
-    if (msg_dbg.getDebugType() == CMessageDebug::DM_TOGGLE_PHYSICS) {
+void CPhysicsManager::sendMessageToAll(const CMessagePtr message) {
+  if (message->getType() == MSG_DEBUG) {
+    auto msg_dbg(std::dynamic_pointer_cast<const CMessageDebug>(message));
+    if (msg_dbg->getDebugType() == CMessageDebug::DM_TOGGLE_PHYSICS) {
       toggleDisplayDebugInfo();
     }
   }

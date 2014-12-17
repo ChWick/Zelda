@@ -100,7 +100,7 @@ public:
   void destroyEvent(events::CEvent *pEvent);
 
   // messages access
-  void sendMessageToAll(const CMessage &message);
+  void sendMessageToAll(const CMessagePtr message);
 
   // methods
   virtual void init();
@@ -175,7 +175,7 @@ public:
 
 protected:
 
-  virtual void handleMessage(const CMessage &message);
+  virtual void handleMessage(const CMessagePtr message);
 };
 
 

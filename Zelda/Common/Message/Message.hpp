@@ -20,6 +20,9 @@
 #ifndef _MESSAGE_HPP_
 #define _MESSAGE_HPP_
 
+#include <memory>
+#include <string>
+#include <OgreStringConverter.h>
 #include "MessageTypes.hpp"
 
 namespace tinyxml2 {
@@ -28,14 +31,22 @@ namespace tinyxml2 {
 
 class CMessage {
 protected:
-  const unsigned int m_Type;
+  const uint8_t mType;
+  //! Store location where message was created
+  const std::string mCreationFile;
 
 public:
-  CMessage(unsigned int type, const tinyxml2::XMLElement *pElement);
-  CMessage(unsigned int type);
+  CMessage(const std::string &creationFile, uint8_t type, const tinyxml2::XMLElement *pElement);
+  CMessage(const std::string &creationFile, uint8_t type);
   virtual ~CMessage();
 
-  unsigned int getType() const {return m_Type;}
+  uint8_t getType() const {return mType;}
+  const std::string &getCreationFile() const {return mCreationFile;}
 };
+
+typedef std::shared_ptr<CMessage> CMessagePtr;
+typedef std::shared_ptr<const CMessage> CMessageConstPtr;
+
+#define __MSG_LOCATION__ std::string("File: ") + __FILE__ + std::string(", Line: ") + Ogre::StringConverter::toString(__LINE__)
 
 #endif

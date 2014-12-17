@@ -73,11 +73,11 @@ void CTextConverter::convert(CEGUI::String &text) {
   LOGI("Converting text finished");
 }
 
-void CTextConverter::sendMessageToAll(const CMessage &msg) {
-  if (msg.getType() == MSG_SWITCH_MAP) {
-    const CMessageSwitchMap &msg_switch_map(dynamic_cast<const CMessageSwitchMap &>(msg));
-    if (msg_switch_map.getStatus() == CMessageSwitchMap::FINISHED) {
-      mCurrentMapPack = msg_switch_map.getFromMap()->getMapPack();
+void CTextConverter::sendMessageToAll(const CMessagePtr msg) {
+  if (msg->getType() == MSG_SWITCH_MAP) {
+    auto msg_switch_map(std::dynamic_pointer_cast<const CMessageSwitchMap>(msg));
+    if (msg_switch_map->getStatus() == CMessageSwitchMap::FINISHED) {
+      mCurrentMapPack = msg_switch_map->getFromMap()->getMapPack();
     }
   }
 }

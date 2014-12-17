@@ -63,7 +63,7 @@ public:
 private:
 
   SInteractionResult interactOnActivate(const Ogre::Vector3 &vInteractDir, CWorldEntity *pSender);
-  void handleMessage(const CMessage &message);
+  void handleMessage(const CMessagePtr message);
 
   void open();
   void onLifted();

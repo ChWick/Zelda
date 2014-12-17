@@ -38,7 +38,8 @@ protected:
   const EItemVariantTypes m_eItemVariantType;
   const CItemStatusStorage *m_pItemStatusStorage;
 public:
-  CMessageItem(const EItemMessageTypes eItemMessageType,
+  CMessageItem(const std::string &creationFile,
+               const EItemMessageTypes eItemMessageType,
                CItemStatusStorage const * const pItemStatusStorage,
                const EItemSlotTypes eItemSlotType = ITEM_SLOT_COUNT,
                const EItemVariantTypes eItemVariantType = ITEM_VARIANT_COUNT);

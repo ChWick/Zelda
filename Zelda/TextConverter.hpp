@@ -40,7 +40,7 @@ public:
   void convert(CEGUI::String &text);
 
 private:
-  virtual void sendMessageToAll(const CMessage &);
+  virtual void sendMessageToAll(const CMessagePtr);
 };
 
 #endif // _TEXT_CONVERTER_HPP_

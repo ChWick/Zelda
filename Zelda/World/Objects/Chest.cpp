@@ -164,11 +164,11 @@ CWorldEntity::SInteractionResult CChest::interactOnActivate(
   return CWorldEntity::interactOnActivate(vInteractDir, pSender);
 }
 
-void CChest::handleMessage(const CMessage &message) {
-  if (message.getType() == MSG_SHOW_TEXT) {
-    const CMessageShowText &msg_st(
-        dynamic_cast<const CMessageShowText&>(message));
-    if (msg_st.getStatus() == CMessageShowText::FINISHED) {
+void CChest::handleMessage(const CMessagePtr message) {
+  if (message->getType() == MSG_SHOW_TEXT) {
+    auto msg_st(
+        std::dynamic_pointer_cast<const CMessageShowText>(message));
+    if (msg_st->getStatus() == CMessageShowText::FINISHED) {
       onFinished();
     }
   }
@@ -184,7 +184,7 @@ void CChest::onLifted() {
   mLifting = false;
   if (mTextMessage.size() > 0) {
     CMessageHandler::getSingleton().addMessage(
-        new CMessageShowText(mTextMessage));
+        std::make_shared<CMessageShowText>(__MSG_LOCATION__, mTextMessage));
   } else {
     onFinished();
   }
@@ -196,7 +196,7 @@ void CChest::onFinished() {
     // if the chest has an inner object
     mInnerObject->deleteLater();
     CMessageHandler::getSingleton().addMessage(
-      new CMessagePlayerPickupItem(mInnerObjectType));
+        std::make_shared<CMessagePlayerPickupItem>(__MSG_LOCATION__, mInnerObjectType));
     mInnerObject = nullptr;
   }
 }

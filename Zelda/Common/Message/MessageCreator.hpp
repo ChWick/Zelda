@@ -22,12 +22,12 @@
 
 #include <OgreSingleton.h>
 #include <OgreAny.h>
+#include "Message.hpp"
 
 namespace tinyxml2 {
   class XMLElement;
 };
 
-class CMessage;
 
 class CMessageCreator : public Ogre::Singleton<CMessageCreator> {
 protected:
@@ -40,7 +40,7 @@ public:
   static CMessageCreator *getSingletonPtr();
 
 
-  virtual CMessage *createMessage(const tinyxml2::XMLElement *pElem, const Ogre::Any &any = Ogre::Any());
+  virtual CMessagePtr createMessage(const std::string &creationFile, const tinyxml2::XMLElement *pElem, const Ogre::Any &any = Ogre::Any());
 };
 
 

@@ -57,7 +57,7 @@ public:
 
 private:
 
-  void handleMessage(const CMessage &message);
+  void handleMessage(const CMessagePtr message);
 };
 
 #endif // _WORLD_HPP_

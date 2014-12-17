@@ -883,11 +883,11 @@ void CGame::windowClosed(Ogre::RenderWindow* rw)
 }
 
 // CMessageInjector
-void CGame::sendMessageToAll(const CMessage &message) {
-  if (message.getType() == MSG_DEBUG) {
-    const CMessageDebug &dbg_msg(dynamic_cast<const CMessageDebug &>(message));
-    if (dbg_msg.getDebugType() == CMessageDebug::DM_TOGGLE_DEBUG_DRAWER) {
-      m_bDebugDrawerEnabled = dbg_msg.isActive();
+void CGame::sendMessageToAll(const CMessagePtr message) {
+  if (message->getType() == MSG_DEBUG) {
+    auto dbg_msg(std::dynamic_pointer_cast<const CMessageDebug>(message));
+    if (dbg_msg->getDebugType() == CMessageDebug::DM_TOGGLE_DEBUG_DRAWER) {
+      m_bDebugDrawerEnabled = dbg_msg->isActive();
     }
   }
 }

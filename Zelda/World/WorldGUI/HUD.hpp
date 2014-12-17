@@ -36,6 +36,6 @@ public:
   CHUD(CEntity *pParentEntity, CEGUI::Window *pParentWindow);
 
 private:
-  void handleMessage(const CMessage &message);
+  void handleMessage(const CMessagePtr message);
 };
 #endif // _HUD_HPP_

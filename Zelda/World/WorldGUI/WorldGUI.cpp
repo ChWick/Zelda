@@ -55,12 +55,12 @@ CWorldGUI::~CWorldGUI() {
   CGUIManager::getSingleton().removeGUIOverlay(this);
 }
 
-void CWorldGUI::handleMessage(const CMessage &message) {
-  if (message.getType() == MSG_SHOW_TEXT) {
-    const CMessageShowText &msg_show_text(dynamic_cast<const CMessageShowText&>(message));
-    if (msg_show_text.getStatus() == CMessageShowText::REQUEST) {
+void CWorldGUI::handleMessage(const CMessagePtr message) {
+  if (message->getType() == MSG_SHOW_TEXT) {
+    auto msg_show_text(std::dynamic_pointer_cast<const CMessageShowText>(message));
+    if (msg_show_text->getStatus() == CMessageShowText::REQUEST) {
       LOGV("Creating MessageBox in CWorldGUI");
-      new CGUITextBox("text_box", this, m_pRoot, msg_show_text.getLanguageString(), msg_show_text.getResult());
+      new CGUITextBox("text_box", this, m_pRoot, msg_show_text->getLanguageString(), msg_show_text->getResult());
     }
   }
 }

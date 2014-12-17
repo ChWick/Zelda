@@ -50,7 +50,7 @@ private:
 
   bool updateItemStatus(const SItemStatus &itemStatus);
 
-  void handleMessage(const CMessage &message);
+  void handleMessage(const CMessagePtr message);
   void receiveInputCommand(const CGameInputCommand &cmd);
 
   void selectFirstAvailable();

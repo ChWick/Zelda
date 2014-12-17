@@ -20,7 +20,9 @@
 #include "MessagePlayerPickupItem.hpp"
 
 
-CMessagePlayerPickupItem::CMessagePlayerPickupItem(unsigned int uiItemType)
-  : CMessage(MSG_PLAYER_PICKUP_ITEM),
-    m_uiItemType(uiItemType) {
+CMessagePlayerPickupItem::CMessagePlayerPickupItem(
+    const std::string &creationFile,
+    unsigned int uiItemType)
+    : CMessage(creationFile, MSG_PLAYER_PICKUP_ITEM),
+      m_uiItemType(uiItemType) {
 }
