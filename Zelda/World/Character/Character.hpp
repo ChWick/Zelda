@@ -43,6 +43,7 @@ enum EFadeState {
   FADE_OUT = 2,
 };
 
+//! Struct containing information for an animation
 struct SAnimationProperty {
   //! Pointer to the animation data
   const SCharacterAnimationData *mAnimationData;
@@ -103,7 +104,6 @@ public:
 protected:
   //! Character data
   const SCharacterData &mCharacterData;
-  const ECharacterAttitude mAttitude;	//!< Is this character a friend or an enemy?
 
   bool m_bMoving;
   Ogre::Entity *m_pBodyEntity;									//!< The entity of the body
@@ -130,11 +130,14 @@ public:
   Ogre::Entity *getBodyEntity() const {return m_pBodyEntity;}
   btCharacterControllerInterface *getKinematicCharacterController() const {return mCCPhysics;}
   CCharacterController *getCharacterController() const {return m_pCharacterController;}
-  const ECharacterAttitude getAttitude() const {return mAttitude;}
+  const SCharacterData &getCharacterData() const {return mCharacterData;}
   const Ogre::vector<Ogre::AnimationState*>::type &getAnimations() const {return m_Anims;}
   unsigned int getCurrentAnimationID() const {return m_uiAnimID;}
   const std::vector<SAnimationProperty> &getAnimationProperties() const {return mAnimationProperty;}
-  const SAnimationProperty &getCurrentAnimationProperty() const {return mAnimationProperty[m_uiAnimID];}
+  const SAnimationProperty &getCurrentAnimationProperty() const {
+    ASSERT(m_uiAnimID < m_uiAnimationCount);
+    return mAnimationProperty[m_uiAnimID];
+  }
 
   // reimplemented
   void setPosition(const Ogre::Vector3 &vPos);
