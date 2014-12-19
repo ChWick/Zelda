@@ -61,6 +61,7 @@ else()
   find_library(OGRE_LIB NAMES OgreMain PATHS ${OGRE_SDK_ROOT}/lib)
   find_library(OGRE_LIB_DBG NAMES OgreMain_d PATHS ${OGRE_SDK_ROOT}/lib)
   find_library(OGRE_OVERLAY_LIB NAMES OgreOverlay PATHS ${OGRE_SDK_ROOT}/lib)
+  find_library(OGRE_OVERLAY_LIB_DBG NAMES OgreOverlay_d PATHS ${OGRE_SDK_ROOT}/lib)
 
   mark_as_advanced(OGRE_H_PATH OGRE_LIB OGRE_LIB_DBG)
 
@@ -78,10 +79,10 @@ if (OGRE_FOUND)
     set (OGRE_LIBRARIES
       ${OGRE_LIB}
       ${OGRE_OVERLAY_LIB})
-    if (OGRE_LIB_DBG)
+    if (OGRE_LIB_DBG AND OGRE_OVERLAY_LIB_DBG)
         set (OGRE_LIBRARIES
 	  ${OGRE_LIB_DBG}
-	  ${OGRE_OVERLAY_LIB})
+	  ${OGRE_OVERLAY_LIB_DBG})
 
     endif()
 else()
