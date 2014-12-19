@@ -20,11 +20,10 @@
 #include "RepeatTypes.hpp"
 
 namespace events {
-CRepeatTypesMap::CRepeatTypesMap() {
+void CRepeatTypesMap::init() {
   m_Map[REPEAT_NONE] = "none";
   m_Map[REPEAT_INFINITE] = "infinite";
   m_Map[REPEAT_TIMED] = "timed";
 }
 
-CRepeatTypesMap REPEAT_TYPES_MAP;
 };

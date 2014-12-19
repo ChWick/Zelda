@@ -118,11 +118,11 @@ bool CWorldGUIItemSelector::updateItemStatus(const SItemStatus &itemStatus) {
   }
   else if (items.size() == 1) {
     pWnd->setVisible(true);
-    pWnd->setProperty("Image", "hud/" + ITEM_VARIANT_DATA_MAP.toData(items.front()).sImagesetName);
+    pWnd->setProperty("Image", "hud/" + CItemVariantDataMap::getSingleton().toData(items.front()).sImagesetName);
   }
   else {
     pWnd->setVisible(true);
-    pWnd->setProperty("Image", "hud/" + ITEM_VARIANT_DATA_MAP.toData(items.front()). sImagesetName);
+    pWnd->setProperty("Image", "hud/" + CItemVariantDataMap::getSingleton().toData(items.front()). sImagesetName);
   }
 
   return true;
@@ -277,7 +277,7 @@ void CWorldGUIItemSelectorMultipleSelect::createButton(int iIndex) {
   Window *pButton = m_pRoot->createChild("OgreTray/ToggleRadioButton", PropertyHelper<int>::toString(iIndex));
   pButton->setPosition(UVector2(UDim(iIndex * 1.f / m_vItems.size(), 0), UDim(0, 0)));
   pButton->setSize(USize(UDim(1.f / m_vItems.size(), 0), UDim(1, 0)));
-  pButton->setProperty("Image", "hud/" + ITEM_VARIANT_DATA_MAP.toData(m_vItems[iIndex]).sImagesetName);
+  pButton->setProperty("Image", "hud/" + CItemVariantDataMap::getSingleton().toData(m_vItems[iIndex]).sImagesetName);
   pButton->setUserData(const_cast<EItemVariantTypes*>(&m_vItems[iIndex]));
   pButton->subscribeEvent(ToggleButton::EventSelectStateChanged, Event::Subscriber(&CWorldGUIItemSelectorMultipleSelect::onSelectedItemChanged, this));
 }
@@ -292,7 +292,7 @@ bool CWorldGUIItemSelectorMultipleSelect::onSelectedItemChanged(const CEGUI::Eve
           __MSG_LOCATION__,
           CMessageItem::IM_SELECTION_CHANGED,
           nullptr,
-          ITEM_SLOT_DATA_MAP.getFromItemVariant(eItemVariant),
+          CItemSlotDataMap::getSingleton().getFromItemVariant(eItemVariant),
           eItemVariant));
 
   return true;

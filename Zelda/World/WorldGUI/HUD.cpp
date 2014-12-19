@@ -69,7 +69,7 @@ void CHUD::handleMessage(const CMessagePtr message) {
     if (msg_item->getItemMessageType() == CMessageItem::IM_SELECTION_CHANGED) {
       m_pCurrentItemDisplay->setProperty(
           "Image",
-          "hud/" + ITEM_VARIANT_DATA_MAP.toData(
+          "hud/" + CItemVariantDataMap::getSingleton().toData(
               msg_item->getItemVariantType()).sImagesetName);
     }
   }

@@ -47,7 +47,9 @@ CMessageCreator::~CMessageCreator() {
 CMessagePtr CMessageCreator::createMessage(const std::string &creationFile,
                                          const tinyxml2::XMLElement *pElem,
                                          const Ogre::Any &any) {
-  uint8_t type(MESSAGE_TYPES_MAP.parseString(Attribute(pElem, m_sMessageTypeAttributeName.c_str())));
+  uint8_t type(CMessageTypesMap::getSingleton().
+               parseString(Attribute(pElem,
+                                     m_sMessageTypeAttributeName.c_str())));
 
   switch (type) {
   case MSG_SWITCH_MAP:

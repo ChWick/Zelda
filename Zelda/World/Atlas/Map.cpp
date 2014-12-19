@@ -73,26 +73,28 @@ CMap::CMap(CEntity *pAtlas,
 
   // Create global collision shapes
   m_PhysicsManager.addCollisionShape(
-      GLOBAL_COLLISION_SHAPES_TYPES_ID_MAP.toString(
+      CGlobalCollisionShapesTypesIdMap::getSingleton().toString(
           GCST_PICKABLE_OBJECT_SPHERE),
       CPhysicsCollisionObject(new btSphereShape(0.04),
                               Ogre::Vector3::NEGATIVE_UNIT_Y * 0.03));
   m_PhysicsManager.addCollisionShape(
-      GLOBAL_COLLISION_SHAPES_TYPES_ID_MAP.toString(GCST_PERSON_CAPSULE),
+      CGlobalCollisionShapesTypesIdMap::getSingleton().toString(GCST_PERSON_CAPSULE),
       CPhysicsCollisionObject(
           new btCapsuleShape(CPerson::PERSON_RADIUS,
                              CPerson::PERSON_HEIGHT
                              - 2 * CPerson::PERSON_RADIUS)));
 
   // house entrance
-  btBoxShape *pHouseEntranceTopShape = new btBoxShape(btVector3(0.07, 0.01, 0.02));
+  btBoxShape *pHouseEntranceTopShape
+      = new btBoxShape(btVector3(0.07, 0.01, 0.02));
   m_PhysicsManager.addCollisionShape(
-  GLOBAL_COLLISION_SHAPES_TYPES_ID_MAP.toString(GCST_HOUSE_ENTRANCE_TOP),
-  CPhysicsCollisionObject(pHouseEntranceTopShape));
- 
-  btBoxShape *pHouseEntranceSideShape = new btBoxShape(btVector3(0.01, 0.08, 0.02));
+      CGlobalCollisionShapesTypesIdMap::getSingleton().toString(GCST_HOUSE_ENTRANCE_TOP),
+      CPhysicsCollisionObject(pHouseEntranceTopShape));
+
+  btBoxShape *pHouseEntranceSideShape
+      = new btBoxShape(btVector3(0.01, 0.08, 0.02));
   m_PhysicsManager.addCollisionShape(
-      GLOBAL_COLLISION_SHAPES_TYPES_ID_MAP.toString(GCST_HOUSE_ENTRANCE_SIDE),
+      CGlobalCollisionShapesTypesIdMap::getSingleton().toString(GCST_HOUSE_ENTRANCE_SIDE),
       CPhysicsCollisionObject(pHouseEntranceSideShape));
 
   btCompoundShape *pHouseEntranceShape = new btCompoundShape();
@@ -109,13 +111,13 @@ CMap::CMap(CEntity *pAtlas,
                   btVector3(0.0, 0.16, 0.02)),
       pHouseEntranceTopShape);
   m_PhysicsManager.addCollisionShape(
-      GLOBAL_COLLISION_SHAPES_TYPES_ID_MAP.toString(GCST_HOUSE_ENTRANCE),
+      CGlobalCollisionShapesTypesIdMap::getSingleton().toString(GCST_HOUSE_ENTRANCE),
       CPhysicsCollisionObject(pHouseEntranceShape, Ogre::Vector3::ZERO));
 
-   // stone pile
+  // stone pile
   btSphereShape *pPileSingleStoneShape = new btSphereShape(0.04);
   m_PhysicsManager.addCollisionShape(
-      GLOBAL_COLLISION_SHAPES_TYPES_ID_MAP.toString(GCST_STONE_PILE_SINGLE_STONE),
+      CGlobalCollisionShapesTypesIdMap::getSingleton().toString(GCST_STONE_PILE_SINGLE_STONE),
       CPhysicsCollisionObject(pPileSingleStoneShape));
 
   btCompoundShape *pStonePileShape = new btCompoundShape();
@@ -135,20 +137,20 @@ CMap::CMap(CEntity *pAtlas,
       btTransform(btQuaternion::getIdentity(), btVector3(-0.0, 0.06, -0.0)),
       pPileSingleStoneShape);
   m_PhysicsManager.addCollisionShape(
-      GLOBAL_COLLISION_SHAPES_TYPES_ID_MAP.toString(GCST_STONE_PILE),
+      CGlobalCollisionShapesTypesIdMap::getSingleton().toString(GCST_STONE_PILE),
       CPhysicsCollisionObject(pStonePileShape, Ogre::Vector3::ZERO));
 
   m_PhysicsManager.addCollisionShape(
-      GLOBAL_COLLISION_SHAPES_TYPES_ID_MAP.toString(GCST_TREE),
+      CGlobalCollisionShapesTypesIdMap::getSingleton().toString(GCST_TREE),
       CPhysicsCollisionObject(
           new btCylinderShape(btVector3(0.173, 0.2, 0.173)),
           Ogre::Vector3::NEGATIVE_UNIT_Y * 0.2));
   m_PhysicsManager.addCollisionShape(
-      GLOBAL_COLLISION_SHAPES_TYPES_ID_MAP.toString(GCST_FALLING_OBJECT_SPHERE),
+      CGlobalCollisionShapesTypesIdMap::getSingleton().toString(GCST_FALLING_OBJECT_SPHERE),
       CPhysicsCollisionObject(new btSphereShape(0.02),
                               Ogre::Vector3::NEGATIVE_UNIT_Y * 0));
   m_PhysicsManager.addCollisionShape(
-      GLOBAL_COLLISION_SHAPES_TYPES_ID_MAP.toString(GCST_SMALL_CHEST_TOP),
+      CGlobalCollisionShapesTypesIdMap::getSingleton().toString(GCST_SMALL_CHEST_TOP),
       CPhysicsCollisionObject(
           new btCylinderShapeX(btVector3(0.04, 0.025, 0.025)),
           Ogre::Vector3(0, 0.020  , 0.025)));
@@ -157,7 +159,7 @@ CMap::CMap(CEntity *pAtlas,
   // Create global entites
   for (int i = 0; i < TT_COUNT; i++) {
     m_apTileEntities[i] = pParentSceneNode->getCreator()->createEntity(
-        TILE_DATA_MAP.toData(static_cast<ETileTypes>(i)).sMeshName);
+        CTileDataMap::getSingleton().toData(static_cast<ETileTypes>(i)).sMeshName);
   }
 
   m_pSceneNode = pParentSceneNode->createChildSceneNode(
@@ -252,6 +254,7 @@ void CMap::exit() {
   m_pStaticGeometry = nullptr;
 
   CWorldEntity::exit();
+  m_PhysicsManager.exit();
 }
 
 void CMap::CreateCube(const btVector3 &Position, btScalar Mass) {
@@ -381,7 +384,7 @@ void CMap::handleMessage(const CMessagePtr message) {
     if (mesc->getOldState() == EST_NORMAL) {
       // only change request if object was in normal state before
 
-      const SObjectTypeData &data(OBJECT_DATA_MAP.toData(
+      const SObjectTypeData &data(CObjectDataMap::getSingleton().toData(
           static_cast<EObjectTypes>(pObject->getType())));
       if (data.eRemovedTile == TT_COUNT) {
         return;
@@ -421,7 +424,7 @@ void CMap::rebuildStaticGeometryChangedTiles() {
     if (!pObject) {continue;}
 
     if (pObject->getState() == EST_NORMAL) {
-      const SObjectTypeData &data(OBJECT_DATA_MAP.toData(
+      const SObjectTypeData &data(CObjectDataMap::getSingleton().toData(
           static_cast<EObjectTypes>(pObject->getType())));
       if (data.eNormalTile != TT_COUNT) {
         m_pStaticGeometryChangedTiles->addEntity(
@@ -509,9 +512,9 @@ void CMap::parseNewEntity(const tinyxml2::XMLElement *pElem) {
 // CDotSceneLoaderCallback
 void CMap::physicsShapeCreated(btCollisionShape *pShape,
                                const std::string &sMeshName) {
-  EObjectTypes objectType(OBJECT_DATA_MAP.getFromMeshName(sMeshName));
+    EObjectTypes objectType(CObjectDataMap::getSingleton().getFromMeshName(sMeshName));
   if (objectType != OBJECT_COUNT) {
-    auto scale = OBJECT_DATA_MAP.toData(objectType).vPhysicsShapeScale;
+    auto scale = CObjectDataMap::getSingleton().toData(objectType).vPhysicsShapeScale;
     pShape->setLocalScaling(pShape->getLocalScaling() * scale);
   }
 }
@@ -544,7 +547,7 @@ void CMap::postEntityAdded(Ogre::Entity *pEntity,
                                 this, this, CChest::SMALL_CHEST);
     pChest->setPosition(pParent->_getDerivedPosition());
     pChest->setThisAsCollisionObjectsUserPointer(pRigidBody);
-    pChest->setInnerObject(OBJECT_TYPE_ID_MAP.parseString(
+    pChest->setInnerObject(CObjectTypeIdMap::getSingleton().parseString(
         userData.getStringUserData("inner_object")));
     pChest->init();
     pChest->start();
@@ -569,15 +572,15 @@ CDotSceneLoaderCallback::EResults CMap::preEntityAdded(
     CUserData &userData) {
   CWorldEntity *pEntity(nullptr);
 
-  EObjectTypes objectType(OBJECT_DATA_MAP.getFromMeshFileName(
+  EObjectTypes objectType(CObjectDataMap::getSingleton().getFromMeshFileName(
       XMLNode->Attribute("meshFile")));
   if (objectType != OBJECT_COUNT
-      && OBJECT_DATA_MAP.toData(objectType).bUserHandle) {
+      && CObjectDataMap::getSingleton().toData(objectType).bUserHandle) {
     CObject *pObject = new CObject(userData.getStringUserData("name"),
                                    this, this, objectType, pParent);
     std::string innerObject(userData.getStringUserData("inner_object"));
     if (!innerObject.empty()) {
-      pObject->setInnerObject(OBJECT_TYPE_ID_MAP.parseString(innerObject));
+      pObject->setInnerObject(CObjectTypeIdMap::getSingleton().parseString(innerObject));
     }
     pEntity = pObject;
     pEntity->init();

@@ -21,5 +21,7 @@
 #include "GameStateManager.hpp"
 
 CGameState::CGameState(EGameStateTypes eType)
-  : CEntity(GAME_STATE_ID_MAP.toString(eType), eType, CGameStateManager::getSingletonPtr()) {
+    : CEntity(CGameStateIdMap::getSingleton().toString(eType),
+              eType,
+              CGameStateManager::getSingletonPtr()) {
 }

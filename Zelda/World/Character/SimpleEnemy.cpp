@@ -37,7 +37,7 @@ CSimpleEnemy::CSimpleEnemy(const std::string &sID,
     : CPerson(sID,
               pParent,
               pMap,
-              PERSON_DATA_ID_MAP.toData(PERSON_SOLDIER_GREEN_SWORD),
+              CPersonDataIdMap::getSingleton().toData(PERSON_SOLDIER_GREEN_SWORD),
               SE_ANIM_COUNT) {
 }
 

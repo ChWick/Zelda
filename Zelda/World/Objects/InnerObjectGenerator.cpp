@@ -86,7 +86,8 @@ void CDefaultGeneratorDataLoader::readGroupElement(
     const tinyxml2::XMLElement *e) {
   GENERATOR_DATA_LIST dataList;
 
-  EObjectTypes type = OBJECT_TYPE_ID_MAP.parseString(Attribute(e, "id"));
+  EObjectTypes type = CObjectTypeIdMap::getSingleton().
+      parseString(Attribute(e, "id"));
 
   for (const tinyxml2::XMLElement *c = e->FirstChildElement();
        c; c = c->NextSiblingElement()) {
@@ -94,7 +95,7 @@ void CDefaultGeneratorDataLoader::readGroupElement(
 
     SGeneratorData data;
     data.probability = RealAttribute(c, "probability");
-    data.objectType = OBJECT_TYPE_ID_MAP.parseString(
+    data.objectType = CObjectTypeIdMap::getSingleton().parseString(
         Attribute(c, "objectType"));
     dataList.push_back(data);
   }

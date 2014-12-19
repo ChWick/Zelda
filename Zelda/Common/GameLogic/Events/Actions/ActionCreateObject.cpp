@@ -32,7 +32,7 @@ namespace events {
 
 CActionCreateObject::CActionCreateObject(const tinyxml2::XMLElement *pElem, const CEvent &owner)
   : CAction(pElem, owner),
-    m_eObjectType(OBJECT_TYPE_ID_MAP.parseString(Attribute(pElem, "object_type"))),
+    m_eObjectType(CObjectTypeIdMap::getSingleton().parseString(Attribute(pElem, "object_type"))),
     m_sLocation(Attribute(pElem, "location", "local")) {
 
 }

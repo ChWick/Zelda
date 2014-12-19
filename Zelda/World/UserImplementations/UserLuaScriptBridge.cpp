@@ -217,12 +217,12 @@ int hasItem(lua_State *l) {
   }
   CWorld *pWorld = dynamic_cast<CWorld*>(
       CGameStateManager::getSingleton().getChildRecursive(
-          GAME_STATE_ID_MAP.toString(GST_WORLD)));
+          CGameStateIdMap::getSingleton().toString(GST_WORLD)));
   ASSERT(pWorld);
 
   const std::string item(lua_tostring(l, 1));
   bool has = pWorld->getItemStatusStorage().hasItem(
-      ITEM_VARIANT_ID_MAP.parseString(item));
+      CItemVariantIdMap::getSingleton().parseString(item));
 
 
   lua_pushboolean(l, has);
@@ -249,7 +249,7 @@ int setInnerObject(lua_State *l) {
   }
 
   EObjectTypes innerObjectType(
-      OBJECT_TYPE_ID_MAP.parseString(innerObject));
+      CObjectTypeIdMap::getSingleton().parseString(innerObject));
 
   if (CObject *object = dynamic_cast<CObject *>(pEntity)) {
     object->setInnerObject(innerObjectType);

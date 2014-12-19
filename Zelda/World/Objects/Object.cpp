@@ -49,7 +49,7 @@ CObject::CObject(const std::string &id,
                  EObjectTypes eObjectType,
                  Ogre::SceneNode *pSceneNode)
   : CWorldEntity(id, pParent, pMap),
-    m_ObjectTypeData(OBJECT_DATA_MAP.toData(eObjectType)),
+    m_ObjectTypeData(CObjectDataMap::getSingleton().toData(eObjectType)),
     mInnerObjectGenerator(InnerObject::DEFAULT_GENERATOR_DATA_MAP
                           .toData(eObjectType)) {
   setType(eObjectType);
@@ -131,7 +131,7 @@ void CObject::createPhysics() {
   if (m_ObjectTypeData.eCollisionShape != GCST_COUNT) {
     const CPhysicsCollisionObject &pco
         = m_pMap->getPhysicsManager()->getCollisionShape(
-            GLOBAL_COLLISION_SHAPES_TYPES_ID_MAP.toString(
+            CGlobalCollisionShapesTypesIdMap::getSingleton().toString(
                 m_ObjectTypeData.eCollisionShape));
     pCollisionShape = pco.getShape();
     vCollisionShapeOffset = BtOgre::Convert::toBullet(pco.getOffset());

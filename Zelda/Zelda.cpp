@@ -19,45 +19,45 @@
 
 #include "Common/GUI/GUIManager.hpp"
 #include "Zelda.hpp"
-#include "Common/GameLogic/GameStateManager.hpp"
+#include "Common/Log.hpp"
+/*#include "Common/GameLogic/GameStateManager.hpp"
 #include "MainMenu/MainMenu.hpp"
 #include "World/World.hpp"
-#include "Common/Log.hpp"
 #include "World/Character/PersonTypes.hpp"
 #include "World/DamageTypes.hpp"
 #include "World/Items/ItemTypes.hpp"
 #include "World/Items/ItemData.hpp"
-#include "TextConverter.hpp"
+#include "TextConverter.hpp"*/
 
 CZelda::~CZelda() {
-  if (CTextConverter::getSingletonPtr()) {delete CTextConverter::getSingletonPtr();}
+  //if (CTextConverter::getSingletonPtr()) {delete CTextConverter::getSingletonPtr();}
 }
 
 void CZelda::initSingletons() {
-  new CTextConverter();
+  //new CTextConverter();
 }
 
 void CZelda::initEnumIdMaps() {
-  PERSON_TYPE_ID_MAP.init();
-  DAMAGE_DATA_MAP.init();
+  /*CPersonTypeIdMap::getSingleton().init();
+  CDamageDataMap::getSingleton().init();
 
-  ITEM_SLOT_ID_MAP.init();
-  ITEM_VARIANT_ID_MAP.init();
+  CItemSlotIdMap::getSingleton().init();
+  CItemVariantIdMap::getSingleton().init();
 
-  ITEM_SLOT_DATA_MAP.init();
-  ITEM_VARIANT_DATA_MAP.init();
+  CItemSlotDataMap::getSingleton().init();
+  CItemVariantDataMap::getSingleton().init();*/
 }
 
 void CZelda::chooseGameState() {
   LOGV("choosing came state");
   //new CMainMenu();
-  new CWorld();
+  //new CWorld();
   //m_pGameStateManager->changeGameState(CGameStateManager::GS_MAIN_MENU);
 }
 
 void CZelda::postGUIManagerInitialised() {
   // add default/global imagesets
-  CGUIManager::getSingleton().addImagesetResource(CGUIManager::SImagesetResource("hud", "hud.png"));
+  //CGUIManager::getSingleton().addImagesetResource(CGUIManager::SImagesetResource("hud", "hud.png"));
 }
 
 bool CZelda::keyPressed( const OIS::KeyEvent &arg ) {

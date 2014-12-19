@@ -33,12 +33,11 @@ enum EEmitterTypes {
   EMIT_ON_STATUS_CHANGE,
 };
 
-class CEmitterTypesMap : public CStringEnumIdMap<EEmitterTypes> {
+class CEmitterTypesMap : public CStringEnumIdMap<CEmitterTypesMap, EEmitterTypes> {
 public:
-  CEmitterTypesMap();
+  void init();
 };
 
-extern CEmitterTypesMap EMITTER_TYPES_MAP;
 };
 
 #endif // _EMITTER_TYPES_HPP_

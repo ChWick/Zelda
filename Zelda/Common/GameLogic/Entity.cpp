@@ -78,7 +78,7 @@ CEntity::CEntity(
     m_sID(Attribute(pElem, "id", m_sID)),
     m_sResourceGroup(Attribute(pElem, "resource_group", sResourceGroup)),
     m_uiType(IntAttribute(pElem, "type", 0)),
-    m_eState(ENTITY_STATE_ID_MAP.parseString(Attribute(pElem, "state", ENTITY_STATE_ID_MAP.toString(EST_NORMAL)))),
+    m_eState(CEntityStateIdMap::getSingleton().parseString(Attribute(pElem, "state", CEntityStateIdMap::getSingleton().toString(EST_NORMAL)))),
     m_bPauseRender(BoolAttribute(pElem, "pause_render", false)),
     m_bPauseUpdate(BoolAttribute(pElem, "pause_update", false)),
     m_pParent(NULL) {

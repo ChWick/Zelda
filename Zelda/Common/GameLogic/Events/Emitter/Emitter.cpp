@@ -18,16 +18,20 @@
  *****************************************************************************/
 
 #include "Emitter.hpp"
-#include "../../tinyxml2/tinyxml2.h"
+#include "../../../tinyxml2/tinyxml2.hpp"
+#include "../../../Util/XMLHelper.hpp"
+
+using XMLHelper::Attribute;
 
 namespace events {
-  CEmitter::CEmitter(EEmitterTypes eType, const CEvent &owner)
+CEmitter::CEmitter(EEmitterTypes eType, const CEvent &owner)
     : m_eType(eType),
       m_Owner(owner)
-  {}
-  CEmitter::CEmitter(const tinyxml2::XMLElement *pElem, const CEvent &owner)
-    : m_eType(EMITTER_TYPES_MAP.parseString(pElem->Attribute("type"))),
-      m_Owner(owner) {
-  }
+{}
+CEmitter::CEmitter(const tinyxml2::XMLElement *pElem, const CEvent &owner)
+      : m_eType(CEmitterTypesMap::getSingleton().parseString(
+            Attribute(pElem, "type"))),
+        m_Owner(owner) {
+}
 
-};
+}  // namespace events

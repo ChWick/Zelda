@@ -818,7 +818,7 @@ void CharacterControllerPhysics::playerStep(btCollisionWorld* collisionWorld,
     printf("jump start\n");
   }
 
-  printf("onGround %d\n", onGround());
+  // printf("onGround %d\n", onGround());
 }
 
 void CharacterControllerPhysics::setFallSpeed(btScalar fallSpeed) {

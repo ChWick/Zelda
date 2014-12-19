@@ -22,13 +22,11 @@
 
 using namespace XMLHelper;
 
-CSwitchMapTypes::CSwitchMapTypes() {
+void CSwitchMapTypes::init() {
   m_Map[SMT_MOVE_CAMERA] = "move_camera";
   m_Map[SMT_FADE_ELLIPTIC] = "fade_elliptic";
   m_Map[SMT_FADE_ALPHA] = "fade_alpha";
 }
-
-const CSwitchMapTypes SWITCH_MAP_TYPES_ID_MAP;
 
 
 CMessageSwitchMap::CMessageSwitchMap(const std::string &creationFile,
@@ -36,7 +34,7 @@ CMessageSwitchMap::CMessageSwitchMap(const std::string &creationFile,
     : CMessage(creationFile, MSG_SWITCH_MAP, pElem),
     m_sMap(Attribute(pElem, "map")),
     m_eStatus(INJECT),
-    m_eSwitchMapType(SWITCH_MAP_TYPES_ID_MAP.parseString(Attribute(pElem, "switch_map_type"))),
+      m_eSwitchMapType(CSwitchMapTypes::getSingleton().parseString(Attribute(pElem, "switch_map_type"))),
     m_sTargetEntrance(Attribute(pElem, "target_entrance", "")),
     m_pFromMap(nullptr),
     m_pToMap(nullptr) {

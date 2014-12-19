@@ -32,5 +32,6 @@ void CTileDataLoader::readGroupElement(const tinyxml2::XMLElement *e) {
   const std::string id = Attribute(e, "id");
   data.sMeshName = Attribute(e, "mesh_name");
 
-  TILE_DATA_MAP.setData(TILE_TYPE_ID_MAP.parseString(id), data);
+  CTileDataMap::getSingleton().
+      setData(CTileTypeIdMap::getSingleton().parseString(id), data);
 }

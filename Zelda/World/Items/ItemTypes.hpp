@@ -106,17 +106,14 @@ enum EItemVariantTypes {
   ITEM_VARIANT_COUNT
 };
 
-class CItemSlotIdMap : public CStringEnumIdMap<EItemSlotTypes> {
+class CItemSlotIdMap : public CStringEnumIdMap<CItemSlotIdMap, EItemSlotTypes> {
 public:
   void init();
 };
 
-class CItemVariantIdMap : public CStringEnumIdMap<EItemVariantTypes> {
+class CItemVariantIdMap : public CStringEnumIdMap<CItemVariantIdMap, EItemVariantTypes> {
 public:
   void init();
 };
-
-extern CItemSlotIdMap ITEM_SLOT_ID_MAP;
-extern CItemVariantIdMap ITEM_VARIANT_ID_MAP;
 
 #endif // ITEM_TYPES_HPP

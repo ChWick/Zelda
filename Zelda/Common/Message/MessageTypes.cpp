@@ -19,7 +19,7 @@
 
 #include "MessageTypes.hpp"
 
-CMessageTypesMap::CMessageTypesMap() {
+void CMessageTypesMap::init() {
   m_Map[MSG_SWITCH_MAP] = "switch_map";
   m_Map[MSG_TARGET_REACHED] = "target_reached";
   m_Map[MSG_DEBUG] = "debug";
@@ -28,5 +28,3 @@ CMessageTypesMap::CMessageTypesMap() {
   m_Map[MSG_HITPOINTS_CHANGED] = "hitpoints_changed";
   m_Map[MSG_ENTITY_DATA_CHANGED] = "entity_data_changed";
 }
-
-CMessageTypesMap MESSAGE_TYPES_MAP;

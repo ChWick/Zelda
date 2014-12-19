@@ -28,7 +28,7 @@
 #endif
 #include <OgrePrerequisites.h>
 #include <OgreSingleton.h>
-#include "Input/InputListener.hpp"
+//#include "Input/InputListener.hpp"
 #include "dependencies/OgreSdkUtil/SdkCameraMan.h"
 #include "dependencies/OgreSdkUtil/SdkTrays.h"
 #include "OgreFileSystemLayer.h"
@@ -46,12 +46,12 @@
 
 class CGameStateManager;
 
-class CGame : public CInputListener,
-              public Ogre::FrameListener,
-              public Ogre::WindowEventListener,
-              protected OgreBites::SdkTrayListener,
-              public Ogre::Singleton<CGame>,
-              public CMessageInjector {
+class CGame : //public CInputListener,
+              //public Ogre::FrameListener,
+              //public Ogre::WindowEventListener,
+    protected OgreBites::SdkTrayListener {
+              //public Ogre::Singleton<CGame> {
+              //public CMessageInjector {
 protected:
   CGameStateManager *m_pGameStateManager;
   Ogre::Viewport *m_pMainViewPort;

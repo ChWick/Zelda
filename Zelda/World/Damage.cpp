@@ -23,21 +23,24 @@
 CDamage::CDamage(CAttackerInterface *attacker, EDamageType eDmgType)
     : mAttacker(attacker),
       m_eDamageType(eDmgType),
-      m_hpDamageValue(DAMAGE_DATA_MAP.toData(eDmgType).defaultDamage),
+      m_hpDamageValue(CDamageDataMap::getSingleton().
+                      toData(eDmgType).defaultDamage),
       m_vDamageDirection(SPATIAL_VECTOR::ZERO), m_fKnockOutTime(0) {
 }
 CDamage::CDamage(CAttackerInterface *attacker,
                  EDamageType eDmgType, const SPATIAL_VECTOR &vDirection)
     : mAttacker(attacker),
       m_eDamageType(eDmgType),
-      m_hpDamageValue(DAMAGE_DATA_MAP.toData(eDmgType).defaultDamage),
+      m_hpDamageValue(CDamageDataMap::getSingleton().
+                      toData(eDmgType).defaultDamage),
       m_vDamageDirection(vDirection), m_fKnockOutTime(0) {
 }
 CDamage::CDamage(CAttackerInterface *attacker, EDamageType eDmgType,
                  const SPATIAL_VECTOR &vDirection, const float fKnockOutTime)
     : mAttacker(attacker),
       m_eDamageType(eDmgType),
-      m_hpDamageValue(DAMAGE_DATA_MAP.toData(eDmgType).defaultDamage),
+      m_hpDamageValue(CDamageDataMap::getSingleton().
+                      toData(eDmgType).defaultDamage),
       m_vDamageDirection(vDirection), m_fKnockOutTime(fKnockOutTime) {
 }
 CDamage::CDamage(CAttackerInterface *attacker, EDamageType eDmgType,

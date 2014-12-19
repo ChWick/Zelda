@@ -27,7 +27,7 @@ namespace events {
 
 CEmitOnReceivedDamage::CEmitOnReceivedDamage(const tinyxml2::XMLElement *pElem, const CEvent &owner)
   : CEmitter(pElem, owner),
-    m_uiDamageMask(DAMAGE_TYPE_ID_MAP.parseString(XMLHelper::Attribute(pElem, "damage"))) {
+    m_uiDamageMask(CDamageTypeIdMap::getSingleton().parseString(XMLHelper::Attribute(pElem, "damage"))) {
 }
 
 };

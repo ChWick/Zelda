@@ -37,9 +37,9 @@ enum EDamageType {
   DMG_ALL     = 511,                  //!< Flag for take/block all damage types
 };
 
-class CDamageTypeIdMap : public CStringEnumIdMap<unsigned int> {
+class CDamageTypeIdMap : public CStringEnumIdMap<CDamageTypeIdMap, unsigned int> {
 public:
-  CDamageTypeIdMap();
+  void init();
   //! parse a string
   /** separates string at spaces to add up multiple damage types.
     * E.g.: "world sword fire"
@@ -47,18 +47,13 @@ public:
   unsigned int parseString(const std::string &str) const;
 };
 
-extern CDamageTypeIdMap DAMAGE_TYPE_ID_MAP;
-
-
 struct SDamageData {
   Hitpoints defaultDamage;
 };
 
-class CDamageDataMap : public CEnumIdMap<EDamageType, SDamageData> {
+class CDamageDataMap : public CEnumIdMap<CDamageDataMap, EDamageType, SDamageData> {
 public:
   void init();
 };
-
-extern CDamageDataMap DAMAGE_DATA_MAP;
 
 #endif // _DAMAGE_TYPES_HPP_

@@ -25,7 +25,7 @@ using namespace XMLHelper;
 
 CEmitOnStatusChange::CEmitOnStatusChange(const tinyxml2::XMLElement *pElem, const CEvent &owner) 
   : CEmitter(pElem, owner),
-    mState(ENTITY_STATE_ID_MAP.parseString(Attribute(pElem, "state"))) {
+    mState(CEntityStateIdMap::getSingleton().parseString(Attribute(pElem, "state"))) {
 }
 
 CEmitOnStatusChange::CEmitOnStatusChange(const EEntityStateTypes state, const CEvent &owner) 

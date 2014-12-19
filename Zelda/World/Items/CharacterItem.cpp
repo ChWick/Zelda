@@ -57,7 +57,7 @@ CCharacterItem::CCharacterItem(CCharacter *character,
 
   mAttachedMesh = mCharacter->getSceneNode()
       ->getCreator()->createEntity(
-          ITEM_VARIANT_DATA_MAP.toData(type).sBasicMeshName);
+          CItemVariantDataMap::getSingleton().toData(type).sBasicMeshName);
   mCharacter->getBodyEntity()
       ->attachObjectToBone(boneToAttach,
                            mAttachedMesh,
@@ -100,7 +100,7 @@ void CCharacterItem::enterNewMap(CMap *oldMap, CMap *newMap) {
 
 
 void CCharacterItem::createPhysics(CMap *map) {
-  if (ITEM_VARIANT_DATA_MAP.toData(mVariantType)
+  if (CItemVariantDataMap::getSingleton().toData(mVariantType)
       .vBlockPhysicsSize.isZeroLength()) {
     return;
   }
@@ -109,9 +109,11 @@ void CCharacterItem::createPhysics(CMap *map) {
 
   btCollisionShape *shape = nullptr;
   mPhysicsOffset
-      = ITEM_VARIANT_DATA_MAP.toData(mVariantType).vBlockPhysicsOffset;
+      = CItemVariantDataMap::getSingleton().
+      toData(mVariantType).vBlockPhysicsOffset;
   shape = new btBoxShape(BtOgre::Convert::toBullet(
-      ITEM_VARIANT_DATA_MAP.toData(mVariantType).vBlockPhysicsSize));
+      CItemVariantDataMap::getSingleton().
+      toData(mVariantType).vBlockPhysicsSize));
   mBlockPhysics = new btRigidBody(0,
                                   new btDefaultMotionState(),
                                   shape);
@@ -141,7 +143,7 @@ void CCharacterItem::startDamage() {
       body->getParentNode()->convertLocalToWorldOrientation(
           body->getSkeleton()->getBone(mBoneToAttach)
           ->_getDerivedOrientation()).yAxis()
-      * ITEM_VARIANT_DATA_MAP.toData(mVariantType).fLength);
+      * CItemVariantDataMap::getSingleton().toData(mVariantType).fLength);
   const Ogre::Vector3 vPos(
       body->getParentNode()->convertLocalToWorldPosition(
           body->getSkeleton()->getBone(mBoneToAttach)
@@ -205,11 +207,12 @@ void CCharacterItem::hide() {
 }
 
 CDamage CCharacterItem::createDamage() {
-  return CDamage(mCharacter,
-                 ITEM_VARIANT_DATA_MAP.toData(mVariantType).eDamageType,
-                 mCharacter->getOrientation().zAxis(),
-                 ITEM_VARIANT_DATA_MAP.toData(mVariantType).uiDamage,
-                 0);
+  return CDamage(
+      mCharacter,
+      CItemVariantDataMap::getSingleton().toData(mVariantType).eDamageType,
+      mCharacter->getOrientation().zAxis(),
+      CItemVariantDataMap::getSingleton().toData(mVariantType).uiDamage,
+      0);
 }
 
 Ogre::Vector3 CCharacterItem::getDamagePosition() {

@@ -54,7 +54,7 @@ void CWorldEntity::exit() {
   }
   if (m_pCollisionObject) {
     assert(m_pMap);
-  	m_pMap->getPhysicsManager()->getWorld()->removeCollisionObject(m_pCollisionObject);
+    m_pMap->getPhysicsManager()->getWorld()->removeCollisionObject(m_pCollisionObject);
     btRigidBody *pRB = btRigidBody::upcast(m_pCollisionObject);
     if (pRB) {
       delete pRB->getMotionState();

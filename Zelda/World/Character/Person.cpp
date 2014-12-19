@@ -77,11 +77,11 @@ CPerson::CPerson(const tinyxml2::XMLElement *pElem,
   : CCharacter(pElem,
                pParent,
                pMap,
-               PERSON_DATA_ID_MAP.toData(
-                   PERSON_TYPE_ID_MAP.parseString(
+               CPersonDataIdMap::getSingleton().toData(
+                   CPersonTypeIdMap::getSingleton().parseString(
                        Attribute(pElem, "person_type")))),
-    m_PersonData(PERSON_DATA_ID_MAP.toData(
-        PERSON_TYPE_ID_MAP.parseString(Attribute(pElem, "person_type")))) {
+    m_PersonData(CPersonDataIdMap::getSingleton().toData(
+        CPersonTypeIdMap::getSingleton().parseString(Attribute(pElem, "person_type")))) {
   m_degLeftHandleCurrentRotation = 0;
   m_degLeftHandleRotationSpeed = 0;
   m_degLeftHandleRotationToTarget = 0;
@@ -124,7 +124,7 @@ void CPerson::createPhysics() {
 
     const CPhysicsCollisionObject &pco
         = m_pMap->getPhysicsManager()->getCollisionShape(
-            GLOBAL_COLLISION_SHAPES_TYPES_ID_MAP.toString(GCST_PERSON_CAPSULE));
+            CGlobalCollisionShapesTypesIdMap::getSingleton().toString(GCST_PERSON_CAPSULE));
     btConvexShape * capsule = dynamic_cast<btConvexShape*>(pco.getShape());
     characterGhostObject->setCollisionShape(capsule);
     // characterGhostObject->setCollisionFlags(getCollisionGroup());

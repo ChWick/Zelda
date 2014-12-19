@@ -18,20 +18,19 @@
  *****************************************************************************/
 
 #include "MessageShowText.hpp"
+#include <string>
 #include "UserMessageTypes.hpp"
 #include "../../Common/Util/XMLHelper.hpp"
 
 using namespace XMLHelper;
 
 
-CMessageShowText::CStatusIDMap::CStatusIDMap() {
+void CMessageShowText::CStatusIDMap::init() {
   m_Map[REQUEST] = "request";
   m_Map[FINISHED] = "finished";
   m_Map[FINISHED_RESULT_CONTINUE] = "finished_result_continue";
   m_Map[FINISHED_RESULT_REPEAT] = "finished_result_repeat";
 }
-
-const CMessageShowText::CStatusIDMap STATUS_ID_MAP;
 
 CMessageShowText::CMessageShowText(const std::string &creationFile,
                                    const std::string &sLanguageString,
@@ -48,6 +47,9 @@ CMessageShowText::CMessageShowText(const std::string &creationFile,
                                    std::shared_ptr<CGUITextBox::SResult> result)
     : CMessage(creationFile, MSG_SHOW_TEXT, pElem),
       m_sLanguageString(Attribute(pElem, "language_string")),
-      mStatus(STATUS_ID_MAP.parseString(Attribute(pElem, "status", STATUS_ID_MAP.toString(REQUEST).c_str()))),
+      mStatus(CStatusIDMap::getSingleton().
+              parseString(Attribute(
+                  pElem, "status",
+                  CStatusIDMap::getSingleton().toString(REQUEST).c_str()))),
       mResult(result) {
 }

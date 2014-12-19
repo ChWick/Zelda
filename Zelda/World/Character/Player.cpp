@@ -51,7 +51,10 @@ const Ogre::Real PLAYER_ENEMY_NOTIFY_RADIUS_SQR = 100.f;  // already squared
 CPlayer::CPlayer(CEntity *pParent,
                  const Ogre::Camera* pCamera,
                  Ogre::SceneManager *pPlayerSceneManager)
-  : CPerson("player", pParent, nullptr, PERSON_DATA_ID_MAP.toData(PERSON_LINK)),
+    : CPerson("player",
+              pParent,
+              nullptr,
+              CPersonDataIdMap::getSingleton().toData(PERSON_LINK)),
     m_pCamera(pCamera),
     m_pPlayerSceneManager(pPlayerSceneManager),
     m_pLiftedEntity(nullptr),

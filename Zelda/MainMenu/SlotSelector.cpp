@@ -42,7 +42,7 @@ CSlotSelector::CSlotSelector(CEntity *pParent, CEGUI::Window *pParentWindow)
 
 bool CSlotSelector::onStartClicked(const CEGUI::EventArgs &args) {
   // delete the game state: main menu
-  delete getParent(GAME_STATE_ID_MAP.toString(GST_MAIN_MENU));
+  delete getParent(CGameStateIdMap::getSingleton().toString(GST_MAIN_MENU));
 
   // create world as new game state
   new CWorld();

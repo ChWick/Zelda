@@ -30,12 +30,10 @@ enum ESwitchMapTypes {
   SMT_FADE_ALPHA,
 };
 
-class CSwitchMapTypes : public CStringEnumIdMap<ESwitchMapTypes> {
+class CSwitchMapTypes : public CStringEnumIdMap<CSwitchMapTypes, ESwitchMapTypes> {
 public:
-  CSwitchMapTypes();
+  void init();
 };
-
-extern const CSwitchMapTypes SWITCH_MAP_TYPES_ID_MAP;
 
 
 class CMap;
