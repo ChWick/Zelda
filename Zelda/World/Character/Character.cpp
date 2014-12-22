@@ -262,10 +262,10 @@ void CCharacter::updateAnimationsCallback(const Ogre::Real fTime) {
 void CCharacter::setAnimation(unsigned int id, bool reset, bool force) {
   if (force) {
     // no fading
-    for (unsigned int i = 0; i < m_uiAnimationCount; i++) {
-      mAnimationProperty[m_uiAnimID].mFadeState = FADE_OUT;
-      m_Anims[id]->setEnabled(false);
-      m_Anims[id]->setWeight(0);
+    for (unsigned int i = 0; i < mAnimationProperty.size(); i++) {
+      mAnimationProperty[i].mFadeState = FADE_OUT;
+      m_Anims[i]->setEnabled(false);
+      m_Anims[i]->setWeight(0);
     }
 
     // only show current
@@ -282,7 +282,7 @@ void CCharacter::setAnimation(unsigned int id, bool reset, bool force) {
     // fading
 
     // disable all animations
-    if (m_uiAnimID < m_uiAnimationCount) {
+    if (m_uiAnimID < mAnimationProperty.size()) {
       // if we have an old animation, fade it out
       mAnimationProperty[m_uiAnimID].mFadeState = FADE_OUT;
     }

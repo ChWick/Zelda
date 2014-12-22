@@ -6,3 +6,7 @@ Release
 Makefile
 .codelite
 .clang
+Zelda
+bin
+include
+src

@@ -19,7 +19,6 @@
 
 #include <CEGUI/CEGUI.h>
 #include "Config/TypeDefines.hpp"
-#include "Game.hpp"
 #include GAME_CLASS_HEADER
 #include <OIS.h>
 #include "FileManager/FileManager.hpp"
@@ -30,17 +29,17 @@
 #endif
 
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
-#  define WIN32_DEFAULT_LIBS
-#  define WIN32_LEAN_AND_MEAN
-#  include <windows.h>
-#  pragma comment(lib, "user32.lib")
+#define WIN32_DEFAULT_LIBS
+#define WIN32_LEAN_AND_MEAN
+#include "windows.h"
+#pragma comment(lib,"user32.lib")
 #elif OGRE_PLATFORM == OGRE_PLATFORM_APPLE
-#  include "OSX/OSX.hpp"
+#include "OSX/OSX.hpp"
 #elif OGRE_PLATFORM == OGRE_PLATFORM_APPLE_IOS
-#  include "SampleBrowser_iOS.h"
+#include "SampleBrowser_iOS.h"
 #elif OGRE_PLATFORM == OGRE_PLATFORM_ANDROID
-#  include <jni.h>
-#  include "Android/Android.hpp"
+#include "Android/Android.hpp"
+#include <jni.h>
 
 CGame* OgreAndroidBridge::mGame = NULL;
 AndroidInputInjector* OgreAndroidBridge::mInputInjector = NULL;
@@ -50,25 +49,24 @@ Ogre::RenderWindow* OgreAndroidBridge::mRenderWnd = NULL;
 Ogre::Root* OgreAndroidBridge::mRoot = NULL;
 bool OgreAndroidBridge::mInit = false;
 bool OgreAndroidBridge::m_bRenderPaused = true;
-// CSnapshot *OgreAndroidBridge::m_pSnapshot = NULL;
+//CSnapshot *OgreAndroidBridge::m_pSnapshot = NULL;
 ANativeActivity *OgreAndroidBridge::mActivity = NULL;
 
 #   ifdef OGRE_STATIC_LIB
 Ogre::StaticPluginLoader* OgreAndroidBridge::mStaticPluginLoader = NULL;
 #   endif
-#else
-#  include "Application/Application.hpp"
+
 #endif
 
-#if 0
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
-INT WINAPI WinMain(HINSTANCE hInst, HINSTANCE, LPSTR strCmdLine, INT)
+INT WINAPI WinMain( HINSTANCE hInst, HINSTANCE, LPSTR strCmdLine, INT )
 #elif OGRE_PLATFORM == OGRE_PLATFORM_ANDROID
 void android_main(struct android_app* state)
 #else
 int main(int argc, char *argv[])
 #endif
 {
+    
     // ----------------------------------------------------------------------------
     // This makes relative paths work in C++ in Xcode by changing directory to the Resources folder inside the .app bundle
 #ifdef __APPLE__
@@ -80,11 +78,11 @@ int main(int argc, char *argv[])
         // error!
     }
     CFRelease(resourcesURL);
-
+    
     chdir(path);
     std::cout << "Current Path: " << path << std::endl;
 #endif
-
+    
 #if OGRE_PLATFORM == OGRE_PLATFORM_APPLE_IOS
 	NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
 	int retVal = UIApplicationMain(argc, argv, @"UIApplication", @"AppDelegate");
@@ -92,13 +90,13 @@ int main(int argc, char *argv[])
 	return retVal;
 #elif (OGRE_PLATFORM == OGRE_PLATFORM_APPLE) && __LP64__
 	NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
-
+    
     mAppDelegate = [[AppDelegate alloc] init];
     [[NSApplication sharedApplication] setDelegate:mAppDelegate];
 	int retVal = NSApplicationMain(argc, (const char **) argv);
-
+    
 	[pool release];
-
+    
 	return retVal;
 #elif OGRE_PLATFORM == OGRE_PLATFORM_ANDROID
   OgreAndroidBridge::init(state);
@@ -131,10 +129,10 @@ int main(int argc, char *argv[])
   OgreAndroidBridge::go(state);
   LOGI("End");
 #else
-  //CFileManager::init();
+  CFileManager::init();
   try {
-    //XMLResources::CManager::LANGUAGE_CODE = "de";
-    //XMLResources::GLOBAL.loadLanguage();
+    XMLResources::CManager::LANGUAGE_CODE = "de";
+    XMLResources::GLOBAL.loadLanguage();
   }
   catch (const Ogre::Exception& e) {
 #  if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
@@ -148,19 +146,18 @@ int main(int argc, char *argv[])
   }
 
   // Create application object
-  //std::unique_ptr<GAME_CLASS> app(new GAME_CLASS());
-  //std::unique_ptr<CApplication> app(new CApplication());
+  GAME_CLASS *app = new GAME_CLASS();
 
 #    if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
 #    else
   if (argc == 2) {
     // add additional level dir path
-    // app->getAdditionalLevelDirPaths().push_back(argv[1]);
+    app->getAdditionalLevelDirPaths().push_back(argv[1]);
   }
 #    endif
 
   try {
-    //app->go();
+    app->go();
   } catch( Ogre::Exception& e ) {
 #    if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
     MessageBox( NULL, e.getFullDescription().c_str(), "An exception has occured!", MB_OK | MB_ICONERROR | MB_TASKMODAL);
@@ -187,28 +184,11 @@ int main(int argc, char *argv[])
       "Unknown Error" << std::endl << "at file: " << __FILE__ << std::endl;
 #    endif
   }
-  //app->closeApp();
-  //app.reset();
+  
+  delete app;
 #  endif
 
-  LOGV("Exitting");
 #if OGRE_PLATFORM != OGRE_PLATFORM_ANDROID
-  return EXIT_SUCCESS;
+  return 0;
 #endif
 }
-
-#endif
-
-#if 1
-#include <iostream>
-
-int main() {
-  if (0) {
-    OgreBites::SdkTrayManager *mgr;
-    mgr->hideLoadingBar();
-    OgreBites::Widget::nukeOverlayElement(0);
-  }
-  std::cout << "test" << std::endl;
-  return EXIT_SUCCESS;
-}
-#endif

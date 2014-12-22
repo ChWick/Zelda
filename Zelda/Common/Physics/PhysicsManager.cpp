@@ -104,8 +104,10 @@ void CPhysicsManager::exit() {
 
     btRigidBody * body = btRigidBody::upcast(obj);
 
-    if (body && body->getMotionState())
+    if (body && body->getMotionState()) {
         delete body->getMotionState();
+        body->setMotionState(nullptr);
+    }
 
     m_pPhyWorld->removeCollisionObject(obj);
 
@@ -118,7 +120,7 @@ void CPhysicsManager::exit() {
     if (triShape) {
       delete triShape->getMeshInterface();
     }
-    delete sh.second.getShape();
+    //delete sh.second.getShape();
   }
   m_CollisionObjects.clear();
 
@@ -222,6 +224,28 @@ void CPhysicsManager::deleteLater(const btCollisionObject *pCO) {
   }
 
   m_Messages.push_back(new CPhysicsMessage(CPhysicsMessage::PMT_DELETE, pCO));
+}
+
+void CPhysicsManager::deleteNow(btCollisionObject *co) {
+  ASSERT(co);
+  btRigidBody *rb = btRigidBody::upcast(co);
+
+  if (rb) {
+    if (rb->getMotionState()) {
+      delete  rb->getMotionState();
+      const_cast<btRigidBody*>(rb)->setMotionState(nullptr);
+    }
+    if (rb->getCollisionShape()) {
+      if (hasCollisionShape(rb->getCollisionShape())) {
+        delete rb->getCollisionShape();
+      }
+      rb->setCollisionShape(nullptr);
+    }
+    secureRemoveRigidBody(rb);
+  } else {
+    m_pPhyWorld->removeCollisionObject(co);
+  }
+  delete co;
 }
 
 #if PHYSICS_MANAGER_DEBUG == 1

@@ -123,11 +123,20 @@ class CPhysicsManager
   btBroadphaseInterface * getBroadphase();
 
   void deleteLater(const btCollisionObject *pCO);
+  void deleteNow(btCollisionObject *co);
   void createLater(btCollisionObject *pCO) {m_Messages.push_back(new CPhysicsMessage(CPhysicsMessage::PMT_CREATE, pCO));}
 
   // Collision shape handling
   bool hasCollisionShape(const Ogre::String &id) const {
     return m_CollisionObjects.find(id) != m_CollisionObjects.end();
+  }
+  bool hasCollisionShape(const btCollisionShape *shape) const {
+    for (auto &p : m_CollisionObjects) {
+      if (p.second.getShape() == shape) {
+        return true;
+      }
+    }
+    return false;
   }
   CPhysicsCollisionObject &getCollisionShape(const Ogre::String &id) {
     assert(hasCollisionShape(id));

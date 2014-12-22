@@ -106,6 +106,8 @@ void CCharacterItem::createPhysics(CMap *map) {
   }
 
   destroyPhysics(map);  // check, that deleted, e.g. when switching
+  CPhysicsManager *physicsManager = map->getPhysicsManager();
+
 
   btCollisionShape *shape = nullptr;
   mPhysicsOffset
@@ -117,7 +119,6 @@ void CCharacterItem::createPhysics(CMap *map) {
   mBlockPhysics = new btRigidBody(0,
                                   new btDefaultMotionState(),
                                   shape);
-  CPhysicsManager *physicsManager = map->getPhysicsManager();
 
   physicsManager->secureAddRigidBody(mBlockPhysics,
                                      mBlockPhysicsGroup,
@@ -130,11 +131,8 @@ void CCharacterItem::destroyPhysics(CMap *map) {
   if (!mBlockPhysics) {return;}  // not created
 
   CPhysicsManager *physicsManager = map->getPhysicsManager();
-
-  delete mBlockPhysics->getMotionState();
-  delete mBlockPhysics->getCollisionShape();
-  physicsManager->secureRemoveRigidBody(mBlockPhysics);
-  delete mBlockPhysics;
+  physicsManager->deleteNow(mBlockPhysics);
+  mBlockPhysics = nullptr;
 }
 
 void CCharacterItem::startDamage() {

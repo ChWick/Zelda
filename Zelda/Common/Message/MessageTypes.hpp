@@ -36,7 +36,7 @@ enum EMessageTypes {
 
 class CMessageTypesMap : public CStringEnumIdMap<CMessageTypesMap, unsigned int> {
 public:
-  void init();
+  virtual void init();
 };
 
 #endif // _MESSAGE_TYPES_HPP_

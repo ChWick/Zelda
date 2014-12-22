@@ -53,14 +53,7 @@ void CWorldEntity::exit() {
     m_pSceneNode = nullptr;
   }
   if (m_pCollisionObject) {
-    assert(m_pMap);
-    m_pMap->getPhysicsManager()->getWorld()->removeCollisionObject(m_pCollisionObject);
-    btRigidBody *pRB = btRigidBody::upcast(m_pCollisionObject);
-    if (pRB) {
-      delete pRB->getMotionState();
-    }
-    // dont delete collision shape, since it is normally a global shape
-    delete m_pCollisionObject;
+    m_pMap->getPhysicsManager()->deleteNow(m_pCollisionObject);
     m_pCollisionObject = nullptr;
   }
 

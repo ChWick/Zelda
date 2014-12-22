@@ -22,4 +22,5 @@
 void CUserMessageTypesMap::init() {
   m_Map[MSG_ITEM] = "item";
   m_Map[MSG_SHOW_TEXT] = "show_text";
+  CMessageTypesMap::init();
 }

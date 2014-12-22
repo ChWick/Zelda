@@ -17,12 +17,11 @@
  * Zelda. If not, see http://www.gnu.org/licenses/.
  *****************************************************************************/
 
+
+#include "GUI/GUIManager.hpp"
 #include "Game.hpp"
-#include <string>
-//#include <OgreCodec.h>
-//#include <OgreConfigFile.h>
-#include "Log.hpp"
-/*#include "GUI/GUIManager.hpp"
+#include <OgreCodec.h>
+#include <OgreConfigFile.h>
 #include "Input/GameInputManager.hpp"
 #include "InputDefines.hpp"
 #include "FileManager/FileManager.hpp"
@@ -30,40 +29,46 @@
 #include "GameLogic/GameStateManager.hpp"
 #include "GameLogic/EntityManager.hpp"
 #include "GameLogic/GameLogicGarbageCollector.hpp"
+#include "GameLogic/GameStateTypes.hpp"
 #include "Util/DebugDrawer.hpp"
 #include "Message/MessageDebug.hpp"
+#include "Log.hpp"
 #include "PauseManager/PauseManager.hpp"
 #include "Lua/LuaScriptManager.hpp"
 #include MESSAGE_CREATOR_HEADER
-#include "Util/GameMemory.hpp"*/
-//#include "Util/Sleep.hpp"
+#include "Util/GameMemory.hpp"
+#include "Util/Sleep.hpp"
+
+#include "GameLogic/Events/RepeatTypes.hpp"
+#include "GameLogic/Events/Actions/ActionTypes.hpp"
+#include "GameLogic/Events/Emitter/EmitterTypes.hpp"
+
 
 
 #if OGRE_PLATFORM == OGRE_PLATFORM_ANDROID
 #include "Android/Android.hpp"
 #endif
 
-//template<> CGame *Ogre::Singleton<CGame>::msSingleton = 0;
+template<> CGame *Ogre::Singleton<CGame>::msSingleton = 0;
 
 #ifdef _DEBUG
 #define USE_DEBUG_PLUGINS
 #endif
 
 
-/*CGame *CGame::getSingletonPtr() {
+CGame *CGame::getSingletonPtr() {
   return msSingleton;
 }
 CGame &CGame::getSingleton() {
   assert(msSingleton);
   return *msSingleton;
-  }*/
+}
 
 // ----------------------------------------------------------------------------
 CGame::CGame(void)
   :
     m_pGameStateManager(NULL),
     m_bDebugDrawerEnabled(false),
-    mOverlaySystem(0),
     mRoot(0),
     mCamera(0),
     mSceneMgr(0),
@@ -76,92 +81,55 @@ CGame::CGame(void)
     mCursorWasVisible(false),
     mShutDown(false),
     mInputManager(NULL) {
-  #if 0
-  mFSLayer = OGRE_NEW_T(Ogre::FileSystemLayer,
-                        Ogre::MEMCATEGORY_GENERAL)(OGRE_VERSION_NAME);
+  mFSLayer = OGRE_NEW_T(Ogre::FileSystemLayer, Ogre::MEMCATEGORY_GENERAL)(OGRE_VERSION_NAME);
 #ifdef INCLUDE_RTSHADER_SYSTEM
-  mShaderGenerator = NULL;
+  mShaderGenerator	 = NULL;
   mMaterialMgrListener   = NULL;
-#endif  // INCLUDE_RTSHADER_SYSTEM
-  #endif
+#endif // INCLUDE_RTSHADER_SYSTEM
 }
-
-
+//-------------------------------------------------------------------------------------
 CGame::~CGame(void) {
-  #if 0
-  //if (DebugDrawer::getSingletonPtr()) {delete DebugDrawer::getSingletonPtr();}
-  if (mTrayMgr) {
-    delete mTrayMgr;
-    mTrayMgr = nullptr;
-  }
-  if (mCameraMan) {
-    delete mCameraMan;
-    mCameraMan = nullptr;
-  }
-/*  if (CGameStateManager::getSingletonPtr()) {
-    CEntityManager::getSingleton().deleteNow(
-        CGameStateManager::getSingletonPtr());
-  }
-  if (CGUIManager::getSingletonPtr()) {
-    delete CGUIManager::getSingletonPtr();
-  }
-  if (CGameInputManager::getSingletonPtr()) {
-    delete CGameInputManager::getSingletonPtr();
-  }
-  if (CInputListenerManager::getSingletonPtr()) {
-    delete CInputListenerManager::getSingletonPtr();
-  }
-  if (CPauseManager::getSingletonPtr()) {
-    delete CPauseManager::getSingletonPtr();
-  }
-  if (MESSAGE_CREATOR::getSingletonPtr()) {
-    delete MESSAGE_CREATOR::getSingletonPtr();
-  }
-  if (CGameMemory::getSingletonPtr()) {
-    delete CGameMemory::getSingletonPtr();
-  }
-  if (CGameLogicGarbageCollector::getSingletonPtr()) {
-    delete CGameLogicGarbageCollector::getSingletonPtr();
-  }
+  if (DebugDrawer::getSingletonPtr()) {delete DebugDrawer::getSingletonPtr();}
+  if (mTrayMgr) delete mTrayMgr;
+  if (mCameraMan) delete mCameraMan;
+  if (CGameStateManager::getSingletonPtr()) { CEntityManager::getSingleton().deleteNow(CGameStateManager::getSingletonPtr()); }
+  if (CGUIManager::getSingletonPtr()) {delete CGUIManager::getSingletonPtr();}
+  if (CGameInputManager::getSingletonPtr()) {delete CGameInputManager::getSingletonPtr();}
+  if (CInputListenerManager::getSingletonPtr()) {delete CInputListenerManager::getSingletonPtr();}
+  if (CPauseManager::getSingletonPtr()) {delete CPauseManager::getSingletonPtr();}
+  if (MESSAGE_CREATOR::getSingletonPtr()) {delete MESSAGE_CREATOR::getSingletonPtr();}
+  if (CGameMemory::getSingletonPtr()) {delete CGameMemory::getSingletonPtr();}
+  if (CGameLogicGarbageCollector::getSingletonPtr()) {delete CGameLogicGarbageCollector::getSingletonPtr();}
+
   if (CMessageHandler::getSingletonPtr()) {
     delete CMessageHandler::getSingletonPtr();
   }
-  if (CEntityManager::getSingletonPtr()) {
-    delete CEntityManager::getSingletonPtr();
-  }*/
+  if (CEntityManager::getSingletonPtr()) {delete CEntityManager::getSingletonPtr();}
 
-  //destroyScene();
-  //shutdownInput();
-
-  // OGRE_DELETE_T(mFSLayer, FileSystemLayer, Ogre::MEMCATEGORY_GENERAL);
-  // Remove ourself as a Window listener
-  /*Ogre::WindowEventUtilities::removeWindowEventListener(mWindow, this);
+  OGRE_DELETE_T(mFSLayer, FileSystemLayer, Ogre::MEMCATEGORY_GENERAL);
+  //Remove ourself as a Window listener
+  Ogre::WindowEventUtilities::removeWindowEventListener(mWindow, this);
   windowClosed(mWindow);
   if (mRoot) {
-    if (mOverlaySystem) {
-      OGRE_DELETE mOverlaySystem;
-      mOverlaySystem = 0;
-    }
-    delete Ogre::ResourceGroupManager::getSingleton().
-        _getResourceManager("LuaScript");
+#if OGRE_VERSION >= ((1 << 16) | (9 << 8) | 0)
+    if (mOverlaySystem) {OGRE_DELETE mOverlaySystem;}
+#endif
+    delete Ogre::ResourceGroupManager::getSingleton()._getResourceManager("LuaScript");
 
     OGRE_DELETE mRoot;
-  }*/
-  #endif
+  }
 }
 void CGame::go() {
-  //initApp();
-  //mRoot->startRendering();
+  initApp();
+  mRoot->startRendering();
 }
-
 void CGame::initApp() {
-  #if 0
 #if OGRE_PLATFORM == OGRE_PLATFORM_ANDROID
   createRoot();
 
   setup();
 
-  // mRoot->saveConfig();
+  //mRoot->saveConfig();
 
   Ogre::Root::getSingleton().getRenderSystem()->_initRenderTargets();
 
@@ -171,79 +139,64 @@ void CGame::initApp() {
 #else
   createRoot();
 
-  if (!oneTimeConfig()) {
-    LOGV("Loading ogre config");
-  }
+  if (!oneTimeConfig());
 
   setup();
 
 #endif
-  #endif
 }
 bool CGame::oneTimeConfig() {
-  #if 0
   if (!mRoot->restoreConfig()) {
     return mRoot->showConfigDialog();
   }
-  #endif
   return true;
 }
 void CGame::closeApp() {
-  #if 0
 #if OGRE_PLATFORM == OGRE_PLATFORM_ANDROID
     shutdown();
 #else
     mRoot->saveConfig();
     shutdown();
-    if (mRoot) {
-      OGRE_DELETE mOverlaySystem;
-      mOverlaySystem = 0;
-      OGRE_DELETE mRoot;
-      mRoot = 0;
-    }
+    if (mRoot)
+      {
+    OGRE_DELETE mOverlaySystem;
+    OGRE_DELETE mRoot;
+  }
 #ifdef OGRE_STATIC_LIB
     mStaticPluginLoader.unload();
 #endif
 #endif
-    #endif
 }
 void CGame::setup() {
-  #if 0
-  LOGI("*** creating window ***");
+  Ogre::LogManager::getSingletonPtr()->logMessage("*** creating window ***");
   mWindow = createWindow();
-  LOGI("*** Setting up input ***");
+  Ogre::LogManager::getSingletonPtr()->logMessage("*** Setting up input ***");
   setupInput(true);
-  LOGI("*** locating resources ***");
+  Ogre::LogManager::getSingletonPtr()->logMessage("*** locating resources ***");
   locateResources();
-  LOGI("*** loading essential resources ***");
-  Ogre::ResourceGroupManager::getSingleton().
-      initialiseResourceGroup("Essential");
+  Ogre::LogManager::getSingletonPtr()->logMessage("*** loading essential resources ***");
+  Ogre::ResourceGroupManager::getSingleton().initialiseResourceGroup("Essential");
 
   Ogre::TextureManager::getSingleton().setDefaultNumMipmaps(5);
 
-  // adds context as listener to process context-level
-  // (above the sample level) events
-  //mRoot->addFrameListener(this);
+  // adds context as listener to process context-level (above the sample level) events
+  mRoot->addFrameListener(this);
 #if OGRE_PLATFORM != OGRE_PLATFORM_ANDROID
-  //Ogre::WindowEventUtilities::addWindowEventListener(mWindow, this);
+  Ogre::WindowEventUtilities::addWindowEventListener(mWindow, this);
 #endif
 
-  LOGI("*** creating scene ***");
+  Ogre::LogManager::getSingletonPtr()->logMessage("*** creating scene ***");
   createScene();
-  LOGI("*** setup finished ***");
-  #endif
+  Ogre::LogManager::getSingletonPtr()->logMessage("*** setup finished ***");
 }
 Ogre::RenderWindow *CGame::createWindow() {
-  #if 0
 #if OGRE_PLATFORM == OGRE_PLATFORM_ANDROID
   return mWindow;
 #else
   return mRoot->initialise(true);
 #endif
-  #endif
 }
 void CGame::createRoot() {
-  #if 0
 #if OGRE_PLATFORM == OGRE_PLATFORM_ANDROID
   mRoot = Ogre::Root::getSingletonPtr();
 #else
@@ -251,24 +204,21 @@ void CGame::createRoot() {
 #   ifndef OGRE_STATIC_LIB
   pluginsPath = mFSLayer->getConfigFilePath("plugins.cfg");
 #   endif
-  mRoot = OGRE_NEW Ogre::Root(pluginsPath,
-                              mFSLayer->getWritablePath("ogre.cfg"),
-                              mFSLayer->getWritablePath("ogre.log"));
+  mRoot = OGRE_NEW Ogre::Root(pluginsPath, mFSLayer->getWritablePath("ogre.cfg"),
+			      mFSLayer->getWritablePath("ogre.log"));
 
 #   ifdef OGRE_STATIC_LIB
   mStaticPluginLoader.load();
 #   endif
 #endif
-  LOGI("*** Finished root ***");
-  LOGI("*** Creating OverlaySystem ***");
+  Ogre::LogManager::getSingletonPtr()->logMessage("*** Finished root ***");
+  Ogre::LogManager::getSingletonPtr()->logMessage("*** Creating OverlaySystem ***");
   mOverlaySystem = OGRE_NEW Ogre::OverlaySystem();
-  LOGI("*** Finished OverlaySystem***");
-  #endif
+  Ogre::LogManager::getSingletonPtr()->logMessage("*** Finished OverlaySystem***");
 }
 void CGame::locateResources() {
-  #if 0
   // add custom resource managers
-  //new CLuaScriptManager();
+  new CLuaScriptManager();
 
   // this is first added, that we use these files first if existing
   for (const std::string &path : m_vAdditionalLevelDirPaths) {
@@ -277,7 +227,7 @@ void CGame::locateResources() {
   }
 
   // load resource paths from config file
-  /*Ogre::ConfigFile cf;
+  Ogre::ConfigFile cf;
 #if OGRE_PLATFORM == OGRE_PLATFORM_ANDROID
   cf.load(openAPKFile(mFSLayer->getConfigFilePath("resources.cfg")));
 #else
@@ -297,44 +247,37 @@ void CGame::locateResources() {
       type = i->first;
       arch = i->second;
 
-      Ogre::ResourceGroupManager::getSingleton().
-          addResourceLocation(arch, type, sec);
+      Ogre::ResourceGroupManager::getSingleton().addResourceLocation(arch, type, sec);
     }
-    }*/
+  }
 
 #if OGRE_PLATFORM == OGRE_PLATFORM_ANDROID
   // add cusom maps file location
   Ogre::ResourceGroupManager::getSingleton().
-    addResourceLocation(
-        CFileManager::getValidPath(
-            CFileManager::DIRECTORY_LEVEL,
-            CFileManager::SL_EXTERNAL),
-        "FileSystem", "level_user");
+    addResourceLocation(CFileManager::getValidPath(CFileManager::DIRECTORY_LEVEL,
+						   CFileManager::SL_EXTERNAL),
+			"FileSystem", "level_user");
 #endif
-  #endif
 }
 void CGame::loadResources() {
-  #if 0
 #if OGRE_PLATFORM == OGRE_PLATFORM_ANDROID
   OgreAndroidBridge::callJavaVoid("closeLoadDialog");
 #endif
   // only load required resources for the game menu (cegui resources)
-  LOGI("Loading resources start");
+  Ogre::LogManager::getSingleton().logMessage("Loading resources start");
+  //Ogre::ResourceGroupManager::getSingleton().initialiseAllResourceGroups();
   showLoadingBar(5, 0);
-  auto &rgmgr = Ogre::ResourceGroupManager::getSingleton();
-  // rgmgt.initialiseResourceGroup("PreloadGame");
-  rgmgr.initialiseResourceGroup("Imagesets");
-  rgmgr.initialiseResourceGroup("Fonts");
-  rgmgr.initialiseResourceGroup("Schemes");
-  rgmgr.initialiseResourceGroup("LookNFeel");
-  rgmgr.initialiseResourceGroup("Layouts");
-  // rgmgr.initialiseResourceGroup("level_user");
+  //Ogre::ResourceGroupManager::getSingleton().initialiseResourceGroup("PreloadGame");
+  Ogre::ResourceGroupManager::getSingleton().initialiseResourceGroup("Imagesets");
+  Ogre::ResourceGroupManager::getSingleton().initialiseResourceGroup("Fonts");
+  Ogre::ResourceGroupManager::getSingleton().initialiseResourceGroup("Schemes");
+  Ogre::ResourceGroupManager::getSingleton().initialiseResourceGroup("LookNFeel");
+  Ogre::ResourceGroupManager::getSingleton().initialiseResourceGroup("Layouts");
+  //Ogre::ResourceGroupManager::getSingleton().initialiseResourceGroup("level_user");
   hideLoadingBar();
-  LOGI("Loading resources end");
-  #endif
+  Ogre::LogManager::getSingleton().logMessage("Loading resources end");
 }
 void CGame::setupInput(bool nograb) {
-  #if 0
 #if OGRE_PLATFORM != OGRE_PLATFORM_ANDROID && OGRE_PLATFORM != OGRE_PLATFORM_WINRT
   OIS::ParamList pl;
   size_t winHandle = 0;
@@ -360,47 +303,38 @@ void CGame::setupInput(bool nograb) {
 
   // attach input devices
   windowResized(mWindow);    // do an initial adjustment of mouse area
-  //CInputListenerManager *pInputManager = new CInputListenerManager(mWindow);
-  //new CGameInputManager();
+  CInputListenerManager *pInputManager = new CInputListenerManager(mWindow);
+  new CGameInputManager();
 #if (OGRE_PLATFORM != OGRE_PLATFORM_APPLE_IOS) && (OGRE_PLATFORM != OGRE_PLATFORM_ANDROID)
 
-  /*if (mInputContext.mKeyboard)
+  if(mInputContext.mKeyboard)
     mInputContext.mKeyboard->setEventCallback(pInputManager);
-  if (mInputContext.mMouse)
-  mInputContext.mMouse->setEventCallback(pInputManager);*/
+  if(mInputContext.mMouse)
+    mInputContext.mMouse->setEventCallback(pInputManager);
 
 #else
-  if (mInputContext.mMultiTouch)
+  if(mInputContext.mMultiTouch)
     mInputContext.mMultiTouch->setEventCallback(pInputManager);
 #endif
 
-  //pInputManager->addInputListener(this);
-  #endif
+  pInputManager->addInputListener(this);
 }
 void CGame::createInputDevices() {
-  #if 0
 #if OGRE_PLATFORM == OGRE_PLATFORM_APPLE_IOS
-  mInputContext.mMultiTouch = static_cast<OIS::MultiTouch*>(
-      mInputMgr->createInputObject(OIS::OISMultiTouch, true));
-  mInputContext.mAccelerometer = static_cast<OIS::JoyStick*>(
-      mInputMgr->createInputObject(OIS::OISJoyStick, true));
+  mInputContext.mMultiTouch = static_cast<OIS::MultiTouch*>(mInputMgr->createInputObject(OIS::OISMultiTouch, true));
+  mInputContext.mAccelerometer = static_cast<OIS::JoyStick*>(mInputMgr->createInputObject(OIS::OISJoyStick, true));
 #elif OGRE_PLATFORM == OGRE_PLATFORM_ANDROID
   // nothing to do
 #elif OGRE_PLATFORM == OGRE_PLATFORM_WINRT
-  // mInputManager is NULL and input devices are already passed to us,
-  // therefore nothing to do
+  // mInputManager is NULL and input devices are already passed to us, therefore nothing to do
   assert(mInputContext.mKeyboard);
   assert(mInputContext.mMouse);
 #else
-  mInputContext.mKeyboard = static_cast<OIS::Keyboard*>(
-      mInputManager->createInputObject(OIS::OISKeyboard, true));
-  mInputContext.mMouse = static_cast<OIS::Mouse*>(
-      mInputManager->createInputObject(OIS::OISMouse, true));
+  mInputContext.mKeyboard = static_cast<OIS::Keyboard*>(mInputManager->createInputObject(OIS::OISKeyboard, true));
+  mInputContext.mMouse = static_cast<OIS::Mouse*>(mInputManager->createInputObject(OIS::OISMouse, true));
 #endif
-  #endif
 }
 void CGame::shutdown() {
-  #if 0
 #if ENABLE_SHADERS_CACHE_SAVE == 1
   if (Ogre::GpuProgramManager::getSingleton().isCacheDirty()) {
     Ogre::String path = mFSLayer->getWritablePath(getShaderCacheFileName());
@@ -408,10 +342,7 @@ void CGame::shutdown() {
     if (outFile) {
       Ogre::LogManager::getSingleton().logMessage("Writing shader cache to ");
       Ogre::LogManager::getSingleton().logMessage(path.c_str());
-      Ogre::DataStreamPtr ostream(new Ogre::FileHandleDataStream(
-          path.c_str(),
-          outFile,
-          Ogre::DataStream::WRITE));
+      Ogre::DataStreamPtr ostream(new Ogre::FileHandleDataStream(path.c_str(), outFile, Ogre::DataStream::WRITE));
       Ogre::GpuProgramManager::getSingleton().saveMicrocodeCache(ostream);
       ostream->close();
     }
@@ -425,130 +356,126 @@ void CGame::shutdown() {
 
   if (mRoot->getRenderSystem() != NULL) destroyScene();
 
- // Ogre::WindowEventUtilities::removeWindowEventListener(mWindow, this);
+    Ogre::WindowEventUtilities::removeWindowEventListener(mWindow, this);
   shutdownInput();
 
 #ifdef INCLUDE_RTSHADER_SYSTEM
   // Destroy the RT Shader System.
   destroyRTShaderSystem();
-#endif  // INCLUDE_RTSHADER_SYSTEM
-  #endif
+#endif // INCLUDE_RTSHADER_SYSTEM
 }
-
 void CGame::shutdownInput() {
-  #if 0
   // detach input devices
   windowResized(mWindow);    // do an initial adjustment of mouse area
-  if (mInputContext.mKeyboard)
+  if(mInputContext.mKeyboard)
     mInputContext.mKeyboard->setEventCallback(NULL);
-  if (mInputContext.mMouse)
+  if(mInputContext.mMouse)
     mInputContext.mMouse->setEventCallback(NULL);
 #if OIS_WITH_MULTITOUCH
-  if (mInputContext.mMultiTouch)
+  if(mInputContext.mMultiTouch)
     mInputContext.mMultiTouch->setEventCallback(NULL);
 #endif
-  if (mInputContext.mAccelerometer)
+  if(mInputContext.mAccelerometer)
     mInputContext.mAccelerometer->setEventCallback(NULL);
 
 #if OGRE_PLATFORM != OGRE_PLATFORM_ANDROID && OGRE_PLATFORM != OGRE_PLATFORM_WINRT
   if (mInputManager) {
-    if (mInputContext.mKeyboard)
+    if(mInputContext.mKeyboard)
       mInputManager->destroyInputObject(mInputContext.mKeyboard);
-    if (mInputContext.mMouse)
+    if(mInputContext.mMouse)
       mInputManager->destroyInputObject(mInputContext.mMouse);
 #if OIS_WITH_MULTITOUCH
-    if (mInputContext.mMultiTouch)
+    if(mInputContext.mMultiTouch)
       mInputManager->destroyInputObject(mInputContext.mMultiTouch);
 #endif
-    if (mInputContext.mAccelerometer)
+    if(mInputContext.mAccelerometer)
       mInputManager->destroyInputObject(mInputContext.mAccelerometer);
 
     OIS::InputManager::destroyInputSystem(mInputManager);
     mInputManager = 0;
   }
 #endif
-  #endif
 }
 void CGame::createScene() {
-  #if 0
   assert(mRoot);
   assert(!mSceneMgr);
   assert(mWindow);
   if (!mWindow) {
-    LOGW("mWindow is not set!");
+    Ogre::LogManager::getSingletonPtr()->logMessage(Ogre::LML_CRITICAL, "mWindow is not set!");
   }
 
   LOGI("Initializing enum id maps");
   initEnumIdMaps();
 
+  //-------------------------------------------------------------------------------------
   // choose scenemanager
-  LOGI("   create scene manager");
+  // Get the SceneManager, in this case a generic one
+  //	mSceneMgr = mRoot->createSceneManager(ST_EXTERIOR_CLOSE, "MainSceneManager");
+  Ogre::LogManager::getSingletonPtr()->logMessage("   create scene manager");
   mSceneMgr = mRoot->createSceneManager(Ogre::ST_GENERIC, "MainSceneManager");
   mSceneMgr->addRenderQueueListener(mOverlaySystem);
 
-  if (mRoot->getRenderSystem()->getCapabilities()->hasCapability(
-          Ogre::RSC_HWSTENCIL)) {
+  if (mRoot->getRenderSystem()->getCapabilities()->hasCapability(Ogre::RSC_HWSTENCIL)) {
     mSceneMgr->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_MODULATIVE);
-  } else {
+  }
+  else {
     // texture modulative leads to crash on android
     // shadows can be supported by vertex programs, to be done!
-    // mSceneMgr->setShadowTechnique(Ogre::SHADOWTYPE_TEXTURE_MODULATIVE);
+    //mSceneMgr->setShadowTechnique(Ogre::SHADOWTYPE_TEXTURE_MODULATIVE);
   }
 
+  //-------------------------------------------------------------------------------------
+  // create camera
   // Create the camera
-  LOGI("   create camera");
+  Ogre::LogManager::getSingletonPtr()->logMessage("   create camera");
   mCamera = mSceneMgr->createCamera("GameCamera");
 
-  mCamera->setPosition(Ogre::Vector3(0, 1, 1));
-  mCamera->lookAt(Ogre::Vector3(0, 0, 0));
+  // Position it at 500 in Z direction
+  mCamera->setPosition(Ogre::Vector3(0,1,1));
+  // Look back along -Z
+  mCamera->lookAt(Ogre::Vector3(0,0,0));
   mCamera->setNearClipDistance(0.001f);
   mCamera->setFarClipDistance(10000.0f);
 
-  LOGI("   create viewport");
-  // create a default camera controller
-  mCameraMan = new OgreBites::SdkCameraMan(mCamera);
-  mCameraMan->setTopSpeed(1);
-
+  Ogre::LogManager::getSingletonPtr()->logMessage("   create viewport");
+  mCameraMan = new OgreBites::SdkCameraMan(mCamera);   // create a default camera controlle
+  mCameraMan->setTopSpeed(10);
+  //------------------------------------------------------------------------------------
+  // create viewports
   // Create one viewport, entire window
   m_pMainViewPort = mWindow->addViewport(mCamera);
-  m_pMainViewPort->setBackgroundColour(Ogre::ColourValue(0, 0, 0));
+  m_pMainViewPort->setBackgroundColour(Ogre::ColourValue(0,0,0));
   m_pMainViewPort->setClearEveryFrame(true, Ogre::FBT_DEPTH);
 
   // Alter the camera aspect ratio to match the viewport
-  mCamera->setAspectRatio(Ogre::Real(m_pMainViewPort->getActualWidth())
-                          / Ogre::Real(m_pMainViewPort->getActualHeight()));
+  mCamera->setAspectRatio(Ogre::Real(m_pMainViewPort->getActualWidth()) / Ogre::Real(m_pMainViewPort->getActualHeight()));
+  //-------------------------------------------------------------------------------------
 
-  // Create the scene
-  // mSceneMgr->setAmbientLight(Ogre::ColourValue(0, 0, 0));
+    //-------------------------------------------------------------------------------------
+    // Create the scene
+  //mSceneMgr->setAmbientLight(Ogre::ColourValue(0, 0, 0));
   mSceneMgr->setAmbientLight(Ogre::ColourValue(0.15f, 0.15f, 0.15f, 1.0f));
 
 
   Ogre::Light* directionalLight = mSceneMgr->createLight("directionalLight");
   directionalLight->setType(Ogre::Light::LT_DIRECTIONAL);
-  // directionalLight->setDiffuseColour(0.65f, 0.65f, 0.65f);
+  //directionalLight->setDiffuseColour(0.65f, 0.65f, 0.65f);
   directionalLight->setDiffuseColour(Ogre::ColourValue(1, 1, 1));
   directionalLight->setSpecularColour(Ogre::ColourValue(.25, .25, 0));
-  directionalLight->setDirection(Ogre::Vector3(0, -5, -1));
+  directionalLight->setDirection(Ogre::Vector3( 0, -5, -1 ));
   directionalLight->setCastShadows(true);
 
-  LOGI("*** Initializing SdkTrays ***");
-
+  Ogre::LogManager::getSingletonPtr()->logMessage("*** Initializing SdkTrays ***");
 #if OGRE_VERSION >= ((1 << 16) | (9 << 8) | 0)
-  mTrayMgr = new OgreBites::SdkTrayManager("InterfaceName",
-                                           mWindow,
-                                           mInputContext,
-                                           this);
+  mTrayMgr = new OgreBites::SdkTrayManager("InterfaceName", mWindow, mInputContext, this);
 #else
-  mTrayMgr = new OgreBites::SdkTrayManager("InterfaceName",
-                                           mWindow,
-                                           NULL,
-                                           this);
+  mTrayMgr = new OgreBites::SdkTrayManager("InterfaceName", mWindow, NULL, this);
 #endif
 
 #ifdef DEBUG_SHOW_OGRE_TRAY
   // frame stats are now in cegui pull menu
-  // mTrayMgr->showFrameStats(OgreBites::TL_TOPLEFT);
-  // mTrayMgr->showLogo(OgreBites::TL_BOTTOMRIGHT);
+  //mTrayMgr->showFrameStats(OgreBites::TL_TOPLEFT);
+  //mTrayMgr->showLogo(OgreBites::TL_BOTTOMRIGHT);
 
   // create a params panel for displaying sample details
   Ogre::StringVector items;
@@ -564,14 +491,13 @@ void CGame::createScene() {
   items.push_back("Filtering");
   items.push_back("Poly Mode");
 
-  mDetailsPanel = mTrayMgr->createParamsPanel(OgreBites::TL_NONE,
-                                              "DetailsPanel", 200, items);
+  mDetailsPanel = mTrayMgr->createParamsPanel(OgreBites::TL_NONE, "DetailsPanel", 200, items);
   mDetailsPanel->setParamValue(9, "Bilinear");
   mDetailsPanel->setParamValue(10, "Solid");
   mDetailsPanel->hide();
 #else
   mTrayMgr->hideCursor();
-#endif  // DEBUG_SHOW_OGRE_TRAY
+#endif // DEBUG_SHOW_OGRE_TRAY
   mTrayMgr->hideCursor();
 
 #ifdef INPUT_MOUSE
@@ -579,91 +505,77 @@ void CGame::createScene() {
   mTrayMgr->hideCursor();
 #endif
 
+  mRoot->addFrameListener(this);
+
 
 #ifdef INCLUDE_RTSHADER_SYSTEM
   // Initialize shader generator.
-  // Must be before resource loading in order to allow parsing
-  // extended material attributes.
+  // Must be before resource loading in order to allow parsing extended material attributes.
   bool success = initialiseRTShaderSystem(mSceneMgr);
   if (!success) {
     OGRE_EXCEPT(Ogre::Exception::ERR_FILE_NOT_FOUND,
-                "Shader Generator Initialization failed -"
-                "Core shader libs path not found",
-                "SampleBrowser::createDummyScene");
+		"Shader Generator Initialization failed - Core shader libs path not found",
+		"SampleBrowser::createDummyScene");
   }
-
-  if (mRoot->getRenderSystem()->getCapabilities()->hasCapability(
-         Ogre::RSC_FIXED_FUNCTION) == false) {
-    // newViewport->setMaterialScheme(
-    // Ogre::RTShader::ShaderGenerator::DEFAULT_SCHEME_NAME);
+  if(mRoot->getRenderSystem()->getCapabilities()->hasCapability(Ogre::RSC_FIXED_FUNCTION) == false) {
+    //newViewport->setMaterialScheme(Ogre::RTShader::ShaderGenerator::DEFAULT_SCHEME_NAME);
 
     // creates shaders for base material BaseWhite using the RTSS
-    Ogre::MaterialPtr baseWhite = Ogre::MaterialManager::getSingleton().
-        getByName("BaseWhite",
-                  Ogre::ResourceGroupManager::INTERNAL_RESOURCE_GROUP_NAME);
+    Ogre::MaterialPtr baseWhite = Ogre::MaterialManager::getSingleton().getByName("BaseWhite", Ogre::ResourceGroupManager::INTERNAL_RESOURCE_GROUP_NAME);
     baseWhite->setLightingEnabled(false);
     mShaderGenerator->createShaderBasedTechnique(
-        "BaseWhite",
-        Ogre::MaterialManager::DEFAULT_SCHEME_NAME,
-        Ogre::RTShader::ShaderGenerator::DEFAULT_SCHEME_NAME);
-    mShaderGenerator->validateMaterial(
-        Ogre::RTShader::ShaderGenerator::DEFAULT_SCHEME_NAME,
-        "BaseWhite");
-
-    if (baseWhite->getNumTechniques() > 1) {
+						 "BaseWhite",
+						 Ogre::MaterialManager::DEFAULT_SCHEME_NAME,
+						 Ogre::RTShader::ShaderGenerator::DEFAULT_SCHEME_NAME);
+    mShaderGenerator->validateMaterial(Ogre::RTShader::ShaderGenerator::DEFAULT_SCHEME_NAME,
+				       "BaseWhite");
+    if(baseWhite->getNumTechniques() > 1) {
       baseWhite->getTechnique(0)->getPass(0)->setVertexProgram(
-          baseWhite->getTechnique(1)->getPass(0)->
-          getVertexProgram()->getName());
+							       baseWhite->getTechnique(1)->getPass(0)->getVertexProgram()->getName());
       baseWhite->getTechnique(0)->getPass(0)->setFragmentProgram(
-          baseWhite->getTechnique(1)->getPass(0)->
-          getFragmentProgram()->getName());
+								 baseWhite->getTechnique(1)->getPass(0)->getFragmentProgram()->getName());
     }
 
     // creates shaders for base material BaseWhiteNoLighting using the RTSS
     mShaderGenerator->createShaderBasedTechnique(
-        "BaseWhiteNoLighting",
-        Ogre::MaterialManager::DEFAULT_SCHEME_NAME,
-        Ogre::RTShader::ShaderGenerator::DEFAULT_SCHEME_NAME);
-    mShaderGenerator->validateMaterial(
-        Ogre::RTShader::ShaderGenerator::DEFAULT_SCHEME_NAME,
-        "BaseWhiteNoLighting");
-    Ogre::MaterialPtr baseWhiteNoLighting
-        = Ogre::MaterialManager::getSingleton().getByName(
-            "BaseWhiteNoLighting",
-            Ogre::ResourceGroupManager::INTERNAL_RESOURCE_GROUP_NAME);
-    if (baseWhite->getNumTechniques() > 1) {
+						 "BaseWhiteNoLighting",
+						 Ogre::MaterialManager::DEFAULT_SCHEME_NAME,
+						 Ogre::RTShader::ShaderGenerator::DEFAULT_SCHEME_NAME);
+    mShaderGenerator->validateMaterial(Ogre::RTShader::ShaderGenerator::DEFAULT_SCHEME_NAME,
+				       "BaseWhiteNoLighting");
+    Ogre::MaterialPtr baseWhiteNoLighting = Ogre::MaterialManager::getSingleton().getByName("BaseWhiteNoLighting", Ogre::ResourceGroupManager::INTERNAL_RESOURCE_GROUP_NAME);
+    if(baseWhite->getNumTechniques() > 1) {
       baseWhiteNoLighting->getTechnique(0)->getPass(0)->setVertexProgram(
-          baseWhiteNoLighting->getTechnique(1)->getPass(0)->
-          getVertexProgram()->getName());
+									 baseWhiteNoLighting->getTechnique(1)->getPass(0)->getVertexProgram()->getName());
       baseWhiteNoLighting->getTechnique(0)->getPass(0)->setFragmentProgram(
-          baseWhiteNoLighting->getTechnique(1)->getPass(0)->
-          getFragmentProgram()->getName());
+									   baseWhiteNoLighting->getTechnique(1)->getPass(0)->getFragmentProgram()->getName());
     }
   }
-#endif  // INCLUDE_RTSHADER_SYSTEM
+#endif // INCLUDE_RTSHADER_SYSTEM
 
 
 
   loadResources();
 
-  LOGI("*** Initializing singleton classes ***");
-  /*LOGI("    GameMemory");
+  Ogre::LogManager::getSingletonPtr()->logMessage("*** Initializing singleton classes ***");
+  //-------------------------------------------------------------------------------------
+  LOGI("    GameMemory");
   new CGameMemory();
-  LOGI("    EntityManager ");
+  Ogre::LogManager::getSingletonPtr()->logMessage("    EntityManager ");
   new CEntityManager();
-  LOGI("    MessageManager ");
+  Ogre::LogManager::getSingletonPtr()->logMessage("    MessageManager ");
   new CMessageHandler();
   CMessageHandler::getSingleton().addInjector(this);
   LOGI("    PauseManager");
   new CPauseManager();
   LOGI("    MessageCreator");
   new MESSAGE_CREATOR();
-  LOGI("    GameSate ");
+  Ogre::LogManager::getSingletonPtr()->logMessage("    GameSate ");
   m_pGameStateManager = new CGameStateManager();
-  LOGI("    GUIManager ");
+  Ogre::LogManager::getSingletonPtr()->logMessage("    GUIManager ");
   new CGUIManager(mSceneMgr, *mWindow);
   postGUIManagerInitialised();
-  LOGI("    DebugDrawer ");
+  Ogre::LogManager::getSingletonPtr()->logMessage("    DebugDrawer ");
   new DebugDrawer(mSceneMgr, 0.7f);
   LOGI("    GameLogicGarbageCollector");
   new CGameLogicGarbageCollector();
@@ -671,25 +583,23 @@ void CGame::createScene() {
   initSingletons();
 
 
-  LOGI("    init GameState ");
+  Ogre::LogManager::getSingletonPtr()->logMessage("    init GameState ");
   m_pGameStateManager->init();
 
-  LOGI("    changing GameState");
-  chooseGameState();*/
+  Ogre::LogManager::getSingletonPtr()->logMessage("    changing GameState");
+  chooseGameState();
 
   // call window resized once to adjust settings
   windowResized(mWindow);
-  #endif
 }
 
 bool CGame::frameRenderingQueued(const Ogre::FrameEvent& evt) {
-  #if 0
-  if (mWindow->isClosed()) {
-    LOGI("Shutting down: window closed");
+  if(mWindow->isClosed()) {
+    Ogre::LogManager::getSingleton().logMessage("Shutting down: window closed");
     return false;
   }
 
-  /*if(mShutDown) {
+  if(mShutDown) {
     Ogre::LogManager::getSingleton().logMessage("Shutting down: user request");
     mShutDown = false; // if it is restarted in mobile devices
     return false;
@@ -704,18 +614,12 @@ bool CGame::frameRenderingQueued(const Ogre::FrameEvent& evt) {
     mCameraMan->frameRenderingQueued(evt);
   }
 
-  m_pGameStateManager->frameRenderingQueued(evt);*/
-#endif
+  m_pGameStateManager->frameRenderingQueued(evt);
+
   return true;
 }
-
 void CGame::destroyScene() {
-  #if 0
-  if (!mRoot) {
-    return;
-  }
-
-  if (!mRoot->hasSceneManager("MainSceneManager"))
+  if(!mRoot->hasSceneManager("MainSceneManager"))
     return;
 
 #ifdef INCLUDE_RTSHADER_SYSTEM
@@ -725,13 +629,10 @@ void CGame::destroyScene() {
   mWindow->removeAllViewports();
   mRoot->destroySceneManager(mSceneMgr);
   mSceneMgr = NULL;
-  #endif
 }
-
 bool CGame::frameStarted(const Ogre::FrameEvent& evt) {
-  #if 0
-  // Need to capture/update each device
-  /*mInputContext.capture();
+  //Need to capture/update each device
+  mInputContext.capture();
 
   // process messages
   CMessageHandler::getSingleton().process();
@@ -760,19 +661,19 @@ bool CGame::frameStarted(const Ogre::FrameEvent& evt) {
   // twice to be secure no message left.
   CMessageHandler::getSingleton().process();
   CMessageHandler::getSingleton().process();
-  CEntityManager::getSingleton().process();*/
-#endif
+  CEntityManager::getSingleton().process();
+
   return true;
 }
 bool CGame::frameEnded(const Ogre::FrameEvent& evt) {
-  /*DebugDrawer::getSingleton().clear();
+  DebugDrawer::getSingleton().clear();
 
 
   m_pGameStateManager->frameEnded(evt);
 
   // limit framerate
   Ogre::Real ttW = 1000.0 / 30.f - 1000.0 * evt.timeSinceLastFrame;
-  if (ttW > 0) msleep(ttW);*/
+  if (ttW > 0) msleep(ttW);
 
   return true;
 }
@@ -780,7 +681,6 @@ bool CGame::frameEnded(const Ogre::FrameEvent& evt) {
 //-------------------------------------------------------------------------------------
 bool CGame::keyPressed( const OIS::KeyEvent &arg )
 {
-  #if 0
 #ifdef DEBUG_SHOW_OGRE_TRAY
   if (mTrayMgr->isDialogVisible()) return true;   // don't process any more keys if dialog is up
 
@@ -893,21 +793,19 @@ bool CGame::keyPressed( const OIS::KeyEvent &arg )
   if (mCameraMan) {
     mCameraMan->injectKeyDown(arg);
   }
-#endif
+
   return true;
 }
 
-bool CGame::keyReleased( const OIS::KeyEvent &arg ) {
-  #if 0
+bool CGame::keyReleased( const OIS::KeyEvent &arg )
+{
   if (mCameraMan) {
     mCameraMan->injectKeyUp(arg);
   }
-  #endif
   return true;
 }
 
 bool CGame::mouseMoved( const OIS::MouseEvent &arg ) {
-  #if 0
 #if (OGRE_PLATFORM != OGRE_PLATFORM_APPLE_IOS) && (OGRE_PLATFORM != OGRE_PLATFORM_ANDROID)
 #ifdef DEBUG_SHOW_OGRE_TRAY
   mTrayMgr->injectMouseMove(arg);
@@ -919,31 +817,27 @@ bool CGame::mouseMoved( const OIS::MouseEvent &arg ) {
 
 #endif
 
-  #endif
   return true;
 }
 bool CGame::mousePressed(const OIS::MouseEvent& arg, OIS::MouseButtonID id) {
-  #if 0
 #ifdef DEBUG_SHOW_OGRE_TRAY
 #if (OGRE_PLATFORM != OGRE_PLATFORM_APPLE_IOS) && (OGRE_PLATFORM != OGRE_PLATFORM_ANDROID)
   mTrayMgr->injectMouseDown(arg, id);
 #endif
 #endif
-#endif
+
   return true;
 }
 bool CGame::mouseReleased( const OIS::MouseEvent &arg, OIS::MouseButtonID id ) {
-  #if 0
 #ifdef DEBUG_SHOW_OGRE_TRAY
 #if (OGRE_PLATFORM != OGRE_PLATFORM_APPLE_IOS) && (OGRE_PLATFORM != OGRE_PLATFORM_ANDROID)
   mTrayMgr->injectMouseUp(arg, id);
 #endif
 #endif
-#endif
+
   return true;
 }
 bool CGame::touchMoved(const OIS::MultiTouchEvent& evt) {
-  #if 0
 #if (OGRE_PLATFORM == OGRE_PLATFORM_APPLE_IOS) || (OGRE_PLATFORM == OGRE_PLATFORM_ANDROID)
 #ifdef DEBUG_SHOW_OGRE_TRAY
    mTrayMgr->injectMouseMove(evt);
@@ -953,27 +847,22 @@ bool CGame::touchMoved(const OIS::MultiTouchEvent& evt) {
     mCameraMan->injectMouseMove(evt);
   }
 #endif
-  #endif
   return true;
 }
 bool CGame::touchPressed(const OIS::MultiTouchEvent& evt) {
-  #if 0
 #ifdef DEBUG_SHOW_OGRE_TRAY
 #if (OGRE_PLATFORM == OGRE_PLATFORM_APPLE_IOS) || (OGRE_PLATFORM == OGRE_PLATFORM_ANDROID)
    mTrayMgr->injectMouseDown(evt);
 #endif
 #endif
-   #endif
   return true;
 }
 bool CGame::touchReleased(const OIS::MultiTouchEvent& evt) {
-  #if 0
 #ifdef DEBUG_SHOW_OGRE_TRAY
 #if (OGRE_PLATFORM == OGRE_PLATFORM_APPLE_IOS) || (OGRE_PLATFORM == OGRE_PLATFORM_ANDROID)
    mTrayMgr->injectMouseUp(evt);
 #endif
 #endif
-   #endif
   return true;
 }
 bool CGame::touchCancelled(const OIS::MultiTouchEvent& evt) {
@@ -981,7 +870,6 @@ bool CGame::touchCancelled(const OIS::MultiTouchEvent& evt) {
 }
 //Adjust mouse clipping are
 void CGame::windowResized(Ogre::RenderWindow* rw) {
-  #if 0
 #if (OGRE_PLATFORM != OGRE_PLATFORM_APPLE_IOS) && (OGRE_PLATFORM != OGRE_PLATFORM_ANDROID)
   if(mInputContext.mMouse) {
     const OIS::MouseState& ms = mInputContext.mMouse->getMouseState();
@@ -989,11 +877,10 @@ void CGame::windowResized(Ogre::RenderWindow* rw) {
     ms.height = rw->getHeight();
   }
 #endif
-  /*if (CGUIManager::getSingletonPtr()) {
+  if (CGUIManager::getSingletonPtr()) {
     CGUIManager::getSingleton().resize(CEGUI::Sizef(rw->getWidth(),
 						     rw->getHeight()));
-  }*/
-  #endif
+  }
 }
 
 //Unattach OIS before window shutdown (very important under Linux)
@@ -1003,12 +890,12 @@ void CGame::windowClosed(Ogre::RenderWindow* rw)
 
 // CMessageInjector
 void CGame::sendMessageToAll(const CMessagePtr message) {
-  /*if (message->getType() == MSG_DEBUG) {
+  if (message->getType() == MSG_DEBUG) {
     auto dbg_msg(std::dynamic_pointer_cast<const CMessageDebug>(message));
     if (dbg_msg->getDebugType() == CMessageDebug::DM_TOGGLE_DEBUG_DRAWER) {
       m_bDebugDrawerEnabled = dbg_msg->isActive();
     }
-  }*/
+  }
 }
 
 #ifdef INCLUDE_RTSHADER_SYSTEM
@@ -1017,7 +904,6 @@ void CGame::sendMessageToAll(const CMessagePtr message) {
   | Initialize the RT Shader system.
   -----------------------------------------------------------------------------*/
 bool CGame:: initialiseRTShaderSystem(Ogre::SceneManager* sceneMgr)  {
-  #if 0
   if (Ogre::RTShader::ShaderGenerator::initialize()) {
     mShaderGenerator = Ogre::RTShader::ShaderGenerator::getSingletonPtr();
 
@@ -1073,7 +959,7 @@ bool CGame:: initialiseRTShaderSystem(Ogre::SceneManager* sceneMgr)  {
       Ogre::MaterialManager::getSingleton().addListener(mMaterialMgrListener);
     }
   }
-#endif
+
   return true;
 }
 
@@ -1081,7 +967,6 @@ bool CGame:: initialiseRTShaderSystem(Ogre::SceneManager* sceneMgr)  {
   | Destroy the RT Shader system.
   -----------------------------------------------------------------------------*/
 void CGame::destroyRTShaderSystem() {
-  #if 0
   // Restore default scheme.
   Ogre::MaterialManager::getSingleton().setActiveScheme(Ogre::MaterialManager::DEFAULT_SCHEME_NAME);
 
@@ -1097,34 +982,35 @@ void CGame::destroyRTShaderSystem() {
     Ogre::RTShader::ShaderGenerator::destroy();
     mShaderGenerator = NULL;
   }
-  #endif
 }
 #endif // INCLUDE_RTSHADER_SYSTEM
 void CGame::createResources() {
 }
 void CGame::destroyResources() {
 }
-OgreBites::SdkTrayManager* CGame::showLoadingBar(unsigned int numGroupsInit, unsigned int numGroupsLoad) {
-  #if 0
+OgreBites::SdkTrayManager* CGame::showLoadingBar(unsigned int numGroupsInit,
+                                                 unsigned int numGroupsLoad) {
   assert(mTrayMgr);
   mTrayMgr->showLoadingBar(numGroupsInit, numGroupsLoad);
-  #endif
   return mTrayMgr;
 }
 void CGame::hideLoadingBar() {
-  #if 0
   assert(mTrayMgr);
-  #endif
   mTrayMgr->hideLoadingBar();
 }
 bool CGame::renderOneFrame() {
-  #if 0
 #if OGRE_PLATFORM == OGRE_PLATFORM_ANDROID
   return OgreAndroidBridge::renderOneFrame(mApp);
 #else
   return mRoot->renderOneFrame();
 #endif
-  #endif
 }
 void CGame::initEnumIdMaps() {
+  CMessageTypesMap::getSingleton().init();
+  CGameStateIdMap::getSingleton().init();
+  CEntityStateIdMap::getSingleton().init();
+
+  events::CRepeatTypesMap::getSingleton().init();
+  events::CActionTypesMap::getSingleton().init();
+  events::CEmitterTypesMap::getSingleton().init();
 }

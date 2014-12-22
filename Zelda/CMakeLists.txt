@@ -51,6 +51,7 @@ set(Game_link_libraries
   pthread)
 
 
+message (${Game_link_libraries})
 set(EXECUTABLE_OUTPUT_PATH ../bin)
 
 include_directories(${Game_include_directories})
@@ -96,11 +97,20 @@ elseif (UNIX)
   set(PLUGINS "")
   if (PLUGIN_OPEN_GL_FOUND)
     set(PLUGIN_FOLDER ${PLUGIN_OPEN_GL_LIB})
-    set(PLUGINS "${PLUGINS}Plugin=RenderSystem_GL\n")
+
+    if (OGRE_LIB_DBG)
+      set(PLUGINS "${PLUGINS}Plugin=RenderSystem_GL_d\n")
+    else()
+      set(PLUGINS "${PLUGINS}Plugin=RenderSystem_GL\n")
+    endif()
   endif()
   if (PLUGIN_OPEN_GLES2_FOUND)
     set(PLUGIN_FOLDER ${PLUGIN_OPEN_GLES2_LIB})
-    set(PLUGINS "${PLUGINS}Plugin=RenderSystem_GLES2\n")
+    if (OGRE_LIB_DBG)
+      set(PLUGINS "${PLUGINS}Plugin=RenderSystem_GLES2\n")
+    else()
+      set(PLUGINS "${PLUGINS}Plugin=RenderSystem_GL\n")
+    endif()
   endif()
 
   set(RESOURCES_PREFIX "../")

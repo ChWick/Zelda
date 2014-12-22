@@ -20,29 +20,6 @@
 #ifndef APPLICATION_HPP
 #define APPLICATION_HPP
 
-
-#include <OgrePlatform.h>
-#if OGRE_PLATFORM == OGRE_PLATFORM_APPLE && !defined(__LP64__)
-#  include <Carbon/Carbon.h>
-#endif
-#include <OgrePrerequisites.h>
-#include <OgreSingleton.h>
-#include "../Input/InputListener.hpp"
-#include "dependencies/OgreSdkUtil/SdkCameraMan.h"
-#include "dependencies/OgreSdkUtil/SdkTrays.h"
-#include <OgreFileSystemLayer.h>
-
-#if OGRE_PLATFORM == OGRE_PLATFORM_ANDROID
-#include <android_native_app_glue.h>
-#include "../Android/OgreAPKFileSystemArchive.h"
-#include "../Android/OgreAPKZipArchive.h"
-#include <OgreArchiveManager.h>
-#endif
-
-#include "../ShaderGenerator.hpp"
-#include "../Message/MessageInjector.hpp"
-#include <OgreWindowEventUtilities.h>
-
 /**
  * Basic application
  * implements basic construction and deletion methods

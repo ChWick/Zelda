@@ -28,6 +28,8 @@
 #ifndef __SdkCameraMan_H__
 #define __SdkCameraMan_H__
 
+#include <OIS/OIS.h>
+#include <OgreRenderWindow.h>
 #include <OgreCamera.h>
 #include <OgreSceneNode.h>
 #include <OgreSceneManager.h>
