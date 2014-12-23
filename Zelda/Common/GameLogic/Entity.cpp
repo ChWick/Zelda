@@ -18,6 +18,8 @@
  *****************************************************************************/
 
 #include "Entity.hpp"
+#include <string>
+#include <list>
 #include "../Util/XMLHelper.hpp"
 #include "Events/Event.hpp"
 #include "Events/Emitter/Emitter.hpp"
@@ -29,11 +31,17 @@
 #include "EntityManager.hpp"
 #include <OgreResourceGroupManager.h>
 
-using namespace events;
-using namespace XMLHelper;
+// declaration and initialize with zero
+uint16_t CEntity::mNumberOfInstances(0);
 
+using XMLHelper::Attribute;
+using XMLHelper::IntAttribute;
+using XMLHelper::BoolAttribute;
 
-CEntity::CEntity(const std::string &sID, unsigned int uiType, CEntity *pParent, const std::string &sResourceGroup)
+CEntity::CEntity(const std::string &sID,
+                 unsigned int uiType,
+                 CEntity *pParent,
+                 const std::string &sResourceGroup)
   : CMessageInjector(false),
     m_sID(sID),
     m_sResourceGroup(sResourceGroup),
@@ -42,10 +50,13 @@ CEntity::CEntity(const std::string &sID, unsigned int uiType, CEntity *pParent, 
     m_bPauseRender(false),
     m_bPauseUpdate(false),
     m_pParent(pParent) {
+  mNumberOfInstances++;
   attachTo(pParent);
 }
 
-CEntity::CEntity(const std::string &sID, CEntity *pParent, const std::string &sResourceGroup)
+CEntity::CEntity(const std::string &sID,
+                 CEntity *pParent,
+                 const std::string &sResourceGroup)
   : CMessageInjector(false),
     m_sID(sID),
     m_sResourceGroup(sResourceGroup),
@@ -54,6 +65,7 @@ CEntity::CEntity(const std::string &sID, CEntity *pParent, const std::string &sR
     m_bPauseRender(false),
     m_bPauseUpdate(false),
     m_pParent(pParent) {
+  mNumberOfInstances++;
   attachTo(pParent);
 }
 CEntity::CEntity(const CEntity &src)
@@ -65,31 +77,36 @@ CEntity::CEntity(const CEntity &src)
     m_bPauseRender(src.m_bPauseRender),
     m_bPauseUpdate(src.m_bPauseUpdate),
     m_pParent(src.m_pParent) {
+  mNumberOfInstances++;
   attachTo(src.m_pParent);
   // not copying children so far
   // and for events
   // so dont use it...
 }
-CEntity::CEntity(
-		 CEntity *pParent,
-		 const tinyxml2::XMLElement *pElem,
-		 const std::string &sResourceGroup)
+CEntity::CEntity(CEntity *pParent,
+                 const tinyxml2::XMLElement *pElem,
+                 const std::string &sResourceGroup)
   : CMessageInjector(false),
     m_sID(Attribute(pElem, "id", m_sID)),
     m_sResourceGroup(Attribute(pElem, "resource_group", sResourceGroup)),
     m_uiType(IntAttribute(pElem, "type", 0)),
-    m_eState(CEntityStateIdMap::getSingleton().parseString(Attribute(pElem, "state", CEntityStateIdMap::getSingleton().toString(EST_NORMAL)))),
+    m_eState(CEntityStateIdMap::getSingleton().parseString(
+        Attribute(pElem, "state",
+                  CEntityStateIdMap::getSingleton().toString(EST_NORMAL)))),
     m_bPauseRender(BoolAttribute(pElem, "pause_render", false)),
     m_bPauseUpdate(BoolAttribute(pElem, "pause_update", false)),
     m_pParent(NULL) {
-
-
+  mNumberOfInstances++;
   readEventsFromXMLElement(pElem, false);
 
-  // at last attach to parent, if there is an exception, delete will be called automatically
+  // at last attach to parent, if there is an exception,
+  // delete will be called automatically
+
   attachTo(pParent);
 }
+
 CEntity::~CEntity() {
+  mNumberOfInstances--;
   std::list<CEntity *> lClone(m_lChildren);
   m_lChildren.clear();
   while (lClone.size() > 0) {
@@ -101,22 +118,27 @@ CEntity::~CEntity() {
 
   attachTo(NULL);
 }
+
 void CEntity::init() {
   mEventAccessedMutex.lock();
-  for (auto pEvent: m_lEvents) {
+  for (auto pEvent : m_lEvents) {
     pEvent->init();
   }
   mEventAccessedMutex.unlock();
 }
+
 void CEntity::exit() {
-  for (auto pEvent: m_lEvents) {
+  for (auto pEvent : m_lEvents) {
     pEvent->exit();
   }
 }
 
 void CEntity::start() {
+  using events::CEvent;
+  
   mEventAccessedMutex.lock();
-  for (std::list<CEvent*>::iterator it = m_lEvents.begin(); it != m_lEvents.end(); it++) {
+  for (std::list<CEvent*>::iterator it = m_lEvents.begin();
+       it != m_lEvents.end(); it++) {
     bool bStart(false);
     for (events::CEmitter *pEmit : (*it)->getEmitter()) {
       if (pEmit->getType() == events::EMIT_ON_CREATE) {
@@ -198,6 +220,7 @@ CEntity *CEntity::getChildRecursive(const std::string &sID) {
   }
   return NULL;
 }
+
 const CEntity *CEntity::getChild(const std::string &sID) const {
   std::lock_guard<std::mutex> lock(mEntityMutex);
   for (auto *pChild : m_lChildren) {
@@ -207,6 +230,7 @@ const CEntity *CEntity::getChild(const std::string &sID) const {
   }
   return NULL;
 }
+
 const CEntity *CEntity::getChildRecursive(const std::string &sID) const {
   std::lock_guard<std::mutex> lock(mEntityMutex);
   for (auto *pChild : m_lChildren) {
@@ -224,13 +248,19 @@ const CEntity *CEntity::getChildRecursive(const std::string &sID) const {
 }
 
 void CEntity::destroy() {
-  for (std::list<CEvent*>::iterator it = m_lEvents.begin(); it != m_lEvents.end();) {
-    /*if ((*it)->getEmitter()->getType() == EventEmitter::EMIT_ON_DESTROY) {
+  using events::CEvent;
+
+  for (std::list<CEvent*>::iterator it = m_lEvents.begin();
+       it != m_lEvents.end(); ) {
+    /*
+      if ((*it)->getEmitter()->getType() == EventEmitter::EMIT_ON_DESTROY) {
       (*it)->start();
       delete (*it);
       it = m_lEvents.erase(it);
     }
-    else */{
+    else
+    */
+    {
       it++;
     }
   }
@@ -254,7 +284,8 @@ void CEntity::sendCallToAll(void (CEntity::*pFunction)(), bool bCallThis) {
   }
 }
 
-void CEntity::sendCallToAllChildrenFirst(void (CEntity::*pFunction)(), bool bCallThis) {
+void CEntity::sendCallToAllChildrenFirst(void (CEntity::*pFunction)(),
+                                         bool bCallThis) {
   for (auto pChild : m_lChildren) {
     pChild->sendCallToAllChildrenFirst(pFunction);
   }
@@ -276,7 +307,7 @@ void CEntity::addEvent(events::CEvent *pEvent) {
   mEventAccessedMutex.unlock();
 }
 
-void CEntity::destroyEvent(CEvent *pEvent) {
+void CEntity::destroyEvent(events::CEvent *pEvent) {
   assert(pEvent);
   mEventToDeleteAccessedMutex.lock();
   m_lEventsToDelete.push_back(pEvent);
@@ -294,8 +325,7 @@ void CEntity::update(Ogre::Real tpf) {
   for (auto &pEnt : m_lChildren) {
     if (!pEnt->m_bPauseUpdate) {
       pEnt->update(tpf);
-    }
-    else {
+    } else {
       pEnt->pauseUpdate(tpf);
     }
   }
@@ -375,8 +405,11 @@ bool CEntity::frameEnded(const Ogre::FrameEvent& evt) {
 }
 
 
-void CEntity::writeToXMLElement(tinyxml2::XMLElement *pElement, EOutputStyle eStyle) const {
-  using namespace tinyxml2;
+void CEntity::writeToXMLElement(tinyxml2::XMLElement *pElement,
+                                EOutputStyle eStyle) const {
+  using tinyxml2::XMLElement;
+  using tinyxml2::XMLDocument;
+  using XMLHelper::SetAttribute;
 
   SetAttribute(pElement, "id", m_sID);
   SetAttribute(pElement, "type", m_uiType);
@@ -418,7 +451,10 @@ void CEntity::clearEvents() {
   mEventToDeleteAccessedMutex.unlock();
 }
 
-void CEntity::moveToTarget(const SPATIAL_VECTOR &vPosition, const Ogre::Quaternion &qRotation, const Ogre::Real fMaxDistanceDeviation, const Ogre::Radian fMaxAngleDeviation) {
+void CEntity::moveToTarget(const SPATIAL_VECTOR &vPosition,
+                           const Ogre::Quaternion &qRotation,
+                           const Ogre::Real fMaxDistanceDeviation,
+                           const Ogre::Radian fMaxAngleDeviation) {
   setPosition(vPosition);
   setOrientation(qRotation);
   CMessageHandler::getSingleton().addMessage(
@@ -433,13 +469,16 @@ void CEntity::changeState(EEntityStateTypes eState) {
   m_eState = eState;
 }
 
-void CEntity::readEventsFromXMLElement(const tinyxml2::XMLElement *pElement, bool bClearEvents) {
+void CEntity::readEventsFromXMLElement(const tinyxml2::XMLElement *pElement,
+                                       bool bClearEvents) {
   if (bClearEvents) {clearEvents();}
 
   assert(pElement);
 
   // read events
-  using namespace tinyxml2;
+  using tinyxml2::XMLElement;
+  using events::CEvent;
+
   for (const XMLElement *pEventElement = pElement->FirstChildElement();
         pEventElement;
         pEventElement = pEventElement->NextSiblingElement()) {
