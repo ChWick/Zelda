@@ -251,6 +251,8 @@ void CApplication::shutdown() {
 
   Ogre::WindowEventUtilities::removeWindowEventListener(mWindow, this);
   windowClosed(mWindow);
+
+  shutdownInput();
 }
 
 void CApplication::shutdownInput() {
