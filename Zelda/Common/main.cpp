@@ -146,14 +146,14 @@ int main(int argc, char *argv[])
   }
 
   // Create application object
-  GAME_CLASS *app = new GAME_CLASS();
+  CApplication *app = new GAME_CLASS();
 
 #    if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
 #    else
-  if (argc == 2) {
+  /*if (argc == 2) {
     // add additional level dir path
     app->getAdditionalLevelDirPaths().push_back(argv[1]);
-  }
+    }*/
 #    endif
 
   try {
@@ -184,11 +184,18 @@ int main(int argc, char *argv[])
       "Unknown Error" << std::endl << "at file: " << __FILE__ << std::endl;
 #    endif
   }
-  
   delete app;
 #  endif
 
 #if OGRE_PLATFORM != OGRE_PLATFORM_ANDROID
-  return 0;
+  return EXIT_SUCCESS;
 #endif
 }
+
+
+
+
+
+
+
+

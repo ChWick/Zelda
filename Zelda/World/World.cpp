@@ -50,7 +50,7 @@ CWorld::CWorld()
   // create the atlas
   LOGV("Creating the atlas");
   m_pAtlas = new CAtlas(this,
-                        CGame::getSingleton().getSceneManager()->getRootSceneNode());
+                        CGame::getSingleton<CGame>().getSceneManager()->getRootSceneNode());
 
   LOGV("Creating the world gui");
   m_pWorldGUI = new CWorldGUI(this);

@@ -20,14 +20,103 @@
 #ifndef APPLICATION_HPP
 #define APPLICATION_HPP
 
+#include <OgrePrerequisites.h>
+#include <OgreSingleton.h>
+#include <OgreString.h>
+#include <OgreWindowEventUtilities.h>
+#include <OgreFileSystemLayer.h>
+#include <OgreArchiveManager.h>
+
+#include "dependencies/OgreSdkUtil/SdkCameraMan.h"
+#include "dependencies/OgreSdkUtil/SdkTrays.h"
+
+#include "../Input/InputListener.hpp"
+#include "../Util/Assert.hpp"
+
 /**
  * Basic application
  * implements basic construction and deletion methods
  * override virtual methods to make it suitable for all platforms
  */
-class CApplication {
-public:
-  virtual void go();
+class CApplication :
+    public Ogre::Singleton<CApplication>,
+    public Ogre::WindowEventListener {
+ protected:
+  // Ogre
+  // ----------------
+  
+  //! Root for Ogre
+  Ogre::Root *mRoot;
+  //! Overlay system of ogre
+  Ogre::OverlaySystem *mOverlaySystem;
+  //! File system abstaction layer
+  Ogre::FileSystemLayer* mFSLayer;
+  //! Render window
+  Ogre::RenderWindow* mWindow;
+  
+  // OIS Input devices
+  // -----------------
+  
+  //! OIS input manager
+  OIS::InputManager* mInputManager;
+  //! Input context
+  OgreBites::InputContext mInputContext;
+
+ public:
+  CApplication();
+  virtual ~CApplication();
+
+  template<class T=CApplication>
+  static T &getSingleton() {
+    return dynamic_cast<T&>(*msSingleton);
+  }
+
+  template<class T=CApplication>
+  static T *getSingletonPtr() {
+    ASSERT(msSingleton);
+    return dynamic_cast<T*>(msSingleton);
+  }
+  
+  void go();
+
+  // getter & setter
+  // ---------------
+  Ogre::Root *getRoot() {return mRoot;}
+  Ogre::FileSystemLayer* getFileSystemLayer() {return mFSLayer;}
+  Ogre::RenderWindow *getRenderWindow() {return mWindow;}
+  
+  OIS::Keyboard* getKeyboard() {return mInputContext.mKeyboard;}
+  OIS::Mouse *getMouse() {return mInputContext.mMouse;}
+  const OgreBites::InputContext &getInputContext() const {return mInputContext;}
+
+  
+  virtual void showLoadingBar(uint16_t numGroupsInit = 1,
+                              uint16_t numGroupsLoad = 1) {}
+  virtual void hideLoadingBar() {}
+
+ protected:
+  virtual void initApp();
+  virtual void createRoot();
+  virtual void createOverlaySystem();
+  virtual bool oneTimeConfig();
+  virtual void setup();
+  virtual Ogre::RenderWindow *createWindow();
+  virtual void setupInput(bool nograb);
+  virtual void createInputSystem(bool nograb);
+  virtual void createInputDevices();
+  virtual void attachInputDevices();
+  virtual void locateResources();
+  virtual Ogre::String getConfigFilePath();
+  virtual void loadResources();
+  virtual void installWindowEventListener();
+
+  virtual void createScene() = 0;
+  virtual void destroyScene() = 0;
+
+  virtual void closeApp();
+  virtual void shutdown();
+  virtual void shutdownInput();
+  virtual void deleteInputDevices();
 };
 
 

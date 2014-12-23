@@ -29,33 +29,33 @@
 class CPlayer;
 class CCameraController;
 
-using namespace Ogre;
-
 class CPlayerController : public CPersonController, public CGameInputListener {
-private:
-	SceneManager * mSceneManager;
-	const Ogre::Camera *m_pCamera;
-
-	Vector3 mKeyDirection;
-public:
-  CPlayerController(SceneManager * scnMgr, const Ogre::Camera *pCamera, CPlayer * ccPlayer);
+ private:
+  Ogre::SceneManager * mSceneManager;
+  const Ogre::Camera *m_pCamera;
+  
+  Ogre::Vector3 mKeyDirection;
+ public:
+  CPlayerController(Ogre::SceneManager *scnMgr,
+                    const Ogre::Camera *pCamera,
+                    CPlayer * ccPlayer);
   /** Default destructor */
   virtual ~CPlayerController();
-	btCharacterControllerInterface * getCCPhysics();
-
+  btCharacterControllerInterface * getCCPhysics();
+  
   virtual void receiveInputCommand(const CGameInputCommand &cmd);
-
-	void updateCharacter(const Real dt);
-
-	void interactionLockedChanged(bool bActivate);
-
-protected:
-
-	virtual void updateGoalDirection();
-	virtual void postUpdateCharacter(Ogre::Real tpf);
+  
+  void updateCharacter(const Ogre::Real dt);
+  
+  void interactionLockedChanged(bool bActivate);
+  
+ protected:
+  
+  virtual void updateGoalDirection();
+  virtual void postUpdateCharacter(Ogre::Real tpf);
 
 private:
-	Quaternion updateOrientation(Real deltaTime);
+  Ogre::Quaternion updateOrientation(Ogre::Real deltaTime);
 };
 
 #endif // PLAYERCONTROLLER_H

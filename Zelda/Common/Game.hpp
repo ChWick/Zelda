@@ -44,14 +44,22 @@
 #include "Message/MessageInjector.hpp"
 #include <OgreWindowEventUtilities.h>
 
+// application prototypes
+#include "Application/Application.hpp"
+#include "Application/AndroidApplication.hpp"
+
 class CGameStateManager;
 
-class CGame : public CInputListener,
-              public Ogre::FrameListener,
-              public Ogre::WindowEventListener,
-              protected OgreBites::SdkTrayListener,
-              public Ogre::Singleton<CGame>,
-              public CMessageInjector {
+class CGame :
+#if OGRE_PLATFORM == OGRE_PLATFORM_ANDROID
+    public CAndroidApplication,
+#else
+    public CApplication,
+#endif
+    public CInputListener,
+    public Ogre::FrameListener,
+    protected OgreBites::SdkTrayListener,
+    public CMessageInjector {
 protected:
   CGameStateManager *m_pGameStateManager;
   Ogre::Viewport *m_pMainViewPort;
@@ -65,36 +73,23 @@ private:
   ShaderGeneratorTechniqueResolverListener* mMaterialMgrListener; //!< Shader generator material manager listener.
 #endif // INCLUDE_RTSHADER_SYSTEM
 public:
+  
   CGame(void);
   virtual ~CGame(void);
 
-  static CGame &getSingleton();
-  static CGame *getSingletonPtr();
-
   std::vector<std::string> &getAdditionalLevelDirPaths() {return m_vAdditionalLevelDirPaths;}
 
-  OIS::Keyboard* getKeyboard() {return mInputContext.mKeyboard;}
-  OIS::Mouse *getMouse() {return mInputContext.mMouse;}
-  const OgreBites::InputContext &getInputContext() const {return mInputContext;}
-
   OgreBites::ParamsPanel* getDetailsPanel() {return mDetailsPanel;}
-  Ogre::FileSystemLayer* getFileSystemLayer() {return mFSLayer;}
-  Ogre::Root *getRoot() {return mRoot;}
-  Ogre::RenderWindow *getRenderWindow() {return mWindow;}
   Ogre::SceneManager *getSceneManager() const {return mSceneMgr;}
   OgreBites::SdkTrayManager *getTrayMgr() {return mTrayMgr;}
   Ogre::Viewport *getMainViewPort() {return m_pMainViewPort;}
-
-  void go();
-  void initApp();
-  void closeApp();
 
   void requestShutDown() { mShutDown = true; }
 
   void createResources();
   void destroyResources();
 
-  OgreBites::SdkTrayManager* showLoadingBar(unsigned int numGroupsInit = 1, unsigned int numGroupsLoad = 1);
+  void showLoadingBar(uint16_t numGroupsInit = 1, uint16_t numGroupsLoad = 1);
   void hideLoadingBar();
 
   bool renderOneFrame();
@@ -121,13 +116,8 @@ public:
 #endif
 
 protected:
-#if OGRE_VERSION >= ((1 << 16) | (9 << 8) | 0)
-  Ogre::OverlaySystem *mOverlaySystem;
-#endif
-  Ogre::Root *mRoot;
   Ogre::Camera* mCamera;
   Ogre::SceneManager* mSceneMgr;
-  Ogre::RenderWindow* mWindow;
   Ogre::String mResourcesCfg;
   Ogre::String mPluginsCfg;
 
@@ -138,10 +128,6 @@ protected:
   OgreBites::ParamsPanel* mDetailsPanel;    // sample details panel
   bool mCursorWasVisible;                   // was cursor visible before dialog appeared
   bool mShutDown;
-
-  // OIS Input devices
-  OIS::InputManager* mInputManager;
-  OgreBites::InputContext mInputContext;
 
   // Ogre::FrameListener
   virtual bool frameRenderingQueued(const Ogre::FrameEvent& evt);
@@ -169,22 +155,10 @@ protected:
 
   // MessageInjector
   void sendMessageToAll(const CMessagePtr message);
-private:
-  void createRoot();
-  void setup();
-  void setupInput(bool nograb = false);
-  void createInputDevices();
-  void shutdown();
-  void shutdownInput();
-  void locateResources();
-  void loadResources();
-  Ogre::RenderWindow *createWindow();
-  void createScene();
-  void destroyScene();
 
-  bool oneTimeConfig();
+  virtual void createScene();
+  virtual void destroyScene();
 private:
-  Ogre::FileSystemLayer* mFSLayer; // File system abstraction layer
 #if OGRE_PLATFORM == OGRE_PLATFORM_ANDROID
   Ogre::DataStreamPtr openAPKFile(const Ogre::String& fileName) {
     Ogre::DataStreamPtr stream;
@@ -211,7 +185,8 @@ private:
 
 protected:
   // virtual function to setup user game
-  virtual void initSingletons() {}
+  virtual void initSingletons();
+  virtual void deleteSingletons();
   virtual void initEnumIdMaps();
   virtual void chooseGameState() {}
   virtual void postGUIManagerInitialised() {}

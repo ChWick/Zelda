@@ -22,25 +22,28 @@
 #include "../../Common/Input/GameInputCommand.hpp"
 #include <OgreCamera.h>
 
-using namespace Ogre;
-
+using Ogre::SceneManager;
+using Ogre::Vector3;
+using Ogre::Real;
+using Ogre::Quaternion;
 
 CPlayerController::CPlayerController(SceneManager * scnMgr,
                                      const Ogre::Camera *pCamera,
                                      CPlayer * ccPlayer)
     : CPersonController(ccPlayer),
       CGameInputListener(true, PAUSE_ATLAS_UPDATE),
-      m_pCamera(pCamera) {
-  mCCPerson = ccPlayer;
-  mSceneManager = scnMgr;
-  mKeyDirection = Vector3::ZERO;
-      }
+      mSceneManager(scnMgr),
+      m_pCamera(pCamera),
+      mKeyDirection(Vector3::ZERO) {
+}
 
 CPlayerController::~CPlayerController() {
 }
+
 btCharacterControllerInterface * CPlayerController::getCCPhysics() {
   return mCCPhysics;
 }
+
 void CPlayerController::receiveInputCommand(const CGameInputCommand &cmd) {
   switch (cmd.getType()) {
     case GIC_RIGHT:
@@ -184,18 +187,19 @@ void CPlayerController::receiveInputCommand(const CGameInputCommand &cmd) {
   return true;
   }
 */
-void CPlayerController::updateCharacter(const Real deltaTime)
-{
+
+void CPlayerController::updateCharacter(const Real deltaTime) {
   CPersonController::updateCharacter(deltaTime);
 }
+
 void CPlayerController::updateGoalDirection() {
   mGoalDirection = Ogre::Vector3::ZERO;
 
-  if (mKeyDirection != Vector3::ZERO)
-  {
-    // calculate actuall goal direction in world based on player's key directions
-    //mGoalDirection += mKeyDirection.z * m_pCamera->getOrientation().zAxis();
-    //mGoalDirection += mKeyDirection.x * m_pCamera->getOrientation().xAxis();
+  if (mKeyDirection != Vector3::ZERO) {
+    // calculate actuall goal direction in world based
+    // on player's key directions
+    // mGoalDirection += mKeyDirection.z * m_pCamera->getOrientation().zAxis();
+    // mGoalDirection += mKeyDirection.x * m_pCamera->getOrientation().xAxis();
     mGoalDirection = mKeyDirection;
     mGoalDirection.y = 0;
     mGoalDirection.normalise();
@@ -209,8 +213,7 @@ void CPlayerController::postUpdateCharacter(Ogre::Real tpf) {
 void CPlayerController::interactionLockedChanged(bool bActivate) {
   if (!bActivate) {
     setGameInputListenerEnabled(true);
-  }
-  else {
+  } else {
     setGameInputListenerEnabled(false);
   }
 }

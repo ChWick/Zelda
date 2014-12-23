@@ -43,10 +43,6 @@ const float CPhysicsManager::GRAVITY_FACTOR = 4.f;
 CPhysicsManager::CPhysicsManager(Ogre::SceneManager *pSceneManager)
   : m_pSceneManager(pSceneManager),
     m_pGhostPairCallback(NULL) {
-#if PHYSICS_MANAGER_DEBUG == 1
-  CInputListenerManager::getSingleton().addInputListener(this);
-#endif  // PHYSICS_MANAGER_DEBUG
-
   Ogre::LogManager::getSingleton().logMessage("Creating new PhysicsManager");
   m_bDisplayDebugInfo = true;
 
@@ -91,10 +87,6 @@ CPhysicsManager::~CPhysicsManager() {
 void CPhysicsManager::exit() {
   if (!m_pPhyWorld) {return;}  // already deleted
 
-#if PHYSICS_MANAGER_DEBUG == 1
-  CInputListenerManager::getSingleton().removeInputListener(this);
-#endif  // PHYSICS_MANAGER_DEBUG
-
 #ifdef PHYSICS_DEBUG
   if (m_pDbgDraw) {delete m_pDbgDraw; m_pDbgDraw = nullptr;}
 #endif  // PHYSICS_DEBUG
@@ -120,7 +112,7 @@ void CPhysicsManager::exit() {
     if (triShape) {
       delete triShape->getMeshInterface();
     }
-    //delete sh.second.getShape();
+    delete sh.second.getShape();
   }
   m_CollisionObjects.clear();
 
@@ -236,7 +228,7 @@ void CPhysicsManager::deleteNow(btCollisionObject *co) {
       const_cast<btRigidBody*>(rb)->setMotionState(nullptr);
     }
     if (rb->getCollisionShape()) {
-      if (hasCollisionShape(rb->getCollisionShape())) {
+      if (!hasCollisionShape(rb->getCollisionShape())) {
         delete rb->getCollisionShape();
       }
       rb->setCollisionShape(nullptr);

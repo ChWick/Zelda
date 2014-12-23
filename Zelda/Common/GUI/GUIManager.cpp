@@ -48,9 +48,9 @@ CGUIManager::CGUIManager(Ogre::SceneManager *pSceneManager, Ogre::RenderTarget &
   m_fMouseSpeedY(0),
   m_fMouseAcceleration(2),
   m_fMouseInitialSpeed(50) {
-  CInputListenerManager::getSingleton().addInputListener(this);
-
-  OgreBites::SdkTrayManager *pTrayMgr = CGame::getSingleton().showLoadingBar(1, 1);
+  CGame::getSingleton().showLoadingBar(1, 1);
+  OgreBites::SdkTrayManager *pTrayMgr =
+      CGame::getSingleton<CGame>().getTrayMgr();
   pTrayMgr->loadBarSetCaption("GUI ...");
   Ogre::LogManager::getSingletonPtr()->logMessage("*** Initializing CEGUI ***");
 
@@ -106,7 +106,6 @@ CGUIManager::CGUIManager(Ogre::SceneManager *pSceneManager, Ogre::RenderTarget &
   CGame::getSingleton().hideLoadingBar();
 }
 CGUIManager::~CGUIManager() {
-  CInputListenerManager::getSingleton().removeInputListener(this);
   m_pSceneManager->removeRenderQueueListener(this);
 
   /*while (m_lGUIOverlays.size() > 0) {

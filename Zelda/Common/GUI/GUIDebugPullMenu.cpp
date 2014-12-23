@@ -155,9 +155,10 @@ bool CGUIDebugPullMenu::onTogglePhysics(const CEGUI::EventArgs &args) {
 void CGUIDebugPullMenu::update(Ogre::Real tpf) {
   CGUIPullMenu::update(tpf);
   if (getDragState() != DS_SLEEPING) {
+    CGame &game(CGame::getSingleton<CGame>());
     const Ogre::RenderTarget::FrameStats stats(
-        CGame::getSingleton().getRenderWindow()->getStatistics());
-    Ogre::SceneManager *sceneMgr = CGame::getSingleton().getSceneManager();
+        game.getRenderWindow()->getStatistics());
+    Ogre::SceneManager *sceneMgr = game.getSceneManager();
 
     m_pFrameStatsGroup->setText("FPS: " + PropertyHelper<int>::toString(
         stats.lastFPS));

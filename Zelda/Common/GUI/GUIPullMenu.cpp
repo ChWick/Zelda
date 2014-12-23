@@ -39,7 +39,6 @@ CGUIPullMenu::CGUIPullMenu(const std::string &id,
     m_fLastDragPos(0),
     m_fTimeSinceLastTouchMoveEvent(0)
      {
-  CInputListenerManager::getSingleton().addInputListener(this);
 
   m_pRoot->setAlwaysOnTop(true);
   m_pRoot->setMousePassThroughEnabled(true);
@@ -107,7 +106,6 @@ CGUIPullMenu::CGUIPullMenu(const std::string &id,
 }
 
 CGUIPullMenu::~CGUIPullMenu() {
-  CInputListenerManager::getSingleton().removeInputListener(this);
 }
 
 void CGUIPullMenu::update(Ogre::Real tpf) {

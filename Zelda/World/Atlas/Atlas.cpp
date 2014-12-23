@@ -57,7 +57,7 @@ CAtlas::CAtlas(CEntity *pParent, Ogre::SceneNode *pRootSceneNode)
   m_pWorldCamera->lookAt(Ogre::Vector3(0, 0, 0));
   // m_pWorldCamera->setProjectionType(Ogre::PT_ORTHOGRAPHIC);
 
-  Ogre::Viewport *vp = CGame::getSingleton().getMainViewPort();
+  Ogre::Viewport *vp = CGame::getSingleton<CGame>().getMainViewPort();
   m_pWorldCamera->setAspectRatio(
       Ogre::Real(vp->getActualWidth()) / Ogre::Real(vp->getActualHeight()));
   vp->setCamera(m_pWorldCamera);
@@ -66,7 +66,7 @@ CAtlas::CAtlas(CEntity *pParent, Ogre::SceneNode *pRootSceneNode)
   LOGV(" - Creating Player");
   m_pPlayer = new CPlayer(this,
                           m_pWorldCamera,
-                          CGame::getSingleton().getSceneManager());
+                          CGame::getSingleton<CGame>().getSceneManager());
 
   /*  m_pCameraPerspective
       = new CAerialCameraPerspective(m_pWorldCamera,

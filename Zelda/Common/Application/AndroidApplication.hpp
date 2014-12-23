@@ -17,27 +17,35 @@
  * Zelda. If not, see http://www.gnu.org/licenses/.
  *****************************************************************************/
 
-#include "InputListener.hpp"
+#ifndef ANDROIDAPPLICATION_HPP
+#define ANDROIDAPPLICATION_HPP
 
-CInputListener::CInputListener(bool addOnCreate)
-    : m_bInputListenerEnabled(true) {
-  if (addOnCreate) {
-    CInputListenerManager::getSingleton().addInputListener(this);
-  }
-}
-CInputListener::~CInputListener() {
-  if (CInputListenerManager::getSingletonPtr()) {
-    CInputListenerManager::getSingleton().removeInputListener(this);
-  }
-}
+#include "Application.hpp"
 
+#if OGRE_PLATFORM == OGRE_PLATFORM_ANDROID
 
-template<> CInputListenerManager*
-Ogre::Singleton<CInputListenerManager>::msSingleton = 0;
+class CAndroidApplication
+    : public CApplication {
+ public:
+ protected:
+  virtual void initApp();
+  virtual void createRoot();
+  
+  virtual bool oneTimeConfig();
+  
+  virtual Ogre::RenderWindow *createWindow();
+  
+  virtual void createInputSystem(bool nograb);
+  virtual void createInputDevices();
+  
+  virtual Ogre::String getConfigFilePath();
+  virtual void loadResources();
+  
+  virtual void installWindowEventListener();
 
-CInputListenerManager* CInputListenerManager::getSingletonPtr(void) {
-    return msSingleton;
-}
-CInputListenerManager& CInputListenerManager::getSingleton(void) {
-    assert( msSingleton );  return ( *msSingleton );
-}
+  virtual void deleteInputDevices();
+};
+
+#endif  // OGRE_PLATFORM == OGRE_PLATFORM_ANDROID
+
+#endif /* ANDROIDAPPLICATION_HPP */

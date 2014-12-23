@@ -18,9 +18,10 @@
  *****************************************************************************/
 
 #include "MessageSwitchMap.hpp"
+#include <string>
 #include "../Util/XMLHelper.hpp"
 
-using namespace XMLHelper;
+using XMLHelper::Attribute;
 
 void CSwitchMapTypes::init() {
   m_Map[SMT_MOVE_CAMERA] = "move_camera";
@@ -32,12 +33,13 @@ void CSwitchMapTypes::init() {
 CMessageSwitchMap::CMessageSwitchMap(const std::string &creationFile,
                                      const tinyxml2::XMLElement *pElem)
     : CMessage(creationFile, MSG_SWITCH_MAP, pElem),
-    m_sMap(Attribute(pElem, "map")),
-    m_eStatus(INJECT),
-      m_eSwitchMapType(CSwitchMapTypes::getSingleton().parseString(Attribute(pElem, "switch_map_type"))),
-    m_sTargetEntrance(Attribute(pElem, "target_entrance", "")),
-    m_pFromMap(nullptr),
-    m_pToMap(nullptr) {
+      m_sMap(Attribute(pElem, "map")),
+      m_eStatus(INJECT),
+      m_eSwitchMapType(CSwitchMapTypes::getSingleton().parseString(
+          Attribute(pElem, "switch_map_type"))),
+      m_sTargetEntrance(Attribute(pElem, "target_entrance", "")),
+      m_pFromMap(nullptr),
+      m_pToMap(nullptr) {
 }
 
 CMessageSwitchMap::CMessageSwitchMap(

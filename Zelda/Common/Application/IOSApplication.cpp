@@ -17,27 +17,15 @@
  * Zelda. If not, see http://www.gnu.org/licenses/.
  *****************************************************************************/
 
-#include "InputListener.hpp"
+#include "IOSApplication.hpp"
 
-CInputListener::CInputListener(bool addOnCreate)
-    : m_bInputListenerEnabled(true) {
-  if (addOnCreate) {
-    CInputListenerManager::getSingleton().addInputListener(this);
-  }
-}
-CInputListener::~CInputListener() {
-  if (CInputListenerManager::getSingletonPtr()) {
-    CInputListenerManager::getSingleton().removeInputListener(this);
-  }
+#if OGRE_PLATFORM == OGRE_PLATFORM_APPLE_IOS
+
+void CIOSApplication::createInputDevices() {
+  mInputContext.mMultiTouch = static_cast<OIS::MultiTouch*>(
+      mInputManager->createInputObject(OIS::OISMultiTouch, true));
+  mInputContext.mAccelerometer = static_cast<OIS::JoyStick*>(
+      mInputManager->createInputObject(OIS::OISJoyStick, true));
 }
 
-
-template<> CInputListenerManager*
-Ogre::Singleton<CInputListenerManager>::msSingleton = 0;
-
-CInputListenerManager* CInputListenerManager::getSingletonPtr(void) {
-    return msSingleton;
-}
-CInputListenerManager& CInputListenerManager::getSingleton(void) {
-    assert( msSingleton );  return ( *msSingleton );
-}
+#endif  // OGRE_PLATFORM == OGRE_PLATFORM_APPLE_IOS

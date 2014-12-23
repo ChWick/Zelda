@@ -53,6 +53,7 @@ namespace OgreBites
     public:
 		SdkCameraMan(Ogre::Camera* cam)
 		: mCamera(0)
+          , mStyle(CS_FREELOOK)
 		, mTarget(0)
 		, mOrbiting(false)
 		, mZooming(false)

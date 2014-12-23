@@ -35,27 +35,31 @@ const Ogre::Real TURN_SPEED = 500;            //!< constant for the turn speed
 const Ogre::Real WALK_SPEED_SCALE = 0.001;
 const Ogre::Real PUSHED_SPEED = 30;
 
-CPersonController::CPersonController(CPerson * ccPlayer) {
-  mCCPerson = ccPlayer;
-
-  mCCPhysics = dynamic_cast<CharacterControllerPhysics*>(
-      mCCPerson->getKinematicCharacterController());
-  mBodyNode = mCCPerson->getSceneNode();
-
-  mJumped = false;
-  m_fWalkSpeed = WALK_SPEED;
-  m_fRunSpeed = RUN_SPEED;
-  m_fCurrentMoveSpeed = m_fWalkSpeed;
-  // mIsFalling = mCCPhysics->onGround();
-  mWalkDirection = Ogre::Vector3::ZERO;
-
-  m_fTimer = 0.0f;
+CPersonController::CPersonController(CPerson * ccPerson)
+    : m_fTimer(0),
+      mIsFalling(false),
+      mJumped(false),
+      m_fWalkSpeed(WALK_SPEED),
+      m_fRunSpeed(RUN_SPEED),
+      m_fCurrentMoveSpeed(WALK_SPEED),
+      mCCPhysics(dynamic_cast<CharacterControllerPhysics*>(
+          ccPerson->getKinematicCharacterController())),
+      mCCPerson(ccPerson),
+      mGoalDirection(Ogre::Vector3::ZERO),
+      mBodyNode(ccPerson->getSceneNode()),
+      mWalkDirection(Ogre::Vector3::ZERO),
+      m_uiCurrentMoveState(MS_NORMAL),
+  m_vUserData(Ogre::Vector3::ZERO),
+  m_fUserData0(0),
+  m_fUserData1(1) {
   changeMoveState(MS_NOT_MOVING);  // default state
   mCCPhysics->setSubStepSpeedReference(WALK_SPEED * WALK_SPEED_SCALE);
 }
+
 void CPersonController::setPosition(const Ogre::Vector3 &vPos) {
   mCCPhysics->warp(BtOgre::Convert::toBullet(vPos));
 }
+
 void CPersonController::setOrientation(const Ogre::Quaternion &vRotation) {
   mBodyNode->setOrientation(vRotation);
   mCCPerson->getCollisionObject()->getWorldTransform().setRotation(

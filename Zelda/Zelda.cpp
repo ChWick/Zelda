@@ -35,11 +35,20 @@
 #include "Common/Message/MessageSwitchMap.hpp"
 
 CZelda::~CZelda() {
-  if (CTextConverter::getSingletonPtr()) {delete CTextConverter::getSingletonPtr();}
 }
 
 void CZelda::initSingletons() {
+  CGame::initSingletons();
+
   new CTextConverter();
+}
+
+void CZelda::deleteSingletons() {
+  if (CTextConverter::getSingletonPtr()) {
+    delete CTextConverter::getSingletonPtr();
+  }
+
+  CGame::deleteSingletons();
 }
 
 void CZelda::initEnumIdMaps() {
