@@ -186,7 +186,7 @@ void CApplication::locateResources() {
 
   // load resource paths from config file
   Ogre::ConfigFile cf;
-  cf.load(getConfigFilePath());
+  cf.load(getConfigFileStream());
   Ogre::ConfigFile::SectionIterator seci = cf.getSectionIterator();
   Ogre::String sec, type, arch;
 
@@ -206,8 +206,20 @@ void CApplication::locateResources() {
   }
 }
 
+void CApplication::createResources() {
+}
+
+void CApplication::destroyResources() {
+}
+
 Ogre::String CApplication::getConfigFilePath() {
   return mFSLayer->getConfigFilePath("resources.cfg");
+}
+
+Ogre::DataStreamPtr CApplication::getConfigFileStream() {
+  return Ogre::DataStreamPtr(
+      new Ogre::FileStreamDataStream(
+          new std::ifstream(getConfigFilePath())));
 }
 
 void CApplication::loadResources() {

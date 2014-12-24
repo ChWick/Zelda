@@ -764,10 +764,7 @@ void CGame::destroyRTShaderSystem() {
   }
 }
 #endif // INCLUDE_RTSHADER_SYSTEM
-void CGame::createResources() {
-}
-void CGame::destroyResources() {
-}
+
 void CGame::showLoadingBar(uint16_t numGroupsInit,
                            uint16_t numGroupsLoad) {
   assert(mTrayMgr);

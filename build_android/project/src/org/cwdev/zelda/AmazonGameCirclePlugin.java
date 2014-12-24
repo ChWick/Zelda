@@ -17,7 +17,7 @@
  * Mencus. If not, see http://www.gnu.org/licenses/.
  *****************************************************************************/
 
-package org.zelda;
+package org.cwdev.zelda;
 
 import java.util.EnumSet;
 

@@ -41,17 +41,6 @@
 #include "Android/Android.hpp"
 #include <jni.h>
 
-CGame* OgreAndroidBridge::mGame = NULL;
-AndroidInputInjector* OgreAndroidBridge::mInputInjector = NULL;
-AndroidMultiTouch* OgreAndroidBridge::mTouch = NULL;
-AndroidKeyboard* OgreAndroidBridge::mKeyboard = NULL;
-Ogre::RenderWindow* OgreAndroidBridge::mRenderWnd = NULL;
-Ogre::Root* OgreAndroidBridge::mRoot = NULL;
-bool OgreAndroidBridge::mInit = false;
-bool OgreAndroidBridge::m_bRenderPaused = true;
-//CSnapshot *OgreAndroidBridge::m_pSnapshot = NULL;
-ANativeActivity *OgreAndroidBridge::mActivity = NULL;
-
 #   ifdef OGRE_STATIC_LIB
 Ogre::StaticPluginLoader* OgreAndroidBridge::mStaticPluginLoader = NULL;
 #   endif

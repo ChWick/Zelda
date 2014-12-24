@@ -33,12 +33,6 @@
 #include "dependencies/OgreSdkUtil/SdkTrays.h"
 #include "OgreFileSystemLayer.h"
 
-#if OGRE_PLATFORM == OGRE_PLATFORM_ANDROID
-#include <android_native_app_glue.h>
-#include "Android/OgreAPKFileSystemArchive.h"
-#include "Android/OgreAPKZipArchive.h"
-#include <OgreArchiveManager.h>
-#endif
 
 #include "ShaderGenerator.hpp"
 #include "Message/MessageInjector.hpp"
@@ -86,34 +80,10 @@ public:
 
   void requestShutDown() { mShutDown = true; }
 
-  void createResources();
-  void destroyResources();
-
   void showLoadingBar(uint16_t numGroupsInit = 1, uint16_t numGroupsLoad = 1);
   void hideLoadingBar();
 
   bool renderOneFrame();
-
-#if OGRE_PLATFORM == OGRE_PLATFORM_ANDROID
-  void initAppForAndroid(Ogre::RenderWindow *window, struct android_app* app, OIS::MultiTouch *mouse, OIS::Keyboard *keyboard) {
-    Ogre::LogManager::getSingletonPtr()->logMessage("Initializing App for Android");
-    assert(mouse);
-    assert(keyboard);
-    mApp = app;
-    mWindow = window;
-    mInputContext.mMultiTouch = mouse;
-    mInputContext.mKeyboard = keyboard;
-
-    if(app != NULL) {
-      mNativeActivity = app->activity;
-      mAssetMgr = app->activity->assetManager;
-      Ogre::ArchiveManager::getSingleton().addArchiveFactory(
-        new Ogre::APKFileSystemArchiveFactory(app->activity->assetManager));
-      Ogre::ArchiveManager::getSingleton().addArchiveFactory(
-	new Ogre::APKZipArchiveFactory(app->activity->assetManager));
-    }
-  }
-#endif
 
 protected:
   Ogre::Camera* mCamera;
@@ -159,24 +129,6 @@ protected:
   virtual void createScene();
   virtual void destroyScene();
 private:
-#if OGRE_PLATFORM == OGRE_PLATFORM_ANDROID
-  Ogre::DataStreamPtr openAPKFile(const Ogre::String& fileName) {
-    Ogre::DataStreamPtr stream;
-    AAsset* asset = AAssetManager_open(mAssetMgr, fileName.c_str(), AASSET_MODE_BUFFER);
-    if(asset) {
-      off_t length = AAsset_getLength(asset);
-      void* membuf = OGRE_MALLOC(length, Ogre::MEMCATEGORY_GENERAL);
-      memcpy(membuf, AAsset_getBuffer(asset), length);
-      AAsset_close(asset);
-
-      stream = Ogre::DataStreamPtr(new Ogre::MemoryDataStream(membuf, length, true, true));
-    }
-    return stream;
-  }
-  struct android_app* mApp;
-  AAssetManager* mAssetMgr;       // Android asset manager to access files inside apk
-  ANativeActivity* mNativeActivity;
-#endif
 #ifdef INCLUDE_RTSHADER_SYSTEM
   bool initialiseRTShaderSystem(Ogre::SceneManager* sceneMgr);
   void destroyRTShaderSystem();

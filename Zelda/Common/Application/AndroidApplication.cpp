@@ -21,11 +21,57 @@
 
 #if OGRE_PLATFORM == OGRE_PLATFORM_ANDROID
 
+#include <android_native_app_glue.h>
+#include <OgreArchiveManager.h>
+#include "Android/OgreAPKFileSystemArchive.h"
+#include "Android/OgreAPKZipArchive.h"
+
+#include "../Log.hpp"
 #include "../Util/Assert.hpp"
 #include "../Android/Android.hpp"
 
+void CAndroidApplication::initAppForAndroid(Ogre::RenderWindow *window,
+                                            struct android_app* app,
+                                            OIS::MultiTouch *mouse,
+                                            OIS::Keyboard *keyboard) {
+  LOGV("Initializing App for Android");
+  ASSERT(mouse);
+  ASSERT(keyboard);
+  mApp = app;
+  mWindow = window;
+  mInputContext.mMultiTouch = mouse;
+  mInputContext.mKeyboard = keyboard;
+
+  if (app != NULL) {
+    mNativeActivity = app->activity;
+    mAssetMgr = app->activity->assetManager;
+    Ogre::ArchiveManager::getSingleton().addArchiveFactory(
+        new Ogre::APKFileSystemArchiveFactory(app->activity->assetManager));
+    Ogre::ArchiveManager::getSingleton().addArchiveFactory(
+        new Ogre::APKZipArchiveFactory(app->activity->assetManager));
+  }
+}
+
+Ogre::DataStreamPtr CAndroidApplication::openAPKFile(
+    const Ogre::String& fileName) {
+  Ogre::DataStreamPtr stream;
+  AAsset* asset = AAssetManager_open(mAssetMgr,
+                                     fileName.c_str(),
+                                     AASSET_MODE_BUFFER);
+  if (asset) {
+    off_t length = AAsset_getLength(asset);
+    void* membuf = OGRE_MALLOC(length, Ogre::MEMCATEGORY_GENERAL);
+    memcpy(membuf, AAsset_getBuffer(asset), length);
+    AAsset_close(asset);
+
+    stream = Ogre::DataStreamPtr(
+        new Ogre::MemoryDataStream(membuf, length, true, true));
+  }
+  return stream;
+}
+
 void CAndroidApplication::initApp() {
-  CAppliation::initApp();
+  CApplication::initApp();
 
   // init render target on our own
   mRoot->getRenderSystem()->_initRenderTargets();
@@ -57,7 +103,7 @@ void CAndroidApplication::createInputDevices() {
   ASSERT(mInputContext.mKeyboard);
 }
 
-Ogre::String getConfigFilePath() {
+Ogre::DataStreamPtr CAndroidApplication::getConfigFileStream() {
   // open apk file
   return openAPKFile(CApplication::getConfigFilePath());
 }

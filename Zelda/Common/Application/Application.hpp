@@ -27,6 +27,11 @@
 #include <OgreFileSystemLayer.h>
 #include <OgreArchiveManager.h>
 
+
+#ifdef OGRE_STATIC_LIB
+#include "OgreStaticPluginLoader.h"
+#endif
+
 #include "dependencies/OgreSdkUtil/SdkCameraMan.h"
 #include "dependencies/OgreSdkUtil/SdkTrays.h"
 
@@ -54,6 +59,11 @@ class CApplication :
   //! Render window
   Ogre::RenderWindow* mWindow;
   
+#ifdef OGRE_STATIC_LIB
+  //! static plugin loader
+  Ogre::StaticPluginLoader mStaticPluginLoader;
+#endif
+  
   // OIS Input devices
   // -----------------
   
@@ -79,6 +89,9 @@ class CApplication :
   
   void go();
 
+  virtual void initApp();
+  virtual void closeApp();
+
   // getter & setter
   // ---------------
   Ogre::Root *getRoot() {return mRoot;}
@@ -94,8 +107,10 @@ class CApplication :
                               uint16_t numGroupsLoad = 1) {}
   virtual void hideLoadingBar() {}
 
+  virtual void createResources();
+  virtual void destroyResources();
+
  protected:
-  virtual void initApp();
   virtual void createRoot();
   virtual void createOverlaySystem();
   virtual bool oneTimeConfig();
@@ -107,13 +122,13 @@ class CApplication :
   virtual void attachInputDevices();
   virtual void locateResources();
   virtual Ogre::String getConfigFilePath();
+  virtual Ogre::DataStreamPtr getConfigFileStream();
   virtual void loadResources();
   virtual void installWindowEventListener();
 
   virtual void createScene() = 0;
   virtual void destroyScene() = 0;
 
-  virtual void closeApp();
   virtual void shutdown();
   virtual void shutdownInput();
   virtual void deleteInputDevices();

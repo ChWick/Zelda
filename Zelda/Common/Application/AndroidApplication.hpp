@@ -21,14 +21,28 @@
 #define ANDROIDAPPLICATION_HPP
 
 #include "Application.hpp"
+#include "../Android/Android.hpp"
 
 #if OGRE_PLATFORM == OGRE_PLATFORM_ANDROID
 
 class CAndroidApplication
     : public CApplication {
- public:
  protected:
+  struct android_app* mApp;
+  //! Android asset manager to access files inside apk
+  AAssetManager* mAssetMgr;
+  ANativeActivity* mNativeActivity;
+ public:
+  void initAppForAndroid(Ogre::RenderWindow *window,
+                         struct android_app* app,
+                         OIS::MultiTouch *mouse,
+                         OIS::Keyboard *keyboard);
+
+  Ogre::DataStreamPtr openAPKFile(const Ogre::String& fileName);
+
+  
   virtual void initApp();
+ protected:
   virtual void createRoot();
   
   virtual bool oneTimeConfig();
@@ -38,7 +52,7 @@ class CAndroidApplication
   virtual void createInputSystem(bool nograb);
   virtual void createInputDevices();
   
-  virtual Ogre::String getConfigFilePath();
+  virtual Ogre::DataStreamPtr getConfigFileStream();
   virtual void loadResources();
   
   virtual void installWindowEventListener();
