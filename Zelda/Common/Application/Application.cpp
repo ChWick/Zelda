@@ -218,8 +218,9 @@ Ogre::String CApplication::getConfigFilePath() {
 
 Ogre::DataStreamPtr CApplication::getConfigFileStream() {
   return Ogre::DataStreamPtr(
-      new Ogre::FileStreamDataStream(
-          new std::ifstream(getConfigFilePath())));
+      OGRE_NEW Ogre::FileStreamDataStream(
+          OGRE_NEW_T(std::ifstream,
+                     Ogre::MEMCATEGORY_GENERAL)(getConfigFilePath())));
 }
 
 void CApplication::loadResources() {
