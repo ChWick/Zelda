@@ -130,6 +130,7 @@ protected:
   virtual void destroyScene();
 private:
 #ifdef INCLUDE_RTSHADER_SYSTEM
+  void initialiseShaderSystem();
   bool initialiseRTShaderSystem(Ogre::SceneManager* sceneMgr);
   void destroyRTShaderSystem();
 #endif

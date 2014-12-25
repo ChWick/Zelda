@@ -21,9 +21,10 @@
 #define ANDROIDAPPLICATION_HPP
 
 #include "Application.hpp"
-#include "../Android/Android.hpp"
 
 #if OGRE_PLATFORM == OGRE_PLATFORM_ANDROID
+
+#include "../Android/Android.hpp"
 
 class CAndroidApplication
     : public CApplication {

@@ -231,7 +231,7 @@ void CGame::createScene() {
   mDetailsPanel->hide();
 #else
   mTrayMgr->hideCursor();
-#endif // DEBUG_SHOW_OGRE_TRAY
+#endif  // DEBUG_SHOW_OGRE_TRAY
   mTrayMgr->hideCursor();
 
 #ifdef INPUT_MOUSE
@@ -241,51 +241,9 @@ void CGame::createScene() {
 
   mRoot->addFrameListener(this);
 
-
 #ifdef INCLUDE_RTSHADER_SYSTEM
-  // Initialize shader generator.
-  // Must be before resource loading in order to allow parsing extended material attributes.
-  bool success = initialiseRTShaderSystem(mSceneMgr);
-  if (!success) {
-    OGRE_EXCEPT(Ogre::Exception::ERR_FILE_NOT_FOUND,
-		"Shader Generator Initialization failed - Core shader libs path not found",
-		"SampleBrowser::createDummyScene");
-  }
-  if(mRoot->getRenderSystem()->getCapabilities()->hasCapability(Ogre::RSC_FIXED_FUNCTION) == false) {
-    //newViewport->setMaterialScheme(Ogre::RTShader::ShaderGenerator::DEFAULT_SCHEME_NAME);
-
-    // creates shaders for base material BaseWhite using the RTSS
-    Ogre::MaterialPtr baseWhite = Ogre::MaterialManager::getSingleton().getByName("BaseWhite", Ogre::ResourceGroupManager::INTERNAL_RESOURCE_GROUP_NAME);
-    baseWhite->setLightingEnabled(false);
-    mShaderGenerator->createShaderBasedTechnique(
-						 "BaseWhite",
-						 Ogre::MaterialManager::DEFAULT_SCHEME_NAME,
-						 Ogre::RTShader::ShaderGenerator::DEFAULT_SCHEME_NAME);
-    mShaderGenerator->validateMaterial(Ogre::RTShader::ShaderGenerator::DEFAULT_SCHEME_NAME,
-				       "BaseWhite");
-    if(baseWhite->getNumTechniques() > 1) {
-      baseWhite->getTechnique(0)->getPass(0)->setVertexProgram(
-							       baseWhite->getTechnique(1)->getPass(0)->getVertexProgram()->getName());
-      baseWhite->getTechnique(0)->getPass(0)->setFragmentProgram(
-								 baseWhite->getTechnique(1)->getPass(0)->getFragmentProgram()->getName());
-    }
-
-    // creates shaders for base material BaseWhiteNoLighting using the RTSS
-    mShaderGenerator->createShaderBasedTechnique(
-						 "BaseWhiteNoLighting",
-						 Ogre::MaterialManager::DEFAULT_SCHEME_NAME,
-						 Ogre::RTShader::ShaderGenerator::DEFAULT_SCHEME_NAME);
-    mShaderGenerator->validateMaterial(Ogre::RTShader::ShaderGenerator::DEFAULT_SCHEME_NAME,
-				       "BaseWhiteNoLighting");
-    Ogre::MaterialPtr baseWhiteNoLighting = Ogre::MaterialManager::getSingleton().getByName("BaseWhiteNoLighting", Ogre::ResourceGroupManager::INTERNAL_RESOURCE_GROUP_NAME);
-    if(baseWhite->getNumTechniques() > 1) {
-      baseWhiteNoLighting->getTechnique(0)->getPass(0)->setVertexProgram(
-									 baseWhiteNoLighting->getTechnique(1)->getPass(0)->getVertexProgram()->getName());
-      baseWhiteNoLighting->getTechnique(0)->getPass(0)->setFragmentProgram(
-									   baseWhiteNoLighting->getTechnique(1)->getPass(0)->getFragmentProgram()->getName());
-    }
-  }
-#endif // INCLUDE_RTSHADER_SYSTEM
+  initialiseShaderSystem();
+#endif  // INCLUDE_RT_SHADER_SYSTEM
 
 
   loadResources();
@@ -390,9 +348,9 @@ bool CGame::frameRenderingQueued(const Ogre::FrameEvent& evt) {
     return false;
   }
 
-  if(mShutDown) {
+  if (mShutDown) {
     Ogre::LogManager::getSingleton().logMessage("Shutting down: user request");
-    mShutDown = false; // if it is restarted in mobile devices
+    mShutDown = false;  // if it is restarted in mobile devices
     return false;
   }
   if (!mWindow->isActive()) {
@@ -411,7 +369,7 @@ bool CGame::frameRenderingQueued(const Ogre::FrameEvent& evt) {
 }
 
 bool CGame::frameStarted(const Ogre::FrameEvent& evt) {
-  //Need to capture/update each device
+  // Need to capture/update each device
   mInputContext.capture();
 
   // process messages
@@ -458,68 +416,60 @@ bool CGame::frameEnded(const Ogre::FrameEvent& evt) {
   return true;
 }
 
-//-------------------------------------------------------------------------------------
-bool CGame::keyPressed( const OIS::KeyEvent &arg )
-{
+bool CGame::keyPressed(const OIS::KeyEvent &arg) {
 #ifdef DEBUG_SHOW_OGRE_TRAY
-  if (mTrayMgr->isDialogVisible()) return true;   // don't process any more keys if dialog is up
+  // don't process any more keys if dialog is up
+  if (mTrayMgr->isDialogVisible()) return true;
 
-  if (arg.key == OIS::KC_F)   // toggle visibility of advanced frame stats
-    {
-      mTrayMgr->toggleAdvancedFrameStats();
+  if (arg.key == OIS::KC_F) {
+    // toggle visibility of advanced frame stats
+    mTrayMgr->toggleAdvancedFrameStats();
+  } else if (arg.key == OIS::KC_G) {
+    // toggle visibility of even rarer debugging details
+    if (mDetailsPanel->getTrayLocation() == OgreBites::TL_NONE) {
+      mTrayMgr->moveWidgetToTray(mDetailsPanel, OgreBites::TL_TOPRIGHT, 0);
+      mDetailsPanel->show();
+    } else {
+      mTrayMgr->removeWidgetFromTray(mDetailsPanel);
+      mDetailsPanel->hide();
     }
-  else if (arg.key == OIS::KC_G)   // toggle visibility of even rarer debugging details
-    {
-      if (mDetailsPanel->getTrayLocation() == OgreBites::TL_NONE)
-        {
-	  mTrayMgr->moveWidgetToTray(mDetailsPanel, OgreBites::TL_TOPRIGHT, 0);
-	  mDetailsPanel->show();
-        }
-      else
-        {
-	  mTrayMgr->removeWidgetFromTray(mDetailsPanel);
-	  mDetailsPanel->hide();
-        }
+  } else if (arg.key == OIS::KC_T) {
+    // cycle texture filtering mode
+    Ogre::String newVal;
+    Ogre::TextureFilterOptions tfo;
+    unsigned int aniso;
+
+    switch (mDetailsPanel->getParamValue(9).asUTF8()[0]) {
+      case 'B':
+        newVal = "Trilinear";
+        tfo = Ogre::TFO_TRILINEAR;
+        aniso = 1;
+        break;
+      case 'T':
+        newVal = "Anisotropic";
+        tfo = Ogre::TFO_ANISOTROPIC;
+        aniso = 8;
+        break;
+      case 'A':
+        newVal = "None";
+        tfo = Ogre::TFO_NONE;
+        aniso = 1;
+        break;
+      default:
+        newVal = "Bilinear";
+        tfo = Ogre::TFO_BILINEAR;
+        aniso = 1;
     }
-  else if (arg.key == OIS::KC_T)   // cycle texture filtering mode
-    {
-      Ogre::String newVal;
-      Ogre::TextureFilterOptions tfo;
-      unsigned int aniso;
 
-      switch (mDetailsPanel->getParamValue(9).asUTF8()[0])
-        {
-        case 'B':
-	  newVal = "Trilinear";
-	  tfo = Ogre::TFO_TRILINEAR;
-	  aniso = 1;
-	  break;
-        case 'T':
-	  newVal = "Anisotropic";
-	  tfo = Ogre::TFO_ANISOTROPIC;
-	  aniso = 8;
-	  break;
-        case 'A':
-	  newVal = "None";
-	  tfo = Ogre::TFO_NONE;
-	  aniso = 1;
-	  break;
-        default:
-	  newVal = "Bilinear";
-	  tfo = Ogre::TFO_BILINEAR;
-	  aniso = 1;
-        }
+    Ogre::MaterialManager::getSingleton().setDefaultTextureFiltering(tfo);
+    Ogre::MaterialManager::getSingleton().setDefaultAnisotropy(aniso);
+    mDetailsPanel->setParamValue(9, newVal);
+  } else if (arg.key == OIS::KC_R) {
+    // cycle polygon rendering mode
+    Ogre::String newVal;
+    Ogre::PolygonMode pm;
 
-      Ogre::MaterialManager::getSingleton().setDefaultTextureFiltering(tfo);
-      Ogre::MaterialManager::getSingleton().setDefaultAnisotropy(aniso);
-      mDetailsPanel->setParamValue(9, newVal);
-    }
-  else if (arg.key == OIS::KC_R)   // cycle polygon rendering mode
-    {
-      Ogre::String newVal;
-      Ogre::PolygonMode pm;
-
-      switch (mCamera->getPolygonMode()) {
+    switch (mCamera->getPolygonMode()) {
       case Ogre::PM_SOLID:
         newVal = "Wireframe";
         pm = Ogre::PM_WIREFRAME;
@@ -537,36 +487,31 @@ bool CGame::keyPressed( const OIS::KeyEvent &arg )
         pm = Ogre::PM_SOLID;
 
         m_pMainViewPort->setClearEveryFrame(true, Ogre::FBT_DEPTH);
-      }
-
-      Ogre::SceneManagerEnumerator::SceneManagerIterator iterator = Ogre::Root::getSingleton().getSceneManagerIterator();
-      while (iterator.hasMoreElements()) {
-        Ogre::SceneManager *pSM = iterator.getNext();
-        Ogre::SceneManager::CameraIterator camIt = pSM->getCameraIterator();
-        while (camIt.hasMoreElements()) {
-          camIt.getNext()->setPolygonMode(pm);
-        }
-      }
-      mDetailsPanel->setParamValue(10, newVal);
     }
 
-  else if(arg.key == OIS::KC_F6)   // refresh all textures
-    {
-      Ogre::TextureManager::getSingleton().reloadAll();
+    Ogre::SceneManagerEnumerator::SceneManagerIterator iterator
+        = Ogre::Root::getSingleton().getSceneManagerIterator();
+    while (iterator.hasMoreElements()) {
+      Ogre::SceneManager *pSM = iterator.getNext();
+      Ogre::SceneManager::CameraIterator camIt = pSM->getCameraIterator();
+      while (camIt.hasMoreElements()) {
+        camIt.getNext()->setPolygonMode(pm);
+      }
     }
-  else
-#endif // DEBUG_SHOW_OGRE_TRAY
+    mDetailsPanel->setParamValue(10, newVal);
+  } else if (arg.key == OIS::KC_F6) {
+    // refresh all textures
+    Ogre::TextureManager::getSingleton().reloadAll();
+  }
+#endif  // DEBUG_SHOW_OGRE_TRAY
   if (arg.key == OIS::KC_F12) {
     // take a screenshot
     mWindow->writeContentsToTimestampedFile("screenshot", ".jpg");
-  }
-  else if (arg.key == OIS::KC_R) {
+  } else if (arg.key == OIS::KC_R) {
     createResources();
-  }
-  else if (arg.key == OIS::KC_E) {
+  } else if (arg.key == OIS::KC_E) {
     destroyResources();
-  }
-  else if (arg.key == OIS::KC_Q && mInputContext.isKeyDown(OIS::KC_LWIN)){
+  } else if (arg.key == OIS::KC_Q && mInputContext.isKeyDown(OIS::KC_LWIN)) {
     requestShutDown();
   }
 
@@ -679,6 +624,66 @@ void CGame::sendMessageToAll(const CMessagePtr message) {
 }
 
 #ifdef INCLUDE_RTSHADER_SYSTEM
+void CGame::initialiseShaderSystem() {
+  // Initialize shader generator.
+  // Must be before resource loading in order to allow
+  // parsing extended material attributes.
+  bool success = initialiseRTShaderSystem(mSceneMgr);
+  if (!success) {
+    OGRE_EXCEPT(Ogre::Exception::ERR_FILE_NOT_FOUND,
+                "Shader Generator Initialization failed -"
+                "Core shader libs path not found",
+                __FILE__);
+  }
+
+  if (mRoot->getRenderSystem()->getCapabilities()
+      ->hasCapability(Ogre::RSC_FIXED_FUNCTION) == false) {
+    auto &mmgr(Ogre::MaterialManager::getSingleton());
+    // newViewport->setMaterialScheme(
+    // Ogre::RTShader::ShaderGenerator::DEFAULT_SCHEME_NAME);
+
+    // creates shaders for base material BaseWhite using the RTSS
+    Ogre::MaterialPtr baseWhite = mmgr.getByName(
+        "BaseWhite",
+        Ogre::ResourceGroupManager::INTERNAL_RESOURCE_GROUP_NAME);
+    baseWhite->setLightingEnabled(false);
+    mShaderGenerator->createShaderBasedTechnique(
+        "BaseWhite",
+        Ogre::MaterialManager::DEFAULT_SCHEME_NAME,
+        Ogre::RTShader::ShaderGenerator::DEFAULT_SCHEME_NAME);
+    mShaderGenerator->validateMaterial(
+        Ogre::RTShader::ShaderGenerator::DEFAULT_SCHEME_NAME,
+        "BaseWhite");
+
+    if (baseWhite->getNumTechniques() > 1) {
+      baseWhite->getTechnique(0)->getPass(0)->setVertexProgram(
+          baseWhite->getTechnique(1)->getPass(0)
+          ->getVertexProgram()->getName());
+      baseWhite->getTechnique(0)->getPass(0)->setFragmentProgram(
+          baseWhite->getTechnique(1)->getPass(0)
+          ->getFragmentProgram()->getName());
+    }
+
+    // creates shaders for base material BaseWhiteNoLighting using the RTSS
+    mShaderGenerator->createShaderBasedTechnique(
+        "BaseWhiteNoLighting",
+        Ogre::MaterialManager::DEFAULT_SCHEME_NAME,
+        Ogre::RTShader::ShaderGenerator::DEFAULT_SCHEME_NAME);
+    mShaderGenerator->validateMaterial(
+        Ogre::RTShader::ShaderGenerator::DEFAULT_SCHEME_NAME,
+        "BaseWhiteNoLighting");
+    Ogre::MaterialPtr baseWhiteNoLighting = mmgr.getByName(
+        "BaseWhiteNoLighting",
+        Ogre::ResourceGroupManager::INTERNAL_RESOURCE_GROUP_NAME);
+    if (baseWhite->getNumTechniques() > 1) {
+      baseWhiteNoLighting->getTechnique(0)->getPass(0)->setVertexProgram(
+          baseWhiteNoLighting->getTechnique(1)->getPass(0)
+          ->getVertexProgram()->getName());
+      baseWhiteNoLighting->getTechnique(0)->getPass(0)->setFragmentProgram(
+          baseWhiteNoLighting->getTechnique(1)->getPass(0)
+          ->getFragmentProgram()->getName());
+    }
+  }
 
 /*-----------------------------------------------------------------------------
   | Initialize the RT Shader system.
@@ -689,34 +694,44 @@ bool CGame:: initialiseRTShaderSystem(Ogre::SceneManager* sceneMgr)  {
 
     mShaderGenerator->addSceneManager(sceneMgr);
 
-#if OGRE_PLATFORM != OGRE_PLATFORM_ANDROID && OGRE_PLATFORM != OGRE_PLATFORM_NACL && OGRE_PLATFORM != OGRE_PLATFORM_WINRT
+#if OGRE_PLATFORM != OGRE_PLATFORM_ANDROID \
+  && OGRE_PLATFORM != OGRE_PLATFORM_NACL \
+  && OGRE_PLATFORM != OGRE_PLATFORM_WINRT
+
     // Setup core libraries and shader cache path.
-    Ogre::StringVector groupVector = Ogre::ResourceGroupManager::getSingleton().getResourceGroups();
+    Ogre::StringVector groupVector
+        = Ogre::ResourceGroupManager::getSingleton().getResourceGroups();
     Ogre::StringVector::iterator itGroup = groupVector.begin();
     Ogre::StringVector::iterator itGroupEnd = groupVector.end();
     Ogre::String shaderCoreLibsPath;
     Ogre::String shaderCachePath;
 
     for (; itGroup != itGroupEnd; ++itGroup) {
-      Ogre::ResourceGroupManager::LocationList resLocationsList = Ogre::ResourceGroupManager::getSingleton().getResourceLocationList(*itGroup);
-      Ogre::ResourceGroupManager::LocationList::iterator it = resLocationsList.begin();
-      Ogre::ResourceGroupManager::LocationList::iterator itEnd = resLocationsList.end();
+      Ogre::ResourceGroupManager::LocationList resLocationsList
+          = Ogre::ResourceGroupManager::getSingleton().getResourceLocationList(
+              *itGroup);
+      Ogre::ResourceGroupManager::LocationList::iterator it
+          = resLocationsList.begin();
+      Ogre::ResourceGroupManager::LocationList::iterator itEnd
+          = resLocationsList.end();
       bool coreLibsFound = false;
 
       // Try to find the location of the core shader lib functions and use it
-      // as shader cache path as well - this will reduce the number of generated files
+      // as shader cache path as well - this will reduce the number
+      // of generated files
       // when running from different directories.
       for (; it != itEnd; ++it) {
-	if ((*it)->archive->getName().find("RTShaderLib") != Ogre::String::npos) {
-	  shaderCoreLibsPath = (*it)->archive->getName() + "/cache/";
-	  shaderCachePath = shaderCoreLibsPath;
-	  coreLibsFound = true;
-	  break;
-	}
+        if ((*it)->archive->getName().find("RTShaderLib")
+            != Ogre::String::npos) {
+          shaderCoreLibsPath = (*it)->archive->getName() + "/cache/";
+          shaderCachePath = shaderCoreLibsPath;
+          coreLibsFound = true;
+          break;
+        }
       }
       // Core libs path found in the current group.
       if (coreLibsFound)
-	break;
+        break;
     }
 
     // Core shader libs not found -> shader generating will fail.
@@ -733,9 +748,11 @@ bool CGame:: initialiseRTShaderSystem(Ogre::SceneManager* sceneMgr)  {
     mShaderGenerator->setShaderCachePath(shaderCachePath);
 #endif
 #endif
-    // Create and register the material manager listener if it doesn't exist yet.
+    // Create and register the material manager listener
+    // if it doesn't exist yet.
     if (mMaterialMgrListener == NULL) {
-      mMaterialMgrListener = new ShaderGeneratorTechniqueResolverListener(mShaderGenerator);
+      mMaterialMgrListener = new ShaderGeneratorTechniqueResolverListener(
+          mShaderGenerator);
       Ogre::MaterialManager::getSingleton().addListener(mMaterialMgrListener);
     }
   }
@@ -748,7 +765,8 @@ bool CGame:: initialiseRTShaderSystem(Ogre::SceneManager* sceneMgr)  {
   -----------------------------------------------------------------------------*/
 void CGame::destroyRTShaderSystem() {
   // Restore default scheme.
-  Ogre::MaterialManager::getSingleton().setActiveScheme(Ogre::MaterialManager::DEFAULT_SCHEME_NAME);
+  Ogre::MaterialManager::getSingleton().setActiveScheme(
+      Ogre::MaterialManager::DEFAULT_SCHEME_NAME);
 
   // Unregister the material manager listener.
   if (mMaterialMgrListener != NULL) {
@@ -763,7 +781,8 @@ void CGame::destroyRTShaderSystem() {
     mShaderGenerator = NULL;
   }
 }
-#endif // INCLUDE_RTSHADER_SYSTEM
+
+#endif  // INCLUDE_RTSHADER_SYSTEM
 
 void CGame::showLoadingBar(uint16_t numGroupsInit,
                            uint16_t numGroupsLoad) {
