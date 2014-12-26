@@ -19,7 +19,7 @@
 
 #include <OgrePlatform.h>
 
-#if OGRE_PLATFORM == OGRE_PLATFORM
+#if OGRE_PLATFORM == OGRE_PLATFORM_ANDROID
 
 #include "Android.hpp"
 #include GAME_CLASS_HEADER

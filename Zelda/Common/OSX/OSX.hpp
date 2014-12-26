@@ -99,7 +99,7 @@ using namespace Ogre;
 
 @end
 
-static CGame *pGame = 0;
+static CApplication *pApplication = 0;
 
 #if __LP64__
 static id mAppDelegate;
@@ -165,19 +165,19 @@ static CVReturn MyDisplayLinkCallback(CVDisplayLinkRef displayLink, const CVTime
 }
 
 - (void)go {
-    pGame = CGame::getSingletonPtr();
+    pApplication = GAME_CLASS::getSingletonPtr();
     
-    if (!pGame)
-        pGame = new CGame();
+    if (!pApplication)
+        pApplication = new GAME_CLASS();
         
-    CGame &game(*pGame);
+    CApplication &app(*pApplication);
     
     NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
     mLastFrameTime = 1;
     mTimer = nil;
     
     try {
-        game.go();
+        app.go();
         Ogre::Root::getSingleton().getRenderSystem()->_initRenderTargets();
         
         // Clear event times
