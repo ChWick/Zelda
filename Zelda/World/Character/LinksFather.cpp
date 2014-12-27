@@ -30,32 +30,16 @@ CLinksFather::CLinksFather(const tinyxml2::XMLElement *pElem,
     : CPerson(pElem, pParent, pMap, LF_ANIM_COUNT) {
 }
 
-void CLinksFather::setupAnimations() {
-  Ogre::StringVector animNames(LF_ANIM_COUNT);
-  animNames[LF_ANIM_SIT] = "Sit";
-  animNames[LF_ANIM_STAND_UP] = "StandUp";
-  animNames[LF_ANIM_WALK] = "Walk";
-
-  // this is very important due to the nature of the exported animations
-  m_pBodyEntity->getSkeleton()->setBlendMode(Ogre::ANIMBLEND_CUMULATIVE);
-
-  // populate our animation list
-  for (unsigned int i = 0; i < m_uiAnimationCount; i++) {
-    m_Anims[i] = m_pBodyEntity->getAnimationState(animNames[i]);
-    m_Anims[i]->setLoop(true);
-    mAnimationProperty[i].mFadeState = FADE_NONE;
-    m_Anims[i]->setEnabled(false);
-    m_Anims[i]->setWeight(0);
+void CLinksFather::updateAnimationsCallback(const Ogre::Real fTime) {
+  uint8_t ms = getCharacterController<CPersonController>()->getMoveState();
+  if (ms == CPersonController::MS_MOVE_TO_POINT) {
+    setAnimation(LF_ANIM_WALK);
   }
-
-
-  // start off in the idle state (top and bottom together)
-  setAnimation(LF_ANIM_SIT);
 }
 
 CCharacterController *CLinksFather::createCharacterController() {
   CPersonController *pc = dynamic_cast<CPersonController*>(
       CPerson::createCharacterController());
-  pc->setWalkSpeed(1);
+  pc->setWalkSpeed(3);
   return pc;
 }

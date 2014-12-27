@@ -305,19 +305,14 @@ const Ogre::AnimationState *CCharacter::getAnimation(unsigned int id) const {
 }
 
 unsigned int CCharacter::getAnimationIdFromString(const std::string &id) const {
-  if (id == "idle") {
-    return ANIM_IDLE;
-  } else if (id == "walk") {
-    return ANIM_WALK;
-  } else if (id == "slice_horizontal") {
-    return ANIM_SLICE_HORIZONTAL;
-  } else if (id == "use_item") {
-    return ANIM_USE_ITEM;
-  } else if (id == "run") {
-    return ANIM_RUN;
+  for (auto &anim : mAnimationProperty) {
+    if (anim.mAnimationData->mName == id) {
+      return anim.mAnimationData->mId;
+    }
   }
+  
   LOGW("Animation id '%s' is unknown.", id.c_str());
-  return ANIM_COUNT;
+  return 0;
 }
 
 void CCharacter::fadeAnimations(const Ogre::Real deltaTime) {

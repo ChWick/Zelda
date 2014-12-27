@@ -35,9 +35,9 @@ public:
  private:
  public:
   CLinksFather(const tinyxml2::XMLElement *pElem, CEntity *pParent, CMap *pMap);
-  
+
+  void updateAnimationsCallback(const Ogre::Real fTime);
  private:
-  void setupAnimations();
   
   virtual CCharacterController *createCharacterController();
 };
