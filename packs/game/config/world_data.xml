@@ -398,7 +398,7 @@
       id="link"
       mesh_name="link"
       material_name="link_armor"
-      scale="1.5f"
+      scale="1.5"
       attitude="friend"
       hitpoints="3"
       animations_count="5"
