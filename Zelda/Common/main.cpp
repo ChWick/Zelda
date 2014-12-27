@@ -20,7 +20,7 @@
 #include <CEGUI/CEGUI.h>
 #include "Config/TypeDefines.hpp"
 #include GAME_CLASS_HEADER
-#include <OIS.h>
+#include <OIS/OIS.h>
 #include "FileManager/FileManager.hpp"
 #include "XMLResources/Manager.hpp"
 

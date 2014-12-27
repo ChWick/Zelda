@@ -393,7 +393,18 @@
        scale (Ogre::Vector3 or Real)     scaling factor for the complete mesh
        attitude (friend | enemy)         the attitude of the person relative to link
        hitpoints (Hitpoints = infinity)  the hitpoints of the person (unit of hears)
+
+       Children:
+         - animation
   -->
+  <!-- animation -->
+  <!-- Properties:
+       ===========
+       
+       name (string)                      the animation name
+       id (integer)                       the id for the corresponding enumeration
+       loop (bool)                        loop the animation
+     -->
   <person
       id="link"
       mesh_name="link"
@@ -416,7 +427,7 @@
       animations_count="3"
       >
     <animation name="Sit" id="0"/>
-    <animation name="StandUp" id="1"/>
+    <animation name="StandUp" id="1" loop="false"/>
     <animation name="Walk" id="2"/>
   </person>
   <person

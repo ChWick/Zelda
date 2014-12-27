@@ -173,7 +173,7 @@ void CGame::createScene() {
 
   Ogre::LogManager::getSingletonPtr()->logMessage("   create viewport");
   mCameraMan = new OgreBites::SdkCameraMan(mCamera);   // create a default camera controlle
-  mCameraMan->setTopSpeed(10);
+  mCameraMan->setTopSpeed(0.5);
   //------------------------------------------------------------------------------------
   // create viewports
   // Create one viewport, entire window

@@ -20,7 +20,7 @@
 #ifndef _INPUT_LISTENER_H_
 #define _INPUT_LISTENER_H_
 
-#include <OIS.h>
+#include <OIS/OIS.h>
 #include <OgreSingleton.h>
 #include <OgreRenderWindow.h>
 #include "../Util/Assert.hpp"
