@@ -18,13 +18,18 @@
  *****************************************************************************/
 
 #include "MessageTypes.hpp"
+#include "../Config/TypeDefines.hpp"
+#include MESSAGE_USER_TYPES_HEADER
 
-void CMessageTypesMap::init() {
-  m_Map[MSG_SWITCH_MAP] = "switch_map";
-  m_Map[MSG_TARGET_REACHED] = "target_reached";
-  m_Map[MSG_DEBUG] = "debug";
-  m_Map[MSG_ENTITY_STATE_CHANGED] = "entity_type_changed";
-  m_Map[MSG_PLAYER_PICKUP_ITEM] = "player_pickup_item";
-  m_Map[MSG_HITPOINTS_CHANGED] = "hitpoints_changed";
-  m_Map[MSG_ENTITY_DATA_CHANGED] = "entity_data_changed";
+template <class USER_TYPE>
+void CMessageTypesMap<USER_TYPE>::init() {
+  CMessageTypesMap<USER_TYPE>::m_Map[MSG_SWITCH_MAP] = "switch_map";
+  CMessageTypesMap<USER_TYPE>::m_Map[MSG_TARGET_REACHED] = "target_reached";
+  CMessageTypesMap<USER_TYPE>::m_Map[MSG_DEBUG] = "debug";
+  CMessageTypesMap<USER_TYPE>::m_Map[MSG_ENTITY_STATE_CHANGED] = "entity_type_changed";
+  CMessageTypesMap<USER_TYPE>::m_Map[MSG_PLAYER_PICKUP_ITEM] = "player_pickup_item";
+  CMessageTypesMap<USER_TYPE>::m_Map[MSG_HITPOINTS_CHANGED] = "hitpoints_changed";
+  CMessageTypesMap<USER_TYPE>::m_Map[MSG_ENTITY_DATA_CHANGED] = "entity_data_changed";
 }
+
+template class CMessageTypesMap<MESSAGE_USER_TYPES>;

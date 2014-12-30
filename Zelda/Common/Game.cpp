@@ -36,6 +36,7 @@
 #include "Physics/PhysicsMasks.hpp"
 #include "Lua/LuaScriptManager.hpp"
 #include MESSAGE_CREATOR_HEADER
+#include MESSAGE_USER_TYPES_HEADER
 #include "Util/GameMemory.hpp"
 #include "Util/Sleep.hpp"
 
@@ -802,7 +803,7 @@ bool CGame::renderOneFrame() {
 #endif
 }
 void CGame::initEnumIdMaps() {
-  CMessageTypesMap::getSingleton().init();
+  MESSAGE_USER_TYPES::getSingleton().init();
   CGameStateIdMap::getSingleton().init();
   CEntityStateIdMap::getSingleton().init();
 

@@ -419,7 +419,7 @@
     <animation name="SwordAttack" id="3" allow_moving="false"/>
     <animation name="RunPegasus" id="4"/>
     <animation name="Sleep" id="5"/>
-    <animation name="Awake" id="6"/>
+    <animation name="Awake" id="6" loop="false"/>
   </person>
   <person
       id="links_father"

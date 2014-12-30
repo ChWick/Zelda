@@ -183,6 +183,9 @@ void CPlayer::updateAnimationsCallback(const Ogre::Real fTime) {
   else if (m_uiAnimID == ANIM_JUMP_START && m_Anims[ANIM_JUMP_START]->hasEnded()) {
     setAnimation(ANIM_JUMP_LOOP);
   }*/
+  if (m_uiAnimID == P_ANIM_AWAKE && m_Anims[P_ANIM_AWAKE]->hasEnded()) {
+    setAnimation(P_ANIM_IDLE);
+  }
   if (dynamic_cast<CPersonController*>(m_pCharacterController)->getMoveState()
       == CPersonController::MS_RUNNING) {
     if (m_uiAnimID != P_ANIM_RUN) {

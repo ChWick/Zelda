@@ -32,6 +32,7 @@
 #include "World/Objects/ObjectTypes.hpp"
 #include "TextConverter.hpp"
 #include "World/Messages/UserMessageTypes.hpp"
+#include "World/Messages/MessageShowText.hpp"
 #include "Common/Message/MessageSwitchMap.hpp"
 
 CZelda::~CZelda() {
@@ -73,6 +74,8 @@ void CZelda::initEnumIdMaps() {
 
   CGlobalCollisionShapesTypesIdMap::getSingleton().init();
   CSwitchMapTypes::getSingleton().init();
+
+  CMessageShowText::CStatusIDMap::getSingleton().init();
 }
 
 void CZelda::chooseGameState() {

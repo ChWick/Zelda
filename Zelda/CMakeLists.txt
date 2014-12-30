@@ -26,6 +26,7 @@ include(toolchain/CopyButtonImageset)
 
 set(Game_include_directories
     ${PROJECT_CONFIG_OUT}
+    ${SOURCE_DIR}
     ..
     .
     ${BULLET_INCLUDE_DIR}

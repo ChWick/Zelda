@@ -40,6 +40,12 @@ int deleteEntity(lua_State *l);
 int hasItem(lua_State *l);
 
 //! c function call to warp an entities position or orientation
+/**
+  * id (string)
+  * position (vector3)
+  * rotation angle (degree)               optional
+  * rotation axis (vector3)               optional
+  */
 int warp(lua_State *l);
 
 //! c function to set the inner object of an object or chest

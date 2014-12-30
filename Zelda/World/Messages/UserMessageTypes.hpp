@@ -29,7 +29,7 @@ enum EUserMessageTypes {
   MSG_USER_COUNT,
 };
 
-class CUserMessageTypesMap : public CMessageTypesMap {
+class CUserMessageTypesMap : public CMessageTypesMap<CUserMessageTypesMap> {
 public:
   void init();
 };
