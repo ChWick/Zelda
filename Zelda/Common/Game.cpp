@@ -33,6 +33,7 @@
 #include "Message/MessageDebug.hpp"
 #include "Log.hpp"
 #include "PauseManager/PauseManager.hpp"
+#include "Physics/PhysicsMasks.hpp"
 #include "Lua/LuaScriptManager.hpp"
 #include MESSAGE_CREATOR_HEADER
 #include "Util/GameMemory.hpp"
@@ -808,4 +809,7 @@ void CGame::initEnumIdMaps() {
   events::CRepeatTypesMap::getSingleton().init();
   events::CActionTypesMap::getSingleton().init();
   events::CEmitterTypesMap::getSingleton().init();
+
+  CPhysicsGroupsIdMap::getSingleton().init();
+  CPhysicsMasksIdMap::getSingleton().init();
 }

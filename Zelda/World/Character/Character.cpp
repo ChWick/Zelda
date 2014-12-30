@@ -65,6 +65,20 @@ CCharacter::CCharacter(const tinyxml2::XMLElement *pElem,
 
 
 void CCharacter::constructor_impl() {
+  switch (mCharacterData.mAttitude) {
+  case ATTITUDE_ENEMY:
+    mCollisionMask = MASK_PLAYER_N_COLLIDES_WITH;
+    mCollisionGroup = COL_CHARACTER_N;
+    break;
+  case ATTITUDE_FRIENDLY:
+    mCollisionMask = MASK_PLAYER_P_COLLIDES_WITH;
+    mCollisionGroup = COL_CHARACTER_P;
+    break;
+  default:
+    throw Ogre::Exception(0, "Unknown collision mask", __FUNCTION__);
+    break;
+  }
+
   mCCPhysics = NULL;
   m_bMoving = false;
   m_fYaw = 0;
@@ -236,7 +250,7 @@ void CCharacter::updateAnimations(Ogre::Real fTime) {
   updateAnimationsCallback(fTime);
 
   // increment the current animation times
-  if (m_uiAnimID != ANIM_NONE) {
+  if (m_uiAnimID != m_Anims.size()) {
     m_Anims[m_uiAnimID]->addTime(fTime * m_fAnimSpeed);
   }
 
@@ -360,7 +374,7 @@ void CCharacter::animJumpLoop()
 	//setAnimation(ANIM_JUMP_LOOP, true);
 }
 void CCharacter::animJumpEnd() {
-  setAnimation(ANIM_IDLE);
+  //setAnimation(ANIM_IDLE);
   m_fTimer = 0;
 }
 void CCharacter::animAttack() {
@@ -397,26 +411,6 @@ void CCharacter::setIsMoving(bool isMoving) {
 
 bool CCharacter::isReadyForNewAction() {
   return m_uiAnimID == ANIM_NONE || m_uiAnimID == ANIM_IDLE || m_uiAnimID == ANIM_WALK;
-}
-
-short CCharacter::getCollisionMask() {
-    switch (mCharacterData.mAttitude) {
-    case ATTITUDE_ENEMY:
-        return MASK_PLAYER_N_COLLIDES_WITH;
-    case ATTITUDE_FRIENDLY:
-        return MASK_PLAYER_P_COLLIDES_WITH;
-    }
-    throw Ogre::Exception(0, "Unknown collision mask", __FUNCTION__);
-}
-
-short CCharacter::getCollisionGroup() {
-    switch (mCharacterData.mAttitude) {
-      case ATTITUDE_ENEMY:
-        return COL_CHARACTER_N;
-      case ATTITUDE_FRIENDLY:
-        return COL_CHARACTER_P;
-    }
-    throw Ogre::Exception(0, "Unknown collision mask", __FUNCTION__);
 }
 
 void CCharacter::useCurrentItem() {

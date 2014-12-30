@@ -65,7 +65,7 @@ public:
     }
     throw Ogre::Exception(0, "Data could not be parsed.", __FILE__);
   }
-  const DATA &toData(T t) const {
+  const DATA &toData(const T t) const {
     ASSERT(m_Map.count(t) == 1);
     return m_Map.at(t);
   }
@@ -88,7 +88,7 @@ class CStringEnumIdMap : public CEnumIdMap<C, T, std::string> {
     }
     throw Ogre::Exception(0, "'" + str + "' could not be parsed.", __FILE__);
   }
-  const std::string &toString(T t) const {
+  const std::string &toString(const T t) const {
     return CEnumIdMap<C, T, std::string>::toData(t);
   }
 };

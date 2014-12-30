@@ -28,6 +28,18 @@ class CMap;
 
 class CPlayer : public CPerson {
 private:
+  enum EDefaultAnimationIDs {
+    P_ANIM_IDLE,
+    P_ANIM_WALK,
+    P_ANIM_SLICE_HORIZONTAL,
+    P_ANIM_USE_ITEM,
+    P_ANIM_RUN,
+    P_ANIM_SLEEP,
+    P_ANIM_AWAKE,
+
+    P_ANIM_COUNT
+  };
+
   const Ogre::Camera *m_pCamera;
   Ogre::SceneManager *m_pPlayerSceneManager;
   CWorldEntity *m_pLiftedEntity;
@@ -48,7 +60,6 @@ public:
 protected:
   void enterMap(CMap *pMap, const Ogre::Vector3 &vInitPosition);
   void setupInternal();
-  void setupAnimations();
   EReceiveDamageResult receiveDamage(const CDamage &dmg);
   void setupBody(Ogre::SceneManager* sceneMgr);
   void setupCamera(Ogre::Camera* cam);

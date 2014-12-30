@@ -55,6 +55,7 @@ void userRegisterCFunctionsToLua(lua_State *l) {
   registerSingleCFunctionsToLua(l, moveTo, "moveTo");
   registerSingleCFunctionsToLua(l, deleteEntity, "delete");
   registerSingleCFunctionsToLua(l, hasItem, "hasItem");
+  registerSingleCFunctionsToLua(l, warp, "warp");
   registerSingleCFunctionsToLua(l, setInnerObject, "setInnerObject");
   registerSingleCFunctionsToLua(l, playAnimation, "playAnimation");
   registerSingleCFunctionsToLua(l, waitForAnimationHasStopped,
@@ -202,6 +203,43 @@ int deleteEntity(lua_State *l) {
   }
 
   pEntity->deleteLater();
+
+  return 0;
+}
+
+int warp(lua_State *l) {
+  LUA_BRIDGE_START(0);
+
+  LOGV("Lua call: warp");
+
+  if (lua_gettop(l) <= 1) {
+    LOGW("Wrong argument count for warp call");
+    return 0;
+  }
+
+  const std::string id(lua_tostring(l, 1));
+  const Ogre::Vector3 p(Ogre::StringConverter::parseVector3(lua_tostring(l, 2)));
+  Ogre::Quaternion q;
+  if (lua_gettop(l) == 4) {
+    const Ogre::Degree d(Ogre::StringConverter::parseReal(lua_tostring(l, 3)));
+    const Ogre::Vector3 v(Ogre::StringConverter::parseVector3(lua_tostring(l, 4)));
+    q = Ogre::Quaternion(d, v);
+  }
+
+
+  CEntity *pEntity = CGameStateManager::getSingleton().getChildRecursive(id);
+  if (!pEntity) {
+    LOGW("Entity '%s' was not found in entity tree.", id.c_str());
+    return 0;
+  }
+  CWorldEntity *pWE (dynamic_cast<CWorldEntity*>(pEntity));
+  if (!pEntity) {
+    LOGW("Entity '%s' is not a CWorldEntity.", id.c_str());
+    return 0;
+  }
+
+  pWE->warp(p, q);
+
 
   return 0;
 }

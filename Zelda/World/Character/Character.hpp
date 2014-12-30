@@ -204,9 +204,6 @@ protected:
   virtual CCharacterController *createCharacterController() = 0;
   void updateAnimations(const Ogre::Real fTime);
 
-  virtual short getCollisionMask();
-  virtual short getCollisionGroup();
-
   virtual bool isReadyForNewAction();
   void fadeAnimations(const Ogre::Real deltaTime);
 

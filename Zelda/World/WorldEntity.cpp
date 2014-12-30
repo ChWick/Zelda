@@ -22,6 +22,7 @@
 #include <BulletCollision/CollisionDispatch/btCollisionObject.h>
 #include "../Common/Physics/BtOgreExtras.hpp"
 #include "../Common/Physics/BtOgrePG.hpp"
+#include "../Common/Physics/PhysicsMasks.hpp"
 #include "../Common/Util/DeleteSceneNode.hpp"
 #include "../Common/GameLogic/Events/Event.hpp"
 #include "../Common/GameLogic/Events/Emitter/EmitOnCollision.hpp"
@@ -30,18 +31,24 @@
 #include "Atlas/MapPack.hpp"
 #include "Damage.hpp"
 
+using XMLHelper::Attribute;
+
 CWorldEntity::CWorldEntity(const std::string &sID, CEntity *pParent, CMap *pMap, const std::string &sResourceGroup)
   : CEntity(sID, pParent, (sResourceGroup == Ogre::ResourceGroupManager::AUTODETECT_RESOURCE_GROUP_NAME && pMap && pMap->getMapPack().get()) ? pMap->getMapPack()->getResourceGroup() : sResourceGroup),
     m_pSceneNode(nullptr),
     m_pCollisionObject(nullptr),
-    m_pMap(pMap) {
+    m_pMap(pMap),
+    mCollisionMask(MASK_STATIC_COLLIDES_WITH),
+    mCollisionGroup(COL_STATIC) {
 }
 
 CWorldEntity::CWorldEntity(CEntity *pParent, CMap *pMap, const tinyxml2::XMLElement *pElem, const std::string &sResourceGroup)
   : CEntity(pParent, pElem, (sResourceGroup == Ogre::ResourceGroupManager::AUTODETECT_RESOURCE_GROUP_NAME && pMap && pMap->getMapPack().get()) ? pMap->getMapPack()->getResourceGroup() : sResourceGroup),
     m_pSceneNode(nullptr),
     m_pCollisionObject(nullptr),
-    m_pMap(pMap) {
+    m_pMap(pMap),
+    mCollisionMask(CPhysicsMasksIdMap::getSingleton().parseString(Attribute(pElem, "collision_mask", "static"))),
+    mCollisionGroup(CPhysicsGroupsIdMap::getSingleton().parseString(Attribute(pElem, "collision_group", CPhysicsGroupsIdMap::getSingleton().toString(COL_STATIC)))) {
 }
 
 CWorldEntity::~CWorldEntity() {
@@ -58,6 +65,29 @@ void CWorldEntity::exit() {
   }
 
   CEntity::exit();
+}
+
+void CWorldEntity::warp(const SPATIAL_VECTOR &p, const Ogre::Quaternion &q) {
+  if (m_pCollisionObject) {
+    // an attached object has to be readded to the collision world
+    bool attached = m_pMap->getPhysicsManager()->hasCollisionObject(m_pCollisionObject);
+    if (attached) {
+      m_pMap->getPhysicsManager()->secureRemoveCollisionObject(m_pCollisionObject);
+    }
+
+    btTransform &t(m_pCollisionObject->getWorldTransform());
+    t.setOrigin(BtOgre::Convert::toBullet(p));
+    t.setRotation(BtOgre::Convert::toBullet(q));
+
+
+    if (attached) {
+      m_pMap->getPhysicsManager()->secureAddCollisionObject(m_pCollisionObject, mCollisionGroup, mCollisionMask);
+    }
+  }
+  if (m_pSceneNode) {
+    m_pSceneNode->setPosition(p);
+    m_pSceneNode->setOrientation(q);
+  }
 }
 
 const SPATIAL_VECTOR &CWorldEntity::getPosition() const {

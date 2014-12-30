@@ -96,59 +96,6 @@ void CPlayer::setupInternal()  {
 	}*/
 }
 
-void CPlayer::setupAnimations() {
-  Ogre::StringVector animNames(ANIM_COUNT);
-  animNames[ANIM_IDLE] = "Idle";
-  animNames[ANIM_RUN] = "RunPegasus";
-  animNames[ANIM_SLICE_HORIZONTAL] = "SwordAttack";
-  animNames[ANIM_USE_ITEM] = "SwordAttack";
-  animNames[ANIM_WALK] = "Walk";
-  /*animNames[ANIM_HANDS_CLOSED] = "HandsClosed";
-    animNames[ANIM_HANDS_RELAXED] = "HandsRelaxed";
-    animNames[ANIM_SLICE_HORIZONTAL] = "SliceHorizontal";
-    animNames[ANIM_BOW_SHOT] = "BowShot";
-    animNames[ANIM_JUMP_START] = "JumpStart";
-    animNames[ANIM_JUMP_LOOP] = "JumpLoop";
-    animNames[ANIM_JUMP_END] = "JumpEnd";*/
-
-  // this is very important due to the nature of the exported animations
-  m_pBodyEntity->getSkeleton()->setBlendMode(Ogre::ANIMBLEND_CUMULATIVE);
-
-  // populate our animation list
-  for (unsigned int i = 0; i < m_uiAnimationCount; i++) {
-    m_Anims[i] = m_pBodyEntity->getAnimationState(animNames[i]);
-    m_Anims[i]->setLoop(true);
-    mAnimationProperty[i].mFadeState = FADE_NONE;
-    m_Anims[i]->setEnabled(false);
-    m_Anims[i]->setWeight(0);
-  }
-
-  // m_Anims[ANIM_HANDS_CLOSED]->setWeight(1);
-  // m_Anims[ANIM_HANDS_RELAXED]->setWeight(1);
-
-  // m_Anims[ANIM_JUMP_END]->setLoop(false);
-  // m_Anims[ANIM_JUMP_START]->setLoop(false);
-
-
-  // relax the hands since we're not holding anything
-  // m_Anims[ANIM_HANDS_RELAXED]->setEnabled(true);
-
-
-  // start off in the idle state (top and bottom together)
-  setAnimation(ANIM_IDLE);
-
-  // we will manually set the direction of the tool in the left hand
-  Ogre::Bone *pLHandleBone
-      = m_pBodyEntity->getSkeleton()->getBone(PERSON_LEFT_HANDLE);
-  pLHandleBone->setManuallyControlled(true);
-  int numAnimations = m_pBodyEntity->getSkeleton()->getNumAnimations();
-  for (int i = 0; i < numAnimations; i++) {
-    // remonveall possible tracks of the bone in the animations
-    Ogre::Animation * anim = m_pBodyEntity->getSkeleton()->getAnimation(i);
-    anim->destroyNodeTrack(pLHandleBone->getHandle());
-  }
-}
-
 void CPlayer::startup(const Ogre::Vector3 &playerPosition,
                       const Ogre::Vector3 &playerLookDirection,
                       const Ogre::Real cameraYaw,
@@ -238,18 +185,18 @@ void CPlayer::updateAnimationsCallback(const Ogre::Real fTime) {
   }*/
   if (dynamic_cast<CPersonController*>(m_pCharacterController)->getMoveState()
       == CPersonController::MS_RUNNING) {
-    if (m_uiAnimID != ANIM_RUN) {
-      setAnimation(ANIM_RUN);
+    if (m_uiAnimID != P_ANIM_RUN) {
+      setAnimation(P_ANIM_RUN);
     }
   } else if (m_bMoving) {
-    if (m_uiAnimID == ANIM_IDLE || m_uiAnimID == ANIM_NONE
-        || m_uiAnimID == ANIM_RUN) {
-      setAnimation(ANIM_WALK);
+    if (m_uiAnimID == P_ANIM_IDLE || m_uiAnimID == P_ANIM_COUNT
+        || m_uiAnimID == P_ANIM_RUN) {
+      setAnimation(P_ANIM_WALK);
     }
   } else if (!m_bMoving) {
-    if (m_uiAnimID == ANIM_WALK || m_uiAnimID == ANIM_NONE
-        || m_uiAnimID == ANIM_RUN) {
-      setAnimation(ANIM_IDLE);
+    if (m_uiAnimID == P_ANIM_WALK || m_uiAnimID == P_ANIM_COUNT
+        || m_uiAnimID == P_ANIM_RUN) {
+      setAnimation(P_ANIM_IDLE);
     }
   }
 

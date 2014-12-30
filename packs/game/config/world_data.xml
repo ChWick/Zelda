@@ -409,16 +409,17 @@
       id="link"
       mesh_name="link"
       material_name="link_armor"
-      scale="1.5"
       attitude="friend"
       hitpoints="3"
-      animations_count="5"
+      animations_count="7"
       >
     <animation name="Idle" id="0"/>
     <animation name="Walk" id="1"/>
     <animation name="SwordAttack" id="2" allow_moving="false"/>
     <animation name="SwordAttack" id="3" allow_moving="false"/>
     <animation name="RunPegasus" id="4"/>
+    <animation name="Sleep" id="5"/>
+    <animation name="Awake" id="6"/>
   </person>
   <person
       id="links_father"

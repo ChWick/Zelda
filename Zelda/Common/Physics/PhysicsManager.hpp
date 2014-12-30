@@ -171,6 +171,10 @@ class CPhysicsManager
   bool hasRigidBody(btRigidBody *body);
   void secureAddRigidBody(btRigidBody *body, uint16_t group, uint16_t mask);
   void secureRemoveRigidBody(btRigidBody *body);
+  
+  bool hasCollisionObject(btCollisionObject *co);
+  void secureAddCollisionObject(btCollisionObject *co, uint16_t group, uint16_t mask);
+  void secureRemoveCollisionObject(btCollisionObject *co);
 
 
 #if PHYSICS_MANAGER_DEBUG == 1

@@ -159,6 +159,24 @@ void CPhysicsManager::secureRemoveRigidBody(btRigidBody *body) {
   m_pPhyWorld->removeRigidBody(body);
 }
 
+
+bool CPhysicsManager::hasCollisionObject(btCollisionObject *co) {
+  return m_pPhyWorld->getCollisionObjectArray().findLinearSearch(co)
+      != m_pPhyWorld->getCollisionObjectArray().size();
+}
+
+void CPhysicsManager::secureAddCollisionObject(btCollisionObject *co,
+                                               uint16_t group,
+                                               uint16_t mask) {
+  if (hasCollisionObject(co)) {return;}
+  m_pPhyWorld->addCollisionObject(co, group, mask);
+}
+
+void CPhysicsManager::secureRemoveCollisionObject(btCollisionObject *co) {
+  if (!hasCollisionObject(co)) {return;}
+  m_pPhyWorld->removeCollisionObject(co);
+}
+
 void CPhysicsManager::update(Ogre::Real tpf) {
   // handle Messages
   while (m_Messages.size() > 0) {
