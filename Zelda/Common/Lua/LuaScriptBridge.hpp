@@ -53,6 +53,9 @@ int log(lua_State *l);
 //! c function call by lua to access messages
 int message(lua_State *l);
 
+//! c function call by lua to sleep a time period
+int msleep(lua_State *l);
+
 //! c funtion to call pause from a lua script
 int pause(lua_State *l);
 

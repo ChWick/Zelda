@@ -34,6 +34,7 @@ using namespace tinyxml2;
 void registerCFunctionsToLua(lua_State *l) {
   registerSingleCFunctionsToLua(l, log, "log");
   registerSingleCFunctionsToLua(l, message, "message");
+  registerSingleCFunctionsToLua(l, msleep, "msleep");
   registerSingleCFunctionsToLua(l, pause, "pause");
   registerSingleCFunctionsToLua(l, unpause, "unpause");
 
@@ -86,6 +87,36 @@ int message(lua_State *l) {
   }
 
   return 0;
+}
+
+int msleep(lua_State *l) {
+  LUA_BRIDGE_START(0);
+
+  if (lua_gettop(l) != 1) {
+    LOGW("Wrong argument count for pause call in lua function msleep");
+    return numberOfReturnValues;
+  }
+
+  int sleep = lua_tointeger(l, 1);
+  if (sleep < 0) {
+    LOGW("sleep time has to be positive");
+    return numberOfReturnValues;
+  }
+
+  // split sleeptime in 100 ms steps
+  int hundrets = sleep / 100;
+  int rest = sleep - hundrets * 100;
+
+  ASSERT(hundrets >= 0);
+  ASSERT(rest >= 0);
+
+  LUA_WAIT(rest);
+
+  for (int i = 0; i < hundrets; ++i) {
+    LUA_WAIT(100);
+  }
+
+  return numberOfReturnValues;
 }
 
 int pause(lua_State *l) {
