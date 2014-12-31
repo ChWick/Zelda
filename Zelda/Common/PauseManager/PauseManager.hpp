@@ -23,6 +23,7 @@
 #include <OgreSingleton.h>
 #include <list>
 #include <vector>
+#include "PauseTypes.hpp"
 
 class CPauseCaller;
 class CPauseListener;
@@ -32,7 +33,7 @@ private:
   std::list<CPauseCaller *> m_lPauseCallers;
   std::list<CPauseListener *> m_lPauseListeners;
 
-  unsigned int m_uiOldPauseFlags;
+  PauseInt m_uiOldPauseFlags;
   bool m_bNeedsUpdate;
 public:
   static CPauseManager& getSingleton(void);
@@ -48,7 +49,7 @@ public:
   void addListener(CPauseListener *pListener);
   void removeListener(CPauseListener *pListener) {m_lPauseListeners.remove(pListener);}
 
-  bool isPause(unsigned int uiFlags) {return (m_uiOldPauseFlags & uiFlags) == uiFlags;}
+  bool isPause(PauseInt uiFlags) {return (m_uiOldPauseFlags & uiFlags) == uiFlags;}
 
   void needUpdate() {m_bNeedsUpdate = true;}
 };

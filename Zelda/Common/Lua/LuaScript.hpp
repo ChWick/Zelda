@@ -26,12 +26,13 @@ extern "C"{
 }
 #include <thread>
 #include <mutex>
+#include "../PauseManager/PauseCaller.hpp"
 
 class CLuaScript;
 
 typedef Ogre::SharedPtr<CLuaScript> CLuaScriptPtr;
 
-class CLuaScript : public Ogre::Resource
+class CLuaScript : public Ogre::Resource, public CPauseCaller
 {
 private:
   std::thread mThread;

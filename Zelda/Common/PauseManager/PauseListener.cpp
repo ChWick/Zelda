@@ -23,6 +23,11 @@
 CPauseListener::CPauseListener() {
   CPauseManager::getSingleton().addListener(this);
 }
+
 CPauseListener::~CPauseListener() {
   CPauseManager::getSingleton().removeListener(this);
+}
+
+bool CPauseListener::isPause(PauseInt p) {
+  return CPauseManager::getSingleton().isPause(p);
 }

@@ -17,18 +17,24 @@
  * Zelda. If not, see http://www.gnu.org/licenses/.
  *****************************************************************************/
 
-#ifndef PAUSE_LISTENER_HPP
-#define PAUSE_LISTENER_HPP
-
 #include "PauseTypes.hpp"
 
-class CPauseListener {
-public:
-  CPauseListener();
-  virtual ~CPauseListener();
+void CPauseTypesIdMap::init() {
+  m_Map[PAUSE_NONE] = "none";
+  m_Map[PAUSE_WORLD_UPDATE] = "world_update";
+  m_Map[PAUSE_WORLD_RENDER] = "world_render";
+  m_Map[PAUSE_ATLAS_UPDATE] = "atlas_update";
+  m_Map[PAUSE_ATLAS_RENDER] = "atlas_render";
+  m_Map[PAUSE_MAP_UPDATE] = "map_update";
+  m_Map[PAUSE_MAP_RENDER] = "map_render";
+  m_Map[PAUSE_PLAYER_UPDATE] = "player_update";
+  m_Map[PAUSE_PLAYER_INPUT] = "player_input";
 
-  virtual void updatePause(int iPauseType, bool bPause) = 0;
-  bool isPause(PauseInt p);
-};
-
-#endif // PAUSE_LISTENER_HPP
+  m_Map[PAUSE_ALL_ATLAS_UPDATE] = "all_atlas_update";
+  m_Map[PAUSE_ALL_ATLAS_RENDER] = "all_atlas_render";
+  m_Map[PAUSE_ALL_ATLAS] = "all_atlas";
+  m_Map[PAUSE_ALL_WORLD_UPDATE] = "all_world_update";
+  m_Map[PAUSE_ALL_WORLD_RENDER] = "all_world_render";
+  m_Map[PAUSE_ALL_WORLD] = "all_world";
+  m_Map[PAUSE_ALL] = "all";
+}

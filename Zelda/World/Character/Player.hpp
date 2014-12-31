@@ -22,11 +22,13 @@
 
 #include "Person.hpp"
 #include "../../Common/GameLogic/EntityProperty.hpp"
+#include "../../Common/PauseManager/PauseListener.hpp"
 #include <OgrePrerequisites.h>
 
 class CMap;
 
-class CPlayer : public CPerson {
+class CPlayer : public CPerson,
+                public CPauseListener {
 private:
   enum EDefaultAnimationIDs {
     P_ANIM_IDLE,
@@ -76,6 +78,8 @@ protected:
   
 private:
   void handleMessage(const CMessagePtr message);
+
+  void updatePause(int iPauseType, bool bPause);
 };
 
 #endif // _PLAYER_HPP_

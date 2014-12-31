@@ -10,6 +10,7 @@ function start()
 
   -- Setup position
   warp("player", "-0.165, 0, -0.255", "90", "0, 1, 0");
+  pause("player_input")
 
   -- start with help call of zelda
   textMessage("<message message_type=\"show_text\" language_string=\"${help_call}\"/>");
@@ -24,4 +25,5 @@ function start()
   -- now awake and normal play starts
   playAnimation("player", "Awake")
   waitForAnimationHasStopped("player", "Awake")
+  unpause()
 end

@@ -21,6 +21,7 @@
 #define PLAYERCONTROLLER_H
 
 #include "PersonController.hpp"
+#include "../../Common/PauseManager/PauseListener.hpp"
 #include "../../Common/Input/GameInputListener.hpp"
 #include "OgreVector3.h"
 #include "OgreSceneNode.h"
@@ -29,7 +30,9 @@
 class CPlayer;
 class CCameraController;
 
-class CPlayerController : public CPersonController, public CGameInputListener {
+class CPlayerController :
+  public CPersonController,
+  public CGameInputListener {
  private:
   Ogre::SceneManager * mSceneManager;
   const Ogre::Camera *m_pCamera;

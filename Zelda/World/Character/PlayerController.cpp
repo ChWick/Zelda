@@ -19,6 +19,7 @@
 
 #include "PlayerController.hpp"
 #include "Player.hpp"
+#include "../../Common/PauseManager/PauseTypes.hpp"
 #include "../../Common/Input/GameInputCommand.hpp"
 #include <OgreCamera.h>
 
@@ -31,7 +32,7 @@ CPlayerController::CPlayerController(SceneManager * scnMgr,
                                      const Ogre::Camera *pCamera,
                                      CPlayer * ccPlayer)
     : CPersonController(ccPlayer),
-      CGameInputListener(true, PAUSE_ATLAS_UPDATE),
+      CGameInputListener(true, PAUSE_ATLAS_UPDATE | PAUSE_PLAYER_INPUT),
       mSceneManager(scnMgr),
       m_pCamera(pCamera),
       mKeyDirection(Vector3::ZERO) {
@@ -195,6 +196,11 @@ void CPlayerController::updateCharacter(const Real deltaTime) {
 void CPlayerController::updateGoalDirection() {
   mGoalDirection = Ogre::Vector3::ZERO;
 
+  if (isPause(PAUSE_PLAYER_INPUT)) {
+    // dont move if input paused
+    return;
+  }
+
   if (mKeyDirection != Vector3::ZERO) {
     // calculate actuall goal direction in world based
     // on player's key directions
@@ -205,11 +211,13 @@ void CPlayerController::updateGoalDirection() {
     mGoalDirection.normalise();
   }
 }
+
 void CPlayerController::postUpdateCharacter(Ogre::Real tpf) {
   if (m_uiCurrentMoveState == MS_NOT_MOVING) {
     changeMoveState(MS_NORMAL);
   }
 }
+
 void CPlayerController::interactionLockedChanged(bool bActivate) {
   if (!bActivate) {
     setGameInputListenerEnabled(true);

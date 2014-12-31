@@ -24,6 +24,7 @@
 #include "../../Common/Util/DebugDrawer.hpp"
 #include "PlayerController.hpp"
 #include <OgreLogManager.h>
+#include "../../Common/PauseManager/PauseTypes.hpp"
 #include "../../Common/Physics/BtOgreExtras.hpp"
 #include "../../Common/Util/Assert.hpp"
 #include "../../Common/GameLogic/Events/Event.hpp"
@@ -322,4 +323,9 @@ void CPlayer::handleMessage(const CMessagePtr message) {
   }
 
   CPerson::handleMessage(message);
+}
+
+void CPlayer::updatePause(int iPauseType, bool bPause) {
+  if (iPauseType == PAUSE_PLAYER_INPUT) {
+  }
 }

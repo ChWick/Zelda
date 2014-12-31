@@ -53,6 +53,12 @@ int log(lua_State *l);
 //! c function call by lua to access messages
 int message(lua_State *l);
 
+//! c funtion to call pause from a lua script
+int pause(lua_State *l);
+
+//! c function to call unpause from a lua script
+int unpause(lua_State *l);
+
 //! c function call by lua to write a int data to game memory
 int writeIntToMemory(lua_State *l);
 

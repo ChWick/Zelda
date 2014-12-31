@@ -23,6 +23,7 @@
 #include "../Message/MessageCreator.hpp"
 #include "../Message/MessageHandler.hpp"
 #include "../tinyxml2/tinyxml2.hpp"
+#include "../PauseManager/PauseTypes.hpp"
 #include "../Util/Sleep.hpp"
 #include "../Util/Assert.hpp"
 #include <memory>
@@ -33,6 +34,8 @@ using namespace tinyxml2;
 void registerCFunctionsToLua(lua_State *l) {
   registerSingleCFunctionsToLua(l, log, "log");
   registerSingleCFunctionsToLua(l, message, "message");
+  registerSingleCFunctionsToLua(l, pause, "pause");
+  registerSingleCFunctionsToLua(l, unpause, "unpause");
 
   // memory access
   registerSingleCFunctionsToLua(l, writeIntToMemory, "writeIntToMemory");
@@ -83,6 +86,45 @@ int message(lua_State *l) {
   }
 
   return 0;
+}
+
+int pause(lua_State *l) {
+  LUA_BRIDGE_START(0);
+
+  if (lua_gettop(l) != 1) {
+    LOGW("Wrong argument count for pause call in lua function pause");
+    return numberOfReturnValues;
+  }
+
+  std::string pstr(lua_tostring(l, 1));
+
+  luaStateMutex.lock();
+  luaScript->pause(CPauseTypesIdMap::getSingleton().parseString(pstr));
+  luaStateMutex.unlock();
+
+  return numberOfReturnValues;
+}
+
+int unpause(lua_State *l) {
+  LUA_BRIDGE_START(0);
+
+  if (lua_gettop(l) > 1) {
+    LOGW("Wrong argument count for pause call in lua function pause");
+    return numberOfReturnValues;
+  }
+
+  luaStateMutex.lock();
+  if (lua_gettop(l) == 0) {
+    // unpause all
+    luaScript->unpause();
+  } else {
+    std::string pstr(lua_tostring(l, 1));
+    luaScript->unpause(CPauseTypesIdMap::getSingleton().parseString(pstr));
+  }
+
+  luaStateMutex.unlock();
+
+  return numberOfReturnValues;
 }
 
 int writeIntToMemory(lua_State *l) {
