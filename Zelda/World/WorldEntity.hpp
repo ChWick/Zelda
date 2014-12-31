@@ -50,6 +50,7 @@ public:
   virtual void translate(const SPATIAL_VECTOR &vOffset);
 
   virtual const SPATIAL_VECTOR getFloorPosition() const {return getPosition();}
+  virtual void setFloorPosition(const SPATIAL_VECTOR &p) {setPosition(p);}
 
   virtual const SPATIAL_VECTOR &getCenter() const;
   virtual void setCenter(const SPATIAL_VECTOR &vCenter);

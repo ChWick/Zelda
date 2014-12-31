@@ -68,6 +68,7 @@ public:
   virtual void interact() {}
 
   virtual const Ogre::Vector3 getFloorPosition() const;
+  virtual void setFloorPosition(const Ogre::Vector3 &p);
 
     virtual void moveToTarget(const SPATIAL_VECTOR &vPosition, const Ogre::Quaternion &qRotation = Ogre::Quaternion::IDENTITY, const Ogre::Real fMaxDistanceDeviation = 0, const Ogre::Radian fMaxAngleDeviation = Ogre::Radian(Ogre::Math::TWO_PI));
 

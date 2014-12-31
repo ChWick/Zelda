@@ -5,8 +5,8 @@ function start()
     setInnerObject("lamp_chest", "tool_lamp");
   end
 
-  playAnimation("links_father", "Sit");
-  playAnimation("player", "Sleep");
+  playAnimation("links_father", "Sit", true, true);
+  playAnimation("player", "Sleep", true, true);
 
   -- Setup position
   warp("player", "-0.165, 0, -0.255", "90", "0, 1, 0");

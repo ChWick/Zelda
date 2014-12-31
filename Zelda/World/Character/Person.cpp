@@ -33,6 +33,7 @@
 #include <OgreSceneManager.h>
 #include <OgreSubMesh.h>
 #include "../../Common/Physics/PhysicsMasks.hpp"
+#include "../../Common/Physics/BtOgrePG.hpp"
 #include "../GlobalCollisionShapesTypes.hpp"
 #include "PersonTypes.hpp"
 #include "../../Common/Log.hpp"
@@ -105,6 +106,17 @@ CCharacterController *CPerson::createCharacterController() {
 
 const Ogre::Vector3 CPerson::getFloorPosition() const {
   return m_pSceneNode->getPosition() - Ogre::Vector3(0, PERSON_FLOOR_OFFSET, 0);
+}
+
+void CPerson::setFloorPosition(const Ogre::Vector3 &p) {
+  Ogre::Vector3 floorOffset(0, PERSON_FLOOR_OFFSET, 0);
+  if (mCCPhysics) {
+    mCCPhysics->warp(BtOgre::Convert::toBullet(p + floorOffset));
+    m_pSceneNode->setPosition(BtOgre::Convert::toOgre(
+        m_pCollisionObject->getWorldTransform().getOrigin()));
+  } else {
+    m_pCharacterController->setPosition(p + floorOffset);
+  }
 }
 
 void CPerson::createPhysics() {

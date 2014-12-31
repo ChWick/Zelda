@@ -68,25 +68,22 @@ void CWorldEntity::exit() {
 }
 
 void CWorldEntity::warp(const SPATIAL_VECTOR &p, const Ogre::Quaternion &q) {
+  bool attached(false);
   if (m_pCollisionObject) {
     // an attached object has to be readded to the collision world
-    bool attached = m_pMap->getPhysicsManager()->hasCollisionObject(m_pCollisionObject);
+    attached = m_pMap->getPhysicsManager()->hasCollisionObject(m_pCollisionObject);
     if (attached) {
       m_pMap->getPhysicsManager()->secureRemoveCollisionObject(m_pCollisionObject);
     }
-
-    btTransform &t(m_pCollisionObject->getWorldTransform());
-    t.setOrigin(BtOgre::Convert::toBullet(p));
-    t.setRotation(BtOgre::Convert::toBullet(q));
-
-
-    if (attached) {
-      m_pMap->getPhysicsManager()->secureAddCollisionObject(m_pCollisionObject, mCollisionGroup, mCollisionMask);
-    }
   }
-  if (m_pSceneNode) {
-    m_pSceneNode->setPosition(p);
-    m_pSceneNode->setOrientation(q);
+
+  // normally set the position and orientation
+  setFloorPosition(p);
+  setOrientation(q);
+
+  if (attached) {
+    // add it again
+    m_pMap->getPhysicsManager()->secureAddCollisionObject(m_pCollisionObject, mCollisionGroup, mCollisionMask);
   }
 }
 
@@ -101,6 +98,7 @@ const SPATIAL_VECTOR &CWorldEntity::getPosition() const {
 
   return CEntity::getPosition();
 }
+
 void CWorldEntity::setPosition(const SPATIAL_VECTOR &vPos) {
   if (m_pCollisionObject) {
     if (btRigidBody::upcast(m_pCollisionObject)
@@ -123,6 +121,7 @@ void CWorldEntity::setPosition(const SPATIAL_VECTOR &vPos) {
     m_pSceneNode->setPosition(vPos);
   }
 }
+
 void CWorldEntity::translate(const SPATIAL_VECTOR &vOffset) {
   m_pSceneNode->translate(vOffset);
 }
