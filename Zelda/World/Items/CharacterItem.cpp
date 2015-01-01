@@ -20,6 +20,9 @@
 #include "CharacterItem.hpp"
 #include <BulletCollision/CollisionShapes/btBoxShape.h>
 #include <BulletCollision/CollisionShapes/btCollisionShape.h>
+#include <BulletCollision/CollisionShapes/btTriangleShape.h>
+#include <BulletCollision/CollisionShapes/btCompoundShape.h>
+#include <BulletCollision/CollisionShapes/btConvexHullShape.h>
 #include <BulletDynamics/Dynamics/btRigidBody.h>
 #include <string>
 #include "ItemData.hpp"
@@ -43,16 +46,24 @@ CCharacterItem::CCharacterItem(CCharacter *character,
   mCharacter(character),
   mVariantType(type),
   mBoneToAttach(boneToAttach),
-  mBlockPhysics(nullptr) {
+  mBlockPhysics(nullptr),
+  mDamagePhysics(nullptr),
+  mContactResultCallback(this) {
   ASSERT(character);
   ASSERT(boneToAttach.size() > 0);
 
   if (mCharacter->getCharacterData().mAttitude == ATTITUDE_FRIENDLY) {
     mBlockPhysicsMask = MASK_SHIELD_P_COLLIDES_WITH;
     mBlockPhysicsGroup = COL_SHIELD_P;
+
+    mCollisionMask = MASK_DAMAGE_P_COLLIDES_WITH;
+    mCollisionGroup = COL_DAMAGE_P;
   } else {
     mBlockPhysicsMask = MASK_SHIELD_N_COLLIDES_WITH;
     mBlockPhysicsGroup = COL_SHIELD_N;
+
+    mCollisionMask = MASK_DAMAGE_N_COLLIDES_WITH;
+    mCollisionGroup = COL_DAMAGE_N;
   }
 
   mAttachedMesh = mCharacter->getSceneNode()
@@ -64,6 +75,8 @@ CCharacterItem::CCharacterItem(CCharacter *character,
                            Ogre::Quaternion(Ogre::Degree(0),
                                             Ogre::Vector3::UNIT_X));
   createPhysics(mCharacter->getMap());
+
+  mContactResultCallback.init();
 }
 
 CCharacterItem::~CCharacterItem() {
@@ -100,39 +113,55 @@ void CCharacterItem::enterNewMap(CMap *oldMap, CMap *newMap) {
 
 
 void CCharacterItem::createPhysics(CMap *map) {
-  if (CItemVariantDataMap::getSingleton().toData(mVariantType)
-      .vBlockPhysicsSize.isZeroLength()) {
-    return;
-  }
-
   destroyPhysics(map);  // check, that deleted, e.g. when switching
+
   CPhysicsManager *physicsManager = map->getPhysicsManager();
 
+  if (!CItemVariantDataMap::getSingleton().toData(mVariantType)
+      .vBlockPhysicsSize.isZeroLength()) {
+    btCollisionShape *shape = nullptr;
+    mPhysicsOffset
+        = CItemVariantDataMap::getSingleton().
+        toData(mVariantType).vBlockPhysicsOffset;
+    shape = new btBoxShape(BtOgre::Convert::toBullet(
+        CItemVariantDataMap::getSingleton().
+        toData(mVariantType).vBlockPhysicsSize));
+    mBlockPhysics = new btRigidBody(0,
+                                    new btDefaultMotionState(),
+                                    shape);
 
-  btCollisionShape *shape = nullptr;
-  mPhysicsOffset
-      = CItemVariantDataMap::getSingleton().
-      toData(mVariantType).vBlockPhysicsOffset;
-  shape = new btBoxShape(BtOgre::Convert::toBullet(
-      CItemVariantDataMap::getSingleton().
-      toData(mVariantType).vBlockPhysicsSize));
-  mBlockPhysics = new btRigidBody(0,
-                                  new btDefaultMotionState(),
-                                  shape);
+    physicsManager->secureAddRigidBody(mBlockPhysics,
+                                       mBlockPhysicsGroup,
+                                       mBlockPhysicsMask);
 
-  physicsManager->secureAddRigidBody(mBlockPhysics,
-                                     mBlockPhysicsGroup,
-                                     mBlockPhysicsMask);
+    mCharacter->setThisAsCollisionObjectsUserPointer(mBlockPhysics);
+  }
 
-  mCharacter->setThisAsCollisionObjectsUserPointer(mBlockPhysics);
+  if (mVariantType == ITEM_VARIANT_SWORD_SIMPLE) {
+    mDamagePhysics = new btRigidBody(0,
+                                     new btDefaultMotionState(),
+                                     nullptr);
+    physicsManager->secureAddRigidBody(mBlockPhysics,
+                                       COL_NOTHING,
+                                       MASK_NONE);
+  }
 }
 
 void CCharacterItem::destroyPhysics(CMap *map) {
-  if (!mBlockPhysics) {return;}  // not created
-
   CPhysicsManager *physicsManager = map->getPhysicsManager();
-  physicsManager->deleteNow(mBlockPhysics);
-  mBlockPhysics = nullptr;
+
+  if (mBlockPhysics) {
+    physicsManager->deleteNow(mBlockPhysics);
+    mBlockPhysics = nullptr;
+  }
+  if (mDamagePhysics) {
+    if (mDamagePhysics->getCollisionShape()) {
+      delete mDamagePhysics->getCollisionShape();
+      mDamagePhysics->setCollisionShape(nullptr);
+    }
+    physicsManager->deleteNow(mDamagePhysics);
+    mDamagePhysics = nullptr;
+  }
 }
 
 void CCharacterItem::startDamage() {
@@ -146,7 +175,8 @@ void CCharacterItem::startDamage() {
       body->getParentNode()->convertLocalToWorldPosition(
           body->getSkeleton()->getBone(mBoneToAttach)
           ->_getDerivedPosition()));
-  mOldDamageStartPos = vDir + vPos;
+  mOldDamageStartPos = vPos;
+  mOldDamageEndPos = vDir + vPos;
 }
 
 void CCharacterItem::updateDamage(Ogre::Real tpf) {
@@ -158,18 +188,40 @@ void CCharacterItem::updateDamage(Ogre::Real tpf) {
   const Ogre::Vector3 vDir(
       body->getParentNode()->convertLocalToWorldOrientation(
           body->getSkeleton()->getBone(mBoneToAttach)
-          ->_getDerivedOrientation()).yAxis() * 0.08);
+          ->_getDerivedOrientation()).yAxis()
+      * CItemVariantDataMap::getSingleton().toData(mVariantType).fLength);
   const Ogre::Vector3 vPos(
       body->getParentNode()->convertLocalToWorldPosition(
           body->getSkeleton()->getBone(mBoneToAttach)
           ->_getDerivedPosition()));
-  mOldDamageStartPos = vDir + vPos;
+  mOldDamageStartPos = vPos;
+  mOldDamageEndPos = vDir + vPos;
 
-  if (mCharacter->createDamage(Ogre::Ray(vPos, vDir),
+  if (mVariantType == ITEM_VARIANT_SWORD_SIMPLE) {
+    // create the new collision shape
+    btConvexHullShape *shape = new btConvexHullShape();
+    shape->addPoint(BtOgre::Convert::toBullet(vPos));
+    shape->addPoint(BtOgre::Convert::toBullet(vPos + vDir));
+    shape->addPoint(BtOgre::Convert::toBullet(mOldDamageEndPos));
+    shape->addPoint(BtOgre::Convert::toBullet(mOldDamageStartPos));
+    shape->setMargin(0);
+    mDamagePhysics->setCollisionShape(shape);
+
+    // perform collision check
+    CMap *map = mCharacter->getMap();
+    btCollisionWorld *physWorld = map->getPhysicsManager()->getWorld();
+    physWorld->contactTest(mDamagePhysics, mContactResultCallback);
+
+    // and delete it
+    delete mDamagePhysics->getCollisionShape();
+    mDamagePhysics->setCollisionShape(nullptr);
+  } else {
+    if (mCharacter->createDamage(Ogre::Ray(vPos, vDir),
                                createDamage()) == false) {
-    // no hit, check for low framerates
-    mCharacter->createDamage(Ogre::Ray(vPos + vDir,
-                                       mOldDamageStartPos), createDamage());
+      // no hit, check for low framerates
+      mCharacter->createDamage(Ogre::Ray(vPos + vDir,
+                                        mOldDamageStartPos), createDamage());
+    }
   }
 
   DebugDrawer::getSingleton().drawLine(vPos, vPos + vDir,
@@ -221,4 +273,42 @@ Ogre::Vector3 CCharacterItem::getDamagePosition() {
 CCharacterItem::EReceiveDamageResult CCharacterItem::hit(
     const CDamage &damage) {
   return RDR_BLOCKED;
+}
+
+
+
+
+CCharacterItemContactResultCallback::CCharacterItemContactResultCallback(CCharacterItem *c)
+  : mCharacterItem(c) {
+}
+
+void CCharacterItemContactResultCallback::init() {
+  m_collisionFilterGroup = mCharacterItem->getCollisionGroup();
+  m_collisionFilterMask = mCharacterItemt->getCollisionMask();
+}
+
+btScalar CCharacterItemContactResultCallback::addSingleResult(btManifoldPoint &cp,
+                           const btCollisionObjectWrapper *colObj0Wrap,
+                           int partId0,
+                           int index0,
+                           const btCollisionObjectWrapper *colObj1Wrap,
+                           int partId1,
+                           int index1) {
+
+  collision(colObj0Wrap->getCollisionObject());
+  collision(colObj1Wrap->getCollisionObject());
+  return 0;
+}
+
+void CCharacterItemContactResultCallback::collision(const btCollisionObject *obj) {
+  if (obj != mCharacterItem->getBlockPhysics()
+      && obj != mCharacterItem->getDamagePhysics()
+      && obj != mCharacterItem->getCharacter()->getCollisionObject()) {
+    CWorldEntity *pWE
+        = CWorldEntity::getFromUserPointer(obj);
+    if (pWE) {
+      // let the character attack this entity
+      mCharacterItem->getCharacter()->attack(mCharacterItem->createDamage(), pWE);
+    }
+  }
 }
