@@ -186,7 +186,7 @@
       damage_value="50"
       block_physics_size="0.01 0.04 0.01"
       block_physics_offset="0 0.02 0"
-      length="0.08"
+      length="0.04"
       />
   <item
       id="sword_master"
@@ -215,8 +215,9 @@
       basic_mesh_name="soldier_sword.mesh"
       damage_type="sword"
       damage_value="50"
-      block_physics_size="0.01 0.04 0.01"
-      block_physics_offset="0 0.02 0"
+      block_physics_size="0.01 0.06 0.01"
+      block_physics_offset="0 0.03 0"
+      length="0.05"
       />
   <item
       id="enemy_shield_simple"
