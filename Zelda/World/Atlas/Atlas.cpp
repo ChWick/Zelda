@@ -81,7 +81,7 @@ CAtlas::CAtlas(CEntity *pParent, Ogre::SceneNode *pRootSceneNode)
       = new CMap(this,
                  CMapPackPtr(new CMapPack(
                      CFileManager::getResourcePath("maps/Atlases/LightWorld/"),
-                     "inner_house_link")), m_pSceneNode, m_pPlayer);
+                     "link_house")), m_pSceneNode, m_pPlayer);
   mFirstFrame = true;
 
   m_pPlayer->enterMap(m_pCurrentMap, Ogre::Vector3(0, 2, 0));
@@ -209,7 +209,8 @@ void CAtlas::handleMessage(const CMessagePtr message) {
 
         // determine direction
         Ogre::Vector3 vDirection(Ogre::Vector3::ZERO);
-        if (abs(nextPack->getGlobalPosition().x
+        Ogre::Vector3 vMapOffset(nextPack->getGlobalPosition() - currPack->getGlobalPosition());
+        /*if (abs(nextPack->getGlobalPosition().x
                 + nextPack->getGlobalSize().x
                 - currPack->getGlobalPosition().x) < 0.01) {
           vDirection.x = -1;
@@ -225,8 +226,31 @@ void CAtlas::handleMessage(const CMessagePtr message) {
                        + currPack->getGlobalSize().y
                        - nextPack->getGlobalPosition().z) < 0.01) {
           vDirection.z = 1;
-        }
+        }*/
 
+        Ogre::Radian r(Ogre::Math::ATan2(vMapOffset.z, vMapOffset.x));
+        if (r < Ogre::Radian(0)) {r += Ogre::Radian(Ogre::Math::TWO_PI);}
+
+        // round and convert to int (0,3)
+        int dir = static_cast<int>((r.valueRadians() + Ogre::Math::PI / 4) / Ogre::Math::TWO_PI * 4);
+        switch (dir) {
+          case 0:
+            vDirection.x = 1;
+            break;
+          case 1:
+            vDirection.z = 1;
+            break;
+          case 2:
+            vDirection.x = -1;
+            break;
+          case 3:
+            vDirection.z = -1;
+            break;
+
+          default:
+          throw Ogre::Exception(0, "dir not allowed", __FILE__);
+            break;
+        }
 
         vPlayerPos = m_pPlayer->getPosition() + vMapPositionOffset;
         vPlayerMoveToPos = vPlayerPos + vDirection * 0.2;

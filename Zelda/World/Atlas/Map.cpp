@@ -186,13 +186,16 @@ CMap::CMap(CEntity *pAtlas,
 
 
   m_SceneLoader.addCallback(this);
+
+  mPrependNodeName = m_MapPack->getName()
+                              + Ogre::StringConverter::toString(MAP_COUNTER++);
+
   m_SceneLoader.parseDotScene(m_MapPack->getSceneFile(),
                               m_MapPack->getResourceGroup(),
                               m_pSceneNode->getCreator(),
                               &m_PhysicsManager,
                               m_pSceneNode,
-                              m_MapPack->getName()
-                              + Ogre::StringConverter::toString(MAP_COUNTER++));
+                              mPrependNodeName);
 
   m_MapPack->parse();
 

@@ -1,3 +1,18 @@
+# tile meshes
+wall_mid_bot*.mesh
+wall_mid_top*.mesh
+wall_sep_green*.mesh
+wall_top_corner_green.mesh
+underwater_wall_*.mesh
+soil_sep*.mesh
+Plane*.mesh
+green_shadow_fence*.mesh
+green_to_wall*.mesh
+physics_floor.*.mesh
+soil_ground*.mesh
+boundary_top*.mesh
+underwater_floor*.mesh
+
 # ignroe meshes that are used from objects
 fence*.mesh
 flower*.mesh
@@ -25,6 +40,6 @@ inner_house_small_table.mesh
 inner_house_table_leg.mesh
 inner_house_window.mesh
 
-# materials are in light_world pack
+# materials are in light_world pack, custom materials have to be added on your own
 *.material
 

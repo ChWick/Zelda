@@ -67,7 +67,7 @@ public:
     m_ListenerList.push_back(pListener);
   }
   void removeInputListener(CInputListener *pListener) {
-    ASSERT(hasInputListener(pListener));
+    // no assert check here, since on exceptions we still must be able to remove
     m_ListenerList.remove(pListener);
   }
   bool hasInputListener(CInputListener *pListener) {

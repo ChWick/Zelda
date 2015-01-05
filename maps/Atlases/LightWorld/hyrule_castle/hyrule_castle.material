@@ -1,0 +1,12 @@
+material hyrule_castle {
+    technique
+    {
+        pass
+        {
+            texture_unit
+            {
+                texture       hyrule_castle.png
+            }
+        }
+    }
+}

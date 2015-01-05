@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map global_position="-3.2 0 0" global_size="3.2 3.2">
+<map global_position="-1.6 0 4.8" global_size="3.2 3.2">
   <region id="bottom_margin" position="0 0 1.6" size="1.6 1 0.01" shape="box"/>
   <region id="top_margin" position="0 0 -1.6" size="1.6 1 0.01" shape="box"/>
   <region id="left_margin" position="-1.6 0 0" size="0.01 1 1.6" shape="box"/>

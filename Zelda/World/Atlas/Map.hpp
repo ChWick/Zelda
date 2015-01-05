@@ -51,6 +51,7 @@ private:
   Ogre::AnimationState *m_pFlowerAnimationState;
   Ogre::MaterialPtr m_pWaterSideWaveMaterial;
   std::map<std::string, Ogre::Entity*> m_mStaticEntitiesMap;
+  std::string mPrependNodeName;
 public:
   CMap(CEntity *pAtlas, CMapPackPtr mapPack, Ogre::SceneNode *pParentSceneNode, CWorldEntity *pPlayer);
   virtual ~CMap();
@@ -65,6 +66,7 @@ public:
   const CPhysicsManager *getPhysicsManager() const {return &m_PhysicsManager;}
   CPhysicsManager *getPhysicsManager() {return &m_PhysicsManager;}
   const CMapPackPtr getMapPack() const {return m_MapPack;}
+  const std::string &getPrependNodeName() const {return mPrependNodeName;}
 
   void update(Ogre::Real tpf);
   bool frameStarted(const Ogre::FrameEvent& evt);

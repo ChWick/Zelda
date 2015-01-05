@@ -71,7 +71,7 @@ CObject::CObject(const std::string &id,
                             m_pSceneNode->getOrientation());
     setCurAndMaxHP(HP_INFINITY);
   } else {
-    pEntity = pSceneManager->createEntity(id + "ent",
+    pEntity = pSceneManager->createEntity(pMap->getPrependNodeName() + id + "ent",
                                           m_ObjectTypeData.sMeshName + ".mesh",
                                           "World");
     if (m_ObjectTypeData.sMaterialName.size() > 0) {

@@ -284,7 +284,7 @@ CCharacterItemContactResultCallback::CCharacterItemContactResultCallback(CCharac
 
 void CCharacterItemContactResultCallback::init() {
   m_collisionFilterGroup = mCharacterItem->getCollisionGroup();
-  m_collisionFilterMask = mCharacterItemt->getCollisionMask();
+  m_collisionFilterMask = mCharacterItem->getCollisionMask();
 }
 
 btScalar CCharacterItemContactResultCallback::addSingleResult(btManifoldPoint &cp,
