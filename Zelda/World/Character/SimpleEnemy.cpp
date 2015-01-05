@@ -32,12 +32,13 @@
 #include "../Items/CharacterItem.hpp"
 
 CSimpleEnemy::CSimpleEnemy(const std::string &sID,
+                           const SPersonData &data,
                            CEntity *pParent,
                            CMap *pMap)
     : CPerson(sID,
               pParent,
               pMap,
-              CPersonDataIdMap::getSingleton().toData(PERSON_SOLDIER_GREEN_SWORD),
+              data,
               SE_ANIM_COUNT) {
 }
 

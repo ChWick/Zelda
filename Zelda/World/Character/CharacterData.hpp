@@ -45,6 +45,8 @@ struct SCharacterAnimationData {
 
 //! Character data
 struct SCharacterData {
+  //! class of the character to use on creation
+  std::string mCharacterClass;
   //! attitude of the character
   ECharacterAttitude mAttitude;
   //! The animations of the character

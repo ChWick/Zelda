@@ -280,7 +280,7 @@
       permanent_static = "false"
       mesh_name = "vase"
       material_name = "VaseSide"
-      damage_source_mask = "world"
+      damage_source_mask = "none"
       collision_shape = "pickable_object_sphere"
       />
   <object
@@ -389,6 +389,7 @@
        ============
 
        id (string)                       the person id
+       character_class (sting)               the class to use on creation
        mesh_name (string)                the mesh to use
        material_name (string = BLANK)    the material to use
        scale (Ogre::Vector3 or Real)     scaling factor for the complete mesh
@@ -408,6 +409,7 @@
      -->
   <person
       id="link"
+      character_class="player"
       mesh_name="link"
       material_name="link_armor"
       attitude="friend"
@@ -424,6 +426,7 @@
   </person>
   <person
       id="links_father"
+      character_class="links_father"
       mesh_name="links_father"
       attitude="friend"
       animations_count="3"
@@ -434,6 +437,7 @@
   </person>
   <person
       id="soldier_block"
+      character_class="standing_person"
       mesh_name="soldier"
       material_name="soldier_green"
       attitude="enemy"
@@ -444,6 +448,7 @@
   </person>
   <person
       id="soldier_blue"
+      character_class="simple_enemy"
       mesh_name="soldier"
       material_name="soldier_blue"
       attitude="enemy"
@@ -455,6 +460,7 @@
   </person>
   <person
       id="soldier_green_sword"
+      character_class="simple_enemy"
       mesh_name="soldier"
       material_name="soldier_green"
       attitude="enemy"

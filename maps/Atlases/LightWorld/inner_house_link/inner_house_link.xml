@@ -11,7 +11,7 @@
     </event>
   </entrance>
 
-  <new_entity entity_type="links_father" id="links_father" rotation="-90" position="0.2 0 -0.2" person_type="links_father">
+  <new_entity id="links_father" rotation="-90" position="0.2 0 -0.2" person_type="links_father">
     <event repeat="infinite">
       <emitter type="interaction" />
       <action type="start_script" file="links_father_begin.lua"/>

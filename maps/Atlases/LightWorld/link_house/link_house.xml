@@ -23,14 +23,14 @@
     </event>
   </entrance>
   <!-- 
-  <new_entity entity_type="standing_person" id="block_1" rotation="180" position="-0.225 1 1.6" person_type="soldier_green_sword">
+  <new_entity id="block_1" rotation="180" position="-0.225 1 1.6" person_type="soldier_green_sword">
     <event repeat="infinite">
       <emitter type="interaction" />
       <action type="start_script" file="instructions.lua"/>
     </event>
   </new_entity>
 
-  <new_entity entity_type="standing_person" id="block_2" rotation="180" position="-0.075 1 1.5" person_type="soldier_green_sword">
+  <new_entity id="block_2" rotation="180" position="-0.075 1 1.5" person_type="soldier_green_sword">
     <event repeat="infinite">
       <emitter type="interaction" />
       <action type="start_script" file="instructions.lua"/>

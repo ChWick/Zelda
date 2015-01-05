@@ -37,6 +37,7 @@ SCharacterAnimationData::SCharacterAnimationData() {
 }
 
 SCharacterData::SCharacterData(const tinyxml2::XMLElement *e) {
+  mCharacterClass = Attribute(e, "character_class");
   mAttitude = CCharacterAttitudeIdMap::getSingleton().parseString(
       Attribute(e, "attitude"));
 

@@ -258,6 +258,11 @@ void CMap::exit() {
 
   CWorldEntity::exit();
   m_PhysicsManager.exit();
+
+  // reset shared pointers, to make sure it is deleted in correct order
+  m_pWaterSideWaveMaterial.setNull();
+  // mappack is last
+  m_MapPack.reset();
 }
 
 void CMap::CreateCube(const btVector3 &Position, btScalar Mass) {
