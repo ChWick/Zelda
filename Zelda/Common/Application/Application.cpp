@@ -18,10 +18,12 @@
  *****************************************************************************/
 
 #include "Application.hpp"
+#include <CEGUI/Exceptions.h>
 #include <string>
 #include <OgreRoot.h>
 #include <OgreSceneManager.h>
 #include <OgreConfigFile.h>
+#include <OgreException.h>
 #include "../Log.hpp"
 #include "../Util/Assert.hpp"
 #include "../Input/GameInputManager.hpp"
@@ -40,8 +42,20 @@ CApplication::~CApplication() {
 }
 
 void CApplication::go() {
-  initApp();
-  mRoot->startRendering();
+  // catch errors during game
+  try {
+    initApp();
+    mRoot->startRendering();
+  } catch( Ogre::Exception &e) {
+    printExceptionMessage(e.getFullDescription());
+  } catch (CEGUI::Exception &e) {
+    printExceptionMessage(e.getMessage().c_str());
+  }
+  catch (...) {
+    printExceptionMessage("Unknown error");
+  }
+
+  // always close app properly
   closeApp();
 }
 
@@ -309,4 +323,16 @@ void CApplication::deleteInputDevices() {
     OIS::InputManager::destroyInputSystem(mInputManager);
     mInputManager = nullptr;
   }
+}
+
+void CApplication::printExceptionMessage(const std::string &s) {
+#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
+  MessageBox(NULL, e.getFullDescription().c_str(),
+      "An exception has occured!", MB_OK | MB_ICONERROR | MB_TASKMODAL);
+#else
+    std::cerr << "An exception has occured: " <<
+      s.c_str() << std::endl;
+    std::cout << "An exception hat occured: " <<
+      s.c_str() << std::endl;
+#endif
 }

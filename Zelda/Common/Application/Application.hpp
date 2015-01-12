@@ -132,6 +132,8 @@ class CApplication :
   virtual void shutdown();
   virtual void shutdownInput();
   virtual void deleteInputDevices();
+
+  virtual void printExceptionMessage(const std::string &s);
 };
 
 

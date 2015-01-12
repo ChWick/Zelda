@@ -95,6 +95,7 @@ def makeGameZip(modelPacks=[]) :
 	copyAllOfType(zipf, '../packs/game/materials/*.material', 'materials')
 	copyAllOfType(zipf, '../packs/game/programs/*', 'programs')
 	copyAllOfType(zipf, '../packs/game/overlays/*', 'overlays')
+        copyAllOfType(zipf, '../packs/game/scripts/*', 'scripts')
 	
 	# items
 	copyAllOfType(zipf, '../models/items/lamp/*.mesh', 'meshes')
