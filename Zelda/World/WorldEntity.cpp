@@ -18,7 +18,9 @@
  *****************************************************************************/
 
 #include "WorldEntity.hpp"
+#include <string>
 #include <OgreSceneNode.h>
+#include <ParticleUniverseSystemManager.h>
 #include <BulletCollision/CollisionDispatch/btCollisionObject.h>
 #include "../Common/Physics/BtOgreExtras.hpp"
 #include "../Common/Physics/BtOgrePG.hpp"
@@ -55,6 +57,13 @@ CWorldEntity::~CWorldEntity() {
 }
 
 void CWorldEntity::exit() {
+  while (mParticleSystems.size() > 0) {
+    ParticleUniverse::ParticleSystemManager::getSingleton().
+        destroyParticleSystem(mParticleSystems.front(),
+                              getMap()->getSceneNode()->getCreator());
+    mParticleSystems.pop_front();
+  }
+
   if (m_pSceneNode) {
     destroySceneNode(m_pSceneNode, true);
     m_pSceneNode = nullptr;
@@ -65,6 +74,39 @@ void CWorldEntity::exit() {
   }
 
   CEntity::exit();
+}
+
+void CWorldEntity::start() {
+  CEntity::start();
+  for (auto *particleSystem : mParticleSystems) {
+    particleSystem->start();
+  }
+}
+
+void CWorldEntity::stop() {
+  for (auto *particleSystem : mParticleSystems) {
+    particleSystem->stop();
+  }
+  CEntity::stop();
+}
+
+ParticleUniverse::ParticleSystem *CWorldEntity::createParticleSystem(
+    const std::string &name_prefix,
+    const std::string &type,
+    bool autoAttach) {
+  ParticleUniverse::ParticleSystem *s
+      = ParticleUniverse::ParticleSystemManager::getSingleton().
+      createParticleSystem(getID() + name_prefix, type,
+                           getMap()->getSceneNode()->getCreator());
+
+  if (autoAttach) {
+    ASSERT(m_pSceneNode);
+    m_pSceneNode->attachObject(s);
+  }
+
+  mParticleSystems.push_back(s);
+
+  return s;
 }
 
 void CWorldEntity::warp(const SPATIAL_VECTOR &p, const Ogre::Quaternion &q) {

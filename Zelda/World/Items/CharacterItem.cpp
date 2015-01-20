@@ -18,6 +18,7 @@
  *****************************************************************************/
 
 #include "CharacterItem.hpp"
+#include <ParticleUniverseSystem.h>
 #include <BulletCollision/CollisionShapes/btBoxShape.h>
 #include <BulletCollision/CollisionShapes/btCollisionShape.h>
 #include <BulletCollision/CollisionShapes/btTriangleShape.h>
@@ -66,9 +67,11 @@ CCharacterItem::CCharacterItem(CCharacter *character,
     mCollisionGroup = COL_DAMAGE_N;
   }
 
+  const SItemVariantData &itemData(
+      CItemVariantDataMap::getSingleton().toData(type));
+
   mAttachedMesh = mCharacter->getSceneNode()
-      ->getCreator()->createEntity(
-          CItemVariantDataMap::getSingleton().toData(type).sBasicMeshName);
+      ->getCreator()->createEntity(itemData.sBasicMeshName);
   mCharacter->getBodyEntity()
       ->attachObjectToBone(boneToAttach,
                            mAttachedMesh,
@@ -77,13 +80,38 @@ CCharacterItem::CCharacterItem(CCharacter *character,
   createPhysics(mCharacter->getMap());
 
   mContactResultCallback.init();
+
+  // create particle systmes
+  for (const SParticleData &pdata : itemData.mParticleData) {
+    // do not attach it automatically to scene node, we attach it to the bone
+    auto p = createParticleSystem(
+        "_ps" + Ogre::StringConverter::toString(mParticleSystems.size()),
+        pdata.mType,
+        false);
+    mCharacter->getBodyEntity()
+      ->attachObjectToBone(boneToAttach,
+                           p,
+                           Ogre::Quaternion(Ogre::Degree(0),
+                                            Ogre::Vector3::UNIT_X));
+  }
+
+  start();
 }
 
 CCharacterItem::~CCharacterItem() {
+}
+
+void CCharacterItem::exit() {
   ASSERT(mCharacter);
   destroyPhysics(mCharacter->getMap());
   mCharacter->getBodyEntity()->detachObjectFromBone(mAttachedMesh);
   mCharacter->getSceneNode()->getCreator()->destroyEntity(mAttachedMesh);
+
+  for (auto m : mParticleSystems) {
+    // detach particle system
+    mCharacter->getBodyEntity()->detachObjectFromBone(m);
+  }
+  CWorldEntity::exit();
 }
 
 void CCharacterItem::update(Ogre::Real tpf) {
@@ -242,6 +270,10 @@ void CCharacterItem::show() {
                                        mBlockPhysicsGroup,
                                        mBlockPhysicsMask);
   }
+
+  for (auto p : mParticleSystems) {
+    p->setVisible(true);
+  }
 }
 
 void CCharacterItem::hide() {
@@ -253,6 +285,10 @@ void CCharacterItem::hide() {
     CPhysicsManager *physicsManager
         = mCharacter->getMap()->getPhysicsManager();
     physicsManager->secureRemoveRigidBody(mBlockPhysics);
+  }
+
+  for (auto p : mParticleSystems) {
+    p->setVisible(false);
   }
 }
 

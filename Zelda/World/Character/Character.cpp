@@ -428,8 +428,11 @@ void CCharacter::useCurrentWeapon() {
 void CCharacter::changeItem(ECharacterItemSlots slot,
                             const std::string &bone,
                             EItemVariantTypes item) {
-  mCurrentItems[slot] = std::shared_ptr<CCharacterItem>(
-      new CCharacterItem(this, bone, item));
+  if (mCurrentItems[slot]) {
+    // exit old item, it will be deleted by the shared_ptr
+    mCurrentItems[slot]->exit();
+  }
+  mCurrentItems[slot] = std::make_shared<CCharacterItem>(this, bone, item);
   switch (slot) {
     case CIS_TOOL:
       mCurrentItems[slot]->hide();

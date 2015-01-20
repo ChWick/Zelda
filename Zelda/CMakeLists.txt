@@ -49,9 +49,13 @@ set(Game_link_libraries
     ${PARTICLEUNIVERSE_LIBRARIES}
 )
 
-set(Game_link_libraries
-  ${Game_link_libraries}
-  pthread)
+# some further libraries for unix
+if (UNIX)
+  set(Game_link_libraries
+    ${Game_link_libraries}
+    pthread
+    dl)
+endif()
 
 set(EXECUTABLE_OUTPUT_PATH ../bin)
 

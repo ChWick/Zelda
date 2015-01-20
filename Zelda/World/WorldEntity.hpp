@@ -20,12 +20,16 @@
 #ifndef _WORLD_ENTITY_HPP_
 #define _WORLD_ENTITY_HPP_
 
+#include <list>
 #include "InteractionInterface.hpp"
 #include "../Common/GameLogic/Entity.hpp"
 #include "HitableInterface.hpp"
 #include "AttackerInterface.hpp"
 
 class CMap;
+namespace ParticleUniverse {
+class ParticleSystem;
+};
 
 class CWorldEntity : public CEntity,
                      public CHitableInterface,
@@ -33,17 +37,27 @@ class CWorldEntity : public CEntity,
                      public CInteractionInterface {
 protected:
   Ogre::SceneNode *m_pSceneNode;
-	btCollisionObject *m_pCollisionObject;
-	CMap *m_pMap;
+  btCollisionObject *m_pCollisionObject;
+  CMap *m_pMap;
   uint16_t mCollisionMask;
   uint16_t mCollisionGroup;
+
+  std::list<ParticleUniverse::ParticleSystem*> mParticleSystems;
 
 public:
   CWorldEntity(const std::string &sID, CEntity *pParent, CMap *pMap, const std::string &sResourceGroup = Ogre::ResourceGroupManager::AUTODETECT_RESOURCE_GROUP_NAME);
   CWorldEntity(CEntity *pParent, CMap *pMap, const tinyxml2::XMLElement *pElem, const std::string &sResourceGroup = Ogre::ResourceGroupManager::AUTODETECT_RESOURCE_GROUP_NAME);
   virtual ~CWorldEntity();
-
+  
   virtual void exit();
+  
+  virtual void start();
+  virtual void stop();
+
+  ParticleUniverse::ParticleSystem *createParticleSystem(
+      const std::string &name_prefix,
+      const std::string &type,
+      bool autoAttach = true);
 
   virtual const SPATIAL_VECTOR &getPosition() const;
   virtual void setPosition(const SPATIAL_VECTOR &vPos);

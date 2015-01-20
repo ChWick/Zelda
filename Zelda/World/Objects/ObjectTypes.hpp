@@ -20,9 +20,11 @@
 #ifndef _OBJECT_TYPES_HPP_
 #define _OBJECT_TYPES_HPP_
 
+#include <vector>
 #include "../../Common/Util/EnumIdMap.hpp"
 #include "../Atlas/TileTypes.hpp"
 #include "../GlobalCollisionShapesTypes.hpp"
+#include "../ParticleData.hpp"
 #include <LinearMath/btVector3.h>
 
 enum EObjectTypes {
@@ -60,6 +62,8 @@ struct SObjectTypeData {
 
   EGlobalCollisionShapesTypes eCollisionShape;
   btVector3 vPhysicsShapeScale;
+
+  // std::vector<SParticleData> mParticleData;
 
   SObjectTypeData &operator=(const SObjectTypeData&) = default;
 };

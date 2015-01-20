@@ -73,6 +73,8 @@ public:
   CCharacterItem(CCharacter *character, const std::string &boneToAttach, EItemVariantTypes type);
   virtual ~CCharacterItem();
 
+  void exit();
+
   void enterNewMap(CMap *oldMap, CMap *newMap);
   void update(Ogre::Real tpf);
   

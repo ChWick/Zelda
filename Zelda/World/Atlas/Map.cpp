@@ -28,6 +28,7 @@
 #include <OgreAnimationState.h>
 #include <OgreMeshManager.h>
 #include <string>
+#include <ParticleUniverseSystemManager.h>
 #include "../../Common/Physics/BtOgrePG.hpp"
 #include "../../Common/Physics/PhysicsMasks.hpp"
 #include "../../Common/Util/DeleteSceneNode.hpp"
@@ -237,7 +238,7 @@ CMap::~CMap() {
 }
 
 void CMap::start() {
-  CEntity::start();
+  CWorldEntity::start();
   sendCallToAll(&CEntity::start, false);
 }
 

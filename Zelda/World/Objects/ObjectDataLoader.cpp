@@ -27,6 +27,8 @@
 #include "../GlobalCollisionShapesTypes.hpp"
 #include <OgreStringConverter.h>
 
+using tinyxml2::XMLElement;
+
 using XMLHelper::Attribute;
 using XMLHelper::IntAttribute;
 using XMLHelper::RealAttribute;
@@ -51,6 +53,14 @@ void CObjectDataLoader::readGroupElement(const tinyxml2::XMLElement *e) {
   data.vPhysicsShapeScale = BtOgre::Convert::toBullet(
       Ogre::StringConverter::parseVector3(
           Attribute(e, "physics_shape_scale", "1 1 1")));
+
+  // read child elements
+  for (const XMLElement *c = e->FirstChildElement(); c;
+       c = c->NextSiblingElement()) {
+    if (strcmp(c->Value(), "particle_system") == 0) {
+      // data.mParticleData.push_back(SParticleData(c));
+    }
+  }
 
   CObjectDataMap::getSingleton().setData(data.eObjectType, data);
 }

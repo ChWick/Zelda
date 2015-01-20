@@ -21,6 +21,8 @@
 #define _ITEM_DATA_HPP_
 
 #include <OgreVector3.h>
+#include <vector>
+#include "../ParticleData.hpp"
 #include "ItemTypes.hpp"
 #include "../DamageTypes.hpp"
 #include "../Hitpoints.hpp"
@@ -42,7 +44,9 @@ struct SItemVariantData {
   Ogre::Vector3 vBlockPhysicsOffset;      //!< Offset of the block shape
 
   Ogre::Real fLength;                     //!< Length of the item 
-      
+
+  //! Particle system that is added to this item
+  std::vector<SParticleData> mParticleData;
 };
 
 class CItemSlotDataMap : public CEnumIdMap<CItemSlotDataMap, EItemSlotTypes, SItemSlotData> {
