@@ -35,6 +35,7 @@ class CEmitterConstructionInfo {
 
  public:
   CEmitterConstructionInfo(const EEmitterTypes t);
+  virtual ~CEmitterConstructionInfo() {}
 
   const EEmitterTypes getType() const {return mType;}
   

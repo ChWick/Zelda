@@ -38,6 +38,8 @@ class CActionConstructionInfo {
   CActionConstructionInfo(const EActionTypes t);
 
  public:
+  virtual ~CActionConstructionInfo() {}
+  
   const EActionTypes &getType() const {return mType;}
 
   static std::shared_ptr<CActionConstructionInfo>

@@ -49,10 +49,10 @@ CEventConstructionInfo::CEventConstructionInfo(const XMLElement *e)
       mStarted(BoolAttribute(e, "started", false)) {
   for (const XMLElement *c = e->FirstChildElement(); c;
        c = c->NextSiblingElement()) {
-    if (strcmp(c->Value(), "action")) {
+    if (strcmp(c->Value(), "action") == 0) {
       mActionConstructionInfos.push_back(
           CActionConstructionInfo::createNew(c));
-    } else if (strcmp(c->Value(), "emitter")) {
+    } else if (strcmp(c->Value(), "emitter") == 0) {
       mEmitterConstructionInfos.push_back(
           CEmitterConstructionInfo::createNew(c));
     } else {

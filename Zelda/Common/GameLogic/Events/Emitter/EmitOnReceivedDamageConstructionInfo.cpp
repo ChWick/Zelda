@@ -17,29 +17,29 @@
  * Zelda. If not, see http://www.gnu.org/licenses/.
  *****************************************************************************/
 
-#include "EmitOnReceivedDamage.hpp"
 #include "EmitOnReceivedDamageConstructionInfo.hpp"
 #include "../../../Util/XMLHelper.hpp"
-#include "../Event.hpp"
-#include "../../Entity.hpp"
 #include "../../../../World/DamageTypes.hpp"
+
+using XMLHelper::IntAttribute;
+using XMLHelper::Attribute;
+using XMLHelper::BoolAttribute;
 
 namespace events {
 
-CEmitOnReceivedDamage::CEmitOnReceivedDamage(
-    const tinyxml2::XMLElement *pElem, const CEvent &owner)
-  : CEmitter(pElem, owner),
-    mDamageMask(CDamageTypeIdMap::getSingleton().parseString(
-        XMLHelper::Attribute(pElem, "damage"))),
-    mKilledByDamage(false) {
+CEmitOnReceivedDamageConstructionInfo::CEmitOnReceivedDamageConstructionInfo(
+    uint32_t mask, bool killedByDamage)
+    : CEmitterConstructionInfo(EMIT_ON_RECEIVED_DAMAGE),
+      mDamageMask(mask),
+      mKilledByDamage(killedByDamage) {
 }
 
-CEmitOnReceivedDamage::CEmitOnReceivedDamage(
-    const std::shared_ptr<CEmitOnReceivedDamageConstructionInfo> info,
-    const CEvent &owner)
-    : CEmitter(info, owner),
-      mDamageMask(info->getDamageMask()),
-      mKilledByDamage(info->wasKilledByDamage()) {
+CEmitOnReceivedDamageConstructionInfo::CEmitOnReceivedDamageConstructionInfo(
+    const tinyxml2::XMLElement *e)
+    : CEmitterConstructionInfo(EMIT_ON_RECEIVED_DAMAGE),
+      mDamageMask(CDamageTypeIdMap::getSingleton().parseString(
+          Attribute(e, "damage_mask", "all"))),
+      mKilledByDamage(BoolAttribute(e, "killed_by_damage", false)) {
 }
 
 }  // namespace events

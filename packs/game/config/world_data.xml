@@ -255,12 +255,12 @@
       collision_shape = "pickable_object_sphere"
       >
     <event>
-      <emitter type="destroyed" damage_type="sword|world"/>
-      <action type="create">
-	<entity type="effect">
+      <emitter type="received_damage" damage_type="sword|world"/>
+      <action type="create_effect">
+	<effect>
 	  <particle_system type="LampFire"/>
 	  <sound type="testSound"/>
-	</entity>
+	</effect>
       </action>
     </event>
   </object>

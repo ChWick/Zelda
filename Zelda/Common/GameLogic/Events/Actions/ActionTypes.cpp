@@ -25,6 +25,7 @@ void CActionTypesMap::init() {
   m_Map[ACTION_CREATE_OBJECT] = "create_object";
   m_Map[ACTION_DELETE_OBJECT] = "delete_object";
   m_Map[ACTION_START_SCRIPT] = "start_script";
+  m_Map[ACTION_CREATE_EFFECT] = "create_effect";
 }
 
 };

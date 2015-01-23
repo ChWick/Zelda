@@ -17,29 +17,33 @@
  * Zelda. If not, see http://www.gnu.org/licenses/.
  *****************************************************************************/
 
-#include "EmitOnReceivedDamage.hpp"
-#include "EmitOnReceivedDamageConstructionInfo.hpp"
-#include "../../../Util/XMLHelper.hpp"
-#include "../Event.hpp"
-#include "../../Entity.hpp"
-#include "../../../../World/DamageTypes.hpp"
+#ifndef _ACTION_CREATE_EFFECT_HPP_
+#define _ACTION_CREATE_EFFECT_HPP_
+
+#include "Action.hpp"
+
+class CEffectConstructionInfo;
 
 namespace events {
 
-CEmitOnReceivedDamage::CEmitOnReceivedDamage(
-    const tinyxml2::XMLElement *pElem, const CEvent &owner)
-  : CEmitter(pElem, owner),
-    mDamageMask(CDamageTypeIdMap::getSingleton().parseString(
-        XMLHelper::Attribute(pElem, "damage"))),
-    mKilledByDamage(false) {
-}
+class CActionCreateEffectConstructionInfo;
 
-CEmitOnReceivedDamage::CEmitOnReceivedDamage(
-    const std::shared_ptr<CEmitOnReceivedDamageConstructionInfo> info,
-    const CEvent &owner)
-    : CEmitter(info, owner),
-      mDamageMask(info->getDamageMask()),
-      mKilledByDamage(info->wasKilledByDamage()) {
-}
+typedef std::list<std::shared_ptr<CEffectConstructionInfo> > EffectConstructionInfoList;
+
+class CActionCreateEffect
+    : public CAction {
+ private:
+  EffectConstructionInfoList mEffectConstructionInfos;
+ public:
+  CActionCreateEffect(
+      const std::shared_ptr<CActionCreateEffectConstructionInfo> info,
+      const CEvent &owner);
+
+ protected:
+  void start();
+};
 
 }  // namespace events
+
+
+#endif /* _ACTION_CREATE_EFFECT_HPP_ */

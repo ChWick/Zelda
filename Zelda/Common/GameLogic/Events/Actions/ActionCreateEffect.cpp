@@ -17,29 +17,19 @@
  * Zelda. If not, see http://www.gnu.org/licenses/.
  *****************************************************************************/
 
-#include "EmitOnReceivedDamage.hpp"
-#include "EmitOnReceivedDamageConstructionInfo.hpp"
-#include "../../../Util/XMLHelper.hpp"
-#include "../Event.hpp"
-#include "../../Entity.hpp"
-#include "../../../../World/DamageTypes.hpp"
+#include "ActionCreateEffect.hpp"
+#include "ActionCreateEffectConstructionInfo.hpp"
 
 namespace events {
 
-CEmitOnReceivedDamage::CEmitOnReceivedDamage(
-    const tinyxml2::XMLElement *pElem, const CEvent &owner)
-  : CEmitter(pElem, owner),
-    mDamageMask(CDamageTypeIdMap::getSingleton().parseString(
-        XMLHelper::Attribute(pElem, "damage"))),
-    mKilledByDamage(false) {
+CActionCreateEffect::CActionCreateEffect(
+      const std::shared_ptr<CActionCreateEffectConstructionInfo> info,
+      const CEvent &owner)
+    : CAction(ACTION_CREATE_EFFECT, owner),
+      mEffectConstructionInfos(info->getEffectConstructionInfos()) {
 }
 
-CEmitOnReceivedDamage::CEmitOnReceivedDamage(
-    const std::shared_ptr<CEmitOnReceivedDamageConstructionInfo> info,
-    const CEvent &owner)
-    : CEmitter(info, owner),
-      mDamageMask(info->getDamageMask()),
-      mKilledByDamage(info->wasKilledByDamage()) {
+void CActionCreateEffect::start() {
 }
 
 }  // namespace events

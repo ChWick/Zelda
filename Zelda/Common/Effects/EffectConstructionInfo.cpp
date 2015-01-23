@@ -29,5 +29,10 @@ CEffectConstructionInfo::CEffectConstructionInfo(const std::string &id)
 
 CEffectConstructionInfo::CEffectConstructionInfo(const XMLElement *e)
     : CEntityConstructionInfo(e) {
-  
+  for (const XMLElement *c = e->FirstChildElement(); c;
+       c = c->NextSiblingElement()) {
+    if (strcmp(c->Value(), "particle_system") == 0) {
+    } else if (strcmp(c->Value(), "sound") == 0) {
+    }
+  }
 }

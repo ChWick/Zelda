@@ -30,6 +30,7 @@ enum EActionTypes {
   ACTION_CREATE_OBJECT,
   ACTION_DELETE_OBJECT,
   ACTION_START_SCRIPT,
+  ACTION_CREATE_EFFECT,
 };
 
 class CActionTypesMap : public CStringEnumIdMap<CActionTypesMap, EActionTypes> {

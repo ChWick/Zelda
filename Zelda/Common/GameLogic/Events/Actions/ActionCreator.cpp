@@ -27,6 +27,8 @@
 #include "ActionCreateObject.hpp"
 #include "ActionDeleteObject.hpp"
 #include "ActionStartScript.hpp"
+#include "ActionCreateEffect.hpp"
+#include "ActionCreateEffectConstructionInfo.hpp"
 
 using XMLHelper::Attribute;
 
@@ -55,6 +57,10 @@ CAction *createAction(const tinyxml2::XMLElement *pElem, const CEvent &owner) {
 CAction *createAction(std::shared_ptr<CActionConstructionInfo> info,
                       const CEvent &owner) {
   switch (info->getType()) {
+    case ACTION_CREATE_EFFECT:
+      return new CActionCreateEffect(
+          std::dynamic_pointer_cast<CActionCreateEffectConstructionInfo>(info),
+          owner);
   }
 
   throw Ogre::Exception(info->getType(),

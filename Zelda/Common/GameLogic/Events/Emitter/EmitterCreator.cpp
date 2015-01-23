@@ -26,6 +26,7 @@
 #include "EmitOnCollision.hpp"
 #include "EmitOnInteraction.hpp"
 #include "EmitOnReceivedDamage.hpp"
+#include "EmitOnReceivedDamageConstructionInfo.hpp"
 #include "EmitOnStatusChange.hpp"
 
 using XMLHelper::Attribute;
@@ -59,14 +60,11 @@ CEmitter *createEmitter(std::shared_ptr<CEmitterConstructionInfo> info,
   switch (info->getType()) {
     case EMIT_ON_CREATE:
       return new CEmitter(EMIT_ON_CREATE, owner);
-      /*case EMIT_ON_COLLISION:
-      return new CEmitOnCollision(info, owner);
-    case EMIT_ON_INTERACTION:
-      return new CEmitOnInteraction(info, owner);
     case EMIT_ON_RECEIVED_DAMAGE:
-      return new CEmitOnReceivedDamage(info, owner);
-    case EMIT_ON_STATUS_CHANGE:
-    return new CEmitOnStatusChange(info, owner);*/
+      return new CEmitOnReceivedDamage(
+          std::dynamic_pointer_cast<CEmitOnReceivedDamageConstructionInfo>(
+              info),
+          owner);
   }
 
   throw Ogre::Exception(info->getType(),

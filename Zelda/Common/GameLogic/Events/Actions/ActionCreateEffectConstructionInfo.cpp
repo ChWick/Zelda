@@ -17,30 +17,31 @@
  * Zelda. If not, see http://www.gnu.org/licenses/.
  *****************************************************************************/
 
-#include "Emitter.hpp"
-#include "EmitterConstructionInfo.hpp"
+#include "ActionCreateEffectConstructionInfo.hpp"
+#include <OgreException.h>
+#include <string>
 #include "../../../tinyxml2/tinyxml2.hpp"
-#include "../../../Util/XMLHelper.hpp"
+#include "../../../Effects/EffectConstructionInfo.hpp"
 
-using XMLHelper::Attribute;
+using tinyxml2::XMLElement;
 
 namespace events {
 
-CEmitter::CEmitter(EEmitterTypes eType, const CEvent &owner)
-    : m_eType(eType),
-      m_Owner(owner) {
-}
-
-CEmitter::CEmitter(const tinyxml2::XMLElement *pElem, const CEvent &owner)
-      : m_eType(CEmitterTypesMap::getSingleton().parseString(
-            Attribute(pElem, "type"))),
-        m_Owner(owner) {
-}
-
-CEmitter::CEmitter(const std::shared_ptr<CEmitterConstructionInfo> info,
-                   const CEvent &owner)
-    : m_eType(info->getType()),
-      m_Owner(owner) {
+CActionCreateEffectConstructionInfo::CActionCreateEffectConstructionInfo(
+    const tinyxml2::XMLElement *e)
+    : CActionConstructionInfo(ACTION_CREATE_EFFECT) {
+  for (const XMLElement *c = e->FirstChildElement(); c;
+       c = c->NextSiblingElement()) {
+    if (strcmp(c->Value(), "effect") == 0) {
+      mEffectConstructionInfos.push_back(
+          std::make_shared<CEffectConstructionInfo>(c));
+    } else {
+      throw Ogre::Exception(0,
+                            "'" + std::string(c->Value()) + "' is not allowed"
+                            "as child element of a CActionCreateEffect node",
+                            __FILE__);
+    }
+  }
 }
 
 }  // namespace events

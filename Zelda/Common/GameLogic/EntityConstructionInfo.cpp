@@ -56,11 +56,8 @@ CEntityConstructionInfo::CEntityConstructionInfo(const XMLElement *e)
     if (strcmp(c->Value(), "event") == 0) {
       mEventConstructionInfos.push_back(
           std::make_shared<events::CEventConstructionInfo>(c));
-    } else {
-      throw Ogre::Exception(0,
-                            "'" + Ogre::String(c->Value()) + "' is not a valid"
-                            " child tag of an entity construction information",
-                            __FILE__);
+    } else  {
+      // tag could be used by child, so dont throw an exception
     }
   }
 }
