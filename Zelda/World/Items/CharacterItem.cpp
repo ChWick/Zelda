@@ -93,6 +93,8 @@ CCharacterItem::CCharacterItem(CCharacter *character,
                            p,
                            Ogre::Quaternion(Ogre::Degree(0),
                                             Ogre::Vector3::UNIT_X));
+p->setScale(Ogre::Vector3::UNIT_SCALE * 0.02);
+p->setScaleVelocity(0.02);
   }
 
   start();
@@ -288,7 +290,7 @@ void CCharacterItem::hide() {
   }
 
   for (auto p : mParticleSystems) {
-    p->setVisible(false);
+    //p->setVisible(false);
   }
 }
 

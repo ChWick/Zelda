@@ -17,20 +17,14 @@
  * Zelda. If not, see http://www.gnu.org/licenses/.
  *****************************************************************************/
 
-#include "ObjectDataLoader.hpp"
-#include "ObjectTypes.hpp"
+#ifndef _EFFECT_HPP_
+#define _EFFECT_HPP_
 
-void CObjectDataLoader::readGroupElement(const tinyxml2::XMLElement *e) {
-  CObjectConstructionInfo info(e);
-  CObjectDataMap::getSingleton().setData(
-      static_cast<EObjectTypes>(info.getType()), info);
-}
+#include "../GameLogic/Entity.hpp"
 
+class CEffect
+    : public CEntity {
+  
+};
 
-
-
-
-
-
-
-
+#endif /* _EFFECT_HPP_ */

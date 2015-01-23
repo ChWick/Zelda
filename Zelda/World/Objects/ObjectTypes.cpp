@@ -20,6 +20,44 @@
 #include "ObjectTypes.hpp"
 #include <string>
 #include "../DamageTypes.hpp"
+#include "../../Common/Util/XMLHelper.hpp"
+#include "../../Common/tinyxml2/tinyxml2.hpp"
+#include "../../Common/Physics/BtOgreExtras.hpp"
+#include "../Atlas/TileTypes.hpp"
+#include "../GlobalCollisionShapesTypes.hpp"
+#include <OgreStringConverter.h>
+
+using tinyxml2::XMLElement;
+
+using XMLHelper::Attribute;
+using XMLHelper::BoolAttribute;
+using XMLHelper::RealAttribute;
+
+CObjectConstructionInfo::CObjectConstructionInfo()
+    : CEntityConstructionInfo("BasicObjectConstructionInfo") {
+}
+
+CObjectConstructionInfo::CObjectConstructionInfo(const tinyxml2::XMLElement *e)
+    : CEntityConstructionInfo(e),
+      mUserHandle(BoolAttribute(e, "user_handle", true)),
+      mPermanentStatic(BoolAttribute(e, "permanent_static", false)),
+      mMeshName(Attribute(e, "mesh_name")),
+      mMaterialName(Attribute(e, "material_name", "")),
+      mDamageSourceMask(CDamageTypeIdMap::getSingleton().parseString(
+          Attribute(e, "damage_source_mask", "none"))),
+      mNormalTile(CTileTypeIdMap::getSingleton().parseString(
+          Attribute(e, "normal_tile", "none"))),
+      mRemovedTile(CTileTypeIdMap::getSingleton().parseString(
+          Attribute(e, "removed_tile", "none"))),
+  mCollisionShape(CGlobalCollisionShapesTypesIdMap::getSingleton().
+                  parseString(Attribute(e, "collision_shape", "none"))),
+  mPhysicsShapeScale(BtOgre::Convert::toBullet(
+      Ogre::StringConverter::parseVector3(
+          Attribute(e, "physics_shape_scale", "1 1 1")))) {
+  setType(CObjectTypeIdMap::getSingleton().
+          parseString(Attribute(e, "type")));
+}
+
 
 
 void CObjectTypeIdMap::init() {
@@ -43,7 +81,7 @@ void CObjectDataMap::init() {
 
 EObjectTypes CObjectDataMap::getFromMeshName(const std::string &mesh) const {
   for (auto &d : m_Map) {
-    if (d.second.sMeshName == mesh) {
+    if (d.second.getMeshName() == mesh) {
       return d.first;
     }
   }
@@ -53,7 +91,7 @@ EObjectTypes CObjectDataMap::getFromMeshName(const std::string &mesh) const {
 EObjectTypes CObjectDataMap::getFromMeshFileName(
     const std::string &mesh) const {
   for (auto &d : m_Map) {
-    if (d.second.sMeshName + ".mesh" == mesh) {
+    if (d.second.getMeshName() + ".mesh" == mesh) {
       return d.first;
     }
   }

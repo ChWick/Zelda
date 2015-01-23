@@ -26,7 +26,7 @@
 
 class CObject : public CWorldEntity {
 protected:
-  const SObjectTypeData &m_ObjectTypeData;
+  const CObjectConstructionInfo &mSharedConstructionInfo;
   InnerObject::CGenerator mInnerObjectGenerator;
 public:
    CObject(const std::string &id, CWorldEntity *pParent, CMap *pMap, EObjectTypes eObjectType, Ogre::SceneNode *pSceneNode = nullptr);

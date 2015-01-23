@@ -18,6 +18,7 @@
  *****************************************************************************/
 
 #include "EmitterCreator.hpp"
+#include "EmitterConstructionInfo.hpp"
 #include "EmitterTypes.hpp"
 #include "../../../Util/XMLHelper.hpp"
 #include <OgreException.h>
@@ -27,13 +28,15 @@
 #include "EmitOnReceivedDamage.hpp"
 #include "EmitOnStatusChange.hpp"
 
-using namespace XMLHelper;
+using XMLHelper::Attribute;
 
 namespace events {
-  CEmitter *createEmitter(const tinyxml2::XMLElement *pElem, const CEvent &owner) {
-    EEmitterTypes type(CEmitterTypesMap::getSingleton().parseString(Attribute(pElem, "type")));
+CEmitter *createEmitter(const tinyxml2::XMLElement *pElem,
+                        const CEvent &owner) {
+  EEmitterTypes type(CEmitterTypesMap::getSingleton().parseString(
+      Attribute(pElem, "type")));
 
-    switch (type) {
+  switch (type) {
     case EMIT_ON_CREATE:
       return new CEmitter(EMIT_ON_CREATE, owner);
     case EMIT_ON_COLLISION:
@@ -44,8 +47,31 @@ namespace events {
       return new CEmitOnReceivedDamage(pElem, owner);
     case EMIT_ON_STATUS_CHANGE:
       return new CEmitOnStatusChange(pElem, owner);
-    }
-
-    throw Ogre::Exception(0, "New emitter type not added in createEmitter", __FILE__);
   }
-};
+
+  throw Ogre::Exception(type,
+                        "New emitter type not added in createEmitter",
+                        __FILE__);
+}
+
+CEmitter *createEmitter(std::shared_ptr<CEmitterConstructionInfo> info,
+                        const CEvent &owner) {
+  switch (info->getType()) {
+    case EMIT_ON_CREATE:
+      return new CEmitter(EMIT_ON_CREATE, owner);
+      /*case EMIT_ON_COLLISION:
+      return new CEmitOnCollision(info, owner);
+    case EMIT_ON_INTERACTION:
+      return new CEmitOnInteraction(info, owner);
+    case EMIT_ON_RECEIVED_DAMAGE:
+      return new CEmitOnReceivedDamage(info, owner);
+    case EMIT_ON_STATUS_CHANGE:
+    return new CEmitOnStatusChange(info, owner);*/
+  }
+
+  throw Ogre::Exception(info->getType(),
+                        "New emitter type not added in createEmitter",
+                        __FILE__);
+}
+
+}  // namespace events

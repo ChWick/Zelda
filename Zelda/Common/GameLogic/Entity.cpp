@@ -21,6 +21,7 @@
 #include <string>
 #include <list>
 #include "../Util/XMLHelper.hpp"
+#include "EntityConstructionInfo.hpp"
 #include "Events/Event.hpp"
 #include "Events/Emitter/Emitter.hpp"
 #include <OgreStringConverter.h>
@@ -103,6 +104,23 @@ CEntity::CEntity(CEntity *pParent,
   // delete will be called automatically
 
   attachTo(pParent);
+}
+
+CEntity::CEntity(CEntity *parent,
+                 const CEntityConstructionInfo &info)
+  : CMessageInjector(false),
+      m_sID(info.getID()),
+      m_sResourceGroup(info.getResourceGroup()),
+      m_uiType(info.getType()),
+      m_eState(info.getState()),
+      m_bPauseRender(info.isPauseRender()),
+      m_bPauseUpdate(info.isPauseUpdate()),
+      m_pParent(nullptr) {
+  mNumberOfInstances++;
+  for (const auto &evt : info.getEventConstructionList()) {
+    m_lEvents.push_back(new events::CEvent(*this, *evt.get()));
+  }
+  attachTo(parent);
 }
 
 CEntity::~CEntity() {

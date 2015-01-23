@@ -17,20 +17,31 @@
  * Zelda. If not, see http://www.gnu.org/licenses/.
  *****************************************************************************/
 
-#include "ObjectDataLoader.hpp"
-#include "ObjectTypes.hpp"
+#include "EmitterConstructionInfo.hpp"
+#include <OgreException.h>
+#include "../../../tinyxml2/tinyxml2.hpp"
+#include "../../../Util/XMLHelper.hpp"
 
-void CObjectDataLoader::readGroupElement(const tinyxml2::XMLElement *e) {
-  CObjectConstructionInfo info(e);
-  CObjectDataMap::getSingleton().setData(
-      static_cast<EObjectTypes>(info.getType()), info);
+using XMLHelper::Attribute;
+
+namespace events {
+
+CEmitterConstructionInfo::CEmitterConstructionInfo(const EEmitterTypes t)
+    : mType(t) {
 }
 
+std::shared_ptr<CEmitterConstructionInfo> CEmitterConstructionInfo::createNew(
+    const tinyxml2::XMLElement *e) {
+  const EEmitterTypes t = CEmitterTypesMap::getSingleton().parseString(
+      Attribute(e, "type"));
 
+  switch (t) {
+    case EMIT_ON_CREATE:
+      return std::make_shared<CEmitterConstructionInfo>(t);
+    default:
+      throw Ogre::Exception(t, "Emitter type not implemented!",
+                            __FILE__);
+  }
+}
 
-
-
-
-
-
-
+}  // namespace events

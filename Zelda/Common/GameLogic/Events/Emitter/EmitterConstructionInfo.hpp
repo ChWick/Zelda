@@ -17,20 +17,31 @@
  * Zelda. If not, see http://www.gnu.org/licenses/.
  *****************************************************************************/
 
-#include "ObjectDataLoader.hpp"
-#include "ObjectTypes.hpp"
+#ifndef EMITTERCONSTRUCTIONINFO_HPP
+#define EMITTERCONSTRUCTIONINFO_HPP
 
-void CObjectDataLoader::readGroupElement(const tinyxml2::XMLElement *e) {
-  CObjectConstructionInfo info(e);
-  CObjectDataMap::getSingleton().setData(
-      static_cast<EObjectTypes>(info.getType()), info);
-}
+#include <memory>
+#include "EmitterTypes.hpp"
 
+namespace tinyxml2 {
+class XMLElement;
+}  // namespace tinyxml2
 
+namespace events {
 
+class CEmitterConstructionInfo {
+ private:
+  const EEmitterTypes mType;
 
+ public:
+  CEmitterConstructionInfo(const EEmitterTypes t);
 
+  const EEmitterTypes getType() const {return mType;}
+  
+  static std::shared_ptr<CEmitterConstructionInfo> createNew(
+      const tinyxml2::XMLElement *e);
+};
 
+}  // namespace events
 
-
-
+#endif /* EMITTERCONSTRUCTIONINFO_HPP */

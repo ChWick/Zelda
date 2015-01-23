@@ -17,20 +17,33 @@
  * Zelda. If not, see http://www.gnu.org/licenses/.
  *****************************************************************************/
 
-#include "ObjectDataLoader.hpp"
-#include "ObjectTypes.hpp"
+#ifndef _ACTIONCREATEOBJECTCONSTRUCTIONINFO_HPP_
+#define _ACTIONCREATEOBJECTCONSTRUCTIONINFO_HPP_
 
-void CObjectDataLoader::readGroupElement(const tinyxml2::XMLElement *e) {
-  CObjectConstructionInfo info(e);
-  CObjectDataMap::getSingleton().setData(
-      static_cast<EObjectTypes>(info.getType()), info);
-}
+#include <string>
+#include "ActionConstructionInfo.hpp"
+#include "../../../../World/Objects/ObjectTypes.hpp"
 
+namespace events {
 
+class CActionCreateObjectConstructionInfo
+    : public CActionConstructionInfo {
+ private:
+  EObjectTypes mObjectType;
+  std::string mLocation;
+ public:
+  //! blank constructor
+  CActionCreateObjectConstructionInfo();
 
+  CActionCreateObjectConstructionInfo(const tinyxml2::XMLElement *e);
 
+  EObjectTypes getObjectType() const {return mObjectType;}
+  void setObjectType(const EObjectTypes ot) {mObjectType = ot;}
 
+  const std::string &getLocation() const {return mLocation;}
+  void setLocation(const std::string &l) {mLocation = l;}
+};
 
+};  // events
 
-
-
+#endif /* _ACTIONCREATEOBJECTCONSTRUCTIONINFO_HPP_ */

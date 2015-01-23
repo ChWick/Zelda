@@ -43,6 +43,8 @@ class btCollisionObject;
 
 class CMessage;
 
+class CEntityConstructionInfo;
+
 //! Class for an arbitrary entity
 class CEntity : public CMessageInjector {
   
@@ -85,6 +87,8 @@ class CEntity : public CMessageInjector {
           const tinyxml2::XMLElement *pElem,
           const std::string &sResourceGroup
           = Ogre::ResourceGroupManager::AUTODETECT_RESOURCE_GROUP_NAME);
+  CEntity(CEntity *parent,
+          const CEntityConstructionInfo &info);
   CEntity(const CEntity &src);
   virtual ~CEntity();
 

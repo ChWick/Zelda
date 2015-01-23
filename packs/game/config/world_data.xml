@@ -86,7 +86,9 @@
       basic_mesh_name="lamp.mesh"
       damage_type="fire"
       damage_value="50"
-      />
+      >
+    <particle_system type="LampFire"/>
+  </item>
   <item
       id="hammer"
       imageset_name="Hammer"
@@ -251,7 +253,17 @@
       normal_tile = "green_soil_bush_shadow"
       removed_tile = "green_soil_bush_lifted"
       collision_shape = "pickable_object_sphere"
-      />
+      >
+    <event>
+      <emitter type="destroyed" damage_type="sword|world"/>
+      <action type="create">
+	<entity type="effect">
+	  <particle_system type="LampFire"/>
+	  <sound type="testSound"/>
+	</entity>
+      </action>
+    </event>
+  </object>
   <object
       type = "light_stone"
       user_handle = "true"
@@ -433,7 +445,7 @@
       >
     <animation name="Sit" id="0"/>
     <animation name="StandUp" id="1" loop="false"/>
-    <animation name="Walk" id="2"/>
+p    <animation name="Walk" id="2"/>
   </person>
   <person
       id="soldier_block"

@@ -393,9 +393,9 @@ void CMap::handleMessage(const CMessagePtr message) {
     if (mesc->getOldState() == EST_NORMAL) {
       // only change request if object was in normal state before
 
-      const SObjectTypeData &data(CObjectDataMap::getSingleton().toData(
+      const CObjectConstructionInfo &data(CObjectDataMap::getSingleton().toData(
           static_cast<EObjectTypes>(pObject->getType())));
-      if (data.eRemovedTile == TT_COUNT) {
+      if (data.getRemovedTile() == TT_COUNT) {
         return;
       }
 
@@ -404,7 +404,7 @@ void CMap::handleMessage(const CMessagePtr message) {
 
 
       m_pStaticGeometryFixedTiles->addEntity(
-          m_apTileEntities[data.eRemovedTile],
+          m_apTileEntities[data.getRemovedTile()],
           pObject->getSceneNode()->getInitialPosition());
 
       m_pStaticGeometryFixedTiles->build();
@@ -433,11 +433,11 @@ void CMap::rebuildStaticGeometryChangedTiles() {
     if (!pObject) {continue;}
 
     if (pObject->getState() == EST_NORMAL) {
-      const SObjectTypeData &data(CObjectDataMap::getSingleton().toData(
+      const CObjectConstructionInfo &data(CObjectDataMap::getSingleton().toData(
           static_cast<EObjectTypes>(pObject->getType())));
-      if (data.eNormalTile != TT_COUNT) {
+      if (data.getNormalTile() != TT_COUNT) {
         m_pStaticGeometryChangedTiles->addEntity(
-            m_apTileEntities[data.eNormalTile],
+            m_apTileEntities[data.getNormalTile()],
             pObject->getSceneNode()->getInitialPosition());
       }
     }
@@ -521,9 +521,9 @@ void CMap::parseNewEntity(const tinyxml2::XMLElement *pElem) {
 // CDotSceneLoaderCallback
 void CMap::physicsShapeCreated(btCollisionShape *pShape,
                                const std::string &sMeshName) {
-    EObjectTypes objectType(CObjectDataMap::getSingleton().getFromMeshName(sMeshName));
+  EObjectTypes objectType(CObjectDataMap::getSingleton().getFromMeshName(sMeshName));
   if (objectType != OBJECT_COUNT) {
-    auto scale = CObjectDataMap::getSingleton().toData(objectType).vPhysicsShapeScale;
+    auto scale = CObjectDataMap::getSingleton().toData(objectType).getPhysicsShapeScale();
     pShape->setLocalScaling(pShape->getLocalScaling() * scale);
   }
 }
@@ -584,7 +584,7 @@ CDotSceneLoaderCallback::EResults CMap::preEntityAdded(
   EObjectTypes objectType(CObjectDataMap::getSingleton().getFromMeshFileName(
       XMLNode->Attribute("meshFile")));
   if (objectType != OBJECT_COUNT
-      && CObjectDataMap::getSingleton().toData(objectType).bUserHandle) {
+      && CObjectDataMap::getSingleton().toData(objectType).isUsedHandled()) {
     CObject *pObject = new CObject(userData.getStringUserData("name"),
                                    this, this, objectType, pParent);
     std::string innerObject(userData.getStringUserData("inner_object"));

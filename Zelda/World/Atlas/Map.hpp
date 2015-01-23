@@ -59,7 +59,12 @@ public:
   void start();
   void exit();
 
+  //! this is just a test function, dont use
   void CreateCube(const btVector3 &Position, btScalar Mass);
+
+  //! creates an effect in this map
+  void createEffect();
+  
 
   void moveMap(const Ogre::Vector3 &offset);
 

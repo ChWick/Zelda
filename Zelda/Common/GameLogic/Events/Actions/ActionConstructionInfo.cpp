@@ -17,49 +17,35 @@
  * Zelda. If not, see http://www.gnu.org/licenses/.
  *****************************************************************************/
 
-#include "ActionCreator.hpp"
 #include "ActionConstructionInfo.hpp"
-#include "ActionTypes.hpp"
-#include "../../../Util/XMLHelper.hpp"
 #include <OgreException.h>
+#include "../../../Util/XMLHelper.hpp"
 
-#include "ActionMessage.hpp"
-#include "ActionCreateObject.hpp"
-#include "ActionDeleteObject.hpp"
-#include "ActionStartScript.hpp"
+#include "ActionCreateObjectConstructionInfo.hpp"
+
 
 using XMLHelper::Attribute;
 
 namespace events {
 
-CAction *createAction(const tinyxml2::XMLElement *pElem, const CEvent &owner) {
+CActionConstructionInfo::CActionConstructionInfo(const EActionTypes t)
+    : mType(t) {
+}
+
+std::shared_ptr<CActionConstructionInfo>
+CActionConstructionInfo::createNew(const tinyxml2::XMLElement *e) {
   EActionTypes type(CActionTypesMap::getSingleton().parseString(
-      Attribute(pElem, "type")));
+      Attribute(e, "type")));
 
   switch (type) {
-    case ACTION_MESSAGE:
-      return new CActionMessage(pElem, owner);
     case ACTION_CREATE_OBJECT:
-      return new CActionCreateObject(pElem, owner);
-    case ACTION_DELETE_OBJECT:
-      return new CActionDeleteObject(pElem, owner);
-    case ACTION_START_SCRIPT:
-      return new CActionStartScript(pElem, owner);
+      return std::make_shared<CActionCreateObjectConstructionInfo>(e);
+    default:
+      throw Ogre::Exception(type,
+                            "ActionConstructionInfo type not implemented",
+                            __FILE__);
   }
-
-  throw Ogre::Exception(type,
-                        "New action type not added in createAction",
-                        __FILE__);
 }
 
-CAction *createAction(std::shared_ptr<CActionConstructionInfo> info,
-                      const CEvent &owner) {
-  switch (info->getType()) {
-  }
-
-  throw Ogre::Exception(info->getType(),
-                        "New action type not added in createAction",
-                        __FILE__);
-}
 
 }  // namespace events

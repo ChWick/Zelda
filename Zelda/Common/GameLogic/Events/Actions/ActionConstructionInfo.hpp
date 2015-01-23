@@ -17,20 +17,33 @@
  * Zelda. If not, see http://www.gnu.org/licenses/.
  *****************************************************************************/
 
-#include "ObjectDataLoader.hpp"
-#include "ObjectTypes.hpp"
+#ifndef _ACTION_CONSTRUCTION_INFO_HPP_
+#define _ACTION_CONSTRUCTION_INFO_HPP_
 
-void CObjectDataLoader::readGroupElement(const tinyxml2::XMLElement *e) {
-  CObjectConstructionInfo info(e);
-  CObjectDataMap::getSingleton().setData(
-      static_cast<EObjectTypes>(info.getType()), info);
-}
+#include <memory>
+#include "ActionTypes.hpp"
 
+namespace tinyxml2 {
+class XMLElement;
+};
 
+namespace events {
 
+class CActionConstructionInfo {
+ private:
+  const EActionTypes mType;
 
+ protected:
+  //! protected construction since this is not a valid class
+  CActionConstructionInfo(const EActionTypes t);
 
+ public:
+  const EActionTypes &getType() const {return mType;}
 
+  static std::shared_ptr<CActionConstructionInfo>
+  createNew(const tinyxml2::XMLElement *e);
+};
 
+};  // events
 
-
+#endif /* _ACTION_CONSTRUCTION_INFO_HPP_ */

@@ -17,20 +17,23 @@
  * Zelda. If not, see http://www.gnu.org/licenses/.
  *****************************************************************************/
 
-#include "ObjectDataLoader.hpp"
-#include "ObjectTypes.hpp"
+#ifndef _EFFECT_CONSTRUCTION_INFO_HPP_
+#define _EFFECT_CONSTRUCTION_INFO_HPP_
 
-void CObjectDataLoader::readGroupElement(const tinyxml2::XMLElement *e) {
-  CObjectConstructionInfo info(e);
-  CObjectDataMap::getSingleton().setData(
-      static_cast<EObjectTypes>(info.getType()), info);
-}
+#include <vector>
+#include "../GameLogic/EntityConstructionInfo.hpp"
 
+//! Construction information for an effect
+class CEffectConstructionInfo
+    : CEntityConstructionInfo {
+ private:
+  
+ public:
+  //! blank default constructor
+  CEffectConstructionInfo(const std::string &id);
 
+  //! constructor from a tinyxml element
+  CEffectConstructionInfo(const tinyxml2::XMLElement *e);
+};
 
-
-
-
-
-
-
+#endif /* _EFFECT_CONSTRUCTION_INFO_HPP_ */

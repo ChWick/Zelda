@@ -18,19 +18,28 @@
  *****************************************************************************/
 
 #include "Event.hpp"
-#include "OgreException.h"
+#include <string>
+#include <OgreException.h>
+#include <OgreStringConverter.h>
+#include "EventConstructionInfo.hpp"
 #include "../../Log.hpp"
-#include "OgreStringConverter.h"
 #include "Emitter/EmitterCreator.hpp"
 #include "Emitter/Emitter.hpp"
 #include "Actions/ActionCreator.hpp"
 #include "Actions/Action.hpp"
 #include "../Entity.hpp"
 
-using namespace XMLHelper;
+using XMLHelper::Attribute;
+using XMLHelper::RealAttribute;
+using XMLHelper::BoolAttribute;
+using XMLHelper::SetAttribute;
+
+using tinyxml2::XMLElement;
 
 namespace events {
-CEvent::CEvent(CEntity &owner, const ERepeatTypes eRepeatType, Ogre::Real fRepeatTime)
+
+CEvent::CEvent(CEntity &owner,
+               const ERepeatTypes eRepeatType, Ogre::Real fRepeatTime)
   : m_sID("unset id"),
     m_eRepeatType(eRepeatType),
     m_fRepeatTime(fRepeatTime),
@@ -38,26 +47,48 @@ CEvent::CEvent(CEntity &owner, const ERepeatTypes eRepeatType, Ogre::Real fRepea
     m_Owner(owner),
     m_bStarted(false) {
 }
-CEvent::CEvent(CEntity &owner, const tinyxml2::XMLElement *pElement)
+
+CEvent::CEvent(CEntity &owner,
+               const tinyxml2::XMLElement *pElement)
   : m_sID(Attribute(pElement, "id", "unset id")),
-    m_eRepeatType(CRepeatTypesMap::getSingleton().parseString(Attribute(pElement, "repeat", "none"))),
+    m_eRepeatType(CRepeatTypesMap::getSingleton().parseString(
+        Attribute(pElement, "repeat", "none"))),
     m_fRepeatTime(RealAttribute(pElement, "time", 0)),
     m_fTimer(0),
     m_Owner(owner),
     m_bStarted(BoolAttribute(pElement, "started", false)) {
-
-  for (const tinyxml2::XMLElement *pChildElem = pElement->FirstChildElement(); pChildElem; pChildElem = pChildElem->NextSiblingElement()) {
+  for (const XMLElement *pChildElem = pElement->FirstChildElement();
+       pChildElem; pChildElem = pChildElem->NextSiblingElement()) {
     if (strcmp(pChildElem->Value(), "emitter") == 0) {
       m_lEmitter.push_back(createEmitter(pChildElem, *this));
-    }
-    else if (strcmp(pChildElem->Value(), "action") == 0) {
+    } else if (strcmp(pChildElem->Value(), "action") == 0) {
       m_lActions.push_back(createAction(pChildElem, *this));
-    }
-    else {
-      throw Ogre::Exception(0, "Unknown event child '" + std::string(pChildElem->Value()) + "'", __FILE__);
+    } else {
+      throw Ogre::Exception(0,
+                            "Unknown event child '"
+                            + std::string(pChildElem->Value()) + "'",
+                            __FILE__);
     }
   }
 }
+
+CEvent::CEvent(CEntity &owner,
+               const CEventConstructionInfo &info)
+    : m_sID(info.getID()),
+      m_eRepeatType(info.getRepeatType()),
+      m_fRepeatTime(info.getRepeatTime()),
+      m_fTimer(info.getTimer()),
+      m_Owner(owner),
+      m_bStarted(info.isStarted()) {
+  for (auto emit : info.getEmitterInfos()) {
+    m_lEmitter.push_back(createEmitter(emit, *this));
+  }
+
+  for (auto act : info.getActionInfos()) {
+    m_lActions.push_back(createAction(act, *this));
+  }
+}
+
 CEvent::~CEvent() {
   for (CEmitter *pEmitter : m_lEmitter) {
     delete pEmitter;
@@ -123,11 +154,12 @@ void CEvent::update(float tpf) {
   }*/
 }
 
-void CEvent::writeToXMLElement(tinyxml2::XMLElement *pElement, EOutputStyle eStyle) const {
+void CEvent::writeToXMLElement(tinyxml2::XMLElement *pElement,
+                               EOutputStyle eStyle) const {
   SetAttribute(pElement, "id", m_sID);
   if (eStyle == OS_FULL) {
     SetAttribute(pElement, "started", m_bStarted);
   }
 }
 
-};
+}  // namespace events

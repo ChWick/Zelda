@@ -17,20 +17,17 @@
  * Zelda. If not, see http://www.gnu.org/licenses/.
  *****************************************************************************/
 
-#include "ObjectDataLoader.hpp"
-#include "ObjectTypes.hpp"
+#include "EffectConstructionInfo.hpp"
+#include <string>
+#include "../tinyxml2/tinyxml2.hpp"
 
-void CObjectDataLoader::readGroupElement(const tinyxml2::XMLElement *e) {
-  CObjectConstructionInfo info(e);
-  CObjectDataMap::getSingleton().setData(
-      static_cast<EObjectTypes>(info.getType()), info);
+using tinyxml2::XMLElement;
+
+CEffectConstructionInfo::CEffectConstructionInfo(const std::string &id)
+    : CEntityConstructionInfo(id) {
 }
 
-
-
-
-
-
-
-
-
+CEffectConstructionInfo::CEffectConstructionInfo(const XMLElement *e)
+    : CEntityConstructionInfo(e) {
+  
+}
