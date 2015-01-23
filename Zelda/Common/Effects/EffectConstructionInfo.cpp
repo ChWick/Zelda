@@ -32,6 +32,7 @@ CEffectConstructionInfo::CEffectConstructionInfo(const XMLElement *e)
   for (const XMLElement *c = e->FirstChildElement(); c;
        c = c->NextSiblingElement()) {
     if (strcmp(c->Value(), "particle_system") == 0) {
+      
     } else if (strcmp(c->Value(), "sound") == 0) {
     }
   }

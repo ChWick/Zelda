@@ -17,18 +17,21 @@
  * Zelda. If not, see http://www.gnu.org/licenses/.
  *****************************************************************************/
 
-#include "ParticleData.hpp"
+#ifndef _PARTICLE_SYSTEM_CONSTRUCTION_INFO_HPP_
+#define _PARTICLE_SYSTEM_CONSTRUCTION_INFO_HPP_
+
 #include <string>
-#include "../Common/Util/XMLHelper.hpp"
+#include "../../tinyxml2/tinyxml2.hpp"
 
-using tinyxml2::XMLElement;
+class CParticleSystemConstructionInfo {
+ private:
+  std::string mType;
 
-using XMLHelper::Attribute;
+ public:
+  CParticleSystemConstructionInfo();
+  CParticleSystemConstructionInfo(const tinyxml2::XMLElement *e);
 
-SParticleData::SParticleData()
-    : mType("unknown") {
-}
+  const std::string &getType() const {return mType;}
+};
 
-SParticleData::SParticleData(const tinyxml2::XMLElement *e)
-    : mType(Attribute(e, "type")) {
-}
+#endif /* _PARTICLE_SYSTEM_CONSTRUCTION_INFO_HPP_ */

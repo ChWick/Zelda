@@ -22,7 +22,7 @@
 
 #include <OgreVector3.h>
 #include <vector>
-#include "../ParticleData.hpp"
+#include "../../Common/Effects/ParticleSystem/ParticleSystemConstructionInfo.hpp"
 #include "ItemTypes.hpp"
 #include "../DamageTypes.hpp"
 #include "../Hitpoints.hpp"
@@ -46,7 +46,7 @@ struct SItemVariantData {
   Ogre::Real fLength;                     //!< Length of the item 
 
   //! Particle system that is added to this item
-  std::vector<SParticleData> mParticleData;
+  std::vector<CParticleSystemConstructionInfo> mParticleData;
 };
 
 class CItemSlotDataMap : public CEnumIdMap<CItemSlotDataMap, EItemSlotTypes, SItemSlotData> {

@@ -24,7 +24,6 @@
 #include "../../Common/Util/EnumIdMap.hpp"
 #include "../Atlas/TileTypes.hpp"
 #include "../GlobalCollisionShapesTypes.hpp"
-#include "../ParticleData.hpp"
 #include "../../Common/GameLogic/EntityConstructionInfo.hpp"
 #include <LinearMath/btVector3.h>
 

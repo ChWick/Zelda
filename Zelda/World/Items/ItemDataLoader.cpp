@@ -52,7 +52,7 @@ void CItemDataLoader::readGroupElement(const tinyxml2::XMLElement *e) {
   for (const XMLElement *c = e->FirstChildElement(); c;
        c = c->NextSiblingElement()) {
     if (strcmp(c->Value(), "particle_system") == 0) {
-      data.mParticleData.push_back(SParticleData(c));
+      data.mParticleData.push_back(CParticleSystemConstructionInfo(c));
     }
   }
 

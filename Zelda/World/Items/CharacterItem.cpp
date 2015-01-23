@@ -82,19 +82,19 @@ CCharacterItem::CCharacterItem(CCharacter *character,
   mContactResultCallback.init();
 
   // create particle systmes
-  for (const SParticleData &pdata : itemData.mParticleData) {
+  for (const CParticleSystemConstructionInfo &pdata : itemData.mParticleData) {
     // do not attach it automatically to scene node, we attach it to the bone
     auto p = createParticleSystem(
         "_ps" + Ogre::StringConverter::toString(mParticleSystems.size()),
-        pdata.mType,
+        pdata.getType(),
         false);
     mCharacter->getBodyEntity()
       ->attachObjectToBone(boneToAttach,
                            p,
                            Ogre::Quaternion(Ogre::Degree(0),
                                             Ogre::Vector3::UNIT_X));
-p->setScale(Ogre::Vector3::UNIT_SCALE * 0.02);
-p->setScaleVelocity(0.02);
+    p->setScale(Ogre::Vector3::UNIT_SCALE * 0.02);
+    p->setScaleVelocity(0.02);
   }
 
   start();
