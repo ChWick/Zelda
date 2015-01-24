@@ -17,43 +17,23 @@
  * Zelda. If not, see http://www.gnu.org/licenses/.
  *****************************************************************************/
 
-#ifndef _DAMAGE_TYPES_HPP_
-#define _DAMAGE_TYPES_HPP_
+#ifndef _WORLD_ENTITY_CONSTRUCTION_INFO_HPP_
+#define _WORLD_ENTITY_CONSTRUCTION_INFO_HPP_
 
-#include "../Common/Util/EnumIdMap.hpp"
-#include "Hitpoints.hpp"
+#include "../GameLogic/EntityConstructionInfo.hpp"
 
-enum EDamageType {
-  DMG_NONE	= 0,
-  DMG_WORLD	= 1,
-  DMG_SWORD   = 2,
-  DMG_ARROW   = 4,
-  DMG_HAMMER  = 8,
-  DMG_BOMB    = 16,
-  DMG_FIRE    = 32,
+class CWorldEntityConstructionInfo
+    : public CEntityConstructionInfo {
+ private:
+  uint16_t mCollisionMask;
+  uint16_t mCollisionGroup;
+ public:
+  CWorldEntityConstructionInfo(const std::string &id);
+  
+  CWorldEntityConstructionInfo(const tinyxml2::XMLElement *e);
 
-  DMG_RUN     = 64,
-
-  DMG_ALL     = 511,                  //!< Flag for take/block all damage types
+  uint16_t getCollisionMask() const {return mCollisionMask;}
+  uint16_t getCollisionGroup() const {return mCollisionGroup;}
 };
 
-class CDamageTypeIdMap : public CStringEnumIdMap<CDamageTypeIdMap, unsigned int> {
-public:
-  void init();
-  //! parse a string
-  /** separates string at spaces to add up multiple damage types.
-    * E.g.: "world sword fire"
-    */
-  unsigned int parseString(const std::string &str) const;
-};
-
-struct SDamageData {
-  Hitpoints defaultDamage;
-};
-
-class CDamageDataMap : public CEnumIdMap<CDamageDataMap, EDamageType, SDamageData> {
-public:
-  void init();
-};
-
-#endif // _DAMAGE_TYPES_HPP_
+#endif /* _WORLD_ENTITY_CONSTRUCTION_INFO_HPP_ */

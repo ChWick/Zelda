@@ -19,7 +19,7 @@
 
 #include "ObjectTypes.hpp"
 #include <string>
-#include "../DamageTypes.hpp"
+#include "../../Common/World/DamageTypes.hpp"
 #include "../../Common/Util/XMLHelper.hpp"
 #include "../../Common/tinyxml2/tinyxml2.hpp"
 #include "../../Common/Physics/BtOgreExtras.hpp"

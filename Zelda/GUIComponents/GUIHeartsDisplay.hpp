@@ -21,7 +21,7 @@
 #define _GUI_HEARTS_DISPLAY_HPP_
 
 #include "../Common/GUI/GUIOverlay.hpp"
-#include "../World/Hitpoints.hpp"
+#include "../Common/World/Hitpoints.hpp"
 
 
 class CGUIHeartsDisplay : public CGUIOverlay {

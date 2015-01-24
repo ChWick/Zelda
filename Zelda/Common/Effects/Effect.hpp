@@ -20,10 +20,14 @@
 #ifndef _EFFECT_HPP_
 #define _EFFECT_HPP_
 
-#include "../GameLogic/Entity.hpp"
+#include "../../World/WorldEntity.hpp"
+
+class CEffectConstructionInfo;
 
 class CEffect
-    : public CEntity {
+    : public CWorldEntity {
+ public:
+  CEffect(CWorldEntity *parent, const CEffectConstructionInfo &info);
   
 };
 

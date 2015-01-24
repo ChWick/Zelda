@@ -17,25 +17,13 @@
  * Zelda. If not, see http://www.gnu.org/licenses/.
  *****************************************************************************/
 
+#include "Effect.hpp"
+#include "EffectConstructionInfo.hpp"
+#include "ParticleSystem/ParticleSystemConstructionInfo.hpp"
 
-#include "WorldEntity.hpp"
-
-
-CWorldEntity::CWorldEntity(const std::string &sID,
-                           CEntity *pParent,
-                           CAbstractMap *pMap,
-                           const std::string &sResourceGroup)
-    : CAbstractWorldEntity(sID, pParent, pMap, sResourceGroup) {
-}
-
-CWorldEntity::CWorldEntity(CEntity *pParent,
-                           CAbstractMap *pMap,
-                           const tinyxml2::XMLElement *pElem,
-                           const std::string &sResourceGroup)
-    : CAbstractWorldEntity(pParent, pMap, pElem, sResourceGroup) {
-}
-
-CWorldEntity::CWorldEntity(CAbstractWorldEntity *parent,
-                           const CWorldEntityConstructionInfo &info)
-    : CAbstractWorldEntity(parent, info) {
+CEffect::CEffect(CWorldEntity *parent, const CEffectConstructionInfo &info)
+    : CWorldEntity(parent, info) {
+  for (auto &ps : info.getParticleSystems()) {
+    createParticleSystem("id", ps->getType());
+  }
 }

@@ -19,7 +19,7 @@
 
 #include "EmitOnReceivedDamageConstructionInfo.hpp"
 #include "../../../Util/XMLHelper.hpp"
-#include "../../../../World/DamageTypes.hpp"
+#include "../../../World/DamageTypes.hpp"
 
 using XMLHelper::IntAttribute;
 using XMLHelper::Attribute;

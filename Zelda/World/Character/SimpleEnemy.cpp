@@ -21,7 +21,7 @@
 #include <string>
 #include "SimpleEnemyController.hpp"
 #include "../Atlas/Map.hpp"
-#include "../Damage.hpp"
+#include "../../Common/World/Damage.hpp"
 #include "PersonTypes.hpp"
 #include <OgreEntity.h>
 #include <OgreBone.h>
@@ -103,7 +103,7 @@ void CSimpleEnemy::setPlayer(CWorldEntity *pPlayer) {
 }
 
 void CSimpleEnemy::updateAnimationsCallback(const Ogre::Real fTime) {
-  for (CWorldEntity *pEnt
+  for (auto *pEnt
            : dynamic_cast<CharacterControllerPhysics*>(mCCPhysics)
            ->getCollidingWorldEntities()) {
     if (dynamic_cast<CCharacter*>(pEnt)

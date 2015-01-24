@@ -20,9 +20,8 @@
 #ifndef _MAP_HPP_
 #define _MAP_HPP_
 
-#include "../WorldEntity.hpp"
+#include "../../Common/World/AbstractMap.hpp"
 #include "../../Common/PauseManager/PauseListener.hpp"
-#include "../../Common/Physics/PhysicsManager.hpp"
 #include "MapPack.hpp"
 #include "../../Common/DotSceneLoader/DotSceneLoader.hpp"
 #include "../../Common/DotSceneLoader/DotSceneLoaderCallback.hpp"
@@ -33,16 +32,12 @@
 #include <OgreMaterial.h>
 #include <map>
 
-class CMap : public CWorldEntity,
-             private CMapPackParserListener,
+class CMap : public CAbstractMap,
+             protected CMapPackParserListener,
              private CDotSceneLoaderCallback,
              public CPauseListener {
 private:
-  CPhysicsManager m_PhysicsManager;
-  CMapPackPtr m_MapPack;
   Ogre::DotSceneLoader m_SceneLoader;
-  CWorldEntity *m_pPlayer;
-  Ogre::StaticGeometry *m_pStaticGeometry;
   Ogre::StaticGeometry *m_pStaticGeometryChangedTiles;          //!< Here are the tiles added that can be remved (bush in place)
   Ogre::StaticGeometry *m_pStaticGeometryFixedTiles;            //!< Here are new static tiles added, initially blank. Afterwards it is all static
 
@@ -50,12 +45,11 @@ private:
   Ogre::Entity *m_pFirstFlowerEntity;
   Ogre::AnimationState *m_pFlowerAnimationState;
   Ogre::MaterialPtr m_pWaterSideWaveMaterial;
-  std::map<std::string, Ogre::Entity*> m_mStaticEntitiesMap;
-  std::string mPrependNodeName;
 public:
   CMap(CEntity *pAtlas, CMapPackPtr mapPack, Ogre::SceneNode *pParentSceneNode, CWorldEntity *pPlayer);
   virtual ~CMap();
 
+  virtual void init();
   void start();
   void exit();
 
@@ -68,16 +62,9 @@ public:
 
   void moveMap(const Ogre::Vector3 &offset);
 
-  const CPhysicsManager *getPhysicsManager() const {return &m_PhysicsManager;}
-  CPhysicsManager *getPhysicsManager() {return &m_PhysicsManager;}
-  const CMapPackPtr getMapPack() const {return m_MapPack;}
-  const std::string &getPrependNodeName() const {return mPrependNodeName;}
-
   void update(Ogre::Real tpf);
   bool frameStarted(const Ogre::FrameEvent& evt);
   bool frameEnded(const Ogre::FrameEvent& evt);
-
-  void addStaticEntity(const std::string &entity, const Ogre::Vector3 &vPosition, const Ogre::Quaternion &vRotation);
 
 private:
   void handleMessage(const CMessagePtr message);

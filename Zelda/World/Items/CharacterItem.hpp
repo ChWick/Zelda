@@ -22,7 +22,7 @@
 
 #include "ItemTypes.hpp"
 #include <OgrePrerequisites.h>
-#include "../Damage.hpp"
+#include "../../Common/World/Damage.hpp"
 #include "../WorldEntity.hpp"
 #include <BulletCollision/CollisionDispatch/btCollisionWorld.h>
 
@@ -75,7 +75,7 @@ public:
 
   void exit();
 
-  void enterNewMap(CMap *oldMap, CMap *newMap);
+  void enterNewMap(CAbstractMap *oldMap, CAbstractMap *newMap);
   void update(Ogre::Real tpf);
   
   void startDamage();
@@ -94,8 +94,8 @@ public:
   virtual Ogre::Vector3 getDamagePosition();
 
  private:
-  void createPhysics(CMap *map);
-  void destroyPhysics(CMap *map);
+  void createPhysics(CAbstractMap *map);
+  void destroyPhysics(CAbstractMap *map);
 
  protected:
   EReceiveDamageResult hit(const CDamage &damage);

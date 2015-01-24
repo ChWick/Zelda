@@ -19,8 +19,8 @@
 
 #include "HitableInterface.hpp"
 #include "Damage.hpp"
-#include "../Common/Message/MessageHandler.hpp"
-#include "../Common/Message/MessageHitpointsChanged.hpp"
+#include "../Message/MessageHandler.hpp"
+#include "../Message/MessageHitpointsChanged.hpp"
 
 void CHitableInterface::update(float tpf) {
   if (m_bInvulnerable) {

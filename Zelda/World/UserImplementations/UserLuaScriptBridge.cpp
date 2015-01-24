@@ -33,10 +33,11 @@
 #include "../../Common/GameLogic/GameStateTypes.hpp"
 #include "../../Common/GameLogic/GameLogicGarbageCollector.hpp"
 #include "../../Common/Message/MessageTargetReached.hpp"
+#include "../../Common/World/AbstractWorldEntity.hpp"
+#include "../../Common/World/AbstractWorld.hpp"
 
 #include "../../GUIComponents/GUITextBox.hpp"
 
-#include "../WorldEntity.hpp"
 #include "../World.hpp"
 #include "../Items/ItemTypes.hpp"
 #include "../Objects/Object.hpp"
@@ -232,7 +233,7 @@ int warp(lua_State *l) {
     LOGW("Entity '%s' was not found in entity tree.", id.c_str());
     return 0;
   }
-  CWorldEntity *pWE (dynamic_cast<CWorldEntity*>(pEntity));
+  CAbstractWorldEntity *pWE (dynamic_cast<CAbstractWorldEntity*>(pEntity));
   if (!pEntity) {
     LOGW("Entity '%s' is not a CWorldEntity.", id.c_str());
     return 0;

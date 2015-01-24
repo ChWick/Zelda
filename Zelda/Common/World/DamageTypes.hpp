@@ -17,24 +17,43 @@
  * Zelda. If not, see http://www.gnu.org/licenses/.
  *****************************************************************************/
 
-#ifndef _MAP_PACK_PARSER_LISTENER_HPP_
-#define _MAP_PACK_PARSER_LISTENER_HPP_
+#ifndef _DAMAGE_TYPES_HPP_
+#define _DAMAGE_TYPES_HPP_
 
-#include "../../Common/World/AbstractMapPackListener.hpp"
+#include "../Util/EnumIdMap.hpp"
+#include "Hitpoints.hpp"
 
-namespace tinyxml2 {
-  class XMLElement;
+enum EDamageType {
+  DMG_NONE	= 0,
+  DMG_WORLD	= 1,
+  DMG_SWORD   = 2,
+  DMG_ARROW   = 4,
+  DMG_HAMMER  = 8,
+  DMG_BOMB    = 16,
+  DMG_FIRE    = 32,
+
+  DMG_RUN     = 64,
+
+  DMG_ALL     = 511,                  //!< Flag for take/block all damage types
 };
 
-class CMapPackParserListener
-    : public CAbstractMapPackListener {
+class CDamageTypeIdMap : public CStringEnumIdMap<CDamageTypeIdMap, unsigned int> {
 public:
-  virtual void parseEvent(const tinyxml2::XMLElement *) {}
-  virtual void parsePlayer(const tinyxml2::XMLElement *) {}
-  virtual void parseRegion(const tinyxml2::XMLElement *pElem) {}
-  virtual void parseEntrance(const tinyxml2::XMLElement *pElem) {}
-  virtual void parseSceneEntity(const tinyxml2::XMLElement *) {}
-  virtual void parseNewEntity(const tinyxml2::XMLElement *) {}
+  void init();
+  //! parse a string
+  /** separates string at spaces to add up multiple damage types.
+    * E.g.: "world sword fire"
+    */
+  unsigned int parseString(const std::string &str) const;
 };
 
-#endif // _MAP_PACK_PARSER_LISTENER_HPP_
+struct SDamageData {
+  Hitpoints defaultDamage;
+};
+
+class CDamageDataMap : public CEnumIdMap<CDamageDataMap, EDamageType, SDamageData> {
+public:
+  void init();
+};
+
+#endif // _DAMAGE_TYPES_HPP_

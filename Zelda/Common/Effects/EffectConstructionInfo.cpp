@@ -19,20 +19,22 @@
 
 #include "EffectConstructionInfo.hpp"
 #include <string>
+#include "ParticleSystem/ParticleSystemConstructionInfo.hpp"
 #include "../tinyxml2/tinyxml2.hpp"
 
 using tinyxml2::XMLElement;
 
 CEffectConstructionInfo::CEffectConstructionInfo(const std::string &id)
-    : CEntityConstructionInfo(id) {
+    : CWorldEntityConstructionInfo(id) {
 }
 
 CEffectConstructionInfo::CEffectConstructionInfo(const XMLElement *e)
-    : CEntityConstructionInfo(e) {
+    : CWorldEntityConstructionInfo(e) {
   for (const XMLElement *c = e->FirstChildElement(); c;
        c = c->NextSiblingElement()) {
     if (strcmp(c->Value(), "particle_system") == 0) {
-      
+      mParticleSystems.push_back(
+          std::make_shared<CParticleSystemConstructionInfo>(c));
     } else if (strcmp(c->Value(), "sound") == 0) {
     }
   }

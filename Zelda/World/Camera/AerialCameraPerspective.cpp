@@ -25,6 +25,7 @@
 #include "../../Common/Message/MessageSwitchMap.hpp"
 #include "../../Common/Message/MessageHandler.hpp"
 #include "../Atlas/Map.hpp"
+#include "../Atlas/MapPack.hpp"
 #include "../../Common/Log.hpp"
 #include "../WorldEntity.hpp"
 
@@ -120,8 +121,10 @@ void CAerialCameraPerspective::sendMessageToAll(const CMessagePtr message) {
       if (switch_map_message->getSwitchMapType() == SMT_MOVE_CAMERA) {
         m_bSwitchingMap = true;
 
-        const CMapPackPtr nextPack = switch_map_message->getToMap()->getMapPack();
-        const CMapPackPtr currPack = switch_map_message->getFromMap()->getMapPack();
+        const CMapPackPtr nextPack(std::dynamic_pointer_cast<CMapPack>(
+            switch_map_message->getToMap()->getMapPack()));
+        const CMapPackPtr currPack(std::dynamic_pointer_cast<CMapPack>(
+            switch_map_message->getFromMap()->getMapPack()));
 
         Ogre::Vector3 vMapPositionOffset = currPack->getGlobalPosition() - nextPack->getGlobalPosition();
 
@@ -134,7 +137,8 @@ void CAerialCameraPerspective::sendMessageToAll(const CMessagePtr message) {
 
         m_fVisionLevelOffset = nextPack->getVisionLevelOffset();
       } else {
-        const CMapPackPtr pack = switch_map_message->getFromMap()->getMapPack();
+        const CMapPackPtr pack(std::dynamic_pointer_cast<CMapPack>(
+            switch_map_message->getFromMap()->getMapPack()));
         Ogre::Vector2 vSize(pack->getGlobalSize().x, pack->getGlobalSize().y);
         m_vMinCamPoint = -vSize / 2;
         m_vMaxCamPoint = vSize / 2;
@@ -147,7 +151,8 @@ void CAerialCameraPerspective::sendMessageToAll(const CMessagePtr message) {
     } else if (switch_map_message->getStatus() == CMessageSwitchMap::FINISHED) {
       m_bSwitchingMap = false;
 
-      const CMapPackPtr pack = switch_map_message->getFromMap()->getMapPack();
+      const CMapPackPtr pack(std::dynamic_pointer_cast<CMapPack>(
+          switch_map_message->getFromMap()->getMapPack()));
       Ogre::Vector2 vSize(pack->getGlobalSize().x, pack->getGlobalSize().y);
       m_vMinCamPoint = -vSize / 2;
       m_vMaxCamPoint = vSize / 2;

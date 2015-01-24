@@ -82,6 +82,8 @@ CAtlas::CAtlas(CEntity *pParent, Ogre::SceneNode *pRootSceneNode)
                  CMapPackPtr(new CMapPack(
                      CFileManager::getResourcePath("maps/Atlases/LightWorld/"),
                      "link_house")), m_pSceneNode, m_pPlayer);
+  m_pCurrentMap->init();
+  
   mFirstFrame = true;
 
   m_pPlayer->enterMap(m_pCurrentMap, Ogre::Vector3(0, 2, 0));
@@ -197,10 +199,14 @@ void CAtlas::handleMessage(const CMessagePtr message) {
                            switch_map_message->getMap())),
                        m_pSceneNode,
                        m_pPlayer);
+        m_pNextMap->init();
+        
         mFirstFrame = true;
 
-        CMapPackPtr nextPack = m_pNextMap->getMapPack();
-        CMapPackPtr currPack = m_pCurrentMap->getMapPack();
+        CMapPackPtr nextPack(std::dynamic_pointer_cast<CMapPack>(
+            m_pNextMap->getMapPack()));
+        CMapPackPtr currPack(std::dynamic_pointer_cast<CMapPack>(
+            m_pCurrentMap->getMapPack()));
 
         Ogre::Vector3 vMapPositionOffset
             = currPack->getGlobalPosition() - nextPack->getGlobalPosition();
@@ -335,8 +341,11 @@ void CAtlas::fadeOutCallback() {
             new CMapPack(
                 CFileManager::getResourcePath("maps/Atlases/LightWorld/"),
                 m_sNextMap)), m_pSceneNode, m_pPlayer);
+    m_pCurrentMap->init();
+    
     mFirstFrame = true;
-    CMapPackPtr currPack = m_pCurrentMap->getMapPack();
+    CMapPackPtr currPack(std::dynamic_pointer_cast<CMapPack>(
+        m_pCurrentMap->getMapPack()));
 
     CEntrance *pEntrance = getNextEntrancePtr();
 

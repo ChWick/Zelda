@@ -38,14 +38,14 @@
 #include "../../Common/GameLogic/Events/Event.hpp"
 #include "../../Common/Message/MessagePlayerPickupItem.hpp"
 #include "../../Common/Message/MessageHandler.hpp"
-#include "../Damage.hpp"
+#include "../../Common/World/Damage.hpp"
 
 
 unsigned int OBJECT_INNER_OBJECT_ID_NUMBER_COUNTER = 0;
 
 CObject::CObject(const std::string &id,
-                 CWorldEntity *pParent,
-                 CMap *pMap,
+                 CAbstractWorldEntity *pParent,
+                 CAbstractMap *pMap,
                  EObjectTypes eObjectType,
                  Ogre::SceneNode *pSceneNode)
   : CWorldEntity(id, pParent, pMap),
@@ -250,7 +250,7 @@ void CObject::makePickable() {
   addEvent(pEvent);
 }
 
-void CObject::enterMap(CMap *pMap, const Ogre::Vector3 &vPosition) {
+void CObject::enterMap(CAbstractMap *pMap, const Ogre::Vector3 &vPosition) {
   // attach to new CEntity
   attachTo(pMap);
 

@@ -130,7 +130,7 @@ void CCharacter::exit() {
   destroyPhysics();
 }
 
-void CCharacter::enterMap(CMap *pMap, const Ogre::Vector3 &vInitPosition) {
+void CCharacter::enterMap(CAbstractMap *pMap, const Ogre::Vector3 &vInitPosition) {
   // switch map only, if map an scene node are existing
   bool bSwitchMapOnly = m_pMap && m_pSceneNode;
 
@@ -195,8 +195,8 @@ bool CCharacter::createDamage(const Ogre::Ray &ray, const CDamage &dmg) {
       BtOgre::Convert::toBullet(ray.getOrigin()),
       BtOgre::Convert::toBullet(ray.getPoint(1)), rayCallback);
   if (rayCallback.hasHit()) {
-    CWorldEntity *pWE
-        = CWorldEntity::getFromUserPointer(rayCallback.m_collisionObject);
+    CAbstractWorldEntity *pWE = CAbstractWorldEntity::getFromUserPointer(
+        rayCallback.m_collisionObject);
     if (pWE) {
       EReceiveDamageResult res = attack(dmg, pWE);
       if (res == RDR_BLOCKED) {

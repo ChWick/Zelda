@@ -30,10 +30,10 @@
 #include "Objects/ObjectTypes.hpp"
 
 CWorld::CWorld()
-  : CGameState(GST_WORLD),
-    m_pWorldGUI(nullptr),
-    m_fWaderSideWaveMaterialNextImageIn(0),
-    m_iWaterSideWaveMaterialCurrentImage(0) {
+    : CAbstractWorld(),
+      m_pWorldGUI(nullptr),
+      m_fWaderSideWaveMaterialNextImageIn(0),
+      m_iWaterSideWaveMaterialCurrentImage(0) {
   Ogre::MaterialManager::getSingleton().setVerbose(true);
 
   LOGV("Creating World");

@@ -22,7 +22,7 @@
 
 #include <OgrePrerequisites.h>
 
-class CWorldEntity;
+class CAbstractWorldEntity;
 
 class CInteractionInterface {
 public:
@@ -50,10 +50,10 @@ public:
   };
 
 public:
-  virtual SInteractionResult interactOnCollision(const Ogre::Vector3 &vInteractDir, CWorldEntity *pSender) {
+  virtual SInteractionResult interactOnCollision(const Ogre::Vector3 &vInteractDir, CAbstractWorldEntity *pSender) {
     return SInteractionResult();
   }
-  virtual SInteractionResult interactOnActivate(const Ogre::Vector3 &vInteractDir, CWorldEntity *pSender) {
+  virtual SInteractionResult interactOnActivate(const Ogre::Vector3 &vInteractDir, CAbstractWorldEntity *pSender) {
     return SInteractionResult();
   }
 };

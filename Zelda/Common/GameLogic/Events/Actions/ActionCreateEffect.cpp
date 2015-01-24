@@ -19,6 +19,9 @@
 
 #include "ActionCreateEffect.hpp"
 #include "ActionCreateEffectConstructionInfo.hpp"
+#include "../Event.hpp"
+#include "../../../Effects/Effect.hpp"
+
 
 namespace events {
 
@@ -30,6 +33,11 @@ CActionCreateEffect::CActionCreateEffect(
 }
 
 void CActionCreateEffect::start() {
+  for (auto &ei : mEffectConstructionInfos) {
+    //CEffect *effect = new CEffect(&m_Owner.getOwner(), *ei.get());
+    //effect->init();
+    //effect->start();
+  }
 }
 
 }  // namespace events

@@ -24,7 +24,7 @@
 #include "../../Common/Message/MessageHitpointsChanged.hpp"
 #include "../Messages/MessageItem.hpp"
 #include "../Messages/UserMessageTypes.hpp"
-#include "../HitableInterface.hpp"
+#include "../../Common/World/HitableInterface.hpp"
 #include "../WorldEntity.hpp"
 #include "../Items/ItemData.hpp"
 #include "../UserImplementations/EntityPropertyIds.hpp"

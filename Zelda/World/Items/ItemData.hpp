@@ -24,8 +24,8 @@
 #include <vector>
 #include "../../Common/Effects/ParticleSystem/ParticleSystemConstructionInfo.hpp"
 #include "ItemTypes.hpp"
-#include "../DamageTypes.hpp"
-#include "../Hitpoints.hpp"
+#include "../../Common/World/DamageTypes.hpp"
+#include "../../Common/World/Hitpoints.hpp"
 
 
 struct SItemSlotData {

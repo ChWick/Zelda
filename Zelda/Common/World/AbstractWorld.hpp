@@ -17,25 +17,17 @@
  * Zelda. If not, see http://www.gnu.org/licenses/.
  *****************************************************************************/
 
+#ifndef ABSTRACTWORLD_HPP
+#define ABSTRACTWORLD_HPP
 
-#include "WorldEntity.hpp"
+#include "../GameLogic/GameState.hpp"
 
+class CAbstractWorld
+    : public CGameState {
+public:
+  CAbstractWorld();
+  
+  virtual ~CAbstractWorld() {}
+};
 
-CWorldEntity::CWorldEntity(const std::string &sID,
-                           CEntity *pParent,
-                           CAbstractMap *pMap,
-                           const std::string &sResourceGroup)
-    : CAbstractWorldEntity(sID, pParent, pMap, sResourceGroup) {
-}
-
-CWorldEntity::CWorldEntity(CEntity *pParent,
-                           CAbstractMap *pMap,
-                           const tinyxml2::XMLElement *pElem,
-                           const std::string &sResourceGroup)
-    : CAbstractWorldEntity(pParent, pMap, pElem, sResourceGroup) {
-}
-
-CWorldEntity::CWorldEntity(CAbstractWorldEntity *parent,
-                           const CWorldEntityConstructionInfo &info)
-    : CAbstractWorldEntity(parent, info) {
-}
+#endif /* ABSTRACTWORLD_HPP */

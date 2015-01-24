@@ -157,8 +157,8 @@ protected:
 public:
   virtual ~CCharacter();
 
-  virtual void exit();
-  void enterMap(CMap *pMap, const Ogre::Vector3 &vInitPosition);
+  virtual void exit() override;
+  void enterMap(CAbstractMap *pMap, const Ogre::Vector3 &vInitPosition) override;
 
   bool createDamage(const Ogre::Ray &ray, const CDamage &dmg);
 

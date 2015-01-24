@@ -20,7 +20,7 @@
 #ifndef _PLAYER_TOOL_H_
 #define _PLAYER_TOOL_H_
 
-#include "../Damage.hpp"
+#include "../../Common/World/Damage.hpp"
 #include <CEGUI/String.h>
 
 //!< This class represents the tools the player can use

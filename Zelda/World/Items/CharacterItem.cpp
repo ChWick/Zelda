@@ -136,13 +136,13 @@ void CCharacterItem::update(Ogre::Real tpf) {
   CWorldEntity::update(tpf);
 }
 
-void CCharacterItem::enterNewMap(CMap *oldMap, CMap *newMap) {
+void CCharacterItem::enterNewMap(CAbstractMap *oldMap, CAbstractMap *newMap) {
   destroyPhysics(oldMap);
   createPhysics(newMap);
 }
 
 
-void CCharacterItem::createPhysics(CMap *map) {
+void CCharacterItem::createPhysics(CAbstractMap *map) {
   destroyPhysics(map);  // check, that deleted, e.g. when switching
 
   CPhysicsManager *physicsManager = map->getPhysicsManager();
@@ -177,7 +177,7 @@ void CCharacterItem::createPhysics(CMap *map) {
   }
 }
 
-void CCharacterItem::destroyPhysics(CMap *map) {
+void CCharacterItem::destroyPhysics(CAbstractMap *map) {
   CPhysicsManager *physicsManager = map->getPhysicsManager();
 
   if (mBlockPhysics) {
@@ -238,7 +238,7 @@ void CCharacterItem::updateDamage(Ogre::Real tpf) {
     mDamagePhysics->setCollisionShape(shape);
 
     // perform collision check
-    CMap *map = mCharacter->getMap();
+    CAbstractMap *map = mCharacter->getMap();
     btCollisionWorld *physWorld = map->getPhysicsManager()->getWorld();
     physWorld->contactTest(mDamagePhysics, mContactResultCallback);
 
@@ -342,8 +342,8 @@ void CCharacterItemContactResultCallback::collision(const btCollisionObject *obj
   if (obj != mCharacterItem->getBlockPhysics()
       && obj != mCharacterItem->getDamagePhysics()
       && obj != mCharacterItem->getCharacter()->getCollisionObject()) {
-    CWorldEntity *pWE
-        = CWorldEntity::getFromUserPointer(obj);
+    CAbstractWorldEntity *pWE
+        = CAbstractWorldEntity::getFromUserPointer(obj);
     if (pWE) {
       // let the character attack this entity
       mCharacterItem->getCharacter()->attack(mCharacterItem->createDamage(), pWE);

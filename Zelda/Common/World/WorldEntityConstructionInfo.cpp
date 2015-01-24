@@ -17,25 +17,24 @@
  * Zelda. If not, see http://www.gnu.org/licenses/.
  *****************************************************************************/
 
+#include "WorldEntityConstructionInfo.hpp"
+#include <string>
+#include "../Physics/PhysicsMasks.hpp"
+#include "../Util/XMLHelper.hpp"
 
-#include "WorldEntity.hpp"
+using XMLHelper::Attribute;
 
-
-CWorldEntity::CWorldEntity(const std::string &sID,
-                           CEntity *pParent,
-                           CAbstractMap *pMap,
-                           const std::string &sResourceGroup)
-    : CAbstractWorldEntity(sID, pParent, pMap, sResourceGroup) {
+CWorldEntityConstructionInfo::CWorldEntityConstructionInfo(
+    const std::string &id)
+    : CEntityConstructionInfo(id) {
 }
 
-CWorldEntity::CWorldEntity(CEntity *pParent,
-                           CAbstractMap *pMap,
-                           const tinyxml2::XMLElement *pElem,
-                           const std::string &sResourceGroup)
-    : CAbstractWorldEntity(pParent, pMap, pElem, sResourceGroup) {
-}
-
-CWorldEntity::CWorldEntity(CAbstractWorldEntity *parent,
-                           const CWorldEntityConstructionInfo &info)
-    : CAbstractWorldEntity(parent, info) {
+CWorldEntityConstructionInfo::CWorldEntityConstructionInfo(
+    const tinyxml2::XMLElement *e)
+    : CEntityConstructionInfo(e),
+      mCollisionMask(CPhysicsMasksIdMap::getSingleton().parseString(
+          Attribute(e, "collision_mask", "static"))),
+    mCollisionGroup(CPhysicsGroupsIdMap::getSingleton().parseString(
+        Attribute(e, "collision_group",
+                  CPhysicsGroupsIdMap::getSingleton().toString(COL_STATIC)))) {
 }

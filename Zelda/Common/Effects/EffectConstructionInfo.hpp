@@ -21,19 +21,28 @@
 #define _EFFECT_CONSTRUCTION_INFO_HPP_
 
 #include <vector>
-#include "../GameLogic/EntityConstructionInfo.hpp"
+#include "../World/WorldEntityConstructionInfo.hpp"
+
+class CParticleSystemConstructionInfo;
+
+typedef std::vector<std::shared_ptr<CParticleSystemConstructionInfo> >
+ParticleSystemConstructionInfoList;
 
 //! Construction information for an effect
 class CEffectConstructionInfo
-    : CEntityConstructionInfo {
+    : public CWorldEntityConstructionInfo {
  private:
-  
+  ParticleSystemConstructionInfoList mParticleSystems;
  public:
   //! blank default constructor
   CEffectConstructionInfo(const std::string &id);
 
   //! constructor from a tinyxml element
   CEffectConstructionInfo(const tinyxml2::XMLElement *e);
+
+  const ParticleSystemConstructionInfoList &getParticleSystems() const {
+    return mParticleSystems;
+  }
 };
 
 #endif /* _EFFECT_CONSTRUCTION_INFO_HPP_ */

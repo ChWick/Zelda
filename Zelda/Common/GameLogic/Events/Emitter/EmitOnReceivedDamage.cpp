@@ -22,7 +22,7 @@
 #include "../../../Util/XMLHelper.hpp"
 #include "../Event.hpp"
 #include "../../Entity.hpp"
-#include "../../../../World/DamageTypes.hpp"
+#include "../../../World/DamageTypes.hpp"
 
 namespace events {
 
