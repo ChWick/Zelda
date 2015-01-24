@@ -235,7 +235,7 @@ void CObject::makePickable() {
   using events::CActionDeleteObject;
   using events::CActionMessage;
 
-  CEvent *pEvent = new CEvent(*this);
+  CEvent *pEvent = new CEvent(this);
 
   CEmitter *pEmitOnCollision = new CEmitOnCollision("player", *pEvent);
   pEvent->addEmitter(pEmitOnCollision);
@@ -244,7 +244,10 @@ void CObject::makePickable() {
   pEvent->addAction(pDeleteThisAction);
 
   CAction *pMessageAction
-      = new CActionMessage(std::make_shared<CMessagePlayerPickupItem>(__MSG_LOCATION__, m_uiType), *pEvent);
+      = new CActionMessage(
+          std::make_shared<CMessagePlayerPickupItem>(__MSG_LOCATION__,
+                                                     m_uiType),
+          *pEvent);
   pEvent->addAction(pMessageAction);
 
   addEvent(pEvent);

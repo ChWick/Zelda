@@ -20,14 +20,14 @@
 #ifndef _EFFECT_HPP_
 #define _EFFECT_HPP_
 
-#include "../../World/WorldEntity.hpp"
+#include "../World/AbstractWorldEntity.hpp"
 
 class CEffectConstructionInfo;
 
 class CEffect
-    : public CWorldEntity {
+    : public CAbstractWorldEntity {
  public:
-  CEffect(CWorldEntity *parent, const CEffectConstructionInfo &info);
+  CEffect(CAbstractWorldEntity *parent, const CEffectConstructionInfo &info);
   
 };
 

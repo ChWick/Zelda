@@ -21,8 +21,9 @@
 #include "EffectConstructionInfo.hpp"
 #include "ParticleSystem/ParticleSystemConstructionInfo.hpp"
 
-CEffect::CEffect(CWorldEntity *parent, const CEffectConstructionInfo &info)
-    : CWorldEntity(parent, info) {
+CEffect::CEffect(CAbstractWorldEntity *parent,
+                 const CEffectConstructionInfo &info)
+    : CAbstractWorldEntity(parent, info) {
   for (auto &ps : info.getParticleSystems()) {
     createParticleSystem("id", ps->getType());
   }

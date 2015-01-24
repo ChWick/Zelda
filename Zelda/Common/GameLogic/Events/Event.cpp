@@ -38,24 +38,24 @@ using tinyxml2::XMLElement;
 
 namespace events {
 
-CEvent::CEvent(CEntity &owner,
+CEvent::CEvent(CEntity *owner,
                const ERepeatTypes eRepeatType, Ogre::Real fRepeatTime)
   : m_sID("unset id"),
     m_eRepeatType(eRepeatType),
     m_fRepeatTime(fRepeatTime),
     m_fTimer(0),
-    m_Owner(owner),
+    mOwner(owner),
     m_bStarted(false) {
 }
 
-CEvent::CEvent(CEntity &owner,
+CEvent::CEvent(CEntity *owner,
                const tinyxml2::XMLElement *pElement)
   : m_sID(Attribute(pElement, "id", "unset id")),
     m_eRepeatType(CRepeatTypesMap::getSingleton().parseString(
         Attribute(pElement, "repeat", "none"))),
     m_fRepeatTime(RealAttribute(pElement, "time", 0)),
     m_fTimer(0),
-    m_Owner(owner),
+    mOwner(owner),
     m_bStarted(BoolAttribute(pElement, "started", false)) {
   for (const XMLElement *pChildElem = pElement->FirstChildElement();
        pChildElem; pChildElem = pChildElem->NextSiblingElement()) {
@@ -72,13 +72,13 @@ CEvent::CEvent(CEntity &owner,
   }
 }
 
-CEvent::CEvent(CEntity &owner,
+CEvent::CEvent(CEntity *owner,
                const CEventConstructionInfo &info)
     : m_sID(info.getID()),
       m_eRepeatType(info.getRepeatType()),
       m_fRepeatTime(info.getRepeatTime()),
       m_fTimer(info.getTimer()),
-      m_Owner(owner),
+      mOwner(owner),
       m_bStarted(info.isStarted()) {
   for (auto emit : info.getEmitterInfos()) {
     m_lEmitter.push_back(createEmitter(emit, *this));
@@ -114,7 +114,7 @@ void CEvent::start() {
     switch (m_eRepeatType) {
     case REPEAT_NONE:
       // delete event
-      m_Owner.destroyEvent(this);
+      mOwner->destroyEvent(this);
       break;
     case REPEAT_INFINITE:
       stop();

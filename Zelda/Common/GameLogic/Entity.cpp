@@ -118,7 +118,7 @@ CEntity::CEntity(CEntity *parent,
       m_pParent(nullptr) {
   mNumberOfInstances++;
   for (const auto &evt : info.getEventConstructionList()) {
-    m_lEvents.push_back(new events::CEvent(*this, *evt.get()));
+    m_lEvents.push_back(new events::CEvent(this, *evt.get()));
   }
   attachTo(parent);
 }
@@ -500,6 +500,6 @@ void CEntity::readEventsFromXMLElement(const tinyxml2::XMLElement *pElement,
   for (const XMLElement *pEventElement = pElement->FirstChildElement();
         pEventElement;
         pEventElement = pEventElement->NextSiblingElement()) {
-    addEvent(new CEvent(*this, pEventElement));
+    addEvent(new CEvent(this, pEventElement));
   }
 }

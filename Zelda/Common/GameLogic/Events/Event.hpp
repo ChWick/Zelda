@@ -28,7 +28,7 @@
 #include "../../GameLogic/OutputStyle.hpp"
 #include "../../Config/TypeDefines.hpp"
 
-class ENTITY;
+class CEntity;
 
 namespace events {
 
@@ -44,16 +44,19 @@ private:
   const Ogre::Real m_fRepeatTime;
   Ogre::Real m_fTimer;
 protected:
-  CEntity &m_Owner;
+  CEntity *mOwner;
   bool m_bStarted;
 
   std::vector<CEmitter *> m_lEmitter;
   std::vector<CAction *> m_lActions;
 
 public:
-  CEvent(CEntity &owner, const ERepeatTypes eRepeatType = REPEAT_NONE, Ogre::Real fRepeatTime = 0);
-  CEvent(CEntity &owner, const tinyxml2::XMLElement *pElement);
-  CEvent(CEntity &owner, const CEventConstructionInfo &info);
+  CEvent(CEntity *owner,
+         const ERepeatTypes eRepeatType = REPEAT_NONE,
+         Ogre::Real fRepeatTime = 0);
+  CEvent(CEntity *owner,
+         const tinyxml2::XMLElement *pElement);
+  CEvent(CEntity *owner, const CEventConstructionInfo &info);
 
   virtual ~CEvent();
 
@@ -68,7 +71,7 @@ public:
   const std::string &getID() const {return m_sID;}
   const std::vector<CEmitter *> &getEmitter() const {return m_lEmitter;}
   const std::vector<CAction *> &getActions() const {return m_lActions;}
-  CEntity &getOwner() const {return m_Owner;}
+  CEntity *getOwner() const {return mOwner;}
 
   void addEmitter(CEmitter *pEmitter) {m_lEmitter.push_back(pEmitter);}
   void addAction(CAction *pAction) {m_lActions.push_back(pAction);}

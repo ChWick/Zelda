@@ -145,6 +145,7 @@ void CCharacter::enterMap(CAbstractMap *pMap, const Ogre::Vector3 &vInitPosition
     if (mCurrentItems[i]) {
       currentItemType[i] = mCurrentItems[i]->getItemVariantType();
       weaponBone[i] = mCurrentItems[i]->getBoneToAttach();
+      mCurrentItems[i]->exit();
       mCurrentItems[i].reset();
     }
   }

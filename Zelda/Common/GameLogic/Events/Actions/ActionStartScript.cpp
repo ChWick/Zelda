@@ -24,13 +24,17 @@
 #include "../../Entity.hpp"
 #include "../Event.hpp"
 
-using namespace XMLHelper;
+using XMLHelper::Attribute;
+
 namespace events {
 
-CActionStartScript::CActionStartScript(const tinyxml2::XMLElement *pElem, const CEvent &owner)
+CActionStartScript::CActionStartScript(const tinyxml2::XMLElement *pElem,
+                                       const CEvent &owner)
   : CAction(pElem, owner),
-    mScript(CLuaScriptManager::getSingleton().getResourceByName(Attribute(pElem, "file"),
-                                                                Attribute(pElem, "resource_group", owner.getOwner().getResourceGroup()))
+    mScript(CLuaScriptManager::getSingleton().getResourceByName(
+        Attribute(pElem, "file"),
+        Attribute(pElem, "resource_group",
+                  owner.getOwner()->getResourceGroup()))
             .dynamicCast<CLuaScript>()) {
   ASSERT(mScript.isNull() == false);
 }
@@ -42,4 +46,4 @@ void CActionStartScript::start() {
   mScript->start();
 }
 
-};
+}  // namespace events
