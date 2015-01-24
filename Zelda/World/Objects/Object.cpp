@@ -322,7 +322,7 @@ void CObject::changeState(EEntityStateTypes eState) {
 
 CObject::SInteractionResult CObject::interactOnCollision(
     const Ogre::Vector3 &vInteractDir,
-    CWorldEntity *pSender) {
+    CAbstractWorldEntity *pSender) {
   switch (m_uiType) {
   case OBJECT_GREEN_RUPEE:
   case OBJECT_BLUE_RUPEE:
@@ -351,7 +351,7 @@ CObject::SInteractionResult CObject::interactOnCollision(
 
 CObject::SInteractionResult CObject::interactOnActivate(
     const Ogre::Vector3 &vInteractDir,
-    CWorldEntity *pSender) {
+    CAbstractWorldEntity *pSender) {
   switch (m_uiType) {
   case OBJECT_GREEN_BUSH:
   case OBJECT_LIGHT_STONE:

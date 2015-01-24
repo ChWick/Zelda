@@ -32,10 +32,10 @@
 #include <OgreMaterial.h>
 #include <map>
 
-class CMap : public CAbstractMap,
-             protected CMapPackParserListener,
-             private CDotSceneLoaderCallback,
-             public CPauseListener {
+class CMap final : public CAbstractMap,
+                   protected CMapPackParserListener,
+                   private CDotSceneLoaderCallback,
+                   public CPauseListener {
 private:
   Ogre::DotSceneLoader m_SceneLoader;
   Ogre::StaticGeometry *m_pStaticGeometryChangedTiles;          //!< Here are the tiles added that can be remved (bush in place)
@@ -49,9 +49,9 @@ public:
   CMap(CEntity *pAtlas, CMapPackPtr mapPack, Ogre::SceneNode *pParentSceneNode, CWorldEntity *pPlayer);
   virtual ~CMap();
 
-  virtual void init();
-  void start();
-  void exit();
+  virtual void init() override;
+  virtual void start() override;
+  virtual void exit() override;
 
   //! this is just a test function, dont use
   void CreateCube(const btVector3 &Position, btScalar Mass);
@@ -62,31 +62,31 @@ public:
 
   void moveMap(const Ogre::Vector3 &offset);
 
-  void update(Ogre::Real tpf);
-  bool frameStarted(const Ogre::FrameEvent& evt);
-  bool frameEnded(const Ogre::FrameEvent& evt);
+  void update(Ogre::Real tpf) override;
+  bool frameStarted(const Ogre::FrameEvent& evt) override;
+  bool frameEnded(const Ogre::FrameEvent& evt) override;
 
 private:
-  void handleMessage(const CMessagePtr message);
-  void updatePause(int iPauseType, bool bPause);
+  void handleMessage(const CMessagePtr message) override;
+  void updatePause(int iPauseType, bool bPause) override;
+  
   void rebuildStaticGeometryChangedTiles();
-  void processCollisionCheck();
   void translateStaticGeometry(Ogre::StaticGeometry *pSG, const Ogre::Vector3 &vVec);
 
   // CMapPackParserListener
-  void parseEvent(const tinyxml2::XMLElement *);
-  void parsePlayer(const tinyxml2::XMLElement *);
-  void parseRegion(const tinyxml2::XMLElement *pElem);
-  void parseEntrance(const tinyxml2::XMLElement *pElem);
-  void parseSceneEntity(const tinyxml2::XMLElement *);
-  void parseNewEntity(const tinyxml2::XMLElement *);
+  void parseEvent(const tinyxml2::XMLElement *) override;
+  void parsePlayer(const tinyxml2::XMLElement *) override;
+  void parseRegion(const tinyxml2::XMLElement *pElem) override;
+  void parseEntrance(const tinyxml2::XMLElement *pElem) override;
+  void parseSceneEntity(const tinyxml2::XMLElement *) override;
+  void parseNewEntity(const tinyxml2::XMLElement *) override;
 
   // CDotSceneLoaderCallback
-  void physicsShapeCreated(btCollisionShape *pShape, const std::string &sMeshName) ;
-  void worldPhysicsAdded(btRigidBody *pRigidBody);
-  void postEntityAdded(Ogre::Entity *pEntity, Ogre::SceneNode *pParent, btRigidBody *pRigidBody, const CUserData &userData);
-	void staticObjectAdded(Ogre::Entity *pEntity, Ogre::SceneNode *pParent);
-  EResults preEntityAdded(tinyxml2::XMLElement *XMLNode, Ogre::SceneNode *pParent, CUserData &userData);
+  void physicsShapeCreated(btCollisionShape *pShape, const std::string &sMeshName) override;
+  void worldPhysicsAdded(btRigidBody *pRigidBody) override;
+  void postEntityAdded(Ogre::Entity *pEntity, Ogre::SceneNode *pParent, btRigidBody *pRigidBody, const CUserData &userData) override;
+  void staticObjectAdded(Ogre::Entity *pEntity, Ogre::SceneNode *pParent) override;
+  EResults preEntityAdded(tinyxml2::XMLElement *XMLNode, Ogre::SceneNode *pParent, CUserData &userData) override;
 
 };
 #endif // _MAP_HPP_

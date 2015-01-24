@@ -57,10 +57,6 @@ CAbstractMap::CAbstractMap(CEntity *parent,
 
 void CAbstractMap::init() {
   WORLD_ENTITY_CLASS::init();
-}
-
-void CAbstractMap::start() {
-  WORLD_ENTITY_CLASS::start();
 
   // build the static geometry
   m_pStaticGeometry->build();
@@ -70,6 +66,10 @@ void CAbstractMap::start() {
     m_pSceneNode->getCreator()->destroyEntity(entpair.second);
   }
   m_mStaticEntitiesMap.clear();
+}
+
+void CAbstractMap::start() {
+  WORLD_ENTITY_CLASS::start();
 }
 
 void CAbstractMap::exit() {
@@ -83,6 +83,8 @@ void CAbstractMap::exit() {
   m_pStaticGeometry = nullptr;
 
   m_PhysicsManager.exit();
+
+  WORLD_ENTITY_CLASS::exit();
 
   // mappack is last
   m_MapPack.reset();
