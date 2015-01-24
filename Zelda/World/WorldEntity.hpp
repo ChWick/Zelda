@@ -28,6 +28,9 @@ class CWorldEntity
   CWorldEntity(const std::string &sID, CEntity *pParent, CAbstractMap *pMap, const std::string &sResourceGroup = Ogre::ResourceGroupManager::AUTODETECT_RESOURCE_GROUP_NAME);
   CWorldEntity(CEntity *pParent, CAbstractMap *pMap, const tinyxml2::XMLElement *pElem, const std::string &sResourceGroup = Ogre::ResourceGroupManager::AUTODETECT_RESOURCE_GROUP_NAME);
   CWorldEntity(CAbstractWorldEntity *parent, const CWorldEntityConstructionInfo &info);
+  CWorldEntity(const std::string &sID,
+               CAbstractWorldEntity *parent,
+               const CWorldEntityConstructionInfo &info);
 
  public:
   static CWorldEntity *getFromUserPointer(btCollisionObject *pCO) {

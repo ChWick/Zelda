@@ -89,6 +89,9 @@ class CEntity : public CMessageInjector {
           = Ogre::ResourceGroupManager::AUTODETECT_RESOURCE_GROUP_NAME);
   CEntity(CEntity *parent,
           const CEntityConstructionInfo &info);
+  CEntity(const std::string &id,
+          CEntity *parent,
+          const CEntityConstructionInfo &info);
   CEntity(const CEntity &src);
   virtual ~CEntity();
 

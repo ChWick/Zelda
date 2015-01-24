@@ -18,8 +18,7 @@
  *****************************************************************************/
 
 #include "DamageTypes.hpp"
-
-using namespace std;
+#include <string>
 
 void CDamageTypeIdMap::init() {
   m_Map[DMG_NONE]    = "none";
@@ -38,11 +37,15 @@ void CDamageTypeIdMap::init() {
 unsigned int CDamageTypeIdMap::parseString(const std::string &str) const {
   unsigned int uiDmg = DMG_NONE;
 
-  istringstream stream(str);
-  string token;
-  while (getline(stream, token, ' ')) {
-    uiDmg |= CStringEnumIdMap<CDamageTypeIdMap, unsigned int>::parseString(token);
-  }
+  std::string delimiters = " |+";
+  size_t current;
+  size_t next = -1;
+  do {
+    current = next + 1;
+    next = str.find_first_of(delimiters, current);
+    uiDmg |= CStringEnumIdMap<CDamageTypeIdMap, unsigned int>::parseString(
+        str.substr(current, next - current));
+  } while (next != std::string::npos);
 
   return uiDmg;
 }

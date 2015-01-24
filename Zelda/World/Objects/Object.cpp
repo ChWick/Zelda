@@ -48,10 +48,12 @@ CObject::CObject(const std::string &id,
                  CAbstractMap *pMap,
                  EObjectTypes eObjectType,
                  Ogre::SceneNode *pSceneNode)
-  : CWorldEntity(id, pParent, pMap),
-    mSharedConstructionInfo(CObjectDataMap::getSingleton().toData(eObjectType)),
-    mInnerObjectGenerator(InnerObject::DEFAULT_GENERATOR_DATA_MAP
-                          .toData(eObjectType)) {
+    : CWorldEntity(id, pParent,
+                   CObjectDataMap::getSingleton().toData(eObjectType)),
+      mSharedConstructionInfo(
+          CObjectDataMap::getSingleton().toData(eObjectType)),
+      mInnerObjectGenerator(InnerObject::DEFAULT_GENERATOR_DATA_MAP
+                            .toData(eObjectType)) {
   setType(eObjectType);
 
   if (pSceneNode) {
@@ -342,7 +344,13 @@ CObject::SInteractionResult CObject::interactOnCollision(
                                btRigidBody::upcast(this->getCollisionObject())
                                ->getLinearVelocity()).normalisedCopy(),
                            HP_ONE_HEART));
-      deleteLater();
+      this->hit(CDamage(pSender,
+                        DMG_WORLD,
+                        -BtOgre::Convert::toOgre(
+                               btRigidBody::upcast(this->getCollisionObject())
+                               ->getLinearVelocity()).normalisedCopy(),
+                        HP_INFINITY));
+      // deleteLater();
     }
     break;
   default:

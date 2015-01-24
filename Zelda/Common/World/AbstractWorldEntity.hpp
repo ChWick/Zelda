@@ -50,7 +50,11 @@ protected:
 public:
   CAbstractWorldEntity(const std::string &sID, CEntity *pParent, CAbstractMap *pMap, const std::string &sResourceGroup = Ogre::ResourceGroupManager::AUTODETECT_RESOURCE_GROUP_NAME);
   CAbstractWorldEntity(CEntity *pParent, CAbstractMap *pMap, const tinyxml2::XMLElement *pElem, const std::string &sResourceGroup = Ogre::ResourceGroupManager::AUTODETECT_RESOURCE_GROUP_NAME);
-  CAbstractWorldEntity(CAbstractWorldEntity *parent, const CWorldEntityConstructionInfo &info);
+  CAbstractWorldEntity(CAbstractWorldEntity *parent,
+                       const CWorldEntityConstructionInfo &info);
+  CAbstractWorldEntity(const std::string &sID,
+                       CAbstractWorldEntity *parent,
+                       const CWorldEntityConstructionInfo &info);
   
   virtual ~CAbstractWorldEntity();
   

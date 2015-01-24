@@ -22,6 +22,7 @@
 #include "../Event.hpp"
 #include "../../../Effects/Effect.hpp"
 #include "../../../World/AbstractWorldEntity.hpp"
+#include "../../../World/AbstractMap.hpp"
 
 
 namespace events {
@@ -37,7 +38,7 @@ void CActionCreateEffect::start() {
   ASSERT(dynamic_cast<CAbstractWorldEntity*>(m_Owner.getOwner()));
   for (auto &ei : mEffectConstructionInfos) {
     CEffect *effect = new CEffect(
-        static_cast<CAbstractWorldEntity*>(m_Owner.getOwner()),
+        static_cast<CAbstractWorldEntity*>(m_Owner.getOwner())->getMap(),
         *ei.get());
     effect->init();
     effect->start();

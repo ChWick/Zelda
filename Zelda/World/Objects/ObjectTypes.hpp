@@ -24,7 +24,7 @@
 #include "../../Common/Util/EnumIdMap.hpp"
 #include "../Atlas/TileTypes.hpp"
 #include "../GlobalCollisionShapesTypes.hpp"
-#include "../../Common/GameLogic/EntityConstructionInfo.hpp"
+#include "../../Common/World/WorldEntityConstructionInfo.hpp"
 #include <LinearMath/btVector3.h>
 
 enum EObjectTypes {
@@ -48,7 +48,7 @@ enum EObjectTypes {
 };
 
 class CObjectConstructionInfo
-    : public CEntityConstructionInfo {
+    : public CWorldEntityConstructionInfo {
  private:
   bool mUserHandle;
   bool mPermanentStatic;
