@@ -21,16 +21,27 @@
 #define _EMIT_ON_RECEIVED_DAMAGE_HPP_
 
 #include "Emitter.hpp"
+#include <memory>
 
 namespace events {
-  class CEmitOnReceivedDamage : public CEmitter {
-  private:
-    unsigned int m_uiDamageMask;
-  public:
-    CEmitOnReceivedDamage(const tinyxml2::XMLElement *pElem, const CEvent &owner);
 
-    unsigned int getDamageMask() {return m_uiDamageMask;}
-  };
+class CEmitOnReceivedDamageConstructionInfo;
+
+class CEmitOnReceivedDamage : public CEmitter {
+ private:
+  uint32_t mDamageMask;
+  bool mKilledByDamage;
+ public:
+  CEmitOnReceivedDamage(const tinyxml2::XMLElement *e,
+                        const CEvent &owner);
+    CEmitOnReceivedDamage(
+        const std::shared_ptr<CEmitOnReceivedDamageConstructionInfo> info,
+        const CEvent &owner);
+  
+  uint32_t getDamageMask() const {return mDamageMask;}
+  bool wasKilledByDamage() const {return mKilledByDamage;}
 };
+
+}  // namespace events
 
 #endif // _EMIT_ON_RECEIVED_DAMAGE_HPP_

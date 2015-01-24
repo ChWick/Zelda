@@ -247,7 +247,7 @@ void CPersonController::updateCharacter(const Ogre::Real deltaTime) {
 
     if (mCCPhysics->isStuck()) {
       bool bOneDestroyed = false;
-      for (CWorldEntity *pEnt : mCCPhysics->getCollidingWorldEntities()) {
+      for (auto *pEnt : mCCPhysics->getCollidingWorldEntities()) {
         if (this->mCCPerson->attack(CDamage(mCCPerson, DMG_RUN), pEnt)
             == CHitableInterface::RDR_ACCEPTED) {
           bOneDestroyed = true;

@@ -25,11 +25,11 @@
 #include <CEGUI/String.h>
 #include "World/Atlas/MapPack.hpp"
 
-class CMap;
+class CAbstractMap;
 
 class CTextConverter : public Ogre::Singleton<CTextConverter>, public CMessageInjector {
 protected:
-  CMapPackPtrConst mCurrentMapPack;
+  CAbstractMapPackPtrConst mCurrentMapPack;
 public:
   CTextConverter();
   virtual ~CTextConverter();

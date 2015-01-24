@@ -23,6 +23,7 @@
 #include <OgreCodec.h>
 #include <OgreConfigFile.h>
 #include <OgreException.h>
+#include <ParticleUniverseSystemManager.h>
 #include "FileManager/FileManager.hpp"
 #include "Message/MessageHandler.hpp"
 #include "GameLogic/GameStateManager.hpp"
@@ -275,7 +276,7 @@ void CGame::destroyScene() {
 
   deleteSingletons();
 
-  if (!mRoot->hasSceneManager("MainSceneManager"))
+  if (!mSceneMgr)
     return;
 
 #ifdef INCLUDE_RTSHADER_SYSTEM

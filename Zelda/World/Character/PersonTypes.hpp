@@ -23,7 +23,7 @@
 #include "../../Common/Util/EnumIdMap.hpp"
 #include <OgreVector3.h>
 #include "CharacterData.hpp"
-#include "../Hitpoints.hpp"
+#include "../../Common/World/Hitpoints.hpp"
 
 enum EPersonTypes {
   PERSON_LINK,

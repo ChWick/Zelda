@@ -17,80 +17,25 @@
  * Zelda. If not, see http://www.gnu.org/licenses/.
  *****************************************************************************/
 
-#ifndef _WORLD_ENTITY_HPP_
-#define _WORLD_ENTITY_HPP_
+#ifndef WORLDENTITY_HPP
+#define WORLDENTITY_HPP
 
-#include "InteractionInterface.hpp"
-#include "../Common/GameLogic/Entity.hpp"
-#include "HitableInterface.hpp"
-#include "AttackerInterface.hpp"
+#include "../Common/World/AbstractWorldEntity.hpp"
 
-class CMap;
+class CWorldEntity
+    : public CAbstractWorldEntity {
+ public:
+  CWorldEntity(const std::string &sID, CEntity *pParent, CAbstractMap *pMap, const std::string &sResourceGroup = Ogre::ResourceGroupManager::AUTODETECT_RESOURCE_GROUP_NAME);
+  CWorldEntity(CEntity *pParent, CAbstractMap *pMap, const tinyxml2::XMLElement *pElem, const std::string &sResourceGroup = Ogre::ResourceGroupManager::AUTODETECT_RESOURCE_GROUP_NAME);
+  CWorldEntity(CAbstractWorldEntity *parent, const CWorldEntityConstructionInfo &info);
 
-class CWorldEntity : public CEntity,
-                     public CHitableInterface,
-                     public CAttackerInterface,
-                     public CInteractionInterface {
-protected:
-  Ogre::SceneNode *m_pSceneNode;
-	btCollisionObject *m_pCollisionObject;
-	CMap *m_pMap;
-  uint16_t mCollisionMask;
-  uint16_t mCollisionGroup;
-
-public:
-  CWorldEntity(const std::string &sID, CEntity *pParent, CMap *pMap, const std::string &sResourceGroup = Ogre::ResourceGroupManager::AUTODETECT_RESOURCE_GROUP_NAME);
-  CWorldEntity(CEntity *pParent, CMap *pMap, const tinyxml2::XMLElement *pElem, const std::string &sResourceGroup = Ogre::ResourceGroupManager::AUTODETECT_RESOURCE_GROUP_NAME);
-  virtual ~CWorldEntity();
-
-  virtual void exit();
-
-  virtual const SPATIAL_VECTOR &getPosition() const;
-  virtual void setPosition(const SPATIAL_VECTOR &vPos);
-  virtual void translate(const SPATIAL_VECTOR &vOffset);
-
-  virtual const SPATIAL_VECTOR getFloorPosition() const {return getPosition();}
-  virtual void setFloorPosition(const SPATIAL_VECTOR &p) {setPosition(p);}
-
-  virtual const SPATIAL_VECTOR &getCenter() const;
-  virtual void setCenter(const SPATIAL_VECTOR &vCenter);
-
-  virtual const SPATIAL_VECTOR &getSize() const;
-  virtual void setSize(const SPATIAL_VECTOR &vSize);
-
-  virtual const SPATIAL_VECTOR &getScale() const;
-  virtual void setScale(const SPATIAL_VECTOR &vScale);
-
-  virtual const Ogre::Quaternion &getOrientation() const;
-  virtual void setOrientation(const Ogre::Quaternion &quat);
-  virtual void rotate(const Ogre::Quaternion &quat);
-
-  virtual void warp(const SPATIAL_VECTOR &p, const Ogre::Quaternion &q);
-
-  virtual Ogre::SceneNode *getSceneNode() const;
-  virtual btCollisionObject *getCollisionObject() const;
-  virtual void setCollisionObject(btCollisionObject *pCollisionObject);
-  virtual CMap *getMap() const {return m_pMap;}
-  virtual void enterMap(CMap *pMap, const Ogre::Vector3 &vPosition);
-
-  virtual void update(Ogre::Real tpf);
-
-
-  void setThisAsCollisionObjectsUserPointer();
-  void setThisAsCollisionObjectsUserPointer(btCollisionObject *pCollsionObject);
-  static CWorldEntity *getFromUserPointer(btCollisionObject *pCO);
-  static CWorldEntity *getFromUserPointer(const btCollisionObject *pCO);
-
-
-  virtual SInteractionResult interactOnCollision(const Ogre::Vector3 &vInteractDir, CWorldEntity *pSender);
-  virtual SInteractionResult interactOnActivate(const Ogre::Vector3 &vInteractDir, CWorldEntity *pSender);
-
-  uint16_t getCollisionMask() const {return mCollisionMask;}
-  uint16_t getCollisionGroup() const {return mCollisionGroup;}
-
-protected:
-  virtual void damageAccepted(const CDamage &damage);
+ public:
+  static CWorldEntity *getFromUserPointer(btCollisionObject *pCO) {
+    return static_cast<CWorldEntity*>(CAbstractWorldEntity::getFromUserPointer(pCO));
+  }
+  static CWorldEntity *getFromUserPointer(const btCollisionObject *pCO) {
+    return static_cast<CWorldEntity*>(CAbstractWorldEntity::getFromUserPointer(pCO));
+  }
 };
 
-#endif // _WORLD_ENTITY_HPP_
-
+#endif /* WORLDENTITY_HPP */

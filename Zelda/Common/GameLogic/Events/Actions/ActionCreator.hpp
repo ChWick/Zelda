@@ -20,15 +20,22 @@
 #ifndef _ACTION_CREATOR_HPP_
 #define _ACTION_CREATOR_HPP_
 
+#include <memory>
+
 namespace tinyxml2 {
-  class XMLElement;
+class XMLElement;
 };
 
 namespace events {
-  class CEvent;
-  class CAction;
+class CEvent;
+class CAction;
 
-  CAction *createAction(const tinyxml2::XMLElement *pElem, const CEvent &owner);
+class CActionConstructionInfo;
+
+CAction *createAction(const tinyxml2::XMLElement *pElem, const CEvent &owner);
+CAction *createAction(std::shared_ptr<CActionConstructionInfo> info,
+                      const CEvent &owner);
+
 };
 
 #endif // _ACTION_CREATOR_HPP_

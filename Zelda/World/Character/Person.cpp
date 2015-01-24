@@ -271,7 +271,7 @@ void CPerson::updateAnimationsCallback(const Ogre::Real fTime) {
 }
 
 bool CPerson::collidesWith(const std::string &sEntityID) const {
-  for (const CWorldEntity *pWE :
+  for (const auto *pWE :
            dynamic_cast<CharacterControllerPhysics*>(mCCPhysics)
            ->getCollidingWorldEntities()) {
     // check if objects are part of the same map

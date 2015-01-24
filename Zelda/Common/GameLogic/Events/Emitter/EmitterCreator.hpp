@@ -20,15 +20,22 @@
 #ifndef _EMITTER_CREATOR_HPP_
 #define _EMITTER_CREATOR_HPP_
 
+#include <memory>
+
 namespace tinyxml2 {
-  class XMLElement;
+class XMLElement;
 };
 
 namespace events {
-  class CEmitter;
-  class CEvent;
 
-  CEmitter *createEmitter(const tinyxml2::XMLElement *pElem, const CEvent &owner);
-};
+class CEmitter;
+class CEvent;
+class CEmitterConstructionInfo;
+
+CEmitter *createEmitter(const tinyxml2::XMLElement *pElem, const CEvent &owner);
+CEmitter *createEmitter(std::shared_ptr<CEmitterConstructionInfo> info,
+                        const CEvent &owner);
+
+}  // namespace events
 
 #endif // _EMITTER_CREATOR_HPP_

@@ -24,45 +24,28 @@
 #include <memory>
 #include <OgreVector3.h>
 #include <OgreVector2.h>
-#include "../../Common/XMLResources/Manager.hpp"
+#include "../../Common/World/AbstractMapPack.hpp"
 
-class CMapPackParserListener;
-
-class CMapPack {
+class CMapPack
+    : public CAbstractMapPack {
 private:
-  const std::string m_sPath;
-  const std::string m_sName;
-  const std::string m_sResourceGroup;
-
-  bool m_bInitialized;
-  CMapPackParserListener *m_pListener;
-
-
   std::string m_sSceneFile;
 
   Ogre::Vector3 m_vGlobalPosition;
   Ogre::Vector2 m_vGlobalSize;
   Ogre::Real    m_fVisionLevelOffset;
 
-  XMLResources::CManager mLanguageManager;
 public:
   CMapPack(const std::string &path, const std::string &name);
-  ~CMapPack();
 
-  void init(CMapPackParserListener *pListener);
+  void init(CAbstractMapPackListener *pListener);
   void parse();
-  void exit();
-
-  const std::string &getPath() const {return m_sPath;}
-  const std::string &getName() const {return m_sName;}
-  const std::string &getResourceGroup() const {return m_sResourceGroup;}
 
   const Ogre::Vector3 &getGlobalPosition() const {return m_vGlobalPosition;}
   const Ogre::Vector2 &getGlobalSize() const {return m_vGlobalSize;}
   const Ogre::Real &getVisionLevelOffset() const {return m_fVisionLevelOffset;}
 
   const std::string &getSceneFile() const {return m_sSceneFile;}
-  const XMLResources::CManager &getLanguageManager() const {return mLanguageManager;}
 
 private:
   void parseXMLFile();

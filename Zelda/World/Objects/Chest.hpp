@@ -51,7 +51,7 @@ private:
   std::string mTextMessage;
   Ogre::Real mTimer;
 public:
-  CChest(const std::string &sID, CWorldEntity *pParent, CMap *pMap, EChestType chestType);
+  CChest(const std::string &sID, CWorldEntity *pParent, CAbstractMap *pMap, EChestType chestType);
   ~CChest();
 
   void start();

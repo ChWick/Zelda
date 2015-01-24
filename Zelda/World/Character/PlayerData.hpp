@@ -22,7 +22,7 @@
 #include "../../Common/tinyxml2/tinyxml2.hpp"
 #include "OgrePrerequisites.h"
 #include "OgreSingleton.h"
-#include "../Hitpoints.hpp"
+#include "../../Common/World/Hitpoints.hpp"
 
 enum EItemSaveState {
 	ISS_STILL_IN_MAP,

@@ -20,11 +20,14 @@
 #ifndef _MAP_PACK_PARSER_LISTENER_HPP_
 #define _MAP_PACK_PARSER_LISTENER_HPP_
 
+#include "../../Common/World/AbstractMapPackListener.hpp"
+
 namespace tinyxml2 {
   class XMLElement;
 };
 
-class CMapPackParserListener {
+class CMapPackParserListener
+    : public CAbstractMapPackListener {
 public:
   virtual void parseEvent(const tinyxml2::XMLElement *) {}
   virtual void parsePlayer(const tinyxml2::XMLElement *) {}

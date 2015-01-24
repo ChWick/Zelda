@@ -17,43 +17,33 @@
  * Zelda. If not, see http://www.gnu.org/licenses/.
  *****************************************************************************/
 
-#ifndef _DAMAGE_TYPES_HPP_
-#define _DAMAGE_TYPES_HPP_
+#ifndef _ACTION_CREATE_EFFECT_HPP_
+#define _ACTION_CREATE_EFFECT_HPP_
 
-#include "../Common/Util/EnumIdMap.hpp"
-#include "Hitpoints.hpp"
+#include "Action.hpp"
 
-enum EDamageType {
-  DMG_NONE	= 0,
-  DMG_WORLD	= 1,
-  DMG_SWORD   = 2,
-  DMG_ARROW   = 4,
-  DMG_HAMMER  = 8,
-  DMG_BOMB    = 16,
-  DMG_FIRE    = 32,
+class CEffectConstructionInfo;
 
-  DMG_RUN     = 64,
+namespace events {
 
-  DMG_ALL     = 511,                  //!< Flag for take/block all damage types
+class CActionCreateEffectConstructionInfo;
+
+typedef std::list<std::shared_ptr<CEffectConstructionInfo> > EffectConstructionInfoList;
+
+class CActionCreateEffect
+    : public CAction {
+ private:
+  EffectConstructionInfoList mEffectConstructionInfos;
+ public:
+  CActionCreateEffect(
+      const std::shared_ptr<CActionCreateEffectConstructionInfo> info,
+      const CEvent &owner);
+
+ protected:
+  void start();
 };
 
-class CDamageTypeIdMap : public CStringEnumIdMap<CDamageTypeIdMap, unsigned int> {
-public:
-  void init();
-  //! parse a string
-  /** separates string at spaces to add up multiple damage types.
-    * E.g.: "world sword fire"
-    */
-  unsigned int parseString(const std::string &str) const;
-};
+}  // namespace events
 
-struct SDamageData {
-  Hitpoints defaultDamage;
-};
 
-class CDamageDataMap : public CEnumIdMap<CDamageDataMap, EDamageType, SDamageData> {
-public:
-  void init();
-};
-
-#endif // _DAMAGE_TYPES_HPP_
+#endif /* _ACTION_CREATE_EFFECT_HPP_ */

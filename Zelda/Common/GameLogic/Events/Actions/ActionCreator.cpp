@@ -18,6 +18,7 @@
  *****************************************************************************/
 
 #include "ActionCreator.hpp"
+#include "ActionConstructionInfo.hpp"
 #include "ActionTypes.hpp"
 #include "../../../Util/XMLHelper.hpp"
 #include <OgreException.h>
@@ -26,14 +27,18 @@
 #include "ActionCreateObject.hpp"
 #include "ActionDeleteObject.hpp"
 #include "ActionStartScript.hpp"
+#include "ActionCreateEffect.hpp"
+#include "ActionCreateEffectConstructionInfo.hpp"
 
-using namespace XMLHelper;
+using XMLHelper::Attribute;
 
 namespace events {
-  CAction *createAction(const tinyxml2::XMLElement *pElem, const CEvent &owner) {
-    EActionTypes type(CActionTypesMap::getSingleton().parseString(Attribute(pElem, "type")));
 
-    switch (type) {
+CAction *createAction(const tinyxml2::XMLElement *pElem, const CEvent &owner) {
+  EActionTypes type(CActionTypesMap::getSingleton().parseString(
+      Attribute(pElem, "type")));
+
+  switch (type) {
     case ACTION_MESSAGE:
       return new CActionMessage(pElem, owner);
     case ACTION_CREATE_OBJECT:
@@ -42,8 +47,25 @@ namespace events {
       return new CActionDeleteObject(pElem, owner);
     case ACTION_START_SCRIPT:
       return new CActionStartScript(pElem, owner);
-    }
-
-    throw Ogre::Exception(0, "New action type not added in createAction", __FILE__);
   }
-};
+
+  throw Ogre::Exception(type,
+                        "New action type not added in createAction",
+                        __FILE__);
+}
+
+CAction *createAction(std::shared_ptr<CActionConstructionInfo> info,
+                      const CEvent &owner) {
+  switch (info->getType()) {
+    case ACTION_CREATE_EFFECT:
+      return new CActionCreateEffect(
+          std::dynamic_pointer_cast<CActionCreateEffectConstructionInfo>(info),
+          owner);
+  }
+
+  throw Ogre::Exception(info->getType(),
+                        "New action type not added in createAction",
+                        __FILE__);
+}
+
+}  // namespace events

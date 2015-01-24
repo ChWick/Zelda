@@ -43,7 +43,7 @@ const Ogre::Real CChest::INNER_OBJECT_TIME_TO_SET_IN_LIFT(1);
 
 CChest::CChest(const std::string &sID,
                CWorldEntity *pParent,
-               CMap *pMap,
+               CAbstractMap *pMap,
                EChestType chestType)
   : CWorldEntity(sID, pParent, pMap, pParent->getResourceGroup()),
     mPhysicsOffset(Ogre::Vector3::ZERO),

@@ -18,16 +18,28 @@
  *****************************************************************************/
 
 #include "EmitOnReceivedDamage.hpp"
+#include "EmitOnReceivedDamageConstructionInfo.hpp"
 #include "../../../Util/XMLHelper.hpp"
 #include "../Event.hpp"
 #include "../../Entity.hpp"
-#include "../../../../World/DamageTypes.hpp"
+#include "../../../World/DamageTypes.hpp"
 
 namespace events {
 
-CEmitOnReceivedDamage::CEmitOnReceivedDamage(const tinyxml2::XMLElement *pElem, const CEvent &owner)
+CEmitOnReceivedDamage::CEmitOnReceivedDamage(
+    const tinyxml2::XMLElement *pElem, const CEvent &owner)
   : CEmitter(pElem, owner),
-    m_uiDamageMask(CDamageTypeIdMap::getSingleton().parseString(XMLHelper::Attribute(pElem, "damage"))) {
+    mDamageMask(CDamageTypeIdMap::getSingleton().parseString(
+        XMLHelper::Attribute(pElem, "damage"))),
+    mKilledByDamage(false) {
 }
 
-};
+CEmitOnReceivedDamage::CEmitOnReceivedDamage(
+    const std::shared_ptr<CEmitOnReceivedDamageConstructionInfo> info,
+    const CEvent &owner)
+    : CEmitter(info, owner),
+      mDamageMask(info->getDamageMask()),
+      mKilledByDamage(info->wasKilledByDamage()) {
+}
+
+}  // namespace events

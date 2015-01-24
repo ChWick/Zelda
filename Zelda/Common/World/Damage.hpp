@@ -22,7 +22,7 @@
 
 #include "Hitpoints.hpp"
 #include "DamageTypes.hpp"
-#include "../Common/Config/TypeDefines.hpp"
+#include "../Config/TypeDefines.hpp"
 #include SPATIAL_VECTOR_HEADER
 
 class CAttackerInterface;

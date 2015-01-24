@@ -32,8 +32,10 @@ class ENTITY;
 
 namespace events {
 
-  class CEmitter;
-  class CAction;
+class CEmitter;
+class CAction;
+
+class CEventConstructionInfo;
 
 class CEvent {
 private:
@@ -51,6 +53,7 @@ protected:
 public:
   CEvent(CEntity &owner, const ERepeatTypes eRepeatType = REPEAT_NONE, Ogre::Real fRepeatTime = 0);
   CEvent(CEntity &owner, const tinyxml2::XMLElement *pElement);
+  CEvent(CEntity &owner, const CEventConstructionInfo &info);
 
   virtual ~CEvent();
 

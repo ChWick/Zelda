@@ -18,108 +18,76 @@
  *****************************************************************************/
 
 #include "MapPack.hpp"
-#include <OgreResourceGroupManager.h>
+#include <OgreStringConverter.h>
+#include <string>
 #include "../../Common/tinyxml2/tinyxml2.hpp"
 #include "../../Common/Util/XMLHelper.hpp"
-#include <OgreLogManager.h>
 #include "MapPackParserListener.hpp"
-#include <OgreStringConverter.h>
 #include "../../Common/Log.hpp"
 
-using namespace tinyxml2;
-using namespace XMLHelper;
+using tinyxml2::XMLElement;
+using tinyxml2::XMLDocument;
+
+using XMLHelper::Attribute;
+using XMLHelper::RealAttribute;
 
 CMapPack::CMapPack(const std::string &path, const std::string &name)
-  : m_sPath(path),
-    m_sName(name),
-    m_sResourceGroup(name + "_RG"),
-    m_bInitialized(false),
-    m_pListener(nullptr),
-    mLanguageManager(name + "_RG", "language/", false) {
-
-  LOGV("Created map pack for: '%s%s'", path.c_str(), name.c_str());
+    : CAbstractMapPack(path, name) {
 }
 
-CMapPack::~CMapPack() {
-  exit();
-}
+void CMapPack::init(CAbstractMapPackListener *listener) {
+  CAbstractMapPack::init(listener);
 
-void CMapPack::init(CMapPackParserListener *pListener) {
-  LOGV("Initializing map pack %s", m_sName.c_str());
-  m_pListener = pListener;
-  if (m_bInitialized) {return;}
-  m_bInitialized = true;
-
-  Ogre::ResourceGroupManager::getSingleton().createResourceGroup(m_sResourceGroup, false);
-#if OGRE_PLATFORM == OGRE_PLATFORM_ANDROID
-  Ogre::ResourceGroupManager::getSingleton().addResourceLocation(m_sPath + m_sName + ".zip", "APKZip", m_sResourceGroup, true, true);
-#else
-  Ogre::ResourceGroupManager::getSingleton().addResourceLocation(m_sPath + m_sName + ".zip", "Zip", m_sResourceGroup, true, true);
-#endif // OGRE_PLATFORM
-  Ogre::StringVectorPtr files(Ogre::ResourceGroupManager::getSingleton().listResourceNames(m_sResourceGroup));
-  for (const Ogre::String &r : *files) {
-    if (r.find(".lua") != Ogre::String::npos) {
-      Ogre::ResourceGroupManager::getSingleton().declareResource(r, "LuaScript", m_sResourceGroup);
-      LOGV("Added lua script at '%s' with name '%s'", r.c_str(), r.c_str());
-    }
-  }
-  Ogre::ResourceGroupManager::getSingleton().initialiseResourceGroup(m_sResourceGroup);
-  Ogre::ResourceGroupManager::getSingleton().loadResourceGroup(m_sResourceGroup);
-
-  m_sSceneFile = m_sName + ".scene";
-  mLanguageManager.loadLanguage();
+  m_sSceneFile = mName + ".scene";
 }
 
 void CMapPack::parse() {
   parseXMLFile();
 }
 
-void CMapPack::exit() {
-  if (!m_bInitialized) {return;}
-  m_bInitialized = false;
-
-  Ogre::ResourceGroupManager::getSingleton().unloadResourceGroup(m_sResourceGroup);
-  Ogre::ResourceGroupManager::getSingleton().destroyResourceGroup(m_sResourceGroup);
-}
-
 void CMapPack::parseXMLFile() {
   Ogre::DataStreamPtr dataStream
-    = Ogre::ResourceGroupManager::getSingleton().openResource(m_sName + ".xml", m_sResourceGroup, false);
+    = Ogre::ResourceGroupManager::getSingleton().openResource(
+        mName + ".xml", mResourceGroup, false);
 
   if (dataStream.isNull()) {
-    throw Ogre::Exception(0, "File " + m_sName + ".zip not found in resource group " + m_sResourceGroup + "!", __FILE__);
+    throw Ogre::Exception(0,
+                          "File " + mName + ".zip not found in resource group "
+                          + mResourceGroup + "!", __FILE__);
   }
 
-  Ogre::LogManager::getSingleton().logMessage("Reading map xml file.");
+  LOGV("Reading map xml file.");
 
   XMLDocument doc;
   doc.Parse(dataStream->getAsString().c_str());
 
   XMLElement *pMapElem = doc.FirstChildElement();
-  m_vGlobalPosition = Ogre::StringConverter::parseVector3(Attribute(pMapElem, "global_position"));
-  m_vGlobalSize = Ogre::StringConverter::parseVector2(Attribute(pMapElem, "global_size"));
+  m_vGlobalPosition = Ogre::StringConverter::parseVector3(
+      Attribute(pMapElem, "global_position"));
+  m_vGlobalSize = Ogre::StringConverter::parseVector2(
+      Attribute(pMapElem, "global_size"));
   m_fVisionLevelOffset = RealAttribute(pMapElem, "vision_level_offset", 0.f);
 
-  for (XMLElement *pElem = pMapElem->FirstChildElement(); pElem; pElem = pElem->NextSiblingElement()) {
+  CMapPackParserListener *listener(
+      dynamic_cast<CMapPackParserListener*>(mListener));
+
+  ASSERT(listener);
+
+  for (const XMLElement *pElem = pMapElem->FirstChildElement(); pElem;
+       pElem = pElem->NextSiblingElement()) {
     if (strcmp(pElem->Value(), "event") == 0) {
-      if (m_pListener) {m_pListener->parseEvent(pElem);}
-    }
-    else if (strcmp(pElem->Value(), "region") == 0) {
-      if (m_pListener) {m_pListener->parseRegion(pElem);}
-    }
-    else if (strcmp(pElem->Value(), "entrance") == 0) {
-      if (m_pListener) {m_pListener->parseEntrance(pElem);}
-    }
-    else if (strcmp(pElem->Value(), "player") == 0) {
-      if (m_pListener) {m_pListener->parsePlayer(pElem);}
-    }
-    else if (strcmp(pElem->Value(), "scene_entity") == 0) {
-      if (m_pListener) {m_pListener->parseSceneEntity(pElem);}
-    }
-    else if (strcmp(pElem->Value(), "new_entity") == 0) {
-      if (m_pListener) {m_pListener->parseNewEntity(pElem);}
-    }
-    else {
+      if (listener) {listener->parseEvent(pElem);}
+    } else if (strcmp(pElem->Value(), "region") == 0) {
+      if (listener) {listener->parseRegion(pElem);}
+    } else if (strcmp(pElem->Value(), "entrance") == 0) {
+      if (listener) {listener->parseEntrance(pElem);}
+    } else if (strcmp(pElem->Value(), "player") == 0) {
+      if (listener) {listener->parsePlayer(pElem);}
+    } else if (strcmp(pElem->Value(), "scene_entity") == 0) {
+      if (listener) {listener->parseSceneEntity(pElem);}
+    } else if (strcmp(pElem->Value(), "new_entity") == 0) {
+      if (listener) {listener->parseNewEntity(pElem);}
+    } else {
       LOGW("Unknown entity in map pack '%s'", pElem->Value());
     }
   }

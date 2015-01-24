@@ -24,6 +24,8 @@
 #include "ItemTypes.hpp"
 #include <OgreStringConverter.h>
 
+using tinyxml2::XMLElement;
+
 using XMLHelper::Attribute;
 using XMLHelper::IntAttribute;
 using XMLHelper::RealAttribute;
@@ -45,6 +47,14 @@ void CItemDataLoader::readGroupElement(const tinyxml2::XMLElement *e) {
       Attribute(e, "block_physics_offset", ""));
 
   data.fLength = RealAttribute(e, "length", 0);
+
+  // read child elements
+  for (const XMLElement *c = e->FirstChildElement(); c;
+       c = c->NextSiblingElement()) {
+    if (strcmp(c->Value(), "particle_system") == 0) {
+      data.mParticleData.push_back(CParticleSystemConstructionInfo(c));
+    }
+  }
 
   CItemVariantDataMap::getSingleton().
       setData(CItemVariantIdMap::getSingleton().parseString(id),

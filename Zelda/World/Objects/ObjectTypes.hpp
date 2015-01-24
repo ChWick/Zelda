@@ -20,9 +20,11 @@
 #ifndef _OBJECT_TYPES_HPP_
 #define _OBJECT_TYPES_HPP_
 
+#include <vector>
 #include "../../Common/Util/EnumIdMap.hpp"
 #include "../Atlas/TileTypes.hpp"
 #include "../GlobalCollisionShapesTypes.hpp"
+#include "../../Common/GameLogic/EntityConstructionInfo.hpp"
 #include <LinearMath/btVector3.h>
 
 enum EObjectTypes {
@@ -45,23 +47,41 @@ enum EObjectTypes {
   OBJECT_COUNT,
 };
 
-struct SObjectTypeData {
-  EObjectTypes eObjectType;
-  
-  bool bUserHandle;
-  bool bPermanentStatic;
-  std::string sMeshName;
-  std::string sMaterialName;
+class CObjectConstructionInfo
+    : public CEntityConstructionInfo {
+ private:
+  bool mUserHandle;
+  bool mPermanentStatic;
+  std::string mMeshName;
+  std::string mMaterialName;
 
-  unsigned int eDamageSourceMask;
+  uint32_t mDamageSourceMask;
 
-  ETileTypes eNormalTile;
-  ETileTypes eRemovedTile;
+  ETileTypes mNormalTile;
+  ETileTypes mRemovedTile;
 
-  EGlobalCollisionShapesTypes eCollisionShape;
-  btVector3 vPhysicsShapeScale;
+  EGlobalCollisionShapesTypes mCollisionShape;
+  btVector3 mPhysicsShapeScale;
 
-  SObjectTypeData &operator=(const SObjectTypeData&) = default;
+ public:
+  CObjectConstructionInfo();
+  CObjectConstructionInfo(const tinyxml2::XMLElement *e);
+
+  CObjectConstructionInfo &operator=(const CObjectConstructionInfo&) = default;
+
+  bool isUsedHandled() const {return mUserHandle;}
+  bool isPermanentStatic() const {return mPermanentStatic;}
+
+  const std::string &getMeshName() const {return mMeshName;}
+  const std::string &getMaterialName() const {return mMaterialName;}
+
+  uint32_t getDamageSourceMask() const {return mDamageSourceMask;}
+
+  ETileTypes getNormalTile() const {return mNormalTile;}
+  ETileTypes getRemovedTile() const {return mRemovedTile;}
+
+  EGlobalCollisionShapesTypes getCollisionShape() const {return mCollisionShape;}
+  const btVector3 &getPhysicsShapeScale() const {return mPhysicsShapeScale;}
 };
 
 class CObjectTypeIdMap : public CStringEnumIdMap<CObjectTypeIdMap, EObjectTypes> {
@@ -69,7 +89,7 @@ public:
   void init();
 };
 
-class CObjectDataMap : public CEnumIdMap<CObjectDataMap, EObjectTypes, SObjectTypeData> {
+class CObjectDataMap : public CEnumIdMap<CObjectDataMap, EObjectTypes, CObjectConstructionInfo> {
  public:
   void init();
 

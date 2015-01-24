@@ -18,41 +18,12 @@
  *****************************************************************************/
 
 #include "ObjectDataLoader.hpp"
-#include <string>
-#include "../../Common/Util/XMLHelper.hpp"
-#include "../../Common/Physics/BtOgreExtras.hpp"
 #include "ObjectTypes.hpp"
-#include "../DamageTypes.hpp"
-#include "../Atlas/TileTypes.hpp"
-#include "../GlobalCollisionShapesTypes.hpp"
-#include <OgreStringConverter.h>
-
-using XMLHelper::Attribute;
-using XMLHelper::IntAttribute;
-using XMLHelper::RealAttribute;
-using XMLHelper::BoolAttribute;
 
 void CObjectDataLoader::readGroupElement(const tinyxml2::XMLElement *e) {
-  SObjectTypeData data;
-  data.eObjectType = CObjectTypeIdMap::getSingleton().
-      parseString(Attribute(e, "type"));
-  data.bUserHandle = BoolAttribute(e, "user_handle", true);
-  data.bPermanentStatic = BoolAttribute(e, "permanent_static", false);
-  data.sMeshName = Attribute(e, "mesh_name");
-  data.sMaterialName = Attribute(e, "material_name", "");
-  data.eDamageSourceMask = CDamageTypeIdMap::getSingleton().parseString(
-      Attribute(e, "damage_source_mask", "none"));
-  data.eNormalTile = CTileTypeIdMap::getSingleton().parseString(
-      Attribute(e, "normal_tile", "none"));
-  data.eRemovedTile = CTileTypeIdMap::getSingleton().parseString(
-      Attribute(e, "removed_tile", "none"));
-  data.eCollisionShape = CGlobalCollisionShapesTypesIdMap::getSingleton().
-      parseString(Attribute(e, "collision_shape", "none"));
-  data.vPhysicsShapeScale = BtOgre::Convert::toBullet(
-      Ogre::StringConverter::parseVector3(
-          Attribute(e, "physics_shape_scale", "1 1 1")));
-
-  CObjectDataMap::getSingleton().setData(data.eObjectType, data);
+  CObjectConstructionInfo info(e);
+  CObjectDataMap::getSingleton().setData(
+      static_cast<EObjectTypes>(info.getType()), info);
 }
 
 

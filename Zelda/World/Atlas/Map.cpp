@@ -28,6 +28,7 @@
 #include <OgreAnimationState.h>
 #include <OgreMeshManager.h>
 #include <string>
+#include <ParticleUniverseSystemManager.h>
 #include "../../Common/Physics/BtOgrePG.hpp"
 #include "../../Common/Physics/PhysicsMasks.hpp"
 #include "../../Common/Util/DeleteSceneNode.hpp"
@@ -52,24 +53,13 @@ using XMLHelper::Attribute;
 using XMLHelper::IntAttribute;
 using XMLHelper::RealAttribute;
 
-/**
- * Counter to make names unique if objects are switched between
- * maps since renaming a scene node is not possible
- */
-int MAP_COUNTER = 0;
-
 CMap::CMap(CEntity *pAtlas,
            CMapPackPtr mapPack,
            Ogre::SceneNode *pParentSceneNode,
            CWorldEntity *pPlayer)
-  : CWorldEntity(mapPack->getName(), pAtlas, this, mapPack->getResourceGroup()),
-    m_PhysicsManager(pParentSceneNode->getCreator()),
-    m_MapPack(mapPack),
-    m_pPlayer(pPlayer),
-    m_pFirstFlowerEntity(nullptr),
-    m_pFlowerAnimationState(nullptr) {
-  Ogre::LogManager::getSingleton().logMessage(
-      "Construction of map '" + m_MapPack->getName() + "'");
+    : CAbstractMap(pAtlas, mapPack, pParentSceneNode, pPlayer),
+      m_pFirstFlowerEntity(nullptr),
+      m_pFlowerAnimationState(nullptr) {
 
   // Create global collision shapes
   m_PhysicsManager.addCollisionShape(
@@ -165,11 +155,6 @@ CMap::CMap(CEntity *pAtlas,
   m_pSceneNode = pParentSceneNode->createChildSceneNode(
       m_MapPack->getName() + "_RootNode");
 
-  m_pStaticGeometry = pParentSceneNode->getCreator()->createStaticGeometry(
-      m_MapPack->getName() + "_StaticGeometry");
-  m_pStaticGeometry->setRegionDimensions(Ogre::Vector3(10, 10, 10));
-  m_pStaticGeometry->setCastShadows(false);
-
   m_pStaticGeometryChangedTiles
       = pParentSceneNode->getCreator()->createStaticGeometry(
           m_MapPack->getName() + "_StaticGeometryChangedTiles");
@@ -182,15 +167,14 @@ CMap::CMap(CEntity *pAtlas,
   m_pStaticGeometryFixedTiles->setRegionDimensions(Ogre::Vector3(10, 10, 10));
   m_pStaticGeometryFixedTiles->setCastShadows(false);
 
-  m_MapPack->init(this);
 
+  m_MapPack->init(this);
 
   m_SceneLoader.addCallback(this);
 
-  mPrependNodeName = m_MapPack->getName()
-                              + Ogre::StringConverter::toString(MAP_COUNTER++);
+  CMapPackPtr pack(std::dynamic_pointer_cast<CMapPack>(m_MapPack));
 
-  m_SceneLoader.parseDotScene(m_MapPack->getSceneFile(),
+  m_SceneLoader.parseDotScene(pack->getSceneFile(),
                               m_MapPack->getResourceGroup(),
                               m_pSceneNode->getCreator(),
                               &m_PhysicsManager,
@@ -216,53 +200,42 @@ CMap::CMap(CEntity *pAtlas,
     //m_pSceneNode->getCreator()->destroyEntity(pEnt);
   }*/
 
-  m_pStaticGeometry->build();
   rebuildStaticGeometryChangedTiles();
 
   m_pWaterSideWaveMaterial
       = Ogre::MaterialManager::getSingleton().getByName("water_side_wave");
   m_pWaterSideWaveMaterial->touch();
   m_pWaterSideWaveMaterial->load();
-
-  // remove entites only used for creating static
-  for (auto entpair : m_mStaticEntitiesMap) {
-    m_pSceneNode->getCreator()->destroyEntity(entpair.second);
-  }
-  m_mStaticEntitiesMap.clear();
-
-  init();
 }
 
 CMap::~CMap() {
 }
 
+void CMap::init() {
+  CAbstractMap::init();
+}
+
 void CMap::start() {
-  CEntity::start();
+  CAbstractMap::start();
   sendCallToAll(&CEntity::start, false);
 }
 
 void CMap::exit() {
   if (!m_pSceneNode) {return;}
   m_SceneLoader.cleanup();
-  LOGI("Destruction of map '%s'", m_MapPack->getName().c_str());
 
   Ogre::SceneManager *sceneManager = m_pSceneNode->getCreator();
 
   for (int i = 0; i < TT_COUNT; i++) {
     sceneManager->destroyEntity(m_apTileEntities[i]);
   }
-  sceneManager->destroyStaticGeometry(m_pStaticGeometry);
   sceneManager->destroyStaticGeometry(m_pStaticGeometryChangedTiles);
   sceneManager->destroyStaticGeometry(m_pStaticGeometryFixedTiles);
-  m_pStaticGeometry = nullptr;
-
-  CWorldEntity::exit();
-  m_PhysicsManager.exit();
 
   // reset shared pointers, to make sure it is deleted in correct order
   m_pWaterSideWaveMaterial.setNull();
-  // mappack is last
-  m_MapPack.reset();
+
+  CAbstractMap::exit();
 }
 
 void CMap::CreateCube(const btVector3 &Position, btScalar Mass) {
@@ -337,19 +310,6 @@ void CMap::moveMap(const Ogre::Vector3 &offset) {
   translateStaticGeometry(m_pStaticGeometryFixedTiles, offset);
 }
 
-void CMap::addStaticEntity(const std::string &entity,
-                           const Ogre::Vector3 &vPosition,
-                           const Ogre::Quaternion &vRotation) {
-  if (m_mStaticEntitiesMap.find(entity) == m_mStaticEntitiesMap.end()) {
-    m_mStaticEntitiesMap[entity]
-        = m_pSceneNode->getCreator()->createEntity(entity);
-  }
-
-  m_pStaticGeometry->addEntity(m_mStaticEntitiesMap.at(entity),
-                               vPosition,
-                               vRotation);
-}
-
 void CMap::translateStaticGeometry(Ogre::StaticGeometry *pSG,
                                    const Ogre::Vector3 &vVec) {
   Ogre::StaticGeometry::RegionIterator regionIt = pSG->getRegionIterator();
@@ -364,7 +324,7 @@ void CMap::translateStaticGeometry(Ogre::StaticGeometry *pSG,
 }
 
 void CMap::update(Ogre::Real tpf) {
-  CWorldEntity::update(tpf);
+  CAbstractMap::update(tpf);
 
   if (m_pFlowerAnimationState) {
     m_pFlowerAnimationState->addTime(tpf * 5);
@@ -372,14 +332,11 @@ void CMap::update(Ogre::Real tpf) {
 }
 
 bool CMap::frameStarted(const Ogre::FrameEvent& evt) {
-  if (m_bPauseUpdate) {return true;}
-  m_PhysicsManager.update(evt.timeSinceLastFrame);
-  processCollisionCheck();
-  return CWorldEntity::frameStarted(evt);
+  return CAbstractMap::frameStarted(evt);
 }
 
 bool CMap::frameEnded(const Ogre::FrameEvent& evt) {
-  return CWorldEntity::frameEnded(evt);
+  return CAbstractMap::frameEnded(evt);
 }
 
 
@@ -392,9 +349,9 @@ void CMap::handleMessage(const CMessagePtr message) {
     if (mesc->getOldState() == EST_NORMAL) {
       // only change request if object was in normal state before
 
-      const SObjectTypeData &data(CObjectDataMap::getSingleton().toData(
+      const CObjectConstructionInfo &data(CObjectDataMap::getSingleton().toData(
           static_cast<EObjectTypes>(pObject->getType())));
-      if (data.eRemovedTile == TT_COUNT) {
+      if (data.getRemovedTile() == TT_COUNT) {
         return;
       }
 
@@ -403,7 +360,7 @@ void CMap::handleMessage(const CMessagePtr message) {
 
 
       m_pStaticGeometryFixedTiles->addEntity(
-          m_apTileEntities[data.eRemovedTile],
+          m_apTileEntities[data.getRemovedTile()],
           pObject->getSceneNode()->getInitialPosition());
 
       m_pStaticGeometryFixedTiles->build();
@@ -432,53 +389,17 @@ void CMap::rebuildStaticGeometryChangedTiles() {
     if (!pObject) {continue;}
 
     if (pObject->getState() == EST_NORMAL) {
-      const SObjectTypeData &data(CObjectDataMap::getSingleton().toData(
+      const CObjectConstructionInfo &data(CObjectDataMap::getSingleton().toData(
           static_cast<EObjectTypes>(pObject->getType())));
-      if (data.eNormalTile != TT_COUNT) {
+      if (data.getNormalTile() != TT_COUNT) {
         m_pStaticGeometryChangedTiles->addEntity(
-            m_apTileEntities[data.eNormalTile],
+            m_apTileEntities[data.getNormalTile()],
             pObject->getSceneNode()->getInitialPosition());
       }
     }
   }
 
   m_pStaticGeometryChangedTiles->build();
-}
-
-void CMap::processCollisionCheck() {
-  auto dispatcher = m_PhysicsManager.getWorld()->getDispatcher();
-
-  int numManifolds = dispatcher->getNumManifolds();
-  for (int i = 0; i < numManifolds; i++) {
-    btPersistentManifold* contactManifold
-        = dispatcher->getManifoldByIndexInternal(i);
-    const btCollisionObject* obA =
-        static_cast<const btCollisionObject*>(contactManifold->getBody0());
-    const btCollisionObject* obB =
-        static_cast<const btCollisionObject*>(contactManifold->getBody1());
-
-    int numContacts = contactManifold->getNumContacts();
-    for (int j = 0; j < numContacts; j++) {
-      btManifoldPoint& pt = contactManifold->getContactPoint(j);
-      if (pt.getDistance() < 0.f) {
-        // Contact of 2 objects
-        CWorldEntity *pWE_A(CWorldEntity::getFromUserPointer(obA));
-        CWorldEntity *pWE_B(CWorldEntity::getFromUserPointer(obB));
-
-        btVector3 vDistance(pt.m_positionWorldOnA - pt.m_positionWorldOnB);
-        if (vDistance.fuzzyZero()) {
-            continue;
-        }
-        vDistance.normalize();
-        if (pWE_A && pWE_B) {
-          pWE_A->interactOnCollision(BtOgre::Convert::toOgre(vDistance),
-                                     pWE_B);
-          pWE_B->interactOnCollision(-BtOgre::Convert::toOgre(vDistance),
-                                     pWE_A);
-        }
-      }
-    }
-  }
 }
 
 // ############################################################################3
@@ -520,9 +441,9 @@ void CMap::parseNewEntity(const tinyxml2::XMLElement *pElem) {
 // CDotSceneLoaderCallback
 void CMap::physicsShapeCreated(btCollisionShape *pShape,
                                const std::string &sMeshName) {
-    EObjectTypes objectType(CObjectDataMap::getSingleton().getFromMeshName(sMeshName));
+  EObjectTypes objectType(CObjectDataMap::getSingleton().getFromMeshName(sMeshName));
   if (objectType != OBJECT_COUNT) {
-    auto scale = CObjectDataMap::getSingleton().toData(objectType).vPhysicsShapeScale;
+    auto scale = CObjectDataMap::getSingleton().toData(objectType).getPhysicsShapeScale();
     pShape->setLocalScaling(pShape->getLocalScaling() * scale);
   }
 }
@@ -583,7 +504,7 @@ CDotSceneLoaderCallback::EResults CMap::preEntityAdded(
   EObjectTypes objectType(CObjectDataMap::getSingleton().getFromMeshFileName(
       XMLNode->Attribute("meshFile")));
   if (objectType != OBJECT_COUNT
-      && CObjectDataMap::getSingleton().toData(objectType).bUserHandle) {
+      && CObjectDataMap::getSingleton().toData(objectType).isUsedHandled()) {
     CObject *pObject = new CObject(userData.getStringUserData("name"),
                                    this, this, objectType, pParent);
     std::string innerObject(userData.getStringUserData("inner_object"));

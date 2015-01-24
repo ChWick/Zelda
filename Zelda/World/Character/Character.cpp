@@ -130,7 +130,7 @@ void CCharacter::exit() {
   destroyPhysics();
 }
 
-void CCharacter::enterMap(CMap *pMap, const Ogre::Vector3 &vInitPosition) {
+void CCharacter::enterMap(CAbstractMap *pMap, const Ogre::Vector3 &vInitPosition) {
   // switch map only, if map an scene node are existing
   bool bSwitchMapOnly = m_pMap && m_pSceneNode;
 
@@ -195,8 +195,8 @@ bool CCharacter::createDamage(const Ogre::Ray &ray, const CDamage &dmg) {
       BtOgre::Convert::toBullet(ray.getOrigin()),
       BtOgre::Convert::toBullet(ray.getPoint(1)), rayCallback);
   if (rayCallback.hasHit()) {
-    CWorldEntity *pWE
-        = CWorldEntity::getFromUserPointer(rayCallback.m_collisionObject);
+    CAbstractWorldEntity *pWE = CAbstractWorldEntity::getFromUserPointer(
+        rayCallback.m_collisionObject);
     if (pWE) {
       EReceiveDamageResult res = attack(dmg, pWE);
       if (res == RDR_BLOCKED) {
@@ -428,8 +428,11 @@ void CCharacter::useCurrentWeapon() {
 void CCharacter::changeItem(ECharacterItemSlots slot,
                             const std::string &bone,
                             EItemVariantTypes item) {
-  mCurrentItems[slot] = std::shared_ptr<CCharacterItem>(
-      new CCharacterItem(this, bone, item));
+  if (mCurrentItems[slot]) {
+    // exit old item, it will be deleted by the shared_ptr
+    mCurrentItems[slot]->exit();
+  }
+  mCurrentItems[slot] = std::make_shared<CCharacterItem>(this, bone, item);
   switch (slot) {
     case CIS_TOOL:
       mCurrentItems[slot]->hide();

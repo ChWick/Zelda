@@ -26,7 +26,7 @@
 #include "World/GlobalCollisionShapesTypes.hpp"
 #include "World/Atlas/TileTypes.hpp"
 #include "World/Character/PersonTypes.hpp"
-#include "World/DamageTypes.hpp"
+#include "Common/World/DamageTypes.hpp"
 #include "World/Items/ItemTypes.hpp"
 #include "World/Items/ItemData.hpp"
 #include "World/Objects/ObjectTypes.hpp"

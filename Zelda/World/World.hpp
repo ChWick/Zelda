@@ -20,7 +20,7 @@
 #ifndef _WORLD_HPP_
 #define _WORLD_HPP_
 
-#include "../Common/GameLogic/GameState.hpp"
+#include "../Common/World/AbstractWorld.hpp"
 #include "Items/ItemStatus.hpp"
 #include <OgrePrerequisites.h>
 #if OGRE_PLATFORM == OGRE_PLATFORM_APPLE && !defined(__LP64__)
@@ -32,7 +32,7 @@
 class CAtlas;
 class CWorldGUI;
 
-class CWorld : public CGameState {
+class CWorld : public CAbstractWorld {
 private:
   CItemStatusStorage m_ItemStatusStorage;
   CAtlas *m_pAtlas;
@@ -44,7 +44,7 @@ private:
   CWorldDataLoader mDataLoader;
 public:
   CWorld();
-  ~CWorld();
+  virtual ~CWorld();
 
   const CItemStatusStorage &getItemStatusStorage() const {
     return m_ItemStatusStorage;

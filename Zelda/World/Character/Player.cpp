@@ -139,7 +139,8 @@ void CPlayer::interact() {
 
   if (rayCallback.hasHit()) {
     CWorldEntity *pWE
-        = CWorldEntity::getFromUserPointer(rayCallback.m_collisionObject);
+        = CWorldEntity::getFromUserPointer(
+            rayCallback.m_collisionObject);
     if (pWE) {
       SInteractionResult res(pWE->interactOnActivate(getOrientation().zAxis(),
                                                      this));

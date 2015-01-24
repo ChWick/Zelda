@@ -1,4 +1,4 @@
- /*****************************************************************************
+/*****************************************************************************
  * Copyright 2014 Christoph Wick
  *
  * This file is part of Zelda.
@@ -17,229 +17,25 @@
  * Zelda. If not, see http://www.gnu.org/licenses/.
  *****************************************************************************/
 
+
 #include "WorldEntity.hpp"
-#include <OgreSceneNode.h>
-#include <BulletCollision/CollisionDispatch/btCollisionObject.h>
-#include "../Common/Physics/BtOgreExtras.hpp"
-#include "../Common/Physics/BtOgrePG.hpp"
-#include "../Common/Physics/PhysicsMasks.hpp"
-#include "../Common/Util/DeleteSceneNode.hpp"
-#include "../Common/GameLogic/Events/Event.hpp"
-#include "../Common/GameLogic/Events/Emitter/EmitOnCollision.hpp"
-#include "../Common/GameLogic/Events/Emitter/EmitOnReceivedDamage.hpp"
-#include "Atlas/Map.hpp"
-#include "Atlas/MapPack.hpp"
-#include "Damage.hpp"
 
-using XMLHelper::Attribute;
 
-CWorldEntity::CWorldEntity(const std::string &sID, CEntity *pParent, CMap *pMap, const std::string &sResourceGroup)
-  : CEntity(sID, pParent, (sResourceGroup == Ogre::ResourceGroupManager::AUTODETECT_RESOURCE_GROUP_NAME && pMap && pMap->getMapPack().get()) ? pMap->getMapPack()->getResourceGroup() : sResourceGroup),
-    m_pSceneNode(nullptr),
-    m_pCollisionObject(nullptr),
-    m_pMap(pMap),
-    mCollisionMask(MASK_STATIC_COLLIDES_WITH),
-    mCollisionGroup(COL_STATIC) {
+CWorldEntity::CWorldEntity(const std::string &sID,
+                           CEntity *pParent,
+                           CAbstractMap *pMap,
+                           const std::string &sResourceGroup)
+    : CAbstractWorldEntity(sID, pParent, pMap, sResourceGroup) {
 }
 
-CWorldEntity::CWorldEntity(CEntity *pParent, CMap *pMap, const tinyxml2::XMLElement *pElem, const std::string &sResourceGroup)
-  : CEntity(pParent, pElem, (sResourceGroup == Ogre::ResourceGroupManager::AUTODETECT_RESOURCE_GROUP_NAME && pMap && pMap->getMapPack().get()) ? pMap->getMapPack()->getResourceGroup() : sResourceGroup),
-    m_pSceneNode(nullptr),
-    m_pCollisionObject(nullptr),
-    m_pMap(pMap),
-    mCollisionMask(CPhysicsMasksIdMap::getSingleton().parseString(Attribute(pElem, "collision_mask", "static"))),
-    mCollisionGroup(CPhysicsGroupsIdMap::getSingleton().parseString(Attribute(pElem, "collision_group", CPhysicsGroupsIdMap::getSingleton().toString(COL_STATIC)))) {
+CWorldEntity::CWorldEntity(CEntity *pParent,
+                           CAbstractMap *pMap,
+                           const tinyxml2::XMLElement *pElem,
+                           const std::string &sResourceGroup)
+    : CAbstractWorldEntity(pParent, pMap, pElem, sResourceGroup) {
 }
 
-CWorldEntity::~CWorldEntity() {
-}
-
-void CWorldEntity::exit() {
-  if (m_pSceneNode) {
-    destroySceneNode(m_pSceneNode, true);
-    m_pSceneNode = nullptr;
-  }
-  if (m_pCollisionObject) {
-    m_pMap->getPhysicsManager()->deleteNow(m_pCollisionObject);
-    m_pCollisionObject = nullptr;
-  }
-
-  CEntity::exit();
-}
-
-void CWorldEntity::warp(const SPATIAL_VECTOR &p, const Ogre::Quaternion &q) {
-  bool attached(false);
-  if (m_pCollisionObject) {
-    // an attached object has to be readded to the collision world
-    attached = m_pMap->getPhysicsManager()->hasCollisionObject(m_pCollisionObject);
-    if (attached) {
-      m_pMap->getPhysicsManager()->secureRemoveCollisionObject(m_pCollisionObject);
-    }
-  }
-
-  // normally set the position and orientation
-  setFloorPosition(p);
-  setOrientation(q);
-
-  if (attached) {
-    // add it again
-    m_pMap->getPhysicsManager()->secureAddCollisionObject(m_pCollisionObject, mCollisionGroup, mCollisionMask);
-  }
-}
-
-const SPATIAL_VECTOR &CWorldEntity::getPosition() const {
-  if (m_pSceneNode) {
-    return m_pSceneNode->getPosition();
-  }
-
-  if (m_pCollisionObject) {
-    return BtOgre::Convert::toOgre(m_pCollisionObject->getWorldTransform().getOrigin());
-  }
-
-  return CEntity::getPosition();
-}
-
-void CWorldEntity::setPosition(const SPATIAL_VECTOR &vPos) {
-  if (m_pCollisionObject) {
-    if (btRigidBody::upcast(m_pCollisionObject)
-        && dynamic_cast<BtOgre::RigidBodyState*>(
-            btRigidBody::upcast(m_pCollisionObject)->getMotionState())) {
-      BtOgre::RigidBodyState *pRBS = dynamic_cast<BtOgre::RigidBodyState*>(
-          btRigidBody::upcast(m_pCollisionObject)->getMotionState());
-
-      m_pCollisionObject->getWorldTransform().setOrigin(
-          pRBS->getCenterOfMassOffset().inverse()
-          * BtOgre::Convert::toBullet(vPos)
-          - pRBS->getLocalTransform().getOrigin());
-      pRBS->setWorldTransform(m_pCollisionObject->getWorldTransform());
-    } else {
-      m_pCollisionObject->getWorldTransform().setOrigin(
-          BtOgre::Convert::toBullet(vPos));
-      m_pSceneNode->setPosition(vPos);
-    }
-  } else {
-    m_pSceneNode->setPosition(vPos);
-  }
-}
-
-void CWorldEntity::translate(const SPATIAL_VECTOR &vOffset) {
-  m_pSceneNode->translate(vOffset);
-}
-
-const SPATIAL_VECTOR &CWorldEntity::getCenter() const {
-  return getPosition();
-}
-void CWorldEntity::setCenter(const SPATIAL_VECTOR &vCenter) {
-  setPosition(vCenter);
-}
-
-const SPATIAL_VECTOR &CWorldEntity::getSize() const {
-  return getScale();
-}
-void CWorldEntity::setSize(const SPATIAL_VECTOR &vSize) {
-  setScale(vSize);
-}
-
-const SPATIAL_VECTOR &CWorldEntity::getScale() const {
-  return m_pSceneNode->getScale();
-}
-void CWorldEntity::setScale(const SPATIAL_VECTOR &vScale) {
-  m_pSceneNode->setScale(vScale);
-}
-
-const Ogre::Quaternion &CWorldEntity::getOrientation() const {
-  return m_pSceneNode->getOrientation();
-}
-
-void CWorldEntity::setOrientation(const Ogre::Quaternion &quat) {
-  m_pSceneNode->setOrientation(quat);
-}
-
-void CWorldEntity::rotate(const Ogre::Quaternion &quat) {
-  m_pSceneNode->rotate(quat);
-}
-
-Ogre::SceneNode *CWorldEntity::getSceneNode() const {
-  return m_pSceneNode;
-}
-
-void CWorldEntity::setCollisionObject(btCollisionObject *pCollisionObject) {
-  m_pCollisionObject = pCollisionObject;
-}
-
-btCollisionObject *CWorldEntity::getCollisionObject() const {
-  return m_pCollisionObject;
-}
-
-void CWorldEntity::update(Ogre::Real tpf) {
-  CHitableInterface::update(tpf);
-  CEntity::update(tpf);
-}
-
-void CWorldEntity::setThisAsCollisionObjectsUserPointer() {
-  setThisAsCollisionObjectsUserPointer(m_pCollisionObject);
-}
-
-void CWorldEntity::setThisAsCollisionObjectsUserPointer(btCollisionObject *pCollisionObject) {
-  ASSERT(pCollisionObject);
-  pCollisionObject->setUserPointer(this);
-}
-
-CWorldEntity *CWorldEntity::getFromUserPointer(btCollisionObject *pCO) {
-  ASSERT(pCO);
-  return static_cast<CWorldEntity*>(pCO->getUserPointer());
-}
-
-CWorldEntity *CWorldEntity::getFromUserPointer(const btCollisionObject *pCO) {
-  ASSERT(pCO);
-  return static_cast<CWorldEntity*>(pCO->getUserPointer());
-}
-
-CWorldEntity::SInteractionResult CWorldEntity::interactOnCollision(const Ogre::Vector3 &vInteractDir, CWorldEntity *pSender) {
-  using namespace events;
-  for (auto &pEvt : getEvents()) {
-    for (auto &pEmit : pEvt->getEmitter()) {
-      if (pEmit->getType() == EMIT_ON_COLLISION) {
-        CEmitOnCollision *pEON(dynamic_cast<CEmitOnCollision *>(pEmit));
-        if (pEON->getID() == pSender->getID()) {
-          pEvt->start();
-        }
-      }
-    }
-  }
-
-  return SInteractionResult();
-}
-
-CWorldEntity::SInteractionResult CWorldEntity::interactOnActivate(const Ogre::Vector3 &vInteractDir, CWorldEntity *pSender) {
-  using namespace events;
-  for (auto &pEvt : getEvents()) {
-    for (auto &pEmit : pEvt->getEmitter()) {
-      if (pEmit->getType() == EMIT_ON_INTERACTION) {
-        pEvt->start();
-      }
-    }
-  }
-
-  return CInteractionInterface::interactOnActivate(vInteractDir, pSender);
-}
-
-void CWorldEntity::damageAccepted(const CDamage &damage) {
-  using namespace events;
-  for (auto &pEvt : getEvents()) {
-    for (auto &pEmit : pEvt->getEmitter()) {
-      if (pEmit->getType() == EMIT_ON_RECEIVED_DAMAGE) {
-        CEmitOnReceivedDamage *pEORD(dynamic_cast<CEmitOnReceivedDamage *>(pEmit));
-        if (pEORD->getDamageMask() & damage.getDamageType()) {
-          pEvt->start();
-        }
-      }
-    }
-  }
-}
-
-void CWorldEntity::enterMap(CMap *pMap, const Ogre::Vector3 &vPosition) {
-  m_pMap = pMap;
-  m_sResourceGroup = pMap->getMapPack()->getResourceGroup();
-  setPosition(vPosition);
+CWorldEntity::CWorldEntity(CAbstractWorldEntity *parent,
+                           const CWorldEntityConstructionInfo &info)
+    : CAbstractWorldEntity(parent, info) {
 }

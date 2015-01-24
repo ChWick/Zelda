@@ -23,6 +23,7 @@
 #include "../../Common/Util/XMLHelper.hpp"
 #include "../../Common/Util/Assert.hpp"
 
+#include "../Atlas/Map.hpp"
 #include "../Character/SimpleEnemy.hpp"
 #include "../Character/StandingPerson.hpp"
 #include "../Character/LinksFather.hpp"

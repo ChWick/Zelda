@@ -38,18 +38,18 @@
 #include "../../Common/GameLogic/Events/Event.hpp"
 #include "../../Common/Message/MessagePlayerPickupItem.hpp"
 #include "../../Common/Message/MessageHandler.hpp"
-#include "../Damage.hpp"
+#include "../../Common/World/Damage.hpp"
 
 
 unsigned int OBJECT_INNER_OBJECT_ID_NUMBER_COUNTER = 0;
 
 CObject::CObject(const std::string &id,
-                 CWorldEntity *pParent,
-                 CMap *pMap,
+                 CAbstractWorldEntity *pParent,
+                 CAbstractMap *pMap,
                  EObjectTypes eObjectType,
                  Ogre::SceneNode *pSceneNode)
   : CWorldEntity(id, pParent, pMap),
-    m_ObjectTypeData(CObjectDataMap::getSingleton().toData(eObjectType)),
+    mSharedConstructionInfo(CObjectDataMap::getSingleton().toData(eObjectType)),
     mInnerObjectGenerator(InnerObject::DEFAULT_GENERATOR_DATA_MAP
                           .toData(eObjectType)) {
   setType(eObjectType);
@@ -65,17 +65,17 @@ CObject::CObject(const std::string &id,
   Ogre::Entity *pEntity(nullptr);
 
   // create entity
-  if (m_ObjectTypeData.bPermanentStatic) {
-    m_pMap->addStaticEntity(m_ObjectTypeData.sMeshName + ".mesh",
+  if (mSharedConstructionInfo.isPermanentStatic()) {
+    m_pMap->addStaticEntity(mSharedConstructionInfo.getMeshName() + ".mesh",
                             m_pSceneNode->getPosition(),
                             m_pSceneNode->getOrientation());
     setCurAndMaxHP(HP_INFINITY);
   } else {
     pEntity = pSceneManager->createEntity(pMap->getPrependNodeName() + id + "ent",
-                                          m_ObjectTypeData.sMeshName + ".mesh",
+                                          mSharedConstructionInfo.getMeshName() + ".mesh",
                                           "World");
-    if (m_ObjectTypeData.sMaterialName.size() > 0) {
-      pEntity->setMaterialName(m_ObjectTypeData.sMaterialName);
+    if (mSharedConstructionInfo.getMaterialName().size() > 0) {
+      pEntity->setMaterialName(mSharedConstructionInfo.getMaterialName());
     }
 
     m_pSceneNode->attachObject(pEntity);
@@ -111,7 +111,7 @@ void CObject::destroyPhysics() {
   if (m_pCollisionObject) {
     btRigidBody *pRigidBody(btRigidBody::upcast(m_pCollisionObject));
     m_pMap->getPhysicsManager()->getWorld()->removeRigidBody(pRigidBody);
-    if (m_ObjectTypeData.eCollisionShape == GCST_COUNT) {
+    if (mSharedConstructionInfo.getCollisionShape() == GCST_COUNT) {
       delete m_pCollisionObject->getCollisionShape();
     }
     delete pRigidBody->getMotionState();
@@ -126,13 +126,13 @@ void CObject::createPhysics() {
   btCollisionShape *pCollisionShape(nullptr);
   btVector3 vCollisionShapeOffset;
   btVector3 vInertia;
-  float fMass = m_ObjectTypeData.bPermanentStatic ? 0 : 0.1;
+  float fMass = mSharedConstructionInfo.isPermanentStatic() ? 0 : 0.1;
 
-  if (m_ObjectTypeData.eCollisionShape != GCST_COUNT) {
+  if (mSharedConstructionInfo.getCollisionShape() != GCST_COUNT) {
     const CPhysicsCollisionObject &pco
         = m_pMap->getPhysicsManager()->getCollisionShape(
             CGlobalCollisionShapesTypesIdMap::getSingleton().toString(
-                m_ObjectTypeData.eCollisionShape));
+                mSharedConstructionInfo.getCollisionShape()));
     pCollisionShape = pco.getShape();
     vCollisionShapeOffset = BtOgre::Convert::toBullet(pco.getOffset());
   } else {
@@ -153,7 +153,7 @@ void CObject::createPhysics() {
   pCollisionShape->calculateLocalInertia(fMass, vInertia);
   
   btMotionState *pMotionState(nullptr);
-  if (m_ObjectTypeData.bPermanentStatic) {
+  if (mSharedConstructionInfo.isPermanentStatic()) {
     pMotionState = new btDefaultMotionState(
         btTransform(initRotation, initPosition),
         btTransform(btQuaternion::getIdentity(), vCollisionShapeOffset));
@@ -250,7 +250,7 @@ void CObject::makePickable() {
   addEvent(pEvent);
 }
 
-void CObject::enterMap(CMap *pMap, const Ogre::Vector3 &vPosition) {
+void CObject::enterMap(CAbstractMap *pMap, const Ogre::Vector3 &vPosition) {
   // attach to new CEntity
   attachTo(pMap);
 
@@ -365,7 +365,7 @@ CObject::SInteractionResult CObject::interactOnActivate(
 }
 
 CObject::EReceiveDamageResult CObject::receiveDamage(const CDamage &dmg) {
-  if (m_ObjectTypeData.eDamageSourceMask & dmg.getDamageType()) {
+  if (mSharedConstructionInfo.getDamageSourceMask() & dmg.getDamageType()) {
     CWorldEntity::receiveDamage(dmg);
     return RDR_ACCEPTED;
   }

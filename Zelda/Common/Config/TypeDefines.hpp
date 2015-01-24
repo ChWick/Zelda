@@ -32,6 +32,10 @@
 #define ENTITY_HEADER "Common/GameLogic/Entity.hpp"
 #define ENTITY CEntity
 
+// The root world entity to use
+#define WORLD_ENTITY_HEADER "World/WorldEntity.hpp"
+#define WORLD_ENTITY_CLASS CWorldEntity
+
 // The message creator
 #define MESSAGE_CREATOR_HEADER "World/Messages/UserMessageCreator.hpp"
 #define MESSAGE_CREATOR CUserMessageCreator
