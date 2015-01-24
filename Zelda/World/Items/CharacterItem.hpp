@@ -73,10 +73,10 @@ public:
   CCharacterItem(CCharacter *character, const std::string &boneToAttach, EItemVariantTypes type);
   virtual ~CCharacterItem();
 
-  void exit();
+  virtual void exit() override;
 
-  void enterNewMap(CAbstractMap *oldMap, CAbstractMap *newMap);
-  void update(Ogre::Real tpf);
+  virtual void enterNewMap(CAbstractMap *oldMap, CAbstractMap *newMap);
+  virtual void update(Ogre::Real tpf) override;
   
   void startDamage();
   void updateDamage(Ogre::Real tpf);
@@ -98,7 +98,7 @@ public:
   void destroyPhysics(CAbstractMap *map);
 
  protected:
-  EReceiveDamageResult hit(const CDamage &damage);
+  virtual EReceiveDamageResult hit(const CDamage &damage) override;
 };
 
 #endif // _CHARACTER_ITEM_HPP_

@@ -64,6 +64,18 @@ CAbstractWorldEntity::CAbstractWorldEntity(CAbstractWorldEntity *parent,
       mCollisionGroup(info.getCollisionGroup()) {
 }
 
+CAbstractWorldEntity::CAbstractWorldEntity(
+    const std::string &sID,
+    CAbstractWorldEntity *parent,
+    const CWorldEntityConstructionInfo &info)
+    : CEntity(sID, parent, info),
+      m_pSceneNode(nullptr),
+      m_pCollisionObject(nullptr),
+      m_pMap(parent->getMap()),
+      mCollisionMask(info.getCollisionMask()),
+      mCollisionGroup(info.getCollisionGroup()) {
+}
+
 CAbstractWorldEntity::~CAbstractWorldEntity() {
 }
 
@@ -248,11 +260,14 @@ CAbstractWorldEntity *CAbstractWorldEntity::getFromUserPointer(const btCollision
   return static_cast<CAbstractWorldEntity*>(pCO->getUserPointer());
 }
 
-CAbstractWorldEntity::SInteractionResult CAbstractWorldEntity::interactOnCollision(const Ogre::Vector3 &vInteractDir, CAbstractWorldEntity *pSender) {
-  using namespace events;
+CAbstractWorldEntity::SInteractionResult CAbstractWorldEntity::interactOnCollision(
+    const Ogre::Vector3 &vInteractDir,
+    CAbstractWorldEntity *pSender) {
+  using events::CEmitOnCollision;
+
   for (auto &pEvt : getEvents()) {
     for (auto &pEmit : pEvt->getEmitter()) {
-      if (pEmit->getType() == EMIT_ON_COLLISION) {
+      if (pEmit->getType() == events::EMIT_ON_COLLISION) {
         CEmitOnCollision *pEON(dynamic_cast<CEmitOnCollision *>(pEmit));
         if (pEON->getID() == pSender->getID()) {
           pEvt->start();

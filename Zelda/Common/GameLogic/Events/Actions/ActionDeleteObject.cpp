@@ -24,15 +24,15 @@
 #include "../../../Log.hpp"
 #include "../../../../World/WorldEntity.hpp"
 
-using namespace XMLHelper;
+using XMLHelper::Attribute;
 
 namespace events {
 
-CActionDeleteObject::CActionDeleteObject(const tinyxml2::XMLElement *pElem, const CEvent &owner)
+CActionDeleteObject::CActionDeleteObject(const tinyxml2::XMLElement *pElem,
+                                         const CEvent &owner)
   : CAction(pElem, owner),
     m_sID(Attribute(pElem, "id")),
     m_pEntity(nullptr) {
-
 }
 
 CActionDeleteObject::CActionDeleteObject(CEntity *pEntity, const CEvent &owner)
@@ -47,10 +47,9 @@ CActionDeleteObject::~CActionDeleteObject() {
 void CActionDeleteObject::start() {
   if (m_pEntity) {
     m_pEntity->deleteLater();
-  }
-  else {
-    m_Owner.getOwner().getRoot()->getChildRecursive(m_sID)->deleteLater();
+  } else {
+    m_Owner.getOwner()->getRoot()->getChildRecursive(m_sID)->deleteLater();
   }
 }
 
-};
+}  // namespace events

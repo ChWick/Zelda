@@ -48,10 +48,12 @@ CObject::CObject(const std::string &id,
                  CAbstractMap *pMap,
                  EObjectTypes eObjectType,
                  Ogre::SceneNode *pSceneNode)
-  : CWorldEntity(id, pParent, pMap),
-    mSharedConstructionInfo(CObjectDataMap::getSingleton().toData(eObjectType)),
-    mInnerObjectGenerator(InnerObject::DEFAULT_GENERATOR_DATA_MAP
-                          .toData(eObjectType)) {
+    : CWorldEntity(id, pParent,
+                   CObjectDataMap::getSingleton().toData(eObjectType)),
+      mSharedConstructionInfo(
+          CObjectDataMap::getSingleton().toData(eObjectType)),
+      mInnerObjectGenerator(InnerObject::DEFAULT_GENERATOR_DATA_MAP
+                            .toData(eObjectType)) {
   setType(eObjectType);
 
   if (pSceneNode) {
@@ -235,7 +237,7 @@ void CObject::makePickable() {
   using events::CActionDeleteObject;
   using events::CActionMessage;
 
-  CEvent *pEvent = new CEvent(*this);
+  CEvent *pEvent = new CEvent(this);
 
   CEmitter *pEmitOnCollision = new CEmitOnCollision("player", *pEvent);
   pEvent->addEmitter(pEmitOnCollision);
@@ -244,7 +246,10 @@ void CObject::makePickable() {
   pEvent->addAction(pDeleteThisAction);
 
   CAction *pMessageAction
-      = new CActionMessage(std::make_shared<CMessagePlayerPickupItem>(__MSG_LOCATION__, m_uiType), *pEvent);
+      = new CActionMessage(
+          std::make_shared<CMessagePlayerPickupItem>(__MSG_LOCATION__,
+                                                     m_uiType),
+          *pEvent);
   pEvent->addAction(pMessageAction);
 
   addEvent(pEvent);
@@ -322,7 +327,7 @@ void CObject::changeState(EEntityStateTypes eState) {
 
 CObject::SInteractionResult CObject::interactOnCollision(
     const Ogre::Vector3 &vInteractDir,
-    CWorldEntity *pSender) {
+    CAbstractWorldEntity *pSender) {
   switch (m_uiType) {
   case OBJECT_GREEN_RUPEE:
   case OBJECT_BLUE_RUPEE:
@@ -339,7 +344,13 @@ CObject::SInteractionResult CObject::interactOnCollision(
                                btRigidBody::upcast(this->getCollisionObject())
                                ->getLinearVelocity()).normalisedCopy(),
                            HP_ONE_HEART));
-      deleteLater();
+      this->hit(CDamage(pSender,
+                        DMG_WORLD,
+                        -BtOgre::Convert::toOgre(
+                               btRigidBody::upcast(this->getCollisionObject())
+                               ->getLinearVelocity()).normalisedCopy(),
+                        HP_INFINITY));
+      // deleteLater();
     }
     break;
   default:
@@ -351,7 +362,7 @@ CObject::SInteractionResult CObject::interactOnCollision(
 
 CObject::SInteractionResult CObject::interactOnActivate(
     const Ogre::Vector3 &vInteractDir,
-    CWorldEntity *pSender) {
+    CAbstractWorldEntity *pSender) {
   switch (m_uiType) {
   case OBJECT_GREEN_BUSH:
   case OBJECT_LIGHT_STONE:

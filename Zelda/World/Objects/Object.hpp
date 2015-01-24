@@ -32,10 +32,10 @@ public:
    CObject(const std::string &id, CAbstractWorldEntity *pParent, CAbstractMap *pMap, EObjectTypes eObjectType, Ogre::SceneNode *pSceneNode = nullptr);
   ~CObject();
 
-  void init();
-  void exit();
+  virtual void init() override;
+  virtual void exit() override;
 
-  virtual void enterMap(CAbstractMap *pMap, const Ogre::Vector3 &vPosition);
+  virtual void enterMap(CAbstractMap *pMap, const Ogre::Vector3 &vPosition) override;
 
   void setInnerObject(EObjectTypes eType);
   virtual void createInnerObject(EObjectTypes eType);
@@ -46,15 +46,15 @@ protected:
 
   void makePickable();
 
-  virtual SInteractionResult interactOnCollision(const Ogre::Vector3 &vInteractDir, CWorldEntity *pSender);
-  virtual SInteractionResult interactOnActivate(const Ogre::Vector3 &vInteractDir, CWorldEntity *pSender);
-  virtual void changeState(EEntityStateTypes eState);
-  virtual EReceiveDamageResult receiveDamage(const CDamage &dmg);
-  virtual EReceiveDamageResult hit(const CDamage &dmg);
+  virtual SInteractionResult interactOnCollision(const Ogre::Vector3 &vInteractDir, CAbstractWorldEntity *pSender) override;
+  virtual SInteractionResult interactOnActivate(const Ogre::Vector3 &vInteractDir, CAbstractWorldEntity *pSender) override;
+  virtual void changeState(EEntityStateTypes eState) override;
+  virtual EReceiveDamageResult receiveDamage(const CDamage &dmg) override;
+  virtual EReceiveDamageResult hit(const CDamage &dmg) override;
 
 
 
-  virtual void killedCallback();
+  virtual void killedCallback() override;
 };
 
 #endif // _OBJECT_HPP_

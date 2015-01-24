@@ -34,11 +34,11 @@ using XMLHelper::BoolAttribute;
 using XMLHelper::RealAttribute;
 
 CObjectConstructionInfo::CObjectConstructionInfo()
-    : CEntityConstructionInfo("BasicObjectConstructionInfo") {
+    : CWorldEntityConstructionInfo("BasicObjectConstructionInfo") {
 }
 
 CObjectConstructionInfo::CObjectConstructionInfo(const tinyxml2::XMLElement *e)
-    : CEntityConstructionInfo(e),
+    : CWorldEntityConstructionInfo(e),
       mUserHandle(BoolAttribute(e, "user_handle", true)),
       mPermanentStatic(BoolAttribute(e, "permanent_static", false)),
       mMeshName(Attribute(e, "mesh_name")),

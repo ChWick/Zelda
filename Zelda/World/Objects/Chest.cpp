@@ -153,7 +153,7 @@ void CChest::pauseUpdate(Ogre::Real tpf) {
 }
 
 CWorldEntity::SInteractionResult CChest::interactOnActivate(
-    const Ogre::Vector3 &vInteractDir, CWorldEntity *pSender) {
+    const Ogre::Vector3 &vInteractDir, CAbstractWorldEntity *pSender) {
   if (mStatus != STATUS_CLOSED) {
     return CWorldEntity::IR_NONE;
   }

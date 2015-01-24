@@ -54,16 +54,17 @@ public:
   CChest(const std::string &sID, CWorldEntity *pParent, CAbstractMap *pMap, EChestType chestType);
   ~CChest();
 
-  void start();
-  void update(Ogre::Real);
-  void pauseUpdate(Ogre::Real);
+  void start() override;
+  void update(Ogre::Real) override;
+  void pauseUpdate(Ogre::Real) override;
 
   void setInnerObject(EObjectTypes eType) {mInnerObjectType = eType;}
   void createInnerObject(EObjectTypes eType);
 private:
 
-  SInteractionResult interactOnActivate(const Ogre::Vector3 &vInteractDir, CWorldEntity *pSender);
-  void handleMessage(const CMessagePtr message);
+  SInteractionResult interactOnActivate(const Ogre::Vector3 &vInteractDir,
+                                        CAbstractWorldEntity *pSender) override;
+  void handleMessage(const CMessagePtr message) override;
 
   void open();
   void onLifted();

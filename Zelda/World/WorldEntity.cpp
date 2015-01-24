@@ -19,7 +19,7 @@
 
 
 #include "WorldEntity.hpp"
-
+#include <string>
 
 CWorldEntity::CWorldEntity(const std::string &sID,
                            CEntity *pParent,
@@ -38,4 +38,10 @@ CWorldEntity::CWorldEntity(CEntity *pParent,
 CWorldEntity::CWorldEntity(CAbstractWorldEntity *parent,
                            const CWorldEntityConstructionInfo &info)
     : CAbstractWorldEntity(parent, info) {
+}
+
+CWorldEntity::CWorldEntity(const std::string &id,
+                           CAbstractWorldEntity *parent,
+                           const CWorldEntityConstructionInfo &info)
+    : CAbstractWorldEntity(id, parent, info) {
 }

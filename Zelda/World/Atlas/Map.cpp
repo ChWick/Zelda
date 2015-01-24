@@ -406,7 +406,7 @@ void CMap::rebuildStaticGeometryChangedTiles() {
 // MapPackParserListener
 
 void CMap::parseEvent(const tinyxml2::XMLElement *pElem) {
-  addEvent(new events::CEvent(*this, pElem));
+  addEvent(new events::CEvent(this, pElem));
 }
 
 void CMap::parsePlayer(const tinyxml2::XMLElement *pElem) {

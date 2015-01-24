@@ -118,10 +118,30 @@ CEntity::CEntity(CEntity *parent,
       m_pParent(nullptr) {
   mNumberOfInstances++;
   for (const auto &evt : info.getEventConstructionList()) {
-    m_lEvents.push_back(new events::CEvent(*this, *evt.get()));
+    m_lEvents.push_back(new events::CEvent(this, *evt.get()));
   }
   attachTo(parent);
 }
+
+
+CEntity::CEntity(const std::string &id,
+                 CEntity *parent,
+                 const CEntityConstructionInfo &info)
+    : CMessageInjector(false),
+      m_sID(id),
+      m_sResourceGroup(info.getResourceGroup()),
+      m_uiType(info.getType()),
+      m_eState(info.getState()),
+      m_bPauseRender(info.isPauseRender()),
+      m_bPauseUpdate(info.isPauseUpdate()),
+      m_pParent(nullptr) {
+  mNumberOfInstances++;
+  for (const auto &evt : info.getEventConstructionList()) {
+    m_lEvents.push_back(new events::CEvent(this, *evt.get()));
+  }
+  attachTo(parent);
+}
+
 
 CEntity::~CEntity() {
   mNumberOfInstances--;
@@ -500,6 +520,6 @@ void CEntity::readEventsFromXMLElement(const tinyxml2::XMLElement *pElement,
   for (const XMLElement *pEventElement = pElement->FirstChildElement();
         pEventElement;
         pEventElement = pEventElement->NextSiblingElement()) {
-    addEvent(new CEvent(*this, pEventElement));
+    addEvent(new CEvent(this, pEventElement));
   }
 }
