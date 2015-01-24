@@ -29,11 +29,9 @@ enum EUserMessageTypes {
   MSG_USER_COUNT,
 };
 
-class CUserMessageTypesMap : public CMessageTypesMap {
+class CUserMessageTypesMap : public CMessageTypesMap<CUserMessageTypesMap> {
 public:
-  CUserMessageTypesMap();
+  void init();
 };
-
-extern CUserMessageTypesMap USER_MESSAGE_TYPES_MAP;
 
 #endif // _USER_MESSAGE_TYPES_HPP_

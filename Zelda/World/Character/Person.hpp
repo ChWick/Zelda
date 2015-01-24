@@ -53,8 +53,8 @@ protected:
 	unsigned int m_uiTakeDamageFlags;               //!< from which dmg types the person can take damage (default all)
 	unsigned int m_uiBlockDamageFlags;              //!< which dmg type will be blocked (default all)
 public:
-	CPerson(const std::string &sID, CEntity *pParent, CMap *pMap, const SPersonData &personData);
-	CPerson(const tinyxml2::XMLElement *pElem, CEntity *pParent, CMap *pMap);
+	CPerson(const std::string &sID, CEntity *pParent, CMap *pMap, const SPersonData &personData, unsigned int uiAnimationCount = ANIM_COUNT);
+	CPerson(const tinyxml2::XMLElement *pElem, CEntity *pParent, CMap *pMap, unsigned int uiAnimationCount);
 	virtual ~CPerson();
 
 	virtual void exit();
@@ -68,6 +68,7 @@ public:
   virtual void interact() {}
 
   virtual const Ogre::Vector3 getFloorPosition() const;
+  virtual void setFloorPosition(const Ogre::Vector3 &p);
 
     virtual void moveToTarget(const SPATIAL_VECTOR &vPosition, const Ogre::Quaternion &qRotation = Ogre::Quaternion::IDENTITY, const Ogre::Real fMaxDistanceDeviation = 0, const Ogre::Radian fMaxAngleDeviation = Ogre::Radian(Ogre::Math::TWO_PI));
 

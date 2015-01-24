@@ -20,7 +20,9 @@
 #include "MessageHitpointsChanged.hpp"
 
 
-CMessageHitpointsChanged::CMessageHitpointsChanged(const CHitableInterface &hitableInterface, const std::string &creationFile)
-  : CMessage(MSG_HITPOINTS_CHANGED, creationFile),
-    m_HitableInterface(hitableInterface) {
+CMessageHitpointsChanged::CMessageHitpointsChanged(
+    const std::string &creationFile,
+    const CHitableInterface &hitableInterface)
+    : CMessage(creationFile, MSG_HITPOINTS_CHANGED),
+      m_HitableInterface(hitableInterface) {
 }

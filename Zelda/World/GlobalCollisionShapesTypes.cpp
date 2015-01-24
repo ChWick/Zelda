@@ -20,7 +20,7 @@
 #include "GlobalCollisionShapesTypes.hpp"
 
 
-CGlobalCollisionShapesTypesIdMap::CGlobalCollisionShapesTypesIdMap() {
+void CGlobalCollisionShapesTypesIdMap::init() {
   m_Map[GCST_PICKABLE_OBJECT_SPHERE] = "pickable_object_sphere";
   m_Map[GCST_PERSON_CAPSULE] = "person_capsule";
   m_Map[GCST_HOUSE_ENTRANCE_TOP] = "house_entrance_top";
@@ -34,6 +34,4 @@ CGlobalCollisionShapesTypesIdMap::CGlobalCollisionShapesTypesIdMap() {
 
   m_Map[GCST_COUNT] = "none";
 }
-
-CGlobalCollisionShapesTypesIdMap GLOBAL_COLLISION_SHAPES_TYPES_ID_MAP;
 

@@ -28,6 +28,7 @@ public:
   virtual ~CPauseListener();
 
   virtual void updatePause(int iPauseType, bool bPause) = 0;
+  bool isPause(PauseInt p);
 };
 
 #endif // PAUSE_LISTENER_HPP

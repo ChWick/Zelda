@@ -27,12 +27,19 @@
 CLinksFather::CLinksFather(const tinyxml2::XMLElement *pElem,
                            CEntity *pParent,
                            CMap *pMap)
-    : CPerson(pElem, pParent, pMap) {
+    : CPerson(pElem, pParent, pMap, LF_ANIM_COUNT) {
+}
+
+void CLinksFather::updateAnimationsCallback(const Ogre::Real fTime) {
+  uint8_t ms = getCharacterController<CPersonController>()->getMoveState();
+  if (ms == CPersonController::MS_MOVE_TO_POINT) {
+    setAnimation(LF_ANIM_WALK);
+  }
 }
 
 CCharacterController *CLinksFather::createCharacterController() {
   CPersonController *pc = dynamic_cast<CPersonController*>(
       CPerson::createCharacterController());
-  pc->setWalkSpeed(1);
+  pc->setWalkSpeed(3);
   return pc;
 }

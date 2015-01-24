@@ -23,41 +23,66 @@
 #include "MainMenu/MainMenu.hpp"
 #include "World/World.hpp"
 #include "Common/Log.hpp"
+#include "World/GlobalCollisionShapesTypes.hpp"
+#include "World/Atlas/TileTypes.hpp"
 #include "World/Character/PersonTypes.hpp"
 #include "World/DamageTypes.hpp"
 #include "World/Items/ItemTypes.hpp"
 #include "World/Items/ItemData.hpp"
+#include "World/Objects/ObjectTypes.hpp"
 #include "TextConverter.hpp"
+#include "World/Messages/UserMessageTypes.hpp"
+#include "World/Messages/MessageShowText.hpp"
+#include "Common/Message/MessageSwitchMap.hpp"
 
 CZelda::~CZelda() {
 }
 
 void CZelda::initSingletons() {
   CGame::initSingletons();
+
   new CTextConverter();
 }
 
-void CZelda::destroySingletons() {
-  if (CTextConverter::getSingletonPtr()) {delete CTextConverter::getSingletonPtr();}
-  CGame::destroySingletons();
+void CZelda::deleteSingletons() {
+  if (CTextConverter::getSingletonPtr()) {
+    delete CTextConverter::getSingletonPtr();
+  }
+
+  CGame::deleteSingletons();
 }
 
 void CZelda::initEnumIdMaps() {
-  PERSON_TYPE_ID_MAP.init();
-  DAMAGE_DATA_MAP.init();
+  CGame::initEnumIdMaps();
 
-  ITEM_SLOT_ID_MAP.init();
-  ITEM_VARIANT_ID_MAP.init();
+  CCharacterAttitudeIdMap::getSingleton().init();
+  CPersonTypeIdMap::getSingleton().init();
+  CDamageTypeIdMap::getSingleton().init();
+  CDamageDataMap::getSingleton().init();
 
-  ITEM_SLOT_DATA_MAP.init();
-  ITEM_VARIANT_DATA_MAP.init();
+  CItemSlotIdMap::getSingleton().init();
+  CItemVariantIdMap::getSingleton().init();
+
+  CItemSlotDataMap::getSingleton().init();
+  CItemVariantDataMap::getSingleton().init();
+
+  CObjectTypeIdMap::getSingleton().init();
+  CObjectDataMap::getSingleton().init();
+
+  CTileTypeIdMap::getSingleton().init();
+  CTileDataMap::getSingleton().init();
+
+  CGlobalCollisionShapesTypesIdMap::getSingleton().init();
+  CSwitchMapTypes::getSingleton().init();
+
+  CMessageShowText::CStatusIDMap::getSingleton().init();
 }
 
 void CZelda::chooseGameState() {
   LOGV("choosing came state");
-  new CMainMenu();
-  //new CWorld();
-  //m_pGameStateManager->changeGameState(CGameStateManager::GS_MAIN_MENU);
+  // new CMainMenu();
+  new CWorld();
+  // m_pGameStateManager->changeGameState(CGameStateManager::GS_MAIN_MENU);
 }
 
 void CZelda::postGUIManagerInitialised() {

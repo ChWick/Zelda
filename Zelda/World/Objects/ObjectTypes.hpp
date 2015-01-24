@@ -64,20 +64,17 @@ struct SObjectTypeData {
   SObjectTypeData &operator=(const SObjectTypeData&) = default;
 };
 
-class CObjectTypeIdMap : public CStringEnumIdMap<EObjectTypes> {
+class CObjectTypeIdMap : public CStringEnumIdMap<CObjectTypeIdMap, EObjectTypes> {
 public:
-  CObjectTypeIdMap();
+  void init();
 };
 
-class CObjectDataMap : public CEnumIdMap<EObjectTypes, SObjectTypeData> {
+class CObjectDataMap : public CEnumIdMap<CObjectDataMap, EObjectTypes, SObjectTypeData> {
  public:
-  CObjectDataMap();
+  void init();
 
   EObjectTypes getFromMeshName(const std::string &mesh) const;
   EObjectTypes getFromMeshFileName(const std::string &mesh) const;
 };
-
-extern CObjectTypeIdMap OBJECT_TYPE_ID_MAP;
-extern CObjectDataMap OBJECT_DATA_MAP;
 
 #endif // _OBJECT_TYPES_HPP_

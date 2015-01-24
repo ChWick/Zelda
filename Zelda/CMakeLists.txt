@@ -26,6 +26,7 @@ include(toolchain/CopyButtonImageset)
 
 set(Game_include_directories
     ${PROJECT_CONFIG_OUT}
+    ${SOURCE_DIR}
     ..
     .
     ${BULLET_INCLUDE_DIR}
@@ -35,6 +36,7 @@ set(Game_include_directories
     ${TINYXML2_INCLUDE_DIR}
     ${BOOST_INCLUDE_DIR}
     ${LUA_INCLUDE_DIR}
+    ${PARTICLEUNIVERSE_INCLUDE_DIR}
 )
 set(Game_link_libraries
     ${BULLET_LIBRARIES}
@@ -44,12 +46,12 @@ set(Game_link_libraries
     ${TINYXML2_LIBRARIES}
     ${BOOST_LIBRARIES}
     ${LUA_LIBRARIES}
+    ${PARTICLEUNIVERSE_LIBRARIES}
 )
 
 set(Game_link_libraries
   ${Game_link_libraries}
   pthread)
-
 
 set(EXECUTABLE_OUTPUT_PATH ../bin)
 
@@ -82,7 +84,7 @@ setup_source_group(include ${Game_include_files})
 
 if (APPLE)
   set(PLUGIN_FOLDER "./")
-  set(PLUGINS "Plugin=RenderSystem_GL") 
+  set(PLUGINS "Plugin=RenderSystem_GL\n")
 
   set(RESOURCES_PREFIX "")
   set(RESOURCES_USING_APK "")
@@ -92,26 +94,36 @@ elseif (UNIX)
   find_path(PLUGIN_OPEN_GLES2_LIB NAMES RenderSystem_GLES2.so PATH_SUFFIXES Plugins Ogre OGRE lib/OGRE lib/OGRE/Plugins lib/x86_64-linux-gnu/OGRE-1.9.0)
   find_package_handle_standard_args(PLUGIN_OPEN_GLES2 DEFAULT_MSG PLUGIN_OPEN_GLES2_LIB)
 
-  
   set(PLUGINS "")
   if (PLUGIN_OPEN_GL_FOUND)
     set(PLUGIN_FOLDER ${PLUGIN_OPEN_GL_LIB})
-    set(PLUGINS "${PLUGINS}Plugin=RenderSystem_GL\n")
+    if (OGRE_LIB_DBG)
+      set(PLUGINS "${PLUGINS}Plugin=RenderSystem_GL_d\n")
+    else()
+      set(PLUGINS "${PLUGINS}Plugin=RenderSystem_GL\n")
+    endif()
   endif()
   if (PLUGIN_OPEN_GLES2_FOUND)
     set(PLUGIN_FOLDER ${PLUGIN_OPEN_GLES2_LIB})
-    set(PLUGINS "${PLUGINS}Plugin=RenderSystem_GLES2\n")
+    if (OGRE_LIB_DBG)
+      set(PLUGINS "${PLUGINS}Plugin=RenderSystem_GLES2_d\n")
+    else()
+      set(PLUGINS "${PLUGINS}Plugin=RenderSystem_GLES2\n")
+    endif()
   endif()
 
   set(RESOURCES_PREFIX "../")
   set(RESOURCES_USING_APK "")
 else()
   set(PLUGIN_FOLDER "${CMAKE_SOURCE_DIR}/plugins")
-  set(PLUGINS "Plugin=RenderSystem_D9")
+  set(PLUGINS "Plugin=RenderSystem_D9\n")
 
   set(RESOURCES_PREFIX "../")  
   set(RESOURCES_USING_APK "")
 endif()
+
+# add particle universe
+set(PLUGINS "${PLUGINS}Plugin=Plugin_ParticleUniverse")
 
 # release
 configure_file("${PROJECT_TEMPLATES_DIR}/plugins.cfg.in" "${EXECUTABLE_OUTPUT_PATH}/plugins.cfg" @ONLY)

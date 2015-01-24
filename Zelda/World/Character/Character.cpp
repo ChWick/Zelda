@@ -20,13 +20,13 @@
 #include "Character.hpp"
 #include <BulletDynamics/Character/btCharacterControllerInterface.h>
 #include <string>
-#include <OgreEntity.h>
-#include <OgreAnimationState.h>
-#include <OgreSkeletonInstance.h>
 #include "CharacterController.hpp"
 #include "../Atlas/Map.hpp"
 #include "../../Common/Physics/PhysicsMasks.hpp"
 #include "../../Common/Physics/BtOgreExtras.hpp"
+#include <OgreEntity.h>
+#include <OgreAnimationState.h>
+#include <OgreSkeletonInstance.h>
 #include "../Items/CharacterItem.hpp"
 #include "../../Common/Util/Assert.hpp"
 
@@ -35,12 +35,12 @@ CCharacter::CCharacter(const std::string &sID,
                        CEntity *pParent,
                        CMap *pMap,
                        const SCharacterData &characterData)
-    : CWorldEntity(sID, pParent, pMap),
-      m_pCharacterController(nullptr),
-      mCharacterData(characterData),
-      m_uiAnimationCount(characterData.mAnimations.size()),
-  m_fTimer(0),
-  m_fAnimSpeed(1) {
+  : CWorldEntity(sID, pParent, pMap),
+    mCharacterData(characterData),
+    m_pCharacterController(nullptr),
+    m_uiAnimationCount(characterData.mAnimations.size()),
+    m_fTimer(0),
+    m_fAnimSpeed(1) {
   m_Anims.resize(m_uiAnimationCount);
   m_uiAnimID = m_uiAnimationCount;
 
@@ -51,12 +51,12 @@ CCharacter::CCharacter(const tinyxml2::XMLElement *pElem,
                        CEntity *pParent,
                        CMap *pMap,
                        const SCharacterData &characterData)
-    : CWorldEntity(pParent, pMap, pElem),
-      m_pCharacterController(nullptr),
-      mCharacterData(characterData),
-      m_uiAnimationCount(characterData.mAnimations.size()),
-      m_fTimer(0),
-      m_fAnimSpeed(1) {
+  : CWorldEntity(pParent, pMap, pElem),
+    mCharacterData(characterData),
+    m_pCharacterController(nullptr),
+    m_uiAnimationCount(characterData.mAnimations.size()),
+    m_fTimer(0),
+    m_fAnimSpeed(1) {
   m_Anims.resize(m_uiAnimationCount);
   m_uiAnimID = m_uiAnimationCount;
 
@@ -65,6 +65,20 @@ CCharacter::CCharacter(const tinyxml2::XMLElement *pElem,
 
 
 void CCharacter::constructor_impl() {
+  switch (mCharacterData.mAttitude) {
+  case ATTITUDE_ENEMY:
+    mCollisionMask = MASK_PLAYER_N_COLLIDES_WITH;
+    mCollisionGroup = COL_CHARACTER_N;
+    break;
+  case ATTITUDE_FRIENDLY:
+    mCollisionMask = MASK_PLAYER_P_COLLIDES_WITH;
+    mCollisionGroup = COL_CHARACTER_P;
+    break;
+  default:
+    throw Ogre::Exception(0, "Unknown collision mask", __FUNCTION__);
+    break;
+  }
+
   mCCPhysics = NULL;
   m_bMoving = false;
   m_fYaw = 0;
@@ -78,12 +92,37 @@ void CCharacter::constructor_impl() {
 CCharacter::~CCharacter() {
 }
 
+void CCharacter::setupAnimations() {
+  ASSERT(m_pBodyEntity);
+  // this is very important due to the nature of the exported animations
+  m_pBodyEntity->getSkeleton()->setBlendMode(Ogre::ANIMBLEND_CUMULATIVE);
+ 
+  preSetupAnimations();
+  for (SAnimationProperty &animProp : mAnimationProperty) {
+    ASSERT(animProp.mAnimationData);
+    Ogre::AnimationState *animState
+        = m_pBodyEntity->getAnimationState(animProp.mAnimationData->mName);
+    animProp.mState = animState;
+    animProp.mFadeState = FADE_NONE;
+ 
+    animState->setLoop(animProp.mAnimationData->mLoop);
+    animState->setEnabled(false);
+    animState->setWeight(0);
+ 
+    m_Anims[animProp.mAnimationData->mId] = animState;
+  }
+ 
+  setAnimation(0, true, true);
+
+  postSetupAnimations();
+}
+
 void CCharacter::exit() {
   if (m_pCharacterController) {
     delete m_pCharacterController;
     m_pCharacterController = nullptr;
   }
-
+  
   for (int i = 0; i < CIS_COUNT; i++) {
     mCurrentItems[i].reset();
   }
@@ -138,32 +177,6 @@ void CCharacter::enterMap(CMap *pMap, const Ogre::Vector3 &vInitPosition) {
                  weaponBone[i], currentItemType[i]);
     }
   }
-}
-
-void CCharacter::setupAnimations() {
-  ASSERT(m_pBodyEntity);
-  // this is very important due to the nature of the exported animations
-  m_pBodyEntity->getSkeleton()->setBlendMode(Ogre::ANIMBLEND_CUMULATIVE);
-
-  preSetupAnimations();
-  for (SAnimationProperty &animProp : mAnimationProperty) {
-    ASSERT(animProp.mAnimationData);
-    Ogre::AnimationState *animState
-        = m_pBodyEntity->getAnimationState(animProp.mAnimationData->mName);
-    animProp.mState = animState;
-    animProp.mFadeState = FADE_NONE;
-
-    animState->setLoop(animProp.mAnimationData->mLoop);
-    animState->setEnabled(false);
-    animState->setWeight(0);
-
-    m_Anims[animProp.mAnimationData->mId] = animState;
-  }
-
-  // select first animation
-  setAnimation(0, true, true);
-
-  postSetupAnimations();
 }
 
 bool CCharacter::createDamage(const Ogre::Ray &ray, const CDamage &dmg) {
@@ -237,7 +250,7 @@ void CCharacter::updateAnimations(Ogre::Real fTime) {
   updateAnimationsCallback(fTime);
 
   // increment the current animation times
-  if (m_uiAnimID != ANIM_NONE) {
+  if (m_uiAnimID != m_Anims.size()) {
     m_Anims[m_uiAnimID]->addTime(fTime * m_fAnimSpeed);
   }
 
@@ -263,27 +276,27 @@ void CCharacter::updateAnimationsCallback(const Ogre::Real fTime) {
 void CCharacter::setAnimation(unsigned int id, bool reset, bool force) {
   if (force) {
     // no fading
-
-    // disable all animations
-    for (unsigned int i = 0; i < m_uiAnimationCount; i++) {
-      mAnimationProperty[m_uiAnimID].mFadeState = FADE_OUT;
-      m_Anims[id]->setEnabled(false);
-      m_Anims[id]->setWeight(0);
+    for (unsigned int i = 0; i < mAnimationProperty.size(); i++) {
+      mAnimationProperty[i].mFadeState = FADE_OUT;
+      m_Anims[i]->setEnabled(false);
+      m_Anims[i]->setWeight(0);
     }
 
     // only show current
     m_uiAnimID = id;
+
     if (id != m_uiAnimationCount) {
       // if we have a new animation, enable it and fade it in
       m_Anims[id]->setEnabled(true);
-      mAnimationProperty[id].mFadeState = FADE_IN;
       m_Anims[id]->setWeight(1);
+      mAnimationProperty[id].mFadeState = FADE_IN;
       if (reset) m_Anims[id]->setTimePosition(0);
     }
   } else {
-    // fadeing
+    // fading
 
-    if (m_uiAnimID < m_uiAnimationCount) {
+    // disable all animations
+    if (m_uiAnimID < mAnimationProperty.size()) {
       // if we have an old animation, fade it out
       mAnimationProperty[m_uiAnimID].mFadeState = FADE_OUT;
     }
@@ -294,7 +307,7 @@ void CCharacter::setAnimation(unsigned int id, bool reset, bool force) {
       // if we have a new animation, enable it and fade it in
       m_Anims[id]->setEnabled(true);
       // m_Anims[id]->setWeight(0);
-      mAnimationProperty[id].mFadeState = FADE_IN;
+      mAnimationProperty[m_uiAnimID].mFadeState = FADE_IN;
       if (reset) m_Anims[id]->setTimePosition(0);
     }
   }
@@ -306,19 +319,14 @@ const Ogre::AnimationState *CCharacter::getAnimation(unsigned int id) const {
 }
 
 unsigned int CCharacter::getAnimationIdFromString(const std::string &id) const {
-  if (id == "idle") {
-    return ANIM_IDLE;
-  } else if (id == "walk") {
-    return ANIM_WALK;
-  } else if (id == "slice_horizontal") {
-    return ANIM_SLICE_HORIZONTAL;
-  } else if (id == "use_item") {
-    return ANIM_USE_ITEM;
-  } else if (id == "run") {
-    return ANIM_RUN;
+  for (auto &anim : mAnimationProperty) {
+    if (anim.mAnimationData->mName == id) {
+      return anim.mAnimationData->mId;
+    }
   }
+  
   LOGW("Animation id '%s' is unknown.", id.c_str());
-  return ANIM_COUNT;
+  return 0;
 }
 
 void CCharacter::fadeAnimations(const Ogre::Real deltaTime) {
@@ -366,7 +374,7 @@ void CCharacter::animJumpLoop()
 	//setAnimation(ANIM_JUMP_LOOP, true);
 }
 void CCharacter::animJumpEnd() {
-  setAnimation(ANIM_IDLE);
+  //setAnimation(ANIM_IDLE);
   m_fTimer = 0;
 }
 void CCharacter::animAttack() {
@@ -403,26 +411,6 @@ void CCharacter::setIsMoving(bool isMoving) {
 
 bool CCharacter::isReadyForNewAction() {
   return m_uiAnimID == ANIM_NONE || m_uiAnimID == ANIM_IDLE || m_uiAnimID == ANIM_WALK;
-}
-
-short CCharacter::getCollisionMask() {
-    switch (mCharacterData.mAttitude) {
-    case ATTITUDE_ENEMY:
-        return MASK_PLAYER_N_COLLIDES_WITH;
-    case ATTITUDE_FRIENDLY:
-        return MASK_PLAYER_P_COLLIDES_WITH;
-    }
-    throw Ogre::Exception(0, "Unknown collision mask", __FUNCTION__);
-}
-
-short CCharacter::getCollisionGroup() {
-    switch (mCharacterData.mAttitude) {
-      case ATTITUDE_ENEMY:
-        return COL_CHARACTER_N;
-      case ATTITUDE_FRIENDLY:
-        return COL_CHARACTER_P;
-    }
-    throw Ogre::Exception(0, "Unknown collision mask", __FUNCTION__);
 }
 
 void CCharacter::useCurrentItem() {

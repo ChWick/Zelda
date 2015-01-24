@@ -92,7 +92,11 @@ bool CWorldGUIItemSelector::onSelectedItemChanged(const CEGUI::EventArgs &args) 
   ASSERT(items.size() > 0);
   if (items.size() == 1) {
     // just select the item
-    CMessageHandler::getSingleton().addMessage(std::make_shared<CMessageItem>(__MSG_LOCATION__, CMessageItem::IM_SELECTION_CHANGED, nullptr, m_eCurrentItemSlot, items.front()));
+    CMessageHandler::getSingleton().addMessage(
+        std::make_shared<CMessageItem>(__MSG_LOCATION__,
+                                       CMessageItem::IM_SELECTION_CHANGED,
+                                       nullptr, m_eCurrentItemSlot,
+                                       items.front()));
   } else {
     // display a selection window
     m_pMultipleSelector = new CWorldGUIItemSelectorMultipleSelect(items, m_pRoot, wnd_args.window->getPosition(), wnd_args.window->getPixelSize().d_width);
@@ -114,11 +118,11 @@ bool CWorldGUIItemSelector::updateItemStatus(const SItemStatus &itemStatus) {
   }
   else if (items.size() == 1) {
     pWnd->setVisible(true);
-    pWnd->setProperty("Image", "hud/" + ITEM_VARIANT_DATA_MAP.toData(items.front()).sImagesetName);
+    pWnd->setProperty("Image", "hud/" + CItemVariantDataMap::getSingleton().toData(items.front()).sImagesetName);
   }
   else {
     pWnd->setVisible(true);
-    pWnd->setProperty("Image", "hud/" + ITEM_VARIANT_DATA_MAP.toData(items.front()). sImagesetName);
+    pWnd->setProperty("Image", "hud/" + CItemVariantDataMap::getSingleton().toData(items.front()). sImagesetName);
   }
 
   return true;
@@ -273,7 +277,7 @@ void CWorldGUIItemSelectorMultipleSelect::createButton(int iIndex) {
   Window *pButton = m_pRoot->createChild("OgreTray/ToggleRadioButton", PropertyHelper<int>::toString(iIndex));
   pButton->setPosition(UVector2(UDim(iIndex * 1.f / m_vItems.size(), 0), UDim(0, 0)));
   pButton->setSize(USize(UDim(1.f / m_vItems.size(), 0), UDim(1, 0)));
-  pButton->setProperty("Image", "hud/" + ITEM_VARIANT_DATA_MAP.toData(m_vItems[iIndex]).sImagesetName);
+  pButton->setProperty("Image", "hud/" + CItemVariantDataMap::getSingleton().toData(m_vItems[iIndex]).sImagesetName);
   pButton->setUserData(const_cast<EItemVariantTypes*>(&m_vItems[iIndex]));
   pButton->subscribeEvent(ToggleButton::EventSelectStateChanged, Event::Subscriber(&CWorldGUIItemSelectorMultipleSelect::onSelectedItemChanged, this));
 }
@@ -284,11 +288,12 @@ bool CWorldGUIItemSelectorMultipleSelect::onSelectedItemChanged(const CEGUI::Eve
 
   const EItemVariantTypes eItemVariant(*static_cast<EItemVariantTypes*>(wnd_args.window->getUserData()));
   CMessageHandler::getSingleton().addMessage(
-      std::make_shared<CMessageItem>(__MSG_LOCATION__,
-                                     CMessageItem::IM_SELECTION_CHANGED,
-                       nullptr,
-                       ITEM_SLOT_DATA_MAP.getFromItemVariant(eItemVariant),
-                       eItemVariant));
+      std::make_shared<CMessageItem>(
+          __MSG_LOCATION__,
+          CMessageItem::IM_SELECTION_CHANGED,
+          nullptr,
+          CItemSlotDataMap::getSingleton().getFromItemVariant(eItemVariant),
+          eItemVariant));
 
   return true;
 }

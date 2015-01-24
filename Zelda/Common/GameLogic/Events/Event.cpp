@@ -40,7 +40,7 @@ CEvent::CEvent(CEntity &owner, const ERepeatTypes eRepeatType, Ogre::Real fRepea
 }
 CEvent::CEvent(CEntity &owner, const tinyxml2::XMLElement *pElement)
   : m_sID(Attribute(pElement, "id", "unset id")),
-    m_eRepeatType(REPEAT_TYPES_MAP.parseString(Attribute(pElement, "repeat", "none"))),
+    m_eRepeatType(CRepeatTypesMap::getSingleton().parseString(Attribute(pElement, "repeat", "none"))),
     m_fRepeatTime(RealAttribute(pElement, "time", 0)),
     m_fTimer(0),
     m_Owner(owner),
@@ -63,6 +63,7 @@ CEvent::~CEvent() {
     delete pEmitter;
   }
   m_lEmitter.clear();
+
   for (CAction *a : m_lActions) {
     delete a;
   }

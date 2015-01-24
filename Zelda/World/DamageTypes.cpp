@@ -21,7 +21,7 @@
 
 using namespace std;
 
-CDamageTypeIdMap::CDamageTypeIdMap() {
+void CDamageTypeIdMap::init() {
   m_Map[DMG_NONE]    = "none";
   m_Map[DMG_WORLD]   = "world";
   m_Map[DMG_SWORD]   = "sword";
@@ -41,13 +41,11 @@ unsigned int CDamageTypeIdMap::parseString(const std::string &str) const {
   istringstream stream(str);
   string token;
   while (getline(stream, token, ' ')) {
-    uiDmg |= CStringEnumIdMap<unsigned int>::parseString(token);
+    uiDmg |= CStringEnumIdMap<CDamageTypeIdMap, unsigned int>::parseString(token);
   }
 
   return uiDmg;
 }
-
-CDamageTypeIdMap DAMAGE_TYPE_ID_MAP;
 
 void CDamageDataMap::init() {
   m_Map[DMG_NONE] = {HP_NONE};
@@ -59,5 +57,3 @@ void CDamageDataMap::init() {
   m_Map[DMG_FIRE] = {HP_ONE_HEART};
   m_Map[DMG_RUN] = {HP_NONE};
 }
-
-CDamageDataMap DAMAGE_DATA_MAP;

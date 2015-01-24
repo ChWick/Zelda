@@ -26,6 +26,7 @@
 #include "../Character/SimpleEnemy.hpp"
 #include "../Character/StandingPerson.hpp"
 #include "../Character/LinksFather.hpp"
+#include "../Character/PersonTypes.hpp"
 
 using XMLHelper::Attribute;
 using XMLHelper::RealAttribute;
@@ -35,7 +36,11 @@ CWorldEntity* CCharacterCreator::createCharacter(
     CWorldEntity *pParent,
     CMap *pMap,
     CWorldEntity *pPlayer) {
-  const std::string sEntityType(Attribute(pElem, "entity_type"));
+
+  EPersonTypes personType = CPersonTypeIdMap::getSingleton().
+      parseString(Attribute(pElem, "person_type"));
+  const SCharacterData &characterData(
+      CPersonDataIdMap::getSingleton().toData(personType));
 
   const Ogre::Real rotation(RealAttribute(pElem, "rotation", 0));
   const Ogre::Quaternion qOrientation(Ogre::Degree(rotation),
@@ -45,16 +50,16 @@ CWorldEntity* CCharacterCreator::createCharacter(
 
   CWorldEntity *pEntity(nullptr);
 
-  if (sEntityType == "simple_enemy") {
+  if (characterData.mCharacterClass == "simple_enemy") {
     CSimpleEnemy *pEnemy = new CSimpleEnemy(pElem, pParent, pMap);
     // special case, set player requires that enemy entered map
     pEnemy->enterMap(pMap, position);
     pEnemy->setOrientation(qOrientation);
     pEnemy->setPlayer(pPlayer);
     return pEnemy;
-  } else if (sEntityType == "standing_person") {
+  } else if (characterData.mCharacterClass == "standing_person") {
     pEntity = new CStandingPerson(pElem, pParent, pMap);
-  } else if (sEntityType == "links_father") {
+  } else if (characterData.mCharacterClass == "links_father") {
     pEntity = new CLinksFather(pElem, pParent, pMap);
   } else {
     return nullptr;  // unknown

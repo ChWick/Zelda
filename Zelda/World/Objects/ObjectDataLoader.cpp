@@ -34,24 +34,25 @@ using XMLHelper::BoolAttribute;
 
 void CObjectDataLoader::readGroupElement(const tinyxml2::XMLElement *e) {
   SObjectTypeData data;
-  data.eObjectType = OBJECT_TYPE_ID_MAP.parseString(Attribute(e, "type"));
+  data.eObjectType = CObjectTypeIdMap::getSingleton().
+      parseString(Attribute(e, "type"));
   data.bUserHandle = BoolAttribute(e, "user_handle", true);
   data.bPermanentStatic = BoolAttribute(e, "permanent_static", false);
   data.sMeshName = Attribute(e, "mesh_name");
   data.sMaterialName = Attribute(e, "material_name", "");
-  data.eDamageSourceMask = DAMAGE_TYPE_ID_MAP.parseString(
+  data.eDamageSourceMask = CDamageTypeIdMap::getSingleton().parseString(
       Attribute(e, "damage_source_mask", "none"));
-  data.eNormalTile = TILE_TYPE_ID_MAP.parseString(
+  data.eNormalTile = CTileTypeIdMap::getSingleton().parseString(
       Attribute(e, "normal_tile", "none"));
-  data.eRemovedTile = TILE_TYPE_ID_MAP.parseString(
+  data.eRemovedTile = CTileTypeIdMap::getSingleton().parseString(
       Attribute(e, "removed_tile", "none"));
-  data.eCollisionShape = GLOBAL_COLLISION_SHAPES_TYPES_ID_MAP.parseString(
-      Attribute(e, "collision_shape", "none"));
+  data.eCollisionShape = CGlobalCollisionShapesTypesIdMap::getSingleton().
+      parseString(Attribute(e, "collision_shape", "none"));
   data.vPhysicsShapeScale = BtOgre::Convert::toBullet(
       Ogre::StringConverter::parseVector3(
           Attribute(e, "physics_shape_scale", "1 1 1")));
 
-  OBJECT_DATA_MAP.setData(data.eObjectType, data);
+  CObjectDataMap::getSingleton().setData(data.eObjectType, data);
 }
 
 

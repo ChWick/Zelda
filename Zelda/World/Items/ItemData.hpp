@@ -45,14 +45,14 @@ struct SItemVariantData {
       
 };
 
-class CItemSlotDataMap : public CEnumIdMap<EItemSlotTypes, SItemSlotData> {
+class CItemSlotDataMap : public CEnumIdMap<CItemSlotDataMap, EItemSlotTypes, SItemSlotData> {
 public:
   void init();
 
   EItemSlotTypes getFromItemVariant(EItemVariantTypes variantType) const;
 };
 
-class CItemVariantDataMap : public CEnumIdMap<EItemVariantTypes, SItemVariantData> {
+class CItemVariantDataMap : public CEnumIdMap<CItemVariantDataMap, EItemVariantTypes, SItemVariantData> {
 public:
   void init();
 
@@ -60,8 +60,5 @@ public:
     m_Map[type] = data;
   }
 };
-
-extern CItemSlotDataMap ITEM_SLOT_DATA_MAP;
-extern CItemVariantDataMap ITEM_VARIANT_DATA_MAP;
 
 #endif // _ITEM_DATA_HPP_

@@ -31,12 +31,11 @@ enum ERepeatTypes {
   REPEAT_TIMED,
 };
 
-class CRepeatTypesMap : public CStringEnumIdMap<ERepeatTypes> {
+class CRepeatTypesMap : public CStringEnumIdMap<CRepeatTypesMap, ERepeatTypes> {
 public:
-  CRepeatTypesMap();
+  void init();
 };
 
-extern CRepeatTypesMap REPEAT_TYPES_MAP;
 };
 
 #endif // _REPEAT_TYPES_HPP_

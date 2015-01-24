@@ -35,6 +35,8 @@ protected:
   Ogre::SceneNode *m_pSceneNode;
 	btCollisionObject *m_pCollisionObject;
 	CMap *m_pMap;
+  uint16_t mCollisionMask;
+  uint16_t mCollisionGroup;
 
 public:
   CWorldEntity(const std::string &sID, CEntity *pParent, CMap *pMap, const std::string &sResourceGroup = Ogre::ResourceGroupManager::AUTODETECT_RESOURCE_GROUP_NAME);
@@ -48,6 +50,7 @@ public:
   virtual void translate(const SPATIAL_VECTOR &vOffset);
 
   virtual const SPATIAL_VECTOR getFloorPosition() const {return getPosition();}
+  virtual void setFloorPosition(const SPATIAL_VECTOR &p) {setPosition(p);}
 
   virtual const SPATIAL_VECTOR &getCenter() const;
   virtual void setCenter(const SPATIAL_VECTOR &vCenter);
@@ -61,6 +64,8 @@ public:
   virtual const Ogre::Quaternion &getOrientation() const;
   virtual void setOrientation(const Ogre::Quaternion &quat);
   virtual void rotate(const Ogre::Quaternion &quat);
+
+  virtual void warp(const SPATIAL_VECTOR &p, const Ogre::Quaternion &q);
 
   virtual Ogre::SceneNode *getSceneNode() const;
   virtual btCollisionObject *getCollisionObject() const;
@@ -79,6 +84,9 @@ public:
 
   virtual SInteractionResult interactOnCollision(const Ogre::Vector3 &vInteractDir, CWorldEntity *pSender);
   virtual SInteractionResult interactOnActivate(const Ogre::Vector3 &vInteractDir, CWorldEntity *pSender);
+
+  uint16_t getCollisionMask() const {return mCollisionMask;}
+  uint16_t getCollisionGroup() const {return mCollisionGroup;}
 
 protected:
   virtual void damageAccepted(const CDamage &damage);

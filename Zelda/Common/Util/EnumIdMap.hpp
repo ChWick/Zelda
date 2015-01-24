@@ -22,11 +22,36 @@
 
 #include <map>
 #include <string>
+#include <memory>
 #include <OgreException.h>
 #include "Assert.hpp"
 
-template <typename T, typename DATA>
-class CEnumIdMap {
+template <typename C>
+class CEnumIdMapSingleton {
+ private:
+  static std::unique_ptr<C> mInstance;
+ protected:
+  CEnumIdMapSingleton() {}
+ public:
+  virtual ~CEnumIdMapSingleton() {}
+
+  virtual void init() = 0;
+
+  static C &getSingleton() {
+    if (!mInstance) {
+      mInstance = std::unique_ptr<C>(new C());
+    }
+    return *mInstance.get();
+  }
+};
+
+// static variable declaration
+template <typename C>
+std::unique_ptr<C> CEnumIdMapSingleton<C>::mInstance;
+
+template <typename C, typename T, typename DATA>
+class CEnumIdMap
+    : public CEnumIdMapSingleton<C> {
 protected:
   std::map<T, DATA> m_Map;
 
@@ -40,7 +65,7 @@ public:
     }
     throw Ogre::Exception(0, "Data could not be parsed.", __FILE__);
   }
-  const DATA &toData(T t) const {
+  const DATA &toData(const T t) const {
     ASSERT(m_Map.count(t) == 1);
     return m_Map.at(t);
   }
@@ -51,20 +76,20 @@ public:
   }
 };
 
-template <typename T>
-class CStringEnumIdMap : public CEnumIdMap<T, std::string> {
+template <typename C, typename T>
+class CStringEnumIdMap : public CEnumIdMap<C, T, std::string> {
  public:
   // default for using strings
   T parseString(const std::string &str) const {
-    for (const std::pair<T, std::string> &p : CEnumIdMap<T, std::string>::m_Map) {
+    for (const std::pair<T, std::string> &p : CEnumIdMap<C, T, std::string>::m_Map) {
       if (p.second == str) {
         return p.first;
       }
     }
     throw Ogre::Exception(0, "'" + str + "' could not be parsed.", __FILE__);
   }
-  const std::string &toString(T t) const {
-    return CEnumIdMap<T, std::string>::toData(t);
+  const std::string &toString(const T t) const {
+    return CEnumIdMap<C, T, std::string>::toData(t);
   }
 };
 

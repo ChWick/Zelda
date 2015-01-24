@@ -28,11 +28,10 @@ enum ECharacterAttitude {
   ATTITUDE_ENEMY,               //!< a evil person, not the player... ganons folks
 };
 
-class CCharacterAttitudeIdMap : public CStringEnumIdMap<ECharacterAttitude> {
+class CCharacterAttitudeIdMap : public CStringEnumIdMap<CCharacterAttitudeIdMap,
+                                                        ECharacterAttitude> {
  public:
-  CCharacterAttitudeIdMap();
+  void init();
 };
-
-extern CCharacterAttitudeIdMap CHARACTER_ATTITUDE_ID_MAP;
 
 #endif  // CHARACTERATTITUDE_HPP

@@ -21,11 +21,11 @@
 #define _CHARACTER_H_
 
 #include "../WorldEntity.hpp"
+#include "CharacterData.hpp"
 #include <LinearMath/btAlignedObjectArray.h>
 #include "CharacterAttitude.hpp"
 #include "CharacterControllerPhysicsListener.hpp"
 #include "../Items/ItemTypes.hpp"
-#include "CharacterData.hpp"
 
 class btRigidBody;
 class CMap;
@@ -37,6 +37,12 @@ class btCharacterControllerInterface;
 
 #define ANIM_FADE_SPEED 10.f   // animation crossfade speed of full weight per second
 
+enum EFadeState {
+  FADE_NONE = 0,
+  FADE_IN = 1,
+  FADE_OUT = 2,
+};
+
 //! Struct containing information for an animation
 struct SAnimationProperty {
   //! Pointer to the animation data
@@ -44,7 +50,7 @@ struct SAnimationProperty {
   //! Pointer to the animation state
   Ogre::AnimationState *mState;
   //! fade state
-  uint8_t mFadeState;
+  EFadeState mFadeState;
 };
 
 //! Klasse f&uuml;r einen animierten Charater mit Standardanimationen
@@ -87,11 +93,6 @@ public:
   };
 
   static const unsigned int ANIM_NONE = ANIM_COUNT;						//!< ANIM_NONE definition: == m_uiAnimationCount
-  enum EFadeStade {
-    FADE_NONE = 0,
-    FADE_IN = 1,
-    FADE_OUT = 2,
-  };
 
   enum ECharacterItemSlots {
     CIS_WEAPON = 0,
@@ -101,6 +102,9 @@ public:
     CIS_COUNT,
   };
 protected:
+  //! Character data
+  const SCharacterData &mCharacterData;
+
   bool m_bMoving;
   Ogre::Entity *m_pBodyEntity;									//!< The entity of the body
   btCharacterControllerInterface *mCCPhysics;		//!< The bullet character controller (Physics)
@@ -111,17 +115,13 @@ protected:
   Ogre::Real m_fYaw;
 
   // Animation data
-  //! number of animations
-  const unsigned int m_uiAnimationCount;
-  //!< master animation list (same as for mAnimationProperty)
-  Ogre::vector<Ogre::AnimationState*>::type m_Anims;
-  //! current animation
-  unsigned int m_uiAnimID;
+  const unsigned int m_uiAnimationCount;							//!< number of animations
+  Ogre::vector<Ogre::AnimationState*>::type m_Anims;	//!< master animation list
+  unsigned int m_uiAnimID;														//!< current animation
 
   Ogre::Real m_fTimer;																//!< Animation timer (how long is the current animation running)
   Ogre::Real m_fAnimSpeed;														//!< Animation speed
-private:
-  const SCharacterData &mCharacterData;
+protected:
   std::shared_ptr<CCharacterItem> mCurrentItems[CIS_COUNT];
   std::vector<SAnimationProperty> mAnimationProperty;
 public:
@@ -183,12 +183,7 @@ public:
 
   void update(Ogre::Real fTime);
 
-  //! Set the current animation of the character entity
-  /**
-   * \param id The id of the animation
-   * \param reset Play the animation from the beginning
-   * \param force Disable fading and show the animation imediately
-   */
+  
   void setAnimation(unsigned int id, bool reset = false, bool force = false);
   const Ogre::AnimationState *getAnimation(unsigned int id) const;
   virtual unsigned int getAnimationIdFromString(const std::string &id) const;
@@ -208,9 +203,6 @@ protected:
   virtual void useItem(EItemVariantTypes item);
   virtual CCharacterController *createCharacterController() = 0;
   void updateAnimations(const Ogre::Real fTime);
-
-  virtual short getCollisionMask();
-  virtual short getCollisionGroup();
 
   virtual bool isReadyForNewAction();
   void fadeAnimations(const Ogre::Real deltaTime);

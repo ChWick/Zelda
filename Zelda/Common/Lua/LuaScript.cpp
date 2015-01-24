@@ -44,6 +44,9 @@ CLuaScript::CLuaScript(Ogre::ResourceManager* creator, const Ogre::String &name,
 
 CLuaScript::~CLuaScript() {
   unload();
+  if (mThread.joinable()) {
+    mThread.join();
+  }
 }
 
 CLuaScriptPtr CLuaScript::clone(const Ogre::String& newName, bool changeGroup, const Ogre::String& newGroup) {

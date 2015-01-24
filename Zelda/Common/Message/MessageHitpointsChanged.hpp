@@ -29,7 +29,8 @@ public:
 protected:
   const CHitableInterface &m_HitableInterface;
 public:
-  CMessageHitpointsChanged(const CHitableInterface &hitableInterface, const std::string &creationFile);
+  CMessageHitpointsChanged(const std::string &creationFile,
+                           const CHitableInterface &hitableInterface);
 
   const CHitableInterface &getHitableInterface() const {return m_HitableInterface;}
 

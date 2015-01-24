@@ -1,4 +1,4 @@
-/*****************************************************************************
+ /*****************************************************************************
  * Copyright 2014 Christoph Wick
  *
  * This file is part of Zelda.
@@ -22,6 +22,7 @@
 #include <BulletCollision/CollisionDispatch/btCollisionObject.h>
 #include "../Common/Physics/BtOgreExtras.hpp"
 #include "../Common/Physics/BtOgrePG.hpp"
+#include "../Common/Physics/PhysicsMasks.hpp"
 #include "../Common/Util/DeleteSceneNode.hpp"
 #include "../Common/GameLogic/Events/Event.hpp"
 #include "../Common/GameLogic/Events/Emitter/EmitOnCollision.hpp"
@@ -30,18 +31,24 @@
 #include "Atlas/MapPack.hpp"
 #include "Damage.hpp"
 
+using XMLHelper::Attribute;
+
 CWorldEntity::CWorldEntity(const std::string &sID, CEntity *pParent, CMap *pMap, const std::string &sResourceGroup)
   : CEntity(sID, pParent, (sResourceGroup == Ogre::ResourceGroupManager::AUTODETECT_RESOURCE_GROUP_NAME && pMap && pMap->getMapPack().get()) ? pMap->getMapPack()->getResourceGroup() : sResourceGroup),
     m_pSceneNode(nullptr),
     m_pCollisionObject(nullptr),
-    m_pMap(pMap) {
+    m_pMap(pMap),
+    mCollisionMask(MASK_STATIC_COLLIDES_WITH),
+    mCollisionGroup(COL_STATIC) {
 }
 
 CWorldEntity::CWorldEntity(CEntity *pParent, CMap *pMap, const tinyxml2::XMLElement *pElem, const std::string &sResourceGroup)
   : CEntity(pParent, pElem, (sResourceGroup == Ogre::ResourceGroupManager::AUTODETECT_RESOURCE_GROUP_NAME && pMap && pMap->getMapPack().get()) ? pMap->getMapPack()->getResourceGroup() : sResourceGroup),
     m_pSceneNode(nullptr),
     m_pCollisionObject(nullptr),
-    m_pMap(pMap) {
+    m_pMap(pMap),
+    mCollisionMask(CPhysicsMasksIdMap::getSingleton().parseString(Attribute(pElem, "collision_mask", "static"))),
+    mCollisionGroup(CPhysicsGroupsIdMap::getSingleton().parseString(Attribute(pElem, "collision_group", CPhysicsGroupsIdMap::getSingleton().toString(COL_STATIC)))) {
 }
 
 CWorldEntity::~CWorldEntity() {
@@ -53,18 +60,31 @@ void CWorldEntity::exit() {
     m_pSceneNode = nullptr;
   }
   if (m_pCollisionObject) {
-    assert(m_pMap);
-  	m_pMap->getPhysicsManager()->getWorld()->removeCollisionObject(m_pCollisionObject);
-    btRigidBody *pRB = btRigidBody::upcast(m_pCollisionObject);
-    if (pRB) {
-      delete pRB->getMotionState();
-    }
-    // dont delete collision shape, since it is normally a global shape
-    delete m_pCollisionObject;
+    m_pMap->getPhysicsManager()->deleteNow(m_pCollisionObject);
     m_pCollisionObject = nullptr;
   }
 
   CEntity::exit();
+}
+
+void CWorldEntity::warp(const SPATIAL_VECTOR &p, const Ogre::Quaternion &q) {
+  bool attached(false);
+  if (m_pCollisionObject) {
+    // an attached object has to be readded to the collision world
+    attached = m_pMap->getPhysicsManager()->hasCollisionObject(m_pCollisionObject);
+    if (attached) {
+      m_pMap->getPhysicsManager()->secureRemoveCollisionObject(m_pCollisionObject);
+    }
+  }
+
+  // normally set the position and orientation
+  setFloorPosition(p);
+  setOrientation(q);
+
+  if (attached) {
+    // add it again
+    m_pMap->getPhysicsManager()->secureAddCollisionObject(m_pCollisionObject, mCollisionGroup, mCollisionMask);
+  }
 }
 
 const SPATIAL_VECTOR &CWorldEntity::getPosition() const {
@@ -78,6 +98,7 @@ const SPATIAL_VECTOR &CWorldEntity::getPosition() const {
 
   return CEntity::getPosition();
 }
+
 void CWorldEntity::setPosition(const SPATIAL_VECTOR &vPos) {
   if (m_pCollisionObject) {
     if (btRigidBody::upcast(m_pCollisionObject)
@@ -100,6 +121,7 @@ void CWorldEntity::setPosition(const SPATIAL_VECTOR &vPos) {
     m_pSceneNode->setPosition(vPos);
   }
 }
+
 void CWorldEntity::translate(const SPATIAL_VECTOR &vOffset) {
   m_pSceneNode->translate(vOffset);
 }

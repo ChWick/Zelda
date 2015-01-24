@@ -28,12 +28,10 @@ template<> CMessageHandler *Ogre::Singleton<CMessageHandler>::msSingleton = 0;
 CMessageHandler *CMessageHandler::getSingletonPtr() {
   return msSingleton;
 }
-
 CMessageHandler &CMessageHandler::getSingleton() {
   ASSERT(msSingleton);
   return *msSingleton;
 }
-
 void CMessageHandler::process() {
   mInjectorMutex.lock();
   while (m_lInjectorsToRemove.size() > 0) {
@@ -49,23 +47,18 @@ void CMessageHandler::process() {
 
   mInjectorMutex.unlock();
 
-  std::list<MessageEntryType> l;
+  std::list<CMessagePtr> l;
   mMutex.lock();
   l.splice(l.end(), m_lMessages);
   mMutex.unlock();
 
   while (l.size() > 0) {
-    MessageEntryType m = l.front();
+    CMessagePtr m = l.front();
     for (auto pInjector : m_lInjectors) {
       pInjector->sendMessageToAll(m);
     }
 
     l.pop_front();
-  }
-
-  // keep message list empty
-  if (m_lMessages.size() > 0) {
-    process();
   }
   return;
 }

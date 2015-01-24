@@ -63,10 +63,10 @@ public:
   static CGameMemory *getSingletonPtr();
 
   int getIntData(const std::string &id, const int defaultValue = 0) {return mIntData.getData(id, defaultValue);}
-  int setIntData(const std::string &id, const int value) {mIntData.setData(id, value);}
+  void setIntData(const std::string &id, const int value) {mIntData.setData(id, value);}
 
   Ogre::Real getRealData(const std::string &id, const Ogre::Real defaultValue = 0) {return mRealData.getData(id, defaultValue);}
-  Ogre::Real setRealData(const std::string &id, const Ogre::Real value) {mRealData.setData(id, value);}
+  void setRealData(const std::string &id, const Ogre::Real value) {mRealData.setData(id, value);}
 };
 
 #endif // _GAME_MEMORY_HPP_

@@ -24,7 +24,9 @@
 
 class CUserMessageCreator : public CMessageCreator {
 public:
-  virtual CMessagePtr createMessage(const tinyxml2::XMLElement *pElem, const std::string &creationFile, const Ogre::Any &any = Ogre::Any());
+  virtual CMessagePtr createMessage(const std::string &creationFile,
+                                    const tinyxml2::XMLElement *pElem,
+                                    const Ogre::Any &any = Ogre::Any());
 };
 
 #endif // _USER_MESSAGE_CREATOR_HPP_

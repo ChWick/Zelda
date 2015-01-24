@@ -126,6 +126,13 @@ void CAerialCameraPerspective::sendMessageToAll(const CMessagePtr message) {
         Ogre::Vector3 vMapPositionOffset = currPack->getGlobalPosition() - nextPack->getGlobalPosition();
 
         m_pCamera->setPosition(m_pCamera->getPosition() + vMapPositionOffset);
+
+        // adjust bounds to new map
+        Ogre::Vector2 vSize(nextPack->getGlobalSize().x, nextPack->getGlobalSize().y);
+        m_vMinCamPoint = -vSize / 2;
+        m_vMaxCamPoint = vSize / 2;
+
+        m_fVisionLevelOffset = nextPack->getVisionLevelOffset();
       } else {
         const CMapPackPtr pack = switch_map_message->getFromMap()->getMapPack();
         Ogre::Vector2 vSize(pack->getGlobalSize().x, pack->getGlobalSize().y);
@@ -137,8 +144,7 @@ void CAerialCameraPerspective::sendMessageToAll(const CMessagePtr message) {
         // move camera to new point
         updateCamera(1000);
       }
-    }
-    else if (switch_map_message->getStatus() == CMessageSwitchMap::FINISHED) {
+    } else if (switch_map_message->getStatus() == CMessageSwitchMap::FINISHED) {
       m_bSwitchingMap = false;
 
       const CMapPackPtr pack = switch_map_message->getFromMap()->getMapPack();

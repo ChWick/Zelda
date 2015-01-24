@@ -20,10 +20,8 @@
 #include "EntityStates.hpp"
 
 
-CEntityStateIdMap::CEntityStateIdMap() {
+void CEntityStateIdMap::init() {
   m_Map[EST_NORMAL] = "normal";
   m_Map[EST_LIFTED] = "lifted";
   m_Map[EST_THROWN] = "thrown";
 }
-
-CEntityStateIdMap ENTITY_STATE_ID_MAP;

@@ -19,20 +19,25 @@
 
 #include "InputListener.hpp"
 
+CInputListener::CInputListener(bool addOnCreate)
+    : m_bInputListenerEnabled(true) {
+  if (addOnCreate) {
+    CInputListenerManager::getSingleton().addInputListener(this);
+  }
+}
 CInputListener::~CInputListener() {
-	if (CInputListenerManager::getSingletonPtr()) {
-		CInputListenerManager::getSingleton().removeInputListener(this);
-	}
+  if (CInputListenerManager::getSingletonPtr()) {
+    CInputListenerManager::getSingleton().removeInputListener(this);
+  }
 }
 
 
-template<> CInputListenerManager* Ogre::Singleton<CInputListenerManager>::msSingleton = 0;
+template<> CInputListenerManager*
+Ogre::Singleton<CInputListenerManager>::msSingleton = 0;
 
-CInputListenerManager* CInputListenerManager::getSingletonPtr(void)
-{
+CInputListenerManager* CInputListenerManager::getSingletonPtr(void) {
     return msSingleton;
 }
-CInputListenerManager& CInputListenerManager::getSingleton(void)
-{
+CInputListenerManager& CInputListenerManager::getSingleton(void) {
     assert( msSingleton );  return ( *msSingleton );
 }

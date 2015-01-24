@@ -33,6 +33,7 @@
 #include <OgreSceneManager.h>
 #include <OgreSubMesh.h>
 #include "../../Common/Physics/PhysicsMasks.hpp"
+#include "../../Common/Physics/BtOgrePG.hpp"
 #include "../GlobalCollisionShapesTypes.hpp"
 #include "PersonTypes.hpp"
 #include "../../Common/Log.hpp"
@@ -55,7 +56,8 @@ const Ogre::Real CPerson::PERSON_FLOOR_OFFSET = PERSON_HEIGHT / 2;
 CPerson::CPerson(const std::string &sID,
                    CEntity *pParent,
                    CMap *pMap,
-                   const SPersonData &personData)
+                   const SPersonData &personData,
+                   unsigned int uiAnimationCount)
     : CCharacter(sID,
                  pParent,
                  pMap,
@@ -71,15 +73,16 @@ CPerson::CPerson(const std::string &sID,
 
 CPerson::CPerson(const tinyxml2::XMLElement *pElem,
                  CEntity *pParent,
-                 CMap *pMap)
+                 CMap *pMap,
+                 unsigned int uiAnimationCount)
   : CCharacter(pElem,
                pParent,
                pMap,
-               PERSON_DATA_ID_MAP.toData(
-                   PERSON_TYPE_ID_MAP.parseString(
+               CPersonDataIdMap::getSingleton().toData(
+                   CPersonTypeIdMap::getSingleton().parseString(
                        Attribute(pElem, "person_type")))),
-    m_PersonData(PERSON_DATA_ID_MAP.toData(
-        PERSON_TYPE_ID_MAP.parseString(Attribute(pElem, "person_type")))) {
+    m_PersonData(CPersonDataIdMap::getSingleton().toData(
+        CPersonTypeIdMap::getSingleton().parseString(Attribute(pElem, "person_type")))) {
   m_degLeftHandleCurrentRotation = 0;
   m_degLeftHandleRotationSpeed = 0;
   m_degLeftHandleRotationToTarget = 0;
@@ -105,6 +108,17 @@ const Ogre::Vector3 CPerson::getFloorPosition() const {
   return m_pSceneNode->getPosition() - Ogre::Vector3(0, PERSON_FLOOR_OFFSET, 0);
 }
 
+void CPerson::setFloorPosition(const Ogre::Vector3 &p) {
+  Ogre::Vector3 floorOffset(0, PERSON_FLOOR_OFFSET, 0);
+  if (mCCPhysics) {
+    mCCPhysics->warp(BtOgre::Convert::toBullet(p + floorOffset));
+    m_pSceneNode->setPosition(BtOgre::Convert::toOgre(
+        m_pCollisionObject->getWorldTransform().getOrigin()));
+  } else {
+    m_pCharacterController->setPosition(p + floorOffset);
+  }
+}
+
 void CPerson::createPhysics() {
     ASSERT(m_pSceneNode);
     ASSERT(!mCCPhysics);
@@ -122,7 +136,7 @@ void CPerson::createPhysics() {
 
     const CPhysicsCollisionObject &pco
         = m_pMap->getPhysicsManager()->getCollisionShape(
-            GLOBAL_COLLISION_SHAPES_TYPES_ID_MAP.toString(GCST_PERSON_CAPSULE));
+            CGlobalCollisionShapesTypesIdMap::getSingleton().toString(GCST_PERSON_CAPSULE));
     btConvexShape * capsule = dynamic_cast<btConvexShape*>(pco.getShape());
     characterGhostObject->setCollisionShape(capsule);
     // characterGhostObject->setCollisionFlags(getCollisionGroup());
@@ -281,10 +295,9 @@ void CPerson::createBlinkingMaterials() {
   Ogre::String materialName = m_PersonData.sMaterialName;
   if (materialName.size() == 0) {
     // use the applied material of the entity
-    ASSERT(m_pBodyEntity->getMesh()->getNumSubMeshes() == 1);
     materialName = m_pBodyEntity->getMesh()->getSubMesh(0)->getMaterialName();
   }
-
+ 
   // get the material
   Ogre::MaterialPtr srcMat
       = Ogre::MaterialManager::getSingleton().getByName(materialName);

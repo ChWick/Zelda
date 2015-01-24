@@ -20,8 +20,10 @@
 #include "MessageDebug.hpp"
 
 
-CMessageDebug::CMessageDebug(const EDebugMessageTypes type, bool bActive, const std::string &creationFile)
-  : CMessage(MSG_DEBUG, creationFile),
-    m_eDebugType(type),
-    m_bActive(bActive) {
+CMessageDebug::CMessageDebug(const std::string &creationFile,
+                             const EDebugMessageTypes type,
+                             bool bActive)
+    : CMessage(creationFile, MSG_DEBUG),
+      m_eDebugType(type),
+      m_bActive(bActive) {
 }

@@ -20,15 +20,16 @@
 #ifndef _INPUT_LISTENER_H_
 #define _INPUT_LISTENER_H_
 
-#include <OIS.h>
+#include <OIS/OIS.h>
 #include <OgreSingleton.h>
 #include <OgreRenderWindow.h>
+#include "../Util/Assert.hpp"
 
 class CInputListener {
 private:
   bool m_bInputListenerEnabled;
 public:
-  CInputListener() {m_bInputListenerEnabled = true;}
+  CInputListener(bool addOnCreate = true);
   virtual ~CInputListener();
   // OIS::KeyListener
   virtual bool keyPressed( const OIS::KeyEvent &arg ) {return true;}
@@ -49,12 +50,9 @@ public:
 
 class CInputListenerManager :
   public Ogre::Singleton<CInputListenerManager>,
-#if (OGRE_PLATFORM != OGRE_PLATFORM_APPLE_IOS) && (OGRE_PLATFORM != OGRE_PLATFORM_ANDROID)
   public OIS::KeyListener,
-  public OIS::MouseListener
-#else
+  public OIS::MouseListener,
   public OIS::MultiTouchListener
-#endif 
 {
 private:
   Ogre::list<CInputListener*>::type m_ListenerList;
@@ -65,9 +63,11 @@ public:
   }
 
   void addInputListener(CInputListener *pListener) {
+    ASSERT(!hasInputListener(pListener));
     m_ListenerList.push_back(pListener);
   }
   void removeInputListener(CInputListener *pListener) {
+    // no assert check here, since on exceptions we still must be able to remove
     m_ListenerList.remove(pListener);
   }
   bool hasInputListener(CInputListener *pListener) {

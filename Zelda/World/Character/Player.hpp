@@ -22,16 +22,30 @@
 
 #include "Person.hpp"
 #include "../../Common/GameLogic/EntityProperty.hpp"
+#include "../../Common/PauseManager/PauseListener.hpp"
 #include <OgrePrerequisites.h>
 
 class CMap;
 
-class CPlayer : public CPerson {
+class CPlayer : public CPerson,
+                public CPauseListener {
 private:
+  enum EDefaultAnimationIDs {
+    P_ANIM_IDLE,
+    P_ANIM_WALK,
+    P_ANIM_SLICE_HORIZONTAL,
+    P_ANIM_USE_ITEM,
+    P_ANIM_RUN,
+    P_ANIM_SLEEP,
+    P_ANIM_AWAKE,
+
+    P_ANIM_COUNT
+  };
+
   const Ogre::Camera *m_pCamera;
   Ogre::SceneManager *m_pPlayerSceneManager;
   CWorldEntity *m_pLiftedEntity;
-
+  
   Ogre::RibbonTrail* mSwordTrail;
 
   // properties, that notyfy world when updated
@@ -40,7 +54,7 @@ public:
 
   CPlayer(CEntity *pParent, const Ogre::Camera *pCamera, Ogre::SceneManager *pPlayerSceneManager);
   virtual ~CPlayer();
-
+  
   void update(Ogre::Real tpf);
   void renderDebug(Ogre::Real tpf);
   void startup(const Ogre::Vector3 &playerPos, const Ogre::Vector3 &playerLookDirection, const Ogre::Real cameraYaw, const Ogre::Real cameraPitch);
@@ -48,7 +62,6 @@ public:
 protected:
   void enterMap(CMap *pMap, const Ogre::Vector3 &vInitPosition);
   void setupInternal();
-  void postSetupAnimations();
   EReceiveDamageResult receiveDamage(const CDamage &dmg);
   void setupBody(Ogre::SceneManager* sceneMgr);
   void setupCamera(Ogre::Camera* cam);
@@ -60,11 +73,13 @@ protected:
   void lift(CWorldEntity *pObjectToLift);
   void throwLifted();
   void postStepForwardAndStrafe();
-
+  
   virtual CCharacterController *createCharacterController();
-
+  
 private:
   void handleMessage(const CMessagePtr message);
+
+  void updatePause(int iPauseType, bool bPause);
 };
 
 #endif // _PLAYER_HPP_

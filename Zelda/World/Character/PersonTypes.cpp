@@ -27,10 +27,6 @@ using XMLHelper::IntAttribute;
 using XMLHelper::BoolAttribute;
 using XMLHelper::Vector3Attribute;
 
-CPersonTypeIdMap PERSON_TYPE_ID_MAP;
-CPersonDataIdMap PERSON_DATA_ID_MAP;
-
-
 void CPersonTypeIdMap::init() {
   m_Map[PERSON_LINK] = "link";
   m_Map[PERSON_LINKS_FATHER] = "links_father";
@@ -39,14 +35,17 @@ void CPersonTypeIdMap::init() {
   m_Map[PERSON_SOLDIER_GREEN_SWORD] = "soldier_green_sword";
 }
 
+void CPersonDataIdMap::init() {
+}
+
 SPersonData::SPersonData(const tinyxml2::XMLElement *e)
     : SCharacterData(e) {
-const std::string id = Attribute(e, "id");
-eType = PERSON_TYPE_ID_MAP.parseString(id);
-sMeshName = Attribute(e, "mesh_name");
-sMaterialName = Attribute(e, "material_name", "");
-vScale = Vector3Attribute(e, "scale", Ogre::Vector3::UNIT_SCALE);
-hitpoints = HP_ONE_HEART * IntAttribute(e, "hitpoints",
+  const std::string id = Attribute(e, "id");
+  eType = CPersonTypeIdMap::getSingleton().parseString(id);
+  sMeshName = Attribute(e, "mesh_name");
+  sMaterialName = Attribute(e, "material_name", "");
+  vScale = Vector3Attribute(e, "scale", Ogre::Vector3::UNIT_SCALE);
+  hitpoints = HP_ONE_HEART * IntAttribute(e, "hitpoints",
                                           HP_INFINITY / HP_ONE_HEART);
 }
 

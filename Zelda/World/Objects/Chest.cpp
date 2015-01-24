@@ -61,7 +61,8 @@ CChest::CChest(const std::string &sID,
     mLidSceneNode->attachObject(m_pSceneNode->getCreator()
                                 ->createEntity("small_chest_top.mesh"));
     pCO = &m_pMap->getPhysicsManager()->getCollisionShape(
-        GLOBAL_COLLISION_SHAPES_TYPES_ID_MAP.toString(GCST_SMALL_CHEST_TOP));
+        CGlobalCollisionShapesTypesIdMap::getSingleton().
+        toString(GCST_SMALL_CHEST_TOP));
     break;
   case BIG_CHEST:
     break;
@@ -166,7 +167,8 @@ CWorldEntity::SInteractionResult CChest::interactOnActivate(
 
 void CChest::handleMessage(const CMessagePtr message) {
   if (message->getType() == MSG_SHOW_TEXT) {
-    auto msg_st(std::dynamic_pointer_cast<const CMessageShowText>(message));
+    auto msg_st(
+        std::dynamic_pointer_cast<const CMessageShowText>(message));
     if (msg_st->getStatus() == CMessageShowText::FINISHED) {
       onFinished();
     }
@@ -195,24 +197,24 @@ void CChest::onFinished() {
     // if the chest has an inner object
     mInnerObject->deleteLater();
     CMessageHandler::getSingleton().addMessage(
-      std::make_shared<CMessagePlayerPickupItem>(mInnerObjectType, __MSG_LOCATION__));
+        std::make_shared<CMessagePlayerPickupItem>(__MSG_LOCATION__, mInnerObjectType));
     mInnerObject = nullptr;
   }
 }
 
 void CChest::createInnerObject(EObjectTypes eType) {
   LOGV("Creating inner object for chest: '%s'",
-        OBJECT_TYPE_ID_MAP.toString(eType).c_str());
+       CObjectTypeIdMap::getSingleton().toString(eType).c_str());
   if (eType == OBJECT_COUNT) {
     return;  // no object inside
   }
   mLifting = true;
-  if (XMLResources::GLOBAL.hasString(OBJECT_TYPE_ID_MAP.toString(eType))) {
-    mTextMessage = "${" + OBJECT_TYPE_ID_MAP.toString(eType) + "}";
+  if (XMLResources::GLOBAL.hasString(CObjectTypeIdMap::getSingleton().toString(eType))) {
+    mTextMessage = "${" + CObjectTypeIdMap::getSingleton().toString(eType) + "}";
   } else {
     mTextMessage = "";
     LOGV("%s", ("No item text for chest object "
-                + OBJECT_TYPE_ID_MAP.toString(eType)).c_str());
+                + CObjectTypeIdMap::getSingleton().toString(eType)).c_str());
   }
   mInnerObject = new CObject(getID() + "_inner_object", this, m_pMap, eType);
   // dont init CObject, since we handle location

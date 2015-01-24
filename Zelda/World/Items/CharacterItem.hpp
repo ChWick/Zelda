@@ -24,10 +24,33 @@
 #include <OgrePrerequisites.h>
 #include "../Damage.hpp"
 #include "../WorldEntity.hpp"
+#include <BulletCollision/CollisionDispatch/btCollisionWorld.h>
 
 class CCharacter;
 class btRigidBody;
 class CMap;
+class CCharacterItem;
+
+class CCharacterItemContactResultCallback
+  : public btCollisionWorld::ContactResultCallback {
+private:
+  CCharacterItem *mCharacterItem;
+public:
+  CCharacterItemContactResultCallback(CCharacterItem *c);
+
+  void init();
+  
+  btScalar addSingleResult(btManifoldPoint &cp,
+                           const btCollisionObjectWrapper *colObj0Wrap,
+                           int partId0,
+                           int index0,
+                           const btCollisionObjectWrapper *colObj1Wrap,
+                           int partId1,
+                           int index1);
+
+private:
+  void collision(const btCollisionObject *obj);
+};
 
 class CCharacterItem : public CWorldEntity {
 protected:
@@ -41,7 +64,11 @@ protected:
   uint16_t mBlockPhysicsMask;
   Ogre::Vector3 mPhysicsOffset;
 
+  btRigidBody *mDamagePhysics;
   Ogre::Vector3 mOldDamageStartPos;
+  Ogre::Vector3 mOldDamageEndPos;
+
+  CCharacterItemContactResultCallback mContactResultCallback;
 public:
   CCharacterItem(CCharacter *character, const std::string &boneToAttach, EItemVariantTypes type);
   virtual ~CCharacterItem();
@@ -54,6 +81,9 @@ public:
 
   const std::string &getBoneToAttach() const {return mBoneToAttach;}
   EItemVariantTypes getItemVariantType() const {return mVariantType;}
+  CCharacter *getCharacter() const {return mCharacter;}
+  btRigidBody *getBlockPhysics() const {return mBlockPhysics;}
+  btRigidBody *getDamagePhysics() const {return mDamagePhysics;}
 
   void show();
   void hide();

@@ -30,12 +30,10 @@ enum ESwitchMapTypes {
   SMT_FADE_ALPHA,
 };
 
-class CSwitchMapTypes : public CStringEnumIdMap<ESwitchMapTypes> {
+class CSwitchMapTypes : public CStringEnumIdMap<CSwitchMapTypes, ESwitchMapTypes> {
 public:
-  CSwitchMapTypes();
+  void init();
 };
-
-extern const CSwitchMapTypes SWITCH_MAP_TYPES_ID_MAP;
 
 
 class CMap;
@@ -56,7 +54,8 @@ protected:
   const CMap *m_pFromMap;
   const CMap *m_pToMap;
 public:
-  CMessageSwitchMap(const tinyxml2::XMLElement *pElem, const std::string &creationFile);
+  CMessageSwitchMap(const std::string &creationFile,
+                    const tinyxml2::XMLElement *pElem);
   CMessageSwitchMap(const std::string &creationFile,
                     const std::string &sMap,
                     ESwitchMapStatus eStatus,

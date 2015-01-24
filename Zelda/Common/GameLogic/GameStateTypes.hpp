@@ -27,11 +27,9 @@ enum EGameStateTypes {
   GST_MAIN_MENU
 };
 
-class CGameStateIdMap : public CStringEnumIdMap<EGameStateTypes> {
+class CGameStateIdMap : public CStringEnumIdMap<CGameStateIdMap, EGameStateTypes> {
 public:
-  CGameStateIdMap();
+  void init();
 };
-
-extern CGameStateIdMap GAME_STATE_ID_MAP;
 
 #endif // GAME_STATE_TYPES_HPP

@@ -33,23 +33,27 @@ public:
     FINISHED_RESULT_REPEAT, //!< when a text box has closed with a question result: repeat
     FINISHED_RESULT_CONTINUE, //!< when a text box has closed with a question result: continue
   };
-  class CStatusIDMap : public CStringEnumIdMap<EStatus> {
+  class CStatusIDMap : public CStringEnumIdMap<CStatusIDMap, EStatus> {
   public:
-    CStatusIDMap();
+    void init();
   };
 protected:
   const std::string m_sLanguageString;
   const EStatus mStatus;
   std::shared_ptr<CGUITextBox::SResult> mResult;
 public:
-  CMessageShowText(const std::string &creationFile, const std::string &sLanguageString, std::shared_ptr<CGUITextBox::SResult> result = std::shared_ptr<CGUITextBox::SResult>(new CGUITextBox::SResult()), EStatus status = REQUEST);
-  CMessageShowText(const std::string &creationFile, const tinyxml2::XMLElement *pElem, std::shared_ptr<CGUITextBox::SResult> result = std::shared_ptr<CGUITextBox::SResult>(new CGUITextBox::SResult()));
+  CMessageShowText(const std::string &creationFile,
+                   const std::string &sLanguageString,
+                   std::shared_ptr<CGUITextBox::SResult> result
+                   = std::shared_ptr<CGUITextBox::SResult>(new CGUITextBox::SResult()),
+                   EStatus status = REQUEST);
+  CMessageShowText(const std::string &creationFile,
+                   const tinyxml2::XMLElement *pElem,
+                   std::shared_ptr<CGUITextBox::SResult> result = std::shared_ptr<CGUITextBox::SResult>(new CGUITextBox::SResult()));
 
   const std::string &getLanguageString() const {return m_sLanguageString;}
   std::shared_ptr<CGUITextBox::SResult> getResult() const {return mResult;}
   EStatus getStatus() const {return mStatus;}
 };
-
-extern const CMessageShowText::CStatusIDMap STATUS_ID_MAP;
 
 #endif // _MESSAGE_SHOW_TEXT_HPP_

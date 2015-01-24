@@ -49,7 +49,7 @@ CObject::CObject(const std::string &id,
                  EObjectTypes eObjectType,
                  Ogre::SceneNode *pSceneNode)
   : CWorldEntity(id, pParent, pMap),
-    m_ObjectTypeData(OBJECT_DATA_MAP.toData(eObjectType)),
+    m_ObjectTypeData(CObjectDataMap::getSingleton().toData(eObjectType)),
     mInnerObjectGenerator(InnerObject::DEFAULT_GENERATOR_DATA_MAP
                           .toData(eObjectType)) {
   setType(eObjectType);
@@ -71,7 +71,7 @@ CObject::CObject(const std::string &id,
                             m_pSceneNode->getOrientation());
     setCurAndMaxHP(HP_INFINITY);
   } else {
-    pEntity = pSceneManager->createEntity(id + "ent",
+    pEntity = pSceneManager->createEntity(pMap->getPrependNodeName() + id + "ent",
                                           m_ObjectTypeData.sMeshName + ".mesh",
                                           "World");
     if (m_ObjectTypeData.sMaterialName.size() > 0) {
@@ -131,7 +131,7 @@ void CObject::createPhysics() {
   if (m_ObjectTypeData.eCollisionShape != GCST_COUNT) {
     const CPhysicsCollisionObject &pco
         = m_pMap->getPhysicsManager()->getCollisionShape(
-            GLOBAL_COLLISION_SHAPES_TYPES_ID_MAP.toString(
+            CGlobalCollisionShapesTypesIdMap::getSingleton().toString(
                 m_ObjectTypeData.eCollisionShape));
     pCollisionShape = pco.getShape();
     vCollisionShapeOffset = BtOgre::Convert::toBullet(pco.getOffset());
@@ -151,7 +151,7 @@ void CObject::createPhysics() {
   ASSERT(pCollisionShape);
 
   pCollisionShape->calculateLocalInertia(fMass, vInertia);
-
+  
   btMotionState *pMotionState(nullptr);
   if (m_ObjectTypeData.bPermanentStatic) {
     pMotionState = new btDefaultMotionState(
@@ -244,7 +244,7 @@ void CObject::makePickable() {
   pEvent->addAction(pDeleteThisAction);
 
   CAction *pMessageAction
-      = new CActionMessage(std::make_shared<CMessagePlayerPickupItem>(m_uiType, __MSG_LOCATION__), *pEvent);
+      = new CActionMessage(std::make_shared<CMessagePlayerPickupItem>(__MSG_LOCATION__, m_uiType), *pEvent);
   pEvent->addAction(pMessageAction);
 
   addEvent(pEvent);
@@ -389,7 +389,7 @@ CObject::EReceiveDamageResult CObject::hit(const CDamage &dmg) {
     // pickup item
     deleteLater();
     CMessageHandler::getSingleton().addMessage(
-        std::make_shared<CMessagePlayerPickupItem>(m_uiType, __MSG_LOCATION__));
+        std::make_shared<CMessagePlayerPickupItem>(__MSG_LOCATION__, m_uiType));
     break;
   default:
     break;

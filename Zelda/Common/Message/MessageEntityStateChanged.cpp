@@ -20,9 +20,13 @@
 #include "MessageEntityStateChanged.hpp"
 
 
-CMessageEntityStateChanged::CMessageEntityStateChanged(EEntityStateTypes eOldState, EEntityStateTypes eNewState, CEntity *entity, const std::string &creationFile)
-  : CMessage(MSG_ENTITY_STATE_CHANGED, creationFile),
-    m_eOldState(eOldState),
-    m_eNewState(eNewState),
-    m_Entity(entity) {
+CMessageEntityStateChanged::CMessageEntityStateChanged(
+    const std::string &creationFile,
+    EEntityStateTypes eOldState,
+    EEntityStateTypes eNewState,
+    CEntity *entity)
+    : CMessage(creationFile, MSG_ENTITY_STATE_CHANGED),
+      m_eOldState(eOldState),
+      m_eNewState(eNewState),
+      m_Entity(entity) {
 }

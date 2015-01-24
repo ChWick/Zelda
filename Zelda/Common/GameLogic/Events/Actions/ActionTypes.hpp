@@ -32,12 +32,11 @@ enum EActionTypes {
   ACTION_START_SCRIPT,
 };
 
-class CActionTypesMap : public CStringEnumIdMap<EActionTypes> {
+class CActionTypesMap : public CStringEnumIdMap<CActionTypesMap, EActionTypes> {
 public:
-  CActionTypesMap();
+  void init();
 };
 
-extern CActionTypesMap ACTION_TYPES_MAP;
 };
 
 #endif // _ACTION_TYPES_HPP_

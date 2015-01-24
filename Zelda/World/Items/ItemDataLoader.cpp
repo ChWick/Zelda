@@ -34,7 +34,8 @@ void CItemDataLoader::readGroupElement(const tinyxml2::XMLElement *e) {
   data.sImagesetName = Attribute(e, "imageset_name", "");
   data.ucItemQuality = IntAttribute(e, "item_quality", 1);
   data.sBasicMeshName = Attribute(e, "basic_mesh_name");
-  data.eDamageType = static_cast<EDamageType>(DAMAGE_TYPE_ID_MAP.parseString(
+  data.eDamageType = static_cast<EDamageType>(
+      CDamageTypeIdMap::getSingleton().parseString(
       Attribute(e, "damage_type", "none")));
   data.uiDamage = IntAttribute(e, "damage_value", HP_NONE);
 
@@ -45,6 +46,7 @@ void CItemDataLoader::readGroupElement(const tinyxml2::XMLElement *e) {
 
   data.fLength = RealAttribute(e, "length", 0);
 
-  ITEM_VARIANT_DATA_MAP.setData(ITEM_VARIANT_ID_MAP.parseString(id),
-                                data);
+  CItemVariantDataMap::getSingleton().
+      setData(CItemVariantIdMap::getSingleton().parseString(id),
+              data);
 }

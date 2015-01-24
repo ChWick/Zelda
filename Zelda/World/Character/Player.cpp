@@ -24,6 +24,7 @@
 #include "../../Common/Util/DebugDrawer.hpp"
 #include "PlayerController.hpp"
 #include <OgreLogManager.h>
+#include "../../Common/PauseManager/PauseTypes.hpp"
 #include "../../Common/Physics/BtOgreExtras.hpp"
 #include "../../Common/Util/Assert.hpp"
 #include "../../Common/GameLogic/Events/Event.hpp"
@@ -51,7 +52,10 @@ const Ogre::Real PLAYER_ENEMY_NOTIFY_RADIUS_SQR = 100.f;  // already squared
 CPlayer::CPlayer(CEntity *pParent,
                  const Ogre::Camera* pCamera,
                  Ogre::SceneManager *pPlayerSceneManager)
-  : CPerson("player", pParent, nullptr, PERSON_DATA_ID_MAP.toData(PERSON_LINK)),
+    : CPerson("player",
+              pParent,
+              nullptr,
+              CPersonDataIdMap::getSingleton().toData(PERSON_LINK)),
     m_pCamera(pCamera),
     m_pPlayerSceneManager(pPlayerSceneManager),
     m_pLiftedEntity(nullptr),
@@ -91,33 +95,6 @@ void CPlayer::setupInternal()  {
 		mSwordTrail->setWidthChange(i, 1 * SCALE);
 		mSwordTrail->setInitialWidth(i, 0.5 * SCALE);
 	}*/
-}
-
-void CPlayer::postSetupAnimations() {
-  // m_Anims[ANIM_HANDS_CLOSED]->setWeight(1);
-  // m_Anims[ANIM_HANDS_RELAXED]->setWeight(1);
-
-  // m_Anims[ANIM_JUMP_END]->setLoop(false);
-  // m_Anims[ANIM_JUMP_START]->setLoop(false);
-
-
-  // relax the hands since we're not holding anything
-  // m_Anims[ANIM_HANDS_RELAXED]->setEnabled(true);
-
-
-  // start off in the idle state (top and bottom together)
-  setAnimation(ANIM_IDLE);
-
-  // we will manually set the direction of the tool in the left hand
-  Ogre::Bone *pLHandleBone
-      = m_pBodyEntity->getSkeleton()->getBone(PERSON_LEFT_HANDLE);
-  pLHandleBone->setManuallyControlled(true);
-  int numAnimations = m_pBodyEntity->getSkeleton()->getNumAnimations();
-  for (int i = 0; i < numAnimations; i++) {
-    // remonveall possible tracks of the bone in the animations
-    Ogre::Animation * anim = m_pBodyEntity->getSkeleton()->getAnimation(i);
-    anim->destroyNodeTrack(pLHandleBone->getHandle());
-  }
 }
 
 void CPlayer::startup(const Ogre::Vector3 &playerPosition,
@@ -207,20 +184,23 @@ void CPlayer::updateAnimationsCallback(const Ogre::Real fTime) {
   else if (m_uiAnimID == ANIM_JUMP_START && m_Anims[ANIM_JUMP_START]->hasEnded()) {
     setAnimation(ANIM_JUMP_LOOP);
   }*/
+  if (m_uiAnimID == P_ANIM_AWAKE && m_Anims[P_ANIM_AWAKE]->hasEnded()) {
+    setAnimation(P_ANIM_IDLE);
+  }
   if (dynamic_cast<CPersonController*>(m_pCharacterController)->getMoveState()
       == CPersonController::MS_RUNNING) {
-    if (m_uiAnimID != ANIM_RUN) {
-      setAnimation(ANIM_RUN);
+    if (m_uiAnimID != P_ANIM_RUN) {
+      setAnimation(P_ANIM_RUN);
     }
   } else if (m_bMoving) {
-    if (m_uiAnimID == ANIM_IDLE || m_uiAnimID == ANIM_NONE
-        || m_uiAnimID == ANIM_RUN) {
-      setAnimation(ANIM_WALK);
+    if (m_uiAnimID == P_ANIM_IDLE || m_uiAnimID == P_ANIM_COUNT
+        || m_uiAnimID == P_ANIM_RUN) {
+      setAnimation(P_ANIM_WALK);
     }
   } else if (!m_bMoving) {
-    if (m_uiAnimID == ANIM_WALK || m_uiAnimID == ANIM_NONE
-        || m_uiAnimID == ANIM_RUN) {
-      setAnimation(ANIM_IDLE);
+    if (m_uiAnimID == P_ANIM_WALK || m_uiAnimID == P_ANIM_COUNT
+        || m_uiAnimID == P_ANIM_RUN) {
+      setAnimation(P_ANIM_IDLE);
     }
   }
 
@@ -343,4 +323,9 @@ void CPlayer::handleMessage(const CMessagePtr message) {
   }
 
   CPerson::handleMessage(message);
+}
+
+void CPlayer::updatePause(int iPauseType, bool bPause) {
+  if (iPauseType == PAUSE_PLAYER_INPUT) {
+  }
 }

@@ -55,6 +55,7 @@ void userRegisterCFunctionsToLua(lua_State *l) {
   registerSingleCFunctionsToLua(l, moveTo, "moveTo");
   registerSingleCFunctionsToLua(l, deleteEntity, "delete");
   registerSingleCFunctionsToLua(l, hasItem, "hasItem");
+  registerSingleCFunctionsToLua(l, warp, "warp");
   registerSingleCFunctionsToLua(l, setInnerObject, "setInnerObject");
   registerSingleCFunctionsToLua(l, playAnimation, "playAnimation");
   registerSingleCFunctionsToLua(l, waitForAnimationHasStopped,
@@ -86,9 +87,10 @@ int textMessage(lua_State *l) {
 
   LOGV("Lua: Creating text message");
   CMessageHandler::getSingleton().addMessage(
-      CMessageCreator::getSingleton().createMessage(doc.FirstChildElement(),
-                                                    __MSG_LOCATION__,
-                                                    Ogre::Any(result)));
+      CMessageCreator::getSingleton().createMessage(
+          __MSG_LOCATION__,
+          doc.FirstChildElement(),
+          Ogre::Any(result)));
 
   LOGV("Lua: Waiting for closing of message box");
 
@@ -132,7 +134,8 @@ class CMoveToWait : public CMessageInjector {
  protected:
   void sendMessageToAll(const CMessagePtr m) {
     if (m->getType() == MSG_TARGET_REACHED) {
-      auto mtr(std::dynamic_pointer_cast<const CMessageTargetReached>(m));
+      auto mtr(
+          std::dynamic_pointer_cast<const CMessageTargetReached>(m));
       if (mtr->getEntity() == mEntity) {
         mMutex.lock();
         mReached = true;
@@ -204,6 +207,43 @@ int deleteEntity(lua_State *l) {
   return 0;
 }
 
+int warp(lua_State *l) {
+  LUA_BRIDGE_START(0);
+
+  LOGV("Lua call: warp");
+
+  if (lua_gettop(l) <= 1) {
+    LOGW("Wrong argument count for warp call");
+    return 0;
+  }
+
+  const std::string id(lua_tostring(l, 1));
+  const Ogre::Vector3 p(Ogre::StringConverter::parseVector3(lua_tostring(l, 2)));
+  Ogre::Quaternion q;
+  if (lua_gettop(l) == 4) {
+    const Ogre::Degree d(Ogre::StringConverter::parseReal(lua_tostring(l, 3)));
+    const Ogre::Vector3 v(Ogre::StringConverter::parseVector3(lua_tostring(l, 4)));
+    q = Ogre::Quaternion(d, v);
+  }
+
+
+  CEntity *pEntity = CGameStateManager::getSingleton().getChildRecursive(id);
+  if (!pEntity) {
+    LOGW("Entity '%s' was not found in entity tree.", id.c_str());
+    return 0;
+  }
+  CWorldEntity *pWE (dynamic_cast<CWorldEntity*>(pEntity));
+  if (!pEntity) {
+    LOGW("Entity '%s' is not a CWorldEntity.", id.c_str());
+    return 0;
+  }
+
+  pWE->warp(p, q);
+
+
+  return 0;
+}
+
 int hasItem(lua_State *l) {
   LUA_BRIDGE_START(1);
 
@@ -215,12 +255,12 @@ int hasItem(lua_State *l) {
   }
   CWorld *pWorld = dynamic_cast<CWorld*>(
       CGameStateManager::getSingleton().getChildRecursive(
-          GAME_STATE_ID_MAP.toString(GST_WORLD)));
+          CGameStateIdMap::getSingleton().toString(GST_WORLD)));
   ASSERT(pWorld);
 
   const std::string item(lua_tostring(l, 1));
   bool has = pWorld->getItemStatusStorage().hasItem(
-      ITEM_VARIANT_ID_MAP.parseString(item));
+      CItemVariantIdMap::getSingleton().parseString(item));
 
 
   lua_pushboolean(l, has);
@@ -247,7 +287,7 @@ int setInnerObject(lua_State *l) {
   }
 
   EObjectTypes innerObjectType(
-      OBJECT_TYPE_ID_MAP.parseString(innerObject));
+      CObjectTypeIdMap::getSingleton().parseString(innerObject));
 
   if (CObject *object = dynamic_cast<CObject *>(pEntity)) {
     object->setInnerObject(innerObjectType);
@@ -265,17 +305,21 @@ int playAnimation(lua_State *l) {
 
   LOGV("Lua call: playAnimation");
 
-  if (lua_gettop(l) < 1) {
+  if (lua_gettop(l) > 4 || lua_gettop(l) < 2) {
     LOGW("'%d' is wrong argument count for playAnimations call",
          lua_gettop(l));
   }
 
   const std::string id(lua_tostring(l, 1));
   const std::string animation(lua_tostring(l, 2));
+  bool restart = true;
   bool force = false;
-  if (lua_gettop(l) == 3) {
-    // we can read force
-    force = lua_toboolean(l, 3);
+
+  if (lua_gettop(l) > 2) {
+    restart = lua_toboolean(l, 3);
+  }
+  if (lua_gettop(l) > 3) {
+    force = lua_toboolean(l, 4);
   }
 
   CEntity *pEntity = CGameStateManager::getSingleton().getChildRecursive(id);
@@ -292,7 +336,7 @@ int playAnimation(lua_State *l) {
 
   // play animation from beginning
   pCharacter->setAnimation(pCharacter->getAnimationIdFromString(animation),
-                           true,
+                           restart,
                            force);
 
   return 0;

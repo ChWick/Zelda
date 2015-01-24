@@ -31,11 +31,32 @@
 
 
 CStandingPerson::CStandingPerson(const tinyxml2::XMLElement *pElem, CEntity *pParent, CMap *pMap)
-  : CPerson(pElem, pParent, pMap) {
+  : CPerson(pElem, pParent, pMap, SP_ANIM_COUNT) {
 }
 
 void CStandingPerson::setupInternal() {
   dynamic_cast<CPersonController*>(m_pCharacterController)->stun();
+}
+
+void CStandingPerson::setupAnimations() {
+  Ogre::StringVector animNames(SP_ANIM_COUNT);
+	animNames[SP_ANIM_STAND] = "Scout";
+
+	// this is very important due to the nature of the exported animations
+  m_pBodyEntity->getSkeleton()->setBlendMode(Ogre::ANIMBLEND_CUMULATIVE);
+
+  // populate our animation list
+  for (unsigned int i = 0; i < m_uiAnimationCount; i++) {
+    m_Anims[i] = m_pBodyEntity->getAnimationState(animNames[i]);
+    m_Anims[i]->setLoop(true);
+    mAnimationProperty[i].mFadeState = FADE_NONE;
+    m_Anims[i]->setEnabled(false);
+    m_Anims[i]->setWeight(0);
+  }
+
+
+  // start off in the idle state (top and bottom together)
+  setAnimation(SP_ANIM_STAND);
 }
 
 CStandingPerson::EReceiveDamageResult CStandingPerson::receiveDamage(const CDamage &dmg) {

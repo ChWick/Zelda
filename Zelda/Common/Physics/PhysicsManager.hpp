@@ -123,11 +123,20 @@ class CPhysicsManager
   btBroadphaseInterface * getBroadphase();
 
   void deleteLater(const btCollisionObject *pCO);
+  void deleteNow(btCollisionObject *co);
   void createLater(btCollisionObject *pCO) {m_Messages.push_back(new CPhysicsMessage(CPhysicsMessage::PMT_CREATE, pCO));}
 
   // Collision shape handling
   bool hasCollisionShape(const Ogre::String &id) const {
     return m_CollisionObjects.find(id) != m_CollisionObjects.end();
+  }
+  bool hasCollisionShape(const btCollisionShape *shape) const {
+    for (auto &p : m_CollisionObjects) {
+      if (p.second.getShape() == shape) {
+        return true;
+      }
+    }
+    return false;
   }
   CPhysicsCollisionObject &getCollisionShape(const Ogre::String &id) {
     assert(hasCollisionShape(id));
@@ -162,6 +171,10 @@ class CPhysicsManager
   bool hasRigidBody(btRigidBody *body);
   void secureAddRigidBody(btRigidBody *body, uint16_t group, uint16_t mask);
   void secureRemoveRigidBody(btRigidBody *body);
+  
+  bool hasCollisionObject(btCollisionObject *co);
+  void secureAddCollisionObject(btCollisionObject *co, uint16_t group, uint16_t mask);
+  void secureRemoveCollisionObject(btCollisionObject *co);
 
 
 #if PHYSICS_MANAGER_DEBUG == 1

@@ -37,17 +37,14 @@ struct ETileData {
   std::string sMeshName;
 };
 
-class CTileTypeIdMap : public CStringEnumIdMap<ETileTypes> {
+class CTileTypeIdMap : public CStringEnumIdMap<CTileTypeIdMap, ETileTypes> {
  public:
-  CTileTypeIdMap();
+  void init();
 };
 
-class CTileDataMap : public CEnumIdMap<ETileTypes, ETileData> {
+class CTileDataMap : public CEnumIdMap<CTileDataMap, ETileTypes, ETileData> {
  public:
-  CTileDataMap();
+  void init();
 };
-
-extern CTileTypeIdMap TILE_TYPE_ID_MAP;
-extern CTileDataMap TILE_DATA_MAP;
 
 #endif // TILE_TYPES_HPP

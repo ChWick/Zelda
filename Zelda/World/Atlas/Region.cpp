@@ -46,7 +46,6 @@ CRegion::~CRegion() {
 }
 
 void CRegion::exit() {
-  delete m_pCollisionObject->getCollisionShape();
   CWorldEntity::exit();
 }
 

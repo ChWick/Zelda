@@ -25,7 +25,7 @@
 class CPlayer;
 
 class CSimpleEnemy : public CPerson {
-public:
+ public:
   enum ESimpleEnemyAnimations {
     SE_ANIM_SCOUT,
     SE_ANIM_WALK,
@@ -33,18 +33,20 @@ public:
     SE_ANIM_COUNT,
   };
 
-private:
-public:
-	CSimpleEnemy(const std::string &sID, CEntity *pParent, CMap *pMap);
-	CSimpleEnemy(const tinyxml2::XMLElement *pElem, CEntity *pParent, CMap *pMap);
+ private:
+ public:
+  CSimpleEnemy(const std::string &sID, const SPersonData &data,
+               CEntity *pParent, CMap *pMap);
+  CSimpleEnemy(const tinyxml2::XMLElement *pElem, CEntity *pParent, CMap *pMap);
 
-	void setPlayer(CWorldEntity *pPlayer);
+  void setPlayer(CWorldEntity *pPlayer);
 
-protected:
-	void setupInternal();
-	virtual CCharacterController *createCharacterController();
+ protected:
+  void setupInternal();
+  void setupAnimations();
+  virtual CCharacterController *createCharacterController();
   EReceiveDamageResult receiveDamage(const CDamage &dmg);
-	void killedCallback();
+  void killedCallback();
 
   void updateAnimationsCallback(const Ogre::Real fTime);
 };

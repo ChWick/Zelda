@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map global_position="0 0 0" global_size="6.4 6.4">
+  <region id="bottom_margin_right" position="1.6 0 3.2" size="1.6 1 0.01" shape="box">  
+    <event repeat="infinite">
+      <emitter type="collision" id="player"/>
+      <action type="message" message_type="switch_map" map="link_house" switch_map_type="move_camera"/>
+    </event>
+  </region>
+  <region id="bottom_margin_left" position="-1.6 0 3.2" size="1.6 1 0.01" shape="box">  
+    <event repeat="infinite">
+      <emitter type="collision" id="player"/>
+      <action type="message" message_type="switch_map" map="link_house_left" switch_map_type="move_camera"/>
+    </event>
+  </region>
+  <region id="top_margin" position="0 0 -3.2" size="3.2 1 0.01" shape="box"/>
+  <region id="left_margin" position="-3.2 0 0" size="0.01 1 3.2" shape="box"></region>
+  <region id="right_margin" position="3.2 0 0" size="0.01 1 3.2" shape="box"/>
+</map>

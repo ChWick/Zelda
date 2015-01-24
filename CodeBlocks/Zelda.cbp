@@ -49,18 +49,15 @@
 		<Linker>
 			<Add library="boost_system" />
 			<Add library="boost_regex" />
-			<Add library="../../tinyxml2/build_linux/libtinyxml2.so" />
 			<Add directory="/bin/Debug" />
 			<Add directory="/bin/Release" />
 		</Linker>
-		<ExtraCommands>
-			<Add before="python ../tools/CreatePacks.py" />
-			<Mode after="always" />
-		</ExtraCommands>
 		<Unit filename="../Zelda/Common/Android/Android.hpp" />
 		<Unit filename="../Zelda/Common/Android/AndroidInput.hpp" />
 		<Unit filename="../Zelda/Common/Android/Logger.hpp" />
 		<Unit filename="../Zelda/Common/Android/OgreStaticPluginLoader.hpp" />
+		<Unit filename="../Zelda/Common/Application/Application.cpp" />
+		<Unit filename="../Zelda/Common/Application/Application.hpp" />
 		<Unit filename="../Zelda/Common/Config/TypeDefines.hpp" />
 		<Unit filename="../Zelda/Common/DotSceneLoader/DotSceneLoader.cpp" />
 		<Unit filename="../Zelda/Common/DotSceneLoader/DotSceneLoader.hpp" />
@@ -352,14 +349,14 @@
 			<debugger />
 			<envvars />
 			<lib_finder>
-				<lib name="OGRE" />
 				<lib name="pthread-stubs" />
 				<lib name="bullet" />
 				<lib name="CEGUI-0" />
-				<lib name="CEGUI-0-OGRE" />
 				<lib name="OIS" />
-				<lib name="OGRE-Overlay" />
 				<lib name="lua" />
+				<lib name="OGRE-Overlay_d" />
+				<lib name="OGRE_d" />
+				<lib name="CEGUI-0-OGRE_d" />
 			</lib_finder>
 			<DoxyBlocks>
 				<comment_style block="0" line="0" />

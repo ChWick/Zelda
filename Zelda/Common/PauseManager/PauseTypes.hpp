@@ -20,6 +20,10 @@
 #ifndef _PAUSE_TYPES_HPP_
 #define _PAUSE_TYPES_HPP_
 
+#include "../Util/EnumIdMap.hpp"
+
+typedef uint32_t PauseInt;
+
 enum EPauseTypes {
   PAUSE_NONE              = 0,
 
@@ -33,6 +37,7 @@ enum EPauseTypes {
   PAUSE_MAP_RENDER        = 32,
 
   PAUSE_PLAYER_UPDATE     = 64,
+  PAUSE_PLAYER_INPUT      = 128,
 
   PAUSE_ALL_ATLAS_UPDATE  = PAUSE_ATLAS_UPDATE | PAUSE_MAP_UPDATE,
   PAUSE_ALL_ATLAS_RENDER  = PAUSE_ATLAS_RENDER | PAUSE_MAP_RENDER,
@@ -43,6 +48,11 @@ enum EPauseTypes {
   PAUSE_ALL_WORLD         = PAUSE_ALL_WORLD_RENDER | PAUSE_ALL_WORLD_UPDATE,
 
   PAUSE_ALL               = 4095,
+};
+
+class CPauseTypesIdMap : public CStringEnumIdMap<CPauseTypesIdMap, EPauseTypes> {
+public:
+  void init();
 };
 
 #endif // _PAUSE_TYPES_HPP_

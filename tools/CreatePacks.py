@@ -4,69 +4,73 @@ import glob
 import ntpath
 
 class File :
-    def __init__(self, filename, outputdir) :
-        self.filename = filename
-        self.outputdir = outputdir
+	def __init__(self, filename, outputdir) :
+		self.filename = filename
+		self.outputdir = outputdir
 
-    def addToZip(self, zipf, srcdir) :
-        zipf.write(os.path.join(srcdir,
-                                self.filename),
-                   os.path.join(self.outputdir,
-                                self.filename),
-                   zipfile.ZIP_DEFLATED)
+	def addToZip(self, zipf, srcdir) :
+		zipf.write(os.path.join(srcdir,
+								self.filename),
+				   os.path.join(self.outputdir,
+								self.filename),
+				   zipfile.ZIP_DEFLATED)
 
 class FilePack :
-    files = []
+	files = []
 
-    def __init__(self, srcdir) :
-        self.srcdir = srcdir
+	def __init__(self, srcdir) :
+		self.files = []
+		self.srcdir = srcdir
 
-    def addFile(self, file) :
-        self.files.append(file)
+	def addFile(self, file) :
+		self.files.append(file)
 
-    def addToZip(self, zipf) :
-        for file in self.files :
-            file.addToZip(zipf, self.srcdir)
+	def addToZip(self, zipf) :
+		for file in self.files :
+			file.addToZip(zipf, self.srcdir)
 
 class ModelPack :
-    filepacks = []
+	filepacks = []
 
-    def addPack(self, pack) :
-        self.filepacks.append(pack)
+	def __init__(self) :
+		self.filepacks = []
 
-    def addToZip(self, zipf) :
-        for pack in self.filepacks :
-            pack.addToZip(zipf)
-    
+	def addPack(self, pack) :
+		self.filepacks.append(pack)
+
+	def addToZip(self, zipf) :
+		for pack in self.filepacks :
+			pack.addToZip(zipf)
+	
 
 def zipdir(path, zip):
-    for root, dirs, files in os.walk(path):
-        for file in files:
-            zip.write(os.path.join(root, file))
+	for root, dirs, files in os.walk(path):
+		for file in files:
+			zip.write(os.path.join(root, file))
 
 def copyAllOfType(zipf, pattern, outputdir, recursive=False) :
-    for f in glob.glob(pattern) :
-        if f.endswith('~') :
-            continue
+	for f in glob.glob(pattern) :
+		if f.endswith('~') :
+			continue
 
-        zipf.write(f, os.path.join(outputdir, ntpath.basename(f)), zipfile.ZIP_DEFLATED)
-        
-        if recursive :
-            copyAllOfType(zipf, os.path.join(f, "*"), os.path.join(outputdir, ntpath.basename(f)), True)
+		zipf.write(f, os.path.join(outputdir, ntpath.basename(f)), zipfile.ZIP_DEFLATED)
+		
+		if recursive :
+			copyAllOfType(zipf, os.path.join(f, "*"), os.path.join(outputdir, ntpath.basename(f)), True)
 
-                
+				
 
 def makeLightWorldZip() :
 	print('Creating light_world.zip')
 
 	zipf = zipfile.ZipFile('../packs/light_world.zip', 'w');
 
-        # local resources
-        copyAllOfType(zipf, '../packs/light_world/textures/*', 'textures')
-        copyAllOfType(zipf, '../packs/light_world/materials/*', 'materials')
-        copyAllOfType(zipf, '../packs/light_world/meshes/*', 'meshes')
+	# local resources
+	copyAllOfType(zipf, '../packs/light_world/textures/*', 'textures')
+	copyAllOfType(zipf, '../packs/light_world/materials/*', 'materials')
+	copyAllOfType(zipf, '../packs/light_world/meshes/*', 'meshes')
 
-        # other mesh fiels
+		# other mesh fiels
 	zipf.write('../maps/bush/GreenBush.mesh', 'meshes/GreenBush.mesh', zipfile.ZIP_DEFLATED)
 	zipf.write('../maps/fence/fence_stake.mesh', 'meshes/fence_stake.mesh', zipfile.ZIP_DEFLATED)
 	zipf.write('../maps/fence/fence_plank.mesh', 'meshes/fence_plank.mesh', zipfile.ZIP_DEFLATED)
@@ -82,7 +86,7 @@ def makeLightWorldZip() :
 
 	zipf.close()
 
-def makeGameZip() :
+def makeGameZip(modelPacks=[]) :
 	print('Creating game.zip')
 
 	zipf = zipfile.ZipFile('../packs/game.zip', 'w');
@@ -91,6 +95,7 @@ def makeGameZip() :
 	copyAllOfType(zipf, '../packs/game/materials/*.material', 'materials')
 	copyAllOfType(zipf, '../packs/game/programs/*', 'programs')
 	copyAllOfType(zipf, '../packs/game/overlays/*', 'overlays')
+        copyAllOfType(zipf, '../packs/game/scripts/*', 'scripts')
 	
 	# items
 	copyAllOfType(zipf, '../models/items/lamp/*.mesh', 'meshes')
@@ -105,11 +110,16 @@ def makeGameZip() :
 	copyAllOfType(zipf, '../models/Objects/rupee/*.mesh', 'meshes')
 	copyAllOfType(zipf, '../models/Objects/heart/*.mesh', 'meshes')
 	copyAllOfType(zipf, '../maps/chest/*.mesh','meshes')
-        copyAllOfType(zipf, '../maps/vase/*.mesh', 'meshes')
+	copyAllOfType(zipf, '../maps/vase/*.mesh', 'meshes')
 	zipf.write('../models/test/Cylinder.mesh', 'meshes/Cylinder.mesh', zipfile.ZIP_DEFLATED)
 
-        # copy config files
-        copyAllOfType(zipf, '../packs/game/config/*', 'config')
+	# copy config files
+	copyAllOfType(zipf, '../packs/game/config/*', 'config')
+
+
+	# model packs
+	for modelPack in modelPacks :
+		modelPack.addToZip(zipf)
 
 	zipf.close()
 
@@ -122,7 +132,7 @@ def makeSdkTrays() :
 
 	zipf.close()
 
-def makeMapPack(name, world, files, includeHouse=False, modelPacks=[]) :
+def makeMapPack(name, world, files, includeHouse=False, modelPacks=[], includeMaterialAndTexture=False) :
 	print 'Creating map pack for', name, ' in ', world
 
 	worldPath = os.path.join('../maps/Atlases', world)
@@ -138,43 +148,60 @@ def makeMapPack(name, world, files, includeHouse=False, modelPacks=[]) :
 		files.append('house_roof_knob.mesh')
 		files.append('house_entrance.mesh')
 		files.append('house_knob.mesh')
+	
+	if (includeMaterialAndTexture) :
+		materialPack = ModelPack()
+		pack = FilePack(dataPath)
+		pack.addFile(File(name + '.material', "materials"))
+		materialPack.addPack(pack)
+		modelPacks.append(materialPack)
+
+		texutrePack = ModelPack()
+		pack = FilePack('../textures/working_files/' + name)
+		pack.addFile(File(name + '.png', "textures"))
+		texutrePack.addPack(pack)
+		modelPacks.append(texutrePack)
 
 	for file in files :
 		zipf.write(os.path.join(dataPath, file), file, zipfile.ZIP_DEFLATED)
 
-        # model packs
-        for modelPack in modelPacks :
-            modelPack.addToZip(zipf)
+	# model packs
+	for modelPack in modelPacks :
+		modelPack.addToZip(zipf)
 
-        # copy scripts
-        copyAllOfType(zipf, os.path.join(dataPath, 'scripts/*'), 'scripts')
-        copyAllOfType(zipf, os.path.join(dataPath, 'language/*'), 'language', True)
+	# copy scripts
+	copyAllOfType(zipf, os.path.join(dataPath, 'scripts/*'), 'scripts')
+	copyAllOfType(zipf, os.path.join(dataPath, 'language/*'), 'language', True)
+
 	zipf.close()
 	
 
-# set this as working dir
-os.chdir(os.path.dirname(os.path.realpath(__file__)))
+def run() :
+	# set this as working dir
+	os.chdir(os.path.dirname(os.path.realpath(__file__)))
+
+	# define model packs
+
+	# links father
+	linksFather = ModelPack()
+	pack = FilePack("../models/links_father")
+	pack.addFile(File("links_father.mesh", "meshes"))
+	pack.addFile(File("links_father.skeleton", "skeletons"))
+	pack.addFile(File("link_father_body.png", "textures"))
+	pack.addFile(File("link_father.material", "materials"))
+	linksFather.addPack(pack)
+
+	makeLightWorldZip()
+	makeGameZip(modelPacks=[linksFather])
+	makeSdkTrays()
+
+	lightWorld = 'LightWorld'
+
+	makeMapPack('link_house', lightWorld, ['physics_border_top.mesh', 'physics_floor.mesh', 'physics_floor_top.mesh', 'wall_bot_right.mesh', 'wall_bot.mesh', 'wall_to_water.mesh', 'house_red_roof.mesh', 'house_roof_border.mesh', 'house_wall.mesh', 'water.mesh'], includeHouse=True)
+	makeMapPack('link_house_left', lightWorld, ['physics_floor.mesh', 'physics_floor_top.mesh', 'physics_floor_top_wall.mesh', 'physics_wall_bot.mesh'])
+	makeMapPack('inner_house_link', lightWorld, ['pillow.mesh', 'duvet.mesh', 'physics_floor.mesh', 'physics_wall.mesh', 'vision_plane.mesh'])
+	makeMapPack('hyrule_castle', lightWorld, ['physics_floor.mesh', 'wall_to_water.mesh', 'water.mesh'], includeMaterialAndTexture=True)
+
 
 if __name__ == '__main__':
-    # define model packs
-
-    # links father
-    linksFather = ModelPack()
-    pack = FilePack("../models/links_father")
-    pack.addFile(File("links_father.mesh", "meshes"))
-    pack.addFile(File("links_father.skeleton", "skeletons"))
-    pack.addFile(File("link_father_body.png", "textures"))
-    pack.addFile(File("link_father.material", "materials"))
-    linksFather.addPack(pack)
-
-
-    makeLightWorldZip()
-    makeGameZip()
-    makeSdkTrays()
-
-    lightWorld = 'LightWorld'
-
-    makeMapPack('link_house', lightWorld, ['physics_border_top.mesh', 'physics_floor.mesh', 'physics_floor_top.mesh', 'wall_bot_right.mesh', 'wall_bot.mesh', 'wall_to_water.mesh', 'house_red_roof.mesh', 'house_roof_border.mesh', 'house_wall.mesh', 'water.mesh'], includeHouse=True)
-    makeMapPack('link_house_left', lightWorld, ['physics_floor.mesh', 'physics_floor_top.mesh', 'physics_floor_top_wall.mesh', 'physics_wall_bot.mesh'])
-    makeMapPack('inner_house_link', lightWorld, ['physics_floor.mesh', 'physics_wall.mesh', 'vision_plane.mesh'], modelPacks=[linksFather])
-
+	run()

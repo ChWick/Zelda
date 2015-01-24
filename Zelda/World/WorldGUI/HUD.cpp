@@ -57,30 +57,28 @@ void CHUD::handleMessage(const CMessagePtr message) {
   if (message->getType() == MSG_HITPOINTS_CHANGED) {
     auto msg_hp_change(
         std::dynamic_pointer_cast<const CMessageHitpointsChanged>(message));
-    const CWorldEntity *pWE(dynamic_cast<const CWorldEntity *>(
-        &msg_hp_change->getHitableInterface()));
-    if (pWE && pWE->getID() == "player") {
+    if (dynamic_cast<const CWorldEntity *>(&msg_hp_change->getHitableInterface()) && dynamic_cast<const CWorldEntity&>(msg_hp_change->getHitableInterface()).getID() == "player") {
       m_pHeartsDisplay->changeMaximalHitpoints(
           msg_hp_change->getHitableInterface().getMaxHP());
       m_pHeartsDisplay->changeCurrentHitpoints(
           msg_hp_change->getHitableInterface().getCurrentHP());
     }
-  } else if (message->getType() == MSG_ITEM) {
+  }
+  else if (message->getType() == MSG_ITEM) {
     auto msg_item(std::dynamic_pointer_cast<const CMessageItem>(message));
     if (msg_item->getItemMessageType() == CMessageItem::IM_SELECTION_CHANGED) {
       m_pCurrentItemDisplay->setProperty(
           "Image",
-          "hud/" + ITEM_VARIANT_DATA_MAP.toData(
+          "hud/" + CItemVariantDataMap::getSingleton().toData(
               msg_item->getItemVariantType()).sImagesetName);
     }
-  } else if (message->getType() == MSG_ENTITY_DATA_CHANGED) {
-    auto msg_edc(
-        std::dynamic_pointer_cast<const CMessageEntityDataChanged>(message));
+  }
+  else if (message->getType() == MSG_ENTITY_DATA_CHANGED) {
+    auto msg_edc(std::dynamic_pointer_cast<const CMessageEntityDataChanged>(message));
     int propertyId(msg_edc->getProperty().getID());
     if (propertyId == ENTITY_PROPERTY_RUPEE) {
       m_pRupeeCounter->setDesiredCount(
-          dynamic_cast<const CEntityIntProperty&>(
-              msg_edc->getProperty()).getData());
+          dynamic_cast<const CEntityIntProperty&>(msg_edc->getProperty()).getData());
     }
   }
 }

@@ -26,7 +26,8 @@ class CMessagePlayerPickupItem: public CMessage {
 protected:
   const unsigned int m_uiItemType;
 public:
-  CMessagePlayerPickupItem(unsigned int uiItemType, const std::string &creationFile);
+  CMessagePlayerPickupItem(const std::string &creationFile,
+                           unsigned int uiItemType);
 
   unsigned int getItemType() const {return m_uiItemType;}
 

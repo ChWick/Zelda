@@ -31,7 +31,7 @@ private:
   CEGUI::Window *m_pWorstFps;
   CEGUI::Window *m_pBatches;
   CEGUI::Window *m_pTriangles;
-
+  
   CEGUI::Window *m_pEntites;
   CEGUI::Window *m_pOgreEntites;
   CEGUI::Window *m_pOgreSkeletons;
@@ -41,9 +41,17 @@ public:
                     EPullMenuPositions ePosition);
 
 private:
-  CEGUI::Window *createButton(const CEGUI::String &wnd, const CEGUI::String &id, const CEGUI::String &text, float &fPos);
-  CEGUI::Window *createLabel(const CEGUI::String &name, CEGUI::Window *&pWindow, float &fPos);
-  CEGUI::Window *createFrameStatsButton(const CEGUI::String &id, const CEGUI::String &sLabel, CEGUI::Window *&pWindow, int iIndex);
+  CEGUI::Window *createButton(const CEGUI::String &wnd,
+                              const CEGUI::String &id,
+                              const CEGUI::String &text,
+                              float &fPos);
+  CEGUI::Window *createLabel(const CEGUI::String &name,
+                             CEGUI::Window *&pWindow,
+                             float &fPos);
+  CEGUI::Window *createFrameStatsButton(const CEGUI::String &id,
+                                        const CEGUI::String &sLabel,
+                                        CEGUI::Window *&pWindow,
+                                        int iIndex);
 
   void update(Ogre::Real tpf);
 

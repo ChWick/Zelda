@@ -19,10 +19,6 @@
 
 #include "ItemTypes.hpp"
 
-CItemSlotIdMap ITEM_SLOT_ID_MAP;
-CItemVariantIdMap ITEM_VARIANT_ID_MAP;
-
-
 void CItemSlotIdMap::init() {
   m_Map[ITEM_SLOT_BOW] = "bow";
   m_Map[ITEM_SLOT_BOOMERANG] = "boomerang";

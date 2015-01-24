@@ -29,6 +29,7 @@
 #include "../Physics/PhysicsManager.hpp"
 #include "../Physics/PhysicsMasks.hpp"
 #include <regex>
+#include "../Log.hpp"
 
 using namespace std;
 using namespace Ogre;
@@ -480,6 +481,7 @@ void DotSceneLoader::processNode(XMLElement *XMLNode, SceneNode *pParent)
 {
     // Construct the node's name
     String name = m_sPrependNode + getAttrib(XMLNode, "name");
+    LOGI("processNode: %s", name.c_str());
 	//regex r("^ST_([A-Za-z]+)_([A-Za-z]+)\\.(\\d{3})$");
 	//cmatch matches;
 	/*Ogre::StaticGeometry *pSG(NULL);

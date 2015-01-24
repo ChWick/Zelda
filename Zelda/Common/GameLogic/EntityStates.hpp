@@ -29,11 +29,11 @@ enum EEntityStateTypes {
   EST_DELETE,
 };
 
-class CEntityStateIdMap : public CStringEnumIdMap<EEntityStateTypes> {
+class CEntityStateIdMap
+    : public CStringEnumIdMap<CEntityStateIdMap,
+                              EEntityStateTypes> {
 public:
-  CEntityStateIdMap();
+  void init();
 };
-
-extern CEntityStateIdMap ENTITY_STATE_ID_MAP;
 
 #endif // ENTITY_STATE_TYPES_HPP

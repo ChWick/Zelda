@@ -20,12 +20,11 @@
 #include "EmitterTypes.hpp"
 
 namespace events {
-CEmitterTypesMap::CEmitterTypesMap() {
+void CEmitterTypesMap::init() {
   m_Map[EMIT_ON_CREATE] = "create";
   m_Map[EMIT_ON_COLLISION] = "collision";
   m_Map[EMIT_ON_INTERACTION] = "interaction";
   m_Map[EMIT_ON_RECEIVED_DAMAGE] = "received_damage";
 }
 
-CEmitterTypesMap EMITTER_TYPES_MAP;
 };

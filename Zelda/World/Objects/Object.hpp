@@ -29,8 +29,8 @@ protected:
   const SObjectTypeData &m_ObjectTypeData;
   InnerObject::CGenerator mInnerObjectGenerator;
 public:
-  CObject(const std::string &id, CWorldEntity *pParent, CMap *pMap, EObjectTypes eObjectType, Ogre::SceneNode *pSceneNode = nullptr);
-  virtual ~CObject();
+   CObject(const std::string &id, CWorldEntity *pParent, CMap *pMap, EObjectTypes eObjectType, Ogre::SceneNode *pSceneNode = nullptr);
+  ~CObject();
 
   void init();
   void exit();

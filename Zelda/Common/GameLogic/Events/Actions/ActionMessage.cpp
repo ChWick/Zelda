@@ -28,7 +28,7 @@ namespace events {
 CActionMessage::CActionMessage(const tinyxml2::XMLElement *pElem, const CEvent &owner)
   : CAction(pElem, owner) {
 
-  m_pMessage = CMessageCreator::getSingleton().createMessage(pElem, __FILE__);
+  m_pMessage = CMessageCreator::getSingleton().createMessage(__MSG_LOCATION__, pElem);
 }
 
 CActionMessage::CActionMessage(CMessagePtr message, const CEvent &owner)

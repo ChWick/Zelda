@@ -20,7 +20,7 @@
 #include <CEGUI/CEGUI.h>
 #include "Config/TypeDefines.hpp"
 #include GAME_CLASS_HEADER
-#include <OIS.h>
+#include <OIS/OIS.h>
 #include "FileManager/FileManager.hpp"
 #include "XMLResources/Manager.hpp"
 
@@ -41,17 +41,6 @@
 #include "Android/Android.hpp"
 #include <jni.h>
 
-CGame* OgreAndroidBridge::mGame = NULL;
-AndroidInputInjector* OgreAndroidBridge::mInputInjector = NULL;
-AndroidMultiTouch* OgreAndroidBridge::mTouch = NULL;
-AndroidKeyboard* OgreAndroidBridge::mKeyboard = NULL;
-Ogre::RenderWindow* OgreAndroidBridge::mRenderWnd = NULL;
-Ogre::Root* OgreAndroidBridge::mRoot = NULL;
-bool OgreAndroidBridge::mInit = false;
-bool OgreAndroidBridge::m_bRenderPaused = true;
-//CSnapshot *OgreAndroidBridge::m_pSnapshot = NULL;
-ANativeActivity *OgreAndroidBridge::mActivity = NULL;
-
 #   ifdef OGRE_STATIC_LIB
 Ogre::StaticPluginLoader* OgreAndroidBridge::mStaticPluginLoader = NULL;
 #   endif
@@ -66,7 +55,7 @@ void android_main(struct android_app* state)
 int main(int argc, char *argv[])
 #endif
 {
-
+    
     // ----------------------------------------------------------------------------
     // This makes relative paths work in C++ in Xcode by changing directory to the Resources folder inside the .app bundle
 #ifdef __APPLE__
@@ -78,11 +67,11 @@ int main(int argc, char *argv[])
         // error!
     }
     CFRelease(resourcesURL);
-
+    
     chdir(path);
     std::cout << "Current Path: " << path << std::endl;
 #endif
-
+    
 #if OGRE_PLATFORM == OGRE_PLATFORM_APPLE_IOS
 	NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
 	int retVal = UIApplicationMain(argc, argv, @"UIApplication", @"AppDelegate");
@@ -90,13 +79,13 @@ int main(int argc, char *argv[])
 	return retVal;
 #elif (OGRE_PLATFORM == OGRE_PLATFORM_APPLE) && __LP64__
 	NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
-
+    
     mAppDelegate = [[AppDelegate alloc] init];
     [[NSApplication sharedApplication] setDelegate:mAppDelegate];
 	int retVal = NSApplicationMain(argc, (const char **) argv);
-
+    
 	[pool release];
-
+    
 	return retVal;
 #elif OGRE_PLATFORM == OGRE_PLATFORM_ANDROID
   OgreAndroidBridge::init(state);
@@ -146,14 +135,14 @@ int main(int argc, char *argv[])
   }
 
   // Create application object
-  GAME_CLASS *app = new GAME_CLASS();
+  CApplication *app = new GAME_CLASS();
 
 #    if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
 #    else
-  if (argc == 2) {
+  /*if (argc == 2) {
     // add additional level dir path
     app->getAdditionalLevelDirPaths().push_back(argv[1]);
-  }
+    }*/
 #    endif
 
   try {
@@ -184,11 +173,18 @@ int main(int argc, char *argv[])
       "Unknown Error" << std::endl << "at file: " << __FILE__ << std::endl;
 #    endif
   }
-  app->closeApp();
   delete app;
 #  endif
 
 #if OGRE_PLATFORM != OGRE_PLATFORM_ANDROID
-  return 0;
+  return EXIT_SUCCESS;
 #endif
 }
+
+
+
+
+
+
+
+

@@ -32,14 +32,14 @@ CGameInputManager& CGameInputManager::getSingleton(void) {
 }
 
 CGameInputManager::CGameInputManager() {
-  CInputListenerManager::getSingleton().addInputListener(this);
   for (auto &state : m_InputStates) {
     state = GIS_NONE;
   }
 }
+
 CGameInputManager::~CGameInputManager() {
-  CInputListenerManager::getSingleton().removeInputListener(this);
 }
+
 bool CGameInputManager::keyPressed( const OIS::KeyEvent &arg ) {
   if (arg.key == OIS::KC_LEFT) {
     injectCommand(CGameInputCommand(GIC_LEFT, 1));

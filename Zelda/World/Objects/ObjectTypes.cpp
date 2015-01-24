@@ -22,10 +22,7 @@
 #include "../DamageTypes.hpp"
 
 
-CObjectTypeIdMap OBJECT_TYPE_ID_MAP;
-CObjectDataMap OBJECT_DATA_MAP;
-
-CObjectTypeIdMap::CObjectTypeIdMap() {
+void CObjectTypeIdMap::init() {
   m_Map[OBJECT_GREEN_BUSH] = "green_bush";
   m_Map[OBJECT_LIGHT_STONE] = "light_stone";
   m_Map[OBJECT_LIGHT_STONE_PILE] = "light_stone_pile";
@@ -41,7 +38,7 @@ CObjectTypeIdMap::CObjectTypeIdMap() {
   m_Map[OBJECT_COUNT] = "none";
 }
 
-CObjectDataMap::CObjectDataMap() {
+void CObjectDataMap::init() {
 }
 
 EObjectTypes CObjectDataMap::getFromMeshName(const std::string &mesh) const {

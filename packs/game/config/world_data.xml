@@ -186,7 +186,7 @@
       damage_value="50"
       block_physics_size="0.01 0.04 0.01"
       block_physics_offset="0 0.02 0"
-      length="0.08"
+      length="0.04"
       />
   <item
       id="sword_master"
@@ -215,8 +215,9 @@
       basic_mesh_name="soldier_sword.mesh"
       damage_type="sword"
       damage_value="50"
-      block_physics_size="0.01 0.04 0.01"
-      block_physics_offset="0 0.02 0"
+      block_physics_size="0.01 0.06 0.01"
+      block_physics_offset="0 0.03 0"
+      length="0.05"
       />
   <item
       id="enemy_shield_simple"
@@ -279,7 +280,7 @@
       permanent_static = "false"
       mesh_name = "vase"
       material_name = "VaseSide"
-      damage_source_mask = "world"
+      damage_source_mask = "none"
       collision_shape = "pickable_object_sphere"
       />
   <object
@@ -388,49 +389,66 @@
        ============
 
        id (string)                       the person id
+       character_class (sting)               the class to use on creation
        mesh_name (string)                the mesh to use
        material_name (string = BLANK)    the material to use
        scale (Ogre::Vector3 or Real)     scaling factor for the complete mesh
        attitude (friend | enemy)         the attitude of the person relative to link
        hitpoints (Hitpoints = infinity)  the hitpoints of the person (unit of hears)
+
+       Children:
+         - animation
   -->
+  <!-- animation -->
+  <!-- Properties:
+       ===========
+       
+       name (string)                      the animation name
+       id (integer)                       the id for the corresponding enumeration
+       loop (bool)                        loop the animation
+     -->
   <person
       id="link"
+      character_class="player"
       mesh_name="link"
       material_name="link_armor"
-      scale="1.5f"
       attitude="friend"
       hitpoints="3"
-      animations_count="5"
+      animations_count="7"
       >
     <animation name="Idle" id="0"/>
     <animation name="Walk" id="1"/>
-    <animation name="SwordAttack" id="2"/>
-    <animation name="SwordAttack" id="3"/>
+    <animation name="SwordAttack" id="2" allow_moving="false"/>
+    <animation name="SwordAttack" id="3" allow_moving="false"/>
     <animation name="RunPegasus" id="4"/>
+    <animation name="Sleep" id="5"/>
+    <animation name="Awake" id="6" loop="false"/>
   </person>
   <person
       id="links_father"
+      character_class="links_father"
       mesh_name="links_father"
       attitude="friend"
       animations_count="3"
       >
     <animation name="Sit" id="0"/>
-    <animation name="StandUp" id="1"/>
+    <animation name="StandUp" id="1" loop="false"/>
     <animation name="Walk" id="2"/>
   </person>
   <person
       id="soldier_block"
+      character_class="standing_person"
       mesh_name="soldier"
       material_name="soldier_green"
       attitude="enemy"
-      animations_count="2"
+      animations_count="1"
       >
     <animation name="Scout" id="0"/>
-    <animation name="Walk" id="1"/>
+    <!--animation name="Walk" id="1"/ -->
   </person>
   <person
       id="soldier_blue"
+      character_class="simple_enemy"
       mesh_name="soldier"
       material_name="soldier_blue"
       attitude="enemy"
@@ -442,6 +460,7 @@
   </person>
   <person
       id="soldier_green_sword"
+      character_class="simple_enemy"
       mesh_name="soldier"
       material_name="soldier_green"
       attitude="enemy"

@@ -22,6 +22,7 @@
 
 #include "InputListener.hpp"
 #include "GameInputCommand.hpp"
+#include "../Util/Assert.hpp"
 #include <OgreSingleton.h>
 #include <list>
 
@@ -42,10 +43,16 @@ public:
   ~CGameInputManager();
 
   void addInputListener(CGameInputListener *pListener) {
+    ASSERT(!hasInputListener(pListener));
     m_lListenerList.push_back(pListener);
   }
   void removeInputListener(CGameInputListener *pListener) {
+    ASSERT(hasInputListener(pListener));
     m_lListenerList.remove(pListener);
+  }
+  bool hasInputListener(CGameInputListener *pListener) const {
+    return std::find(m_lListenerList.begin(), m_lListenerList.end(), pListener)
+        != m_lListenerList.end();
   }
 
   // OIS::KeyListener

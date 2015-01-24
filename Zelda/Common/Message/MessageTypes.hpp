@@ -34,11 +34,10 @@ enum EMessageTypes {
   MSG_USER,
 };
 
-class CMessageTypesMap : public CStringEnumIdMap<unsigned int> {
+template<class USER_TYPE>
+class CMessageTypesMap : public CStringEnumIdMap<USER_TYPE, unsigned int> {
 public:
-  CMessageTypesMap();
+  virtual void init();
 };
-
-extern CMessageTypesMap MESSAGE_TYPES_MAP;
 
 #endif // _MESSAGE_TYPES_HPP_

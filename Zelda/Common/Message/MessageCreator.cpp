@@ -22,6 +22,8 @@
 #include "../Util/XMLHelper.hpp"
 #include <OgreException.h>
 #include "../Util/Assert.hpp"
+#include "../Config/TypeDefines.hpp"
+#include MESSAGE_USER_TYPES_HEADER
 
 #include "MessageSwitchMap.hpp"
 
@@ -44,12 +46,16 @@ CMessageCreator::CMessageCreator()
 CMessageCreator::~CMessageCreator() {
 }
 
-CMessagePtr CMessageCreator::createMessage(const tinyxml2::XMLElement *pElem, const std::string &creationFile, const Ogre::Any &any) {
-  unsigned int type(MESSAGE_TYPES_MAP.parseString(Attribute(pElem, m_sMessageTypeAttributeName.c_str())));
+CMessagePtr CMessageCreator::createMessage(const std::string &creationFile,
+                                         const tinyxml2::XMLElement *pElem,
+                                         const Ogre::Any &any) {
+  uint8_t type(MESSAGE_USER_TYPES::getSingleton().
+               parseString(Attribute(pElem,
+                                     m_sMessageTypeAttributeName.c_str())));
 
   switch (type) {
   case MSG_SWITCH_MAP:
-    return std::make_shared<CMessageSwitchMap>(pElem, creationFile);
+    return std::make_shared<CMessageSwitchMap>(creationFile, pElem);
   default:
     break;
   }

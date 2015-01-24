@@ -36,8 +36,13 @@
 #define MESSAGE_CREATOR_HEADER "World/Messages/UserMessageCreator.hpp"
 #define MESSAGE_CREATOR CUserMessageCreator
 
+// User message types
+#define MESSAGE_USER_TYPES_HEADER "World/Messages/UserMessageTypes.hpp"
+#define MESSAGE_USER_TYPES CUserMessageTypesMap
+
 // User lua script bridge
 #define LUA_SCRIPT_BRIDGE_HEADER "World/UserImplementations/UserLuaScriptBridge.hpp"
 #define LUA_SCRIPT_BRIDGE_REGISTER_FUNCTION(l) userRegisterCFunctionsToLua(l)
+
 
 #endif // _TYPE_DEFINES_HPP_

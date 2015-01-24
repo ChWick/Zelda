@@ -23,6 +23,7 @@
 #include "../Message/MessageCreator.hpp"
 #include "../Message/MessageHandler.hpp"
 #include "../tinyxml2/tinyxml2.hpp"
+#include "../PauseManager/PauseTypes.hpp"
 #include "../Util/Sleep.hpp"
 #include "../Util/Assert.hpp"
 #include <memory>
@@ -33,6 +34,9 @@ using namespace tinyxml2;
 void registerCFunctionsToLua(lua_State *l) {
   registerSingleCFunctionsToLua(l, log, "log");
   registerSingleCFunctionsToLua(l, message, "message");
+  registerSingleCFunctionsToLua(l, msleep, "msleep");
+  registerSingleCFunctionsToLua(l, pause, "pause");
+  registerSingleCFunctionsToLua(l, unpause, "unpause");
 
   // memory access
   registerSingleCFunctionsToLua(l, writeIntToMemory, "writeIntToMemory");
@@ -74,13 +78,84 @@ int message(lua_State *l) {
   XMLDocument doc;
   doc.Parse(lua_tostring(l, 1));
 
-  CMessageHandler::getSingleton().addMessage(CMessageCreator::getSingleton().createMessage(doc.FirstChildElement(), __FILE__));
+  CMessageHandler::getSingleton().addMessage(
+      CMessageCreator::getSingleton().createMessage(__MSG_LOCATION__,
+                                                    doc.FirstChildElement()));
 
   while (true) {
     LUA_WAIT(10);
   }
 
   return 0;
+}
+
+int msleep(lua_State *l) {
+  LUA_BRIDGE_START(0);
+
+  if (lua_gettop(l) != 1) {
+    LOGW("Wrong argument count for pause call in lua function msleep");
+    return numberOfReturnValues;
+  }
+
+  int sleep = lua_tointeger(l, 1);
+  if (sleep < 0) {
+    LOGW("sleep time has to be positive");
+    return numberOfReturnValues;
+  }
+
+  // split sleeptime in 100 ms steps
+  int hundrets = sleep / 100;
+  int rest = sleep - hundrets * 100;
+
+  ASSERT(hundrets >= 0);
+  ASSERT(rest >= 0);
+
+  LUA_WAIT(rest);
+
+  for (int i = 0; i < hundrets; ++i) {
+    LUA_WAIT(100);
+  }
+
+  return numberOfReturnValues;
+}
+
+int pause(lua_State *l) {
+  LUA_BRIDGE_START(0);
+
+  if (lua_gettop(l) != 1) {
+    LOGW("Wrong argument count for pause call in lua function pause");
+    return numberOfReturnValues;
+  }
+
+  std::string pstr(lua_tostring(l, 1));
+
+  luaStateMutex.lock();
+  luaScript->pause(CPauseTypesIdMap::getSingleton().parseString(pstr));
+  luaStateMutex.unlock();
+
+  return numberOfReturnValues;
+}
+
+int unpause(lua_State *l) {
+  LUA_BRIDGE_START(0);
+
+  if (lua_gettop(l) > 1) {
+    LOGW("Wrong argument count for pause call in lua function pause");
+    return numberOfReturnValues;
+  }
+
+  luaStateMutex.lock();
+  if (lua_gettop(l) == 0) {
+    // unpause all
+    luaScript->unpause();
+  } else {
+    std::string pstr(lua_tostring(l, 1));
+    luaScript->unpause(CPauseTypesIdMap::getSingleton().parseString(pstr));
+  }
+
+  luaStateMutex.unlock();
+
+  return numberOfReturnValues;
 }
 
 int writeIntToMemory(lua_State *l) {

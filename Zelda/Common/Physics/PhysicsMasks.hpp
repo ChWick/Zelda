@@ -20,6 +20,8 @@
 #ifndef _PHYSICS_MASKS_HPP_
 #define _PHYSICS_MASKS_HPP_
 
+#include "../Util/EnumIdMap.hpp"
+
 
 enum ECollisionTypes {
   COL_NOTHING     = 0,    //!< Collide with nothing
@@ -56,5 +58,15 @@ const unsigned int MASK_CAMERA_COLLIDES_WITH = COL_STATIC;
 const unsigned int MASK_DAMAGE_P_COLLIDES_WITH = COL_CHARACTER_N | COL_SHIELD_N | COL_STATIC | COL_INTERACTIVE;
 const unsigned int MASK_DAMAGE_N_COLLIDES_WITH = COL_CHARACTER_P | COL_SHIELD_P | COL_STATIC | COL_INTERACTIVE;
 //int powerupCollidesWith = COL_SHIP | COL_WALL;
+
+class CPhysicsGroupsIdMap : public CStringEnumIdMap<CPhysicsGroupsIdMap, ECollisionTypes> {
+public:
+  void init();
+};
+
+class CPhysicsMasksIdMap : public CStringEnumIdMap<CPhysicsGroupsIdMap, uint16_t> {
+public:
+  void init();
+};
 
 #endif // _PHYSICS_MASKS_HPP_

@@ -19,10 +19,8 @@
 
 #include "TileTypes.hpp"
 
-CTileTypeIdMap TILE_TYPE_ID_MAP;
-CTileDataMap TILE_DATA_MAP;
 
-CTileTypeIdMap::CTileTypeIdMap() {
+void CTileTypeIdMap::init() {
   m_Map[TT_GREEN_SOIL] = "green_soil";
   m_Map[TT_GREEN_SOIL_BUSH_SHADOW] = "green_soil_bush_shadow";
   m_Map[TT_GREEN_SOIL_BUSH_LIFTED] = "green_soil_bush_lifted";
@@ -32,6 +30,6 @@ CTileTypeIdMap::CTileTypeIdMap() {
   m_Map[TT_COUNT] = "none";
 }
 
-CTileDataMap::CTileDataMap() {
+void CTileDataMap::init() {
 }
 

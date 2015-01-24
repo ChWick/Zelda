@@ -57,7 +57,7 @@ CAtlas::CAtlas(CEntity *pParent, Ogre::SceneNode *pRootSceneNode)
   m_pWorldCamera->lookAt(Ogre::Vector3(0, 0, 0));
   // m_pWorldCamera->setProjectionType(Ogre::PT_ORTHOGRAPHIC);
 
-  Ogre::Viewport *vp = CGame::getSingleton().getMainViewPort();
+  Ogre::Viewport *vp = CGame::getSingleton<CGame>().getMainViewPort();
   m_pWorldCamera->setAspectRatio(
       Ogre::Real(vp->getActualWidth()) / Ogre::Real(vp->getActualHeight()));
   vp->setCamera(m_pWorldCamera);
@@ -66,7 +66,7 @@ CAtlas::CAtlas(CEntity *pParent, Ogre::SceneNode *pRootSceneNode)
   LOGV(" - Creating Player");
   m_pPlayer = new CPlayer(this,
                           m_pWorldCamera,
-                          CGame::getSingleton().getSceneManager());
+                          CGame::getSingleton<CGame>().getSceneManager());
 
   /*  m_pCameraPerspective
       = new CAerialCameraPerspective(m_pWorldCamera,
@@ -88,7 +88,7 @@ CAtlas::CAtlas(CEntity *pParent, Ogre::SceneNode *pRootSceneNode)
   m_pCurrentMap->start();
 
   CMessageHandler::getSingleton().addMessage(
-      std::make_shared<CMessageSwitchMap>(__FILE__,
+      std::make_shared<CMessageSwitchMap>(__MSG_LOCATION__,
                                           m_pCurrentMap->getMapPack()->getName(),
                                           CMessageSwitchMap::FINISHED,
                                           m_eSwitchMapType,
@@ -209,7 +209,8 @@ void CAtlas::handleMessage(const CMessagePtr message) {
 
         // determine direction
         Ogre::Vector3 vDirection(Ogre::Vector3::ZERO);
-        if (abs(nextPack->getGlobalPosition().x
+        Ogre::Vector3 vMapOffset(nextPack->getGlobalPosition() - currPack->getGlobalPosition());
+        /*if (abs(nextPack->getGlobalPosition().x
                 + nextPack->getGlobalSize().x
                 - currPack->getGlobalPosition().x) < 0.01) {
           vDirection.x = -1;
@@ -225,8 +226,31 @@ void CAtlas::handleMessage(const CMessagePtr message) {
                        + currPack->getGlobalSize().y
                        - nextPack->getGlobalPosition().z) < 0.01) {
           vDirection.z = 1;
-        }
+        }*/
 
+        Ogre::Radian r(Ogre::Math::ATan2(vMapOffset.z, vMapOffset.x));
+        if (r < Ogre::Radian(0)) {r += Ogre::Radian(Ogre::Math::TWO_PI);}
+
+        // round and convert to int (0,3)
+        int dir = static_cast<int>((r.valueRadians() + Ogre::Math::PI / 4) / Ogre::Math::TWO_PI * 4);
+        switch (dir) {
+          case 0:
+            vDirection.x = 1;
+            break;
+          case 1:
+            vDirection.z = 1;
+            break;
+          case 2:
+            vDirection.x = -1;
+            break;
+          case 3:
+            vDirection.z = -1;
+            break;
+
+          default:
+          throw Ogre::Exception(0, "dir not allowed", __FILE__);
+            break;
+        }
 
         vPlayerPos = m_pPlayer->getPosition() + vMapPositionOffset;
         vPlayerMoveToPos = vPlayerPos + vDirection * 0.2;
@@ -237,13 +261,14 @@ void CAtlas::handleMessage(const CMessagePtr message) {
         m_bPlayerTargetReached = false;
 
         CMessageHandler::getSingleton().addMessage(
-            std::make_shared<CMessageSwitchMap>(__FILE__,
-                                                m_pNextMap->getMapPack()->getName(),
-                                  CMessageSwitchMap::SWITCHING,
-                                  m_eSwitchMapType,
-                                  m_pCurrentMap,
-                                  m_pNextMap,
-                                  m_sNextMapEntrance));
+            std::make_shared<CMessageSwitchMap>(
+                __MSG_LOCATION__,
+                m_pNextMap->getMapPack()->getName(),
+                CMessageSwitchMap::SWITCHING,
+                m_eSwitchMapType,
+                m_pCurrentMap,
+                m_pNextMap,
+                m_sNextMapEntrance));
       } else if (m_eSwitchMapType == SMT_FADE_ALPHA) {
         pause(PAUSE_PLAYER_UPDATE | PAUSE_MAP_UPDATE);
         mAlphaFader.startFadeOut(1);
@@ -269,13 +294,14 @@ void CAtlas::handleMessage(const CMessagePtr message) {
 
         pMap->start();
         CMessageHandler::getSingleton().addMessage(
-            std::make_shared<CMessageSwitchMap>(__MSG_LOCATION__,
-                                                m_pCurrentMap->getMapPack()->getName(),
-                                  CMessageSwitchMap::FINISHED,
-                                  m_eSwitchMapType,
-                                  pMap,
-                                  nullptr,
-                                  m_sNextMapEntrance));
+            std::make_shared<CMessageSwitchMap>(
+                __MSG_LOCATION__,
+                m_pCurrentMap->getMapPack()->getName(),
+                CMessageSwitchMap::FINISHED,
+                m_eSwitchMapType,
+                pMap,
+                nullptr,
+                m_sNextMapEntrance));
       }
     }
   }
@@ -325,13 +351,14 @@ void CAtlas::fadeOutCallback() {
     unpause(PAUSE_ALL);
 
     CMessageHandler::getSingleton().addMessage(
-        std::make_shared<CMessageSwitchMap>(__FILE__,
-                                            m_pCurrentMap->getMapPack()->getName(),
-                              CMessageSwitchMap::SWITCHING,
-                              m_eSwitchMapType,
-                              m_pCurrentMap,
-                              nullptr,
-                              m_sNextMapEntrance));
+        std::make_shared<CMessageSwitchMap>(
+            __MSG_LOCATION__,
+            m_pCurrentMap->getMapPack()->getName(),
+            CMessageSwitchMap::SWITCHING,
+            m_eSwitchMapType,
+            m_pCurrentMap,
+            nullptr,
+            m_sNextMapEntrance));
 
 
     // delete the old map

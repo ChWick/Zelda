@@ -41,7 +41,7 @@ public:
   void setGameInputListenerFlags(int iPauseFlags) {mGameInputListenerPauseFlags = iPauseFlags;}
 
 private:
-  void updatePause(int iPauseType, bool bPause);
+  virtual void updatePause(int iPauseType, bool bPause);
 };
 
 #endif

@@ -37,6 +37,7 @@ find_package(bullet)
 find_package(OIS)
 find_package(CEGUI)
 find_package(lua)
+find_package(ParticleUniverse)
 #find_package(tinyxml2)
 
 if(ANDROID)

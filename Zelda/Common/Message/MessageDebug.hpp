@@ -34,7 +34,9 @@ protected:
   const EDebugMessageTypes m_eDebugType;
   bool m_bActive;
 public:
-  CMessageDebug(const EDebugMessageTypes type, bool bActive, const std::string &creationFile);
+  CMessageDebug(const std::string &creationFile,
+                const EDebugMessageTypes type,
+                bool bActive);
 
   EDebugMessageTypes getDebugType() const {return m_eDebugType;}
 

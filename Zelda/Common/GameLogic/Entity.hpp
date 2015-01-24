@@ -45,14 +45,16 @@ class CMessage;
 
 //! Class for an arbitrary entity
 class CEntity : public CMessageInjector {
+  
  private:
   //! Debug information: number of generated entiteis
   static uint16_t mNumberOfInstances;
+  
  public:
   //! get debug information: number of generated entities
   static uint16_t getNumberOfInstances() {return mNumberOfInstances;}
-
-protected:
+  
+ protected:
   std::string m_sID;                          //!< id of the entity
   std::string m_sResourceGroup;               //!< in which resource group to search for entities resources
   unsigned int m_uiType;                      //!< one can set a type
@@ -60,7 +62,7 @@ protected:
 
   bool m_bPauseRender;		                    //!< if true the entity and its children will not be rendered anymore
   bool m_bPauseUpdate;                        //!< if true the entity and its children will not be updated anymore
-private:
+ private:
   mutable std::mutex mEntityMutex;                    //!< mutex of the entity, when data is changed/accessed
   mutable std::mutex mEventAccessedMutex;             //!< mutex of the entity, if the events list is accessed
   mutable std::mutex mEventToDeleteAccessedMutex;     //!< mutex of the entity, if the events list is accessed
@@ -69,12 +71,20 @@ private:
   std::list<CEntity*> m_lChildren;
   std::list<events::CEvent*> m_lEvents;
   std::list<events::CEvent*> m_lEventsToDelete;
-public:
-  CEntity(const std::string &sID, unsigned int uiType, CEntity *pParent, const std::string &sResourceGroup = Ogre::ResourceGroupManager::AUTODETECT_RESOURCE_GROUP_NAME);
-  CEntity(const std::string &sID, CEntity *pParent, const std::string &sResourceGroup = Ogre::ResourceGroupManager::AUTODETECT_RESOURCE_GROUP_NAME);
-  CEntity(
-	  CEntity *pParent,
-	  const tinyxml2::XMLElement *pElem, const std::string &sResourceGroup = Ogre::ResourceGroupManager::AUTODETECT_RESOURCE_GROUP_NAME);
+ public:
+  CEntity(const std::string &sID,
+          unsigned int uiType,
+          CEntity *pParent,
+          const std::string &sResourceGroup
+          = Ogre::ResourceGroupManager::AUTODETECT_RESOURCE_GROUP_NAME);
+  CEntity(const std::string &sID,
+          CEntity *pParent,
+          const std::string &sResourceGroup
+          = Ogre::ResourceGroupManager::AUTODETECT_RESOURCE_GROUP_NAME);
+  CEntity(CEntity *pParent,
+          const tinyxml2::XMLElement *pElem,
+          const std::string &sResourceGroup
+          = Ogre::ResourceGroupManager::AUTODETECT_RESOURCE_GROUP_NAME);
   CEntity(const CEntity &src);
   virtual ~CEntity();
 
@@ -98,7 +108,8 @@ public:
   void deleteNow();
 
   void sendCallToAll(void (CEntity::*pFunction)(), bool bCallThis = true);
-  void sendCallToAllChildrenFirst(void (CEntity::*pFunction)(), bool bCallThis = true);
+  void sendCallToAllChildrenFirst(void (CEntity::*pFunction)(),
+                                  bool bCallThis = true);
 
   // events access
   std::list<events::CEvent*> &getEvents() {return m_lEvents;}
@@ -127,10 +138,12 @@ public:
 
   virtual bool frameRenderingQueued(const Ogre::FrameEvent& evt);
 
-  virtual void writeToXMLElement(tinyxml2::XMLElement *pElement, EOutputStyle eStyle) const;
+  virtual void writeToXMLElement(tinyxml2::XMLElement *pElement,
+                                 EOutputStyle eStyle) const;
 
   void clearEvents();
-  void readEventsFromXMLElement(const tinyxml2::XMLElement *pElement, bool bClearEvents = true);
+  void readEventsFromXMLElement(const tinyxml2::XMLElement *pElement,
+                                bool bClearEvents = true);
 
   // getter setter
   // =============
@@ -156,7 +169,9 @@ public:
 
   virtual const SPATIAL_VECTOR &getPosition() const {return SPATIAL_VECTOR::ZERO;}
   virtual void setPosition(const SPATIAL_VECTOR &vPos) {}
-  virtual void translate(const SPATIAL_VECTOR &vOffset) {setPosition(getPosition() + vOffset);}
+  virtual void translate(const SPATIAL_VECTOR &vOffset) {
+    setPosition(getPosition() + vOffset);
+  }
 
   virtual const SPATIAL_VECTOR &getCenter() const {return getPosition();}
   virtual void setCenter(const SPATIAL_VECTOR &vCenter) {setPosition(vCenter);}
@@ -164,16 +179,24 @@ public:
   virtual const SPATIAL_VECTOR &getSize() const {return SPATIAL_VECTOR::ZERO;}
   virtual void setSize(const SPATIAL_VECTOR &vSize) {}
 
-  virtual const SPATIAL_VECTOR &getScale() const {return SPATIAL_VECTOR::UNIT_SCALE;}
+  virtual const SPATIAL_VECTOR &getScale() const {
+    return SPATIAL_VECTOR::UNIT_SCALE;
+  }
   virtual void setScale(const SPATIAL_VECTOR &vScale) {}
 
-	virtual const Ogre::Quaternion &getOrientation() const {return Ogre::Quaternion::IDENTITY;}
-	virtual void setOrientation(const Ogre::Quaternion &quat) {}
+  virtual const Ogre::Quaternion &getOrientation() const {
+    return Ogre::Quaternion::IDENTITY;
+  }
+  virtual void setOrientation(const Ogre::Quaternion &quat) {}
 
   unsigned int getType() const {return m_uiType;}
   void setType(unsigned int uiType) {m_uiType = uiType;}
 
-  virtual void moveToTarget(const SPATIAL_VECTOR &vPosition, const Ogre::Quaternion &qRotation = Ogre::Quaternion::IDENTITY, const Ogre::Real fMaxDistanceDeviation = 0, const Ogre::Radian fMaxAngleDeviation = Ogre::Radian(Ogre::Math::TWO_PI));
+  virtual void moveToTarget(
+      const SPATIAL_VECTOR &vPosition,
+      const Ogre::Quaternion &qRotation = Ogre::Quaternion::IDENTITY,
+      const Ogre::Real fMaxDistanceDeviation = 0,
+      const Ogre::Radian fMaxAngleDeviation = Ogre::Radian(Ogre::Math::TWO_PI));
 
 
   virtual Ogre::SceneNode *getSceneNode() const {return nullptr;}

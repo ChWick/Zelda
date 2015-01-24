@@ -19,9 +19,7 @@
 
 #include "CharacterAttitude.hpp"
 
-CCharacterAttitudeIdMap CHARACTER_ATTITUDE_ID_MAP;
-
-CCharacterAttitudeIdMap::CCharacterAttitudeIdMap() {
+void CCharacterAttitudeIdMap::init() {
   m_Map[ATTITUDE_ENEMY] = "enemy";
   m_Map[ATTITUDE_FRIENDLY] = "friend";
 }

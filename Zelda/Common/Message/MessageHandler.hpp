@@ -37,7 +37,7 @@ private:
   std::list<CMessageInjector*> m_lInjectors;
   std::list<CMessageInjector*> m_lInjectorsToAdd;
   std::list<CMessageInjector*> m_lInjectorsToRemove;
-  std::list<MessageEntryType> m_lMessages;
+  std::list<CMessagePtr> m_lMessages;
 public:
   static CMessageHandler &getSingleton();
   static CMessageHandler *getSingletonPtr();

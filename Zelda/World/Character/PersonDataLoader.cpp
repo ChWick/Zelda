@@ -31,5 +31,5 @@ using XMLHelper::Vector3Attribute;
 void CPersonDataLoader::readGroupElement(const tinyxml2::XMLElement *e) {
   SPersonData data(e);
 
-  PERSON_DATA_ID_MAP.setData(data.eType, data);
+  CPersonDataIdMap::getSingleton().setData(data.eType, data);
 }

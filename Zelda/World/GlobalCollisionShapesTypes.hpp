@@ -37,12 +37,12 @@ enum EGlobalCollisionShapesTypes {
   GCST_COUNT,
 };
 
-class CGlobalCollisionShapesTypesIdMap : public CStringEnumIdMap<EGlobalCollisionShapesTypes> {
+class CGlobalCollisionShapesTypesIdMap
+    : public CStringEnumIdMap<CGlobalCollisionShapesTypesIdMap,
+                              EGlobalCollisionShapesTypes> {
 public:
-  CGlobalCollisionShapesTypesIdMap();
+  void init();
 };
-
-extern CGlobalCollisionShapesTypesIdMap GLOBAL_COLLISION_SHAPES_TYPES_ID_MAP;
 
 
 #endif // _GLOBAL_COLLISION_SHAPES_TYPES_HPP_

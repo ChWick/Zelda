@@ -30,7 +30,8 @@ std::vector<EItemVariantTypes> SItemStatus::getBestItem() const {
   int ucQuality = -1;
 
   for (size_t i = 0; i < vItems.size(); i++) {
-    const SItemVariantData &data(ITEM_VARIANT_DATA_MAP.toData(vItems[i]));
+    const SItemVariantData &data(CItemVariantDataMap::getSingleton().
+                                 toData(vItems[i]));
     if (ucQuality == data.ucItemQuality) {
       items.push_back(vItems[i]);
     } else if (ucQuality < data.ucItemQuality) {
@@ -63,21 +64,24 @@ void CItemStatusStorage::load() {
 }
 
 void CItemStatusStorage::pickupItem(EItemVariantTypes eItemVariantType) {
-  EItemSlotTypes slot = ITEM_SLOT_DATA_MAP.getFromItemVariant(eItemVariantType);
+  EItemSlotTypes slot = CItemSlotDataMap::getSingleton().
+      getFromItemVariant(eItemVariantType);
   ASSERT(slot != ITEM_SLOT_COUNT);
   m_Storage[slot].vItems.push_back(eItemVariantType);
 
   CMessageHandler::getSingleton().addMessage(
-      std::make_shared<CMessageItem>(__MSG_LOCATION__,
-                                     CMessageItem::IM_STATUS_CHANGED,
-                       this,
-                       slot,
-                       eItemVariantType));
+      std::make_shared<CMessageItem>(
+          __MSG_LOCATION__,
+          CMessageItem::IM_STATUS_CHANGED,
+          this,
+          slot,
+          eItemVariantType));
 }
 
 bool CItemStatusStorage::hasItem(EItemVariantTypes eItemVariantType) const {
   ASSERT(eItemVariantType != ITEM_VARIANT_COUNT);
-  EItemSlotTypes slot = ITEM_SLOT_DATA_MAP.getFromItemVariant(eItemVariantType);
+  EItemSlotTypes slot = CItemSlotDataMap::getSingleton().
+      getFromItemVariant(eItemVariantType);
   ASSERT(slot != ITEM_SLOT_COUNT);
   auto &v(m_Storage[slot].vItems);
   return std::find(v.begin(), v.end(), eItemVariantType) != v.end();

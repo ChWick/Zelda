@@ -28,6 +28,7 @@ namespace tinyxml2 {
   class XMLElement;
 };
 
+
 class CMessageCreator : public Ogre::Singleton<CMessageCreator> {
 protected:
   const std::string m_sMessageTypeAttributeName;
@@ -39,7 +40,7 @@ public:
   static CMessageCreator *getSingletonPtr();
 
 
-  virtual CMessagePtr createMessage(const tinyxml2::XMLElement *pElem, const std::string &creationFile, const Ogre::Any &any = Ogre::Any());
+  virtual CMessagePtr createMessage(const std::string &creationFile, const tinyxml2::XMLElement *pElem, const Ogre::Any &any = Ogre::Any());
 };
 
 

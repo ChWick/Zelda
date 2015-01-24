@@ -1,30 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/mainLayout"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/shade">
-    
-	
-	<ImageView
-	    android:id="@+id/background_image"
-	    android:contentDescription="@string/loading_description"
-	    android:layout_width="wrap_content"
-	    android:layout_height="match_parent"
-	    android:src="@drawable/ic_launcher"
-	    android:layout_centerInParent="true"/>
+    android:background="@drawable/shade" >
+
+    <ImageView
+        android:id="@+id/background_image"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:src="@drawable/ic_launcher" />
+
     <TextView
-        android:visibility="invisible"
+        android:id="@+id/zelda_load_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:textColor="#FFFFAA"
-        android:gravity="center"
         android:background="#AA000066"
-	android:id="@+id/zelda_load_text"/>
+        android:gravity="center"
+        android:textColor="#FFFFAA"
+        android:visibility="invisible" />
+
 </RelativeLayout>
-
-

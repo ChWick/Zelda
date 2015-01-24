@@ -25,9 +25,9 @@ CMessageItem::CMessageItem(const std::string &creationFile,
                            CItemStatusStorage const * const pItemStatusStorage,
                            const EItemSlotTypes eItemSlotType,
                            const EItemVariantTypes eItemVariantType)
-  : CMessage(MSG_ITEM, creationFile),
-    m_eItemMessageType(eItemMessageType),
-    m_eItemSlotType(eItemSlotType),
-    m_eItemVariantType(eItemVariantType),
-    m_pItemStatusStorage(pItemStatusStorage) {
+    : CMessage(creationFile, MSG_ITEM),
+      m_eItemMessageType(eItemMessageType),
+      m_eItemSlotType(eItemSlotType),
+      m_eItemVariantType(eItemVariantType),
+      m_pItemStatusStorage(pItemStatusStorage) {
 }

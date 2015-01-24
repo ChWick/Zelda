@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map global_position="-3.2 0 0" global_size="3.2 3.2">
+<map global_position="-1.6 0 4.8" global_size="3.2 3.2">
   <region id="bottom_margin" position="0 0 1.6" size="1.6 1 0.01" shape="box"/>
   <region id="top_margin" position="0 0 -1.6" size="1.6 1 0.01" shape="box"/>
   <region id="left_margin" position="-1.6 0 0" size="0.01 1 1.6" shape="box"/>
@@ -15,15 +15,15 @@
       <action type="create_object" object_type="rupee_red" location="inner"/>
     </event>
   </scene_entity>
-  <new_entity entity_type="simple_enemy" id="link_house_left_enemy_1" position="1 1 0" person_type="soldier_green_sword">
+  <new_entity id="link_house_left_enemy_1" position="1 1 0" person_type="soldier_green_sword">
   </new_entity>
 
-  <new_entity entity_type="standing_person" id="link_house_left_block_1" rotation="0" position="1 1 0" person_type="soldier_green_sword">
+  <new_entity id="link_house_left_block_1" rotation="0" position="1 1 0" person_type="soldier_block">
     <event repeat="infinite">
       <emitter type="interaction" />
       <action type="start_script" file="instructions.lua"/>
     </event>
   </new_entity>
-  <new_entity entity_type="standing_person" id="link_house_left_block_2" rotation="180" position="1 1 0.1" person_type="soldier_green_sword">
+  <new_entity entity_type="standing_person" id="link_house_left_block_2" rotation="180" position="1 1 0.1" person_type="soldier_block">
   </new_entity>
 </map>

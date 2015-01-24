@@ -50,7 +50,7 @@
 #include "OgrePlatform.h"
 #include "Android/OgreAndroidEGLWindow.h"
 #include "../Config/TypeDefines.hpp"
-#include GAME_CLASS_HEADER
+#include "../Application/Application.hpp"
 #include <stdio.h>
 
 #ifdef OGRE_STATIC_LIB
@@ -67,6 +67,7 @@
 #include "../Util/Assert.hpp"
 
 class OgreAndroidBridge;
+class CAndroidApplication;
 
 
 /*=============================================================================
@@ -82,61 +83,9 @@ public:
     state->onAppCmd = &OgreAndroidBridge::handleCmd;
     state->onInputEvent = &OgreAndroidBridge::handleInput;
   }
-  static void start() {
-    ASSERT(mActivity);
+  static void start();
 
-    if(mInit)
-      return;
-
-    LOGI("Initialising Root");
-    mRoot = new Ogre::Root("plugins"OGRE_BUILD_SUFFIX".cfg",
-			   "ogre.cfg",
-			   CFileManager::getValidPath("ogre.log",
-						      CFileManager::SL_EXTERNAL));
-#ifdef OGRE_STATIC_LIB
-    LOGI("Loading plugins");
-    mStaticPluginLoader = new Ogre::StaticPluginLoader();
-    mStaticPluginLoader->load();
-    LOGI("plugins loaded");
-#endif
-    mRoot->setRenderSystem(mRoot->getAvailableRenderers().at(0));
-    mRoot->initialise(false);
-    mInit = true;
-  }
-
-  static void shutdown()
-  {
-    if(!mInit)
-      return;
-
-    mInit = false;
-
-    if(mGame)
-      {
-	mGame->closeApp();
-	OGRE_DELETE mGame;
-	mGame = NULL;
-      }
-
-    OGRE_DELETE mRoot;
-    mRoot = NULL;
-    mRenderWnd = NULL;
-
-    delete mTouch;
-    mTouch = NULL;
-
-    delete mKeyboard;
-    mKeyboard = NULL;
-
-    delete mInputInjector;
-    mInputInjector = NULL;
-
-#ifdef OGRE_STATIC_LIB
-    mStaticPluginLoader->unload();
-    delete mStaticPluginLoader;
-    mStaticPluginLoader = NULL;
-#endif
-  }
+  static void shutdown();
 
   static int32_t handleInput(struct android_app* app, AInputEvent* event)
   {
@@ -187,84 +136,7 @@ public:
     return 0;
   }
 
-  static void handleCmd(struct android_app* app, int32_t cmd)
-  {
-    if (app->savedState) {
-      LOGI("loading snapshot ...");
-      //CSnapshotManager::getSingleton().setSnapshot(std::shared_ptr<CSnapshot>(new CSnapshot(app->savedState, app->savedStateSize)));
-    }
-    switch (cmd)
-      {
-      case APP_CMD_SAVE_STATE:
-	LOGI("Saving state");
-	//CSnapshotManager::getSingleton().makeBackupSnapshot();
-	//CSnapshotManager::getSingleton().makeSnapshot().saveToMemory(app->savedState, app->savedStateSize);
-	//if (CSaveStateManager::getSingletonPtr()) {CSaveStateManager::getSingleton().writeXMLFile();}
-	break;
-      case APP_CMD_INIT_WINDOW:
-	m_bRenderPaused = false;
-	LOGI("Initialising window command");
-	if (app->window && mRoot) {
-	  LOGI("... creating config");
-	  AConfiguration* config = AConfiguration_new();
-	  AConfiguration_fromAssetManager(config, app->activity->assetManager);
-
-	  if (!mRenderWnd) {
-	    LOGI("... creating render window");
-	    Ogre::NameValuePairList opt;
-	    opt["externalWindowHandle"] = Ogre::StringConverter::toString((int)app->window);
-	    opt["androidConfig"] = Ogre::StringConverter::toString((int)config);
-
-	    mRenderWnd = Ogre::Root::getSingleton().createRenderWindow("OgreWindow", 0, 0, false, &opt);
-
-	    if(!mTouch)
-	      mTouch = new AndroidMultiTouch();
-
-	    if(!mKeyboard)
-	      mKeyboard = new AndroidKeyboard();
-
-	    if(!mGame) {
-	      LOGI("... creating game");
-	      mGame = OGRE_NEW GAME_CLASS();
-	      mGame->initAppForAndroid(mRenderWnd, app, mTouch, mKeyboard);
-	      mGame->initApp();
-
-	      mInputInjector = new AndroidInputInjector(CInputListenerManager::getSingletonPtr(), mTouch, mKeyboard);
-	    }
-	  }
-	  else {
-	    LOGI("... recreating render winow");
-	    static_cast<Ogre::AndroidEGLWindow*>(mRenderWnd)->_createInternalResources(app->window, config);
-	    if (mGame) {
-	      LOGI("... creating resources");
-	      mGame->createResources();
-	    }
-	  }
-
-	  AConfiguration_delete(config);
-	}
-	break;
-      case APP_CMD_TERM_WINDOW:
-	if (mGame)
-	  mGame->destroyResources();
-
-	if(mRoot && mRenderWnd)
-	  static_cast<Ogre::AndroidEGLWindow*>(mRenderWnd)->_destroyInternalResources();
-	break;
-      case APP_CMD_PAUSE:
-	m_bRenderPaused = true;
-	break;
-      case APP_CMD_RESUME:
-	m_bRenderPaused = false;
-	break;
-      case APP_CMD_GAINED_FOCUS:
-	break;
-      case APP_CMD_LOST_FOCUS:
-	break;
-      case APP_CMD_CONFIG_CHANGED:
-	break;
-      }
-  }
+  static void handleCmd(struct android_app* app, int32_t cmd);
 
   static bool renderOneFrame(struct android_app* state) {
     int ident, events;
@@ -438,7 +310,7 @@ public:
 
 private:
   static ANativeActivity *mActivity;
-  static CGame* mGame;
+  static CAndroidApplication* mApplication;
   static AndroidInputInjector* mInputInjector;
   static AndroidMultiTouch* mTouch;
   static AndroidKeyboard* mKeyboard;
