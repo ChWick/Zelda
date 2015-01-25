@@ -25,17 +25,21 @@
 #include "EffectConstructionInfo.hpp"
 #include "ParticleSystem/ParticleSystemConstructionInfo.hpp"
 
+Ogre::NameGenerator CEffect::mNameGenerator("Effect");
+
 CEffect::CEffect(CAbstractWorldEntity *parent,
                  const CEffectConstructionInfo &info)
-    : CAbstractWorldEntity(parent, info) {
-  LOGV("Creating effect: '%s'", info.getID().c_str());
+    : CAbstractWorldEntity(mNameGenerator.generate(), parent, info) {
+  m_pSceneNode = parent->getSceneNode()->createChildSceneNode();
+
+  LOGV("Creating effect: '%s'", getID().c_str());
 
   uint8_t ps_count = 0;
   for (auto &ps_info : info.getParticleSystems()) {
     LOGV(" - Creating particle system");
     ParticleUniverse::ParticleSystem *p =
         createParticleSystem("_ps_" + Ogre::StringConverter::toString(ps_count),
-                             ps_info->getType(), false);
-    parent->getSceneNode()->attachObject(p);
+                             ps_info->getType(), true);
+    setPosition(parent->getPosition());
   }
 }

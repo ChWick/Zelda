@@ -20,12 +20,15 @@
 #ifndef _EFFECT_HPP_
 #define _EFFECT_HPP_
 
+#include <OgreNameGenerator.h>
 #include "../World/AbstractWorldEntity.hpp"
 
 class CEffectConstructionInfo;
 
 class CEffect
     : public CAbstractWorldEntity {
+ private:
+  static Ogre::NameGenerator mNameGenerator;
  public:
   CEffect(CAbstractWorldEntity *parent, const CEffectConstructionInfo &info);
   
