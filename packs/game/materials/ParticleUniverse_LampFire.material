@@ -1,0 +1,21 @@
+
+material ParticleUniverse/LampFire
+{
+	technique
+	{
+		pass
+		{
+			lighting off
+			scene_blend add
+			depth_write off
+
+			texture_unit pu_dot_01.png
+			{
+				texture_alias pu_dot_01.png
+				texture pu_dot_01.png
+			}
+		}
+
+	}
+
+}
