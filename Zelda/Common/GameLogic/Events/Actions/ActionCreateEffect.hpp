@@ -21,6 +21,7 @@
 #define _ACTION_CREATE_EFFECT_HPP_
 
 #include "Action.hpp"
+#include "../../../DataContainers/AttachedParentData.hpp"
 
 class CEffectConstructionInfo;
 
@@ -34,6 +35,7 @@ class CActionCreateEffect
     : public CAction {
  private:
   EffectConstructionInfoList mEffectConstructionInfos;
+  DataContainers::CAttachedParentData mAttachedParentData;
  public:
   CActionCreateEffect(
       const std::shared_ptr<CActionCreateEffectConstructionInfo> info,

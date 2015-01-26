@@ -64,11 +64,15 @@ class CEntity : public CMessageInjector {
 
   bool m_bPauseRender;		                    //!< if true the entity and its children will not be rendered anymore
   bool m_bPauseUpdate;                        //!< if true the entity and its children will not be updated anymore
- private:
+
+ protected:
   mutable std::mutex mEntityMutex;                    //!< mutex of the entity, when data is changed/accessed
+  
+ private:
   mutable std::mutex mEventAccessedMutex;             //!< mutex of the entity, if the events list is accessed
   mutable std::mutex mEventToDeleteAccessedMutex;     //!< mutex of the entity, if the events list is accessed
 
+ private:
   CEntity *m_pParent;
   std::list<CEntity*> m_lChildren;
   std::list<events::CEvent*> m_lEvents;

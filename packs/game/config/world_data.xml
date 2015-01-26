@@ -256,7 +256,7 @@
       >
     <event>
       <emitter type="received_damage" damage_type="sword|world"/>
-      <action type="create_effect">
+      <action type="create_effect" attached_parent_type="map">
 	<effect>
 	  <particle_system type="LampFire"/>
 	  <sound type="testSound"/>

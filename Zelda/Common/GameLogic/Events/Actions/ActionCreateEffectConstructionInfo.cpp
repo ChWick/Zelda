@@ -29,7 +29,8 @@ namespace events {
 
 CActionCreateEffectConstructionInfo::CActionCreateEffectConstructionInfo(
     const tinyxml2::XMLElement *e)
-    : CActionConstructionInfo(ACTION_CREATE_EFFECT) {
+    : CActionConstructionInfo(ACTION_CREATE_EFFECT),
+      mAttachedParentData(e) {
   for (const XMLElement *c = e->FirstChildElement(); c;
        c = c->NextSiblingElement()) {
     if (strcmp(c->Value(), "effect") == 0) {

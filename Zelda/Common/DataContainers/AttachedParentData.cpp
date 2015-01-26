@@ -17,29 +17,32 @@
  * Zelda. If not, see http://www.gnu.org/licenses/.
  *****************************************************************************/
 
-#ifndef _EFFECT_HPP_
-#define _EFFECT_HPP_
+#include "AttachedParentData.hpp"
+#include "../Util/XMLHelper.hpp"
 
-#include <OgreNameGenerator.h>
-#include <ParticleUniverseCommon.h>
-#include <ParticleUniverseSystemListener.h>
-#include "../World/AbstractWorldEntity.hpp"
+using XMLHelper::Attribute;
 
-class CEffectConstructionInfo;
+namespace DataContainers {
 
-class CEffect
-    : public CAbstractWorldEntity,
-      public ParticleUniverse::ParticleSystemListener {
- private:
-  static Ogre::NameGenerator mNameGenerator;
- public:
-  CEffect(CAbstractWorldEntity *parent, const CEffectConstructionInfo &info);
+CAttachedParentData::CAttachedParentData()
+    : mType(APT_LOCAL),
+      mEntityID("") {
+}
 
- private:
-  virtual void handleParticleSystemEvent(
-      ParticleUniverse::ParticleSystem* particleSystem,
-      ParticleUniverse::ParticleUniverseEvent& particleUniverseEvent) override;
-  
-};
+CAttachedParentData::CAttachedParentData(const tinyxml2::XMLElement *e)
+    : mType(CAttachedParentTypesMap::getSingleton().parseString(
+          Attribute(e, "attached_parent_type"))),
+      mEntityID(Attribute(e, "attached_entity_id", "")) {
+  ASSERT((mType != APT_ENTITY && mEntityID.size() == 0)
+         || (mType == APT_ENTITY && mEntityID.size() > 0));
+}
 
-#endif /* _EFFECT_HPP_ */
+void CAttachedParentTypesMap::init() {
+  m_Map[APT_MAP] = "map";
+  m_Map[APT_ATLAS] = "atlas";
+  m_Map[APT_WORLD] = "world";
+  m_Map[APT_LOCAL] = "local";
+  m_Map[APT_ENTITY] = "entity";
+}
+
+}  // namespace DataContainers

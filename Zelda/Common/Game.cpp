@@ -41,6 +41,7 @@
 #include MESSAGE_USER_TYPES_HEADER
 #include "Util/GameMemory.hpp"
 #include "Util/Sleep.hpp"
+#include "DataContainers/AttachedParentData.hpp"
 
 #include "GameLogic/Events/RepeatTypes.hpp"
 #include "GameLogic/Events/Actions/ActionTypes.hpp"
@@ -808,6 +809,8 @@ void CGame::initEnumIdMaps() {
   MESSAGE_USER_TYPES::getSingleton().init();
   CGameStateIdMap::getSingleton().init();
   CEntityStateIdMap::getSingleton().init();
+
+  DataContainers::CAttachedParentTypesMap::getSingleton().init();
 
   events::CRepeatTypesMap::getSingleton().init();
   events::CActionTypesMap::getSingleton().init();

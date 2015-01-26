@@ -46,6 +46,7 @@ protected:
   uint16_t mCollisionGroup;
 
   std::list<ParticleUniverse::ParticleSystem*> mParticleSystems;
+  std::list<ParticleUniverse::ParticleSystem*> mParticleSystemsToDelete;
 
 public:
   CAbstractWorldEntity(const std::string &sID, CEntity *pParent, CAbstractMap *pMap, const std::string &sResourceGroup = Ogre::ResourceGroupManager::AUTODETECT_RESOURCE_GROUP_NAME);
@@ -67,6 +68,12 @@ public:
       const std::string &name_prefix,
       const std::string &type,
       bool autoAttach = true);
+  
+  void deleteParticleSystemNow(
+      ParticleUniverse::ParticleSystem *s);
+  
+  void deleteParticleSystemLater(
+      ParticleUniverse::ParticleSystem *s);
 
   virtual const SPATIAL_VECTOR &getPosition() const;
   virtual void setPosition(const SPATIAL_VECTOR &vPos);

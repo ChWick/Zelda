@@ -18,6 +18,7 @@
  *****************************************************************************/
 
 #include "ActionCreateEffect.hpp"
+#include <OgreException.h>
 #include "ActionCreateEffectConstructionInfo.hpp"
 #include "../Event.hpp"
 #include "../../../Effects/Effect.hpp"
@@ -31,16 +32,25 @@ CActionCreateEffect::CActionCreateEffect(
       const std::shared_ptr<CActionCreateEffectConstructionInfo> info,
       const CEvent &owner)
     : CAction(ACTION_CREATE_EFFECT, owner),
-      mEffectConstructionInfos(info->getEffectConstructionInfos()) {
+      mEffectConstructionInfos(info->getEffectConstructionInfos()),
+      mAttachedParentData(info->getAttachedParentData()) {
 }
 
 void CActionCreateEffect::start() {
   ASSERT(dynamic_cast<CAbstractWorldEntity*>(m_Owner.getOwner()));
   for (auto &ei : mEffectConstructionInfos) {
-    CEffect *effect = new CEffect(
+    CEffect *effect = nullptr;
+    if (mAttachedParentData.getType() == DataContainers::APT_MAP) {
+      effect = new CEffect(
         static_cast<CAbstractWorldEntity*>(m_Owner.getOwner())->getMap(),
         *ei.get());
+    } else {
+      throw Ogre::Exception(mAttachedParentData.getType(),
+                            "Attached parent type is not implemented",
+                            __FILE__);
+    }
     effect->init();
+    effect->setPosition(m_Owner.getOwner()->getPosition());
     effect->start();
   }
 }

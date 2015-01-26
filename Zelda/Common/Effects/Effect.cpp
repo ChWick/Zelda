@@ -40,6 +40,16 @@ CEffect::CEffect(CAbstractWorldEntity *parent,
     ParticleUniverse::ParticleSystem *p =
         createParticleSystem("_ps_" + Ogre::StringConverter::toString(ps_count),
                              ps_info->getType(), true);
-    setPosition(parent->getPosition());
+    // add this as event listener
+    p->addParticleSystemListener(this);
+  }
+}
+
+void CEffect::handleParticleSystemEvent(
+    ParticleUniverse::ParticleSystem* particleSystem,
+    ParticleUniverse::ParticleUniverseEvent& particleUniverseEvent) {
+  if (particleUniverseEvent.eventType
+      == ParticleUniverse::PU_EVT_SYSTEM_STOPPED) {
+    deleteParticleSystemLater(particleSystem);
   }
 }

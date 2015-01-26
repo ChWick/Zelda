@@ -132,7 +132,35 @@ ParticleUniverse::ParticleSystem *CAbstractWorldEntity::createParticleSystem(
   return s;
 }
 
-void CAbstractWorldEntity::warp(const SPATIAL_VECTOR &p, const Ogre::Quaternion &q) {
+void CAbstractWorldEntity::deleteParticleSystemLater(
+    ParticleUniverse::ParticleSystem *s) {
+  mEntityMutex.lock();
+  ASSERT(std::find(mParticleSystems.begin(),
+                   mParticleSystems.end(),
+                   s)
+         != mParticleSystems.end());
+  mParticleSystemsToDelete.push_back(s);
+  mEntityMutex.unlock();
+}
+
+void CAbstractWorldEntity::deleteParticleSystemNow(
+    ParticleUniverse::ParticleSystem *s) {
+  auto it = std::find(mParticleSystems.begin(),
+                      mParticleSystems.end(),
+                      s);
+  ASSERT(it != mParticleSystems.end());
+
+  s->detachFromParent();
+
+  ParticleUniverse::ParticleSystemManager::getSingleton().
+        destroyParticleSystem(s,
+                              getMap()->getSceneNode()->getCreator());
+
+  mParticleSystems.erase(it);
+}
+
+void CAbstractWorldEntity::warp(const SPATIAL_VECTOR &p,
+                                const Ogre::Quaternion &q) {
   bool attached(false);
   if (m_pCollisionObject) {
     // an attached object has to be readded to the collision world
@@ -237,6 +265,14 @@ btCollisionObject *CAbstractWorldEntity::getCollisionObject() const {
 }
 
 void CAbstractWorldEntity::update(Ogre::Real tpf) {
+  // delete particle systems
+  mEntityMutex.lock();
+  while (mParticleSystemsToDelete.size() > 0) {
+    deleteParticleSystemNow(mParticleSystemsToDelete.front());
+    mParticleSystemsToDelete.pop_front();
+  }
+  mEntityMutex.unlock();
+
   CHitableInterface::update(tpf);
   CEntity::update(tpf);
 }

@@ -21,6 +21,7 @@
 #define _ACTION_CREATE_EFFECT_CONSTRUCTION_INFO_HPP_
 
 #include "ActionConstructionInfo.hpp"
+#include "../../../DataContainers/AttachedParentData.hpp"
 
 class CEffectConstructionInfo;
 
@@ -32,12 +33,17 @@ class CActionCreateEffectConstructionInfo
     : public CActionConstructionInfo {
  private:
   EffectConstructionInfoList mEffectConstructionInfos;
+  DataContainers::CAttachedParentData mAttachedParentData;
  public:
   CActionCreateEffectConstructionInfo(
       const tinyxml2::XMLElement *e);
 
   const EffectConstructionInfoList &getEffectConstructionInfos() const {
     return mEffectConstructionInfos;
+  }
+
+  const DataContainers::CAttachedParentData &getAttachedParentData() const {
+    return mAttachedParentData;
   }
 };
 
