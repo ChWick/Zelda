@@ -32,10 +32,16 @@ class CEffect
       public ParticleUniverse::ParticleSystemListener {
  private:
   static Ogre::NameGenerator mNameGenerator;
+
+  bool mDeleteOnFinished;
  public:
   CEffect(CAbstractWorldEntity *parent, const CEffectConstructionInfo &info);
 
  private:
+  //! This function checks if all effects have finished and deletes
+  //! itself. Only used if mDeleteOnFinished is set
+  void checkIfFinished();
+  
   virtual void handleParticleSystemEvent(
       ParticleUniverse::ParticleSystem* particleSystem,
       ParticleUniverse::ParticleUniverseEvent& particleUniverseEvent) override;

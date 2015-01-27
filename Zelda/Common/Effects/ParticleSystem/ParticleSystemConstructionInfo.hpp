@@ -20,18 +20,25 @@
 #ifndef _PARTICLE_SYSTEM_CONSTRUCTION_INFO_HPP_
 #define _PARTICLE_SYSTEM_CONSTRUCTION_INFO_HPP_
 
+#include <OgreVector3.h>
 #include <string>
 #include "../../tinyxml2/tinyxml2.hpp"
 
 class CParticleSystemConstructionInfo {
  private:
   std::string mType;
+  Ogre::Vector3 mScale;
+  Ogre::Real mScaleVelocity;
+  Ogre::Vector3 mOffset;
 
  public:
   CParticleSystemConstructionInfo();
   CParticleSystemConstructionInfo(const tinyxml2::XMLElement *e);
 
   const std::string &getType() const {return mType;}
+  const Ogre::Vector3 &getScale() const {return mScale;}
+  const Ogre::Real &getScaleVelocity() const {return mScaleVelocity;}
+  const Ogre::Vector3 &getOffset() const {return mOffset;}
 };
 
 #endif /* _PARTICLE_SYSTEM_CONSTRUCTION_INFO_HPP_ */

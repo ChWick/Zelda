@@ -1,0 +1,56 @@
+system BushExplosion
+{
+    technique 
+    {
+        visual_particle_quota                   10
+        emitted_emitter_quota                   10
+        material                                ParticleUniverse_BushExplosion
+        default_particle_width                  1
+        default_particle_height                 1
+        default_particle_depth                  1
+        renderer                                Billboard
+        {
+        }
+        emitter                                 SphereSurface 
+        {
+            emission_rate                       1000
+            angle                               5
+            time_to_live                        1
+            velocity                            dyn_random
+            {
+                min                             0
+                max                             2
+            }
+            duration                            1
+            repeat_delay                        2
+            auto_direction                      true
+            force_emission                      true
+            radius                              1
+        }
+        affector                                LinearForce Affector5
+        {
+            force_vector                        0 -10 0
+        }
+        affector                                TextureRotator Affector4
+        {
+            use_own_rotation                    true
+            rotation                            dyn_random
+            {
+                min                             -5
+                max                             5
+            }
+            rotation_speed                      dyn_random
+            {
+                min                             -5
+                max                             5
+            }
+        }
+        observer                                OnClear OnClearObserver
+        {
+            observe_interval                    0.1
+            handler                             DoStopSystem StopSystemHandler
+            {
+            }
+        }
+    }
+}

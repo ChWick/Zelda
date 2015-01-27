@@ -258,7 +258,7 @@
       <emitter type="received_damage" damage_type="sword|world"/>
       <action type="create_effect" attached_parent_type="map">
 	<effect>
-	  <particle_system type="LampFire"/>
+	  <particle_system type="BushExplosion" scale="0.05" scale_velocity="0.05" offset="0 0 0"/>
 	  <sound type="testSound"/>
 	</effect>
       </action>

@@ -29,7 +29,8 @@ Ogre::NameGenerator CEffect::mNameGenerator("Effect");
 
 CEffect::CEffect(CAbstractWorldEntity *parent,
                  const CEffectConstructionInfo &info)
-    : CAbstractWorldEntity(mNameGenerator.generate(), parent, info) {
+    : CAbstractWorldEntity(mNameGenerator.generate(), parent, info),
+      mDeleteOnFinished(true) {
   m_pSceneNode = parent->getSceneNode()->createChildSceneNode();
 
   LOGV("Creating effect: '%s'", getID().c_str());
@@ -40,9 +41,27 @@ CEffect::CEffect(CAbstractWorldEntity *parent,
     ParticleUniverse::ParticleSystem *p =
         createParticleSystem("_ps_" + Ogre::StringConverter::toString(ps_count),
                              ps_info->getType(), true);
+    p->setScale(ps_info->getScale());
+    p->setScaleVelocity(ps_info->getScaleVelocity());
     // add this as event listener
     p->addParticleSystemListener(this);
   }
+}
+
+void CEffect::checkIfFinished() {
+  if (!mDeleteOnFinished) {
+    return;  // no automatic deleting
+  }
+
+  // all particle systems have to be stopped
+  for (auto &ps : mParticleSystems) {
+    if (ps->getState() != ParticleUniverse::ParticleSystem::PSS_STOPPED) {
+      return;  // there is still a particle system alive
+    }
+  }
+
+  // everything has stopped, or is already removed
+  deleteLater();  // delete us later
 }
 
 void CEffect::handleParticleSystemEvent(
@@ -50,6 +69,14 @@ void CEffect::handleParticleSystemEvent(
     ParticleUniverse::ParticleUniverseEvent& particleUniverseEvent) {
   if (particleUniverseEvent.eventType
       == ParticleUniverse::PU_EVT_SYSTEM_STOPPED) {
+    // this has to be set if checkIfFinished shall work in a correct way
+    ASSERT(particleSystem->getState() ==
+           ParticleUniverse::ParticleSystem::PSS_STOPPED);
+
+    // delete the particle system (later, in update loop)
     deleteParticleSystemLater(particleSystem);
+
+    // check if the effect finished completely, this will delete this
+    checkIfFinished();
   }
 }

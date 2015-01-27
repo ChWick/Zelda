@@ -69,6 +69,7 @@ def makeLightWorldZip() :
 	copyAllOfType(zipf, '../packs/light_world/textures/*', 'textures')
 	copyAllOfType(zipf, '../packs/light_world/materials/*', 'materials')
 	copyAllOfType(zipf, '../packs/light_world/meshes/*', 'meshes')
+	copyAllOfType(zipf, '../packs/light_world/scripts/*', 'scripts')
 
 		# other mesh fiels
 	zipf.write('../maps/bush/GreenBush.mesh', 'meshes/GreenBush.mesh', zipfile.ZIP_DEFLATED)

@@ -24,12 +24,20 @@
 using tinyxml2::XMLElement;
 
 using XMLHelper::Attribute;
+using XMLHelper::RealAttribute;
+using XMLHelper::Vector3Attribute;
 
 CParticleSystemConstructionInfo::CParticleSystemConstructionInfo()
-    : mType("unknown") {
+    : mType("unknown"),
+      mScale(Ogre::Vector3::UNIT_SCALE),
+      mScaleVelocity(1),
+      mOffset(Ogre::Vector3::ZERO) {
 }
 
 CParticleSystemConstructionInfo::CParticleSystemConstructionInfo(
     const tinyxml2::XMLElement *e)
-    : mType(Attribute(e, "type")) {
+    : mType(Attribute(e, "type")),
+      mScale(Vector3Attribute(e, "scale", Ogre::Vector3::UNIT_SCALE)),
+      mScaleVelocity(RealAttribute(e, "scale_velocity", 1)),
+      mOffset(Vector3Attribute(e, "offset", Ogre::Vector3::ZERO)) {
 }
