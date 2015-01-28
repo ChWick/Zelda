@@ -1,0 +1,21 @@
+
+material ParticleUniverse_LightStoneExplosion
+{
+	technique
+	{
+		pass
+		{
+			lighting off
+			scene_blend alpha_blend
+			depth_write off
+
+			texture_unit stone_splitter.png
+			{
+				texture_alias stone_splitter.png
+				texture stone_splitter.png
+			}
+		}
+
+	}
+
+}

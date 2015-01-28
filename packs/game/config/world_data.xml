@@ -274,7 +274,16 @@
       normal_tile = "green_soil_stone_shadow"
       removed_tile = "green_soil_stone_lifted"
       collision_shape = "pickable_object_sphere"
-      />
+      >
+    <event>
+      <emitter type="received_damage" damage_type="world"/>
+      <action type="create_effect" attached_parent_type="map">
+	<effect>
+	  <particle_system type="LightStoneExplosion" scale="0.05" scale_velocity="0.05" offset="0 0 0"/>
+	</effect>
+      </action>
+    </event>
+  </object>
   <object
       type = "light_stone_pile"
       user_handle = "true"
