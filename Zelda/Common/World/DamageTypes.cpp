@@ -30,6 +30,7 @@ void CDamageTypeIdMap::init() {
   m_Map[DMG_FIRE]    = "fire";
 
   m_Map[DMG_RUN]     = "run";
+  m_Map[DMG_FLYING_OBJECT] = "flying_object";
 
   m_Map[DMG_ALL]     = "all";
 }

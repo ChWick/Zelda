@@ -34,6 +34,8 @@ enum EDamageType {
 
   DMG_RUN     = 64,
 
+  DMG_FLYING_OBJECT = 128,            //!< Bush, stone, ... that has been thrown
+
   DMG_ALL     = 511,                  //!< Flag for take/block all damage types
 };
 

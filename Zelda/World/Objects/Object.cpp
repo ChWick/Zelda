@@ -338,8 +338,9 @@ CObject::SInteractionResult CObject::interactOnCollision(
   case OBJECT_LIGHT_STONE:
   case OBJECT_VASE:
     if (m_eState == EST_THROWN) {
+      // we hit the other object by flying object dmg
       pSender->hit(CDamage(this,
-                           DMG_WORLD,
+                           DMG_FLYING_OBJECT,
                            BtOgre::Convert::toOgre(
                                btRigidBody::upcast(this->getCollisionObject())
                                ->getLinearVelocity()).normalisedCopy(),
