@@ -783,7 +783,8 @@ void DotSceneLoader::processEntity(XMLElement *XMLNode, SceneNode *pParent, CUse
   if (isStatic) {
     // for static gemometry (paged geometry), we can use the same entity for each appearance
     if (m_lEntityBufferMap.find(meshFile) == m_lEntityBufferMap.end()) {
-      m_lEntityBufferMap[meshFile] = pEntity = mSceneMgr->createEntity("Ent:" + m_sPrependNode + meshFile, meshFile, m_sGroupName);
+      pEntity = mSceneMgr->createEntity("Ent:" + m_sPrependNode + meshFile, meshFile, m_sGroupName);
+      m_lEntityBufferMap[meshFile] = pEntity;
     }
     else {
       pEntity = m_lEntityBufferMap[meshFile];
