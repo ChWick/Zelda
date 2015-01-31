@@ -147,6 +147,13 @@ void startLuaScriptThread(lua_State *pLuaState, CLuaScript *script) {
 }
 
 void CLuaScript::start() {
+  // be sure that the script is loaded!
+  ASSERT(isLoaded());
+  // if there is an asserten, check if the script is loaded from the correct
+  // resource group, since it may happen that it find an script in the old map
+  // if used AUTODETECT_RESOURCE_GROUP with identical script names
+  
+
   std::lock_guard<std::mutex> lock(mLuaStateMutex);
 
   if (mStarted) {

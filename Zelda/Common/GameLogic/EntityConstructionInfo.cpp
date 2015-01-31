@@ -34,7 +34,7 @@ Ogre::NameGenerator CEntityConstructionInfo::mNameGenerator("Entity");
 CEntityConstructionInfo::CEntityConstructionInfo()
     : mID(mNameGenerator.generate()),
       mResourceGroup(
-          Ogre::ResourceGroupManager::AUTODETECT_RESOURCE_GROUP_NAME),
+          ""),
       mType(0),
       mState(EST_NORMAL),
       mPauseRender(false),
@@ -44,7 +44,7 @@ CEntityConstructionInfo::CEntityConstructionInfo()
 CEntityConstructionInfo::CEntityConstructionInfo(const std::string &id)
     : mID(id),
       mResourceGroup(
-          Ogre::ResourceGroupManager::AUTODETECT_RESOURCE_GROUP_NAME),
+          ""),
       mType(0),
       mState(EST_NORMAL),
       mPauseRender(false),

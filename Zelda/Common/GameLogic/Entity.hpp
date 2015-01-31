@@ -217,6 +217,10 @@ class CEntity : public CMessageInjector {
 protected:
 
   virtual void handleMessage(const CMessagePtr message);
+
+  const std::string &initialiseResourceGroup(
+      CEntity *parent,
+      const CEntityConstructionInfo &info) const;
 };
 
 

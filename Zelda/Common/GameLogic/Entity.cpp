@@ -108,9 +108,9 @@ CEntity::CEntity(CEntity *pParent,
 
 CEntity::CEntity(CEntity *parent,
                  const CEntityConstructionInfo &info)
-  : CMessageInjector(false),
+    : CMessageInjector(false),
       m_sID(info.getID()),
-      m_sResourceGroup(info.getResourceGroup()),
+      m_sResourceGroup(initialiseResourceGroup(parent, info)),
       m_uiType(info.getType()),
       m_eState(info.getState()),
       m_bPauseRender(info.isPauseRender()),
@@ -129,7 +129,7 @@ CEntity::CEntity(const std::string &id,
                  const CEntityConstructionInfo &info)
     : CMessageInjector(false),
       m_sID(id),
-      m_sResourceGroup(info.getResourceGroup()),
+      m_sResourceGroup(initialiseResourceGroup(parent, info)),
       m_uiType(info.getType()),
       m_eState(info.getState()),
       m_bPauseRender(info.isPauseRender()),
@@ -522,4 +522,17 @@ void CEntity::readEventsFromXMLElement(const tinyxml2::XMLElement *pElement,
         pEventElement = pEventElement->NextSiblingElement()) {
     addEvent(new CEvent(this, pEventElement));
   }
+}
+
+
+const std::string &CEntity::initialiseResourceGroup(
+    CEntity *parent,
+    const CEntityConstructionInfo &info) const {
+  if (info.getResourceGroup().size() > 0) {
+    return info.getResourceGroup();
+  }
+  if (parent) {
+    return parent->getResourceGroup();
+  }
+  return Ogre::ResourceGroupManager::AUTODETECT_RESOURCE_GROUP_NAME;
 }

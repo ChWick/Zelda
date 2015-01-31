@@ -36,7 +36,7 @@ CActionStartScript::CActionStartScript(const tinyxml2::XMLElement *pElem,
           Attribute(pElem, "file"),
           Attribute(pElem, "resource_group",
                     owner.getOwner()->getResourceGroup()))
-              .staticCast<CLuaScript>()) {
+              .dynamicCast<CLuaScript>()) {
   ASSERT(mScript.isNull() == false);
 }
 
@@ -49,7 +49,7 @@ CActionStartScript::CActionStartScript(
           (info->getResourceGroup().size() > 0) ?
           info->getResourceGroup() :
           owner.getOwner()->getResourceGroup())
-              .staticCast<CLuaScript>()) {
+              .dynamicCast<CLuaScript>()) {
   ASSERT(mScript.isNull() == false);
 }
 

@@ -4,13 +4,13 @@
   <region id="top_margin" position="0 0 -1.6" size="1.6 1 0.01" shape="box"/>
   <region id="left_margin" position="-1.6 0 0" size="0.01 1 1.6" shape="box"/>
   <region id="right_margin" position="1.6 0 0" size="0.01 1 1.6" shape="box">
-    <event repeat="infinite">
+    <event repeat_type="infinite">
       <emitter type="collision" id="player"/>
       <action type="message" message_type="switch_map" map="link_house" switch_map_type="move_camera"/>
     </event>
   </region>
   <scene_entity id="green_tree.019">
-    <event repeat="none">
+    <event repeat_type="none">
       <emitter type="received_damage" damage="run"/>
       <action type="create_object" object_type="rupee_red" location="inner"/>
     </event>
@@ -19,7 +19,7 @@
   </new_entity>
 
   <new_entity id="link_house_left_block_1" rotation="0" position="1 1 0" person_type="soldier_block">
-    <event repeat="infinite">
+    <event repeat_type="infinite">
       <emitter type="interaction" />
       <action type="start_script" file="instructions.lua"/>
     </event>
