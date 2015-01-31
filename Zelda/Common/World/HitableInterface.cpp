@@ -21,6 +21,23 @@
 #include "Damage.hpp"
 #include "../Message/MessageHandler.hpp"
 #include "../Message/MessageHitpointsChanged.hpp"
+#include "HitableInterfaceConstructionInfo.hpp"
+
+
+CHitableInterface::CHitableInterface()
+    : m_uiMaxHP(0),
+      m_uiCurrentHP(0),
+      m_fInvulnerableTimer(0),
+      m_bInvulnerable(false) {
+}
+
+CHitableInterface::CHitableInterface(
+    const CHitableInterfaceConstructionInfo &info)
+    : m_uiMaxHP(info.getMaximalHitpoints()),
+      m_uiCurrentHP(info.getCurrentHitpoints()),
+      m_fInvulnerableTimer(info.getInvulnerableTimer()),
+      m_bInvulnerable(info.isInvulnerable()) {
+}
 
 void CHitableInterface::update(float tpf) {
   if (m_bInvulnerable) {

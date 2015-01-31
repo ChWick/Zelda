@@ -20,6 +20,7 @@
 #include "Character.hpp"
 #include <BulletDynamics/Character/btCharacterControllerInterface.h>
 #include <string>
+#include "CharacterConstructionInfo.hpp"
 #include "CharacterController.hpp"
 #include "../Atlas/Map.hpp"
 #include "../../Common/Physics/PhysicsMasks.hpp"
@@ -31,14 +32,29 @@
 #include "../../Common/Util/Assert.hpp"
 
 // map will be set on enter map, in construction, m_pMap is nullptr
+CCharacter::CCharacter(CAbstractWorldEntity *pParent,
+                       const CCharacterConstructionInfo &info)
+    : CWorldEntity(pParent, info),
+      mAttitude(info.getAttitude()),
+  mAnimationDataList(info.getAnimationDataList()),
+  m_pCharacterController(nullptr),
+  m_uiAnimationCount(info.getAnimationDataList().size()),
+    m_fTimer(0),
+    m_fAnimSpeed(1) {
+  m_Anims.resize(m_uiAnimationCount);
+  m_uiAnimID = m_uiAnimationCount;
+
+  constructor_impl();
+}
+
 CCharacter::CCharacter(const std::string &sID,
-                       CEntity *pParent,
-                       CMap *pMap,
-                       const SCharacterData &characterData)
-  : CWorldEntity(sID, pParent, pMap),
-    mCharacterData(characterData),
-    m_pCharacterController(nullptr),
-    m_uiAnimationCount(characterData.mAnimations.size()),
+                       CAbstractWorldEntity *pParent,
+                       const CCharacterConstructionInfo &info)
+    : CWorldEntity(sID, pParent, info),
+      mAttitude(info.getAttitude()),
+  mAnimationDataList(info.getAnimationDataList()),
+  m_pCharacterController(nullptr),
+  m_uiAnimationCount(info.getAnimationDataList().size()),
     m_fTimer(0),
     m_fAnimSpeed(1) {
   m_Anims.resize(m_uiAnimationCount);
@@ -46,26 +62,9 @@ CCharacter::CCharacter(const std::string &sID,
 
   constructor_impl();
 }
-
-CCharacter::CCharacter(const tinyxml2::XMLElement *pElem,
-                       CEntity *pParent,
-                       CMap *pMap,
-                       const SCharacterData &characterData)
-  : CWorldEntity(pParent, pMap, pElem),
-    mCharacterData(characterData),
-    m_pCharacterController(nullptr),
-    m_uiAnimationCount(characterData.mAnimations.size()),
-    m_fTimer(0),
-    m_fAnimSpeed(1) {
-  m_Anims.resize(m_uiAnimationCount);
-  m_uiAnimID = m_uiAnimationCount;
-
-  constructor_impl();
-}
-
 
 void CCharacter::constructor_impl() {
-  switch (mCharacterData.mAttitude) {
+  switch (getAttitude()) {
   case ATTITUDE_ENEMY:
     mCollisionMask = MASK_PLAYER_N_COLLIDES_WITH;
     mCollisionGroup = COL_CHARACTER_N;
@@ -85,7 +84,7 @@ void CCharacter::constructor_impl() {
 
   mAnimationProperty.resize(m_uiAnimationCount);
   for (uint8_t i = 0; i < m_uiAnimationCount; ++i) {
-    mAnimationProperty[i].mAnimationData = &mCharacterData.mAnimations[i];
+    mAnimationProperty[i].mAnimationData = &mAnimationDataList[i];
   }
 }
 
@@ -185,7 +184,7 @@ bool CCharacter::createDamage(const Ogre::Ray &ray, const CDamage &dmg) {
   btCollisionWorld::ClosestRayResultCallback rayCallback(
       BtOgre::Convert::toBullet(ray.getOrigin()),
       BtOgre::Convert::toBullet(ray.getPoint(1)));
-  if (mCharacterData.mAttitude == ATTITUDE_FRIENDLY) {
+  if (getAttitude() == ATTITUDE_FRIENDLY) {
     rayCallback.m_collisionFilterGroup = COL_DAMAGE_P;
     rayCallback.m_collisionFilterMask = MASK_DAMAGE_P_COLLIDES_WITH;
   } else {

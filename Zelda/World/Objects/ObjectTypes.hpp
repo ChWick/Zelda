@@ -65,7 +65,8 @@ class CObjectConstructionInfo
 
  public:
   CObjectConstructionInfo();
-  CObjectConstructionInfo(const tinyxml2::XMLElement *e);
+
+  virtual void parse(const tinyxml2::XMLElement *e) override;
 
   CObjectConstructionInfo &operator=(const CObjectConstructionInfo&) = default;
 

@@ -32,33 +32,51 @@ using tinyxml2::XMLElement;
 using XMLHelper::Attribute;
 using XMLHelper::BoolAttribute;
 using XMLHelper::RealAttribute;
+using XMLHelper::Vector3Attribute;
 
 CObjectConstructionInfo::CObjectConstructionInfo()
-    : CWorldEntityConstructionInfo("BasicObjectConstructionInfo") {
+    : CWorldEntityConstructionInfo(),
+      mUserHandle(false),
+      mPermanentStatic(false),
+      mDamageSourceMask(DMG_NONE),
+      mNormalTile(TT_COUNT),
+      mRemovedTile(TT_COUNT),
+      mCollisionShape(GCST_COUNT),
+      mPhysicsShapeScale(1, 1, 1) {
 }
 
-CObjectConstructionInfo::CObjectConstructionInfo(const tinyxml2::XMLElement *e)
-    : CWorldEntityConstructionInfo(e),
-      mUserHandle(BoolAttribute(e, "user_handle", true)),
-      mPermanentStatic(BoolAttribute(e, "permanent_static", false)),
-      mMeshName(Attribute(e, "mesh_name")),
-      mMaterialName(Attribute(e, "material_name", "")),
-      mDamageSourceMask(CDamageTypeIdMap::getSingleton().parseString(
-          Attribute(e, "damage_source_mask", "none"))),
-      mNormalTile(CTileTypeIdMap::getSingleton().parseString(
-          Attribute(e, "normal_tile", "none"))),
-      mRemovedTile(CTileTypeIdMap::getSingleton().parseString(
-          Attribute(e, "removed_tile", "none"))),
-  mCollisionShape(CGlobalCollisionShapesTypesIdMap::getSingleton().
-                  parseString(Attribute(e, "collision_shape", "none"))),
-  mPhysicsShapeScale(BtOgre::Convert::toBullet(
-      Ogre::StringConverter::parseVector3(
-          Attribute(e, "physics_shape_scale", "1 1 1")))) {
+
+void CObjectConstructionInfo::parse(const tinyxml2::XMLElement *e) {
+  CWorldEntityConstructionInfo::parse(e);
+
+  mUserHandle = BoolAttribute(e, "user_handle", mUserHandle);
+  mPermanentStatic = BoolAttribute(e, "permanent_static", mPermanentStatic);
+  mMeshName = Attribute(e, "mesh_name", mMeshName);
+  mMaterialName = Attribute(e, "material_name", mMaterialName);
+  mDamageSourceMask = CDamageTypeIdMap::getSingleton().parseString(
+      Attribute(e, "damage_source_mask",
+                CDamageTypeIdMap::getSingleton().toString(
+                    mDamageSourceMask)));
+  mNormalTile = CTileTypeIdMap::getSingleton().parseString(
+      Attribute(e, "normal_tile", CTileTypeIdMap::getSingleton().toString(
+          mNormalTile)));
+  mRemovedTile = CTileTypeIdMap::getSingleton().parseString(
+      Attribute(e, "removed_tile", CTileTypeIdMap::getSingleton().toString(
+          mRemovedTile)));
+  mCollisionShape = CGlobalCollisionShapesTypesIdMap::getSingleton().
+      parseString(Attribute(
+          e, "collision_shape",
+          CGlobalCollisionShapesTypesIdMap::getSingleton().toString(
+              mCollisionShape)));
+  mPhysicsShapeScale = BtOgre::Convert::toBullet(
+      Vector3Attribute(e, "physics_shape_scale",
+                       BtOgre::Convert::toOgre(mPhysicsShapeScale)));
+
   setType(CObjectTypeIdMap::getSingleton().
-          parseString(Attribute(e, "type")));
+          parseString(Attribute(e, "type",
+                                CObjectTypeIdMap::getSingleton().toString(
+                                    static_cast<EObjectTypes>(getType())))));
 }
-
-
 
 void CObjectTypeIdMap::init() {
   m_Map[OBJECT_GREEN_BUSH] = "green_bush";

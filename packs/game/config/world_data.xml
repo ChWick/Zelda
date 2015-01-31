@@ -253,6 +253,7 @@
       normal_tile = "green_soil_bush_shadow"
       removed_tile = "green_soil_bush_lifted"
       collision_shape = "pickable_object_sphere"
+      hitpoints = "0"
       >
     <event>
       <emitter type="received_damage" damage_type="sword|world"/>
@@ -274,6 +275,7 @@
       normal_tile = "green_soil_stone_shadow"
       removed_tile = "green_soil_stone_lifted"
       collision_shape = "pickable_object_sphere"
+      hitpoints = "0"
       >
     <event>
       <emitter type="received_damage" damage_type="world"/>
@@ -294,6 +296,7 @@
       normal_tile = "green_soil_stone_pile_shadow"
       removed_tile = "green_soil"
       collision_shape = "stone_pile"
+      hitpoints = "0"
       />
   <object
       type = "vase"
@@ -303,6 +306,7 @@
       material_name = "VaseSide"
       damage_source_mask = "world"
       collision_shape = "pickable_object_sphere"
+      hitpoints = "0"
       />
   <object
       type = "green_tree"
@@ -429,7 +433,7 @@
        loop (bool)                        loop the animation
      -->
   <person
-      id="link"
+      person_type="link"
       character_class="player"
       mesh_name="link"
       material_name="link_armor"
@@ -446,7 +450,7 @@
     <animation name="Awake" id="6" loop="false"/>
   </person>
   <person
-      id="links_father"
+      person_type="links_father"
       character_class="links_father"
       mesh_name="links_father"
       attitude="friend"
@@ -457,7 +461,7 @@
 p    <animation name="Walk" id="2"/>
   </person>
   <person
-      id="soldier_block"
+      person_type="soldier_block"
       character_class="standing_person"
       mesh_name="soldier"
       material_name="soldier_green"
@@ -468,7 +472,7 @@ p    <animation name="Walk" id="2"/>
     <!--animation name="Walk" id="1"/ -->
   </person>
   <person
-      id="soldier_blue"
+      person_type="soldier_blue"
       character_class="simple_enemy"
       mesh_name="soldier"
       material_name="soldier_blue"
@@ -480,7 +484,7 @@ p    <animation name="Walk" id="2"/>
     <animation name="Walk" id="1"/>
   </person>
   <person
-      id="soldier_green_sword"
+      person_type="soldier_green_sword"
       character_class="simple_enemy"
       mesh_name="soldier"
       material_name="soldier_green"
@@ -490,5 +494,13 @@ p    <animation name="Walk" id="2"/>
       >
     <animation name="Scout" id="0"/>
     <animation name="Walk" id="1"/>
+    <event>
+      <emitter type="received_damage" damage_type="all"/>
+      <action type="create_effect" attached_parent_type="map">
+	<effect>
+	  <particle_system type="BushExplosion" scale="0.05" scale_velocity="0.05" offset="0 0 0"/>
+	</effect>
+      </action>
+    </event>
   </person>
 </world_data>

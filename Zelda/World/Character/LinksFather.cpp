@@ -24,10 +24,9 @@
 #include <OgreSceneNode.h>
 #include "PersonController.hpp"
 
-CLinksFather::CLinksFather(const tinyxml2::XMLElement *pElem,
-                           CEntity *pParent,
-                           CMap *pMap)
-    : CPerson(pElem, pParent, pMap, LF_ANIM_COUNT) {
+CLinksFather::CLinksFather(CAbstractWorldEntity *pParent,
+                           const CPersonConstructionInfo &info)
+    : CPerson(pParent, info, LF_ANIM_COUNT) {
 }
 
 void CLinksFather::updateAnimationsCallback(const Ogre::Real fTime) {

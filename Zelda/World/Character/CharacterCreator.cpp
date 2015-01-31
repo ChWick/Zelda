@@ -28,6 +28,8 @@
 #include "../Character/StandingPerson.hpp"
 #include "../Character/LinksFather.hpp"
 #include "../Character/PersonTypes.hpp"
+#include "../Character/CharacterConstructionInfo.hpp"
+#include "../Character/PersonData.hpp"
 
 using XMLHelper::Attribute;
 using XMLHelper::RealAttribute;
@@ -35,13 +37,14 @@ using XMLHelper::RealAttribute;
 CWorldEntity* CCharacterCreator::createCharacter(
     const tinyxml2::XMLElement *pElem,
     CWorldEntity *pParent,
-    CMap *pMap,
     CWorldEntity *pPlayer) {
 
   EPersonTypes personType = CPersonTypeIdMap::getSingleton().
       parseString(Attribute(pElem, "person_type"));
-  const SCharacterData &characterData(
+  // create copy of default and parse the element
+  CPersonConstructionInfo characterInfo(
       CPersonDataIdMap::getSingleton().toData(personType));
+  characterInfo.parse(pElem);
 
   const Ogre::Real rotation(RealAttribute(pElem, "rotation", 0));
   const Ogre::Quaternion qOrientation(Ogre::Degree(rotation),
@@ -51,24 +54,24 @@ CWorldEntity* CCharacterCreator::createCharacter(
 
   CWorldEntity *pEntity(nullptr);
 
-  if (characterData.mCharacterClass == "simple_enemy") {
-    CSimpleEnemy *pEnemy = new CSimpleEnemy(pElem, pParent, pMap);
+  if (characterInfo.getCharacterClass() == "simple_enemy") {
+    CSimpleEnemy *pEnemy = new CSimpleEnemy(pParent, characterInfo);
     // special case, set player requires that enemy entered map
-    pEnemy->enterMap(pMap, position);
+    pEnemy->enterMap(pParent->getMap(), position);
     pEnemy->setOrientation(qOrientation);
     pEnemy->setPlayer(pPlayer);
     return pEnemy;
-  } else if (characterData.mCharacterClass == "standing_person") {
-    pEntity = new CStandingPerson(pElem, pParent, pMap);
-  } else if (characterData.mCharacterClass == "links_father") {
-    pEntity = new CLinksFather(pElem, pParent, pMap);
+  } else if (characterInfo.getCharacterClass() == "standing_person") {
+    pEntity = new CStandingPerson(pParent, characterInfo);
+  } else if (characterInfo.getCharacterClass() == "links_father") {
+    pEntity = new CLinksFather(pParent, characterInfo);
   } else {
     return nullptr;  // unknown
   }
 
   ASSERT(pEntity);
 
-  pEntity->enterMap(pMap, position);
+  pEntity->enterMap(pParent->getMap(), position);
   pEntity->setOrientation(qOrientation);
 
   return pEntity;

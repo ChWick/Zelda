@@ -21,43 +21,56 @@
 #define _PERSON_H_
 
 #include "Character.hpp"
+#include "PersonTypes.hpp"
 #include <OgreMaterial.h>
 
-struct SPersonData;
+class CPersonConstructionInfo;
 
 //! Class for a general person
 /** It will define physics, animations, based on the same skeleton/mesh
   */
 class CPerson : public CCharacter {
-public:
-	static const Ogre::Real PERSON_HEIGHT;
-	static const Ogre::Real PERSON_RADIUS;
+ public:
+  static const Ogre::Real PERSON_HEIGHT;
+  static const Ogre::Real PERSON_RADIUS;
   static const Ogre::Real PERSON_PHYSICS_OFFSET;
   static const Ogre::Real PERSON_FLOOR_OFFSET;
-protected:
-	static const Ogre::String PERSON_LEFT_HANDLE;
-	static const Ogre::String PERSON_RIGHT_HANDLE;
-	static const Ogre::String PERSON_SHEATH;
-	static const Ogre::String PERSON_SHIELD_PACKED;
+ protected:
+  static const Ogre::String PERSON_LEFT_HANDLE;
+  static const Ogre::String PERSON_RIGHT_HANDLE;
+  static const Ogre::String PERSON_SHEATH;
+  static const Ogre::String PERSON_SHIELD_PACKED;
+  
+  enum EHands {LEFT_HAND, RIGHT_HAND, NUM_HANDS};
 
-	enum EHands {LEFT_HAND, RIGHT_HAND, NUM_HANDS};
+ private:
+  // person data fields
+  EPersonTypes mPersonType;
+  std::string mMeshName;
+  std::string mMaterialName;
+  Ogre::Vector3 mScale;
+ protected:
+  Ogre::MaterialPtr m_pMaterial;
+ private:
+  Ogre::Degree m_degLeftHandleCurrentRotation;
+  Ogre::Degree m_degLeftHandleRotationToTarget;
+  Ogre::Degree m_degLeftHandleRotationSpeed;
+ protected:
+  unsigned int m_uiTakeDamageFlags;               //!< from which dmg types the person can take damage (default all)
+  unsigned int m_uiBlockDamageFlags;              //!< which dmg type will be blocked (default all)
+ public:
+  
+  CPerson(CAbstractWorldEntity *pParent,
+          const CPersonConstructionInfo &info,
+          unsigned int uiAnimationCount = ANIM_COUNT);
+  
+  CPerson(const std::string &id,
+          CAbstractWorldEntity *pParent,
+          const CPersonConstructionInfo &info,
+          unsigned int uiAnimationCount = ANIM_COUNT);
+  virtual ~CPerson();
 
-protected:
-  const SPersonData &m_PersonData;
-    Ogre::MaterialPtr m_pMaterial;
-private:
-    Ogre::Degree m_degLeftHandleCurrentRotation;
-    Ogre::Degree m_degLeftHandleRotationToTarget;
-    Ogre::Degree m_degLeftHandleRotationSpeed;
-protected:
-	unsigned int m_uiTakeDamageFlags;               //!< from which dmg types the person can take damage (default all)
-	unsigned int m_uiBlockDamageFlags;              //!< which dmg type will be blocked (default all)
-public:
-	CPerson(const std::string &sID, CEntity *pParent, CMap *pMap, const SPersonData &personData, unsigned int uiAnimationCount = ANIM_COUNT);
-	CPerson(const tinyxml2::XMLElement *pElem, CEntity *pParent, CMap *pMap, unsigned int uiAnimationCount);
-	virtual ~CPerson();
-
-	virtual void exit();
+  virtual void exit();
 
   virtual bool frameEnded(const Ogre::FrameEvent& evt);
 
@@ -70,28 +83,28 @@ public:
   virtual const Ogre::Vector3 getFloorPosition() const;
   virtual void setFloorPosition(const Ogre::Vector3 &p);
 
-    virtual void moveToTarget(const SPATIAL_VECTOR &vPosition, const Ogre::Quaternion &qRotation = Ogre::Quaternion::IDENTITY, const Ogre::Real fMaxDistanceDeviation = 0, const Ogre::Radian fMaxAngleDeviation = Ogre::Radian(Ogre::Math::TWO_PI));
+  virtual void moveToTarget(const SPATIAL_VECTOR &vPosition, const Ogre::Quaternion &qRotation = Ogre::Quaternion::IDENTITY, const Ogre::Real fMaxDistanceDeviation = 0, const Ogre::Radian fMaxAngleDeviation = Ogre::Radian(Ogre::Math::TWO_PI));
 
-protected:
-	virtual void createPhysics();
-	virtual void destroyPhysics();
-	virtual void initBody(Ogre::SceneNode *pParentSceneNode);
+ protected:
+  virtual void createPhysics();
+  virtual void destroyPhysics();
+  virtual void initBody(Ogre::SceneNode *pParentSceneNode);
 
-	void updateAnimationsCallback(const Ogre::Real fTime);
-	void postUpdateAnimationsCallback(const Ogre::Real fTime);
+  void updateAnimationsCallback(const Ogre::Real fTime);
+  void postUpdateAnimationsCallback(const Ogre::Real fTime);
 
-	void setLeftHandleRotation(const Ogre::Degree &degree, Ogre::Real speed = 0);
+  void setLeftHandleRotation(const Ogre::Degree &degree, Ogre::Real speed = 0);
 
-	virtual void startBeingInvulnerableCallback();
-	virtual void endBeingInvulnerableCallback();
+  virtual void startBeingInvulnerableCallback();
+  virtual void endBeingInvulnerableCallback();
 
-	virtual CCharacterController *createCharacterController();
+  virtual CCharacterController *createCharacterController();
 
-	void createBlinkingMaterials();
-	void removeBlinkingMaterials();
+  void createBlinkingMaterials();
+  void removeBlinkingMaterials();
 
-	friend class CShield;
-protected:
+  friend class CShield;
+ protected:
   virtual void myDamageBlocked(const CDamage &damage,
                                CHitableInterface *hitInterface);
 

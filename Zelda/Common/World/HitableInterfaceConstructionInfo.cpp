@@ -17,21 +17,26 @@
  * Zelda. If not, see http://www.gnu.org/licenses/.
  *****************************************************************************/
 
-#include "CharacterData.hpp"
-#include "../../Common/Util/XMLHelper.hpp"
+#include "HitableInterfaceConstructionInfo.hpp"
+#include "../Util/XMLHelper.hpp"
 
-using XMLHelper::Attribute;
-using XMLHelper::RealAttribute;
 using XMLHelper::IntAttribute;
+using XMLHelper::RealAttribute;
 using XMLHelper::BoolAttribute;
 
-SCharacterAnimationData::SCharacterAnimationData(
-    const tinyxml2::XMLElement *e) {
-  mName = Attribute(e, "name");
-  mId = IntAttribute(e, "id");
-  mLoop = BoolAttribute(e, "loop", true);
-  mAllowMoving = BoolAttribute(e, "allow_moving", true);
+CHitableInterfaceConstructionInfo::CHitableInterfaceConstructionInfo()
+    : mMaximalHitpoints(HP_INFINITY / HP_ONE_HEART),
+      mCurrentHitpoints(HP_INFINITY / HP_ONE_HEART),
+      mInvulnerableTimer(0),
+      mInvulnerable(false) {
 }
 
-SCharacterAnimationData::SCharacterAnimationData() {
+void CHitableInterfaceConstructionInfo::parse(const tinyxml2::XMLElement *e) {
+  mMaximalHitpoints = HP_ONE_HEART * IntAttribute(
+      e, "hitpoints", mMaximalHitpoints);
+  mCurrentHitpoints = HP_ONE_HEART * IntAttribute(
+      e, "current_hitpoints", mCurrentHitpoints);
+  mInvulnerableTimer = RealAttribute(e, "invulnerable_timer",
+                                     mInvulnerableTimer);
+  mInvulnerable = BoolAttribute(e, "is_invulnerable", mInvulnerable);
 }

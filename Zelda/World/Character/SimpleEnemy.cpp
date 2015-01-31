@@ -31,22 +31,13 @@
 #include "CharacterController_Physics.hpp"
 #include "../Items/CharacterItem.hpp"
 
-CSimpleEnemy::CSimpleEnemy(const std::string &sID,
-                           const SPersonData &data,
-                           CEntity *pParent,
-                           CMap *pMap)
-    : CPerson(sID,
-              pParent,
-              pMap,
-              data,
+CSimpleEnemy::CSimpleEnemy(CAbstractWorldEntity *pParent,
+                           const CPersonConstructionInfo &info)
+    : CPerson(pParent,
+              info,
               SE_ANIM_COUNT) {
 }
 
-CSimpleEnemy::CSimpleEnemy(const tinyxml2::XMLElement *pElem,
-                           CEntity *pParent,
-                           CMap *pMap)
-  : CPerson(pElem, pParent, pMap, SE_ANIM_COUNT) {
-}
 void CSimpleEnemy::setupInternal() {
   changeItem(CIS_WEAPON,
              PERSON_RIGHT_HANDLE, ITEM_VARIANT_ENEMY_SWORD_SIMPLE);
@@ -107,7 +98,7 @@ void CSimpleEnemy::updateAnimationsCallback(const Ogre::Real fTime) {
            : dynamic_cast<CharacterControllerPhysics*>(mCCPhysics)
            ->getCollidingWorldEntities()) {
     if (dynamic_cast<CCharacter*>(pEnt)
-        && dynamic_cast<CCharacter*>(pEnt)->getCharacterData().mAttitude
+        && dynamic_cast<CCharacter*>(pEnt)->getAttitude()
         == ATTITUDE_FRIENDLY) {
       attack(CDamage(this,
                      DMG_SWORD,

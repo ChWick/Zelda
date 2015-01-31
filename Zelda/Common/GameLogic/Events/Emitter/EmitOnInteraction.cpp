@@ -24,8 +24,16 @@
 
 namespace events {
 
-CEmitOnInteraction::CEmitOnInteraction(const tinyxml2::XMLElement *pElem, const CEvent &owner)
-  : CEmitter(pElem, owner) {
+CEmitOnInteraction::CEmitOnInteraction(const tinyxml2::XMLElement *pElem,
+                                       const CEvent &owner)
+    : CEmitter(pElem, owner) {
 }
 
-};
+
+CEmitOnInteraction::CEmitOnInteraction(
+    const std::shared_ptr<CEmitOnInteractionConstructionInfo> info,
+    const CEvent &owner)
+    : CEmitter(EMIT_ON_INTERACTION, owner) {
+}
+
+}  // namespace events

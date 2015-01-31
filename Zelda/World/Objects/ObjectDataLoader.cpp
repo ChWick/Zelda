@@ -21,7 +21,8 @@
 #include "ObjectTypes.hpp"
 
 void CObjectDataLoader::readGroupElement(const tinyxml2::XMLElement *e) {
-  CObjectConstructionInfo info(e);
+  CObjectConstructionInfo info;
+  info.parse(e);
   CObjectDataMap::getSingleton().setData(
       static_cast<EObjectTypes>(info.getType()), info);
 }

@@ -23,6 +23,7 @@
 #include "../Atlas/Map.hpp"
 #include "../../Common/Util/DebugDrawer.hpp"
 #include "PlayerController.hpp"
+#include "PersonData.hpp"
 #include <OgreLogManager.h>
 #include "../../Common/PauseManager/PauseTypes.hpp"
 #include "../../Common/Physics/BtOgreExtras.hpp"
@@ -49,12 +50,11 @@
 Ogre::Real g_fCurrentSpeedScale = 1;
 const Ogre::Real PLAYER_ENEMY_NOTIFY_RADIUS_SQR = 100.f;  // already squared
 
-CPlayer::CPlayer(CEntity *pParent,
+CPlayer::CPlayer(CAbstractWorldEntity *pParent,
                  const Ogre::Camera* pCamera,
                  Ogre::SceneManager *pPlayerSceneManager)
     : CPerson("player",
               pParent,
-              nullptr,
               CPersonDataIdMap::getSingleton().toData(PERSON_LINK)),
     m_pCamera(pCamera),
     m_pPlayerSceneManager(pPlayerSceneManager),

@@ -31,6 +31,7 @@ class btRigidBody;
 class CMap;
 class CCharacterController;
 class CCharacterItem;
+class CCharacterConstructionInfo;
 
 class btCollisionShape;
 class btCharacterControllerInterface;
@@ -101,10 +102,14 @@ public:
     
     CIS_COUNT,
   };
-protected:
-  //! Character data
-  const SCharacterData &mCharacterData;
-
+ private:
+  // properties that define the character
+  
+  //! attitude
+  ECharacterAttitude mAttitude;
+  //! animations
+  CharacterAnimationDataList mAnimationDataList;
+ protected:
   bool m_bMoving;
   Ogre::Entity *m_pBodyEntity;									//!< The entity of the body
   btCharacterControllerInterface *mCCPhysics;		//!< The bullet character controller (Physics)
@@ -122,7 +127,9 @@ protected:
   Ogre::Real m_fTimer;																//!< Animation timer (how long is the current animation running)
   Ogre::Real m_fAnimSpeed;														//!< Animation speed
 protected:
+  //! current items of the character
   std::shared_ptr<CCharacterItem> mCurrentItems[CIS_COUNT];
+  //! properties of the animations
   std::vector<SAnimationProperty> mAnimationProperty;
 public:
 
@@ -130,7 +137,10 @@ public:
   Ogre::Entity *getBodyEntity() const {return m_pBodyEntity;}
   btCharacterControllerInterface *getKinematicCharacterController() const {return mCCPhysics;}
   CCharacterController *getCharacterController() const {return m_pCharacterController;}
-  const SCharacterData &getCharacterData() const {return mCharacterData;}
+  ECharacterAttitude getAttitude() const {return mAttitude;}
+  const CharacterAnimationDataList &getAnimationDataList() const {
+    return mAnimationDataList;
+  }
   const Ogre::vector<Ogre::AnimationState*>::type &getAnimations() const {return m_Anims;}
   unsigned int getCurrentAnimationID() const {return m_uiAnimID;}
   const std::vector<SAnimationProperty> &getAnimationProperties() const {return mAnimationProperty;}
@@ -140,19 +150,16 @@ public:
   }
 
   // reimplemented
-  void setPosition(const Ogre::Vector3 &vPos);
-  void setOrientation(const Ogre::Quaternion &vRotation);
+  void setPosition(const Ogre::Vector3 &vPos) override;
+  void setOrientation(const Ogre::Quaternion &vRotation) override;
 
 protected:
   // all values scaled in world units!
+  CCharacter(CAbstractWorldEntity *pParent,
+             const CCharacterConstructionInfo &info);
   CCharacter(const std::string &sID,
-             CEntity *pParent,
-             CMap *pMap,
-             const SCharacterData &characterData);
-  CCharacter(const tinyxml2::XMLElement *pElem,
-             CEntity *pParent,
-             CMap *pMap,
-             const SCharacterData &characterData);
+             CAbstractWorldEntity *pParent,
+             const CCharacterConstructionInfo &info);
 
 public:
   virtual ~CCharacter();

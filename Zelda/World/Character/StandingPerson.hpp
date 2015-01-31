@@ -34,7 +34,8 @@ public:
 
 private:
 public:
-	CStandingPerson(const tinyxml2::XMLElement *pElem, CEntity *pParent, CMap *pMap);
+  CStandingPerson(CAbstractWorldEntity *pParent,
+                  const CPersonConstructionInfo &info);
 
 protected:
 	void setupInternal();

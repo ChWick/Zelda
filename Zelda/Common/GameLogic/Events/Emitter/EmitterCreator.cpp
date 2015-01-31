@@ -25,6 +25,7 @@
 
 #include "EmitOnCollision.hpp"
 #include "EmitOnInteraction.hpp"
+#include "EmitOnInteractionConstructionInfo.hpp"
 #include "EmitOnReceivedDamage.hpp"
 #include "EmitOnReceivedDamageConstructionInfo.hpp"
 #include "EmitOnStatusChange.hpp"
@@ -63,6 +64,11 @@ CEmitter *createEmitter(std::shared_ptr<CEmitterConstructionInfo> info,
     case EMIT_ON_RECEIVED_DAMAGE:
       return new CEmitOnReceivedDamage(
           std::dynamic_pointer_cast<CEmitOnReceivedDamageConstructionInfo>(
+              info),
+          owner);
+    case EMIT_ON_INTERACTION:
+      return new CEmitOnInteraction(
+          std::dynamic_pointer_cast<CEmitOnInteractionConstructionInfo>(
               info),
           owner);
   }

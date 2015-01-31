@@ -23,11 +23,17 @@
 #include "Emitter.hpp"
 
 namespace events {
-  class CEmitOnInteraction : public CEmitter {
-  private:
-  public:
-    CEmitOnInteraction(const tinyxml2::XMLElement *pElem, const CEvent &owner);
-  };
+class CEmitOnInteractionConstructionInfo;
+
+class CEmitOnInteraction : public CEmitter {
+ private:
+ public:
+  CEmitOnInteraction(const tinyxml2::XMLElement *pElem, const CEvent &owner);
+  CEmitOnInteraction(
+      const std::shared_ptr<CEmitOnInteractionConstructionInfo> info,
+      const CEvent &owner);
 };
+
+}  // namespace events
 
 #endif // _EMIT_ON_INTERACTION_HPP_

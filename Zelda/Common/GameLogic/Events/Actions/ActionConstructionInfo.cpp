@@ -23,6 +23,7 @@
 
 #include "ActionCreateObjectConstructionInfo.hpp"
 #include "ActionCreateEffectConstructionInfo.hpp"
+#include "ActionStartScriptConstructionInfo.hpp"
 
 
 using XMLHelper::Attribute;
@@ -43,6 +44,8 @@ CActionConstructionInfo::createNew(const tinyxml2::XMLElement *e) {
       return std::make_shared<CActionCreateObjectConstructionInfo>(e);
     case ACTION_CREATE_EFFECT:
       return std::make_shared<CActionCreateEffectConstructionInfo>(e);
+    case ACTION_START_SCRIPT:
+      return std::make_shared<CActionStartScriptConstructionInfo>(e);
     default:
       throw Ogre::Exception(type,
                             "ActionConstructionInfo type not implemented",

@@ -17,29 +17,33 @@
  * Zelda. If not, see http://www.gnu.org/licenses/.
  *****************************************************************************/
 
-#ifndef _LINKS_FATHER_HPP_
-#define _LINKS_FATHER_HPP_
+#ifndef PERSONCONSTRUCTIONINFO_HPP
+#define PERSONCONSTRUCTIONINFO_HPP
 
-#include "Person.hpp"
+#include <OgreVector3.h>
+#include "../../Common/World/Hitpoints.hpp"
+#include "CharacterConstructionInfo.hpp"
+#include "PersonTypes.hpp"
 
-class CLinksFather : public CPerson {
-public:
-  enum ELinksFatherAnimations {
-    LF_ANIM_SIT,
-    LF_ANIM_STAND_UP,
-    LF_ANIM_WALK,
-    
-    LF_ANIM_COUNT,
-  };
-  
+class CPersonConstructionInfo
+    : public CCharacterConstructionInfo {
  private:
+  EPersonTypes mPersonType;
+  std::string mMeshName;
+  std::string mMaterialName;
+  Ogre::Vector3 mScale;
+  
  public:
-  CLinksFather(CAbstractWorldEntity *pParent,
-               const CPersonConstructionInfo &info);
+  CPersonConstructionInfo();
 
-  void updateAnimationsCallback(const Ogre::Real fTime);
- private:
-  
-  virtual CCharacterController *createCharacterController();
+  virtual void parse(const tinyxml2::XMLElement *e) override;
+
+  CPersonConstructionInfo &operator=(const CPersonConstructionInfo &) = default;
+
+  EPersonTypes getPersonType() const {return mPersonType;}
+  const std::string &getMeshName() const {return mMeshName;}
+  const std::string &getMaterialName() const {return mMaterialName;}
+  const Ogre::Vector3 &getScale() const {return mScale;}
 };
-#endif // _LINKS_FATHER_HPP_
+
+#endif /* PERSONCONSTRUCTIONINFO_HPP */

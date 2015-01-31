@@ -35,7 +35,8 @@ CActionCreateEffectConstructionInfo::CActionCreateEffectConstructionInfo(
        c = c->NextSiblingElement()) {
     if (strcmp(c->Value(), "effect") == 0) {
       mEffectConstructionInfos.push_back(
-          std::make_shared<CEffectConstructionInfo>(c));
+          std::make_shared<CEffectConstructionInfo>());
+      mEffectConstructionInfos.back()->parse(c);
     } else {
       throw Ogre::Exception(0,
                             "'" + std::string(c->Value()) + "' is not allowed"

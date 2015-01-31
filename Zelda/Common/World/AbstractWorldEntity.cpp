@@ -36,8 +36,13 @@
 
 using XMLHelper::Attribute;
 
-CAbstractWorldEntity::CAbstractWorldEntity(const std::string &sID, CEntity *pParent, CAbstractMap *pMap, const std::string &sResourceGroup)
-  : CEntity(sID, pParent, (sResourceGroup == Ogre::ResourceGroupManager::AUTODETECT_RESOURCE_GROUP_NAME && pMap && pMap->getMapPack().get()) ? pMap->getMapPack()->getResourceGroup() : sResourceGroup),
+CAbstractWorldEntity::CAbstractWorldEntity(const std::string &sID,
+                                           CEntity *pParent,
+                                           CAbstractMap *pMap,
+                                           const std::string &sResourceGroup)
+  : CEntity(sID,
+            pParent,
+            (sResourceGroup == Ogre::ResourceGroupManager::AUTODETECT_RESOURCE_GROUP_NAME && pMap && pMap->getMapPack().get()) ? pMap->getMapPack()->getResourceGroup() : sResourceGroup),
     m_pSceneNode(nullptr),
     m_pCollisionObject(nullptr),
     m_pMap(pMap),
@@ -45,7 +50,10 @@ CAbstractWorldEntity::CAbstractWorldEntity(const std::string &sID, CEntity *pPar
     mCollisionGroup(COL_STATIC) {
 }
 
-CAbstractWorldEntity::CAbstractWorldEntity(CEntity *pParent, CAbstractMap *pMap, const tinyxml2::XMLElement *pElem, const std::string &sResourceGroup)
+CAbstractWorldEntity::CAbstractWorldEntity(CEntity *pParent,
+                                           CAbstractMap *pMap,
+                                           const tinyxml2::XMLElement *pElem,
+                                           const std::string &sResourceGroup)
   : CEntity(pParent, pElem, (sResourceGroup == Ogre::ResourceGroupManager::AUTODETECT_RESOURCE_GROUP_NAME && pMap && pMap->getMapPack().get()) ? pMap->getMapPack()->getResourceGroup() : sResourceGroup),
     m_pSceneNode(nullptr),
     m_pCollisionObject(nullptr),
@@ -57,6 +65,7 @@ CAbstractWorldEntity::CAbstractWorldEntity(CEntity *pParent, CAbstractMap *pMap,
 CAbstractWorldEntity::CAbstractWorldEntity(CAbstractWorldEntity *parent,
                            const CWorldEntityConstructionInfo &info)
     : CEntity(parent, info),
+      CHitableInterface(info),
       m_pSceneNode(nullptr),
       m_pCollisionObject(nullptr),
       m_pMap(parent->getMap()),
@@ -69,6 +78,7 @@ CAbstractWorldEntity::CAbstractWorldEntity(
     CAbstractWorldEntity *parent,
     const CWorldEntityConstructionInfo &info)
     : CEntity(sID, parent, info),
+      CHitableInterface(info),
       m_pSceneNode(nullptr),
       m_pCollisionObject(nullptr),
       m_pMap(parent->getMap()),

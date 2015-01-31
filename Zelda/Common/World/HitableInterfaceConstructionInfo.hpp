@@ -17,31 +17,31 @@
  * Zelda. If not, see http://www.gnu.org/licenses/.
  *****************************************************************************/
 
-#ifndef SIMPLEFRIEND_H
-#define SIMPLEFRIEND_H
+#ifndef HITABLEINTERFACECONSTRUCTIONINFO_HPP
+#define HITABLEINTERFACECONSTRUCTIONINFO_HPP
 
-#include "Person.hpp"
+#include "Hitpoints.hpp"
 
-//! Class for simple friends (characters)
-/**
-  * Like father of link or zelda, ...
-  */
-class SimpleFriend : public CPerson {
-public:
-    //! List of the characters
-    enum ESimpleFriendTypes {
-        SF_LINKS_FATHER,                //!< father of link
-    };
-private:
-    ESimpleFriendTypes m_eType;         //!< type of the friend
-public:
-    SimpleFriend(CAbstractWorldEntity *pParent, ESimpleFriendTypes eType);
-    virtual ~SimpleFriend();
-
-protected:
-	void setupInternal();
-  void setupAnimations();
-private:
+namespace tinyxml2 {
+class XMLElement;
 };
 
-#endif // SIMPLEFRIEND_H
+class CHitableInterfaceConstructionInfo {
+ private:
+  Hitpoints mMaximalHitpoints;
+  Hitpoints mCurrentHitpoints;
+  float mInvulnerableTimer;
+  bool mInvulnerable;
+
+ public:
+  CHitableInterfaceConstructionInfo();
+
+  virtual void parse(const tinyxml2::XMLElement *e);
+  
+  Hitpoints getMaximalHitpoints() const {return mMaximalHitpoints;}
+  Hitpoints getCurrentHitpoints() const {return mCurrentHitpoints;}
+  float getInvulnerableTimer() const {return mInvulnerableTimer;}
+  bool isInvulnerable() const {return mInvulnerable;}
+};
+
+#endif /* HITABLEINTERFACECONSTRUCTIONINFO_HPP */

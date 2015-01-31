@@ -18,6 +18,7 @@
  *****************************************************************************/
 
 #include "ActionStartScript.hpp"
+#include "ActionStartScriptConstructionInfo.hpp"
 #include "../../../Util/XMLHelper.hpp"
 #include "../../../Util/Assert.hpp"
 #include "../../../Lua/LuaScriptManager.hpp"
@@ -30,12 +31,25 @@ namespace events {
 
 CActionStartScript::CActionStartScript(const tinyxml2::XMLElement *pElem,
                                        const CEvent &owner)
-  : CAction(pElem, owner),
-    mScript(CLuaScriptManager::getSingleton().getResourceByName(
-        Attribute(pElem, "file"),
-        Attribute(pElem, "resource_group",
-                  owner.getOwner()->getResourceGroup()))
-            .dynamicCast<CLuaScript>()) {
+    : CAction(pElem, owner),
+      mScript(CLuaScriptManager::getSingleton().getResourceByName(
+          Attribute(pElem, "file"),
+          Attribute(pElem, "resource_group",
+                    owner.getOwner()->getResourceGroup()))
+              .staticCast<CLuaScript>()) {
+  ASSERT(mScript.isNull() == false);
+}
+
+CActionStartScript::CActionStartScript(
+    const std::shared_ptr<CActionStartScriptConstructionInfo> info,
+    const CEvent &owner)
+    : CAction(ACTION_START_SCRIPT, owner),
+      mScript(CLuaScriptManager::getSingleton().getResourceByName(
+          info->getFile(),
+          (info->getResourceGroup().size() > 0) ?
+          info->getResourceGroup() :
+          owner.getOwner()->getResourceGroup())
+              .staticCast<CLuaScript>()) {
   ASSERT(mScript.isNull() == false);
 }
 

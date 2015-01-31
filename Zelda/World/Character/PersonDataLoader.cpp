@@ -18,18 +18,12 @@
  *****************************************************************************/
 
 #include "PersonDataLoader.hpp"
-#include <string>
-#include "../../Common/Util/XMLHelper.hpp"
-#include "PersonTypes.hpp"
-#include <OgreStringConverter.h>
-
-using XMLHelper::Attribute;
-using XMLHelper::IntAttribute;
-using XMLHelper::RealAttribute;
-using XMLHelper::Vector3Attribute;
+#include "PersonData.hpp"
+#include "PersonConstructionInfo.hpp"
 
 void CPersonDataLoader::readGroupElement(const tinyxml2::XMLElement *e) {
-  SPersonData data(e);
+  CPersonConstructionInfo info;
+  info.parse(e);
 
-  CPersonDataIdMap::getSingleton().setData(data.eType, data);
+  CPersonDataIdMap::getSingleton().setData(info.getPersonType(), info);
 }

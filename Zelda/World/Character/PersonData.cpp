@@ -17,31 +17,7 @@
  * Zelda. If not, see http://www.gnu.org/licenses/.
  *****************************************************************************/
 
-#ifndef SIMPLEFRIEND_H
-#define SIMPLEFRIEND_H
+#include "PersonData.hpp"
 
-#include "Person.hpp"
-
-//! Class for simple friends (characters)
-/**
-  * Like father of link or zelda, ...
-  */
-class SimpleFriend : public CPerson {
-public:
-    //! List of the characters
-    enum ESimpleFriendTypes {
-        SF_LINKS_FATHER,                //!< father of link
-    };
-private:
-    ESimpleFriendTypes m_eType;         //!< type of the friend
-public:
-    SimpleFriend(CAbstractWorldEntity *pParent, ESimpleFriendTypes eType);
-    virtual ~SimpleFriend();
-
-protected:
-	void setupInternal();
-  void setupAnimations();
-private:
-};
-
-#endif // SIMPLEFRIEND_H
+void CPersonDataIdMap::init() {
+}

@@ -431,7 +431,7 @@ void CMap::parseSceneEntity(const tinyxml2::XMLElement *pElem) {
 
 void CMap::parseNewEntity(const tinyxml2::XMLElement *pElem) {
   CWorldEntity *pNewEnt = CCharacterCreator::createCharacter(
-      pElem, this, this, m_pPlayer);
+      pElem, this, m_pPlayer);
   if (pNewEnt) {return;}
 
   throw Ogre::Exception(0, "New entity could not be created.", __FILE__);

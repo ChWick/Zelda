@@ -35,10 +35,11 @@ class CEffectConstructionInfo
   ParticleSystemConstructionInfoList mParticleSystems;
  public:
   //! blank default constructor
+  CEffectConstructionInfo();
   CEffectConstructionInfo(const std::string &id);
 
   //! constructor from a tinyxml element
-  CEffectConstructionInfo(const tinyxml2::XMLElement *e);
+  virtual void parse(const tinyxml2::XMLElement* e) override;
 
   const ParticleSystemConstructionInfoList &getParticleSystems() const {
     return mParticleSystems;

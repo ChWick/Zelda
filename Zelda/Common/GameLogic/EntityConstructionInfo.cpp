@@ -29,6 +29,18 @@ using XMLHelper::BoolAttribute;
 
 using tinyxml2::XMLElement;
 
+Ogre::NameGenerator CEntityConstructionInfo::mNameGenerator("Entity");
+
+CEntityConstructionInfo::CEntityConstructionInfo()
+    : mID(mNameGenerator.generate()),
+      mResourceGroup(
+          Ogre::ResourceGroupManager::AUTODETECT_RESOURCE_GROUP_NAME),
+      mType(0),
+      mState(EST_NORMAL),
+      mPauseRender(false),
+      mPauseUpdate(false) {
+}
+
 CEntityConstructionInfo::CEntityConstructionInfo(const std::string &id)
     : mID(id),
       mResourceGroup(
@@ -39,18 +51,16 @@ CEntityConstructionInfo::CEntityConstructionInfo(const std::string &id)
       mPauseUpdate(false) {
 }
 
-CEntityConstructionInfo::CEntityConstructionInfo(const XMLElement *e)
-    : mID(Attribute(e, "id", "SharedConstructionInfo")),
-      mResourceGroup(Attribute(e, "resource_group",
-                               Ogre::ResourceGroupManager
-                               ::AUTODETECT_RESOURCE_GROUP_NAME)),
-      mType(IntAttribute(e, "type", 0)),
-      mState(CEntityStateIdMap::getSingleton().parseString(
-          Attribute(e, "state",
-                    CEntityStateIdMap::getSingleton().toString(
-                        EST_NORMAL)))),
-      mPauseRender(BoolAttribute(e, "pause_render", false)),
-      mPauseUpdate(BoolAttribute(e, "pause_update", false)) {
+void CEntityConstructionInfo::parse(const tinyxml2::XMLElement *e) {
+  mID = Attribute(e, "id", mID);
+  mResourceGroup = Attribute(e, "resource_group", mResourceGroup);
+  mType = IntAttribute(e, "type", mType);
+  mState = CEntityStateIdMap::getSingleton().parseString(
+      Attribute(e, "state", CEntityStateIdMap::getSingleton().toString(
+          mState)));
+  mPauseRender = BoolAttribute(e, "pause_render", mPauseRender);
+  mPauseUpdate = BoolAttribute(e, "pause_update", mPauseUpdate);
+
   for (const XMLElement *c = e->FirstChildElement(); c;
        c = c->NextSiblingElement()) {
     if (strcmp(c->Value(), "event") == 0) {

@@ -17,27 +17,33 @@
  * Zelda. If not, see http://www.gnu.org/licenses/.
  *****************************************************************************/
 
-#ifndef _WORLD_ENTITY_CONSTRUCTION_INFO_HPP_
-#define _WORLD_ENTITY_CONSTRUCTION_INFO_HPP_
+#ifndef CHARACTERCONSTRUCTIONINFO_HPP
+#define CHARACTERCONSTRUCTIONINFO_HPP
 
-#include "../GameLogic/EntityConstructionInfo.hpp"
-#include "HitableInterfaceConstructionInfo.hpp"
+#include "../../Common/World/WorldEntityConstructionInfo.hpp"
+#include "CharacterData.hpp"
 
-class CWorldEntityConstructionInfo
-    : public CEntityConstructionInfo,
-      public CHitableInterfaceConstructionInfo {
+class CCharacterConstructionInfo
+    : public CWorldEntityConstructionInfo {
  private:
-  uint16_t mCollisionMask;
-  uint16_t mCollisionGroup;
+  //! class of the character to use on creation
+  std::string mCharacterClass;
+  //! attitude of the character
+  ECharacterAttitude mAttitude;
+  //! The animations of the character
+  CharacterAnimationDataList mAnimations;
   
  public:
-  CWorldEntityConstructionInfo();
-  CWorldEntityConstructionInfo(const std::string &id);
-  
+  CCharacterConstructionInfo();
+  explicit CCharacterConstructionInfo(const tinyxml2::XMLElement *e);
+
   virtual void parse(const tinyxml2::XMLElement *e) override;
 
-  uint16_t getCollisionMask() const {return mCollisionMask;}
-  uint16_t getCollisionGroup() const {return mCollisionGroup;}
-};
+  CCharacterConstructionInfo &operator=(const CCharacterConstructionInfo&) = default;
 
-#endif /* _WORLD_ENTITY_CONSTRUCTION_INFO_HPP_ */
+  const std::string &getCharacterClass() const {return mCharacterClass;}
+  ECharacterAttitude getAttitude() const {return mAttitude;}
+  const CharacterAnimationDataList &getAnimationDataList() const {return mAnimations;}
+};
+  
+#endif /* CHARACTERCONSTRUCTIONINFO_HPP */

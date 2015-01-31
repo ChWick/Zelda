@@ -33,7 +33,7 @@ public:
   /**
     * @return the newly created world entity or a nullptr if the character type is unknown or an error occurred
     */
-  static CWorldEntity* createCharacter(const tinyxml2::XMLElement *pElem, CWorldEntity *pParent, CMap *pMap, CWorldEntity *pPlayer);
+  static CWorldEntity* createCharacter(const tinyxml2::XMLElement *pElem, CWorldEntity *pParent, CWorldEntity *pPlayer);
 };
 
 #endif // _CHARACTER_CREATOR_HPP_

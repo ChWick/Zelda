@@ -27,6 +27,7 @@
 #include "ActionCreateObject.hpp"
 #include "ActionDeleteObject.hpp"
 #include "ActionStartScript.hpp"
+#include "ActionStartScriptConstructionInfo.hpp"
 #include "ActionCreateEffect.hpp"
 #include "ActionCreateEffectConstructionInfo.hpp"
 
@@ -60,6 +61,10 @@ CAction *createAction(std::shared_ptr<CActionConstructionInfo> info,
     case ACTION_CREATE_EFFECT:
       return new CActionCreateEffect(
           std::dynamic_pointer_cast<CActionCreateEffectConstructionInfo>(info),
+          owner);
+    case ACTION_START_SCRIPT:
+      return new CActionStartScript(
+          std::dynamic_pointer_cast<CActionStartScriptConstructionInfo>(info),
           owner);
   }
 

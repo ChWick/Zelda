@@ -22,6 +22,7 @@
 
 #include <vector>
 #include <memory>
+#include <OgreNameGenerator.h>
 #include "EntityStates.hpp"
 #include "Events/EventConstructionInfo.hpp"
 
@@ -30,6 +31,8 @@ typedef std::vector<
 
 class CEntityConstructionInfo {
  private:
+  static Ogre::NameGenerator mNameGenerator;
+  
   std::string mID;
   std::string mResourceGroup;
   uint16_t mType;
@@ -39,11 +42,13 @@ class CEntityConstructionInfo {
   
   EventConstructionInfoList mEventConstructionInfos;
  public:
+  //! empty construction info will use a generated id
+  CEntityConstructionInfo();
   //! default constructor requires at least an id
   CEntityConstructionInfo(const std::string &id);
 
-  //! constructor from a tinyxml element
-  CEntityConstructionInfo(const tinyxml2::XMLElement *e);
+  //! parse from a tinyxml element
+  virtual void parse(const tinyxml2::XMLElement *e);
 
   CEntityConstructionInfo &operator=(const CEntityConstructionInfo &) = default;
 

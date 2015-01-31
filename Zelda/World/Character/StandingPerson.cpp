@@ -18,20 +18,22 @@
  *****************************************************************************/
 
 #include "StandingPerson.hpp"
-#include "PersonTypes.hpp"
+#include <BulletCollision/CollisionDispatch/btGhostObject.h>
 #include <OgreEntity.h>
 #include <OgreBone.h>
 #include <OgreSkeletonInstance.h>
 #include <OgreSceneNode.h>
-#include <BulletCollision/CollisionDispatch/btGhostObject.h>
+#include "PersonTypes.hpp"
 #include "../../Common/Physics/PhysicsManager.hpp"
 #include "../Atlas/Map.hpp"
 #include "../GlobalCollisionShapesTypes.hpp"
 #include "PersonController.hpp"
 
 
-CStandingPerson::CStandingPerson(const tinyxml2::XMLElement *pElem, CEntity *pParent, CMap *pMap)
-  : CPerson(pElem, pParent, pMap, SP_ANIM_COUNT) {
+CStandingPerson::CStandingPerson(
+    CAbstractWorldEntity *pParent,
+    const CPersonConstructionInfo &info)
+    : CPerson(pParent, info, SP_ANIM_COUNT) {
 }
 
 void CStandingPerson::setupInternal() {

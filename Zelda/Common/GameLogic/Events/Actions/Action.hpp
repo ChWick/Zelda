@@ -35,7 +35,7 @@ class CAction {
   const CEvent &m_Owner;
   
   CAction(const tinyxml2::XMLElement *pElem, const CEvent &owner);
-    CAction(const EActionTypes type, const CEvent &owner);
+  CAction(const EActionTypes type, const CEvent &owner);
   
  public:
   virtual ~CAction() {}

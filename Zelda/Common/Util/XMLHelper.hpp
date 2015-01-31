@@ -21,6 +21,7 @@
 #define _XML_HELPER_HPP_
 
 #include "../tinyxml2/tinyxml2.hpp"
+#include "EnumIdMap.hpp"
 #include "Assert.hpp"
 #include <string>
 #include <OgreString.h>
@@ -74,44 +75,31 @@ Ogre::Vector3 Vector3Attribute(const tinyxml2::XMLElement *pElem,
 Ogre::Vector3 Vector3Attribute(const tinyxml2::XMLElement *pElem,
                                const std::string &label);
 
-  template <class T>
-  T EnumAttribute(const tinyxml2::XMLElement *pElem,
-		  const char *pLabel,
-		  int iOffset = 0) {
-    assert(pElem);
-    assert(pLabel);
-    if (!pElem->Attribute(pLabel)) {
-      throw Ogre::Exception(0,
-			    "Required attribute '" + Ogre::String(pLabel) + "' not found",
-			    __FILE__);
-    }
-    return static_cast<T>(pElem->IntAttribute(pLabel) + iOffset);
+template <class EnumIdMap, class Type>
+Type EnumAttribute(const tinyxml2::XMLElement *pElem,
+                   const char *pLabel,
+                   Type eDefault) {
+  ASSERT(pElem);
+  ASSERT(pLabel);
+  if (!pElem->Attribute(pLabel)) {
+    return eDefault;
   }
-  template <class T>
-  T EnumAttribute(const tinyxml2::XMLElement *pElem,
-		  const char *pLabel,
-		  T eDefault,
-		  int iOffset = 0,
-		  bool bRequired = false) {
-    assert(pElem);
-    assert(pLabel);
-    if (!pElem->Attribute(pLabel)) {
-      if (bRequired) {
-	throw Ogre::Exception(0,
-			      "Required attribute '" + Ogre::String(pLabel) + "' not found",
-			      __FILE__);
-      }
-      return eDefault;
-    }
-    return static_cast<T>(pElem->IntAttribute(pLabel) + iOffset);
+  return EnumIdMap::getSingleton().parseString(pElem->Attribute(pLabel));
+}
+
+template <class EnumIdMap, class Type>
+Type EnumAttribute(const tinyxml2::XMLElement *pElem,
+                const char *pLabel) {
+  ASSERT(pLabel);
+  ASSERT(pElem);
+  if (!pElem->Attribute(pLabel)) {
+    throw Ogre::Exception(0,
+                          "Required attribute '" + Ogre::String(pLabel) +
+                          "' not found",
+                          __FILE__);
   }
-  template <class T>
-  T EnumAttribute(const tinyxml2::XMLElement *pElem,
-		  const char *pLabel,
-		  T eDefault,
-		  bool bRequired) {
-    return EnumAttribute<T>(pElem, pLabel, eDefault, 0, bRequired);
-  }
+  return EnumAttribute<EnumIdMap, Type>(pElem, pLabel);
+}
 
 
   void SetAttribute(tinyxml2::XMLElement *pElem,

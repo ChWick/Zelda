@@ -23,6 +23,7 @@
 #include "Hitpoints.hpp"
 
 class CDamage;
+class CHitableInterfaceConstructionInfo;
 
 class CHitableInterface {
 private:
@@ -39,9 +40,9 @@ private:
     RDR_IGNORED,
   };
 
-  CHitableInterface()
-      : m_uiMaxHP(0), m_uiCurrentHP(0), m_fInvulnerableTimer(0), m_bInvulnerable(false) {
-  }
+  CHitableInterface();
+
+  explicit CHitableInterface(const CHitableInterfaceConstructionInfo &info);
   
   Hitpoints getMaxHP() const {return m_uiMaxHP;}
   Hitpoints getCurrentHP() const {return m_uiCurrentHP;}

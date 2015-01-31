@@ -27,18 +27,24 @@
 class CMessage;
 
 namespace events {
-  class CActionStartScript : public CAction {
-  protected:
-    CMessage *m_pMessage;
-    CLuaScriptPtr mScript;
-  public:
-    CActionStartScript(const tinyxml2::XMLElement *pElem, const CEvent &owner);
+class CActionStartScriptConstructionInfo;
 
-    ~CActionStartScript();
-
-  protected:
-    void start();
-  };
+class CActionStartScript : public CAction {
+ protected:
+  CMessage *m_pMessage;
+  CLuaScriptPtr mScript;
+ public:
+  CActionStartScript(const tinyxml2::XMLElement *pElem, const CEvent &owner);
+  CActionStartScript(
+      const std::shared_ptr<CActionStartScriptConstructionInfo> info,
+      const CEvent &owner);
+  
+  ~CActionStartScript();
+  
+ protected:
+  void start();
 };
+
+}  // namespace events
 
 #endif // _ACTION_START_SCRIPT_HPP_

@@ -20,6 +20,7 @@
 #ifndef CHARACTERDATA_HPP
 #define CHARACTERDATA_HPP
 
+#include "../../Common/World/WorldEntityConstructionInfo.hpp"
 #include "CharacterAttitude.hpp"
 
 namespace tinyxml2 {
@@ -43,19 +44,6 @@ struct SCharacterAnimationData {
   SCharacterAnimationData &operator=(const SCharacterAnimationData &) = default;
 };
 
-//! Character data
-struct SCharacterData {
-  //! class of the character to use on creation
-  std::string mCharacterClass;
-  //! attitude of the character
-  ECharacterAttitude mAttitude;
-  //! The animations of the character
-  std::vector<SCharacterAnimationData> mAnimations;
-
-  explicit SCharacterData(const tinyxml2::XMLElement *e);
-  SCharacterData();
-  
-  SCharacterData &operator=(const SCharacterData &) = default;
-};
+typedef std::vector<SCharacterAnimationData> CharacterAnimationDataList;
 
 #endif /* CHARACTERDATA_HPP */

@@ -20,6 +20,7 @@
 #include "EmitterConstructionInfo.hpp"
 #include <OgreException.h>
 #include "EmitOnReceivedDamageConstructionInfo.hpp"
+#include "EmitOnInteractionConstructionInfo.hpp"
 #include "../../../tinyxml2/tinyxml2.hpp"
 #include "../../../Util/XMLHelper.hpp"
 
@@ -40,7 +41,9 @@ std::shared_ptr<CEmitterConstructionInfo> CEmitterConstructionInfo::createNew(
     case EMIT_ON_CREATE:
       return std::make_shared<CEmitterConstructionInfo>(t);
     case EMIT_ON_RECEIVED_DAMAGE:
-      return std::make_shared<CEmitOnReceivedDamageConstructionInfo>(t);
+      return std::make_shared<CEmitOnReceivedDamageConstructionInfo>(e);
+    case EMIT_ON_INTERACTION:
+      return std::make_shared<CEmitOnInteractionConstructionInfo>(e);
     default:
       throw Ogre::Exception(t, "Emitter type not implemented!",
                             __FILE__);

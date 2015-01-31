@@ -21,6 +21,7 @@
 #include <BulletDynamics/Character/btKinematicCharacterController.h>
 #include <string>
 #include "PersonController.hpp"
+#include "PersonConstructionInfo.hpp"
 #include "../Atlas/Map.hpp"
 #include "../../Common/Util/DebugDrawer.hpp"
 #include "CharacterController_Physics.hpp"
@@ -40,8 +41,6 @@
 #include "../../Common/Util/XMLHelper.hpp"
 #include "../Items/CharacterItem.hpp"
 
-using XMLHelper::Attribute;
-
 // const Ogre::Real PERSONS_MASS = 1.0f;
 const Ogre::String CPerson::PERSON_SHEATH("Sheath");
 const Ogre::String CPerson::PERSON_SHIELD_PACKED("ShieldPacked");
@@ -52,43 +51,38 @@ const Ogre::Real CPerson::PERSON_RADIUS = 0.03f;
 const Ogre::Real CPerson::PERSON_PHYSICS_OFFSET = PERSON_HEIGHT / 2 + 0.005;
 const Ogre::Real CPerson::PERSON_FLOOR_OFFSET = PERSON_HEIGHT / 2;
 
-
-CPerson::CPerson(const std::string &sID,
-                   CEntity *pParent,
-                   CMap *pMap,
-                   const SPersonData &personData,
-                   unsigned int uiAnimationCount)
-    : CCharacter(sID,
-                 pParent,
-                 pMap,
-                 personData),
-      m_PersonData(personData) {
+CPerson::CPerson(CAbstractWorldEntity *pParent,
+                 const CPersonConstructionInfo &info,
+                 unsigned int uiAnimationCount)
+    : CCharacter(pParent,
+                 info),
+      mPersonType(info.getPersonType()),
+      mMeshName(info.getMeshName()),
+      mMaterialName(info.getMaterialName()),
+      mScale(info.getScale()) {
   m_degLeftHandleCurrentRotation = 0;
   m_degLeftHandleRotationSpeed = 0;
   m_degLeftHandleRotationToTarget = 0;
 
   m_uiTakeDamageFlags = m_uiBlockDamageFlags = DMG_ALL;
-  setCurAndMaxHP(personData.hitpoints);
 }
 
-CPerson::CPerson(const tinyxml2::XMLElement *pElem,
-                 CEntity *pParent,
-                 CMap *pMap,
+CPerson::CPerson(const std::string &sID,
+                 CAbstractWorldEntity *pParent,
+                 const CPersonConstructionInfo &info,
                  unsigned int uiAnimationCount)
-  : CCharacter(pElem,
-               pParent,
-               pMap,
-               CPersonDataIdMap::getSingleton().toData(
-                   CPersonTypeIdMap::getSingleton().parseString(
-                       Attribute(pElem, "person_type")))),
-    m_PersonData(CPersonDataIdMap::getSingleton().toData(
-        CPersonTypeIdMap::getSingleton().parseString(Attribute(pElem, "person_type")))) {
+    : CCharacter(sID,
+                 pParent,
+                 info),
+      mPersonType(info.getPersonType()),
+      mMeshName(info.getMeshName()),
+      mMaterialName(info.getMaterialName()),
+      mScale(info.getScale()) {
   m_degLeftHandleCurrentRotation = 0;
   m_degLeftHandleRotationSpeed = 0;
   m_degLeftHandleRotationToTarget = 0;
 
   m_uiTakeDamageFlags = m_uiBlockDamageFlags = DMG_ALL;
-  setCurAndMaxHP(m_PersonData.hitpoints);
 }
 
 CPerson::~CPerson() {
@@ -224,11 +218,11 @@ void CPerson::setLeftHandleRotation(const Ogre::Degree &degree,
 }
 
 void CPerson::initBody(Ogre::SceneNode *pParentSceneNode) {
-  Ogre::String meshName = m_PersonData.sMeshName;
+  Ogre::String meshName = mMeshName;
     // create main model
     m_pSceneNode = pParentSceneNode->createChildSceneNode(m_sID + meshName);
     Ogre::SceneNode *pModelSN = m_pSceneNode->createChildSceneNode();
-    pModelSN->setScale(m_PersonData.vScale);
+    pModelSN->setScale(mScale);
     pModelSN->setPosition(0, -PERSON_PHYSICS_OFFSET, 0);
     m_pBodyEntity = pParentSceneNode->getCreator()
         ->createEntity(pModelSN->getName() + ".mesh", meshName + ".mesh");
@@ -292,12 +286,12 @@ void CPerson::createBlinkingMaterials() {
   ASSERT(m_pBodyEntity);
 
   // find name of material to clone it
-  Ogre::String materialName = m_PersonData.sMaterialName;
+  Ogre::String materialName = mMaterialName;
   if (materialName.size() == 0) {
     // use the applied material of the entity
     materialName = m_pBodyEntity->getMesh()->getSubMesh(0)->getMaterialName();
   }
- 
+
   // get the material
   Ogre::MaterialPtr srcMat
       = Ogre::MaterialManager::getSingleton().getByName(materialName);

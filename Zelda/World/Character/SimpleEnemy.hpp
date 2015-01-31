@@ -35,9 +35,8 @@ class CSimpleEnemy : public CPerson {
 
  private:
  public:
-  CSimpleEnemy(const std::string &sID, const SPersonData &data,
-               CEntity *pParent, CMap *pMap);
-  CSimpleEnemy(const tinyxml2::XMLElement *pElem, CEntity *pParent, CMap *pMap);
+  CSimpleEnemy(CAbstractWorldEntity *pParent,
+               const CPersonConstructionInfo &info);
 
   void setPlayer(CWorldEntity *pPlayer);
 

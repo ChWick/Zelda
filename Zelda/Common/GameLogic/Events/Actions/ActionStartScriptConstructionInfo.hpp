@@ -17,31 +17,30 @@
  * Zelda. If not, see http://www.gnu.org/licenses/.
  *****************************************************************************/
 
-#ifndef SIMPLEFRIEND_H
-#define SIMPLEFRIEND_H
+#ifndef ACTIONSTARTSCRIPTCONSTRUCTIONINFO_HPP
+#define ACTIONSTARTSCRIPTCONSTRUCTIONINFO_HPP
 
-#include "Person.hpp"
+#include "ActionConstructionInfo.hpp"
+#include <string>
 
-//! Class for simple friends (characters)
-/**
-  * Like father of link or zelda, ...
-  */
-class SimpleFriend : public CPerson {
-public:
-    //! List of the characters
-    enum ESimpleFriendTypes {
-        SF_LINKS_FATHER,                //!< father of link
-    };
-private:
-    ESimpleFriendTypes m_eType;         //!< type of the friend
-public:
-    SimpleFriend(CAbstractWorldEntity *pParent, ESimpleFriendTypes eType);
-    virtual ~SimpleFriend();
+namespace events {
 
-protected:
-	void setupInternal();
-  void setupAnimations();
-private:
+class CActionStartScriptConstructionInfo
+    : public CActionConstructionInfo {
+ private:
+  std::string mFile;
+  std::string mResourceGroup;
+
+ public:
+  CActionStartScriptConstructionInfo(
+      const tinyxml2::XMLElement *e);
+
+  const std::string &getFile() const {return mFile;}
+  const std::string &getResourceGroup() const {return mResourceGroup;}
+  
 };
 
-#endif // SIMPLEFRIEND_H
+}  // namespace events
+
+
+#endif /* ACTIONSTARTSCRIPTCONSTRUCTIONINFO_HPP */

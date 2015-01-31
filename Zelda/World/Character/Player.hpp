@@ -52,7 +52,7 @@ private:
   CEntityBoundedIntProperty mRupeeCount;
 public:
 
-  CPlayer(CEntity *pParent, const Ogre::Camera *pCamera, Ogre::SceneManager *pPlayerSceneManager);
+  CPlayer(CAbstractWorldEntity *pParent, const Ogre::Camera *pCamera, Ogre::SceneManager *pPlayerSceneManager);
   virtual ~CPlayer();
   
   void update(Ogre::Real tpf);

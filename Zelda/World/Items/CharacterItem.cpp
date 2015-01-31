@@ -53,7 +53,7 @@ CCharacterItem::CCharacterItem(CCharacter *character,
   ASSERT(character);
   ASSERT(boneToAttach.size() > 0);
 
-  if (mCharacter->getCharacterData().mAttitude == ATTITUDE_FRIENDLY) {
+  if (mCharacter->getAttitude() == ATTITUDE_FRIENDLY) {
     mBlockPhysicsMask = MASK_SHIELD_P_COLLIDES_WITH;
     mBlockPhysicsGroup = COL_SHIELD_P;
 

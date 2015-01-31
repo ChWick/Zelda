@@ -17,31 +17,29 @@
  * Zelda. If not, see http://www.gnu.org/licenses/.
  *****************************************************************************/
 
-#ifndef SIMPLEFRIEND_H
-#define SIMPLEFRIEND_H
+#include "PersonConstructionInfo.hpp"
+#include <string>
+#include "../../Common/Util/XMLHelper.hpp"
 
-#include "Person.hpp"
+using XMLHelper::Attribute;
+using XMLHelper::RealAttribute;
+using XMLHelper::IntAttribute;
+using XMLHelper::BoolAttribute;
+using XMLHelper::Vector3Attribute;
+using XMLHelper::EnumAttribute;
 
-//! Class for simple friends (characters)
-/**
-  * Like father of link or zelda, ...
-  */
-class SimpleFriend : public CPerson {
-public:
-    //! List of the characters
-    enum ESimpleFriendTypes {
-        SF_LINKS_FATHER,                //!< father of link
-    };
-private:
-    ESimpleFriendTypes m_eType;         //!< type of the friend
-public:
-    SimpleFriend(CAbstractWorldEntity *pParent, ESimpleFriendTypes eType);
-    virtual ~SimpleFriend();
 
-protected:
-	void setupInternal();
-  void setupAnimations();
-private:
-};
+CPersonConstructionInfo::CPersonConstructionInfo()
+    : CCharacterConstructionInfo(),
+      mScale(Ogre::Vector3::UNIT_SCALE) {
+}
 
-#endif // SIMPLEFRIEND_H
+void CPersonConstructionInfo::parse(const tinyxml2::XMLElement *e) {
+  CCharacterConstructionInfo::parse(e);
+
+  mPersonType = EnumAttribute<CPersonTypeIdMap, EPersonTypes>(
+      e, "person_type", mPersonType);
+  mMeshName = Attribute(e, "mesh_name", mMeshName);
+  mMaterialName = Attribute(e, "material_name", mMaterialName);
+  mScale = Vector3Attribute(e, "scale", mScale);
+}

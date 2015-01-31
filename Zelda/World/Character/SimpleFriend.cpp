@@ -19,14 +19,15 @@
 
 #include "SimpleFriend.hpp"
 #include "PlayerTool.hpp"
+#include "PersonData.hpp"
 #include "PersonTypes.hpp"
 
-SimpleFriend::SimpleFriend(const std::string &sID, CEntity *pParent, CMap *pMap, ESimpleFriendTypes eType)
-: CPerson(sID,
-          pParent,
-          pMap,
-          CPersonDataIdMap::getSingleton().toData(PERSON_SOLDIER_BLUE)),
-  m_eType(eType){
+SimpleFriend::SimpleFriend(CAbstractWorldEntity *pParent,
+                           ESimpleFriendTypes eType)
+    : CPerson("unset",
+              pParent,
+              CPersonDataIdMap::getSingleton().toData(PERSON_SOLDIER_BLUE)),
+      m_eType(eType) {
     //ctor
 }
 

@@ -17,31 +17,20 @@
  * Zelda. If not, see http://www.gnu.org/licenses/.
  *****************************************************************************/
 
-#ifndef SIMPLEFRIEND_H
-#define SIMPLEFRIEND_H
+#ifndef EMITONINTERACTIONCONSTRUCTIONINFO_HPP
+#define EMITONINTERACTIONCONSTRUCTIONINFO_HPP
 
-#include "Person.hpp"
+#include "EmitterConstructionInfo.hpp"
 
-//! Class for simple friends (characters)
-/**
-  * Like father of link or zelda, ...
-  */
-class SimpleFriend : public CPerson {
-public:
-    //! List of the characters
-    enum ESimpleFriendTypes {
-        SF_LINKS_FATHER,                //!< father of link
-    };
-private:
-    ESimpleFriendTypes m_eType;         //!< type of the friend
-public:
-    SimpleFriend(CAbstractWorldEntity *pParent, ESimpleFriendTypes eType);
-    virtual ~SimpleFriend();
+namespace events {
 
-protected:
-	void setupInternal();
-  void setupAnimations();
-private:
+class CEmitOnInteractionConstructionInfo
+    : public CEmitterConstructionInfo {
+ public:
+  CEmitOnInteractionConstructionInfo(
+      const tinyxml2::XMLElement *e);
 };
 
-#endif // SIMPLEFRIEND_H
+}  // namespace events
+
+#endif /* EMITONINTERACTIONCONSTRUCTIONINFO_HPP */

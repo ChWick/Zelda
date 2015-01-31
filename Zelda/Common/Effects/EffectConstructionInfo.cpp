@@ -24,12 +24,16 @@
 
 using tinyxml2::XMLElement;
 
+
+CEffectConstructionInfo::CEffectConstructionInfo()
+    : CWorldEntityConstructionInfo() {
+}
+
 CEffectConstructionInfo::CEffectConstructionInfo(const std::string &id)
     : CWorldEntityConstructionInfo(id) {
 }
 
-CEffectConstructionInfo::CEffectConstructionInfo(const XMLElement *e)
-    : CWorldEntityConstructionInfo(e) {
+void CEffectConstructionInfo::parse(const XMLElement *e) {
   for (const XMLElement *c = e->FirstChildElement(); c;
        c = c->NextSiblingElement()) {
     if (strcmp(c->Value(), "particle_system") == 0) {
