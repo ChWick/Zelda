@@ -105,11 +105,16 @@ public:
 
   virtual void update(Ogre::Real tpf);
 
-  virtual SInteractionResult interactOnCollision(const Ogre::Vector3 &vInteractDir, CAbstractWorldEntity *pSender);
-  virtual SInteractionResult interactOnActivate(const Ogre::Vector3 &vInteractDir, CAbstractWorldEntity *pSender);
+  virtual SInteractionResult interactOnCollision(const Ogre::Vector3 &vInteractDir, CAbstractWorldEntity *pSender) override;
+  virtual SInteractionResult interactOnActivate(const Ogre::Vector3 &vInteractDir, CAbstractWorldEntity *pSender) override;
 
   uint16_t getCollisionMask() const {return mCollisionMask;}
   uint16_t getCollisionGroup() const {return mCollisionGroup;}
+
+  
+  virtual const std::string &getID() const override {
+    return CEntity::getID();
+  }
 
  protected:
   virtual void damageAccepted(const CDamage &damage);

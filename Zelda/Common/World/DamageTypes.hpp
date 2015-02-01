@@ -22,6 +22,7 @@
 
 #include "../Util/EnumIdMap.hpp"
 #include "Hitpoints.hpp"
+#include <limits>
 
 enum EDamageType {
   DMG_NONE	= 0,
@@ -36,17 +37,14 @@ enum EDamageType {
 
   DMG_FLYING_OBJECT = 128,            //!< Bush, stone, ... that has been thrown
 
-  DMG_ALL     = 511,                  //!< Flag for take/block all damage types
+  DMG_ALL     = std::numeric_limits<int32_t>::max(),                  //!< Flag for take/block all damage types
 };
 
-class CDamageTypeIdMap : public CStringEnumIdMap<CDamageTypeIdMap, unsigned int> {
+typedef int32_t DamageTypeMask;
+
+class CDamageTypeIdMap : public CStringListEnumIdMap<CDamageTypeIdMap, int32_t> {
 public:
   void init();
-  //! parse a string
-  /** separates string at spaces to add up multiple damage types.
-    * E.g.: "world sword fire"
-    */
-  unsigned int parseString(const std::string &str) const;
 };
 
 struct SDamageData {

@@ -53,18 +53,27 @@ CCharacterItem::CCharacterItem(CCharacter *character,
   ASSERT(character);
   ASSERT(boneToAttach.size() > 0);
 
-  if (mCharacter->getAttitude() == ATTITUDE_FRIENDLY) {
-    mBlockPhysicsMask = MASK_SHIELD_P_COLLIDES_WITH;
-    mBlockPhysicsGroup = COL_SHIELD_P;
+  switch (mCharacter->getDamageAttitude()) {
+    case ATTITUDE_FRIENDLY:
+    case ATTITUDE_PLAYER:
+      mBlockPhysicsMask = MASK_SHIELD_P_COLLIDES_WITH;
+      mBlockPhysicsGroup = COL_SHIELD_P;
 
-    mCollisionMask = MASK_DAMAGE_P_COLLIDES_WITH;
-    mCollisionGroup = COL_DAMAGE_P;
-  } else {
-    mBlockPhysicsMask = MASK_SHIELD_N_COLLIDES_WITH;
-    mBlockPhysicsGroup = COL_SHIELD_N;
+      mCollisionMask = MASK_DAMAGE_P_COLLIDES_WITH;
+      mCollisionGroup = COL_DAMAGE_P;
+      break;
+    case ATTITUDE_ENEMY:
+      mBlockPhysicsMask = MASK_SHIELD_N_COLLIDES_WITH;
+      mBlockPhysicsGroup = COL_SHIELD_N;
 
-    mCollisionMask = MASK_DAMAGE_N_COLLIDES_WITH;
-    mCollisionGroup = COL_DAMAGE_N;
+      mCollisionMask = MASK_DAMAGE_N_COLLIDES_WITH;
+      mCollisionGroup = COL_DAMAGE_N;
+      break;
+    default:
+      throw Ogre::Exception(mCharacter->getDamageAttitude(),
+                            "Character attribute unknown",
+                            __FILE__);
+      break;
   }
 
   const SItemVariantData &itemData(

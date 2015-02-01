@@ -18,13 +18,40 @@
  *****************************************************************************/
 
 #include "AttackerInterface.hpp"
+#include "AttackerInterfaceConstructionInfo.hpp"
 #include "HitableInterface.hpp"
 #include "Damage.hpp"
+#include "../Log.hpp"
 
+
+CAttackerInterface::CAttackerInterface()
+    : mDamageAttitude(ATTITUDE_NONE) {
+}
+CAttackerInterface::CAttackerInterface(
+    const CAttackerInterfaceConstructionInfo &info)
+    : mDamageAttitude(info.getDamageAttitude()) {
+}
 
 CHitableInterface::EReceiveDamageResult CAttackerInterface::attack(
     const CDamage &damage,
     CHitableInterface *hitableInterface) {
+
+  // check if attitude mask and damage mask match, elsewise the damage
+  // is blocked and wont be recognized
+  if (((damage.getDamageType() & hitableInterface->getDamageTypeMask()) == 0)
+      || ((this->getDamageAttitude()
+           & hitableInterface->getDamageAttitudeMask()) == 0)) {
+    // the damage is ignored by the target
+    damage.getAttacker()->myDamageIgnored(damage, hitableInterface);
+    return CHitableInterface::RDR_IGNORED;
+  }
+
+  // the damage hits the target
+  LOGV("'%s' attacks '%s' with '%d' damage points",
+       this->getID().c_str(),
+       hitableInterface->getID().c_str(),
+       damage.getDamageValue());
+
   CHitableInterface::EReceiveDamageResult res(hitableInterface->hit(damage));
   switch (res) {
     case CHitableInterface::RDR_BLOCKED:

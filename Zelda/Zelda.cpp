@@ -26,7 +26,6 @@
 #include "World/GlobalCollisionShapesTypes.hpp"
 #include "World/Atlas/TileTypes.hpp"
 #include "World/Character/PersonTypes.hpp"
-#include "Common/World/DamageTypes.hpp"
 #include "World/Items/ItemTypes.hpp"
 #include "World/Items/ItemData.hpp"
 #include "World/Objects/ObjectTypes.hpp"
@@ -55,10 +54,7 @@ void CZelda::deleteSingletons() {
 void CZelda::initEnumIdMaps() {
   CGame::initEnumIdMaps();
 
-  CCharacterAttitudeIdMap::getSingleton().init();
   CPersonTypeIdMap::getSingleton().init();
-  CDamageTypeIdMap::getSingleton().init();
-  CDamageDataMap::getSingleton().init();
 
   CItemSlotIdMap::getSingleton().init();
   CItemVariantIdMap::getSingleton().init();

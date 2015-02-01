@@ -35,22 +35,6 @@ void CDamageTypeIdMap::init() {
   m_Map[DMG_ALL]     = "all";
 }
 
-unsigned int CDamageTypeIdMap::parseString(const std::string &str) const {
-  unsigned int uiDmg = DMG_NONE;
-
-  std::string delimiters = " |+";
-  size_t current;
-  size_t next = -1;
-  do {
-    current = next + 1;
-    next = str.find_first_of(delimiters, current);
-    uiDmg |= CStringEnumIdMap<CDamageTypeIdMap, unsigned int>::parseString(
-        str.substr(current, next - current));
-  } while (next != std::string::npos);
-
-  return uiDmg;
-}
-
 void CDamageDataMap::init() {
   m_Map[DMG_NONE] = {HP_NONE};
   m_Map[DMG_WORLD] = {HP_ONE_HEART};

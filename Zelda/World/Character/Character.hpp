@@ -23,7 +23,6 @@
 #include "../WorldEntity.hpp"
 #include "CharacterData.hpp"
 #include <LinearMath/btAlignedObjectArray.h>
-#include "CharacterAttitude.hpp"
 #include "CharacterControllerPhysicsListener.hpp"
 #include "../Items/ItemTypes.hpp"
 
@@ -105,8 +104,6 @@ public:
  private:
   // properties that define the character
   
-  //! attitude
-  ECharacterAttitude mAttitude;
   //! animations
   CharacterAnimationDataList mAnimationDataList;
  protected:
@@ -137,7 +134,6 @@ public:
   Ogre::Entity *getBodyEntity() const {return m_pBodyEntity;}
   btCharacterControllerInterface *getKinematicCharacterController() const {return mCCPhysics;}
   CCharacterController *getCharacterController() const {return m_pCharacterController;}
-  ECharacterAttitude getAttitude() const {return mAttitude;}
   const CharacterAnimationDataList &getAnimationDataList() const {
     return mAnimationDataList;
   }

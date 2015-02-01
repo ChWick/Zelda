@@ -84,7 +84,9 @@ Type EnumAttribute(const tinyxml2::XMLElement *pElem,
   if (!pElem->Attribute(pLabel)) {
     return eDefault;
   }
-  return EnumIdMap::getSingleton().parseString(pElem->Attribute(pLabel));
+  // cast to be sure to match the return type
+  return static_cast<Type>(
+      EnumIdMap::getSingleton().parseString(pElem->Attribute(pLabel)));
 }
 
 template <class EnumIdMap, class Type>

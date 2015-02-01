@@ -17,32 +17,19 @@
  * Zelda. If not, see http://www.gnu.org/licenses/.
  *****************************************************************************/
 
-#ifndef CHARACTERDATA_HPP
-#define CHARACTERDATA_HPP
+#include "AttackerInterfaceConstructionInfo.hpp"
+#include "../Util/XMLHelper.hpp"
 
-#include "../../Common/World/WorldEntityConstructionInfo.hpp"
+using XMLHelper::IntAttribute;
+using XMLHelper::RealAttribute;
+using XMLHelper::BoolAttribute;
+using XMLHelper::EnumAttribute;
 
-namespace tinyxml2 {
-class XMLElement;
+CAttackerInterfaceConstructionInfo::CAttackerInterfaceConstructionInfo()
+    : mDamageAttitude(ATTITUDE_NONE) {
 }
 
-//! character animation data
-struct SCharacterAnimationData {
-  //! Name of the animation
-  std::string mName;
-  //! id of the animation
-  uint8_t mId;
-  //! loop the animation
-  bool mLoop;
-  //! may the character move during the animation
-  bool mAllowMoving;
-
-  explicit SCharacterAnimationData(const tinyxml2::XMLElement *e);
-  SCharacterAnimationData();
-
-  SCharacterAnimationData &operator=(const SCharacterAnimationData &) = default;
-};
-
-typedef std::vector<SCharacterAnimationData> CharacterAnimationDataList;
-
-#endif /* CHARACTERDATA_HPP */
+void CAttackerInterfaceConstructionInfo::parse(const tinyxml2::XMLElement *e) {
+  mDamageAttitude = EnumAttribute<CDamageAttitudeIdMap, EDamageAttitude>(
+      e, "attacker_damage_attitude", mDamageAttitude);
+}

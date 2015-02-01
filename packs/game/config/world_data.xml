@@ -253,13 +253,15 @@
       normal_tile = "green_soil_bush_shadow"
       removed_tile = "green_soil_bush_lifted"
       collision_shape = "pickable_object_sphere"
+      hit_by_damage_type_mask = "world|sword"
+      hit_by_damage_attitude_mask = "player"
       hitpoints = "0"
       >
     <event>
       <emitter type="received_damage" damage_type="sword|world"/>
       <action type="create_effect" attached_parent_type="map">
 	<effect>
-	  <particle_system type="BushExplosion" scale="0.05" scale_velocity="0.05" offset="0 0 0"/>
+	  <particle_system type="EnemyExplosion" scale="0.3" scale_velocity="0.3" offset="0 0 0"/>
 	  <sound type="testSound"/>
 	</effect>
       </action>
@@ -437,7 +439,7 @@
       character_class="player"
       mesh_name="link"
       material_name="link_armor"
-      attitude="friend"
+      attacker_damage_attitude="player"
       hitpoints="3"
       animations_count="7"
       >
@@ -453,19 +455,19 @@
       person_type="links_father"
       character_class="links_father"
       mesh_name="links_father"
-      attitude="friend"
+      attacker_damage_attitude="friend"
       animations_count="3"
       >
     <animation name="Sit" id="0"/>
     <animation name="StandUp" id="1" loop="false"/>
-p    <animation name="Walk" id="2"/>
+    <animation name="Walk" id="2"/>
   </person>
   <person
       person_type="soldier_block"
       character_class="standing_person"
       mesh_name="soldier"
       material_name="soldier_green"
-      attitude="enemy"
+      attacker_damage_attitude="enemy"
       animations_count="1"
       >
     <animation name="Scout" id="0"/>
@@ -476,7 +478,7 @@ p    <animation name="Walk" id="2"/>
       character_class="simple_enemy"
       mesh_name="soldier"
       material_name="soldier_blue"
-      attitude="enemy"
+      attacker_damage_attitude="enemy"
       hitpoints="3"
       animations_count="2"
       >
@@ -488,9 +490,11 @@ p    <animation name="Walk" id="2"/>
       character_class="simple_enemy"
       mesh_name="soldier"
       material_name="soldier_green"
-      attitude="enemy"
+      attacker_damage_attitude="enemy"
       hitpoints="1"
       animations_count="2"
+      hit_by_damage_type_mask = "all"
+      hit_by_damage_attitude_mask = "player|neutral"
       >
     <animation name="Scout" id="0"/>
     <animation name="Walk" id="1"/>
@@ -498,7 +502,7 @@ p    <animation name="Walk" id="2"/>
       <emitter type="received_damage" damage_type="all"/>
       <action type="create_effect" attached_parent_type="map">
 	<effect>
-	  <particle_system type="BushExplosion" scale="0.05" scale_velocity="0.05" offset="0 0 0"/>
+	  <particle_system type="EnemyExplosion" scale="0.3" scale_velocity="0.3" offset="0 0 0"/>
 	</effect>
       </action>
     </event>

@@ -28,6 +28,7 @@ using XMLHelper::EnumAttribute;
 CWorldEntityConstructionInfo::CWorldEntityConstructionInfo()
     : CEntityConstructionInfo(),
       CHitableInterfaceConstructionInfo(),
+      CAttackerInterfaceConstructionInfo(),
       mCollisionMask(MASK_STATIC_COLLIDES_WITH),
       mCollisionGroup(COL_STATIC) {
 }
@@ -36,6 +37,7 @@ CWorldEntityConstructionInfo::CWorldEntityConstructionInfo(
     const std::string &id)
     : CEntityConstructionInfo(id),
       CHitableInterfaceConstructionInfo(),
+      CAttackerInterfaceConstructionInfo(),
       mCollisionMask(MASK_STATIC_COLLIDES_WITH),
       mCollisionGroup(COL_STATIC) {
 }
@@ -44,6 +46,7 @@ void CWorldEntityConstructionInfo::parse(
     const tinyxml2::XMLElement *e) {
   CEntityConstructionInfo::parse(e);
   CHitableInterfaceConstructionInfo::parse(e);
+  CAttackerInterfaceConstructionInfo::parse(e);
 
   mCollisionMask =
       EnumAttribute<CPhysicsMasksIdMap, uint16_t>(

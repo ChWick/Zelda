@@ -47,6 +47,8 @@
 #include "GameLogic/Events/Actions/ActionTypes.hpp"
 #include "GameLogic/Events/Emitter/EmitterTypes.hpp"
 
+#include "World/DamageTypes.hpp"
+#include "World/DamageAttitude.hpp"
 
 
 #if OGRE_PLATFORM == OGRE_PLATFORM_ANDROID
@@ -806,6 +808,10 @@ bool CGame::renderOneFrame() {
 #endif
 }
 void CGame::initEnumIdMaps() {
+  CDamageTypeIdMap::getSingleton().init();
+  CDamageDataMap::getSingleton().init();
+  CDamageAttitudeIdMap::getSingleton().init();
+  
   MESSAGE_USER_TYPES::getSingleton().init();
   CGameStateIdMap::getSingleton().init();
   CEntityStateIdMap::getSingleton().init();

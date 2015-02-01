@@ -66,6 +66,7 @@ CAbstractWorldEntity::CAbstractWorldEntity(CAbstractWorldEntity *parent,
                            const CWorldEntityConstructionInfo &info)
     : CEntity(parent, info),
       CHitableInterface(info),
+      CAttackerInterface(info),
       m_pSceneNode(nullptr),
       m_pCollisionObject(nullptr),
       m_pMap(parent->getMap()),
@@ -79,6 +80,7 @@ CAbstractWorldEntity::CAbstractWorldEntity(
     const CWorldEntityConstructionInfo &info)
     : CEntity(sID, parent, info),
       CHitableInterface(info),
+      CAttackerInterface(info),
       m_pSceneNode(nullptr),
       m_pCollisionObject(nullptr),
       m_pMap(parent->getMap()),

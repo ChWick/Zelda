@@ -17,9 +17,14 @@
  * Zelda. If not, see http://www.gnu.org/licenses/.
  *****************************************************************************/
 
-#include "CharacterAttitude.hpp"
+#include "DamageAttitude.hpp"
+#include <string>
 
-void CCharacterAttitudeIdMap::init() {
+void CDamageAttitudeIdMap::init() {
+  m_Map[ATTITUDE_NEUTRAL] = "none";
+  m_Map[ATTITUDE_PLAYER] = "player";
   m_Map[ATTITUDE_ENEMY] = "enemy";
   m_Map[ATTITUDE_FRIENDLY] = "friend";
+  m_Map[ATTITUDE_NEUTRAL] = "neutral";
+  m_Map[ATTITUDE_MASK_ALL] = "all";
 }

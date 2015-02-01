@@ -80,7 +80,7 @@ template <typename C, typename T>
 class CStringEnumIdMap : public CEnumIdMap<C, T, std::string> {
  public:
   // default for using strings
-  T parseString(const std::string &str) const {
+  virtual T parseString(const std::string &str) const {
     for (const std::pair<T, std::string> &p : CEnumIdMap<C, T, std::string>::m_Map) {
       if (p.second == str) {
         return p.first;
@@ -88,8 +88,38 @@ class CStringEnumIdMap : public CEnumIdMap<C, T, std::string> {
     }
     throw Ogre::Exception(0, "'" + str + "' could not be parsed.", __FILE__);
   }
-  const std::string &toString(const T t) const {
+  virtual const std::string &toString(const T t) const {
     return CEnumIdMap<C, T, std::string>::toData(t);
+  }
+};
+
+template <typename C, typename T=int32_t>
+class CStringListEnumIdMap : public CStringEnumIdMap<C, T> {
+ private:
+  const std::string mDelimiters;
+ public:
+  CStringListEnumIdMap(const std::string delimiters = "|+")
+      : mDelimiters(delimiters) {
+  }
+  
+  // default for using strings
+  virtual T parseString(const std::string &str) const override {
+    T value(0);
+    
+    size_t current;
+    size_t next = -1;
+    do {
+      current = next + 1;
+      next = str.find_first_of(mDelimiters, current);
+      value |= CStringEnumIdMap<C, T>::parseString(
+          str.substr(current, next - current));
+    } while (next != std::string::npos);
+
+    return value;
+  }
+  
+  virtual const std::string &toString(const T t) const override {
+    return CStringEnumIdMap<C, T>::toString(t);
   }
 };
 

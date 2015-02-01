@@ -21,6 +21,8 @@
 #define HITABLEINTERFACECONSTRUCTIONINFO_HPP
 
 #include "Hitpoints.hpp"
+#include "DamageTypes.hpp"
+#include "DamageAttitude.hpp"
 
 namespace tinyxml2 {
 class XMLElement;
@@ -28,6 +30,9 @@ class XMLElement;
 
 class CHitableInterfaceConstructionInfo {
  private:
+  DamageTypeMask mDamageTypeMask;
+  DamageAttitudeMask mDamageAttitudeMask;
+  
   Hitpoints mMaximalHitpoints;
   Hitpoints mCurrentHitpoints;
   float mInvulnerableTimer;
@@ -37,7 +42,9 @@ class CHitableInterfaceConstructionInfo {
   CHitableInterfaceConstructionInfo();
 
   virtual void parse(const tinyxml2::XMLElement *e);
-  
+
+  DamageTypeMask getDamageTypeMask() const {return mDamageTypeMask;}
+  DamageAttitudeMask getDamageAttitudeMask() const {return mDamageAttitudeMask;}
   Hitpoints getMaximalHitpoints() const {return mMaximalHitpoints;}
   Hitpoints getCurrentHitpoints() const {return mCurrentHitpoints;}
   float getInvulnerableTimer() const {return mInvulnerableTimer;}

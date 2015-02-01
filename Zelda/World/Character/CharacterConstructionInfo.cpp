@@ -34,8 +34,6 @@ void CCharacterConstructionInfo::parse(const tinyxml2::XMLElement *e) {
   CWorldEntityConstructionInfo::parse(e);
 
   mCharacterClass = Attribute(e, "character_class", mCharacterClass);
-  mAttitude = EnumAttribute<CCharacterAttitudeIdMap, ECharacterAttitude>(
-      e, "attitude", mAttitude);
 
   uint8_t animCount = IntAttribute(e, "animations_count", mAnimations.size());
   if (mAnimations.size() != animCount) {

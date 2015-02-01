@@ -21,12 +21,20 @@
 #define _HITABLE_INTERFACE_HPP_
 
 #include "Hitpoints.hpp"
+#include "DamageTypes.hpp"
+#include "DamageAttitude.hpp"
+#include <string>
 
 class CDamage;
 class CHitableInterfaceConstructionInfo;
 
 class CHitableInterface {
 private:
+  //! The mask of damage types to receive damage from
+  DamageTypeMask mDamageTypeMask;
+  //! The damage attitudes this hitable interface may be hitted by
+  DamageAttitudeMask mDamageAttitudeMask;
+  
   Hitpoints m_uiMaxHP;								  //!< maximum of hit points (in hear percentage)
   Hitpoints m_uiCurrentHP;							//!< current hit points (in heart percentage)
   float m_fInvulnerableTimer;			      //!< time to be invulnerable
@@ -43,7 +51,11 @@ private:
   CHitableInterface();
 
   explicit CHitableInterface(const CHitableInterfaceConstructionInfo &info);
-  
+
+  DamageTypeMask getDamageTypeMask() const {return mDamageTypeMask;}
+  void setDamageTypeMask(DamageTypeMask mask) {mDamageTypeMask = mask;}
+  DamageAttitudeMask getDamageAttitudeMask() const {return mDamageAttitudeMask;}
+  void setDamageAttitudeMask(DamageAttitudeMask mask) {mDamageAttitudeMask = mask;}
   Hitpoints getMaxHP() const {return m_uiMaxHP;}
   Hitpoints getCurrentHP() const {return m_uiCurrentHP;}
   
@@ -59,6 +71,8 @@ private:
   
   
   virtual EReceiveDamageResult hit(const CDamage &damage);
+  
+  virtual const std::string &getID() const = 0;
 
  protected:
   virtual void hitpointsChangedCallback();

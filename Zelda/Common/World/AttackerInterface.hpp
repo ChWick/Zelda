@@ -23,12 +23,22 @@
 #include "HitableInterface.hpp"
 
 class CDamage;
+class CAttackerInterfaceConstructionInfo;
 
 class CAttackerInterface {
+ private:
+  //! the attitude of the damage by this attacker
+  EDamageAttitude mDamageAttitude;
  public:
+  CAttackerInterface();
+  explicit CAttackerInterface(const CAttackerInterfaceConstructionInfo &info);
   virtual ~CAttackerInterface() {}
 
   CHitableInterface::EReceiveDamageResult attack(const CDamage &damage, CHitableInterface *hitableInterface);
+
+  virtual const std::string &getID() const = 0;
+  EDamageAttitude getDamageAttitude() const {return mDamageAttitude;}
+  void setDamageAttitude(EDamageAttitude attitude) {mDamageAttitude = attitude;}
 
  private:
   virtual void myDamageIgnored(const CDamage &damage, CHitableInterface *hitInterface) {}

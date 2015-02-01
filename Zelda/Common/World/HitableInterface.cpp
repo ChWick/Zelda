@@ -19,13 +19,16 @@
 
 #include "HitableInterface.hpp"
 #include "Damage.hpp"
+#include "../Log.hpp"
 #include "../Message/MessageHandler.hpp"
 #include "../Message/MessageHitpointsChanged.hpp"
 #include "HitableInterfaceConstructionInfo.hpp"
 
 
 CHitableInterface::CHitableInterface()
-    : m_uiMaxHP(0),
+    : mDamageTypeMask(DMG_NONE),
+      mDamageAttitudeMask(ATTITUDE_NONE),
+      m_uiMaxHP(0),
       m_uiCurrentHP(0),
       m_fInvulnerableTimer(0),
       m_bInvulnerable(false) {
@@ -33,7 +36,9 @@ CHitableInterface::CHitableInterface()
 
 CHitableInterface::CHitableInterface(
     const CHitableInterfaceConstructionInfo &info)
-    : m_uiMaxHP(info.getMaximalHitpoints()),
+    : mDamageTypeMask(info.getDamageTypeMask()),
+      mDamageAttitudeMask(info.getDamageAttitudeMask()),
+      m_uiMaxHP(info.getMaximalHitpoints()),
       m_uiCurrentHP(info.getCurrentHitpoints()),
       m_fInvulnerableTimer(info.getInvulnerableTimer()),
       m_bInvulnerable(info.isInvulnerable()) {
@@ -64,8 +69,7 @@ void CHitableInterface::setMaxHP(Hitpoints uiMaxHP) {
   if (m_uiMaxHP != uiMaxHP) {
     m_uiMaxHP = uiMaxHP;
     maxHitpointsChangedCallback();
-  }
-  else {
+  } else {
     m_uiMaxHP = uiMaxHP;
   }
 }
@@ -74,8 +78,7 @@ void CHitableInterface::setCurrentHP(Hitpoints uiHP) {
   if (m_uiCurrentHP != uiHP) {
     m_uiCurrentHP = uiHP;
     hitpointsChangedCallback();
-  }
-  else {
+  } else {
     m_uiCurrentHP = uiHP;
   }
 
@@ -85,13 +88,17 @@ void CHitableInterface::setCurrentHP(Hitpoints uiHP) {
 }
 
 void CHitableInterface::changeHP(Hitpoints uiHP) {
+  LOGV("'%s' with %d hp lost/gained %d hp.",
+       getID().c_str(),
+       m_uiCurrentHP,
+       uiHP);
+
   if (m_uiCurrentHP + uiHP <= 0) {
     m_uiCurrentHP = 0;
     hitpointsChangedCallback();
     killedCallback();
     return;
-  }
-  else if (m_uiCurrentHP + uiHP >= m_uiMaxHP) {
+  } else if (m_uiCurrentHP + uiHP >= m_uiMaxHP) {
     m_uiCurrentHP = m_uiMaxHP;
     hitpointsChangedCallback();
     return;
@@ -117,7 +124,7 @@ CHitableInterface::EReceiveDamageResult CHitableInterface::hit(
     damageAccepted(damage);
     break;
   case RDR_BLOCKED:
-    std::cout << "hitblock" << std::endl;
+    LOGV("hitblock");
     damageBlocked(damage);
     break;
   case RDR_IGNORED:

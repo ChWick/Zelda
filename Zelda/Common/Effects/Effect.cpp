@@ -43,9 +43,28 @@ CEffect::CEffect(CAbstractWorldEntity *parent,
                              ps_info->getType(), true);
     p->setScale(ps_info->getScale());
     p->setScaleVelocity(ps_info->getScaleVelocity());
-    // add this as event listener
+  }
+}
+
+void CEffect::exit() {
+  CAbstractWorldEntity::exit();
+}
+
+void CEffect::start() {
+  CAbstractWorldEntity::start();
+
+  // add us as particle system listener, after the system has been started
+  for (auto p : mParticleSystems) {
     p->addParticleSystemListener(this);
   }
+}
+
+void CEffect::stop() {
+  // remove the listener before the system has been stopped
+  for (auto p : mParticleSystems) {
+    p->removeParticleSystemListener(this);
+  }
+  CAbstractWorldEntity::stop();
 }
 
 void CEffect::checkIfFinished() {

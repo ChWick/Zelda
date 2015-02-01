@@ -45,6 +45,9 @@ CAbstractMap::CAbstractMap(CEntity *parent,
       m_PhysicsManager(pParentSceneNode->getCreator()),
       m_MapPack(mapPack),
       m_pPlayer(player) {
+  // additional settings
+  setDamageAttitude(ATTITUDE_NEUTRAL);
+
   LOGV("Construction of map '%s'", m_MapPack->getName().c_str());
   mPrependNodeName = m_MapPack->getName()
                               + Ogre::StringConverter::toString(MAP_COUNTER++);

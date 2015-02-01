@@ -22,6 +22,7 @@
 
 #include "Hitpoints.hpp"
 #include "DamageTypes.hpp"
+#include "DamageAttitude.hpp"
 #include "../Config/TypeDefines.hpp"
 #include SPATIAL_VECTOR_HEADER
 

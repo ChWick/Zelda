@@ -17,21 +17,31 @@
  * Zelda. If not, see http://www.gnu.org/licenses/.
  *****************************************************************************/
 
-#ifndef CHARACTERATTITUDE_HPP
-#define CHARACTERATTITUDE_HPP
+#ifndef DAMAGEATTITUDE_HPP
+#define DAMAGEATTITUDE_HPP
 
-#include "../../Common/Util/EnumIdMap.hpp"
+#include "../Util/EnumIdMap.hpp"
 
-//! Attitude of a character
-enum ECharacterAttitude {
-  ATTITUDE_FRIENDLY,            //!< Friendly
-  ATTITUDE_ENEMY,               //!< a evil person, not the player... ganons folks
+//! Attitude of a hitable interface
+enum EDamageAttitude {
+  ATTITUDE_NONE     = 0,       //!< Something that wont be hit
+  ATTITUDE_PLAYER   = 2 << 0,  //!< the player
+  ATTITUDE_FRIENDLY = 2 << 1,  //!< Friendly
+  ATTITUDE_ENEMY    = 2 << 2,  //!< a evil person, not the player...
+  ATTITUDE_NEUTRAL  = 2 << 3,  //!< neutral elements (map, ...)
+
+  ATTITUDE_MASK_FRIEND_OR_ENEMY = ATTITUDE_FRIENDLY | ATTITUDE_ENEMY,
+  ATTITUDE_MASK_ALL = ATTITUDE_PLAYER | ATTITUDE_FRIENDLY | ATTITUDE_ENEMY | ATTITUDE_NEUTRAL,
+  ATTITUDE_MASK_ENEMY_OR_NEUTRAL = ATTITUDE_ENEMY | ATTITUDE_NEUTRAL,
 };
 
-class CCharacterAttitudeIdMap : public CStringEnumIdMap<CCharacterAttitudeIdMap,
-                                                        ECharacterAttitude> {
+typedef int8_t DamageAttitudeMask;
+
+class CDamageAttitudeIdMap :
+    public CStringListEnumIdMap<CDamageAttitudeIdMap,
+                                DamageAttitudeMask> {
  public:
   void init();
 };
 
-#endif  // CHARACTERATTITUDE_HPP
+#endif  // DAMAGEATTITUDE_HPP

@@ -28,8 +28,6 @@ class CCharacterConstructionInfo
  private:
   //! class of the character to use on creation
   std::string mCharacterClass;
-  //! attitude of the character
-  ECharacterAttitude mAttitude;
   //! The animations of the character
   CharacterAnimationDataList mAnimations;
   
@@ -42,7 +40,6 @@ class CCharacterConstructionInfo
   CCharacterConstructionInfo &operator=(const CCharacterConstructionInfo&) = default;
 
   const std::string &getCharacterClass() const {return mCharacterClass;}
-  ECharacterAttitude getAttitude() const {return mAttitude;}
   const CharacterAnimationDataList &getAnimationDataList() const {return mAnimations;}
 };
   

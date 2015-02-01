@@ -37,6 +37,10 @@ class CEffect
  public:
   CEffect(CAbstractWorldEntity *parent, const CEffectConstructionInfo &info);
 
+  virtual void exit() override;
+  virtual void start() override;
+  virtual void stop() override;
+
  private:
   //! This function checks if all effects have finished and deletes
   //! itself. Only used if mDeleteOnFinished is set

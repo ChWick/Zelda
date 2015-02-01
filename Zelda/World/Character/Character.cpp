@@ -35,9 +35,8 @@
 CCharacter::CCharacter(CAbstractWorldEntity *pParent,
                        const CCharacterConstructionInfo &info)
     : CWorldEntity(pParent, info),
-      mAttitude(info.getAttitude()),
-  mAnimationDataList(info.getAnimationDataList()),
-  m_pCharacterController(nullptr),
+      mAnimationDataList(info.getAnimationDataList()),
+      m_pCharacterController(nullptr),
   m_uiAnimationCount(info.getAnimationDataList().size()),
     m_fTimer(0),
     m_fAnimSpeed(1) {
@@ -51,7 +50,6 @@ CCharacter::CCharacter(const std::string &sID,
                        CAbstractWorldEntity *pParent,
                        const CCharacterConstructionInfo &info)
     : CWorldEntity(sID, pParent, info),
-      mAttitude(info.getAttitude()),
   mAnimationDataList(info.getAnimationDataList()),
   m_pCharacterController(nullptr),
   m_uiAnimationCount(info.getAnimationDataList().size()),
@@ -64,18 +62,19 @@ CCharacter::CCharacter(const std::string &sID,
 }
 
 void CCharacter::constructor_impl() {
-  switch (getAttitude()) {
-  case ATTITUDE_ENEMY:
-    mCollisionMask = MASK_PLAYER_N_COLLIDES_WITH;
-    mCollisionGroup = COL_CHARACTER_N;
-    break;
-  case ATTITUDE_FRIENDLY:
-    mCollisionMask = MASK_PLAYER_P_COLLIDES_WITH;
-    mCollisionGroup = COL_CHARACTER_P;
-    break;
-  default:
-    throw Ogre::Exception(0, "Unknown collision mask", __FUNCTION__);
-    break;
+  switch (getDamageAttitude()) {
+    case ATTITUDE_ENEMY:
+      mCollisionMask = MASK_PLAYER_N_COLLIDES_WITH;
+      mCollisionGroup = COL_CHARACTER_N;
+      break;
+    case ATTITUDE_PLAYER:
+    case ATTITUDE_FRIENDLY:
+      mCollisionMask = MASK_PLAYER_P_COLLIDES_WITH;
+      mCollisionGroup = COL_CHARACTER_P;
+      break;
+    default:
+      throw Ogre::Exception(0, "Unknown collision mask", __FILE__);
+      break;
   }
 
   mCCPhysics = NULL;
@@ -184,12 +183,19 @@ bool CCharacter::createDamage(const Ogre::Ray &ray, const CDamage &dmg) {
   btCollisionWorld::ClosestRayResultCallback rayCallback(
       BtOgre::Convert::toBullet(ray.getOrigin()),
       BtOgre::Convert::toBullet(ray.getPoint(1)));
-  if (getAttitude() == ATTITUDE_FRIENDLY) {
-    rayCallback.m_collisionFilterGroup = COL_DAMAGE_P;
-    rayCallback.m_collisionFilterMask = MASK_DAMAGE_P_COLLIDES_WITH;
-  } else {
-    rayCallback.m_collisionFilterGroup = COL_DAMAGE_N;
-    rayCallback.m_collisionFilterMask = MASK_DAMAGE_N_COLLIDES_WITH;
+  switch (getDamageAttitude()) {
+    case ATTITUDE_FRIENDLY:
+    case ATTITUDE_PLAYER:
+      rayCallback.m_collisionFilterGroup = COL_DAMAGE_P;
+      rayCallback.m_collisionFilterMask = MASK_DAMAGE_P_COLLIDES_WITH;
+      break;
+    case ATTITUDE_ENEMY:
+      rayCallback.m_collisionFilterGroup = COL_DAMAGE_N;
+      rayCallback.m_collisionFilterMask = MASK_DAMAGE_N_COLLIDES_WITH;
+      break;
+    default:
+      throw Ogre::Exception(getDamageAttitude(), "Unknown damage attitude",
+                            __FILE__);
   }
   m_pMap->getPhysicsManager()->getWorld()->rayTest(
       BtOgre::Convert::toBullet(ray.getOrigin()),

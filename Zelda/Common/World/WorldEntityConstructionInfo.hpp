@@ -22,10 +22,12 @@
 
 #include "../GameLogic/EntityConstructionInfo.hpp"
 #include "HitableInterfaceConstructionInfo.hpp"
+#include "AttackerInterfaceConstructionInfo.hpp"
 
 class CWorldEntityConstructionInfo
     : public CEntityConstructionInfo,
-      public CHitableInterfaceConstructionInfo {
+      public CHitableInterfaceConstructionInfo,
+      public CAttackerInterfaceConstructionInfo {
  private:
   uint16_t mCollisionMask;
   uint16_t mCollisionGroup;

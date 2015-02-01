@@ -23,19 +23,26 @@
 using XMLHelper::IntAttribute;
 using XMLHelper::RealAttribute;
 using XMLHelper::BoolAttribute;
+using XMLHelper::EnumAttribute;
 
 CHitableInterfaceConstructionInfo::CHitableInterfaceConstructionInfo()
-    : mMaximalHitpoints(HP_INFINITY / HP_ONE_HEART),
-      mCurrentHitpoints(HP_INFINITY / HP_ONE_HEART),
+    : mDamageTypeMask(DMG_NONE),           // does not take damage by default
+      mDamageAttitudeMask(ATTITUDE_NONE),  // no attitude (not hittable)
+      mMaximalHitpoints(HP_INFINITY),      // infinite hitpoints by default
+      mCurrentHitpoints(HP_INFINITY),      // infinite hitpoints by default
       mInvulnerableTimer(0),
       mInvulnerable(false) {
 }
 
 void CHitableInterfaceConstructionInfo::parse(const tinyxml2::XMLElement *e) {
+  mDamageTypeMask = EnumAttribute<CDamageTypeIdMap, DamageTypeMask>(
+      e, "hit_by_damage_type_mask", mDamageTypeMask);
+  mDamageAttitudeMask = EnumAttribute<CDamageAttitudeIdMap, DamageAttitudeMask>(
+      e, "hit_by_damage_attitude_mask", mDamageAttitudeMask);
   mMaximalHitpoints = HP_ONE_HEART * IntAttribute(
-      e, "hitpoints", mMaximalHitpoints);
+      e, "hitpoints", mMaximalHitpoints / HP_ONE_HEART);
   mCurrentHitpoints = HP_ONE_HEART * IntAttribute(
-      e, "current_hitpoints", mCurrentHitpoints);
+      e, "current_hitpoints", mCurrentHitpoints / HP_ONE_HEART);
   mInvulnerableTimer = RealAttribute(e, "invulnerable_timer",
                                      mInvulnerableTimer);
   mInvulnerable = BoolAttribute(e, "is_invulnerable", mInvulnerable);
