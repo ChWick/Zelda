@@ -201,7 +201,7 @@ def run() :
 	makeMapPack('link_house', lightWorld, ['physics_border_top.mesh', 'physics_floor.mesh', 'physics_floor_top.mesh', 'wall_bot_right.mesh', 'wall_bot.mesh', 'wall_to_water.mesh', 'house_red_roof.mesh', 'house_roof_border.mesh', 'house_wall.mesh', 'water.mesh'], includeHouse=True)
 	makeMapPack('link_house_left', lightWorld, ['physics_floor.mesh', 'physics_floor_top.mesh', 'physics_floor_top_wall.mesh', 'physics_wall_bot.mesh'])
 	makeMapPack('inner_house_link', lightWorld, ['pillow.mesh', 'duvet.mesh', 'physics_floor.mesh', 'physics_wall.mesh', 'vision_plane.mesh'])
-	makeMapPack('hyrule_castle', lightWorld, ['physics_floor.mesh', 'wall_to_water.mesh', 'water.mesh', 'hyrule_castle_mushroom.mesh'], includeMaterialAndTexture=True)
+	makeMapPack('hyrule_castle', lightWorld, ['physics_floor.mesh', 'physics_wall.000.mesh', 'physics_wall.001.mesh', 'physics_wall.002.mesh', 'physics_wall.003.mesh', 'physics_wall.004.mesh', 'physics_wall.005.mesh', 'physics_wall.006.mesh', 'physics_wall.007.mesh', 'wall_to_water.mesh', 'water.mesh', 'hyrule_castle_mushroom.mesh', 'hyrule_castle_bridge_end.mesh', 'hyrule_castle_bridge_mid.mesh', 'hyrule_castle_bridge_start.mesh', 'hyrule_castle_pink_bush_start.mesh', 'hyrule_castle_pink_bush_mid.mesh', 'hyrule_castle_pink_bush_end.mesh', 'hyrule_castle_entrance_side.mesh', 'hyrule_castle_stairs.mesh', 'hyrule_castle_archway.mesh', 'hyrule_castle_door.mesh', 'hyrule_castle_entrance_side_small.mesh'], includeMaterialAndTexture=True)
 
 
 if __name__ == '__main__':
